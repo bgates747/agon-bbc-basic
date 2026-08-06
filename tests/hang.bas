@@ -1,0 +1,6 @@
+   10 K = 1
+   20 WHILE K < 10
+   30   ON ERROR LOCAL PRINT "ERROR" : STOP
+   40   K += 1
+   50 ENDWHILE
+

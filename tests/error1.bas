@@ -1,0 +1,2 @@
+   10 A$=STRING$(128,CHR$(128))
+   20 PRINT LEN(A$), ASC(LEFT(A$,1))

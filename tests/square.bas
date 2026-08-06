@@ -1,0 +1,4 @@
+ 100 PRINT FNPL1CORE_square(9)
+ 110 END
+ 1000 DEF FNPL1CORE_square(vN)=vN*vN
+
