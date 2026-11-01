@@ -1,0 +1,86 @@
+[
+  {
+    "source": "VDU 65-((2>=2)=(TRUE)),13,10\n",
+    "expression": "65-((2>=2)=(TRUE))",
+    "expected": "B\n",
+    "status": 0,
+    "diagnostic": null
+  },
+  {
+    "source": "VDU 65-((2<>3)=(TRUE)),13,10\n",
+    "expression": "65-((2<>3)=(TRUE))",
+    "expected": "B\n",
+    "status": 0,
+    "diagnostic": null
+  },
+  {
+    "source": "VDU 65-((2=3)=(FALSE)),13,10\n",
+    "expression": "65-((2=3)=(FALSE))",
+    "expected": "B\n",
+    "status": 0,
+    "diagnostic": null
+  },
+  {
+    "source": "VDU 65-((1<2 AND 3>2)=(TRUE)),13,10\n",
+    "expression": "65-((1<2 AND 3>2)=(TRUE))",
+    "expected": "B\n",
+    "status": 0,
+    "diagnostic": null
+  },
+  {
+    "source": "VDU 65-((&FFFFFF)=(16777215)),13,10\n",
+    "expression": "65-((&FFFFFF)=(16777215))",
+    "expected": "B\n",
+    "status": 0,
+    "diagnostic": null
+  },
+  {
+    "source": "VDU 65-((&1000000)=(16777216)),13,10\n",
+    "expression": "65-((&1000000)=(16777216))",
+    "expected": "B\n",
+    "status": 0,
+    "diagnostic": null
+  },
+  {
+    "source": "VDU 65-((&7FFFFFFF)=(2147483647)),13,10\n",
+    "expression": "65-((&7FFFFFFF)=(2147483647))",
+    "expected": "B\n",
+    "status": 0,
+    "diagnostic": null
+  },
+  {
+    "source": "VDU 65-((&80000000)=(-2147483648)),13,10\n",
+    "expression": "65-((&80000000)=(-2147483648))",
+    "expected": "B\n",
+    "status": 0,
+    "diagnostic": null
+  },
+  {
+    "source": "VDU 65-((&FFFFFFFF)=(-1)),13,10\n",
+    "expression": "65-((&FFFFFFFF)=(-1))",
+    "expected": "B\n",
+    "status": 0,
+    "diagnostic": null
+  },
+  {
+    "source": "VDU 65-((-&80000000)=(&80000000)),13,10\n",
+    "expression": "65-((-&80000000)=(&80000000))",
+    "expected": "B\n",
+    "status": 0,
+    "diagnostic": null
+  },
+  {
+    "source": "VDU 65-((&7FFFFFFF+1)=(2147483648)),13,10\n",
+    "expression": "65-((&7FFFFFFF+1)=(2147483648))",
+    "expected": "B\n",
+    "status": 0,
+    "diagnostic": null
+  },
+  {
+    "source": "VDU 65-((&80000000-1)=(-2147483649)),13,10\n",
+    "expression": "65-((&80000000-1)=(-2147483649))",
+    "expected": "B\n",
+    "status": 0,
+    "diagnostic": null
+  }
+]

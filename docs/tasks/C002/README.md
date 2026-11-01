@@ -1,8 +1,8 @@
-# C002 numeric runtime experiment
+# C002 numeric runtime qualification
 
 This experiment executes an isolated BBC numeric package in a standalone MOS
 program and compares its packed results/errors with actual BASIC V evaluation.
-The compiler remains BBC BASIC; these assembly routines are its prospective
+The compiler remains BBC BASIC; these assembly routines are its
 runtime and Python only orchestrates qualification.
 
 From the project root, first provision/verify the shared automated profile with
@@ -33,7 +33,13 @@ duration. A case mismatch fails qualification and is retained in the report.
 Selected reports, cases, oracle source, fixture bytes and logs are retained in
 `evidence/`; build products/listings remain disposable. [ABI.md](ABI.md)
 documents the pointer, stack, packing and error contracts, and
-[vendor provenance](vendor/PROVENANCE.md) identifies the exact reusable source.
+[vendor provenance](../../../compiler/runtime/vendor/PROVENANCE.md) identifies the exact reusable source.
 
-This tranche does not enable compiler expressions or demonstrate self-hosting.
-Its results are automated eZ80/MOS qualification, not physical hardware timing.
+The original adapter tranche alone did not enable expressions. Its runtime
+source/notice have since moved to `compiler/runtime/`; the probe remains in
+C002 and uses that source. These are automated eZ80/MOS checks, not physical
+hardware timing or self-hosting.
+
+The subsequent [native expression integration](EXPRESSIONS.md) qualified and
+promoted native arithmetic consumed by VDU. Its scope, limitations, evidence
+and reproduction commands are documented separately.

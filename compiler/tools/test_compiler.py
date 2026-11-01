@@ -20,7 +20,8 @@ TASK_ROOT = Path(__file__).resolve().parents[1]
 ROOT = TASK_ROOT.parent
 
 
-def run_profile(profile: Path, script: str, marker: str, log_name: str) -> str:
+def run_profile(profile: Path, script: str, marker: str, log_name: str,
+                timeout_seconds: float = 45) -> str:
     (profile / "sdcard/autoexec.txt").write_bytes(
         script.replace("\n", "\r\n").encode("ascii")
     )
@@ -31,7 +32,7 @@ def run_profile(profile: Path, script: str, marker: str, log_name: str) -> str:
             stdin=subprocess.PIPE, stdout=log, stderr=subprocess.STDOUT,
         )
         try:
-            deadline = time.monotonic() + 45
+            deadline = time.monotonic() + timeout_seconds
             while time.monotonic() < deadline:
                 output = log_path.read_text(errors="replace")
                 if marker in output:
@@ -98,9 +99,9 @@ def main() -> None:
         (b'10 END\n10 END\n', None, "Line numbers must increase"),
         (b'20 END\n10 END\n', None, "Line numbers must increase"),
         (b'65280 END\n', None, "Number outside supported range"),
-        (b'VDU 256\n', None, "Number outside supported range"),
-        (b'VDU 1.5\n', None, "Unexpected text after statement"),
-        (b'VDU -1\n', None, "Expected an unsigned integer constant"),
+        (b'VDU &100000000\n', None, "Hex literal exceeds eight digits"),
+        (b'VDU 1.5\n', None, "Fractional literals are not yet supported"),
+        (b'VDU -1E3\n', None, "Exponent literals are not yet supported"),
         (b'PRINT "unterminated\n', None, "Unterminated string"),
         (b'PRINT EVAL("1")\n', None, "EVAL are unsupported"),
         (b'EVAL("1")\n', None, "EVAL is deliberately unsupported"),
@@ -129,7 +130,7 @@ def main() -> None:
     (sdcard / "repeat.bas").write_bytes(cases[0][0])
     definitions = (TASK_ROOT / "compiler.bas").read_text().split("1000 DEF", 1)[1]
     driver = [
-        "10 PROCinit", "20 test%=0", "30 test%=test%+1",
+        "10 PROCinit:RESTORE 200", "20 test%=0", "30 test%=test%+1",
         f'40 IF test%>{len(cases)+1} THEN PRINT "COMPILE_DONE":OSCLI "BYE"',
         "50 READ src$,dst$",
         '60 ON ERROR PRINT "CASE_ERR:";src$:REPORT:PRINT:CLOSE#0:GOTO 90',

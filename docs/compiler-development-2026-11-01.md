@@ -1,9 +1,9 @@
 # Compiler development — 2026-11-01
 
-The tested bootstrap was promoted into the live compiler tree, and an isolated
-numeric runtime now passes byte-level comparisons with BASIC V. This establishes
-a calling interface for arithmetic; compiler numeric expressions and self-hosting
-remain unimplemented.
+The compiler now emits native numeric VDU expressions using the qualified BBC
+arithmetic runtime. Its 84-case integration suite passed before promotion to
+the development tree. General literals, formatting, variables and self-hosting
+remain incomplete; accepted testing is required before promotion to main.
 
 The later C007 search establishes a curated testing/benchmark source catalogue
 and measurement contract. It adds no compiler behavior or measured speedup.
@@ -35,7 +35,7 @@ and measurement contract. It adds no compiler behavior or measured speedup.
    Selected the exact local BASIC V math package to match the reference rather
    than mixing it with Dean's older package. Retained its license/source
    unchanged in the task silo. See [C002](tasks/C002.md),
-   [ABI](tasks/C002/ABI.md) and [provenance](tasks/C002/vendor/PROVENANCE.md).
+   [ABI](tasks/C002/ABI.md) and [provenance](../compiler/runtime/vendor/PROVENANCE.md).
 2. Standalone assembly/linking exposed UEXT/UEXTA macro dependencies and two
    undeclared sparse stack helpers in addition to the three declared imports.
    Supplied explicit bytewise helpers; the standalone numeric object has zero
@@ -121,3 +121,51 @@ covered the earlier dirt.
    feature, benchmark adaptation, emulator deployment or performance run was
    begun. New research/documents remain uncommitted for the Author's review;
    the requested pre-search checkpoint is already pushed.
+
+## C002 native expression integration and development promotion
+
+1. At the Author's request, committed all C007 dirt as `227b620`. Automatic
+   approval review initially rejected the push pending an exact destination;
+   the Author authorised the origin and then corrected the proposed `compiled`
+   branch to the existing development workflow. Inspected local/remote state,
+   removed the never-pushed local `compiled` branch and pushed `227b620` to
+   `origin/codex/native-bbc-compiler`. Main remains unchanged. Future promotion
+   to main requires accepted testing.
+2. Refined the next C002 tranche before implementation. Oryx is down for
+   maintenance; all emulator work used the current Pi5's existing canonical
+   headless CLI fixture. No Oryx connection, graphical review or hardware
+   deployment occurred. The original 39-case/15-execution bootstrap passed
+   before new code, in 13.130 seconds.
+3. Implemented BBC BASIC parsing/emission for numeric VDU expressions and
+   standalone runtime integration. Preserved the inspected evaluator's
+   left-associated power and tight unary binding. Whole decimal/zero-fraction
+   literals and signed hex patterns retain standard numeric representations;
+   general fractions/exponents, numeric PRINT, variables and functions remain
+   clear exclusions. The observed 2^32 reader defect is intentionally corrected.
+4. Qualified assembly packaging at two independent addresses, then compared
+   every emitted numeric template against GNU linking. Integration caught and
+   fixed a hex-template loader assumption and a high-bit hex conversion boundary.
+   Kept the old numeric adapter/vendor unchanged; new literal/unary helpers
+   bring the complete template to 3854 bytes with 375 internal relocations.
+5. Full experiment passed **84 cases / 67 native executions / 17 rejections**,
+   using 58 BASIC reference expressions and 66 independently linked emitted
+   images. Covered precision, overflow, native errors, GOSUB error exit, eager
+   evaluation, diagnostics, destination preservation and deterministic repeats.
+   Seven bounded batches totalled **330.787 seconds**, excluding provisioning;
+   these are host qualification durations, not physical Agon timing. Retained
+   [summary and raw evidence](tasks/C002/evidence/expressions-001/summary.json).
+6. Promoted the exact tested compiler and assembly/runtime build inputs into
+   `compiler/`, with unchanged BBC source hash
+   `4095e9e61e953a84b2f257717a6642f4609df49a57a15bee5ffd0d84de8f03d2`.
+   The frozen evidence compiler is historical, not a second maintained source.
+   Adjusted test source locations, DATA restore and three obsolete VDU rejection
+   fixtures. Live baseline qualification passes **39 cases / 15 native
+   executions** in **21.735 seconds**, retaining the complete assembly golden.
+   From the promoted locations, repeated 24 targeted expression cases (19
+   native executions / five rejections) in 89.409 seconds and all 257 numeric
+   ABI cases with zero mismatches in 7.839 seconds. Retained
+   [promotion evidence](tasks/C002/evidence/expressions-promotion-001/summary.json).
+7. Updated the specification/matrix, handoff, runtime runbook and C002/TODO.
+   C002 remains open for broader literals, numeric formatting/functions and
+   semantic coverage. New changes remain uncommitted for Author review; the
+   pre-tranche checkpoint is pushed and main is untouched.

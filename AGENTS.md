@@ -4,8 +4,8 @@ Read `/Agon/mystuff/agon-dev-env/codex/AGENTS.md` first. That directory owns
 shared environment, ownership, assembly and emulator instructions.
 
 This working repository contains the reference BASIC V ADL interpreter and a
-promoted bootstrap compiler at `compiler/compiler.bas`. Experimental numeric
-runtime work remains under `docs/tasks/C002/`.
+promoted compiler at `compiler/compiler.bas` and numeric runtime under
+`compiler/runtime/`. C002 retains qualification harnesses and historical evidence.
 Keep interpreter changes separate from compiler work. The active compiler
 branch is `codex/native-bbc-compiler`.
 
@@ -25,8 +25,9 @@ and destination recorded in the task document. Do not treat placement or an
 automated test pass as human emulator validation or commit approval.
 
 C001 was promoted after its recorded 39-case/15-execution qualification and
-repeat validation at the live location. C002 is active: isolate and qualify the
-numeric adapter before implementing compiler expressions. Read
+repeat validation at the live location. C002 is active: the adapter and numeric
+VDU expression slice are promoted; general literals/formatting/functions remain
+pending. Read `docs/tasks/C002/EXPRESSIONS.md`,
 `docs/tasks/C002/ABI.md` and its task record for scope/results. C003–C006 remain
 unstarted. The compiler is still BBC BASIC; assembly is runtime code, not a
 replacement compiler implementation.
@@ -35,7 +36,11 @@ Use `.venv/bin/python` explicitly. `compiler/README.md` contains build/test
 commands. `.emulator/` is an ignored automated CLI fixture, not a graphical
 human review instance. No graphical emulator or hardware has been deployed.
 The Author explicitly requested pre-tranche checkpoints on 2026-11-01:
-`a45a15f`, then `ccd09af` before the C007 corpus search. Both are pushed.
+`a45a15f`, `ccd09af` before C007, and `227b620` before expression integration.
+All are pushed to the Author's origin. Keep this development branch and promote
+to `main` only after testing is accepted; do not create a redundant `compiled`
+branch. Oryx is down for maintenance until the Author says otherwise: use the
+Pi5's automated CLI fixture or defer emulator testing, never contact Oryx.
 C007's completed source search and measurement contract are indexed by
 `compiler/TESTING.md`; no new benchmark performance was measured. New work
 remains uncommitted pending review and the canonical emulator validation policy.

@@ -3,8 +3,9 @@
 The current implementation proves the path from BBC BASIC source to a MOS
 native executable. Later stages must preserve BBC BASIC values and activation
 semantics before broadening the accepted language. This draft describes the
-promoted C001 bootstrap in `compiler/compiler.bas`. Experimental numeric code
-is separately qualified under C002 and has not enabled language expressions.
+promoted C001 bootstrap and qualified C002 numeric VDU slice in
+`compiler/compiler.bas`. These remain on the development branch pending
+accepted testing before promotion to main.
 Task documents and experimental silos follow
 [the accepted task convention](../docs/tasks/README.md).
 
@@ -44,9 +45,10 @@ Task documents and experimental silos follow
    suppresses the newline. Bare `PRINT` emits CR/LF. Doubled quotes represent
    one quote; colon inside a string is data. Commas, print-position formatting,
    numeric output and general expressions are unsupported.
-8. `VDU` accepts comma-separated unsigned decimal or uppercase hexadecimal
-   byte constants in 0..255. Word forms, negative constants, wrapping and
-   expressions are unsupported. `CLS` emits VDU 12.
+8. `VDU` accepts comma-separated numeric byte expressions, converts each through
+   the package's SFIX semantics and emits the low byte. Negative values and
+   byte wrapping are supported when conversion fits a signed integer. Word
+   and zero-fill forms remain unsupported. `CLS` emits VDU 12.
 9. `END` and falling off the source exit to MOS. `RETURN` without GOSUB reports
    `No GOSUB`; nested GOSUB is limited to 255 frames. Runtime failures return
    status 1, success returns status 0. `END` unwinds all outstanding GOSUBs.
@@ -81,6 +83,41 @@ Task documents and experimental silos follow
    error preserves an existing output. An I/O error during the final write can
    leave an incomplete file. Exact identical source/output path strings are
    rejected; path aliases are not canonicalised, so use distinct files.
+8. Numeric VDU expressions use the standalone packed numeric runtime in
+   `runtime/`. Its 3854-byte template includes the qualified adapter/package
+   and literal/unary helpers. BBC BASIC copies and rebases its 375 internal
+   three-byte relocations; these do not occupy the source-fixup array. The
+   template is included once per numeric program and omitted otherwise.
+   Up to 32 five-byte temporary slots are allocated. There are no user calls
+   inside admitted expressions; future FN calls need an activation-safe stack.
+
+## Current numeric expression subset
+
+1. Atoms are decimal whole literals, whole-valued float literals, uppercase
+   hexadecimal literals, TRUE/FALSE and parenthesised expressions. Decimal
+   whole parts have at most ten digits and range from 0 through 2^32 inclusive.
+   Optional fractional suffixes contain one or more zero digits only. Hex
+   values use one to eight digits and denote signed 32-bit bit patterns.
+   General fractions, exponent notation, variables and function calls remain
+   clear compile-time exclusions. Fractional arithmetic results retain the
+   complete five-byte representation.
+2. Precedence from tightest is item/unary, ^, * / DIV MOD, + -, comparisons,
+   AND, EOR/OR. Binary operators associate left-to-right. In particular,
+   `2^3^2=64` and `-2^2=4` follow the reference evaluator. Comparisons accept
+   one operator per expression level; parentheses permit nested comparisons.
+   Unary signs and NOT are supported. AND/OR do not short-circuit. Shifts and
+   unrelated operator extensions are unsupported.
+3. Literal parsing accumulates exact BBC numeric values within the chosen
+   whole-literal bound; it does not use the reference's decimal constant reader.
+   Both `4294967296` and `4294967296.0` intentionally encode exact 2^32,
+   correcting the recorded reader defect. Hex integer payloads are emitted
+   bytewise, without out-of-range float-to-integer assignment. Integer unary
+   minus preserves integer type, including INT_MIN wrap.
+4. Binary operations use selectors 0..15 of the qualified package. Runtime
+   errors report their message and return status 1 through the saved-stack
+   exit. Numeric PRINT/STR$, source-level conversion/math functions and general
+   literals remain future C002 work. Parser recursion is capped at 32 entries,
+   counting both expression and item routines. See the C002 task for evidence.
 
 ## Required semantics for subsequent implementation
 
@@ -101,9 +138,10 @@ Task documents and experimental silos follow
    allocating unrelated C-style locals is insufficient. Error unwinding must
    eventually perform equivalent restoration.
 5. A small adapter boundary hides the numeric package's split register
-   representation from callers. C002 defines an experimental packed-value
+   representation from callers. C002 defines the qualified packed-value
    pointer ABI in `docs/tasks/C002/ABI.md`; the compiler expression/value-stack
-   ABI and integration remain unimplemented. String management
+   ABI supports the current VDU expression slice; future activation-safe
+   expression storage is still required. String management
    and activation handling need explicit compiled runtimes; interpreter
    parser routines are not stable runtime entry points.
 6. Self-hosting acceptance requires interpreting the BBC BASIC compiler to

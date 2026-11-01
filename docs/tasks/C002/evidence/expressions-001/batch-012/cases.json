@@ -1,0 +1,86 @@
+[
+  {
+    "source": "VDU 65-((-7 MOD 3)=(-1)),13,10\n",
+    "expression": "65-((-7 MOD 3)=(-1))",
+    "expected": "B\n",
+    "status": 0,
+    "diagnostic": null
+  },
+  {
+    "source": "VDU 65-((7 MOD -3)=(1)),13,10\n",
+    "expression": "65-((7 MOD -3)=(1))",
+    "expected": "B\n",
+    "status": 0,
+    "diagnostic": null
+  },
+  {
+    "source": "VDU 65-((1 OR 2 EOR 3)=(0)),13,10\n",
+    "expression": "65-((1 OR 2 EOR 3)=(0))",
+    "expected": "B\n",
+    "status": 0,
+    "diagnostic": null
+  },
+  {
+    "source": "VDU 65-((1 EOR 2 OR 4)=(7)),13,10\n",
+    "expression": "65-((1 EOR 2 OR 4)=(7))",
+    "expected": "B\n",
+    "status": 0,
+    "diagnostic": null
+  },
+  {
+    "source": "VDU 65-((1 OR 2 AND 0)=(1)),13,10\n",
+    "expression": "65-((1 OR 2 AND 0)=(1))",
+    "expected": "B\n",
+    "status": 0,
+    "diagnostic": null
+  },
+  {
+    "source": "VDU 65-((NOT 1)=(-2)),13,10\n",
+    "expression": "65-((NOT 1)=(-2))",
+    "expected": "B\n",
+    "status": 0,
+    "diagnostic": null
+  },
+  {
+    "source": "VDU 65-((NOT (7/2))=(-4)),13,10\n",
+    "expression": "65-((NOT (7/2))=(-4))",
+    "expected": "B\n",
+    "status": 0,
+    "diagnostic": null
+  },
+  {
+    "source": "VDU 65-((TRUE)=(-1)),13,10\n",
+    "expression": "65-((TRUE)=(-1))",
+    "expected": "B\n",
+    "status": 0,
+    "diagnostic": null
+  },
+  {
+    "source": "VDU 65-((FALSE)=(0)),13,10\n",
+    "expression": "65-((FALSE)=(0))",
+    "expected": "B\n",
+    "status": 0,
+    "diagnostic": null
+  },
+  {
+    "source": "VDU 65-((1<2)=(TRUE)),13,10\n",
+    "expression": "65-((1<2)=(TRUE))",
+    "expected": "B\n",
+    "status": 0,
+    "diagnostic": null
+  },
+  {
+    "source": "VDU 65-((2>1)=(TRUE)),13,10\n",
+    "expression": "65-((2>1)=(TRUE))",
+    "expected": "B\n",
+    "status": 0,
+    "diagnostic": null
+  },
+  {
+    "source": "VDU 65-((2<=2)=(TRUE)),13,10\n",
+    "expression": "65-((2<=2)=(TRUE))",
+    "expected": "B\n",
+    "status": 0,
+    "diagnostic": null
+  }
+]

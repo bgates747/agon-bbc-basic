@@ -1,8 +1,8 @@
 # Experimental numeric adapter ABI
 
 The adapter operates on BBC BASIC's packed numeric values without requiring a
-resident interpreter. It is a tested experimental interface for the compiler's
-numeric runtime; compiler expressions have not yet been connected to it.
+resident interpreter. It is the qualified interface for the compiler's
+numeric runtime, now used by the promoted VDU expression subset.
 
 ## Entry and value representation
 
@@ -104,4 +104,7 @@ Comparing with the interpreter qualifies extraction and calling compatibility;
 it is not independent mathematical verification of every vendor algorithm.
 The full package currently occupies 3812 bytes including the adapter/helpers.
 It includes private entries beyond the exposed interface; no dead-code pruning
-has been performed. Numeric code is not yet included by the live compiler.
+has been performed. Numeric code is now included by the development compiler
+for numeric VDU expressions. The complete expression template is 3854 bytes,
+adding literal-copy and unary-minus helpers. Runtime source and retained
+notices are in `compiler/runtime/`.

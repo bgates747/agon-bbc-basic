@@ -17,6 +17,7 @@ import time
 
 TASK = Path(__file__).resolve().parents[1]
 ROOT = TASK.parents[2]
+RUNTIME = ROOT / "compiler/runtime"
 OPERATORS = ["AND", "DIV", "EOR", "MOD", "OR", "<=", "<>", ">=", "<", "=", "*", "+", ">", "-", "^", "/"]
 
 
@@ -119,9 +120,9 @@ def main() -> None:
     assembler = args.toolchain/"ez80-none-elf-as"
     linker = args.toolchain/"ez80-none-elf-ld"
     for name in ["numeric", "probe"]:
-        subprocess.run([str(assembler), "-march=ez80+full", "-I", str(TASK), "-I", str(build),
+        subprocess.run([str(assembler), "-march=ez80+full", "-I", str(RUNTIME), "-I", str(build),
                         f'-al={build/name}.lst', "-o", str(build/f"{name}.o"),
-                        str(TASK/f"{name}.s")], check=True)
+                        str((RUNTIME if name == "numeric" else TASK)/f"{name}.s")], check=True)
     undefined = subprocess.run([str(args.toolchain/"ez80-none-elf-nm"), "-u", str(build/"numeric.o")],
                                check=True, capture_output=True, text=True).stdout
     assert not undefined.strip(), undefined
@@ -147,8 +148,8 @@ def main() -> None:
                   status_counts={str(s):sum(fixture[i*18+12]==s for i in range(len(tests)))
                                  for s in sorted(set(fixture[12::18]))},
                   hashes={str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest()
-                          for p in [ROOT/"bin/basic.bin", TASK/"numeric.s", TASK/"probe.s",
-                                    TASK/"vendor/MATH.Z80", build/"cases.dat", build/"probe.bin"]})
+                          for p in [ROOT/"bin/basic.bin", RUNTIME/"numeric.s", TASK/"probe.s",
+                                    RUNTIME/"vendor/MATH.Z80", build/"cases.dat", build/"probe.bin"]})
     (build/"results.json").write_text(json.dumps(report,indent=2)+"\n")
     (build/"reference.log").write_text(reference_log)
     (build/"native.log").write_text(native_log)

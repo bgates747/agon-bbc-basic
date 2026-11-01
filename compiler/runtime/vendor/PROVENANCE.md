@@ -24,5 +24,9 @@ original license and copyright headers are retained.
    experiment selects the newer BASIC V package to match the current reference
    interpreter and avoids mixing helper layouts or operation tables between
    the two implementations.
-6. No upstream interpreter source has been edited. Numeric experiments are
-   confined to C002; promotion has not yet occurred.
+6. No upstream interpreter source has been edited. On 2026-11-01, the qualified
+   adapter, unchanged vendor source/notice and expression helpers moved from
+   C002 into `compiler/runtime/`. The BBC compiler now embeds the packaged image
+   for its qualified VDU expression subset. Original 257-case ABI evidence and
+   the 84-case expression evidence remain under C002. Development-tree
+   promotion does not claim human review, main acceptance or hardware testing.

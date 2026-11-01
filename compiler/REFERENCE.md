@@ -3,8 +3,9 @@
 Dean Belfield's arithmetic package is the strongest reuse candidate. String,
 variable and procedure code is closely coupled to interpreter parsing and
 memory state and needs adaptation. C001 extracted no interpreter runtime.
-C002 now isolates the newer BASIC V math package experimentally; it has not
-yet been linked into compiler-generated programs.
+C002 isolated and qualified the newer BASIC V math package. It is now emitted
+for the tested numeric VDU subset from `compiler/runtime/`; other numeric
+source features remain partial or unsupported in the compatibility matrix.
 
 ## Inspected sources and provenance
 
@@ -64,7 +65,7 @@ yet been linked into compiler-generated programs.
    adapter supplies all five helpers plus required assembly macros; no
    interpreter globals remain unresolved. See the experimental
    [numeric ABI](../docs/tasks/C002/ABI.md) and
-   [provenance](../docs/tasks/C002/vendor/PROVENANCE.md).
+   [provenance](runtime/vendor/PROVENANCE.md).
 7. Direct byte checks confirm FONE encodes 1.0 with exponent 128 and exact
    halfway addition uses the package's ODD behavior, not IEEE ties-to-even.
    The reference constant reader also stores `4294967296.0` differently from

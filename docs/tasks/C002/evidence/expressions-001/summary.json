@@ -1,0 +1,19 @@
+{
+  "cases": 84,
+  "native_executions": 67,
+  "rejected_sources": 17,
+  "reference_expressions": 58,
+  "independently_linked_images": 66,
+  "duration_seconds": 330.787,
+  "compiler_sha256": "4095e9e61e953a84b2f257717a6642f4609df49a57a15bee5ffd0d84de8f03d2",
+  "human_validation": false,
+  "batches": [
+    0,
+    12,
+    24,
+    36,
+    48,
+    60,
+    72
+  ]
+}

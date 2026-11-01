@@ -1,0 +1,88 @@
+[
+  {
+    "source": "VDU 65-((65536*65536)=(2147483648*2)),13,10\n",
+    "expression": "65-((65536*65536)=(2147483648*2))",
+    "expected": "B\n",
+    "status": 0,
+    "diagnostic": null
+  },
+  {
+    "source": "VDU 65-((16777216.0+1)=(16777217)),13,10\n",
+    "expression": "65-((16777216.0+1)=(16777217))",
+    "expected": "B\n",
+    "status": 0,
+    "diagnostic": null
+  },
+  {
+    "source": "VDU 65-((2147483648.0+1)=(2147483649)),13,10\n",
+    "expression": "65-((2147483648.0+1)=(2147483649))",
+    "expected": "B\n",
+    "status": 0,
+    "diagnostic": null
+  },
+  {
+    "source": "VDU 65-(((2147483648.0*2)+1)=((2147483648.0*2)+2)),13,10\n",
+    "expression": "65-(((2147483648.0*2)+1)=((2147483648.0*2)+2))",
+    "expected": "B\n",
+    "status": 0,
+    "diagnostic": null
+  },
+  {
+    "source": "VDU 65-(((2147483648.0*2)+3)=((2147483648.0*2)+2)),13,10\n",
+    "expression": "65-(((2147483648.0*2)+3)=((2147483648.0*2)+2))",
+    "expected": "B\n",
+    "status": 0,
+    "diagnostic": null
+  },
+  {
+    "source": "VDU 65-((4294967295)=((2147483648.0*2)-1)),13,10\n",
+    "expression": "65-((4294967295)=((2147483648.0*2)-1))",
+    "expected": "B\n",
+    "status": 0,
+    "diagnostic": null
+  },
+  {
+    "source": "VDU 65-((4294967296)=(2147483648.0*2)),13,10\n",
+    "expression": "65-((2147483648.0*2)=(2147483648.0*2))",
+    "expected": "B\n",
+    "status": 0,
+    "diagnostic": null,
+    "intentional_reference_literal_correction": true
+  },
+  {
+    "source": "VDU 65-((1/2+1/4)=(3/4)),13,10\n",
+    "expression": "65-((1/2+1/4)=(3/4))",
+    "expected": "B\n",
+    "status": 0,
+    "diagnostic": null
+  },
+  {
+    "source": "VDU 65-((-1/2)=(0-1/2)),13,10\n",
+    "expression": "65-((-1/2)=(0-1/2))",
+    "expected": "B\n",
+    "status": 0,
+    "diagnostic": null
+  },
+  {
+    "source": "VDU 65-((1DIV2)=(0)),13,10\n",
+    "expression": "65-((1DIV2)=(0))",
+    "expected": "B\n",
+    "status": 0,
+    "diagnostic": null
+  },
+  {
+    "source": "VDU 65-((1AND2)=(0)),13,10\n",
+    "expression": "65-((1AND2)=(0))",
+    "expected": "B\n",
+    "status": 0,
+    "diagnostic": null
+  },
+  {
+    "source": "VDU 65-(4294967296.0=(2147483648.0*2)),13,10\n",
+    "expression": "65-((2147483648.0*2)=(2147483648.0*2))",
+    "expected": "B\n",
+    "status": 0,
+    "diagnostic": null,
+    "intentional_reference_literal_correction": true
+  }
+]

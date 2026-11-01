@@ -7,11 +7,10 @@ directory. See [the task convention](docs/tasks/README.md). Feature status is in
 task documents and dated logs. C007's corpus search is complete and retained
 alongside them. C002 is active; C003–C006 are unstarted scopes.
 
-1. [ ] [C002](docs/tasks/C002.md) — Integrate the qualified experimental numeric
-   adapter: implement compiler literals/expressions, emission and runtime
-   relocation. Preserve four-byte integers, five-byte floats, conversions,
-   comparisons and overflow; resolve the recorded constant-reader discrepancy
-   explicitly before promoting numeric language support.
+1. [ ] [C002](docs/tasks/C002.md) — Extend the promoted numeric VDU expression
+   subset with general decimal fraction/exponent literals, numeric formatting
+   and remaining numeric functions. Broaden differential semantics coverage;
+   preserve four-byte integers, five-byte floats, conversion and overflow.
 2. [ ] [C003](docs/tasks/C003.md) — Add scalar variables and mutable strings with defined ownership,
    allocation limits, assignment and BBC BASIC naming/type conventions.
 3. [ ] [C004](docs/tasks/C004.md) — Add structured control flow and separate PROC/FN activation

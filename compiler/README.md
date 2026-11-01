@@ -1,14 +1,16 @@
-# Native BBC BASIC compiler — bootstrap
+# Native BBC BASIC compiler — development
 
 This is the first small implementation of the self-hosting compiler project.
 The compiler is BBC BASIC and emits native eZ80 ADL code directly. It currently
-compiles literal output and labelled control flow; it cannot compile itself.
+compiles literal output, labelled control flow and numeric byte VDU expressions;
+it cannot compile itself.
 The interpreter elsewhere in this repository remains the compatibility
 reference and bootstrap host. The tested implementation was promoted under
 [task C001](../docs/tasks/C001.md) to `compiler/compiler.bas`; sample programs,
-regression tests and tooling are alongside it. The numeric runtime experiment
-remains siloed under [C002](../docs/tasks/C002.md) and is not yet emitted by the
-compiler.
+regression tests and tooling are alongside it. The qualified C002 expression
+slice and numeric runtime are now in this development tree. General fractional/
+exponent literals, variables and numeric PRINT remain unsupported. Promotion
+to `main` awaits accepted testing.
 
 ## Running on Agon
 
@@ -22,7 +24,9 @@ replaces the interpreter at `&40000`; reload BASIC for another compilation.
 `compiler.bas` has line numbers so that the existing interpreter can load it
 without a preprocessor. Programs being compiled may omit line numbers. The
 compiler performs source parsing, symbol resolution, relocation, runtime
-emission and binary output itself; the Python harness only runs tests.
+emission and binary output itself; the Python harness only runs tests. The
+numeric runtime template is already embedded as DATA, so the Agon compiler
+needs no separate runtime image or assembler.
 
 ## Current documents
 
@@ -74,3 +78,6 @@ remain in `.emulator`; successful results and input hashes are written to
 `compiler/build/test-results.json`. Retained qualification reports and
 logs are in `docs/tasks/C001/evidence/`. These checks do not qualify physical
 hardware or prove self-hosting.
+
+For numeric integration and assembly-template regeneration, see the
+[runtime runbook](runtime/README.md) and [C002 expression record](../docs/tasks/C002/EXPRESSIONS.md).

@@ -1,0 +1,79 @@
+[
+  {
+    "source": "VDU 65,13,10\n",
+    "expression": "65",
+    "expected": "A\n",
+    "status": 0,
+    "diagnostic": null
+  },
+  {
+    "source": "VDU 321,13,10\n",
+    "expression": "321",
+    "expected": "A\n",
+    "status": 0,
+    "diagnostic": null
+  },
+  {
+    "source": "VDU -191,13,10\n",
+    "expression": "-191",
+    "expected": "A\n",
+    "status": 0,
+    "diagnostic": null
+  },
+  {
+    "source": "VDU 131/2,13,10\n",
+    "expression": "131/2",
+    "expected": "A\n",
+    "status": 0,
+    "diagnostic": null
+  },
+  {
+    "source": "VDU -381/2+256,13,10\n",
+    "expression": "-381/2+256",
+    "expected": "A\n",
+    "status": 0,
+    "diagnostic": null
+  },
+  {
+    "source": "GOTO @main\n@sub:VDU 60+5:RETURN\n@main:GOSUB @sub:PRINT \"B\":END\n",
+    "expected": "AB\n",
+    "status": 0,
+    "diagnostic": null
+  },
+  {
+    "source": "PRINT \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\":VDU 60+5,13,10:END\n",
+    "expected": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\nA\n",
+    "status": 0,
+    "diagnostic": null
+  },
+  {
+    "source": "PRINT \"ok\":END\n",
+    "expected": "ok\n",
+    "status": 0,
+    "diagnostic": null
+  },
+  {
+    "source": "VDU 1/0:PRINT \"bad\"\n",
+    "expected": "Division by zero\n",
+    "status": 1,
+    "diagnostic": null
+  },
+  {
+    "source": "VDU 2^200:PRINT \"bad\"\n",
+    "expected": "Too big\n",
+    "status": 1,
+    "diagnostic": null
+  },
+  {
+    "source": "VDU 2147483648\n",
+    "expected": "Too big\n",
+    "status": 1,
+    "diagnostic": null
+  },
+  {
+    "source": "VDU (-2)^(1/2)\n",
+    "expected": "Log range\n",
+    "status": 1,
+    "diagnostic": null
+  }
+]

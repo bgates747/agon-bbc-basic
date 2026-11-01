@@ -2,10 +2,10 @@
 
 This matrix describes the compiler, not the reference interpreter. A feature
 is implemented only for the scope stated here. The compiler is not yet
-self-hosting and has no general numeric or mutable-string runtime. Implemented
-statuses describe the promoted C001 bootstrap in `compiler/compiler.bas`.
-See [its task record](../docs/tasks/C001.md). C002 separately qualifies an
-experimental numeric adapter; it does not enable numeric language features yet.
+self-hosting and has no variables or mutable-string runtime. Implemented
+statuses describe the C001 bootstrap and qualified C002 numeric VDU slice in
+`compiler/compiler.bas`. These are development-branch promotions; accepted
+testing is still required before promotion to main.
 
 | Feature | Status | Current scope or constraint |
 | --- | --- | --- |
@@ -18,11 +18,13 @@ experimental numeric adapter; it does not enable numeric language features yet.
 | RETURN and END | Implemented | Checked return; END restores MOS stack |
 | REM and colon statements | Implemented | Quoted colons remain string data |
 | PRINT | Partial | Literals, doubled quotes, semicolons, CR/LF |
-| VDU and CLS | Partial | Unsigned byte constants; no word/expression forms |
-| 32-bit integer values and variables | Unsupported | No narrowing to ADL width; runtime pending |
-| 40-bit floating-point values | Unsupported | Required format retained as design constraint |
-| Arithmetic and conversion | Unsupported | No overflow/promotion behavior claimed |
-| Comparison and Boolean expressions | Unsupported | Includes numeric IF conditions |
+| VDU and CLS | Partial | Numeric byte expressions use SFIX and low-byte wrapping; no word/zero-fill forms |
+| 32-bit integer values | Implemented | Exact four-byte temporaries and signed hex bit patterns; no ADL narrowing |
+| Numeric literals | Partial | Decimal whole values 0..2^32, at most ten digits; optional zero-only fractional suffix; hex up to eight uppercase digits |
+| 40-bit floating-point values | Partial | Five-byte arithmetic/promoted values and whole-valued float literals; general fraction/exponent literals unsupported |
+| Arithmetic and conversion | Partial | Binary + - * / ^ DIV MOD, unary signs, package overflow/promotion and VDU SFIX; no numeric formatting or math functions |
+| Comparison and Boolean expressions | Partial | Numeric = <> <= >= < >, NOT/AND/EOR/OR and TRUE/FALSE in VDU; no shifts or IF statements |
+| Numeric variables | Unsupported | Assignment/storage/bindings remain C003 |
 | Mutable strings and string variables | Unsupported | Literal output does not implement assignment |
 | Variable suffixes and default numeric variables | Unsupported | Assignment rejected |
 | IF/CASE/FOR/WHILE/REPEAT | Unsupported | Structured control flow pending |

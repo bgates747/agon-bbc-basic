@@ -1,0 +1,28 @@
+Warning: unused arguments left: ["--firmware", "platform"].
+Tom's Fake VDP Version 1.03
+unknown packet VDU 0x17, 0, 0xf8
+unknown packet VDU 0x17, 0, 0x99
+uunknown packet VDU 0x17, 0, 0x94
+
+Agon Platform MOS Version 3.0.2 Arthur
+
+ERR:e0.bas
+e0.bas:1:5: Expected a numeric item at 3250
+ERR:e1.bas
+e1.bas:1:7: Unexpected text after statement at 3250
+ERR:e2.bas
+e2.bas:1:7: PRINT requires a string literal; expressions and EVAL are unsupported at 3250
+ERR:e3.bas
+e3.bas:1:21: Expression nesting exceeds 32 at 3250
+ERR:e4.bas
+e4.bas:2:14: Undefined target @missing at 3250
+OK:e5.bas
+OK:e6.bas
+OK:e7.bas
+OK:e8.bas
+OK:e9.bas
+OK:e10.bas
+OK:e11.bas
+OK:e5.bas
+EXPR_COMPILE_DONE
+/ *
