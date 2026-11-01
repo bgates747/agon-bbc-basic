@@ -3,8 +3,9 @@
 This matrix describes the compiler, not the reference interpreter. A feature
 is implemented only for the scope stated here. The compiler is not yet
 self-hosting and has no general numeric or mutable-string runtime. Implemented
-statuses describe the tested C001 experiment in `docs/tasks/C001/`; no compiler
-source has yet been promoted to the live tree. See [its task record](../docs/tasks/C001.md).
+statuses describe the promoted C001 bootstrap in `compiler/compiler.bas`.
+See [its task record](../docs/tasks/C001.md). C002 separately qualifies an
+experimental numeric adapter; it does not enable numeric language features yet.
 
 | Feature | Status | Current scope or constraint |
 | --- | --- | --- |

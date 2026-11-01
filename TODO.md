@@ -3,14 +3,17 @@
 This is the single list of unfinished work. Immutable task IDs link to detailed
 records under `docs/tasks`; experimental code belongs in the matching task
 directory. See [the task convention](docs/tasks/README.md). Feature status is in
-`compiler/COMPATIBILITY.md`. C000 is complete and retained in its task document
-and the dated log. C002–C006 remain broad, unstarted scopes.
+`compiler/COMPATIBILITY.md`. C000 and C001 are complete and retained in their
+task documents and dated logs. C002 is active; C003–C006 are unstarted scopes.
 
-1. [ ] [C001](docs/tasks/C001.md) — Resolve live promotion of the tested bootstrap;
-   preserve its qualification evidence and record the selected live destination.
-2. [ ] [C002](docs/tasks/C002.md) — Specify and adapt the numeric runtime: exact four-byte integers,
-   five-byte floats, conversions, mixed arithmetic, comparisons and overflow;
-   qualify against the reference interpreter before enabling expressions.
+1. [ ] [C007](docs/tasks/C007.md) — Search and curate correctness/performance
+   programs covering interpreter-heavy control flow, calls, variables, strings,
+   parsing and I/O, with arithmetic controls and a fair measurement protocol.
+2. [ ] [C002](docs/tasks/C002.md) — Integrate the qualified experimental numeric
+   adapter: implement compiler literals/expressions, emission and runtime
+   relocation. Preserve four-byte integers, five-byte floats, conversions,
+   comparisons and overflow; resolve the recorded constant-reader discrepancy
+   explicitly before promoting numeric language support.
 3. [ ] [C003](docs/tasks/C003.md) — Add scalar variables and mutable strings with defined ownership,
    allocation limits, assignment and BBC BASIC naming/type conventions.
 4. [ ] [C004](docs/tasks/C004.md) — Add structured control flow and separate PROC/FN activation

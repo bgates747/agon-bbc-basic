@@ -1,0 +1,53 @@
+{
+  "status": "Failed independent fixture assumptions; not a native runtime failure",
+  "observations": [
+    {
+      "index": 247,
+      "case": {
+        "op": 11,
+        "left": "16777216.0",
+        "right": "1",
+        "alias": 0
+      },
+      "lhs": "0000000098",
+      "rhs": "0100000000",
+      "status_and_result": "008000000098"
+    },
+    {
+      "index": 248,
+      "case": {
+        "op": 11,
+        "left": "2147483648.0",
+        "right": "1",
+        "alias": 0
+      },
+      "lhs": "000000009f",
+      "rhs": "0100000000",
+      "status_and_result": "00010000009f"
+    },
+    {
+      "index": 249,
+      "case": {
+        "op": 11,
+        "left": "4294967296.0",
+        "right": "1",
+        "alias": 0
+      },
+      "lhs": "faffff7f9f",
+      "rhs": "0100000000",
+      "status_and_result": "00fbffff7f9f"
+    },
+    {
+      "index": 250,
+      "case": {
+        "op": 11,
+        "left": "4294967296.0",
+        "right": "3",
+        "alias": 0
+      },
+      "lhs": "faffff7f9f",
+      "rhs": "0300000000",
+      "status_and_result": "00fdffff7f9f"
+    }
+  ]
+}

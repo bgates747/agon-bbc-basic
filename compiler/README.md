@@ -4,13 +4,15 @@ This is the first small implementation of the self-hosting compiler project.
 The compiler is BBC BASIC and emits native eZ80 ADL code directly. It currently
 compiles literal output and labelled control flow; it cannot compile itself.
 The interpreter elsewhere in this repository remains the compatibility
-reference and bootstrap host. All implementation and experimental test tools
-are siloed under [task C001](../docs/tasks/C001.md), in `docs/tasks/C001/`.
-No compiler source has yet been promoted into the live source tree.
+reference and bootstrap host. The tested implementation was promoted under
+[task C001](../docs/tasks/C001.md) to `compiler/compiler.bas`; sample programs,
+regression tests and tooling are alongside it. The numeric runtime experiment
+remains siloed under [C002](../docs/tasks/C002.md) and is not yet emitted by the
+compiler.
 
 ## Running on Agon
 
-From `docs/tasks/C001/` on the Agon SD card, load `compiler.bas` into the
+From `compiler/` on the Agon SD card, load `compiler.bas` into the
 repository's BASIC V ADL interpreter and `RUN`.
 Enter the plain-text input filename and destination `.bin` filename at its
 prompts. For example, compile `examples/hello.bas` into `hello.bin`. Exit BASIC
@@ -31,7 +33,7 @@ emission and binary output itself; the Python harness only runs tests.
    register conventions, dependencies and licensing.
 4. [Tasks](../TODO.md) — the single unfinished-work list, linked to detailed
    immutable-ID documents in `docs/tasks/`.
-5. [Development log](../docs/compiler-development-2026-10-31.md) — experiments
+5. [Development log](../docs/compiler-development-2026-11-01.md) — experiments
    and verification evidence.
 
 ## Automated qualification
@@ -51,9 +53,9 @@ is ARM64. Build its unchanged CLI backend into an isolated output directory:
 ```bash
 cargo build --release --locked --offline \
   --manifest-path /Agon/fab-agon-emulator/Cargo.toml \
-  -p agon-cli-emulator --target-dir docs/tasks/C001/build/cli
-.venv/bin/python docs/tasks/C001/tools/test_compiler.py \
-  --cli docs/tasks/C001/build/cli/release/agon-cli-emulator
+  -p agon-cli-emulator --target-dir compiler/build/cli
+.venv/bin/python compiler/tools/test_compiler.py \
+  --cli compiler/build/cli/release/agon-cli-emulator
 ```
 
 The harness imports the canonical `agon-dev-env` profile generator, verifies
@@ -67,6 +69,6 @@ The tests run the actual BBC BASIC compiler, compare one complete executable
 against independently assembled GNU eZ80 source, run generated executables,
 exercise compilation failures and check that old output survives them. Logs
 remain in `.emulator`; successful results and input hashes are written to
-`docs/tasks/C001/build/test-results.json`. Retained qualification reports and
+`compiler/build/test-results.json`. Retained qualification reports and
 logs are in `docs/tasks/C001/evidence/`. These checks do not qualify physical
 hardware or prove self-hosting.

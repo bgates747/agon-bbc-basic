@@ -49,6 +49,7 @@ retrospectively to the compiler work already performed.
 | C004 | [Structured flow, procedures, functions and LOCAL](C004.md) |
 | C005 | [Arrays, indirection and bootstrap I/O](C005.md) |
 | C006 | [Self-hosting and physical qualification](C006.md) |
+| C007 | [Curated correctness and performance program search](C007.md) |
 
 Open work is listed only in [TODO.md](../../TODO.md). Broad unstarted briefs
 must be refined before implementation; their existence does not mean work has

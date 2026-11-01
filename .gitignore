@@ -24,4 +24,6 @@ include/.DS_Store
 .venv/
 .emulator/
 /docs/tasks/C001/build/
+/docs/tasks/C002/build/
+/compiler/build/
 __pycache__/

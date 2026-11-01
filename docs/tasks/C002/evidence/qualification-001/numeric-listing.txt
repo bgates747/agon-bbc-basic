@@ -1,0 +1,2664 @@
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C002/numeric.s 			page 1
+
+
+   1                       	; C002 experimental numeric adapter. New wrapper around the unchanged package.
+   2                       	; See ABI.md and vendor/PROVENANCE.md. No interpreter is linked.
+   3                       	    .assume adl=1
+   4                       	    .text
+   5                       	    .global rt_numeric
+   6                       	
+   7                       	; A = selector (0..15 binary, 38 truncate to integer, 39 float).
+   8                       	; IX = writable five-byte lhs/result; IY = five-byte rhs (may equal IX).
+   9                       	; Success: A=0, Z=1, carry=0. Failure: A=error, Z=0, carry=1;
+  10                       	; lhs is unchanged. IX, IY and SP are preserved. Other registers are volatile.
+  11                       	rt_numeric:
+  12 0000 FE 10             	    cp 16
+  13 0002 38 0D             	    jr c,num_accept
+  14 0004 FE 26             	    cp 38
+  15 0006 28 09             	    jr z,num_accept
+  16 0008 FE 27             	    cp 39
+  17 000a 28 05             	    jr z,num_accept
+  18 000c 3E 01             	    ld a,1
+  19 000e B7                	    or a
+  20 000f 37                	    scf
+  21 0010 C9                	    ret
+  22                       	num_accept:
+  23 0011 DD E5             	    push ix
+  24 0013 FD E5             	    push iy
+  25 0015 F5                	    push af
+  26 0016 01 00 00 00       	    ld bc,0
+  27 001a 21 00 00 00       	    ld hl,0
+  28 001e DD 6E 02          	    ld l,(ix+2)
+  29 0021 DD 66 03          	    ld h,(ix+3)
+  30 0024 DD 4E 04          	    ld c,(ix+4)
+  31 0027 D9                	    exx
+  32 0028 21 00 00 00       	    ld hl,0
+  33 002c DD 6E 00          	    ld l,(ix+0)
+  34 002f DD 66 01          	    ld h,(ix+1)
+  35 0032 D9                	    exx
+  36 0033 FD E5             	    push iy
+  37 0035 DD E1             	    pop ix
+  38 0037 CD 53 00 00       	    call DLOAD5
+  39 003b F1                	    pop af
+  40 003c CD B9 00 00       	    call FPP
+  41 0040 38 0A             	    jr c,num_error
+  42 0042 FD E1             	    pop iy
+  43 0044 DD E1             	    pop ix
+  44 0046 CD 6D 00 00       	    call STORE5
+  45 004a AF                	    xor a
+  46 004b C9                	    ret
+  47                       	num_error:
+  48 004c FD E1             	    pop iy
+  49 004e DD E1             	    pop ix
+  50 0050 B7                	    or a
+  51 0051 37                	    scf
+  52 0052 C9                	    ret
+  53                       	
+  54                       	; Adapted from baseline EVAL.Z80 / EXEC.Z80 (same license as vendor/LICENSE).
+  55                       	; Read/write only the stated five bytes. Zero upper register bytes on loads.
+  56                       	    .global DLOAD5,STORE5,TEST
+  57                       	DLOAD5:
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C002/numeric.s 			page 2
+
+
+  58 0053 DD 46 04          	    ld b,(ix+4)
+  59 0056 D9                	    exx
+  60 0057 11 00 00 00       	    ld de,0
+  61 005b DD 5E 00          	    ld e,(ix+0)
+  62 005e DD 56 01          	    ld d,(ix+1)
+  63 0061 D9                	    exx
+  64 0062 11 00 00 00       	    ld de,0
+  65 0066 DD 5E 02          	    ld e,(ix+2)
+  66 0069 DD 56 03          	    ld d,(ix+3)
+  67 006c C9                	    ret
+  68                       	STORE5:
+  69 006d DD 71 04          	    ld (ix+4),c
+  70 0070 D9                	    exx
+  71 0071 DD 75 00          	    ld (ix+0),l
+  72 0074 DD 74 01          	    ld (ix+1),h
+  73 0077 D9                	    exx
+  74 0078 DD 75 02          	    ld (ix+2),l
+  75 007b DD 74 03          	    ld (ix+3),h
+  76 007e C9                	    ret
+  77                       	TEST:
+  78 007f 7C                	    ld a,h
+  79 0080 B5                	    or l
+  80 0081 D9                	    exx
+  81 0082 B4                	    or h
+  82 0083 B5                	    or l
+  83 0084 D9                	    exx
+  84 0085 C9                	    ret
+  85                       	
+  86                       	; Additional, undeclared package dependencies found by standalone linking.
+  87                       	; Internal sparse stack value: low word + padding at 0..2, high word +
+  88                       	; padding at 3..5, exponent at 6. All seven accesses below are byte-exact.
+  89                       	    .global DLOAD5_SPL,STORE5_SPL
+  90                       	DLOAD5_SPL:
+  91 0086 DD 46 06          	    ld b,(ix+6)
+  92 0089 D9                	    exx
+  93 008a 11 00 00 00       	    ld de,0
+  94 008e DD 5E 00          	    ld e,(ix+0)
+  95 0091 DD 56 01          	    ld d,(ix+1)
+  96 0094 D9                	    exx
+  97 0095 11 00 00 00       	    ld de,0
+  98 0099 DD 5E 03          	    ld e,(ix+3)
+  99 009c DD 56 04          	    ld d,(ix+4)
+ 100 009f C9                	    ret
+ 101                       	STORE5_SPL:
+ 102 00a0 DD 71 06          	    ld (ix+6),c
+ 103 00a3 D9                	    exx
+ 104 00a4 DD 75 00          	    ld (ix+0),l
+ 105 00a7 DD 74 01          	    ld (ix+1),h
+ 106 00aa AF                	    xor a
+ 107 00ab DD 77 02          	    ld (ix+2),a
+ 108 00ae D9                	    exx
+ 109 00af DD 75 03          	    ld (ix+3),l
+ 110 00b2 DD 74 04          	    ld (ix+4),h
+ 111 00b5 DD 77 05          	    ld (ix+5),a
+ 112 00b8 C9                	    ret
+ 113                       	
+ 114                       	; Minimal assembly compatibility macros required by the pinned package.
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C002/numeric.s 			page 3
+
+
+ 115                       	    .macro EXTRN symbol
+ 116                       	    .extern \symbol
+ 117                       	    .endm
+ 118                       	    .macro PTR symbol
+ 119                       	    .d24 \symbol
+ 120                       	    .endm
+ 121                       	    .macro UEXT reg
+ 122                       	    or a
+ 123                       	    sbc \reg,\reg
+ 124                       	    .endm
+ 125                       	    .macro UEXTA reg
+ 126                       	    xor a
+ 127                       	    sbc \reg,\reg
+ 128                       	    .endm
+ 129                       	    .include "vendor/MATH.Z80"
+   1                       		TITLE	'(C) COPYRIGHT R.T.RUSSELL 1986-2025'
+   2                       	;
+   3                       	;Z80 FLOATING POINT PACKAGE
+   4                       	;(C) COPYRIGHT  R.T.RUSSELL  1986-2024
+   5                       	;VERSION 0.0, 26-10-1986
+   6                       	;VERSION 0.1, 14-12-1988 (BUG FIX)
+   7                       	;VERSION 5.0, 16-06-2024 (SHIFTS ADDED)
+   8                       	;VERSION 5.1, 16-03-2025 (Shifts moved to new codes)
+   9                       	;
+  10                       	;BINARY FLOATING POINT REPRESENTATION:
+  11                       	;   32 BIT SIGN-MAGNITUDE NORMALIZED MANTISSA
+  12                       	;    8 BIT EXCESS-128 SIGNED EXPONENT
+  13                       	;   SIGN BIT REPLACES MANTISSA MSB (IMPLIED "1")
+  14                       	;   MANTISSA=0 & EXPONENT=0 IMPLIES VALUE IS ZERO.
+  15                       	;
+  16                       	;BINARY INTEGER REPRESENTATION:
+  17                       	;   32 BIT 2'S-COMPLEMENT SIGNED INTEGER
+  18                       	;    "EXPONENT" BYTE = 0 (WHEN PRESENT)
+  19                       	;
+  20                       	;NORMAL REGISTER ALLOCATION: MANTISSA - HLH'L'
+  21                       	;                            EXPONENT - C
+  22                       	;ALTERNATE REGISTER ALLOCATION: MANTISSA - DED'E'
+  23                       	;                               EXPONENT - B
+  24                       	;
+  25                       	;Error codes:
+  26                       	;
+  27                       	BADOP	EQU	1		;Bad operation code
+  28                       	DIVBY0	EQU	18		;Division by zero
+  29                       	TOOBIG	EQU	20		;Too big
+  30                       	NGROOT	EQU	21		;Negative root
+  31                       	LOGRNG	EQU	22		;Log range
+  32                       	ACLOST	EQU	23		;Accuracy lost
+  33                       	EXPRNG	EQU	24		;Exp range
+  34                       	;
+  35                       		GLOBAL	FPP
+  36                       		EXTRN	STORE5
+  37                       		EXTRN	DLOAD5
+  38                       		EXTRN	TEST
+  39                       	;
+  40                       	;Call entry and despatch code:
+  41                       	;
+  42 00b9 FD E5             	FPP:	PUSH	IY		;Save IY
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C002/numeric.s 			page 4
+'(C) COPYRIGHT R.T.RUSSELL 1986-2025'
+
+  43 00bb FD 21 00 00 00    		LD	IY,0
+  44 00c0 FD 39             		ADD	IY,SP		;Save SP in IY
+  45 00c2 CD D2 00 00       		CALL	OP		;Perform operation
+  46 00c6 BF                		CP	A		;Good return (Z, NC)
+  47 00c7 FD E1             	EXIT:	POP	IY		;Restore IY
+  48 00c9 C9                		RET			;Return to caller
+  49                       	;
+  50                       	;Error exit:
+  51                       	;
+  52 00ca 3E 01             	BAD:	LD	A,BADOP		;"Bad operation code"
+  53 00cc FD F9             	ERROR:	LD	SP,IY		;Restore SP from IY
+  54 00ce B7                		OR	A		;Set NZ
+  55 00cf 37                		SCF			;Set C
+  56 00d0 18 F5             		JR	EXIT
+  57                       	;
+  58                       	;Perform operation or function:
+  59                       	;
+  60 00d2 FE 30             	OP:	CP	(RTABLE-DTABLE)/3
+  61 00d4 30 F4             		JR	NC,BAD
+  62 00d6 FE 10             		CP	(FTABLE-DTABLE)/3
+  63 00d8 30 08             		JR	NC,DISPAT
+  64 00da 08                		EX	AF,AF'
+  65 00db 78                		LD	A,B
+  66 00dc B1                		OR	C		;Both integer?
+  67 00dd C4 24 0C 00       		CALL	NZ,FLOATA	;No, so float both
+  68 00e1 08                		EX	AF,AF'
+  69 00e2 E5                	DISPAT:	PUSH	HL
+  70 00e3 21 F5 00 00       		LD	HL,DTABLE
+  71 00e7 C5                		PUSH	BC
+  72 00e8 01 03 00 00       		LD	BC, 3		; C = 3
+  73 00ec 47                		LD	B, A 		; B = op-code
+  74 00ed ED 4C             		MLT 	BC 		;BC = op-code * 3
+  75 00ef 09                		ADD	HL,BC
+  76 00f0 ED 27             		LD	HL, (HL)	;Get the routine address (24-bit)
+  77 00f2 C1                		POP	BC
+  78 00f3 E3                		EX	(SP),HL
+  79 00f4 C9                		RET			;Off to routine
+  80                       	;
+  81                       	;Despatch table:
+  82                       	;
+  83 00f5 B9 01 00          	DTABLE:	PTR	IAND		;0  AND (INTEGER)
+  84 00f8 0D 02 00          		PTR	IBDIV		;1  DIV
+  85 00fb CC 01 00          		PTR	IEOR		;2  EOR
+  86 00fe F2 01 00          		PTR	IMOD		;3  MOD
+  87 0101 DF 01 00          		PTR	IOR		;4  OR
+  88 0104 BB 04 00          		PTR	ILE		;5  <=
+  89 0107 CA 04 00          		PTR	INE		;6  <>
+  90 010a AE 04 00          		PTR	IGE		;7  >=
+  91 010d 93 04 00          		PTR	ILT		;8  <
+  92 0110 D7 04 00          		PTR	IEQ		;9  =
+  93 0113 5D 03 00          		PTR	IMUL		;10 *
+  94 0116 36 02 00          		PTR	IADD		;11 +
+  95 0119 A0 04 00          		PTR	IGT		;12 >
+  96 011c 1D 02 00          		PTR	ISUB		;13 -
+  97 011f E7 03 00          		PTR	IPOW		;14 ^
+  98 0122 A8 02 00          		PTR	IDIV		;15 /
+  99                       	;
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C002/numeric.s 			page 5
+'(C) COPYRIGHT R.T.RUSSELL 1986-2025'
+
+ 100 0125 2C 05 00          	FTABLE:	PTR	ABS		;16 ABS
+ 101 0128 12 09 00          		PTR	ACS		;17 ACS
+ 102 012b 50 08 00          		PTR	ASN		;18 ASN
+ 103 012e 80 08 00          		PTR	ATN		;19 ATN
+ 104 0131 4B 06 00          		PTR	COS		;20 COS
+ 105 0134 5A 05 00          		PTR	DEG		;21 DEG
+ 106 0137 07 07 00          		PTR	EXP		;22 EXP
+ 107 013a AE 05 00          		PTR	INT		;23 INT
+ 108 013d A5 07 00          		PTR	LN		;24 LN
+ 109 0140 3A 08 00          		PTR	LOG		;25 LOG
+ 110 0143 38 05 00          		PTR	CPL		;26 NOT
+ 111 0146 64 05 00          		PTR	RAD		;27 RAD
+ 112 0149 7F 05 00          		PTR	SGN		;28 SGN
+ 113 014c 58 06 00          		PTR	SIN		;29 SIN
+ 114 014f C7 05 00          		PTR	SQR		;30 SQR
+ 115 0152 25 06 00          		PTR	TAN		;31 TAN
+ 116                       	;
+ 117 0155 AA 0C 00          		PTR	ZERO		;32 ZERO
+ 118 0158 E0 06 00          		PTR	FONE		;33 FONE
+ 119 015b DC 04 00          		PTR	TRUE		;34 TRUE
+ 120 015e 4C 05 00          		PTR	PI		;35 PI
+ 121                       	;
+ 122 0161 93 05 00          		PTR	VAL		;36 VAL
+ 123 0164 1B 09 00          		PTR	STR		;37 STR$
+ 124                       	;
+ 125 0167 5C 0B 00          		PTR	SFIX		;38 FIX
+ 126 016a 34 0C 00          		PTR	SFLOAT		;39 FLOAT
+ 127                       	;
+ 128 016d 82 0C 00          		PTR	FTEST		;40 TEST
+ 129 0170 8D 0C 00          		PTR	FCOMP		;41 COMPARE
+ 130                       	;
+ 131 0173 CA 00 00          		PTR	BAD		;42 Reserved for Z88
+ 132 0176 CA 00 00          		PTR	BAD		;43 Reserved for Z88
+ 133                       	;
+ 134 0179 E9 04 00          		PTR	ISHL		;44 <<
+ 135 017c E9 04 00          		PTR	ISHX		;45 <<<
+ 136 017f F8 04 00          		PTR	ISAR		;46 >>
+ 137 0182 0A 05 00          		PTR	ISHR		;47 >>>
+ 138                       	;
+ 139 0185 B5 01 00          	RTABLE:	PTR	FAND		;AND (FLOATING-POINT)
+ 140 0188 09 02 00          		PTR	FBDIV		;DIV
+ 141 018b C8 01 00          		PTR	FEOR		;EOR
+ 142 018e EE 01 00          		PTR	FMOD		;MOD
+ 143 0191 DB 01 00          		PTR	FOR		;OR
+ 144 0194 B5 04 00          		PTR	FLE		;<=
+ 145 0197 C4 04 00          		PTR	FNE		;<>
+ 146 019a A8 04 00          		PTR	FGE		;>=
+ 147 019d 8D 04 00          		PTR	FLT		;<
+ 148 01a0 D1 04 00          		PTR	FEQ		;=
+ 149 01a3 8D 03 00          		PTR	FMUL		;*
+ 150 01a6 43 02 00          		PTR	FADD		;+
+ 151 01a9 9A 04 00          		PTR	FGT		;>
+ 152 01ac 2A 02 00          		PTR	FSUB		;-
+ 153 01af 5A 04 00          		PTR	FPOW		;^
+ 154 01b2 AC 02 00          		PTR	FDIV		;/
+ 155                       	;
+ 156                       	;ARITHMETIC AND LOGICAL OPERATORS:
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C002/numeric.s 			page 6
+'(C) COPYRIGHT R.T.RUSSELL 1986-2025'
+
+ 157                       	;All take two arguments, in HLH'L'C & DED'E'B.
+ 158                       	;Output in HLH'L'C
+ 159                       	;All registers except IX, IY destroyed.
+ 160                       	; (N.B. FPOW destroys IX).
+ 161                       	;
+ 162                       	;FAND - Floating-point AND.
+ 163                       	;IAND - Integer AND.
+ 164                       	;
+ 165 01b5 CD 50 0B 00       	FAND:	CALL	FIX2
+ 166 01b9 7C                	IAND:	LD	A,H
+ 167 01ba A2                		AND	D
+ 168 01bb 67                		LD	H,A
+ 169 01bc 7D                		LD	A,L
+ 170 01bd A3                		AND	E
+ 171 01be 6F                		LD	L,A
+ 172 01bf D9                		EXX
+ 173 01c0 7C                		LD	A,H
+ 174 01c1 A2                		AND	D
+ 175 01c2 67                		LD	H,A
+ 176 01c3 7D                		LD	A,L
+ 177 01c4 A3                		AND	E
+ 178 01c5 6F                		LD	L,A
+ 179 01c6 D9                		EXX
+ 180 01c7 C9                		RET
+ 181                       	;
+ 182                       	;FEOR - Floating-point exclusive-OR.
+ 183                       	;IEOR - Integer exclusive-OR.
+ 184                       	;
+ 185 01c8 CD 50 0B 00       	FEOR:	CALL	FIX2
+ 186 01cc 7C                	IEOR:	LD	A,H
+ 187 01cd AA                		XOR	D
+ 188 01ce 67                		LD	H,A
+ 189 01cf 7D                		LD	A,L
+ 190 01d0 AB                		XOR	E
+ 191 01d1 6F                		LD	L,A
+ 192 01d2 D9                		EXX
+ 193 01d3 7C                		LD	A,H
+ 194 01d4 AA                		XOR	D
+ 195 01d5 67                		LD	H,A
+ 196 01d6 7D                		LD	A,L
+ 197 01d7 AB                		XOR	E
+ 198 01d8 6F                		LD	L,A
+ 199 01d9 D9                		EXX
+ 200 01da C9                		RET
+ 201                       	;
+ 202                       	;FOR - Floating-point OR.
+ 203                       	;IOR - Integer OR.
+ 204                       	;
+ 205 01db CD 50 0B 00       	FOR:	CALL	FIX2
+ 206 01df 7C                	IOR:	LD	A,H
+ 207 01e0 B2                		OR	D
+ 208 01e1 67                		LD	H,A
+ 209 01e2 7D                		LD	A,L
+ 210 01e3 B3                		OR	E
+ 211 01e4 6F                		LD	L,A
+ 212 01e5 D9                		EXX
+ 213 01e6 7C                		LD	A,H
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C002/numeric.s 			page 7
+'(C) COPYRIGHT R.T.RUSSELL 1986-2025'
+
+ 214 01e7 B2                		OR	D
+ 215 01e8 67                		LD	H,A
+ 216 01e9 7D                		LD	A,L
+ 217 01ea B3                		OR	E
+ 218 01eb 6F                		LD	L,A
+ 219 01ec D9                		EXX
+ 220 01ed C9                		RET
+ 221                       	;
+ 222                       	;FMOD - Floating-point remainder.
+ 223                       	;IMOD - Integer remainder.
+ 224                       	;
+ 225 01ee CD 50 0B 00       	FMOD:	CALL	FIX2
+ 226 01f2 7C                	IMOD:	LD	A,H
+ 227 01f3 AA                		XOR	D		;DIV RESULT SIGN
+ 228 01f4 CB 7C             		BIT	7,H
+ 229 01f6 CD C5 0E 00       		CALL	ABS2		;MAKE BOTH POSITIVE
+ 230 01fa 3E DF             		LD	A,-33
+ 231 01fc CD EB 0D 00       		CALL	DIVA		;DIVIDE
+ 232 0200 D9                		EXX
+ 233 0201 0E 00             		LD	C,0		;INTEGER MARKER
+ 234 0203 08                		EX	AF,AF'
+ 235 0204 C8                		RET	Z
+ 236 0205 C3 6C 0B 00       		JP	NEGATE
+ 237                       	;
+ 238                       	;BDIV - Integer division.
+ 239                       	;
+ 240 0209 CD 50 0B 00       	FBDIV:	CALL	FIX2
+ 241 020d CD F2 01 00       	IBDIV:	CALL	IMOD
+ 242 0211 B7                		OR	A
+ 243 0212 CD 65 0C 00       		CALL	SWAP
+ 244 0216 0E 00             		LD	C,0
+ 245 0218 F0                		RET	P
+ 246 0219 C3 6C 0B 00       		JP	NEGATE
+ 247                       	;
+ 248                       	;ISUB - Integer subtraction.
+ 249                       	;FSUB - Floating point subtraction with rounding.
+ 250                       	;
+ 251 021d CD F9 0C 00       	ISUB:	CALL	SUB
+ 252 0221 E0                		RET	PO
+ 253 0222 CD F1 0C 00       		CALL	ADD
+ 254 0226 CD 28 0C 00       		CALL	FLOAT2
+ 255 022a 7A                	FSUB:	LD	A,D
+ 256 022b EE 80             		XOR	80H		;CHANGE SIGN THEN ADD
+ 257 022d 57                		LD	D,A
+ 258 022e 18 13             		JR	FADD
+ 259                       	;
+ 260                       	;Reverse subtract.
+ 261                       	;
+ 262 0230 7C                	RSUB:	LD	A,H
+ 263 0231 EE 80             		XOR	80H
+ 264 0233 67                		LD	H,A
+ 265 0234 18 0D             		JR	FADD
+ 266                       	;
+ 267                       	;IADD - Integer addition.
+ 268                       	;FADD - Floating point addition with rounding.
+ 269                       	;
+ 270 0236 CD F1 0C 00       	IADD:	CALL	ADD
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C002/numeric.s 			page 8
+'(C) COPYRIGHT R.T.RUSSELL 1986-2025'
+
+ 271 023a E0                		RET	PO
+ 272 023b CD F9 0C 00       		CALL	SUB
+ 273 023f CD 28 0C 00       		CALL	FLOAT2
+ 274 0243 05                	FADD:	DEC	B
+ 275 0244 04                		INC	B
+ 276 0245 C8                		RET	Z		;ARG 2 ZERO
+ 277 0246 0D                		DEC	C
+ 278 0247 0C                		INC	C
+ 279 0248 CA 65 0C 00       		JP	Z,SWAP		;ARG 1 ZERO
+ 280 024c D9                		EXX
+ 281 024d 01 00 00 00       		LD	BC,0		;INITIALISE
+ 282 0251 D9                		EXX
+ 283 0252 7C                		LD	A,H
+ 284 0253 AA                		XOR	D		;XOR SIGNS
+ 285 0254 F5                		PUSH	AF
+ 286 0255 78                		LD	A,B
+ 287 0256 B9                		CP	C		;COMPARE EXPONENTS
+ 288 0257 DC 65 0C 00       		CALL	C,SWAP		;MAKE DED'E'B LARGEST
+ 289 025b 78                		LD	A,B
+ 290 025c CB FC             		SET	7,H		;IMPLIED 1
+ 291 025e C4 3F 0B 00       		CALL	NZ,FIX		;ALIGN
+ 292 0262 F1                		POP	AF
+ 293 0263 7A                		LD	A,D		;SIGN OF LARGER
+ 294 0264 CB FA             		SET	7,D		;IMPLIED 1
+ 295 0266 FA 76 02 00       		JP	M,FADD3		;SIGNS DIFFERENT
+ 296 026a CD F1 0C 00       		CALL	ADD		;HLH'L'=HLH'L'+DED'E'
+ 297 026e DC 6D 0C 00       		CALL	C,DIV2		;NORMALISE
+ 298 0272 CB FC             		SET	7,H
+ 299 0274 18 0D             		JR	FADD4
+ 300                       	;
+ 301 0276 CD F9 0C 00       	FADD3:	CALL	SUB		;HLH'L'=HLH'L'-DED'E'
+ 302 027a DC 84 0B 00       		CALL	C,NEG		;NEGATE HLH'L'B'C'
+ 303 027e CD 03 0C 00       		CALL	FLO48
+ 304 0282 2F                		CPL			;CHANGE RESULT SIGN
+ 305 0283 D9                	FADD4:	EXX
+ 306 0284 EB                		EX	DE,HL
+ 307 0285 21 00 80 00       		LD	HL,8000H
+ 308 0289 B7                		OR	A		;CLEAR CARRY
+ 309 028a 52 ED 42          		SBC.S	HL,BC
+ 310 028d EB                		EX	DE,HL
+ 311 028e D9                		EXX
+ 312 028f CC 5F 0C 00       		CALL	Z,ODD		;ROUND UNBIASSED
+ 313 0293 DC 4D 0C 00       		CALL	C,ADD1		;ROUND UP
+ 314 0297 DC 7A 0C 00       		CALL	C,INCC
+ 315 029b CB BC             		RES	7,H
+ 316 029d 0D                		DEC	C
+ 317 029e 0C                		INC	C
+ 318 029f CA AA 0C 00       		JP	Z,ZERO
+ 319 02a3 B7                		OR	A		;RESULT SIGNQ
+ 320 02a4 F0                		RET	P		;POSITIVE
+ 321 02a5 CB FC             		SET	7,H		;NEGATIVE
+ 322 02a7 C9                		RET
+ 323                       	;
+ 324                       	;IDIV - Integer division.
+ 325                       	;FDIV - Floating point division with rounding.
+ 326                       	;
+ 327 02a8 CD 28 0C 00       	IDIV:	CALL	FLOAT2
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C002/numeric.s 			page 9
+'(C) COPYRIGHT R.T.RUSSELL 1986-2025'
+
+ 328 02ac 05                	FDIV:	DEC	B		;TEST FOR ZERO
+ 329 02ad 04                		INC	B
+ 330 02ae 3E 12             		LD	A,DIVBY0
+ 331 02b0 CA CC 00 00       		JP	Z,ERROR		;"Division by zero"
+ 332 02b4 0D                		DEC	C		;TEST FOR ZERO
+ 333 02b5 0C                		INC	C
+ 334 02b6 C8                		RET	Z
+ 335 02b7 7C                		LD	A,H
+ 336 02b8 AA                		XOR	D		;CALC. RESULT SIGN
+ 337 02b9 08                		EX	AF,AF'		;SAVE SIGN
+ 338 02ba CB FA             		SET	7,D		;REPLACE IMPLIED 1's
+ 339 02bc CB FC             		SET	7,H
+ 340 02be C5                		PUSH	BC		;SAVE EXPONENTS
+ 341 02bf 42                		LD	B,D		;LOAD REGISTERS
+ 342 02c0 4B                		LD	C,E
+ 343 02c1 11 00 00 00       		LD	DE,0
+ 344 02c5 D9                		EXX
+ 345 02c6 42                		LD	B,D
+ 346 02c7 4B                		LD	C,E
+ 347 02c8 11 00 00 00       		LD	DE,0
+ 348 02cc 3E E0             		LD	A,-32		;LOOP COUNTER
+ 349 02ce CD EB 0D 00       		CALL	DIVA		;DIVIDE
+ 350 02d2 D9                		EXX
+ 351 02d3 CB 7A             		BIT	7,D
+ 352 02d5 D9                		EXX
+ 353 02d6 CC 0A 0E 00       		CALL	Z,DIVB		;NORMALISE & INC A
+ 354 02da EB                		EX	DE,HL
+ 355 02db D9                		EXX
+ 356 02dc CB 38             		SRL	B		;DIVISOR/2
+ 357 02de CB 19             		RR	C
+ 358 02e0 B7                		OR	A		;CLEAR CARRY
+ 359 02e1 52 ED 42          		SBC.S	HL,BC		;REMAINDER-DIVISOR/2
+ 360 02e4 3F                		CCF
+ 361 02e5 EB                		EX	DE,HL		;RESULT IN HLH'L'
+ 362 02e6 CC 5F 0C 00       		CALL	Z,ODD		;ROUND UNBIASSED
+ 363 02ea DC 4D 0C 00       		CALL	C,ADD1		;ROUND UP
+ 364 02ee C1                		POP	BC		;RESTORE EXPONENTS
+ 365 02ef DC 7A 0C 00       		CALL	C,INCC
+ 366 02f3 1F                		RRA			;LSB OF A TO CARRY
+ 367 02f4 79                		LD	A,C		;COMPUTE NEW EXPONENT
+ 368 02f5 98                		SBC	A,B
+ 369 02f6 3F                		CCF
+ 370 02f7 C3 CD 03 00       		JP	CHKOVF
+ 371                       	
+ 372                       	;
+ 373                       	; IMULM - hybrid integer multiply for IMUL (eZ80 MLT-assisted)
+ 374                       	;
+ 375                       	; Fast paths:
+ 376                       	;   - 8×8
+ 377                       	;   - 16×8
+ 378                       	;   - 8×16
+ 379                       	;
+ 380                       	; Slow path:
+ 381                       	;   - full 32×32 multiply via original MULA
+ 382                       	;
+ 383                       	; Entry (after ABS2):
+ 384                       	;   main BC = low  16 bits of operand X
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C002/numeric.s 			page 10
+'(C) COPYRIGHT R.T.RUSSELL 1986-2025'
+
+ 385                       	;   alt  BC = high 16 bits of operand X
+ 386                       	;   main DE = low  16 bits of operand Y
+ 387                       	;   alt  DE = high 16 bits of operand Y
+ 388                       	;
+ 389                       	; Fast-path condition:
+ 390                       	;   B'=C'=D'=E'=0  (both operands ≤ 16 bits)
+ 391                       	;
+ 392                       	; Exit (same layout as MULA):
+ 393                       	;   main DE = low  16 bits of product
+ 394                       	;   alt  DE = high 16 bits of product
+ 395                       	;   main HL = 0
+ 396                       	;   alt  HL = 0
+ 397                       	;
+ 398                       	; Notes:
+ 399                       	;   - Uses eZ80 MLT instruction for fast 8×8 multiplies
+ 400                       	;   - Keeps fallback to MULA for correctness on larger values
+ 401                       	;   - No scratch memory used
+ 402                       	;
+ 403                       	
+ 404 02fb D9                	IMULM:	EXX
+ 405 02fc 78                		LD	A,B
+ 406 02fd B1                		OR	C
+ 407 02fe B2                		OR	D
+ 408 02ff B3                		OR	E
+ 409 0300 D9                		EXX
+ 410 0301 20 54             		JR	NZ,IMULM_SLOW	; operands exceed 16 bits
+ 411                       	
+ 412 0303 78                		LD	A,B
+ 413 0304 B7                		OR	A
+ 414 0305 28 06             		JR	Z,IMULM_X8	; X fits in 8 bits
+ 415                       	
+ 416 0307 7A                		LD	A,D
+ 417 0308 B7                		OR	A
+ 418 0309 28 1A             		JR	Z,IMULM_16X8	; X is 16-bit, Y is 8-bit
+ 419                       	
+ 420 030b 18 4A             		JR	IMULM_SLOW	; both 16-bit -> use original path
+ 421                       	
+ 422                       	;
+ 423                       	; X fits in 8 bits
+ 424                       	;
+ 425                       	IMULM_X8:
+ 426 030d 7A                		LD	A,D
+ 427 030e B7                		OR	A
+ 428 030f 28 02             		JR	Z,IMULM_8X8	; both 8-bit
+ 429                       	
+ 430 0311 18 2B             		JR	IMULM_8X16	; X is 8-bit, Y is 16-bit
+ 431                       	
+ 432                       	;
+ 433                       	; 8×8 fast path
+ 434                       	;   X = C
+ 435                       	;   Y = E
+ 436                       	;
+ 437                       	IMULM_8X8:
+ 438 0313 7B                		LD	A,E
+ 439 0314 51                		LD	D,C
+ 440 0315 5F                		LD	E,A
+ 441 0316 ED 5C             		MLT	DE			; DE = C * E
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C002/numeric.s 			page 11
+'(C) COPYRIGHT R.T.RUSSELL 1986-2025'
+
+ 442                       	
+ 443 0318 AF ED 62          		UEXTA	HL
+ 444 031b D9                		EXX
+ 445 031c AF ED 62          		UEXTA	HL
+ 446 031f EB                		EX	DE, HL
+ 447 0320 AF ED 62          		UEXTA	HL
+ 448 0323 D9                		EXX
+ 449 0324 C9                		RET
+ 450                       	
+ 451                       	;
+ 452                       	; 16×8 fast path
+ 453                       	;   X = 256*B + C
+ 454                       	;   Y = E
+ 455                       	;
+ 456                       	; product = (C*E) + ((B*E) << 8)
+ 457                       	;
+ 458                       	IMULM_16X8:
+ 459 0325 7B                		LD	A,E			; save Y
+ 460                       	
+ 461 0326 51                		LD	D,C
+ 462 0327 5F                		LD	E,A
+ 463 0328 ED 5C             		MLT	DE			; DE = C * Y
+ 464                       	
+ 465 032a 4F                		LD	C,A
+ 466 032b ED 4C             		MLT	BC			; BC = B * Y
+ 467                       	
+ 468 032d 7A                		LD	A,D
+ 469 032e 81                		ADD	A,C
+ 470 032f 57                		LD	D,A			; low word high byte
+ 471                       	
+ 472 0330 3E 00             		LD	A,0
+ 473 0332 88                		ADC	A,B			; high word low byte
+ 474                       	
+ 475 0333 B7 ED 62          		UEXT	HL
+ 476                       	
+ 477 0336 D9                		EXX
+ 478 0337 5F                		LD	E, A
+ 479 0338 AF                		XOR	A
+ 480 0339 57                		LD	D, A
+ 481 033a ED 62             		SBC	HL, HL
+ 482 033c D9                		EXX
+ 483 033d C9                		RET
+ 484                       	
+ 485                       	;
+ 486                       	; 8×16 fast path
+ 487                       	;   X = C
+ 488                       	;   Y = 256*D + E
+ 489                       	;
+ 490                       	; product = (C*E) + ((C*D) << 8)
+ 491                       	;
+ 492                       	IMULM_8X16:
+ 493 033e 7A                		LD	A,D			; save Y high
+ 494                       	
+ 495 033f 51                		LD	D,C
+ 496 0340 ED 5C             		MLT	DE			; DE = C * Ylow
+ 497                       	
+ 498 0342 41                		LD	B,C
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C002/numeric.s 			page 12
+'(C) COPYRIGHT R.T.RUSSELL 1986-2025'
+
+ 499 0343 4F                		LD	C,A
+ 500 0344 ED 4C             		MLT	BC			; BC = C * Yhigh
+ 501                       	
+ 502 0346 7A                		LD	A,D
+ 503 0347 81                		ADD	A,C
+ 504 0348 57                		LD	D,A			; low word high byte
+ 505                       	
+ 506 0349 3E 00             		LD	A,0
+ 507 034b 88                		ADC	A,B			; high word low byte
+ 508                       	
+ 509 034c B7 ED 62          		UEXT	HL
+ 510                       	
+ 511 034f D9                		EXX
+ 512 0350 5F                		LD	E, A
+ 513 0351 AF                		XOR	A
+ 514 0352 57                		LD	D, A
+ 515 0353 ED 62             		SBC	HL, HL
+ 516 0355 D9                		EXX
+ 517 0356 C9                		RET
+ 518                       	
+ 519                       	;
+ 520                       	; Fallback: original multiply
+ 521                       	;
+ 522                       	IMULM_SLOW:
+ 523 0357 3E DF             		LD	A,-33
+ 524 0359 C3 20 0E 00       		JP	MULA
+ 525                       	
+ 526                       	;
+ 527                       	;IMUL - Integer multiplication.
+ 528                       	;
+ 529 035d 7C                	IMUL:	LD	A,H
+ 530 035e AA                		XOR	D
+ 531 035f CD C5 0E 00       		CALL	ABS2		;MAKE BOTH POSITIVE
+ 532 0363 CD FB 02 00       		CALL	IMULM
+ 533 0367 D9                		EXX
+ 534 0368 0E BF             		LD	C,191		;PRESET EXPONENT
+ 535 036a CD 7F 00 00       		CALL	TEST		;TEST RANGE
+ 536 036e 20 0F             		JR	NZ,IMUL1	;TOO BIG
+ 537 0370 CB 7A             		BIT	7,D
+ 538 0372 20 0B             		JR	NZ,IMUL1
+ 539 0374 CD 65 0C 00       		CALL	SWAP
+ 540 0378 4A                		LD	C,D		;INTEGER MARKER
+ 541 0379 08                		EX	AF,AF'
+ 542 037a F0                		RET	P
+ 543 037b C3 6C 0B 00       		JP	NEGATE
+ 544                       	;
+ 545 037f 0D                	IMUL1:	DEC	C
+ 546 0380 CD 96 0E 00       		CALL	SLA8
+ 547 0384 F2 7F 03 00       		JP	P,IMUL1		;NORMALISE
+ 548 0388 08                		EX	AF,AF'
+ 549 0389 F8                		RET	M
+ 550 038a CB BC             		RES	7,H		;POSITIVE
+ 551 038c C9                		RET
+ 552                       	;
+ 553                       	;FMUL - Floating point multiplication with rounding.
+ 554                       	;
+ 555 038d 05                	FMUL:	DEC	B		;TEST FOR ZERO
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C002/numeric.s 			page 13
+'(C) COPYRIGHT R.T.RUSSELL 1986-2025'
+
+ 556 038e 04                		INC	B
+ 557 038f CA AA 0C 00       		JP	Z,ZERO
+ 558 0393 0D                		DEC	C		;TEST FOR ZERO
+ 559 0394 0C                		INC	C
+ 560 0395 C8                		RET	Z
+ 561 0396 7C                		LD	A,H
+ 562 0397 AA                		XOR	D		;CALC. RESULT SIGN
+ 563 0398 08                		EX	AF,AF'
+ 564 0399 CB FA             		SET	7,D		;REPLACE IMPLIED 1's
+ 565 039b CB FC             		SET	7,H
+ 566 039d C5                		PUSH	BC		;SAVE EXPONENTS
+ 567 039e 44                		LD	B,H		;LOAD REGISTERS
+ 568 039f 4D                		LD	C,L
+ 569 03a0 B7 ED 62          		UEXT	HL
+ 570 03a3 D9                		EXX
+ 571 03a4 44                		LD	B,H
+ 572 03a5 4D                		LD	C,L
+ 573 03a6 ED 62             		SBC	HL, HL
+ 574 03a8 3E E0             		LD	A,-32		;LOOP COUNTER
+ 575 03aa CD 20 0E 00       		CALL	MULA		;MULTIPLY
+ 576 03ae DC 36 0E 00       		CALL	C,MULB		;NORMALISE & INC A
+ 577 03b2 D9                		EXX
+ 578 03b3 E5                		PUSH	HL
+ 579 03b4 21 00 80 00       		LD	HL,8000H
+ 580 03b8 B7                		OR	A		;CLEAR CARRY
+ 581 03b9 52 ED 52          		SBC.S   HL,DE
+ 582 03bc E1                		POP	HL
+ 583 03bd CC 5F 0C 00       		CALL	Z,ODD		;ROUND UNBIASSED
+ 584 03c1 DC 4D 0C 00       		CALL	C,ADD1		;ROUND UP
+ 585 03c5 C1                		POP	BC		;RESTORE EXPONENTS
+ 586 03c6 DC 7A 0C 00       		CALL	C,INCC
+ 587 03ca 1F                		RRA			;LSB OF A TO CARRY
+ 588 03cb 79                		LD	A,C		;COMPUTE NEW EXPONENT
+ 589 03cc 88                		ADC	A,B
+ 590 03cd 38 06             	CHKOVF:	JR	C,CHKO1
+ 591 03cf F2 AA 0C 00       		JP	P,ZERO		;UNDERFLOW
+ 592 03d3 18 04             		JR	CHKO2
+ 593 03d5 FA 7C 0C 00       	CHKO1:	JP	M,OFLOW		;OVERFLOW
+ 594 03d9 C6 80             	CHKO2:	ADD	A,80H
+ 595 03db 4F                		LD	C,A
+ 596 03dc CA AA 0C 00       		JP	Z,ZERO
+ 597 03e0 08                		EX	AF,AF'		;RESTORE SIGN BIT
+ 598 03e1 CB BC             		RES	7,H
+ 599 03e3 F0                		RET	P
+ 600 03e4 CB FC             		SET	7,H
+ 601 03e6 C9                		RET
+ 602                       	;
+ 603                       	;IPOW - Integer involution.
+ 604                       	;
+ 605 03e7 CD 65 0C 00       	IPOW:	CALL	SWAP
+ 606 03eb CB 7C             		BIT	7,H
+ 607 03ed F5                		PUSH	AF		;SAVE SIGN
+ 608 03ee C4 6C 0B 00       		CALL	NZ,NEGATE
+ 609 03f2 48                	IPOW0:	LD	C,B
+ 610 03f3 06 20             		LD	B,32		;LOOP COUNTER
+ 611 03f5 CD 16 0D 00       	IPOW1:	CALL	X2
+ 612 03f9 38 08             		JR	C,IPOW2
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C002/numeric.s 			page 14
+'(C) COPYRIGHT R.T.RUSSELL 1986-2025'
+
+ 613 03fb 10 F8             		DJNZ	IPOW1
+ 614 03fd F1                		POP	AF
+ 615 03fe D9                		EXX
+ 616 03ff 2C                		INC	L		;RESULT=1
+ 617 0400 D9                		EXX
+ 618 0401 4C                		LD	C,H
+ 619 0402 C9                		RET
+ 620                       	;
+ 621 0403 F1                	IPOW2:	POP	AF
+ 622 0404 C5                		PUSH	BC
+ 623 0405 EB                		EX	DE,HL
+ 624 0406 E5                		PUSH	HL
+ 625 0407 D9                		EXX
+ 626 0408 EB                		EX	DE,HL
+ 627 0409 E5                		PUSH	HL
+ 628 040a D9                		EXX
+ 629 040b DD 21 00 00 00    		LD	IX,0
+ 630 0410 DD 39             		ADD	IX,SP
+ 631 0412 28 3B             		JR	Z,IPOW4
+ 632 0414 C5                		PUSH	BC
+ 633 0415 D9                		EXX
+ 634 0416 D5                		PUSH	DE
+ 635 0417 D9                		EXX
+ 636 0418 D5                		PUSH	DE
+ 637 0419 CD 34 0C 00       		CALL	SFLOAT
+ 638 041d CD 8C 07 00       		CALL	RECIP
+ 639 0421 CD A0 00 00       		CALL	STORE5_SPL	; Sparse stack layout
+ 640 0425 18 21             		JR	IPOW5
+ 641                       	;
+ 642 0427 C5                	IPOW3:	PUSH	BC
+ 643 0428 D9                		EXX
+ 644 0429 CB 23             		SLA	E
+ 645 042b CB 12             		RL	D
+ 646 042d D5                		PUSH	DE
+ 647 042e D9                		EXX
+ 648 042f CB 13             		RL	E
+ 649 0431 CB 12             		RL	D
+ 650 0433 D5                		PUSH	DE
+ 651 0434 3E 0A             		LD	A,'*' & 0FH
+ 652 0436 F5                		PUSH	AF
+ 653 0437 CD 2A 0D 00       		CALL	COPY
+ 654 043b CD D2 00 00       		CALL	OP		;SQUARE
+ 655 043f F1                		POP	AF
+ 656 0440 CD 86 00 00       		CALL	DLOAD5_SPL
+ 657 0444 DC D2 00 00       		CALL	C,OP		;MULTIPLY BY X
+ 658 0448 D1                	IPOW5:	POP	DE
+ 659 0449 D9                		EXX
+ 660 044a D1                		POP	DE
+ 661 044b D9                		EXX
+ 662 044c 79                		LD	A,C
+ 663 044d C1                		POP	BC
+ 664 044e 4F                		LD	C,A
+ 665 044f 10 D6             	IPOW4:	DJNZ	IPOW3
+ 666 0451 F1                		POP	AF
+ 667 0452 F1                		POP	AF
+ 668 0453 F1                		POP	AF
+ 669 0454 C9                		RET
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C002/numeric.s 			page 15
+'(C) COPYRIGHT R.T.RUSSELL 1986-2025'
+
+ 670                       	;
+ 671 0455 F1                	FPOW0:	POP	AF
+ 672 0456 F1                		POP	AF
+ 673 0457 F1                		POP	AF
+ 674 0458 18 98             		JR	IPOW0
+ 675                       	;
+ 676                       	;FPOW - Floating-point involution.
+ 677                       	;
+ 678 045a CB 7A             	FPOW:	BIT	7,D
+ 679 045c F5                		PUSH	AF
+ 680 045d CD 65 0C 00       		CALL	SWAP
+ 681 0461 CD 3A 0D 00       		CALL	PUSH5
+ 682 0465 0D                		DEC	C
+ 683 0466 0C                		INC	C
+ 684 0467 28 EC             		JR	Z,FPOW0
+ 685 0469 3E 9E             		LD	A,158
+ 686 046b B9                		CP	C
+ 687 046c 38 0A             		JR	C,FPOW1
+ 688 046e 3C                		INC	A
+ 689 046f CD 3F 0B 00       		CALL	FIX
+ 690 0473 08                		EX	AF,AF'
+ 691 0474 F2 55 04 00       		JP	P,FPOW0
+ 692 0478 CD 65 0C 00       	FPOW1:	CALL	SWAP
+ 693 047c CD A9 07 00       		CALL	LN0
+ 694 0480 CD 43 0D 00       		CALL	POP5
+ 695 0484 F1                		POP	AF
+ 696 0485 CD 8D 03 00       		CALL	FMUL
+ 697 0489 C3 0B 07 00       		JP	EXP0
+ 698                       	;
+ 699                       	;Integer and floating-point compare.
+ 700                       	;Result is TRUE (-1) or FALSE (0).
+ 701                       	;
+ 702 048d CD B4 0C 00       	FLT:	CALL	FCP
+ 703 0491 18 04             		JR	ILT1
+ 704 0493 CD A6 0C 00       	ILT:	CALL	ICP
+ 705 0497 D0                	ILT1:	RET	NC
+ 706 0498 18 42             		JR	TRUE
+ 707                       	;
+ 708 049a CD B4 0C 00       	FGT:	CALL	FCP
+ 709 049e 18 04             		JR	IGT1
+ 710 04a0 CD A6 0C 00       	IGT:	CALL	ICP
+ 711 04a4 C8                	IGT1:	RET	Z
+ 712 04a5 D8                		RET	C
+ 713 04a6 18 34             		JR	TRUE
+ 714                       	;
+ 715 04a8 CD B4 0C 00       	FGE:	CALL	FCP
+ 716 04ac 18 04             		JR	IGE1
+ 717 04ae CD A6 0C 00       	IGE:	CALL	ICP
+ 718 04b2 D8                	IGE1:	RET	C
+ 719 04b3 18 27             		JR	TRUE
+ 720                       	;
+ 721 04b5 CD B4 0C 00       	FLE:	CALL	FCP
+ 722 04b9 18 04             		JR	ILE1
+ 723 04bb CD A6 0C 00       	ILE:	CALL	ICP
+ 724 04bf 28 1B             	ILE1:	JR	Z,TRUE
+ 725 04c1 D0                		RET	NC
+ 726 04c2 18 18             		JR	TRUE
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C002/numeric.s 			page 16
+'(C) COPYRIGHT R.T.RUSSELL 1986-2025'
+
+ 727                       	;
+ 728 04c4 CD B4 0C 00       	FNE:	CALL	FCP
+ 729 04c8 18 04             		JR	INE1
+ 730 04ca CD A6 0C 00       	INE:	CALL	ICP
+ 731 04ce C8                	INE1:	RET	Z
+ 732 04cf 18 0B             		JR	TRUE
+ 733                       	;
+ 734 04d1 CD B4 0C 00       	FEQ:	CALL	FCP
+ 735 04d5 18 04             		JR	IEQ1
+ 736 04d7 CD A6 0C 00       	IEQ:	CALL	ICP
+ 737 04db C0                	IEQ1:	RET	NZ
+ 738 04dc 21 FF FF FF       	TRUE:	LD	HL,-1
+ 739 04e0 D9                		EXX
+ 740 04e1 21 FF FF FF       		LD	HL,-1
+ 741 04e5 D9                		EXX
+ 742 04e6 AF                		XOR	A
+ 743 04e7 4F                		LD	C,A
+ 744 04e8 C9                		RET
+ 745                       	;
+ 746                       	;Integer shifts:
+ 747                       	;
+ 748                       	ISHX:
+ 749 04e9 CD 1C 05 00       	ISHL:	CALL	SHIFTS
+ 750 04ed C8                		RET	Z
+ 751 04ee D9                	ISHL1:	EXX
+ 752 04ef 52 29             		ADD.S	HL,HL
+ 753 04f1 D9                		EXX
+ 754 04f2 52 ED 6A          		ADC.S	HL,HL
+ 755 04f5 10 F7             		DJNZ	ISHL1
+ 756 04f7 C9                		RET
+ 757                       	;
+ 758 04f8 CD 1C 05 00       	ISAR:	CALL	SHIFTS
+ 759 04fc C8                		RET	Z
+ 760 04fd CB 2C             	ISAR1:	SRA	H
+ 761 04ff CB 1D             		RR	L
+ 762 0501 D9                		EXX
+ 763 0502 CB 1C             		RR	H
+ 764 0504 CB 1D             		RR	L
+ 765 0506 D9                		EXX
+ 766 0507 10 F4             		DJNZ	ISAR1
+ 767 0509 C9                		RET
+ 768                       	;
+ 769 050a CD 1C 05 00       	ISHR:	CALL	SHIFTS
+ 770 050e C8                		RET	Z
+ 771 050f CB 3C             	ISHR1:	SRL	H
+ 772 0511 CB 1D             		RR	L
+ 773 0513 D9                		EXX
+ 774 0514 CB 1C             		RR	H
+ 775 0516 CB 1D             		RR	L
+ 776 0518 D9                		EXX
+ 777 0519 10 F4             		DJNZ	ISHR1
+ 778 051b C9                		RET
+ 779                       	;
+ 780 051c CD 50 0B 00       	SHIFTS:	CALL	FIX2
+ 781 0520 7A                		LD	A,D
+ 782 0521 B3                		OR	E
+ 783 0522 D9                		EXX
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C002/numeric.s 			page 17
+'(C) COPYRIGHT R.T.RUSSELL 1986-2025'
+
+ 784 0523 B2                		OR	D
+ 785 0524 7B                		LD	A,E
+ 786 0525 D9                		EXX
+ 787 0526 06 20             		LD	B,32
+ 788 0528 C0                		RET	NZ
+ 789 0529 47                		LD	B,A
+ 790 052a B7                		OR	A
+ 791 052b C9                		RET
+ 792                       	;
+ 793                       	;FUNCTIONS:
+ 794                       	;
+ 795                       	;Result returned in HLH'L'C (floating point)
+ 796                       	;Result returned in HLH'L' (C=0) (integer)
+ 797                       	;All registers except IY destroyed.
+ 798                       	;
+ 799                       	;ABS - Absolute value
+ 800                       	;Result is numeric, variable type.
+ 801                       	;
+ 802 052c CB 7C             	ABS:	BIT	7,H
+ 803 052e C8                		RET	Z		;POSITIVE/ZERO
+ 804 052f 0D                		DEC	C
+ 805 0530 0C                		INC	C
+ 806 0531 CA 6C 0B 00       		JP	Z,NEGATE	;INTEGER
+ 807 0535 CB BC             		RES	7,H
+ 808 0537 C9                		RET
+ 809                       	;
+ 810                       	;NOT - Complement integer.
+ 811                       	;Result is integer numeric.
+ 812                       	;
+ 813 0538 CD 5C 0B 00       	CPL:	CALL	SFIX
+ 814 053c 7C                		LD	A,H
+ 815 053d 2F                		CPL
+ 816 053e 67                		LD	H,A
+ 817 053f 7D                		LD	A,L
+ 818 0540 2F                		CPL
+ 819 0541 6F                		LD	L,A
+ 820 0542 D9                		EXX
+ 821 0543 7C                		LD	A,H
+ 822 0544 2F                		CPL
+ 823 0545 67                		LD	H,A
+ 824 0546 7D                		LD	A,L
+ 825 0547 2F                		CPL
+ 826 0548 6F                		LD	L,A
+ 827 0549 D9                		EXX
+ 828 054a AF                		XOR	A		;NUMERIC MARKER
+ 829 054b C9                		RET
+ 830                       	;
+ 831                       	;PI - Return PI (3.141592654)
+ 832                       	;Result is floating-point numeric.
+ 833                       	;
+ 834 054c 21 0F 49 00       	PI:	LD	HL,490FH
+ 835 0550 D9                		EXX
+ 836 0551 21 A2 DA 00       		LD	HL,0DAA2H
+ 837 0555 D9                		EXX
+ 838 0556 0E 81             		LD	C,81H
+ 839 0558 AF                		XOR	A		;NUMERIC MARKER
+ 840 0559 C9                		RET
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C002/numeric.s 			page 18
+'(C) COPYRIGHT R.T.RUSSELL 1986-2025'
+
+ 841                       	;
+ 842                       	;DEG - Convert radians to degrees
+ 843                       	;Result is floating-point numeric.
+ 844                       	;
+ 845 055a CD 6E 05 00       	DEG:	CALL	FPI180
+ 846 055e CD 8D 03 00       		CALL	FMUL
+ 847 0562 AF                		XOR	A
+ 848 0563 C9                		RET
+ 849                       	;
+ 850                       	;RAD - Convert degrees to radians
+ 851                       	;Result is floating-point numeric.
+ 852                       	;
+ 853 0564 CD 6E 05 00       	RAD:	CALL	FPI180
+ 854 0568 CD AC 02 00       		CALL	FDIV
+ 855 056c AF                		XOR	A
+ 856 056d C9                		RET
+ 857                       	;
+ 858                       	;180/PI
+ 859                       	;
+ 860 056e CD 34 0C 00       	FPI180:	CALL	SFLOAT
+ 861 0572 11 2E 65 00       		LD	DE,652EH
+ 862 0576 D9                		EXX
+ 863 0577 11 D3 E0 00       		LD	DE,0E0D3H
+ 864 057b D9                		EXX
+ 865 057c 06 85             		LD	B,85H
+ 866 057e C9                		RET
+ 867                       	;
+ 868                       	;SGN - Return -1, 0 or +1
+ 869                       	;Result is integer numeric.
+ 870                       	;
+ 871 057f CD 7F 00 00       	SGN:	CALL	TEST
+ 872 0583 B1                		OR	C
+ 873 0584 C8                		RET	Z		;ZERO
+ 874 0585 CB 7C             		BIT	7,H
+ 875 0587 C2 DC 04 00       		JP	NZ,TRUE		;-1
+ 876 058b CD AA 0C 00       		CALL	ZERO
+ 877 058f C3 4D 0C 00       		JP	ADD1		;1
+ 878                       	;
+ 879                       	;VAL - Return numeric value of string.
+ 880                       	;Input: ASCII string at IX
+ 881                       	;Result is variable type numeric.
+ 882                       	;
+ 883 0593 CD B3 0E 00       	VAL:	CALL	SIGNQ
+ 884 0597 F5                		PUSH	AF
+ 885 0598 CD 81 0A 00       		CALL	CON
+ 886 059c F1                		POP	AF
+ 887 059d FE 2D             		CP	'-'
+ 888 059f 3E 00             		LD	A,0		;NUMERIC MARKER
+ 889 05a1 C0                		RET	NZ
+ 890 05a2 0D                		DEC	C
+ 891 05a3 0C                		INC	C
+ 892 05a4 CA 6C 0B 00       		JP	Z,NEGATE	;ZERO/INTEGER
+ 893 05a8 7C                		LD	A,H
+ 894 05a9 EE 80             		XOR	80H		;CHANGE SIGN (FP)
+ 895 05ab 67                		LD	H,A
+ 896 05ac AF                		XOR	A
+ 897 05ad C9                		RET
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C002/numeric.s 			page 19
+'(C) COPYRIGHT R.T.RUSSELL 1986-2025'
+
+ 898                       	;
+ 899                       	;INT - Floor function
+ 900                       	;Result is integer numeric.
+ 901                       	;
+ 902 05ae 0D                	INT:	DEC	C
+ 903 05af 0C                		INC	C
+ 904 05b0 C8                		RET	Z		;ZERO/INTEGER
+ 905 05b1 3E 9F             		LD	A,159
+ 906 05b3 44                		LD	B,H		;B7=SIGN BIT
+ 907 05b4 CD 3F 0B 00       		CALL	FIX
+ 908 05b8 08                		EX	AF,AF'
+ 909 05b9 A0                		AND	B
+ 910 05ba FC 4D 0C 00       		CALL	M,ADD1		;NEGATIVE NON-INTEGER
+ 911 05be 78                		LD	A,B
+ 912 05bf B7                		OR	A
+ 913 05c0 FC 6C 0B 00       		CALL	M,NEGATE
+ 914 05c4 AF                		XOR	A
+ 915 05c5 4F                		LD	C,A
+ 916 05c6 C9                		RET
+ 917                       	;
+ 918                       	;SQR - square root
+ 919                       	;Result is floating-point numeric.
+ 920                       	;
+ 921 05c7 CD 34 0C 00       	SQR:	CALL	SFLOAT
+ 922 05cb CB 7C             	SQR0:	BIT	7,H
+ 923 05cd 3E 15             		LD	A,NGROOT
+ 924 05cf C2 CC 00 00       		JP	NZ,ERROR	;"-ve root"
+ 925 05d3 0D                		DEC	C
+ 926 05d4 0C                		INC	C
+ 927 05d5 C8                		RET	Z		;ZERO
+ 928 05d6 CB FC             		SET	7,H		;IMPLIED 1
+ 929 05d8 CB 41             		BIT	0,C
+ 930 05da CC 6D 0C 00       		CALL	Z,DIV2		;MAKE EXPONENT ODD
+ 931 05de 79                		LD	A,C
+ 932 05df D6 80             		SUB	80H
+ 933 05e1 CB 2F             		SRA	A		;HALVE EXPONENT
+ 934 05e3 C6 80             		ADD	A,80H
+ 935 05e5 4F                		LD	C,A
+ 936 05e6 C5                		PUSH	BC		;SAVE EXPONENT
+ 937 05e7 EB                		EX	DE,HL
+ 938 05e8 21 00 00 00       		LD	HL,0
+ 939 05ec 44                		LD	B,H
+ 940 05ed 4D                		LD	C,L
+ 941 05ee D9                		EXX
+ 942 05ef EB                		EX	DE,HL
+ 943 05f0 21 00 00 00       		LD	HL,0
+ 944 05f4 44                		LD	B,H
+ 945 05f5 4D                		LD	C,L
+ 946 05f6 3E E1             		LD	A,-31
+ 947 05f8 CD 58 0E 00       		CALL	SQRA		;ROOT
+ 948 05fc D9                		EXX
+ 949 05fd CB 78             		BIT	7,B
+ 950 05ff D9                		EXX
+ 951 0600 CC 58 0E 00       		CALL	Z,SQRA		;NORMALISE & INC A
+ 952 0604 CD 79 0E 00       		CALL	SQRB
+ 953 0608 B7                		OR	A		;CLEAR CARRY
+ 954 0609 CD 0A 0E 00       		CALL	DIVB
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C002/numeric.s 			page 20
+'(C) COPYRIGHT R.T.RUSSELL 1986-2025'
+
+ 955 060d CB 1B             		RR	E		;LSB TO CARRY
+ 956 060f 60                		LD	H,B
+ 957 0610 69                		LD	L,C
+ 958 0611 D9                		EXX
+ 959 0612 60                		LD	H,B
+ 960 0613 69                		LD	L,C
+ 961 0614 DC 4D 0C 00       		CALL	C,ADD1		;ROUND UP
+ 962 0618 C1                		POP	BC		;RESTORE EXPONENT
+ 963 0619 DC 7A 0C 00       		CALL	C,INCC
+ 964 061d 1F                		RRA
+ 965 061e 9F                		SBC	A,A
+ 966 061f 81                		ADD	A,C
+ 967 0620 4F                		LD	C,A
+ 968 0621 CB BC             		RES	7,H		;POSITIVE
+ 969 0623 AF                		XOR	A
+ 970 0624 C9                		RET
+ 971                       	;
+ 972                       	;TAN - Tangent function
+ 973                       	;Result is floating-point numeric.
+ 974                       	;
+ 975 0625 CD 34 0C 00       	TAN:	CALL	SFLOAT
+ 976 0629 CD 3A 0D 00       		CALL	PUSH5
+ 977 062d CD 4F 06 00       		CALL	COS0
+ 978 0631 CD 43 0D 00       		CALL	POP5
+ 979 0635 CD 3A 0D 00       		CALL	PUSH5
+ 980 0639 CD 65 0C 00       		CALL	SWAP
+ 981 063d CD 5C 06 00       		CALL	SIN0
+ 982 0641 CD 43 0D 00       		CALL	POP5
+ 983 0645 CD AC 02 00       		CALL	FDIV
+ 984 0649 AF                		XOR	A		;NUMERIC MARKER
+ 985 064a C9                		RET
+ 986                       	;
+ 987                       	;COS - Cosine function
+ 988                       	;Result is floating-point numeric.
+ 989                       	;
+ 990 064b CD 34 0C 00       	COS:	CALL	SFLOAT
+ 991 064f CD 94 0B 00       	COS0:	CALL	SCALE
+ 992 0653 1C                		INC	E
+ 993 0654 1C                		INC	E
+ 994 0655 7B                		LD	A,E
+ 995 0656 18 10             		JR	SIN1
+ 996                       	;
+ 997                       	;SIN - Sine function
+ 998                       	;Result is floating-point numeric.
+ 999                       	;
+ 1000 0658 CD 34 0C 00       	SIN:	CALL	SFLOAT
+ 1001 065c E5                	SIN0:	PUSH	HL		;H7=SIGN
+ 1002 065d CD 94 0B 00       		CALL	SCALE
+ 1003 0661 F1                		POP	AF
+ 1004 0662 07                		RLCA
+ 1005 0663 07                		RLCA
+ 1006 0664 07                		RLCA
+ 1007 0665 E6 04             		AND	4
+ 1008 0667 AB                		XOR	E
+ 1009 0668 F5                	SIN1:	PUSH	AF		;OCTANT
+ 1010 0669 CB BC             		RES	7,H
+ 1011 066b 1F                		RRA
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C002/numeric.s 			page 21
+'(C) COPYRIGHT R.T.RUSSELL 1986-2025'
+
+ 1012 066c CD FA 06 00       		CALL	PIBY4
+ 1013 0670 DC 30 02 00       		CALL	C,RSUB		;X=(PI/4)-X
+ 1014 0674 F1                		POP	AF
+ 1015 0675 F5                		PUSH	AF
+ 1016 0676 E6 03             		AND	3
+ 1017 0678 E2 B1 06 00       		JP	PO,SIN2		;USE COSINE APPROX.
+ 1018 067c CD 3A 0D 00       		CALL	PUSH5		;SAVE X
+ 1019 0680 CD 32 0D 00       		CALL	SQUARE		;PUSH X*X
+ 1020 0684 CD 77 0D 00       		CALL	POLY
+ 1021 0688 B7 A8             		DEFW	0A8B7H		;a(8)
+ 1022 068a 11 36             		DEFW	3611H
+ 1023 068c 6D                		DEFB	6DH
+ 1024 068d 26 DE             		DEFW	0DE26H		;a(6)
+ 1025 068f 05 D0             		DEFW	0D005H
+ 1026 0691 73                		DEFB	73H
+ 1027 0692 C0 80             		DEFW	80C0H		;a(4)
+ 1028 0694 88 08             		DEFW	888H
+ 1029 0696 79                		DEFB	79H
+ 1030 0697 9D AA             		DEFW	0AA9DH		;a(2)
+ 1031 0699 AA AA             		DEFW	0AAAAH
+ 1032 069b 7D                		DEFB	7DH
+ 1033 069c 00 00             		DEFW	0		;a(0)
+ 1034 069e 00 00             		DEFW	0
+ 1035 06a0 80                		DEFB	80H
+ 1036 06a1 CD 43 0D 00       		CALL	POP5
+ 1037 06a5 CD 43 0D 00       		CALL	POP5
+ 1038 06a9 CD 8D 03 00       		CALL	FMUL
+ 1039 06ad C3 D6 06 00       		JP	SIN3
+ 1040                       	;
+ 1041 06b1 CD 32 0D 00       	SIN2:	CALL	SQUARE		;PUSH X*X
+ 1042 06b5 CD 77 0D 00       		CALL	POLY
+ 1043 06b9 71 D5             		DEFW	0D571H		;b(8)
+ 1044 06bb 78 4C             		DEFW	4C78H
+ 1045 06bd 70                		DEFB	70H
+ 1046 06be AF 94             		DEFW	94AFH		;b(6)
+ 1047 06c0 03 B6             		DEFW	0B603H
+ 1048 06c2 76                		DEFB	76H
+ 1049 06c3 C8 9C             		DEFW	9CC8H		;b(4)
+ 1050 06c5 AA 2A             		DEFW	2AAAH
+ 1051 06c7 7B                		DEFB	7BH
+ 1052 06c8 DD FF             		DEFW	0FFDDH		;b(2)
+ 1053 06ca FF FF             		DEFW	0FFFFH
+ 1054 06cc 7E                		DEFB	7EH
+ 1055 06cd 00 00             		DEFW	0		;b(0)
+ 1056 06cf 00 00             		DEFW	0
+ 1057 06d1 80                		DEFB	80H
+ 1058 06d2 CD 43 0D 00       		CALL	POP5
+ 1059 06d6 F1                	SIN3:	POP	AF
+ 1060 06d7 E6 04             		AND	4
+ 1061 06d9 C8                		RET	Z
+ 1062 06da 0D                		DEC	C
+ 1063 06db 0C                		INC	C
+ 1064 06dc C8                		RET	Z		;ZERO
+ 1065 06dd CB FC             		SET	7,H		;MAKE NEGATIVE
+ 1066 06df C9                		RET
+ 1067                       	;
+ 1068                       	;Floating-point one:
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C002/numeric.s 			page 22
+'(C) COPYRIGHT R.T.RUSSELL 1986-2025'
+
+ 1069                       	;
+ 1070 06e0 21 00 00 00       	FONE:	LD	HL,0
+ 1071 06e4 D9                		EXX
+ 1072 06e5 21 00 00 00       		LD	HL,0
+ 1073 06e9 D9                		EXX
+ 1074 06ea 0E 80             		LD	C,80H
+ 1075 06ec C9                		RET
+ 1076                       	;
+ 1077 06ed 11 00 00 00       	DONE:	LD	DE,0
+ 1078 06f1 D9                		EXX
+ 1079 06f2 11 00 00 00       		LD	DE,0
+ 1080 06f6 D9                		EXX
+ 1081 06f7 06 80             		LD	B,80H
+ 1082 06f9 C9                		RET
+ 1083                       	;
+ 1084 06fa 11 0F 49 00       	PIBY4:	LD	DE,490FH
+ 1085 06fe D9                		EXX
+ 1086 06ff 11 A2 DA 00       		LD	DE,0DAA2H
+ 1087 0703 D9                		EXX
+ 1088 0704 06 7F             		LD	B,7FH
+ 1089 0706 C9                		RET
+ 1090                       	;
+ 1091                       	;EXP - Exponential function
+ 1092                       	;Result is floating-point numeric.
+ 1093                       	;
+ 1094 0707 CD 34 0C 00       	EXP:	CALL	SFLOAT
+ 1095 070b CD 98 07 00       	EXP0:	CALL	LN2		;LN(2)
+ 1096 070f D9                		EXX
+ 1097 0710 1D                		DEC	E
+ 1098 0711 01 CF D1 00       		LD	BC,0D1CFH	;0.6931471805599453
+ 1099 0715 D9                		EXX
+ 1100 0716 E5                		PUSH	HL		;H7=SIGN
+ 1101 0717 CD A7 0B 00       		CALL	MOD48		;"MODULUS"
+ 1102 071b F1                		POP	AF
+ 1103 071c CB 7B             		BIT	7,E
+ 1104 071e 28 0B             		JR	Z,EXP1
+ 1105 0720 17                		RLA
+ 1106 0721 DA AA 0C 00       		JP	C,ZERO
+ 1107 0725 3E 18             		LD	A,EXPRNG
+ 1108 0727 C3 CC 00 00       		JP	ERROR		;"Exp range"
+ 1109                       	;
+ 1110 072b E6 80             	EXP1:	AND	80H
+ 1111 072d B3                		OR	E
+ 1112 072e F5                		PUSH	AF		;INTEGER PART
+ 1113 072f CB BC             		RES	7,H
+ 1114 0731 CD 3A 0D 00       		CALL	PUSH5		;PUSH X*LN(2)
+ 1115 0735 CD 77 0D 00       		CALL	POLY
+ 1116 0739 72 40             		DEFW	4072H		;a(7)
+ 1117 073b 2E 94             		DEFW	942EH
+ 1118 073d 73                		DEFB	73H
+ 1119 073e 65 6F             		DEFW	6F65H		;a(6)
+ 1120 0740 4F 2E             		DEFW	2E4FH
+ 1121 0742 76                		DEFB	76H
+ 1122 0743 37 6D             		DEFW	6D37H		;a(5)
+ 1123 0745 02 88             		DEFW	8802H
+ 1124 0747 79                		DEFB	79H
+ 1125 0748 12 E5             		DEFW	0E512H		;a(4)
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C002/numeric.s 			page 23
+'(C) COPYRIGHT R.T.RUSSELL 1986-2025'
+
+ 1126 074a A0 2A             		DEFW	2AA0H
+ 1127 074c 7B                		DEFB	7BH
+ 1128 074d 14 4F             		DEFW	4F14H		;a(3)
+ 1129 074f AA AA             		DEFW	0AAAAH
+ 1130 0751 7D                		DEFB	7DH
+ 1131 0752 56 FD             		DEFW	0FD56H		;a(2)
+ 1132 0754 FF 7F             		DEFW	7FFFH
+ 1133 0756 7E                		DEFB	7EH
+ 1134 0757 FE FF             		DEFW	0FFFEH		;a(1)
+ 1135 0759 FF FF             		DEFW	0FFFFH
+ 1136 075b 7F                		DEFB	7FH
+ 1137 075c 00 00             		DEFW	0		;a(0)
+ 1138 075e 00 00             		DEFW	0
+ 1139 0760 80                		DEFB	80H
+ 1140 0761 CD 43 0D 00       		CALL	POP5
+ 1141 0765 F1                		POP	AF
+ 1142 0766 F5                		PUSH	AF
+ 1143 0767 F4 8C 07 00       		CALL	P,RECIP		;X=1/X
+ 1144 076b F1                		POP	AF
+ 1145 076c F2 74 07 00       		JP	P,EXP4
+ 1146 0770 E6 7F             		AND	7FH
+ 1147 0772 ED 44             		NEG
+ 1148 0774 C6 80             	EXP4:	ADD	A,80H
+ 1149 0776 81                		ADD	A,C
+ 1150 0777 38 06             		JR	C,EXP2
+ 1151 0779 F2 AA 0C 00       		JP	P,ZERO		;UNDERFLOW
+ 1152 077d 18 04             		JR	EXP3
+ 1153 077f FA 7C 0C 00       	EXP2:	JP	M,OFLOW		;OVERFLOW
+ 1154 0783 C6 80             	EXP3:	ADD	A,80H
+ 1155 0785 CA AA 0C 00       		JP	Z,ZERO
+ 1156 0789 4F                		LD	C,A
+ 1157 078a AF                		XOR	A		;NUMERIC MARKER
+ 1158 078b C9                		RET
+ 1159                       	;
+ 1160 078c CD ED 06 00       	RECIP:	CALL	DONE
+ 1161 0790 CD 65 0C 00       	RDIV:	CALL	SWAP
+ 1162 0794 C3 AC 02 00       		JP	FDIV		;RECIPROCAL
+ 1163                       	;
+ 1164 0798 11 72 31 00       	LN2:	LD	DE,3172H	;LN(2)
+ 1165 079c D9                		EXX
+ 1166 079d 11 F8 17 00       		LD	DE,17F8H
+ 1167 07a1 D9                		EXX
+ 1168 07a2 06 7F             		LD	B,7FH
+ 1169 07a4 C9                		RET
+ 1170                       	;
+ 1171                       	;LN - Natural log.
+ 1172                       	;Result is floating-point numeric.
+ 1173                       	;
+ 1174 07a5 CD 34 0C 00       	LN:	CALL	SFLOAT
+ 1175 07a9 3E 16             	LN0:	LD	A,LOGRNG
+ 1176 07ab CB 7C             		BIT	7,H
+ 1177 07ad C2 CC 00 00       		JP	NZ,ERROR	;"Log range"
+ 1178 07b1 0C                		INC	C
+ 1179 07b2 0D                		DEC	C
+ 1180 07b3 CA CC 00 00       		JP	Z,ERROR
+ 1181 07b7 11 04 35 00       		LD	DE,3504H	;SQR(2)
+ 1182 07bb D9                		EXX
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C002/numeric.s 			page 24
+'(C) COPYRIGHT R.T.RUSSELL 1986-2025'
+
+ 1183 07bc 11 33 F3 00       		LD	DE,0F333H	;1.41421356237
+ 1184 07c0 D9                		EXX
+ 1185 07c1 CD BD 0C 00       		CALL	ICP0		;MANTISSA>SQR(2)?
+ 1186 07c5 79                		LD	A,C		;EXPONENT
+ 1187 07c6 0E 80             		LD	C,80H		;1 <= X < 2
+ 1188 07c8 38 02             		JR	C,LN4
+ 1189 07ca 0D                		DEC	C
+ 1190 07cb 3C                		INC	A
+ 1191 07cc F5                	LN4:	PUSH	AF		;SAVE EXPONENT
+ 1192 07cd CD 4F 0D 00       		CALL	RATIO		;X=(X-1)/(X+1)
+ 1193 07d1 CD 3A 0D 00       		CALL	PUSH5
+ 1194 07d5 CD 32 0D 00       		CALL	SQUARE		;PUSH X*X
+ 1195 07d9 CD 77 0D 00       		CALL	POLY
+ 1196 07dd 48 CC             		DEFW	0CC48H		;a(9)
+ 1197 07df FB 74             		DEFW	74FBH
+ 1198 07e1 7D                		DEFB	7DH
+ 1199 07e2 AF AE             		DEFW	0AEAFH		;a(7)
+ 1200 07e4 FF 11             		DEFW	11FFH
+ 1201 07e6 7E                		DEFB	7EH
+ 1202 07e7 8C D9             		DEFW	0D98CH		;a(5)
+ 1203 07e9 CD 4C             		DEFW	4CCDH
+ 1204 07eb 7E                		DEFB	7EH
+ 1205 07ec E3 A9             		DEFW	0A9E3H		;a(3)
+ 1206 07ee AA 2A             		DEFW	2AAAH
+ 1207 07f0 7F                		DEFB	7FH
+ 1208 07f1 00 00             		DEFW	0		;a(1)
+ 1209 07f3 00 00             		DEFW	0
+ 1210 07f5 81                		DEFB	81H
+ 1211 07f6 CD 43 0D 00       		CALL	POP5
+ 1212 07fa CD 43 0D 00       		CALL	POP5
+ 1213 07fe CD 8D 03 00       		CALL	FMUL
+ 1214 0802 F1                		POP	AF		;EXPONENT
+ 1215 0803 CD 3A 0D 00       		CALL	PUSH5
+ 1216 0807 08                		EX	AF,AF'
+ 1217 0808 CD AA 0C 00       		CALL	ZERO
+ 1218 080c 08                		EX	AF,AF'
+ 1219 080d D6 80             		SUB	80H
+ 1220 080f 28 1F             		JR	Z,LN3
+ 1221 0811 30 02             		JR	NC,LN1
+ 1222 0813 2F                		CPL
+ 1223 0814 3C                		INC	A
+ 1224 0815 67                	LN1:	LD	H,A
+ 1225 0816 0E 87             		LD	C,87H
+ 1226 0818 F5                		PUSH	AF
+ 1227 0819 CD 16 0C 00       		CALL	FLOAT
+ 1228 081d CB BC             		RES	7,H
+ 1229 081f CD 98 07 00       		CALL	LN2
+ 1230 0823 CD 8D 03 00       		CALL	FMUL
+ 1231 0827 F1                		POP	AF
+ 1232 0828 30 06             		JR	NC,LN3
+ 1233 082a FA 30 08 00       		JP	M,LN3
+ 1234 082e CB FC             		SET	7,H
+ 1235 0830 CD 43 0D 00       	LN3:	CALL	POP5
+ 1236 0834 CD 43 02 00       		CALL	FADD
+ 1237 0838 AF                		XOR	A
+ 1238 0839 C9                		RET
+ 1239                       	;
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C002/numeric.s 			page 25
+'(C) COPYRIGHT R.T.RUSSELL 1986-2025'
+
+ 1240                       	;LOG - base-10 logarithm.
+ 1241                       	;Result is floating-point numeric.
+ 1242                       	;
+ 1243 083a CD A5 07 00       	LOG:	CALL	LN
+ 1244 083e 11 5B 5E 00       		LD	DE,5E5BH	;LOG(e)
+ 1245 0842 D9                		EXX
+ 1246 0843 11 A9 D8 00       		LD	DE,0D8A9H
+ 1247 0847 D9                		EXX
+ 1248 0848 06 7E             		LD	B,7EH
+ 1249 084a CD 8D 03 00       		CALL	FMUL
+ 1250 084e AF                		XOR	A
+ 1251 084f C9                		RET
+ 1252                       	;
+ 1253                       	;ASN - Arc-sine
+ 1254                       	;Result is floating-point numeric.
+ 1255                       	;
+ 1256 0850 CD 34 0C 00       	ASN:	CALL	SFLOAT
+ 1257 0854 CD 3A 0D 00       		CALL	PUSH5
+ 1258 0858 CD 2A 0D 00       		CALL	COPY
+ 1259 085c CD 8D 03 00       		CALL	FMUL
+ 1260 0860 CD ED 06 00       		CALL	DONE
+ 1261 0864 CD 30 02 00       		CALL	RSUB
+ 1262 0868 CD CB 05 00       		CALL	SQR0
+ 1263 086c CD 43 0D 00       		CALL	POP5
+ 1264 0870 0C                		INC	C
+ 1265 0871 0D                		DEC	C
+ 1266 0872 3E 02             		LD	A,2
+ 1267 0874 D5                		PUSH	DE
+ 1268 0875 CA FA 08 00       		JP	Z,ACS1
+ 1269 0879 D1                		POP	DE
+ 1270 087a CD 90 07 00       		CALL	RDIV
+ 1271 087e 18 04             		JR	ATN0
+ 1272                       	;
+ 1273                       	;ATN - arc-tangent
+ 1274                       	;Result is floating-point numeric.
+ 1275                       	;
+ 1276 0880 CD 34 0C 00       	ATN:	CALL	SFLOAT
+ 1277 0884 E5                	ATN0:	PUSH	HL		;SAVE SIGN
+ 1278 0885 CB BC             		RES	7,H
+ 1279 0887 11 13 54 00       		LD	DE,5413H	;TAN(PI/8)=SQR(2)-1
+ 1280 088b D9                		EXX
+ 1281 088c 11 D0 CC 00       		LD	DE,0CCD0H
+ 1282 0890 D9                		EXX
+ 1283 0891 06 7E             		LD	B,7EH
+ 1284 0893 CD BA 0C 00       		CALL	FCP0		;COMPARE
+ 1285 0897 06 00             		LD	B,0
+ 1286 0899 38 22             		JR	C,ATN2
+ 1287 089b 11 82 1A 00       		LD	DE,1A82H	;TAN(3*PI/8)=SQR(2)+1
+ 1288 089f D9                		EXX
+ 1289 08a0 11 9A 79 00       		LD	DE,799AH
+ 1290 08a4 D9                		EXX
+ 1291 08a5 06 81             		LD	B,81H
+ 1292 08a7 CD BA 0C 00       		CALL	FCP0		;COMPARE
+ 1293 08ab 38 0A             		JR	C,ATN1
+ 1294 08ad CD 8C 07 00       		CALL	RECIP		;X=1/X
+ 1295 08b1 06 02             		LD	B,2
+ 1296 08b3 C3 BD 08 00       		JP	ATN2
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C002/numeric.s 			page 26
+'(C) COPYRIGHT R.T.RUSSELL 1986-2025'
+
+ 1297 08b7 CD 4F 0D 00       	ATN1:	CALL	RATIO		;X=(X-1)/(X+1)
+ 1298 08bb 06 01             		LD	B,1
+ 1299 08bd C5                	ATN2:	PUSH	BC		;SAVE FLAG
+ 1300 08be CD 3A 0D 00       		CALL	PUSH5
+ 1301 08c2 CD 32 0D 00       		CALL	SQUARE		;PUSH X*X
+ 1302 08c6 CD 77 0D 00       		CALL	POLY
+ 1303 08ca 35 F3             		DEFW	0F335H		;a(13)
+ 1304 08cc D8 37             		DEFW	37D8H
+ 1305 08ce 7B                		DEFB	7BH
+ 1306 08cf 91 6B             		DEFW	6B91H		;a(11)
+ 1307 08d1 B9 AA             		DEFW	0AAB9H
+ 1308 08d3 7C                		DEFB	7CH
+ 1309 08d4 DE 41             		DEFW	41DEH		;a(9)
+ 1310 08d6 97 61             		DEFW	6197H
+ 1311 08d8 7C                		DEFB	7CH
+ 1312 08d9 7B 9D             		DEFW	9D7BH		;a(7)
+ 1313 08db 37 92             		DEFW	9237H
+ 1314 08dd 7D                		DEFB	7DH
+ 1315 08de 5A 2A             		DEFW	2A5AH		;a(5)
+ 1316 08e0 CC 4C             		DEFW	4CCCH
+ 1317 08e2 7D                		DEFB	7DH
+ 1318 08e3 5C A9             		DEFW	0A95CH		;a(3)
+ 1319 08e5 AA AA             		DEFW	0AAAAH
+ 1320 08e7 7E                		DEFB	7EH
+ 1321 08e8 00 00             		DEFW	0		;a(1)
+ 1322 08ea 00 00             		DEFW	0
+ 1323 08ec 80                		DEFB	80H
+ 1324 08ed CD 43 0D 00       		CALL	POP5
+ 1325 08f1 CD 43 0D 00       		CALL	POP5
+ 1326 08f5 CD 8D 03 00       		CALL	FMUL
+ 1327 08f9 F1                		POP	AF
+ 1328 08fa CD FA 06 00       	ACS1:	CALL	PIBY4		;PI/4
+ 1329 08fe 1F                		RRA
+ 1330 08ff F5                		PUSH	AF
+ 1331 0900 DC 43 02 00       		CALL	C,FADD
+ 1332 0904 F1                		POP	AF
+ 1333 0905 04                		INC	B
+ 1334 0906 1F                		RRA
+ 1335 0907 DC 30 02 00       		CALL	C,RSUB
+ 1336 090b F1                		POP	AF
+ 1337 090c B7                		OR	A
+ 1338 090d F0                		RET	P
+ 1339 090e CB FC             		SET	7,H		;MAKE NEGATIVE
+ 1340 0910 AF                		XOR	A
+ 1341 0911 C9                		RET
+ 1342                       	;
+ 1343                       	;ACS - Arc cosine=PI/2-ASN.
+ 1344                       	;Result is floating point numeric.
+ 1345                       	;
+ 1346 0912 CD 50 08 00       	ACS:	CALL	ASN
+ 1347 0916 3E 02             		LD	A,2
+ 1348 0918 F5                		PUSH	AF
+ 1349 0919 18 DF             		JR	ACS1
+ 1350                       	;
+ 1351                       	;Function STR - convert numeric value to ASCII string.
+ 1352                       	;   Inputs: HLH'L'C = integer or floating-point number
+ 1353                       	;           DE = address at which to store string
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C002/numeric.s 			page 27
+'(C) COPYRIGHT R.T.RUSSELL 1986-2025'
+
+ 1354                       	;           IX = address of @% format control
+ 1355                       	;  Outputs: String stored, with NUL terminator
+ 1356                       	;
+ 1357                       	;First normalise for decimal output:
+ 1358                       	;
+ 1359 091b CD 34 0C 00       	STR:	CALL	SFLOAT
+ 1360 091f 06 00             		LD	B,0		;DEFAULT PT. POSITION
+ 1361 0921 CB 7C             		BIT	7,H		;NEGATIVE?
+ 1362 0923 28 06             		JR	Z,STR10
+ 1363 0925 CB BC             		RES	7,H
+ 1364 0927 3E 2D             		LD	A,'-'
+ 1365 0929 12                		LD	(DE),A		;STORE SIGN
+ 1366 092a 13                		INC	DE
+ 1367 092b AF                	STR10:	XOR	A		;CLEAR A
+ 1368 092c B9                		CP	C
+ 1369 092d 28 4E             		JR	Z,STR2		;ZERO
+ 1370 092f D5                		PUSH	DE		;SAVE TEXT POINTER
+ 1371 0930 78                		LD	A,B
+ 1372 0931 F5                	STR11:	PUSH	AF		;SAVE DECIMAL COUNTER
+ 1373 0932 79                		LD	A,C		;BINARY EXPONENT
+ 1374 0933 FE A1             		CP	161
+ 1375 0935 30 1C             		JR	NC,STR14
+ 1376 0937 FE 9B             		CP	155
+ 1377 0939 30 29             		JR	NC,STR15
+ 1378 093b 2F                		CPL
+ 1379 093c FE E1             		CP	225
+ 1380 093e 38 02             		JR	C,STR13
+ 1381 0940 3E F8             		LD	A,-8
+ 1382 0942 C6 1C             	STR13:	ADD	A,28
+ 1383 0944 CD A6 0D 00       		CALL	POWR10
+ 1384 0948 F5                		PUSH	AF
+ 1385 0949 CD 8D 03 00       		CALL	FMUL
+ 1386 094d F1                		POP	AF
+ 1387 094e 47                		LD	B,A
+ 1388 094f F1                		POP	AF
+ 1389 0950 90                		SUB	B
+ 1390 0951 18 DE             		JR	STR11
+ 1391 0953 D6 20             	STR14:	SUB	32
+ 1392 0955 CD A6 0D 00       		CALL	POWR10
+ 1393 0959 F5                		PUSH	AF
+ 1394 095a CD AC 02 00       		CALL	FDIV
+ 1395 095e F1                		POP	AF
+ 1396 095f 47                		LD	B,A
+ 1397 0960 F1                		POP	AF
+ 1398 0961 80                		ADD	A,B
+ 1399 0962 18 CD             		JR	STR11
+ 1400 0964 3E 09             	STR15:	LD	A,9
+ 1401 0966 CD A6 0D 00       		CALL	POWR10		;10^9
+ 1402 096a CD BA 0C 00       		CALL	FCP0
+ 1403 096e 79                		LD	A,C
+ 1404 096f C1                		POP	BC
+ 1405 0970 4F                		LD	C,A
+ 1406 0971 CB FC             		SET	7,H		;IMPLIED 1
+ 1407 0973 DC E2 0C 00       		CALL	C,X10B		;X10, DEC B
+ 1408 0977 D1                		POP	DE		;RESTORE TEXT POINTER
+ 1409 0978 CB B9             		RES	7,C
+ 1410 097a 3E 00             		LD	A,0
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C002/numeric.s 			page 28
+'(C) COPYRIGHT R.T.RUSSELL 1986-2025'
+
+ 1411 097c 17                		RLA			;PUT CARRY IN LSB
+ 1412                       	;
+ 1413                       	;At this point decimal normalisation has been done,
+ 1414                       	;now convert to decimal digits:
+ 1415                       	;      AHLH'L' = number in normalised integer form
+ 1416                       	;            B = decimal place adjustment
+ 1417                       	;            C = binary place adjustment (29-33)
+ 1418                       	;
+ 1419 097d 0C                	STR2:	INC	C
+ 1420 097e 08                		EX	AF,AF'		;SAVE A
+ 1421 097f 78                		LD	A,B
+ 1422 0980 DD CB 02 4E       		BIT	1,(IX+2)
+ 1423 0984 20 08             		JR	NZ,STR20
+ 1424 0986 AF                		XOR	A
+ 1425 0987 DD BE 01          		CP	(IX+1)
+ 1426 098a 28 0B             		JR	Z,STR21
+ 1427 098c 3E F6             		LD	A,-10
+ 1428 098e DD 86 01          	STR20:	ADD	A,(IX+1)	;SIG. FIG. COUNT
+ 1429 0991 B7                		OR	A		;CLEAR CARRY
+ 1430 0992 FA 97 09 00       		JP	M,STR21
+ 1431 0996 AF                		XOR	A
+ 1432 0997 F5                	STR21:	PUSH	AF
+ 1433 0998 08                		EX	AF,AF'		;RESTORE A
+ 1434 0999 CD 16 0D 00       	STR22:	CALL	X2		;RL AHLH'L'
+ 1435 099d 8F                		ADC	A,A
+ 1436 099e FE 0A             		CP	10
+ 1437 09a0 38 05             		JR	C,STR23
+ 1438 09a2 D6 0A             		SUB	10
+ 1439 09a4 D9                		EXX
+ 1440 09a5 2C                		INC	L		;SET RESULT BIT
+ 1441 09a6 D9                		EXX
+ 1442 09a7 0D                	STR23:	DEC	C
+ 1443 09a8 20 EF             		JR	NZ,STR22	;32 TIMES
+ 1444 09aa 4F                		LD	C,A		;REMAINDER
+ 1445 09ab 7C                		LD	A,H
+ 1446 09ac E6 3F             		AND	3FH		;CLEAR OUT JUNK
+ 1447 09ae 67                		LD	H,A
+ 1448 09af F1                		POP	AF
+ 1449 09b0 F2 BE 09 00       		JP	P,STR24
+ 1450 09b4 3C                		INC	A
+ 1451 09b5 20 1C             		JR	NZ,STR26
+ 1452 09b7 3E 04             		LD	A,4
+ 1453 09b9 B9                		CP	C		;ROUND UP?
+ 1454 09ba 3E 00             		LD	A,0
+ 1455 09bc 18 15             		JR	STR26
+ 1456 09be F5                	STR24:	PUSH	AF
+ 1457 09bf 79                		LD	A,C
+ 1458 09c0 CE 30             		ADC	A,'0'		;ADD CARRY
+ 1459 09c2 FE 30             		CP	'0'
+ 1460 09c4 28 05             		JR	Z,STR25		;SUPPRESS ZERO
+ 1461 09c6 FE 3A             		CP	'9'+1
+ 1462 09c8 3F                		CCF
+ 1463 09c9 30 08             		JR	NC,STR26
+ 1464 09cb E3                	STR25:	EX	(SP),HL
+ 1465 09cc CB 75             		BIT	6,L		;ZERO FLAG
+ 1466 09ce E3                		EX	(SP),HL
+ 1467 09cf 20 05             		JR	NZ,STR27
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C002/numeric.s 			page 29
+'(C) COPYRIGHT R.T.RUSSELL 1986-2025'
+
+ 1468 09d1 3E 30             		LD	A,'0'
+ 1469 09d3 3C                	STR26:	INC	A		;SET +VE
+ 1470 09d4 3D                		DEC	A
+ 1471 09d5 F5                		PUSH	AF		;PUT ON STACK + CARRY
+ 1472 09d6 04                	STR27:	INC	B
+ 1473 09d7 CD 7F 00 00       		CALL	TEST		;IS HLH'L' ZERO?
+ 1474 09db 0E 20             		LD	C,32
+ 1475 09dd 3E 00             		LD	A,0
+ 1476 09df 20 B8             		JR	NZ,STR22
+ 1477 09e1 F1                		POP	AF
+ 1478 09e2 F5                		PUSH	AF
+ 1479 09e3 3E 00             		LD	A,0
+ 1480 09e5 38 B2             		JR	C,STR22
+ 1481                       	;
+ 1482                       	;At this point, the decimal character string is stored
+ 1483                       	; on the stack. Trailing zeroes are suppressed and may
+ 1484                       	; need to be replaced.
+ 1485                       	;B register holds decimal point position.
+ 1486                       	;Now format number and store as ASCII string:
+ 1487                       	;
+ 1488 09e7 EB                	STR3:	EX	DE,HL		;STRING POINTER
+ 1489 09e8 0E FF             		LD	C,-1		;FLAG "E"
+ 1490 09ea 16 01             		LD	D,1
+ 1491 09ec DD 5E 01          		LD	E,(IX+1)	;f2
+ 1492 09ef DD CB 02 46       		BIT	0,(IX+2)
+ 1493 09f3 20 35             		JR	NZ,STR34	;E MODE
+ 1494 09f5 DD CB 02 4E       		BIT	1,(IX+2)
+ 1495 09f9 28 12             		JR	Z,STR31
+ 1496 09fb 78                		LD	A,B		;F MODE
+ 1497 09fc B7                		OR	A
+ 1498 09fd 28 05             		JR	Z,STR30
+ 1499 09ff FA 04 0A 00       		JP	M,STR30
+ 1500 0a03 50                		LD	D,B
+ 1501 0a04 7A                	STR30:	LD	A,D
+ 1502 0a05 DD 86 01          		ADD	A,(IX+1)
+ 1503 0a08 5F                		LD	E,A
+ 1504 0a09 FE 0B             		CP	11
+ 1505 0a0b 38 19             		JR	C,STR32
+ 1506 0a0d 78                	STR31:	LD	A,B		;G MODE
+ 1507 0a0e 11 01 01 00       		LD	DE,101H
+ 1508 0a12 B7                		OR	A
+ 1509 0a13 FA 2A 0A 00       		JP	M,STR34
+ 1510 0a17 28 0D             		JR	Z,STR32
+ 1511 0a19 DD 7E 01          		LD	A,(IX+1)
+ 1512 0a1c B7                		OR	A
+ 1513 0a1d 20 02             		JR	NZ,STR3A
+ 1514 0a1f 3E 0A             		LD	A,10
+ 1515 0a21 B8                	STR3A:	CP	B
+ 1516 0a22 38 06             		JR	C,STR34
+ 1517 0a24 50                		LD	D,B
+ 1518 0a25 58                		LD	E,B
+ 1519 0a26 78                	STR32:	LD	A,B
+ 1520 0a27 C6 81             		ADD	A,129
+ 1521 0a29 4F                		LD	C,A
+ 1522 0a2a CB FA             	STR34:	SET	7,D
+ 1523 0a2c 1D                		DEC	E
+ 1524 0a2d 7A                	STR35:	LD	A,D
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C002/numeric.s 			page 30
+'(C) COPYRIGHT R.T.RUSSELL 1986-2025'
+
+ 1525 0a2e B9                		CP	C
+ 1526 0a2f 30 0E             		JR	NC,STR33
+ 1527 0a31 F1                	STR36:	POP	AF
+ 1528 0a32 28 04             		JR	Z,STR37
+ 1529 0a34 F2 41 0A 00       		JP	P,STR38
+ 1530 0a38 F5                	STR37:	PUSH	AF
+ 1531 0a39 1C                		INC	E
+ 1532 0a3a 1D                		DEC	E
+ 1533 0a3b FA 52 0A 00       		JP	M,STR4
+ 1534 0a3f 3E 30             	STR33:	LD	A,'0'
+ 1535 0a41 15                	STR38:	DEC	D
+ 1536 0a42 E2 49 0A 00       		JP	PO,STR39
+ 1537 0a46 36 2E             		LD	(HL),'.'
+ 1538 0a48 23                		INC	HL
+ 1539 0a49 77                	STR39:	LD	(HL),A
+ 1540 0a4a 23                		INC	HL
+ 1541 0a4b 1D                		DEC	E
+ 1542 0a4c F2 2D 0A 00       		JP	P,STR35
+ 1543 0a50 18 DF             		JR	STR36
+ 1544                       	;
+ 1545 0a52 F1                	STR4:	POP	AF
+ 1546 0a53 0C                	STR40:	INC	C
+ 1547 0a54 4D                		LD	C,L
+ 1548 0a55 20 28             		JR	NZ,STR44
+ 1549 0a57 36 45             		LD	(HL),'E'	;EXPONENT
+ 1550 0a59 23                		INC	HL
+ 1551 0a5a 78                		LD	A,B
+ 1552 0a5b 3D                		DEC	A
+ 1553 0a5c F2 65 0A 00       		JP	P,STR41
+ 1554 0a60 36 2D             		LD	(HL),'-'
+ 1555 0a62 23                		INC	HL
+ 1556 0a63 ED 44             		NEG
+ 1557 0a65 36 30             	STR41:	LD	(HL),'0'
+ 1558 0a67 28 15             		JR	Z,STR47
+ 1559 0a69 FE 0A             		CP	10
+ 1560 0a6b 47                		LD	B,A
+ 1561 0a6c 3E 3A             		LD	A,':'
+ 1562 0a6e 38 03             		JR	C,STR42
+ 1563 0a70 23                		INC	HL
+ 1564 0a71 36 30             		LD	(HL),'0'
+ 1565 0a73 34                	STR42:	INC	(HL)
+ 1566 0a74 BE                		CP	(HL)
+ 1567 0a75 20 05             		JR	NZ,STR43
+ 1568 0a77 36 30             		LD	(HL),'0'
+ 1569 0a79 2B                		DEC	HL
+ 1570 0a7a 34                		INC	(HL)
+ 1571 0a7b 23                		INC	HL
+ 1572 0a7c 10 F5             	STR43:	DJNZ	STR42
+ 1573 0a7e 23                	STR47:	INC	HL
+ 1574 0a7f EB                	STR44:	EX	DE,HL
+ 1575 0a80 C9                		RET
+ 1576                       	;
+ 1577                       	;Support subroutines:
+ 1578                       	;
+ 1579                       	;CON - Get unsigned numeric constant from ASCII string.
+ 1580                       	;   Inputs: ASCII string at (IX).
+ 1581                       	;  Outputs: Variable-type result in HLH'L'C
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C002/numeric.s 			page 31
+'(C) COPYRIGHT R.T.RUSSELL 1986-2025'
+
+ 1582                       	;           IX updated (points to delimiter)
+ 1583                       	;           A7 = 0 (numeric marker)
+ 1584                       	;
+ 1585 0a81 CD AA 0C 00       	CON:	CALL	ZERO		;INITIALISE TO ZERO
+ 1586 0a85 0E 00             		LD	C,0		;TRUNCATION COUNTER
+ 1587 0a87 CD 15 0B 00       		CALL	NUMBER		;GET INTEGER PART
+ 1588 0a8b FE 2E             		CP	'.'
+ 1589 0a8d 06 00             		LD	B,0		;DECL. PLACE COUNTER
+ 1590 0a8f CC 13 0B 00       		CALL	Z,NUMBIX	;GET FRACTION PART
+ 1591 0a93 FE 45             		CP	'E'
+ 1592 0a95 3E 00             		LD	A,0		;INITIALISE EXPONENT
+ 1593 0a97 CC E1 0A 00       		CALL	Z,GETEXP	;GET EXPONENT
+ 1594 0a9b CB 7C             		BIT	7,H
+ 1595 0a9d 20 08             		JR	NZ,CON0		;INTEGER OVERFLOW
+ 1596 0a9f B7                		OR	A
+ 1597 0aa0 20 05             		JR	NZ,CON0		;EXPONENT NON-ZERO
+ 1598 0aa2 B8                		CP	B
+ 1599 0aa3 20 02             		JR	NZ,CON0		;DECIMAL POINT
+ 1600 0aa5 B9                		CP	C
+ 1601 0aa6 C8                		RET	Z		;INTEGER
+ 1602 0aa7 90                	CON0:	SUB	B
+ 1603 0aa8 81                		ADD	A,C
+ 1604 0aa9 0E 9F             		LD	C,159
+ 1605 0aab CD 16 0C 00       		CALL	FLOAT
+ 1606 0aaf CB BC             		RES	7,H		;DITCH IMPLIED 1
+ 1607 0ab1 B7                		OR	A
+ 1608 0ab2 C8                		RET	Z		;DONE
+ 1609 0ab3 FA C1 0A 00       		JP	M,CON2		;NEGATIVE EXPONENT
+ 1610 0ab7 CD A6 0D 00       		CALL	POWR10
+ 1611 0abb CD 8D 03 00       		CALL	FMUL		;SCALE
+ 1612 0abf AF                		XOR	A
+ 1613 0ac0 C9                		RET
+ 1614 0ac1 FE DA             	CON2:	CP	-38
+ 1615 0ac3 38 0C             		JR	C,CON3		;CAN'T SCALE IN ONE GO
+ 1616 0ac5 ED 44             		NEG
+ 1617 0ac7 CD A6 0D 00       		CALL	POWR10
+ 1618 0acb CD AC 02 00       		CALL	FDIV		;SCALE
+ 1619 0acf AF                		XOR	A
+ 1620 0ad0 C9                		RET
+ 1621 0ad1 F5                	CON3:	PUSH	AF
+ 1622 0ad2 3E 26             		LD	A,38
+ 1623 0ad4 CD A6 0D 00       		CALL	POWR10
+ 1624 0ad8 CD AC 02 00       		CALL	FDIV
+ 1625 0adc F1                		POP	AF
+ 1626 0add C6 26             		ADD	A,38
+ 1627 0adf 18 E0             		JR	CON2
+ 1628                       	;
+ 1629                       	;GETEXP - Get decimal exponent from string
+ 1630                       	;     Inputs: ASCII string at (IX)
+ 1631                       	;             (IX points at 'E')
+ 1632                       	;             A = initial value
+ 1633                       	;    Outputs: A = new exponent
+ 1634                       	;             IX updated.
+ 1635                       	;   Destroys: A,A',IX,F,F'
+ 1636                       	;
+ 1637 0ae1 C5                	GETEXP:	PUSH	BC		;SAVE REGISTERS
+ 1638 0ae2 47                		LD	B,A		;INITIAL VALUE
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C002/numeric.s 			page 32
+'(C) COPYRIGHT R.T.RUSSELL 1986-2025'
+
+ 1639 0ae3 0E 02             		LD	C,2		;2 DIGITS MAX
+ 1640 0ae5 DD 23             		INC	IX		;BUMP PAST 'E'
+ 1641 0ae7 CD B3 0E 00       		CALL	SIGNQ
+ 1642 0aeb 08                		EX	AF,AF'		;SAVE EXPONENT SIGN
+ 1643 0aec CD A9 0E 00       	GETEX1:	CALL	DIGITQ
+ 1644 0af0 38 18             		JR	C,GETEX2
+ 1645 0af2 78                		LD	A,B		;B=B*10
+ 1646 0af3 87                		ADD	A,A
+ 1647 0af4 87                		ADD	A,A
+ 1648 0af5 80                		ADD	A,B
+ 1649 0af6 87                		ADD	A,A
+ 1650 0af7 47                		LD	B,A
+ 1651 0af8 DD 7E 00          		LD	A,(IX)		;GET BACK DIGIT
+ 1652 0afb DD 23             		INC	IX
+ 1653 0afd E6 0F             		AND	0FH		;MASK UNWANTED BITS
+ 1654 0aff 80                		ADD	A,B		;ADD IN DIGIT
+ 1655 0b00 47                		LD	B,A
+ 1656 0b01 0D                		DEC	C
+ 1657 0b02 F2 EC 0A 00       		JP	P,GETEX1
+ 1658 0b06 06 64             		LD	B,100		;FORCE OVERFLOW
+ 1659 0b08 18 E2             		JR	GETEX1
+ 1660 0b0a 08                	GETEX2:	EX	AF,AF'		;RESTORE SIGN
+ 1661 0b0b FE 2D             		CP	'-'
+ 1662 0b0d 78                		LD	A,B
+ 1663 0b0e C1                		POP	BC		;RESTORE
+ 1664 0b0f C0                		RET	NZ
+ 1665 0b10 ED 44             		NEG			;NEGATE EXPONENT
+ 1666 0b12 C9                		RET
+ 1667                       	;
+ 1668                       	;NUMBER: Get unsigned integer from string.
+ 1669                       	;    Inputs: string at (IX)
+ 1670                       	;            C = truncated digit count
+ 1671                       	;                (initially zero)
+ 1672                       	;            B = total digit count
+ 1673                       	;            HLH'L' = initial value
+ 1674                       	;   Outputs: HLH'L' = number (binary integer)
+ 1675                       	;            A = delimiter.
+ 1676                       	;            B, C & IX updated
+ 1677                       	;  Destroys: A,B,C,D,E,H,L,B',C',D',E',H',L',IX,F
+ 1678                       	;
+ 1679 0b13 DD 23             	NUMBIX:	INC	IX
+ 1680 0b15 CD A9 0E 00       	NUMBER:	CALL	DIGITQ
+ 1681 0b19 D8                		RET	C
+ 1682 0b1a 04                		INC	B		;INCREMENT DIGIT COUNT
+ 1683 0b1b DD 23             		INC	IX
+ 1684 0b1d CD 03 0D 00       		CALL	X10		;*10 & COPY OLD VALUE
+ 1685 0b21 38 15             		JR	C,NUMB1		;OVERFLOW
+ 1686 0b23 0D                		DEC	C		;SEE IF TRUNCATED
+ 1687 0b24 0C                		INC	C
+ 1688 0b25 20 11             		JR	NZ,NUMB1	;IMPORTANT!
+ 1689 0b27 E6 0F             		AND	0FH
+ 1690 0b29 D9                		EXX
+ 1691 0b2a 06 00             		LD	B,0
+ 1692 0b2c 4F                		LD	C,A
+ 1693 0b2d 52 09             		ADD.S   HL,BC           ;ADD IN DIGIT
+ 1694 0b2f D9                		EXX
+ 1695 0b30 30 E3             		JR	NC,NUMBER
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C002/numeric.s 			page 33
+'(C) COPYRIGHT R.T.RUSSELL 1986-2025'
+
+ 1696 0b32 52 23             		INC.S   HL              ;CARRY
+ 1697 0b34 7C                		LD	A,H
+ 1698 0b35 B5                		OR	L
+ 1699 0b36 20 DD             		JR	NZ,NUMBER
+ 1700 0b38 0C                	NUMB1:	INC	C		;TRUNCATION COUNTER
+ 1701 0b39 CD 68 0C 00       		CALL	SWAP1		;RESTORE PREVIOUS VALUE
+ 1702 0b3d 18 D6             		JR	NUMBER
+ 1703                       	;
+ 1704                       	;FIX - Fix number to specified exponent value.
+ 1705                       	;    Inputs: HLH'L'C = +ve non-zero number (floated)
+ 1706                       	;            A = desired exponent (A>C)
+ 1707                       	;   Outputs: HLH'L'C = fixed number (unsigned)
+ 1708                       	;            fraction shifted into B'C'
+ 1709                       	;            A'F' positive if integer input
+ 1710                       	;  Destroys: C,H,L,A',B',C',H',L',F,F'
+ 1711                       	;
+ 1712 0b3f 08                	FIX:	EX	AF,AF'
+ 1713 0b40 AF                		XOR	A
+ 1714 0b41 08                		EX	AF,AF'
+ 1715 0b42 CB FC             		SET	7,H		;IMPLIED 1
+ 1716 0b44 CD 6D 0C 00       	FIX1:	CALL	DIV2
+ 1717 0b48 B9                		CP	C
+ 1718 0b49 C8                		RET	Z
+ 1719 0b4a 30 F8             		JR	NC,FIX1
+ 1720 0b4c C3 7C 0C 00       		JP	OFLOW
+ 1721                       	;
+ 1722                       	;SFIX - Convert to integer if necessary.
+ 1723                       	;    Input: Variable-type number in HLH'L'C
+ 1724                       	;   Output: Integer in HLH'L', C=0
+ 1725                       	; Destroys: A,C,H,L,A',B',C',H',L',F,F'
+ 1726                       	;
+ 1727                       	;NEGATE - Negate HLH'L'
+ 1728                       	;    Destroys: H,L,H',L',F
+ 1729                       	;
+ 1730 0b50 CD 65 0C 00       	FIX2:	CALL	SWAP
+ 1731 0b54 CD 5C 0B 00       		CALL	SFIX
+ 1732 0b58 CD 65 0C 00       		CALL	SWAP
+ 1733 0b5c 0D                	SFIX:	DEC	C
+ 1734 0b5d 0C                		INC	C
+ 1735 0b5e C8                		RET	Z		;INTEGER/ZERO
+ 1736 0b5f CB 7C             		BIT	7,H		;SIGN
+ 1737 0b61 F5                		PUSH	AF
+ 1738 0b62 3E 9F             		LD	A,159
+ 1739 0b64 CD 3F 0B 00       		CALL	FIX
+ 1740 0b68 F1                		POP	AF
+ 1741 0b69 0E 00             		LD	C,0
+ 1742 0b6b C8                		RET	Z
+ 1743 0b6c B7                	NEGATE:	OR	A		;CLEAR CARRY
+ 1744 0b6d D9                		EXX
+ 1745 0b6e D5                	NEG0:	PUSH	DE
+ 1746 0b6f EB                		EX	DE,HL
+ 1747 0b70 21 00 00 00       		LD	HL,0
+ 1748 0b74 52 ED 52          		SBC.S   HL,DE
+ 1749 0b77 D1                		POP	DE
+ 1750 0b78 D9                		EXX
+ 1751 0b79 D5                		PUSH	DE
+ 1752 0b7a EB                		EX	DE,HL
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C002/numeric.s 			page 34
+'(C) COPYRIGHT R.T.RUSSELL 1986-2025'
+
+ 1753 0b7b 21 00 00 00       		LD	HL,0
+ 1754 0b7f 52 ED 52          		SBC.S   HL,DE
+ 1755 0b82 D1                		POP	DE
+ 1756 0b83 C9                		RET
+ 1757                       	;
+ 1758                       	;NEG - Negate HLH'L'B'C'
+ 1759                       	;    Also complements A (used in FADD)
+ 1760                       	;    Destroys: A,H,L,B',C',H',L',F
+ 1761                       	;
+ 1762 0b84 D9                	NEG:	EXX
+ 1763 0b85 2F                		CPL
+ 1764 0b86 E5                		PUSH	HL
+ 1765 0b87 B7                		OR	A		;CLEAR CARRY
+ 1766 0b88 21 00 00 00       		LD      HL,0
+ 1767 0b8c 52 ED 42          		SBC.S   HL,BC
+ 1768 0b8f 44                		LD	B,H
+ 1769 0b90 4D                		LD	C,L
+ 1770 0b91 E1                		POP	HL
+ 1771 0b92 18 DA             		JR	NEG0
+ 1772                       	;
+ 1773                       	;SCALE - Trig scaling.
+ 1774                       	;MOD48 - 48-bit floating-point "modulus" (remainder).
+ 1775                       	;   Inputs: HLH'L'C unsigned floating-point dividend
+ 1776                       	;           DED'E'B'C'B unsigned 48-bit FP divisor
+ 1777                       	;  Outputs: HLH'L'C floating point remainder (H7=1)
+ 1778                       	;           E = quotient (bit 7 is sticky)
+ 1779                       	; Destroys: A,B,C,D,E,H,L,B',C',D',E',H',L',IX,F
+ 1780                       	;FLO48 - Float unsigned number (48 bits)
+ 1781                       	;    Input/output in HLH'L'B'C'C
+ 1782                       	;   Destroys: C,H,L,B',C',H',L',F
+ 1783                       	;
+ 1784 0b94 3E 96             	SCALE:	LD	A,150
+ 1785 0b96 B9                		CP	C
+ 1786 0b97 3E 17             		LD	A,ACLOST
+ 1787 0b99 DA CC 00 00       		JP	C,ERROR		;"Accuracy lost"
+ 1788 0b9d CD FA 06 00       		CALL	PIBY4
+ 1789 0ba1 D9                		EXX
+ 1790 0ba2 01 69 21 00       		LD	BC,2169H	;3.141592653589793238
+ 1791 0ba6 D9                		EXX
+ 1792 0ba7 CB FA             	MOD48:	SET	7,D		;IMPLIED 1
+ 1793 0ba9 CB FC             		SET	7,H
+ 1794 0bab 79                		LD	A,C
+ 1795 0bac 0E 00             		LD	C,0		;INIT QUOTIENT
+ 1796 0bae DD 21 00 00 00    		LD	IX,0
+ 1797 0bb3 DD E5             		PUSH	IX		;PUT ZERO ON STACK
+ 1798 0bb5 B8                		CP	B
+ 1799 0bb6 38 46             		JR	C,MOD485	;DIVIDEND<DIVISOR
+ 1800 0bb8 D9                	MOD481:	EXX			;CARRY=0 HERE
+ 1801 0bb9 E3                		EX	(SP),HL
+ 1802 0bba 52 ED 42          		SBC.S   HL,BC
+ 1803 0bbd E3                		EX	(SP),HL
+ 1804 0bbe 52 ED 52          		SBC.S   HL,DE
+ 1805 0bc1 D9                		EXX
+ 1806 0bc2 52 ED 52          		SBC.S   HL,DE
+ 1807 0bc5 30 0C             		JR	NC,MOD482	;DIVIDEND>=DIVISOR
+ 1808 0bc7 D9                		EXX
+ 1809 0bc8 E3                		EX	(SP),HL
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C002/numeric.s 			page 35
+'(C) COPYRIGHT R.T.RUSSELL 1986-2025'
+
+ 1810 0bc9 52 09             		ADD.S   HL,BC
+ 1811 0bcb E3                		EX	(SP),HL
+ 1812 0bcc 52 ED 5A          		ADC.S   HL,DE
+ 1813 0bcf D9                		EXX
+ 1814 0bd0 52 ED 5A          		ADC.S   HL,DE
+ 1815 0bd3 3F                	MOD482:	CCF
+ 1816 0bd4 CB 11             		RL	C		;QUOTIENT
+ 1817 0bd6 30 02             		JR	NC,MOD483
+ 1818 0bd8 CB F9             		SET	7,C		;STICKY BIT
+ 1819 0bda 3D                	MOD483:	DEC	A
+ 1820 0bdb B8                		CP	B
+ 1821 0bdc 38 1F             		JR	C,MOD484	;DIVIDEND<DIVISOR
+ 1822 0bde E3                		EX	(SP),HL
+ 1823 0bdf 52 29             		ADD.S   HL,HL           ;DIVIDEND * 2
+ 1824 0be1 E3                		EX	(SP),HL
+ 1825 0be2 D9                		EXX
+ 1826 0be3 52 ED 6A          		ADC.S   HL,HL
+ 1827 0be6 D9                		EXX
+ 1828 0be7 52 ED 6A          		ADC.S   HL,HL
+ 1829 0bea 30 CC             		JR	NC,MOD481	;AGAIN
+ 1830 0bec B7                		OR	A
+ 1831 0bed D9                		EXX
+ 1832 0bee E3                		EX	(SP),HL
+ 1833 0bef 52 ED 42          		SBC.S   HL,BC           ;OVERFLOW, SO SUBTRACT
+ 1834 0bf2 E3                		EX	(SP),HL
+ 1835 0bf3 52 ED 52          		SBC.S   HL,DE
+ 1836 0bf6 D9                		EXX
+ 1837 0bf7 52 ED 52          		SBC.S   HL,DE
+ 1838 0bfa B7                		OR	A
+ 1839 0bfb 18 D6             		JR	MOD482
+ 1840                       	;
+ 1841 0bfd 3C                	MOD484:	INC	A
+ 1842 0bfe 59                	MOD485:	LD	E,C		;QUOTIENT
+ 1843 0bff 4F                		LD	C,A		;REMAINDER EXPONENT
+ 1844 0c00 D9                		EXX
+ 1845 0c01 C1                		POP	BC
+ 1846 0c02 D9                		EXX
+ 1847 0c03 CB 7C             	FLO48:	BIT	7,H
+ 1848 0c05 C0                		RET	NZ
+ 1849 0c06 D9                		EXX
+ 1850 0c07 CB 21             		SLA	C
+ 1851 0c09 CB 10             		RL	B
+ 1852 0c0b 52 ED 6A          		ADC.S   HL,HL
+ 1853 0c0e D9                		EXX
+ 1854 0c0f 52 ED 6A          		ADC.S   HL,HL
+ 1855 0c12 0D                		DEC	C
+ 1856 0c13 20 EE             		JR	NZ,FLO48
+ 1857 0c15 C9                		RET
+ 1858                       	;
+ 1859                       	;Float unsigned number
+ 1860                       	;    Input/output in HLH'L'C
+ 1861                       	;   Destroys: C,H,L,H',L',F
+ 1862                       	;
+ 1863 0c16 CB 7C             	FLOAT:	BIT	7,H
+ 1864 0c18 C0                		RET	NZ
+ 1865 0c19 D9                		EXX			;SAME AS "X2"
+ 1866 0c1a 52 29             		ADD.S   HL,HL		;TIME-CRITICAL
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C002/numeric.s 			page 36
+'(C) COPYRIGHT R.T.RUSSELL 1986-2025'
+
+ 1867 0c1c D9                		EXX			;REGION
+ 1868 0c1d 52 ED 6A          		ADC.S   HL,HL		;(BENCHMARKS)
+ 1869 0c20 0D                		DEC	C
+ 1870 0c21 20 F3             	        JR      NZ,FLOAT
+ 1871 0c23 C9                		RET
+ 1872                       	;
+ 1873                       	;SFLOAT - Convert to floating-point if necessary.
+ 1874                       	;    Input: Variable-type number in HLH'L'C
+ 1875                       	;    Output: Floating-point in HLH'L'C
+ 1876                       	;    Destroys: A,C,H,L,H',L',F
+ 1877                       	;
+ 1878 0c24 08                	FLOATA:	EX	AF,AF'
+ 1879 0c25 C6 30             		ADD     A,(RTABLE-DTABLE)/3
+ 1880 0c27 08                		EX	AF,AF'
+ 1881 0c28 CD 65 0C 00       	FLOAT2:	CALL	SWAP
+ 1882 0c2c CD 34 0C 00       		CALL	SFLOAT
+ 1883 0c30 CD 65 0C 00       		CALL	SWAP
+ 1884 0c34 0D                	SFLOAT:	DEC	C
+ 1885 0c35 0C                		INC	C
+ 1886 0c36 C0                		RET	NZ		;ALREADY FLOATING-POINT
+ 1887 0c37 CD 7F 00 00       		CALL	TEST
+ 1888 0c3b C8                		RET	Z		;ZERO
+ 1889 0c3c 7C                		LD	A,H
+ 1890 0c3d B7                		OR	A
+ 1891 0c3e FC 6C 0B 00       		CALL	M,NEGATE
+ 1892 0c42 0E 9F             		LD	C,159
+ 1893 0c44 CD 16 0C 00       		CALL	FLOAT
+ 1894 0c48 B7                		OR	A
+ 1895 0c49 F8                		RET	M		;NEGATIVE
+ 1896 0c4a CB BC             		RES	7,H
+ 1897 0c4c C9                		RET
+ 1898                       	;
+ 1899                       	;ROUND UP
+ 1900                       	;Return with carry set if 32-bit overflow
+ 1901                       	;   Destroys: H,L,B',C',H',L',F
+ 1902                       	;
+ 1903 0c4d D9                	ADD1:	EXX
+ 1904 0c4e 01 01 00 00       		LD	BC,1
+ 1905 0c52 52 09             		ADD.S   HL,BC
+ 1906 0c54 D9                		EXX
+ 1907 0c55 D0                		RET	NC
+ 1908 0c56 C5                		PUSH	BC
+ 1909 0c57 01 01 00 00       		LD	BC,1
+ 1910 0c5b 52 09             		ADD.S   HL,BC
+ 1911 0c5d C1                		POP	BC
+ 1912 0c5e C9                		RET
+ 1913                       	;
+ 1914                       	;ODD - Add one if even, leave alone if odd.
+ 1915                       	; (Used to perform unbiassed rounding, i.e.
+ 1916                       	;  number is rounded up half the time)
+ 1917                       	;    Destroys: L',F (carry cleared)
+ 1918                       	;
+ 1919 0c5f B7                	ODD:	OR	A		;CLEAR CARRY
+ 1920 0c60 D9                		EXX
+ 1921 0c61 CB C5             		SET	0,L		;MAKE ODD
+ 1922 0c63 D9                		EXX
+ 1923 0c64 C9                		RET
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C002/numeric.s 			page 37
+'(C) COPYRIGHT R.T.RUSSELL 1986-2025'
+
+ 1924                       	;
+ 1925                       	;SWAP - Swap arguments.
+ 1926                       	;    Exchanges DE,HL D'E',H'L' and B,C
+ 1927                       	;    Destroys: A,B,C,D,E,H,L,D',E',H',L'
+ 1928                       	;SWAP1 - Swap DEHL with D'E'H'L'
+ 1929                       	;    Destroys: D,E,H,L,D',E',H',L'
+ 1930                       	;
+ 1931 0c65 79                	SWAP:	LD	A,C
+ 1932 0c66 48                		LD	C,B
+ 1933 0c67 47                		LD	B,A
+ 1934 0c68 EB                	SWAP1:	EX	DE,HL
+ 1935 0c69 D9                		EXX
+ 1936 0c6a EB                		EX	DE,HL
+ 1937 0c6b D9                		EXX
+ 1938 0c6c C9                		RET
+ 1939                       	;
+ 1940                       	;DIV2 - destroys C,H,L,A',B',C',H',L',F,F'
+ 1941                       	;INCC - destroys C,F
+ 1942                       	;OFLOW
+ 1943                       	;
+ 1944 0c6d CD 1F 0D 00       	DIV2:	CALL	D2
+ 1945 0c71 D9                		EXX
+ 1946 0c72 CB 18             		RR	B
+ 1947 0c74 CB 19             		RR	C
+ 1948 0c76 08                		EX	AF,AF'
+ 1949 0c77 B0                		OR	B
+ 1950 0c78 08                		EX	AF,AF'
+ 1951 0c79 D9                		EXX
+ 1952 0c7a 0C                	INCC:	INC	C
+ 1953 0c7b C0                		RET	NZ
+ 1954 0c7c 3E 14             	OFLOW:	LD	A,TOOBIG
+ 1955 0c7e C3 CC 00 00       		JP	ERROR		;"Too big"
+ 1956                       	;
+ 1957                       	;FTEST - Test for zero & sign
+ 1958                       	;    Output: A=0 if zero, A=&40 if +ve, A=&C0 if -ve
+ 1959                       	;
+ 1960 0c82 CD 7F 00 00       	FTEST:	CALL	TEST
+ 1961 0c86 C8                		RET	Z
+ 1962 0c87 7C                		LD	A,H
+ 1963 0c88 E6 80             		AND	10000000B
+ 1964 0c8a F6 40             		OR	01000000B
+ 1965 0c8c C9                		RET
+ 1966                       	;
+ 1967                       	;FCOMP - Compare two numbers
+ 1968                       	;    Output: A=0 if equal, A=&40 if L>R, A=&C0 if L<R
+ 1969                       	;
+ 1970 0c8d 78                	FCOMP:	LD	A,B
+ 1971 0c8e B1                		OR	C		;Both integer?
+ 1972 0c8f 20 0B             		JR	NZ,FCOMP1
+ 1973 0c91 CD A6 0C 00       		CALL	ICP
+ 1974 0c95 3E 00             	FCOMP0:	LD	A,0
+ 1975 0c97 C8                		RET	Z		;Equal
+ 1976 0c98 3E 80             		LD	A,80H
+ 1977 0c9a 1F                		RRA
+ 1978 0c9b C9                		RET
+ 1979                       	;
+ 1980 0c9c CD 28 0C 00       	FCOMP1:	CALL	FLOAT2		;Float both
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C002/numeric.s 			page 38
+'(C) COPYRIGHT R.T.RUSSELL 1986-2025'
+
+ 1981 0ca0 CD B4 0C 00       		CALL	FCP
+ 1982 0ca4 18 EF             		JR	FCOMP0
+ 1983                       	;
+ 1984                       	;Integer and floating point compare.
+ 1985                       	;Sets carry & zero flags according to HLH'L'C-DED'E'B
+ 1986                       	;Result pre-set to FALSE
+ 1987                       	;ICP1, FCP1 destroy A,F
+ 1988                       	;
+ 1989                       	;ZERO - Return zero.
+ 1990                       	; Destroys: A,C,H,L,H',L'
+ 1991                       	;
+ 1992 0ca6 CD D9 0C 00       	ICP:	CALL	ICP1
+ 1993 0caa 3E 00             	ZERO:	LD	A,0
+ 1994 0cac D9                		EXX
+ 1995 0cad 67                		LD	H,A
+ 1996 0cae 6F                		LD	L,A
+ 1997 0caf D9                		EXX
+ 1998 0cb0 67                		LD	H,A
+ 1999 0cb1 6F                		LD	L,A
+ 2000 0cb2 4F                		LD	C,A
+ 2001 0cb3 C9                		RET
+ 2002                       	;
+ 2003 0cb4 CD CB 0C 00       	FCP:	CALL	FCP1
+ 2004 0cb8 18 F0             		JR	ZERO		;PRESET FALSE
+ 2005                       	;
+ 2006 0cba 79                	FCP0:	LD	A,C
+ 2007 0cbb B8                		CP	B		;COMPARE EXPONENTS
+ 2008 0cbc C0                		RET	NZ
+ 2009                       	ICP0:
+ 2010 0cbd 52 ED 52          		SBC.S   HL,DE           ;COMP MANTISSA MSB
+ 2011 0cc0 52 19             		ADD.S   HL,DE
+ 2012 0cc2 C0                		RET	NZ
+ 2013 0cc3 D9                		EXX
+ 2014 0cc4 52 ED 52          		SBC.S   HL,DE           ;COMP MANTISSA LSB
+ 2015 0cc7 52 19             		ADD.S   HL,DE
+ 2016 0cc9 D9                		EXX
+ 2017 0cca C9                		RET
+ 2018                       	;
+ 2019 0ccb 7C                	FCP1:	LD	A,H
+ 2020 0ccc AA                		XOR	D
+ 2021 0ccd 7C                		LD	A,H
+ 2022 0cce 17                		RLA
+ 2023 0ccf F8                		RET	M
+ 2024 0cd0 30 E8             		JR	NC,FCP0
+ 2025 0cd2 CD BA 0C 00       		CALL	FCP0
+ 2026 0cd6 C8                		RET	Z		;** V0.1 BUG FIX
+ 2027 0cd7 3F                		CCF
+ 2028 0cd8 C9                		RET
+ 2029                       	;
+ 2030 0cd9 7C                	ICP1:	LD	A,H
+ 2031 0cda AA                		XOR	D
+ 2032 0cdb F2 BD 0C 00       		JP	P,ICP0
+ 2033 0cdf 7C                		LD	A,H
+ 2034 0ce0 17                		RLA
+ 2035 0ce1 C9                		RET
+ 2036                       	;
+ 2037                       	;ADD - Integer add.
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C002/numeric.s 			page 39
+'(C) COPYRIGHT R.T.RUSSELL 1986-2025'
+
+ 2038                       	;Carry, sign & zero flags valid on exit
+ 2039                       	;    Destroys: H,L,H',L',F
+ 2040                       	;
+ 2041 0ce2 05                	X10B:	DEC	B
+ 2042 0ce3 0C                		INC	C
+ 2043 0ce4 CD 2B 0D 00       	X5:	CALL	COPY0
+ 2044 0ce8 CD 1E 0D 00       		CALL	D2C
+ 2045 0cec CD 1E 0D 00       		CALL	D2C
+ 2046 0cf0 08                		EX	AF,AF'		;SAVE CARRY
+ 2047 0cf1 D9                	ADD:	EXX
+ 2048 0cf2 52 19             		ADD.S   HL,DE
+ 2049 0cf4 D9                		EXX
+ 2050 0cf5 52 ED 5A          		ADC.S   HL,DE
+ 2051 0cf8 C9                		RET
+ 2052                       	;
+ 2053                       	;SUB - Integer subtract.
+ 2054                       	;Carry, sign & zero flags valid on exit
+ 2055                       	;    Destroys: H,L,H',L',F
+ 2056                       	;
+ 2057 0cf9 D9                	SUB:	EXX
+ 2058 0cfa B7                		OR	A
+ 2059 0cfb 52 ED 52          		SBC.S   HL,DE
+ 2060 0cfe D9                		EXX
+ 2061 0cff 52 ED 52          		SBC.S   HL,DE
+ 2062 0d02 C9                		RET
+ 2063                       	;
+ 2064                       	;X10 - unsigned integer * 10
+ 2065                       	;   Inputs: HLH'L' initial value
+ 2066                       	;  Outputs: DED'E' = initial HLH'L'
+ 2067                       	;           Carry bit set if overflow
+ 2068                       	;           If carry not set HLH'L'=result
+ 2069                       	; Destroys: D,E,H,L,D',E',H',L',F
+ 2070                       	;X2 - Multiply HLH'L' by 2 as 32-bit integer.
+ 2071                       	;    Carry set if MSB=1 before shift.
+ 2072                       	;    Sign set if MSB=1 after shift.
+ 2073                       	;    Destroys: H,L,H',L',F
+ 2074                       	;
+ 2075 0d03 CD 2B 0D 00       	X10:	CALL	COPY0		;DED'E'=HLH'L'
+ 2076 0d07 CD 16 0D 00       		CALL	X2
+ 2077 0d0b D8                		RET	C		;TOO BIG
+ 2078 0d0c CD 16 0D 00       		CALL	X2
+ 2079 0d10 D8                		RET	C
+ 2080 0d11 CD F1 0C 00       		CALL	ADD
+ 2081 0d15 D8                		RET	C
+ 2082 0d16 D9                	X2:	EXX
+ 2083 0d17 52 29             		ADD.S   HL,HL
+ 2084 0d19 D9                		EXX
+ 2085 0d1a 52 ED 6A          		ADC.S   HL,HL
+ 2086 0d1d C9                		RET
+ 2087                       	;
+ 2088                       	;D2 - Divide HLH'L' by 2 as 32-bit integer.
+ 2089                       	;    Carry set if LSB=1 before shift.
+ 2090                       	;    Destroys: H,L,H',L',F
+ 2091                       	;
+ 2092 0d1e 0C                	D2C:	INC	C
+ 2093 0d1f CB 3C             	D2:	SRL	H
+ 2094 0d21 CB 1D             		RR	L
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C002/numeric.s 			page 40
+'(C) COPYRIGHT R.T.RUSSELL 1986-2025'
+
+ 2095 0d23 D9                		EXX
+ 2096 0d24 CB 1C             		RR	H
+ 2097 0d26 CB 1D             		RR	L
+ 2098 0d28 D9                		EXX
+ 2099 0d29 C9                		RET
+ 2100                       	;
+ 2101                       	;COPY - COPY HLH'L'C INTO DED'E'B
+ 2102                       	;  Destroys: B,C,D,E,H,L,D',E',H',L'
+ 2103                       	;
+ 2104 0d2a 41                	COPY:	LD	B,C
+ 2105 0d2b 54                	COPY0:	LD	D,H
+ 2106 0d2c 5D                		LD	E,L
+ 2107 0d2d D9                		EXX
+ 2108 0d2e 54                		LD	D,H
+ 2109 0d2f 5D                		LD	E,L
+ 2110 0d30 D9                		EXX
+ 2111 0d31 C9                		RET
+ 2112                       	;
+ 2113                       	;SQUARE - PUSH X*X
+ 2114                       	;PUSH5 - PUSH HLH'L'C ONTO STACK.
+ 2115                       	;  Destroys: SP,IX
+ 2116                       	;
+ 2117 0d32 CD 2A 0D 00       	SQUARE:	CALL	COPY
+ 2118 0d36 CD 8D 03 00       		CALL	FMUL
+ 2119 0d3a DD E1             	PUSH5:	POP	IX		;RETURN ADDRESS
+ 2120 0d3c C5                		PUSH	BC
+ 2121 0d3d E5                		PUSH	HL
+ 2122 0d3e D9                		EXX
+ 2123 0d3f E5                		PUSH	HL
+ 2124 0d40 D9                		EXX
+ 2125 0d41 DD E9             		JP	(IX)		;"RETURN"
+ 2126                       	;
+ 2127                       	;POP5 - POP DED'E'B OFF STACK.
+ 2128                       	;  Destroys: A,B,D,E,D',E',SP,IX
+ 2129                       	;
+ 2130 0d43 DD E1             	POP5:	POP	IX		;RETURN ADDRESS
+ 2131 0d45 D9                		EXX
+ 2132 0d46 D1                		POP	DE
+ 2133 0d47 D9                		EXX
+ 2134 0d48 D1                		POP	DE
+ 2135 0d49 79                		LD	A,C
+ 2136 0d4a C1                		POP	BC
+ 2137 0d4b 41                		LD	B,C
+ 2138 0d4c 4F                		LD	C,A
+ 2139 0d4d DD E9             		JP	(IX)		;"RETURN"
+ 2140                       	;
+ 2141                       	;RATIO - Calculate (X-1)/(X+1)
+ 2142                       	;    Inputs: X in HLH'L'C
+ 2143                       	;   Outputs: (X-1)/(X+1) in HLH'L'C
+ 2144                       	;  Destroys: Everything except IY,SP,I
+ 2145                       	;
+ 2146 0d4f CD 3A 0D 00       	RATIO:	CALL	PUSH5		;SAVE X
+ 2147 0d53 CD ED 06 00       		CALL	DONE
+ 2148 0d57 CD 43 02 00       		CALL	FADD
+ 2149 0d5b CD 43 0D 00       		CALL	POP5		;RESTORE X
+ 2150 0d5f CD 3A 0D 00       		CALL	PUSH5		;SAVE X+1
+ 2151 0d63 CD 65 0C 00       		CALL	SWAP
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C002/numeric.s 			page 41
+'(C) COPYRIGHT R.T.RUSSELL 1986-2025'
+
+ 2152 0d67 CD ED 06 00       		CALL	DONE
+ 2153 0d6b CD 2A 02 00       		CALL	FSUB
+ 2154 0d6f CD 43 0D 00       		CALL	POP5		;RESTORE X+1
+ 2155 0d73 C3 AC 02 00       		JP	FDIV
+ 2156                       	;
+ 2157                       	;POLY - Evaluate a polynomial.
+ 2158                       	;    Inputs: X in HLH'L'C and also stored at (SP+3)
+ 2159                       	;            Polynomial coefficients follow call.
+ 2160                       	;   Outputs: Result in HLH'L'C
+ 2161                       	;  Destroys: Everything except IY,SP,I
+ 2162                       	;Routine terminates on finding a coefficient >=1.
+ 2163                       	;Note: The last coefficient is EXECUTED on return
+ 2164                       	;      so must contain only innocuous bytes!
+ 2165                       	;
+ 2166 0d77 DD 21 03 00 00    	POLY:	LD      IX, 3				; Advance the SP to the return address
+ 2167 0d7c DD 39             		ADD	IX,SP
+ 2168 0d7e DD E3             		EX	(SP),IX
+ 2169 0d80 CD 53 00 00       		CALL	DLOAD5		;FIRST COEFFICIENT
+ 2170 0d84 CD 8D 03 00       	POLY1:	CALL	FMUL
+ 2171 0d88 11 05 00 00       		LD	DE,5
+ 2172 0d8c DD 19             		ADD	IX,DE
+ 2173 0d8e CD 53 00 00       		CALL	DLOAD5		;NEXT COEFFICIENT
+ 2174 0d92 DD E3             		EX	(SP),IX
+ 2175 0d94 04                		INC	B
+ 2176 0d95 05                		DEC	B		;TEST
+ 2177 0d96 FA 43 02 00       		JP	M,FADD
+ 2178 0d9a CD 43 02 00       		CALL	FADD
+ 2179 0d9e CD 86 00 00       		CALL	DLOAD5_SPL		;X
+ 2180 0da2 DD E3             		EX	(SP),IX
+ 2181 0da4 18 DE             		JR	POLY1
+ 2182                       	;
+ 2183                       	;POWR10 - Calculate power of ten.
+ 2184                       	;    Inputs: A=power of 10 required (A<128)
+ 2185                       	;            A=binary exponent to be exceeded (A>=128)
+ 2186                       	;   Outputs: DED'E'B = result
+ 2187                       	;            A = actual power of ten returned
+ 2188                       	;  Destroys: A,B,D,E,A',D',E',F,F'
+ 2189                       	;
+ 2190 0da6 3C                	POWR10:	INC	A
+ 2191 0da7 08                		EX	AF,AF'
+ 2192 0da8 E5                		PUSH	HL
+ 2193 0da9 D9                		EXX
+ 2194 0daa E5                		PUSH	HL
+ 2195 0dab D9                		EXX
+ 2196 0dac CD ED 06 00       		CALL	DONE
+ 2197 0db0 CD 65 0C 00       		CALL	SWAP
+ 2198 0db4 AF                		XOR	A
+ 2199 0db5 08                	POWR11:	EX	AF,AF'
+ 2200 0db6 3D                		DEC	A
+ 2201 0db7 28 26             		JR	Z,POWR14	;EXIT TYPE 1
+ 2202 0db9 F2 C1 0D 00       		JP	P,POWR13
+ 2203 0dbd B9                		CP	C
+ 2204 0dbe 38 1F             		JR	C,POWR14	;EXIT TYPE 2
+ 2205 0dc0 3C                		INC	A
+ 2206 0dc1 08                	POWR13:	EX	AF,AF'
+ 2207 0dc2 3C                		INC	A
+ 2208 0dc3 CB FC             		SET	7,H
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C002/numeric.s 			page 42
+'(C) COPYRIGHT R.T.RUSSELL 1986-2025'
+
+ 2209 0dc5 CD E4 0C 00       		CALL	X5
+ 2210 0dc9 30 06             		JR	NC,POWR12
+ 2211 0dcb 08                		EX	AF,AF'
+ 2212 0dcc CD 1E 0D 00       		CALL	D2C
+ 2213 0dd0 08                		EX	AF,AF'
+ 2214 0dd1 08                	POWR12:	EX	AF,AF'
+ 2215 0dd2 DC 4D 0C 00       		CALL	C,ADD1		;ROUND UP
+ 2216 0dd6 0C                		INC	C
+ 2217 0dd7 FA B5 0D 00       		JP	M,POWR11
+ 2218 0ddb C3 7C 0C 00       		JP	OFLOW
+ 2219 0ddf CD 65 0C 00       	POWR14:	CALL	SWAP
+ 2220 0de3 CB BA             		RES	7,D
+ 2221 0de5 D9                		EXX
+ 2222 0de6 E1                		POP	HL
+ 2223 0de7 D9                		EXX
+ 2224 0de8 E1                		POP	HL
+ 2225 0de9 08                		EX	AF,AF'
+ 2226 0dea C9                		RET
+ 2227                       	;
+ 2228                       	;DIVA, DIVB - DIVISION PRIMITIVE.
+ 2229                       	;    Function: D'E'DE = H'L'HLD'E'DE / B'C'BC
+ 2230                       	;              Remainder in H'L'HL
+ 2231                       	;    Inputs: A = loop counter (normally -32)
+ 2232                       	;    Destroys: A,D,E,H,L,D',E',H',L',F
+ 2233                       	;
+ 2234 0deb B7                	DIVA:	OR	A		;CLEAR CARRY
+ 2235                       	DIV0:
+ 2236 0dec 52 ED 42          		SBC.S   HL,BC           ;DIVIDEND-DIVISOR
+ 2237 0def D9                		EXX
+ 2238 0df0 52 ED 42          		SBC.S   HL,BC
+ 2239 0df3 D9                		EXX
+ 2240 0df4 30 07             		JR	NC,DIV1
+ 2241 0df6 52 09             		ADD.S   HL,BC           ;DIVIDEND+DIVISOR
+ 2242 0df8 D9                		EXX
+ 2243 0df9 52 ED 4A          		ADC.S   HL,BC
+ 2244 0dfc D9                		EXX
+ 2245 0dfd 3F                	DIV1:	CCF
+ 2246 0dfe CB 13             	DIVC:	RL	E		;SHIFT RESULT INTO DE
+ 2247 0e00 CB 12             		RL	D
+ 2248 0e02 D9                		EXX
+ 2249 0e03 CB 13             		RL	E
+ 2250 0e05 CB 12             		RL	D
+ 2251 0e07 D9                		EXX
+ 2252 0e08 3C                		INC	A
+ 2253 0e09 F0                		RET	P
+ 2254                       	DIVB:
+ 2255 0e0a 52 ED 6A          		ADC.S   HL,HL           ;DIVIDEND*2
+ 2256 0e0d D9                		EXX
+ 2257 0e0e 52 ED 6A          		ADC.S   HL,HL
+ 2258 0e11 D9                		EXX
+ 2259 0e12 30 D8             		JR	NC,DIV0
+ 2260 0e14 B7                		OR	A
+ 2261 0e15 52 ED 42          		SBC.S   HL,BC           ;DIVIDEND-DIVISOR
+ 2262 0e18 D9                		EXX
+ 2263 0e19 52 ED 42          		SBC.S   HL,BC
+ 2264 0e1c D9                		EXX
+ 2265 0e1d 37                		SCF
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C002/numeric.s 			page 43
+'(C) COPYRIGHT R.T.RUSSELL 1986-2025'
+
+ 2266 0e1e 18 DE             		JR	DIVC
+ 2267                       	;
+ 2268                       	;MULA, MULB - MULTIPLICATION PRIMITIVE.
+ 2269                       	;    Function: H'L'HLD'E'DE = B'C'BC * D'E'DE
+ 2270                       	;    Inputs: A = loop counter (usually -32)
+ 2271                       	;            H'L'HL = 0
+ 2272                       	;    Destroys: D,E,H,L,D',E',H',L',A,F
+ 2273                       	;
+ 2274 0e20 B7                	MULA:	OR	A		;CLEAR CARRY
+ 2275 0e21 D9                	MUL0:	EXX
+ 2276 0e22 CB 1A             		RR	D		;MULTIPLIER/2
+ 2277 0e24 CB 1B             		RR	E
+ 2278 0e26 D9                		EXX
+ 2279 0e27 CB 1A             		RR	D
+ 2280 0e29 CB 1B             		RR	E
+ 2281 0e2b 30 07             		JR	NC,MUL1
+ 2282 0e2d 52 09             		ADD.S   HL,BC           ;ADD IN MULTIPLICAND
+ 2283 0e2f D9                		EXX
+ 2284 0e30 52 ED 4A          		ADC.S   HL,BC
+ 2285 0e33 D9                		EXX
+ 2286 0e34 3C                	MUL1:	INC	A
+ 2287 0e35 F0                		RET	P
+ 2288 0e36 D9                	MULB:	EXX
+ 2289 0e37 CB 1C             		RR	H		;PRODUCT/2
+ 2290 0e39 CB 1D             		RR	L
+ 2291 0e3b D9                		EXX
+ 2292 0e3c CB 1C             		RR	H
+ 2293 0e3e CB 1D             		RR	L
+ 2294 0e40 18 DF             		JR	MUL0
+ 2295                       	;
+ 2296                       	;SQRA, SQRB - SQUARE ROOT PRIMITIVES
+ 2297                       	;    Function: B'C'BC = SQR (D'E'DE)
+ 2298                       	;    Inputs: A = loop counter (normally -31)
+ 2299                       	;            B'C'BCH'L'HL initialised to 0
+ 2300                       	;  Destroys: A,B,C,D,E,H,L,B',C',D',E',H',L',F
+ 2301                       	;
+ 2302                       	SQR1:
+ 2303 0e42 52 ED 42          		SBC.S   HL,BC
+ 2304 0e45 D9                		EXX
+ 2305 0e46 52 ED 42          		SBC.S   HL,BC
+ 2306 0e49 D9                		EXX
+ 2307 0e4a 0C                		INC	C
+ 2308 0e4b 30 09             		JR	NC,SQR2
+ 2309 0e4d 0D                		DEC	C
+ 2310 0e4e 52 09             		ADD.S   HL,BC
+ 2311 0e50 D9                		EXX
+ 2312 0e51 52 ED 4A          		ADC.S   HL,BC
+ 2313 0e54 D9                		EXX
+ 2314 0e55 0D                		DEC	C
+ 2315 0e56 3C                	SQR2:	INC	A
+ 2316 0e57 F0                		RET	P
+ 2317 0e58 CB 21             	SQRA:	SLA	C
+ 2318 0e5a CB 10             		RL	B
+ 2319 0e5c 0C                		INC	C
+ 2320 0e5d D9                		EXX
+ 2321 0e5e CB 11             		RL	C
+ 2322 0e60 CB 10             		RL	B
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C002/numeric.s 			page 44
+'(C) COPYRIGHT R.T.RUSSELL 1986-2025'
+
+ 2323 0e62 CD 96 0E 00       		CALL	SLA8
+ 2324 0e66 CD 96 0E 00       		CALL	SLA8
+ 2325 0e6a D9                		EXX
+ 2326 0e6b 30 D5             		JR	NC,SQR1
+ 2327 0e6d B7                	SQR3:	OR	A
+ 2328 0e6e 52 ED 42          		SBC.S   HL,BC
+ 2329 0e71 D9                		EXX
+ 2330 0e72 52 ED 42          		SBC.S   HL,BC
+ 2331 0e75 D9                		EXX
+ 2332 0e76 0C                		INC	C
+ 2333 0e77 18 DD             		JR	SQR2
+ 2334                       	;
+ 2335                       	SQRB:
+ 2336 0e79 52 29             		ADD.S   HL,HL
+ 2337 0e7b D9                		EXX
+ 2338 0e7c 52 ED 6A          		ADC.S   HL,HL
+ 2339 0e7f D9                		EXX
+ 2340 0e80 38 EB             		JR	C,SQR3
+ 2341 0e82 3C                		INC	A
+ 2342 0e83 0C                		INC	C
+ 2343 0e84 52 ED 42          		SBC.S   HL,BC
+ 2344 0e87 D9                		EXX
+ 2345 0e88 52 ED 42          		SBC.S   HL,BC
+ 2346 0e8b D9                		EXX
+ 2347 0e8c D0                		RET	NC
+ 2348 0e8d 52 09             		ADD.S   HL,BC
+ 2349 0e8f D9                		EXX
+ 2350 0e90 52 ED 4A          		ADC.S   HL,BC
+ 2351 0e93 D9                		EXX
+ 2352 0e94 0D                		DEC	C
+ 2353 0e95 C9                		RET
+ 2354                       	;
+ 2355 0e96 D9                	SLA8:	EXX
+ 2356 0e97 CB 23             		SLA	E
+ 2357 0e99 CB 12             		RL	D
+ 2358 0e9b D9                		EXX
+ 2359 0e9c CB 13             		RL	E
+ 2360 0e9e CB 12             		RL	D
+ 2361 0ea0 D9                		EXX
+ 2362 0ea1 52 ED 6A          		ADC.S	HL,HL
+ 2363 0ea4 D9                		EXX
+ 2364 0ea5 52 ED 6A          		ADC.S	HL,HL
+ 2365 0ea8 C9                		RET
+ 2366                       	;
+ 2367 0ea9 DD 7E 00          	DIGITQ:	LD	A,(IX)
+ 2368 0eac FE 3A             		CP	'9'+1
+ 2369 0eae 3F                		CCF
+ 2370 0eaf D8                		RET	C
+ 2371 0eb0 FE 30             		CP	'0'
+ 2372 0eb2 C9                		RET
+ 2373                       	;
+ 2374 0eb3 DD 7E 00          	SIGNQ:	LD	A,(IX)
+ 2375 0eb6 DD 23             		INC	IX
+ 2376 0eb8 FE 20             		CP	' '
+ 2377 0eba 28 F7             		JR	Z,SIGNQ
+ 2378 0ebc FE 2B             		CP	'+'
+ 2379 0ebe C8                		RET	Z
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C002/numeric.s 			page 45
+'(C) COPYRIGHT R.T.RUSSELL 1986-2025'
+
+ 2380 0ebf FE 2D             		CP	'-'
+ 2381 0ec1 C8                		RET	Z
+ 2382 0ec2 DD 2B             		DEC	IX
+ 2383 0ec4 C9                		RET
+ 2384                       	;
+ 2385 0ec5 08                	ABS2:	EX	AF,AF'
+ 2386 0ec6 CB 7C             		BIT	7,H
+ 2387 0ec8 C4 6C 0B 00       		CALL	NZ,NEGATE	;MAKE ARGUMENTS +VE
+ 2388 0ecc CD 65 0C 00       		CALL	SWAP
+ 2389 0ed0 CB 7C             		BIT	7,H
+ 2390 0ed2 C4 6C 0B 00       		CALL	NZ,NEGATE
+ 2391 0ed6 44                		LD	B,H
+ 2392 0ed7 4D                		LD	C,L
+ 2393 0ed8 21 00 00 00       		LD	HL,0
+ 2394 0edc D9                		EXX
+ 2395 0edd 44                		LD	B,H
+ 2396 0ede 4D                		LD	C,L
+ 2397 0edf 21 00 00 00       		LD	HL,0
+ 2398 0ee3 C9                		RET
+ 2399                       	;
+ 2400                       		END

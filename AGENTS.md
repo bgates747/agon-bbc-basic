@@ -4,8 +4,8 @@ Read `/Agon/mystuff/agon-dev-env/codex/AGENTS.md` first. That directory owns
 shared environment, ownership, assembly and emulator instructions.
 
 This working repository contains the reference BASIC V ADL interpreter and a
-experimental compiler under `docs/tasks/C001/`. `compiler/` currently holds
-project documents; no compiler implementation has been promoted to live code.
+promoted bootstrap compiler at `compiler/compiler.bas`. Experimental numeric
+runtime work remains under `docs/tasks/C002/`.
 Keep interpreter changes separate from compiler work. The active compiler
 branch is `codex/native-bbc-compiler`.
 
@@ -24,12 +24,16 @@ evidence. Passing experiments can be promoted to live source with the evidence
 and destination recorded in the task document. Do not treat placement or an
 automated test pass as human emulator validation or commit approval.
 
-C001 has passed automated qualification and remains experimental. C002–C006
-are broad, unstarted task briefs, to be refined before implementation. This
-documentation and relocation request does not start any further language work.
+C001 was promoted after its recorded 39-case/15-execution qualification and
+repeat validation at the live location. C002 is active: isolate and qualify the
+numeric adapter before implementing compiler expressions. Read
+`docs/tasks/C002/ABI.md` and its task record for scope/results. C003–C006 remain
+unstarted. The compiler is still BBC BASIC; assembly is runtime code, not a
+replacement compiler implementation.
 
 Use `.venv/bin/python` explicitly. `compiler/README.md` contains build/test
 commands. `.emulator/` is an ignored automated CLI fixture, not a graphical
 human review instance. No graphical emulator or hardware has been deployed.
-Leave changes uncommitted pending the Author's review and the canonical
-emulator validation policy.
+The Author explicitly requested the pre-tranche changes be committed and
+pushed on 2026-11-01; that checkpoint is `a45a15f`. New work remains uncommitted
+pending review and the canonical emulator validation policy.

@@ -1,0 +1,24 @@
+{
+  "cases": 257,
+  "failures": [],
+  "fixture_record_bytes": 18,
+  "packed_result_bytes": 5,
+  "independent_precision_anchors": 4,
+  "unresolved_numeric_symbols": 0,
+  "duration_seconds": 15.574,
+  "status_counts": {
+    "0": 239,
+    "1": 6,
+    "18": 1,
+    "20": 10,
+    "22": 1
+  },
+  "hashes": {
+    "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+    "docs/tasks/C002/numeric.s": "77b9ad24e71d38c2b8b87121a491833ef735e4d121eb4e4e3908c77221f7d481",
+    "docs/tasks/C002/probe.s": "d03f7b7a07d678a45242538b74c51b66d7a819c8d53f627f85730d5652832c36",
+    "docs/tasks/C002/vendor/MATH.Z80": "1f92ffc352b22051ff77f0a48d206d04012fb5e404c0a70e47d76342ce7aece3",
+    "docs/tasks/C002/build/cases.dat": "6ee38d0d04d8e6fafe5b9d5ae6815c6acbfbabd0ba8c7af4c538c5c7376a102e",
+    "docs/tasks/C002/build/probe.bin": "f7c428690e3d7a951d7bb1d358fbf25d677b8682942ee2c28498d693a3d3c4d5"
+  }
+}

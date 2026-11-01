@@ -3,8 +3,9 @@
 The current implementation proves the path from BBC BASIC source to a MOS
 native executable. Later stages must preserve BBC BASIC values and activation
 semantics before broadening the accepted language. This draft describes the
-experimental implementation in `docs/tasks/C001/`; it does not establish live
-promotion. Task documents and experimental silos follow
+promoted C001 bootstrap in `compiler/compiler.bas`. Experimental numeric code
+is separately qualified under C002 and has not enabled language expressions.
+Task documents and experimental silos follow
 [the accepted task convention](../docs/tasks/README.md).
 
 ## Current source language
@@ -99,9 +100,10 @@ promotion. Task documents and experimental silos follow
    observe dynamically installed local values as the reference does; simply
    allocating unrelated C-style locals is insufficient. Error unwinding must
    eventually perform equivalent restoration.
-5. A small adapter boundary should hide the numeric package's split register
-   representation from emitted program code. Its exact value-stack ABI is
-   deliberately undecided until the package is qualified. String management
+5. A small adapter boundary hides the numeric package's split register
+   representation from callers. C002 defines an experimental packed-value
+   pointer ABI in `docs/tasks/C002/ABI.md`; the compiler expression/value-stack
+   ABI and integration remain unimplemented. String management
    and activation handling need explicit compiled runtimes; interpreter
    parser routines are not stable runtime entry points.
 6. Self-hosting acceptance requires interpreting the BBC BASIC compiler to

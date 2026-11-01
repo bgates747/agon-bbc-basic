@@ -2,8 +2,9 @@
 
 Dean Belfield's arithmetic package is the strongest reuse candidate. String,
 variable and procedure code is closely coupled to interpreter parsing and
-memory state and needs adaptation. No interpreter runtime has been extracted
-or linked into generated programs in this milestone.
+memory state and needs adaptation. C001 extracted no interpreter runtime.
+C002 now isolates the newer BASIC V math package experimentally; it has not
+yet been linked into compiler-generated programs.
 
 ## Inspected sources and provenance
 
@@ -58,6 +59,16 @@ or linked into generated programs in this milestone.
    requires bringing or replacing those helpers and auditing their register
    and stack assumptions. The versions also differ in operation tables and
    optimisations; copying a selector number from a different version is unsafe.
+6. C002's actual standalone link found two additional undeclared dependencies,
+   `STORE5_SPL` and `DLOAD5_SPL`, for seven-byte sparse stack layouts. Its
+   adapter supplies all five helpers plus required assembly macros; no
+   interpreter globals remain unresolved. See the experimental
+   [numeric ABI](../docs/tasks/C002/ABI.md) and
+   [provenance](../docs/tasks/C002/vendor/PROVENANCE.md).
+7. Direct byte checks confirm FONE encodes 1.0 with exponent 128 and exact
+   halfway addition uses the package's ODD behavior, not IEEE ties-to-even.
+   The reference constant reader also stores `4294967296.0` differently from
+   `2147483648.0*2`; C002 retains this discrepancy for explicit parser design.
 
 ## Strings, variables and memory
 

@@ -1,0 +1,6 @@
+{
+  "status": "Reference tie behavior differs from the initial ties-to-even fixture assumption",
+  "case_249": "0b0000000000a001000000000001000000a0",
+  "case_250": "0b0000000000a003000000000001000000a0",
+  "source_confirmation": "MATH.Z80 ODD sets the low significand bit for exact halfway cases."
+}

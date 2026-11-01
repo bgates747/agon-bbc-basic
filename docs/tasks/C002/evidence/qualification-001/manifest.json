@@ -1,0 +1,29 @@
+{
+  "date": "2026-11-01",
+  "checkpoint_commit": "a45a15ff1a2148a2f065fc16ce72ea38a676dd1d",
+  "cli_source_commit": "c22876d1f7ad903537c308cf65afd6553b37cdb8",
+  "cli_source_tag": "1.2.5",
+  "inputs": {
+    "compiler/tools/test_compiler.py": "3320b6d113646caf5e2bc785021273036965d7c879d30e15cc3a4d626580425c",
+    "docs/tasks/C002/tools/test_numeric.py": "dd06afbffff586c99f371ca88942369677ffc826816c3bb2aabe525b5a959b16",
+    "docs/tasks/C002/numeric.s": "77b9ad24e71d38c2b8b87121a491833ef735e4d121eb4e4e3908c77221f7d481",
+    "docs/tasks/C002/probe.s": "d03f7b7a07d678a45242538b74c51b66d7a819c8d53f627f85730d5652832c36",
+    "docs/tasks/C002/vendor/MATH.Z80": "1f92ffc352b22051ff77f0a48d206d04012fb5e404c0a70e47d76342ce7aece3",
+    "docs/tasks/C002/vendor/LICENSE.txt": "cc8e92d92cf12fb1d04ddae0b573367f14188df5fcd6c7909d36486ff53a108a"
+  },
+  "environment": {
+    "cli": {
+      "path": "/tmp/bbc-compiler-cli-target/release/agon-cli-emulator",
+      "sha256": "bf5f29b243b8214e54c515dcc26edf47399ce440356af2ebc3ce3d7664ae11eb"
+    },
+    "mos_image": {
+      "path": "/Agon/mystuff/bbc-basic-v-adl/.emulator/mos_platform.bin",
+      "sha256": "d564243283972690933a4554296ad6202ca4ef54572279533a942960846bebae"
+    },
+    "mos_map": {
+      "path": "/Agon/mystuff/bbc-basic-v-adl/.emulator/mos_platform.map",
+      "sha256": "d69e60bbce61a7b4b3eef318ba395f11c4e1a5b585755755113992dc94edcb86"
+    }
+  },
+  "source_note": "Numeric source is a byte-for-byte copy of baseline MATH.Z80; runtime/probe/harness are experimental C002 artifacts."
+}

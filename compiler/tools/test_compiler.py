@@ -17,7 +17,7 @@ import time
 
 
 TASK_ROOT = Path(__file__).resolve().parents[1]
-ROOT = TASK_ROOT.parents[2]
+ROOT = TASK_ROOT.parent
 
 
 def run_profile(profile: Path, script: str, marker: str, log_name: str) -> str:
