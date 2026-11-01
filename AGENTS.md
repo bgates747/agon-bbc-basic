@@ -34,6 +34,8 @@ replacement compiler implementation.
 Use `.venv/bin/python` explicitly. `compiler/README.md` contains build/test
 commands. `.emulator/` is an ignored automated CLI fixture, not a graphical
 human review instance. No graphical emulator or hardware has been deployed.
-The Author explicitly requested the pre-tranche changes be committed and
-pushed on 2026-11-01; that checkpoint is `a45a15f`. New work remains uncommitted
-pending review and the canonical emulator validation policy.
+The Author explicitly requested pre-tranche checkpoints on 2026-11-01:
+`a45a15f`, then `ccd09af` before the C007 corpus search. Both are pushed.
+C007's completed source search and measurement contract are indexed by
+`compiler/TESTING.md`; no new benchmark performance was measured. New work
+remains uncommitted pending review and the canonical emulator validation policy.

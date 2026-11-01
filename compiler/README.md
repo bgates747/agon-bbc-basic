@@ -35,6 +35,8 @@ emission and binary output itself; the Python harness only runs tests.
    immutable-ID documents in `docs/tasks/`.
 5. [Development log](../docs/compiler-development-2026-11-01.md) — experiments
    and verification evidence.
+6. [Testing and benchmarking corpus](TESTING.md) — curated source programs,
+   eligibility, correctness oracles and measurement protocol.
 
 ## Automated qualification
 

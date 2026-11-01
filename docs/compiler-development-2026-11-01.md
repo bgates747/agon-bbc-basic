@@ -5,6 +5,9 @@ numeric runtime now passes byte-level comparisons with BASIC V. This establishes
 a calling interface for arithmetic; compiler numeric expressions and self-hosting
 remain unimplemented.
 
+The later C007 search establishes a curated testing/benchmark source catalogue
+and measurement contract. It adds no compiler behavior or measured speedup.
+
 ## Checkpoint and C001 promotion
 
 1. The Author requested the existing work be committed and pushed before the
@@ -78,4 +81,43 @@ covered the earlier dirt.
 2. The Author explicitly requested all current dirt be committed and pushed
    before executing C007. The checkpoint includes the completed C001 promotion,
    C002 runtime qualification and the newly defined search task. Search results
-   will be recorded after that checkpoint.
+   are recorded below, after that checkpoint.
+
+## C007 search completed
+
+1. Committed and pushed the complete pre-search tree as
+   `ccd09af856f2745add0b150c6f7b3efd51e992e9` on
+   `codex/native-bbc-compiler`. The checkpoint included C007's definition;
+   substantive search followed the successful push.
+2. Inspected local tests and primary external sources. Retained a catalogue of
+   three correctness groups, thirteen performance candidates and three mixed
+   applications, with explicit source-inspection versus execution status.
+   [compiler/TESTING.md](../compiler/TESTING.md) provides the permanent entry;
+   the detailed [catalogue](tasks/C007/CATALOG.md) remains in the task silo.
+3. Preferred established sources are bench64's individual control/call/string/
+   array/numeric cases and BBC-specific ClockSp kernels. BBCSDL timing exposes
+   dispatch/name-lookup work but needs substantial adaptation. Local CASE,
+   stress, LOCAL/string and file regressions provide smaller seeds. The compiler
+   and bounded Life are realistic mixed workloads; CPU Mandelbrot supplies a
+   numeric-heavy control. No complete performance candidate compiles today.
+4. Recorded 27 pinned local source identities and verified exact Git blobs for
+   eleven external source/license files. Final checks resolved 62 local links,
+   parsed both inspection tools/provenance files and passed `git diff --check`.
+   Rendered four tokenised originals with
+   the task-local inspection aid; it validates framing, not dialect equivalence.
+   No external BASIC source was vendored. Downloads/listings remain ignored.
+5. Recorded licensing evidence and uncertainty. Bench64 is CC BY-SA 4.0 and
+   disallows speed-oriented changes in official comparisons. Matrix Brandy's
+   repository GPL text does not by itself settle historical ClockSp provenance.
+   Original/adapted versions must stay distinguishable.
+6. The [measurement contract](tasks/C007/MEASUREMENT.md) requires equal validated
+   work, exact BBC numeric semantics, deterministic inputs, raw target ticks,
+   adequate duration/repeats and separate compute/API/device results. Existing
+   progress output, constant-foldable expressions and historical relative-MHz
+   displays must not be mistaken for clean CPU measurements.
+7. **C007 search complete:** removed its unfinished-work entry with these
+   deliverables/evidence as the technical closure rationale. Gaps are documented
+   as findings, not a competing implementation checklist. No new compiler
+   feature, benchmark adaptation, emulator deployment or performance run was
+   begun. New research/documents remain uncommitted for the Author's review;
+   the requested pre-search checkpoint is already pushed.

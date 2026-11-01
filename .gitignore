@@ -27,3 +27,4 @@ include/.DS_Store
 /docs/tasks/C002/build/
 /compiler/build/
 __pycache__/
+/docs/tasks/C007/build/

@@ -1,0 +1,115 @@
+{
+  "task": "C007",
+  "search_date": "2026-11-01",
+  "repositories": [
+    {
+      "repository": "scruss/bench64",
+      "revision": "fb0d0de4d98aa1bfc49191294b7216df13572b09",
+      "license_assessment": "CC-BY-SA-4.0",
+      "files": [
+        {
+          "path": "bbc_basic/bench64bbc.bas",
+          "git_blob": "5bd951b6ca94e765109ef835cbaa9dc6a2d0db5b",
+          "bytes": 2427,
+          "url": "https://github.com/scruss/bench64/blob/fb0d0de4d98aa1bfc49191294b7216df13572b09/bbc_basic/bench64bbc.bas",
+          "sha256": "b586a2d8c0fa7b2b18a7163cd11051789d1a3e56b859683d57061124a2e0d8e6",
+          "inspection": "source inspected; not executed"
+        },
+        {
+          "path": "README.md",
+          "git_blob": "ea49e2da114ee799c33bb58f79e6c1af0d74c230",
+          "bytes": 20081,
+          "url": "https://github.com/scruss/bench64/blob/fb0d0de4d98aa1bfc49191294b7216df13572b09/README.md",
+          "sha256": "5a7ba5475b04d32afc68922e6b9976f56061631d5800d5b49e15244b6603ad88",
+          "inspection": "source inspected; not executed"
+        },
+        {
+          "path": "LICENCE",
+          "git_blob": "04ad0e556a72f21ead1aa7e8228be3f5ab69d74d",
+          "bytes": 153,
+          "url": "https://github.com/scruss/bench64/blob/fb0d0de4d98aa1bfc49191294b7216df13572b09/LICENCE",
+          "sha256": "00288649025514dea3186db1b431ad8fa984acbcd96ce979d029e4ca678a449e",
+          "inspection": "source inspected; not executed"
+        }
+      ]
+    },
+    {
+      "repository": "stardot/MatrixBrandy",
+      "revision": "737d89583e2faf77bccbf1038ccf12f454518a48",
+      "license_assessment": "Repository GPL v2 text; per-program grants/ownership not established",
+      "files": [
+        {
+          "path": "tests/ClockSp",
+          "git_blob": "a28a9d3917c56e6f5df2fc1423cb1a994fa4452a",
+          "bytes": 2609,
+          "url": "https://github.com/stardot/MatrixBrandy/blob/737d89583e2faf77bccbf1038ccf12f454518a48/tests/ClockSp",
+          "sha256": "fe513b4f5c81870865479abe1118611f2396d1fdbf2816d7a0675d5f5a5f588d",
+          "inspection": "source inspected; not executed"
+        },
+        {
+          "path": "examples/sieve",
+          "git_blob": "9c485d4c727ef014ba51b879b545732de50e3562",
+          "bytes": 492,
+          "url": "https://github.com/stardot/MatrixBrandy/blob/737d89583e2faf77bccbf1038ccf12f454518a48/examples/sieve",
+          "sha256": "49153be1ae0877566274312966eab098ca2499fd91d529cf594f7b2ddd814abd",
+          "inspection": "source inspected; not executed"
+        },
+        {
+          "path": "examples/combsort",
+          "git_blob": "bc51e08c503339f62219586e234d14b8497ebee2",
+          "bytes": 1252,
+          "url": "https://github.com/stardot/MatrixBrandy/blob/737d89583e2faf77bccbf1038ccf12f454518a48/examples/combsort",
+          "sha256": "0a5921ddff340cd7592cba39eabd2a60a35cc092d03837d747cbcd3faec6dd77",
+          "inspection": "source inspected; not executed"
+        },
+        {
+          "path": "docs/COPYING",
+          "git_blob": "d159169d1050894d3ea3b98e1c965c4058208fe1",
+          "bytes": 18092,
+          "url": "https://github.com/stardot/MatrixBrandy/blob/737d89583e2faf77bccbf1038ccf12f454518a48/docs/COPYING",
+          "sha256": "8177f97513213526df2cf6184d8ff986c675afb514d4e68a404010521b880643",
+          "inspection": "source inspected; not executed"
+        }
+      ]
+    },
+    {
+      "repository": "rtrussell/BBCSDL",
+      "revision": "88e012617e27d6ed7ab2cab5d336d1121a044b45",
+      "license_assessment": "Repository zlib-style; preserve file-specific attribution",
+      "files": [
+        {
+          "path": "examples/tools/timing.bbc",
+          "git_blob": "a6c595e6729d1b0e7202fd2bccf3faa680547fd3",
+          "bytes": 9286,
+          "url": "https://github.com/rtrussell/BBCSDL/blob/88e012617e27d6ed7ab2cab5d336d1121a044b45/examples/tools/timing.bbc",
+          "sha256": "1f0dc6e8333785afee32b799d4cf974285f3b423d7461a1153a302a641e9dda9",
+          "inspection": "source inspected; not executed"
+        },
+        {
+          "path": "examples/games/hanoi.bbc",
+          "git_blob": "00a08f4af8eb464620c92bba0b69bc1a2a9b54ad",
+          "bytes": 874,
+          "url": "https://github.com/rtrussell/BBCSDL/blob/88e012617e27d6ed7ab2cab5d336d1121a044b45/examples/games/hanoi.bbc",
+          "sha256": "9af81c904539e0d3ff2b75610c03bb2ef0254a85bc154a520f79f449af2ab6f7",
+          "inspection": "source inspected; not executed"
+        },
+        {
+          "path": "examples/general/sorttest.bbc",
+          "git_blob": "aef352ccfddbfb307a0f1595cbf7345e851e00cd",
+          "bytes": 3764,
+          "url": "https://github.com/rtrussell/BBCSDL/blob/88e012617e27d6ed7ab2cab5d336d1121a044b45/examples/general/sorttest.bbc",
+          "sha256": "ad2c88e260e7734e243097caafaaca36921bdfc095399ded0ec2dac5ded27400",
+          "inspection": "source inspected; not executed"
+        },
+        {
+          "path": "licence.txt",
+          "git_blob": "a17b08db8448e4e5e4dfa91045761fdb6bd87338",
+          "bytes": 891,
+          "url": "https://github.com/rtrussell/BBCSDL/blob/88e012617e27d6ed7ab2cab5d336d1121a044b45/licence.txt",
+          "sha256": "9fc925116006848e6a28fac091b6cfd498e1cad42d36da03901af4fdb9638ce1",
+          "inspection": "source inspected; not executed"
+        }
+      ]
+    }
+  ]
+}
