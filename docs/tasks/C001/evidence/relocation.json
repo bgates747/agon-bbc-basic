@@ -1,0 +1,36 @@
+{
+  "task": "C001",
+  "date": "2026-10-31",
+  "files": [
+    {
+      "previous_path": "compiler/compiler.bas",
+      "task_path": "docs/tasks/C001/compiler.bas",
+      "sha256_before_move": "170aa81fae100127aaf8de4411c621de43b256fa62dcbedc00a7da0c73c2ddef",
+      "sha256_after_relocation": "170aa81fae100127aaf8de4411c621de43b256fa62dcbedc00a7da0c73c2ddef",
+      "change": "None; byte-for-byte relocation."
+    },
+    {
+      "previous_path": "compiler/examples/hello.bas",
+      "task_path": "docs/tasks/C001/examples/hello.bas",
+      "sha256_before_move": "a94a836918597b23e69a716fee8e5c0e3b628566be4f871db7cdb74483e26367",
+      "sha256_after_relocation": "a94a836918597b23e69a716fee8e5c0e3b628566be4f871db7cdb74483e26367",
+      "change": "None; byte-for-byte relocation."
+    },
+    {
+      "previous_path": "compiler/tests/golden.s",
+      "task_path": "docs/tasks/C001/tests/golden.s",
+      "sha256_before_move": "451e7d0ca61349f5fc8ade8d7fdbba4397432b29873eb5a5d3adcb70c9b38196",
+      "sha256_after_relocation": "451e7d0ca61349f5fc8ade8d7fdbba4397432b29873eb5a5d3adcb70c9b38196",
+      "change": "None; byte-for-byte relocation."
+    },
+    {
+      "previous_path": "compiler/tools/test_compiler.py",
+      "task_path": "docs/tasks/C001/tools/test_compiler.py",
+      "sha256_before_move": "5bcd25c82287976f2c8fc96fb560d8a9c24608e41203e801d3bd435dcc211bc1",
+      "sha256_after_relocation": "b86640f067ad3b968dbbf15d7f2f5e9ac08b30eace3d77375eb87ae9e3453e83",
+      "change": "Task-relative filesystem paths only; reverse transformation matches original hash."
+    }
+  ],
+  "qualification_before": "evidence/qualification-001/results.json",
+  "qualification_after": "evidence/qualification-002/results.json"
+}

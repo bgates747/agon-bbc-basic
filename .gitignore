@@ -19,3 +19,9 @@ obj/
 # Apple
 .DS_Store
 include/.DS_Store
+
+# Native compiler development
+.venv/
+.emulator/
+/docs/tasks/C001/build/
+__pycache__/

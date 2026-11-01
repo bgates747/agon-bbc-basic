@@ -3,6 +3,11 @@
 A port of BBC Basic for Z80 by R.T.Russell.  Modified to run in eZ80/ADL mode on the Agon Platform.
 This port is targetting to be functionally compatible with BBC Basic V5 for the Z80 as per upstream repo https://github.com/rtrussell/BBCZ80
 
+An experimental native compiler written in BBC BASIC is being developed on
+`codex/native-bbc-compiler`. See [the compiler documentation](compiler/README.md)
+and [compatibility matrix](compiler/COMPATIBILITY.md). It currently supports a
+small output/control-flow subset and is not yet self-hosting.
+
 ### Status: beta
 See the issue list for any functionality that isn't supported yet.
 
