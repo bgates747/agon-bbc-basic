@@ -2,7 +2,8 @@
 
 The adapter operates on BBC BASIC's packed numeric values without requiring a
 resident interpreter. It is the qualified interface for the compiler's
-numeric runtime, now used by the promoted VDU expression subset.
+numeric runtime, now used by numeric VDU/PRINT expressions and standard math
+functions. Formatting has its own pointer interface, described below.
 
 ## Entry and value representation
 
@@ -49,13 +50,58 @@ numeric runtime, now used by the promoted VDU expression subset.
 | 13 | subtraction |
 | 14 | power |
 | 15 | division |
+| 16 | ABS |
+| 17 | ACS |
+| 18 | ASN |
+| 19 | ATN |
+| 20 | COS |
+| 21 | DEG |
+| 22 | EXP |
+| 23 | INT (floor) |
+| 24 | LN |
+| 25 | LOG |
+| 26 | NOT |
+| 27 | RAD |
+| 28 | SGN |
+| 29 | SIN |
+| 30 | SQR |
+| 31 | TAN |
+| 35 | PI |
 | 38 | convert to integer using the package's SFIX semantics |
 | 39 | convert to floating point using SFLOAT |
 
 Selectors follow the pinned BASIC V table, not a different release's table.
-Conversions ignore the value of the required right record. SFIX is qualified
+Unary operations, PI and conversions ignore the value of the required right record. SFIX is qualified
 against integer assignment; it must not be substituted for floor-valued INT.
-Other selectors, including VAL/STR pointer interfaces, are deliberately rejected.
+Internal constants 32..34 and other selectors, including VAL/STR pointer
+interfaces 36/37, are deliberately rejected. The expanded interface passed
+449 packed-result/error/structural comparisons. ABS(INT_MIN) retains the
+reference's integer wrap behavior; no extra promotion is silently introduced.
+
+## Formatter and numeric PRINT interfaces
+
+1. `rt_format`: IX points to a read-only five-byte value; IY points to a
+   writable, nonoverlapping buffer of at least 32 bytes. Success returns
+   A=0/Z/NC, HL=the native 24-bit character count (0..31), with a NUL byte at
+   buffer[length]. IX, IY, SP and the numeric input are preserved. Other
+   registers are volatile. Error returns A=code/NZ/C; output text/length are
+   unspecified, while input/pointer/stack preservation remains the contract.
+2. The adapter supplies a private four-byte default G9 control block and sets
+   the FPP STR entry's actual IX=format/DE=output pointer arguments. It loads
+   the value into split arithmetic registers without invoking the binary-value
+   loader on the output buffer. FPP remains the protected entry/error frame.
+3. STR's original interpreter caller uses a page-aligned string accumulator
+   and treats E as its length. The new adapter computes the full end-pointer
+   difference and explicitly appends NUL. It requires neither STAVAR nor ACCS.
+   Qualification uses a buffer at page offset 251, text crossing the page,
+   exact minimum/maximum float payloads, guard bytes, dirty register upper
+   bytes, and pointer/SP/input checks: 45 cases match actual BASIC STR$ bytes.
+4. `rt_printnum`: IX points to the value and A supplies the minimum field
+   width (compiler emits 0 or 10). It formats through `rt_format` and emits
+   padding/text using MOS character output. IX/IY/SP are preserved; A/Z/carry
+   follow the same status contract. Other registers are volatile. Its private
+   32-byte display buffer is reused by synchronous calls; no interrupt/reentry
+   formatting interface is defined. There is no general mutable-string runtime.
 
 ## Internal helper and ADL contracts
 
@@ -102,9 +148,10 @@ evidence and is not a numeric behavior the compiler is committed to reproduce.
 
 Comparing with the interpreter qualifies extraction and calling compatibility;
 it is not independent mathematical verification of every vendor algorithm.
-The full package currently occupies 3812 bytes including the adapter/helpers.
+The numeric package currently occupies 3816 bytes including the expanded adapter/helpers
+(the initial binary/conversion adapter package was 3812 bytes).
 It includes private entries beyond the exposed interface; no dead-code pruning
 has been performed. Numeric code is now included by the development compiler
-for numeric VDU expressions. The complete expression template is 3854 bytes,
-adding literal-copy and unary-minus helpers. Runtime source and retained
+for numeric expressions. The complete expression/output template is 4028 bytes,
+adding literal-copy, unary-minus, formatting and display helpers. Runtime source and retained
 notices are in `compiler/runtime/`.

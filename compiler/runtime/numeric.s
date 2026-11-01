@@ -4,13 +4,15 @@
     .text
     .global rt_numeric
 
-; A = selector (0..15 binary, 38 truncate to integer, 39 float).
+; A = selector (0..15 binary, 16..31 unary, 35 PI, 38 fix, 39 float).
 ; IX = writable five-byte lhs/result; IY = five-byte rhs (may equal IX).
 ; Success: A=0, Z=1, carry=0. Failure: A=error, Z=0, carry=1;
 ; lhs is unchanged. IX, IY and SP are preserved. Other registers are volatile.
 rt_numeric:
-    cp 16
+    cp 32
     jr c,num_accept
+    cp 35
+    jr z,num_accept
     cp 38
     jr z,num_accept
     cp 39

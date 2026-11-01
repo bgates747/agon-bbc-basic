@@ -30,3 +30,9 @@ original license and copyright headers are retained.
    for its qualified VDU expression subset. Original 257-case ABI evidence and
    the 84-case expression evidence remain under C002. Development-tree
    promotion does not claim human review, main acceptance or hardware testing.
+7. The later numeric-output tranche expanded the adapter's admitted unary
+   selectors and added a separate STR formatter bridge in
+   `../expression_runtime.s`. It retains this exact vendor source and license.
+   Expanded qualification covers 449 packed numeric cases and 45 formatter
+   cases, plus native output comparisons; see
+   [the output record](../../../docs/tasks/C002/OUTPUT.md).

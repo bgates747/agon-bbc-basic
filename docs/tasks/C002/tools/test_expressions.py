@@ -96,7 +96,7 @@ def cases():
         ("VDU a%\n", "Unsupported numeric item"),
         ("VDU \"A\"\n", "Expected a numeric item"),
         ("VDU 65;0\n", "Unexpected text"),
-        ("PRINT 65\n", "PRINT requires a string literal"),
+        ("PRINT STR$(65)\n", "Unsupported numeric item STR"),
         ("VDU "+"("*20+"1"+")"*20+"\n", "Expression nesting exceeds"),
         ("VDU 65\nGOTO @missing\n", "Undefined target"),
     ]
@@ -117,9 +117,12 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--cli", required=True, type=Path)
     parser.add_argument("--compiler", type=Path, default=ROOT / "compiler/compiler.bas")
+    parser.add_argument("--runtime-build", type=Path, default=ROOT / "compiler/build/numeric-runtime")
     parser.add_argument("--start", type=int, default=0)
     parser.add_argument("--count", type=int, default=12)
     args = parser.parse_args()
+    args.compiler = args.compiler.resolve(strict=True)
+    args.runtime_build = args.runtime_build.resolve(strict=True)
     harness = module("bootstrap_harness", ROOT / "compiler/tools/test_compiler.py")
     profile = ROOT / ".emulator"
     assert (profile / ".compiler-tests").is_file()
@@ -183,7 +186,7 @@ def main():
         assert (sd / f"e{repeat_index}.bin").read_bytes() == (sd / "expr-repeat.bin").read_bytes()
     # Check the BBC-performed copy/relocation against an independent GNU link,
     # before executing an image. No arithmetic or BASIC code generation here.
-    runtime_build = ROOT / "compiler/build/numeric-runtime"
+    runtime_build = args.runtime_build
     template = (runtime_build / "runtime-0.bin").read_bytes()
     linked_bases = []
     for index, case in enumerate(tests):

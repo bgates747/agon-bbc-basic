@@ -1,14 +1,16 @@
 # Standalone numeric runtime
 
 The BBC compiler embeds this runtime as DATA and emits it only when a program
-uses numeric VDU expressions. It preserves four-byte integers and five-byte BBC
+uses numeric expressions. It preserves four-byte integers and five-byte BBC
 floats; generated programs execute without the interpreter. The current image
-is 3854 bytes before temporary slots and error-message glue.
+is 4028 bytes before temporary slots and error-message glue.
 
 1. `numeric.s` is the qualified pointer adapter plus required bytewise helpers.
    [ABI](../../docs/tasks/C002/ABI.md) documents selectors, preservation, aliases
-   and error handling. Its source was promoted unchanged from C002.
-2. `expression_runtime.s` adds inline packed-literal copying and unary minus.
+   and error handling. C002 qualified binary/conversion calls first, then
+   standard unary math functions and PI without altering the vendor source.
+2. `expression_runtime.s` adds inline packed-literal copying, unary minus,
+   a read-only G9 formatter and numeric PRINT output.
    It includes `numeric.s` last because the unchanged vendor source ends with
    assembler END. All numeric-field accesses in these helpers are byte-sized.
 3. `vendor/MATH.Z80` is the unchanged pinned BASIC V package. Keep its

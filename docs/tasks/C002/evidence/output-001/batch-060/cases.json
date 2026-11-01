@@ -1,0 +1,62 @@
+[
+  {
+    "source": "VDU 1+\n",
+    "diagnostic": "Expected a numeric item",
+    "expected": null
+  },
+  {
+    "source": "VDU (1+2\n",
+    "diagnostic": "Expected )",
+    "expected": null
+  },
+  {
+    "source": "VDU 1<2<3\n",
+    "diagnostic": "Chained comparisons",
+    "expected": null
+  },
+  {
+    "source": "VDU 1<<2\n",
+    "diagnostic": "Shift operators",
+    "expected": null
+  },
+  {
+    "source": "VDU 0.5\n",
+    "diagnostic": "Fractional literals",
+    "expected": null
+  },
+  {
+    "source": "VDU 1E3\n",
+    "diagnostic": "Exponent literals",
+    "expected": null
+  },
+  {
+    "source": "VDU 1.\n",
+    "diagnostic": "Expected fractional digits",
+    "expected": null
+  },
+  {
+    "source": "VDU &\n",
+    "diagnostic": "Expected digits",
+    "expected": null
+  },
+  {
+    "source": "VDU &100000000\n",
+    "diagnostic": "Hex literal exceeds",
+    "expected": null
+  },
+  {
+    "source": "VDU 4294967297\n",
+    "diagnostic": "Decimal whole literal exceeds",
+    "expected": null
+  },
+  {
+    "source": "VDU EVAL(\"1\")\n",
+    "diagnostic": "EVAL is deliberately unsupported",
+    "expected": null
+  },
+  {
+    "source": "VDU a%\n",
+    "diagnostic": "Unsupported numeric item",
+    "expected": null
+  }
+]

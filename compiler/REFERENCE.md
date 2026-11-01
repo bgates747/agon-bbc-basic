@@ -4,7 +4,8 @@ Dean Belfield's arithmetic package is the strongest reuse candidate. String,
 variable and procedure code is closely coupled to interpreter parsing and
 memory state and needs adaptation. C001 extracted no interpreter runtime.
 C002 isolated and qualified the newer BASIC V math package. It is now emitted
-for the tested numeric VDU subset from `compiler/runtime/`; other numeric
+for numeric VDU, default numeric PRINT and standard unary math functions from
+`compiler/runtime/`; other numeric
 source features remain partial or unsupported in the compatibility matrix.
 
 ## Inspected sources and provenance
@@ -63,13 +64,21 @@ source features remain partial or unsupported in the compatibility matrix.
 6. C002's actual standalone link found two additional undeclared dependencies,
    `STORE5_SPL` and `DLOAD5_SPL`, for seven-byte sparse stack layouts. Its
    adapter supplies all five helpers plus required assembly macros; no
-   interpreter globals remain unresolved. See the experimental
+   interpreter globals remain unresolved. See the qualified
    [numeric ABI](../docs/tasks/C002/ABI.md) and
    [provenance](runtime/vendor/PROVENANCE.md).
 7. Direct byte checks confirm FONE encodes 1.0 with exponent 128 and exact
    halfway addition uses the package's ODD behavior, not IEEE ties-to-even.
    The reference constant reader also stores `4294967296.0` differently from
    `2147483648.0*2`; C002 retains this discrepancy for explicit parser design.
+
+8. Numeric output calls the package's STR entry through a separate pointer
+   ABI: IX supplies private format control and DE supplies an output buffer.
+   The interpreter's usual numeric pointer adapter cannot supply that contract.
+   The new formatter needs neither STAVAR nor the page-aligned ACCS global;
+   it calculates length from full ADL pointers and appends NUL explicitly.
+   Its private 32-byte scratch serves PRINT only, without string-variable
+   ownership or allocation. See [output qualification](../docs/tasks/C002/OUTPUT.md).
 
 ## Strings, variables and memory
 

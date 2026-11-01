@@ -3,7 +3,7 @@
 The current implementation proves the path from BBC BASIC source to a MOS
 native executable. Later stages must preserve BBC BASIC values and activation
 semantics before broadening the accepted language. This draft describes the
-promoted C001 bootstrap and qualified C002 numeric VDU slice in
+promoted C001 bootstrap and qualified C002 numeric expression/output slices in
 `compiler/compiler.bas`. These remain on the development branch pending
 accepted testing before promotion to main.
 Task documents and experimental silos follow
@@ -41,10 +41,13 @@ Task documents and experimental silos follow
    compile errors. Computed destinations are unsupported.
 6. Colon separates statements. A named label may precede a statement on the
    same line. `REM` consumes the rest of the physical line, including colons.
-7. `PRINT` accepts string literals separated by semicolons. A final semicolon
-   suppresses the newline. Bare `PRINT` emits CR/LF. Doubled quotes represent
-   one quote; colon inside a string is data. Commas, print-position formatting,
-   numeric output and general expressions are unsupported.
+7. `PRINT` accepts string literals and numeric expressions in a semicolon list.
+   Numeric output uses the reference's default G9 format and an initial minimum
+   field width of ten characters. A semicolon sets subsequent numeric padding
+   to zero; a final semicolon suppresses the newline. A leading semicolon is
+   supported. Bare `PRINT` emits CR/LF. Doubled quotes represent one quote;
+   colon inside a string is data. Comma zones, TAB/SPC, hexadecimal PRINT,
+   @% assignment, string expressions and source-level STR$ remain unsupported.
 8. `VDU` accepts comma-separated numeric byte expressions, converts each through
    the package's SFIX semantics and emits the low byte. Negative values and
    byte wrapping are supported when conversion fits a signed integer. Word
@@ -83,9 +86,10 @@ Task documents and experimental silos follow
    error preserves an existing output. An I/O error during the final write can
    leave an incomplete file. Exact identical source/output path strings are
    rejected; path aliases are not canonicalised, so use distinct files.
-8. Numeric VDU expressions use the standalone packed numeric runtime in
-   `runtime/`. Its 3854-byte template includes the qualified adapter/package
-   and literal/unary helpers. BBC BASIC copies and rebases its 375 internal
+8. Numeric expressions use the standalone packed numeric runtime in
+   `runtime/`. Its 4028-byte template includes the qualified adapter/package,
+   literal/unary helpers, formatter and private 32-byte display scratch.
+   BBC BASIC copies and rebases its 380 internal
    three-byte relocations; these do not occupy the source-fixup array. The
    template is included once per numeric program and omitted otherwise.
    Up to 32 five-byte temporary slots are allocated. There are no user calls
@@ -98,7 +102,7 @@ Task documents and experimental silos follow
    whole parts have at most ten digits and range from 0 through 2^32 inclusive.
    Optional fractional suffixes contain one or more zero digits only. Hex
    values use one to eight digits and denote signed 32-bit bit patterns.
-   General fractions, exponent notation, variables and function calls remain
+   General fractions, exponent notation, variables and user function calls remain
    clear compile-time exclusions. Fractional arithmetic results retain the
    complete five-byte representation.
 2. Precedence from tightest is item/unary, ^, * / DIV MOD, + -, comparisons,
@@ -113,10 +117,18 @@ Task documents and experimental silos follow
    correcting the recorded reader defect. Hex integer payloads are emitted
    bytewise, without out-of-range float-to-integer assignment. Integer unary
    minus preserves integer type, including INT_MIN wrap.
-4. Binary operations use selectors 0..15 of the qualified package. Runtime
+4. Standard functions ABS, ACS, ASN, ATN, COS, DEG, EXP, INT, LN, LOG, NOT,
+   RAD, SGN, SIN, SQR and TAN consume a numeric item, optionally a parenthesised
+   expression, matching the reference's tight function binding. PI is a numeric
+   constant. Built-in functions followed immediately by digits are supported
+   (for example `SQR16`); no general keyword-crunching compatibility is claimed.
+   Functions preserve the tested reference behavior, including integer
+   ABS(INT_MIN) wrapping to INT_MIN. INT floors; it is distinct from VDU SFIX
+   truncation. Invalid domains propagate the package's numeric error codes.
+5. Binary operations use selectors 0..15 of the qualified package. Runtime
    errors report their message and return status 1 through the saved-stack
-   exit. Numeric PRINT/STR$, source-level conversion/math functions and general
-   literals remain future C002 work. Parser recursion is capped at 32 entries,
+   exit. Source-level VAL/STR$, mutable format control and general literals
+   remain unavailable. Parser recursion is capped at 32 entries,
    counting both expression and item routines. See the C002 task for evidence.
 
 ## Required semantics for subsequent implementation

@@ -18,6 +18,8 @@ import time
 TASK = Path(__file__).resolve().parents[1]
 ROOT = TASK.parents[2]
 RUNTIME = ROOT / "compiler/runtime"
+UNARY = dict(enumerate(["ABS", "ACS", "ASN", "ATN", "COS", "DEG", "EXP", "INT",
+                        "LN", "LOG", "NOT", "RAD", "SGN", "SIN", "SQR", "TAN"], 16))
 OPERATORS = ["AND", "DIV", "EOR", "MOD", "OR", "<=", "<>", ">=", "<", "=", "*", "+", ">", "-", "^", "/"]
 
 
@@ -44,7 +46,16 @@ def cases() -> list[dict]:
     for left, right in [("16777216.0", "1"), ("2147483648.0", "1"),
                         ("2147483648.0*2", "1"), ("2147483648.0*2", "3")]:
         tests.append(dict(op=11, left=left, right=right, alias=0))
-    for op in [16, 35, 36, 37, 40, 255]:
+    for op in UNARY:
+        for left in ["0", "1", "-1", "1/2", "-1/2", "3.9", "-3.9", "&7FFFFFFF",
+                     "&80000000", "1E38", "1E-38"]:
+            tests.append(dict(op=op, left=left, right="0", alias=0))
+    for left in ["0", "-1", "1E38"]:
+        tests.append(dict(op=35, left=left, right="0", alias=0))
+    for op in [16, 23, 26, 28, 30, 35]:
+        for left in ["7/2", "-1"]:
+            tests.append(dict(op=op, left=left, right=left, alias=1))
+    for op in [32, 33, 34, 36, 37, 40, 255]:
         tests.append(dict(op=op, left="7", right="3", alias=0))
     return tests
 
@@ -57,6 +68,10 @@ def reference_source(tests: list[dict]) -> str:
         op = case["op"]
         if op < 16:
             expr = f'result=left {OPERATORS[op]} right'
+        elif op in UNARY:
+            expr = f'result={UNARY[op]}(left)'
+        elif op == 35:
+            expr = 'result=PI'
         elif op == 38:
             expr = 'converted%=left:result=converted%'
         elif op == 39:
@@ -96,7 +111,7 @@ def main() -> None:
         raise SystemExit("Profile CLI differs from --cli; reprovision with the compiler test runner")
     sdcard = profile/"sdcard"
     build = TASK/"build"
-    build.mkdir(exist_ok=True)
+    build.mkdir(parents=True, exist_ok=True)
     tests = cases()
     source = reference_source(tests)
     (build/"reference.bas").write_text(source)

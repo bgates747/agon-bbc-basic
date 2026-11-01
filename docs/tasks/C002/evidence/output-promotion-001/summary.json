@@ -1,0 +1,170 @@
+{
+  "checkpoint_before_tranche": "b1b708c",
+  "branch": "codex/native-bbc-compiler",
+  "compiler_sha256": "fa57cc43b08ee279e42fef3fbe78e549a9c6ecbfcf4eea65778e49788643aa41",
+  "byte_identical_promotion": true,
+  "runtime_data_regeneration_byte_identical": true,
+  "numeric": {
+    "cases": 449,
+    "failures": [],
+    "fixture_record_bytes": 18,
+    "packed_result_bytes": 5,
+    "independent_precision_anchors": 4,
+    "unresolved_numeric_symbols": 0,
+    "duration_seconds": 17.447,
+    "status_counts": {
+      "0": 391,
+      "1": 7,
+      "18": 1,
+      "20": 15,
+      "21": 13,
+      "22": 11,
+      "23": 9,
+      "24": 2
+    },
+    "hashes": {
+      "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+      "compiler/runtime/numeric.s": "406b7c0cc54bead665e009ba189f28139c5b6f15ac0c71699866b8f9233d5c3a",
+      "docs/tasks/C002/probe.s": "d03f7b7a07d678a45242538b74c51b66d7a819c8d53f627f85730d5652832c36",
+      "compiler/runtime/vendor/MATH.Z80": "1f92ffc352b22051ff77f0a48d206d04012fb5e404c0a70e47d76342ce7aece3",
+      "docs/tasks/C002/build/cases.dat": "4a6724796fac1b0093b567d6c5173cf7f3e41f27d262424cc6c35d1f090927c4",
+      "docs/tasks/C002/build/probe.bin": "32d5ade1dcbd7f3a338989de56dfab6c5087aff31882410f5f2b6c0002b2524f"
+    }
+  },
+  "formatter": {
+    "cases": 45,
+    "mismatches": 0,
+    "buffer_bytes": 32,
+    "buffer_alignment": 251,
+    "nul_checked": true,
+    "stack_index_input_canaries_checked": true,
+    "duration_seconds": 2.036,
+    "hashes": {
+      "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+      "compiler/runtime/expression_runtime.s": "5c205fd9f8cd5ba6d46e2d5c6ca80e11ca6590c2bfd2412bc0fbb4b754976826",
+      "compiler/runtime/numeric.s": "406b7c0cc54bead665e009ba189f28139c5b6f15ac0c71699866b8f9233d5c3a",
+      "docs/tasks/C002/build/format/format.dat": "d84c625ca3bfad329cd6804b9b38c18befa73766487b718c7d1f40efd33f7d7c"
+    }
+  },
+  "output_integration": {
+    "programs": 18,
+    "native_executions": 10,
+    "rejected_sources": 8,
+    "reference_output_programs": 5,
+    "legacy_arithmetic_observations": 0,
+    "deterministic_repeat": true,
+    "independent_link_bases": [
+      262850,
+      264267,
+      263169,
+      262753,
+      262464,
+      262420,
+      262420,
+      262454,
+      262453,
+      262852
+    ],
+    "duration_seconds": 62.599,
+    "hashes": {
+      "compiler/compiler.bas": "fa57cc43b08ee279e42fef3fbe78e549a9c6ecbfcf4eea65778e49788643aa41",
+      "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+      "docs/tasks/C002/build/output-integration/cases.json": "da64b79c7f27810880bad9a7d2ecc46de109f61a07f34edaec396fa9fa2392a2"
+    }
+  },
+  "output_integration_arguments": [
+    "--skip-legacy"
+  ],
+  "baseline": {
+    "cases": 39,
+    "native_executions": 15,
+    "deterministic_repeat": true,
+    "assembler_oracle": true,
+    "duration_seconds": 22.534,
+    "basic_sha256": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+    "compiler_sha256": "fa57cc43b08ee279e42fef3fbe78e549a9c6ecbfcf4eea65778e49788643aa41",
+    "cli_sha256": "bf5f29b243b8214e54c515dcc26edf47399ce440356af2ebc3ce3d7664ae11eb",
+    "mos_sha256": "d564243283972690933a4554296ad6202ca4ef54572279533a942960846bebae"
+  },
+  "runtime": {
+    "bytes": 4028,
+    "relocations": 380,
+    "exports": {
+      "rt_numeric": 212,
+      "rt_literal": 0,
+      "rt_negate": 12,
+      "rt_printnum": 113
+    },
+    "independent_link_bases": [
+      266240,
+      290816
+    ],
+    "unresolved_symbols": 0,
+    "hashes": {
+      "compiler/runtime/numeric.s": "406b7c0cc54bead665e009ba189f28139c5b6f15ac0c71699866b8f9233d5c3a",
+      "compiler/runtime/expression_runtime.s": "5c205fd9f8cd5ba6d46e2d5c6ca80e11ca6590c2bfd2412bc0fbb4b754976826",
+      "compiler/runtime/vendor/MATH.Z80": "1f92ffc352b22051ff77f0a48d206d04012fb5e404c0a70e47d76342ce7aece3",
+      "compiler/runtime/vendor/LICENSE.txt": "cc8e92d92cf12fb1d04ddae0b573367f14188df5fcd6c7909d36486ff53a108a",
+      "compiler/build/numeric-runtime/runtime_data.bas": "dd69ee7dace4c5fc73214a2a694820ba2522650c214205f07b345e8a6e11619c",
+      "compiler/build/numeric-runtime/runtime-0.bin": "bdb5eb917ea7600e9a21b11425f4c26f48b5f0d7c2d2298c1fc5812886c4ea2d"
+    }
+  },
+  "initial_full_qualification": "../output-001/summary.json",
+  "host": "Pi5 aarch64; existing canonical project CLI fixture",
+  "human_emulator_validation": false,
+  "physical_hardware_validation": false,
+  "performance_benchmark": false,
+  "oryx_contacted": false,
+  "main_changed": false,
+  "new_tranche_committed": false,
+  "final_orchestration_rechecks": {
+    "reason": "Require the full explicit EVAL diagnostic; remove redundant identical assembly include paths.",
+    "baseline": {
+      "cases": 39,
+      "native_executions": 15,
+      "deterministic_repeat": true,
+      "assembler_oracle": true,
+      "duration_seconds": 22.532,
+      "basic_sha256": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+      "compiler_sha256": "fa57cc43b08ee279e42fef3fbe78e549a9c6ecbfcf4eea65778e49788643aa41",
+      "cli_sha256": "bf5f29b243b8214e54c515dcc26edf47399ce440356af2ebc3ce3d7664ae11eb",
+      "mos_sha256": "d564243283972690933a4554296ad6202ca4ef54572279533a942960846bebae"
+    },
+    "numeric": {
+      "cases": 449,
+      "failures": [],
+      "fixture_record_bytes": 18,
+      "packed_result_bytes": 5,
+      "independent_precision_anchors": 4,
+      "unresolved_numeric_symbols": 0,
+      "duration_seconds": 17.549,
+      "status_counts": {
+        "0": 391,
+        "1": 7,
+        "18": 1,
+        "20": 15,
+        "21": 13,
+        "22": 11,
+        "23": 9,
+        "24": 2
+      },
+      "hashes": {
+        "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+        "compiler/runtime/numeric.s": "406b7c0cc54bead665e009ba189f28139c5b6f15ac0c71699866b8f9233d5c3a",
+        "docs/tasks/C002/probe.s": "d03f7b7a07d678a45242538b74c51b66d7a819c8d53f627f85730d5652832c36",
+        "compiler/runtime/vendor/MATH.Z80": "1f92ffc352b22051ff77f0a48d206d04012fb5e404c0a70e47d76342ce7aece3",
+        "docs/tasks/C002/build/cases.dat": "4a6724796fac1b0093b567d6c5173cf7f3e41f27d262424cc6c35d1f090927c4",
+        "docs/tasks/C002/build/probe.bin": "32d5ade1dcbd7f3a338989de56dfab6c5087aff31882410f5f2b6c0002b2524f"
+      }
+    }
+  },
+  "qualification_tool_hashes": {
+    "compiler/tools/build_numeric_runtime.py": "2fe9583b9e05d85f09c4279992b15b46cd5b11a2add6972f160c464a22b8990f",
+    "compiler/tools/test_compiler.py": "fc74f4bba72b635e07d1ebfda783cd05fb27e7399e881b6a3e85218eccf13fe7",
+    "docs/tasks/C002/tools/test_numeric.py": "95c32c7011ae54196b12a730ecc6a6c344909e1d3863b1d0b1cfe7abd04218f8",
+    "docs/tasks/C002/tools/test_format.py": "8c3fe86f896b144d3f845b5b9fbab0c9698726c5cec08eb741e4a55ab7d2d234",
+    "docs/tasks/C002/tools/test_output.py": "ed50c6b3fdb35689f171c6d6c4059c7e7f218fa3b4dec29c00276fa6d3d8491b",
+    "docs/tasks/C002/tools/test_expressions.py": "e9ad6b5ea99375ef1623c56d1bfab45e4dbe9cfc91d116610b16e926496c93ca",
+    "docs/tasks/C002/output/format_probe.s": "095bd3dd1589865a2803a2a13b3cca51fe1befbf9dc6d8d6e574a4c0b32ccdcf"
+  }
+}

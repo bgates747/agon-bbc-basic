@@ -59,6 +59,7 @@ def run_profile(profile: Path, script: str, marker: str, log_name: str,
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--cli", required=True, type=Path)
+    parser.add_argument("--compiler", type=Path, default=TASK_ROOT / "compiler.bas")
     parser.add_argument("--runtime", type=Path, default=Path.home() / "Agon/fab-agon-emulator")
     parser.add_argument("--setup", type=Path, default=Path.home() / "Agon/mystuff/agon-dev-env/scripts/setup_emulator.py")
     parser.add_argument("--assembler", type=Path, default=Path.home() / "Agon/agondev/release/bin/ez80-none-elf-as")
@@ -103,7 +104,7 @@ def main() -> None:
         (b'VDU 1.5\n', None, "Fractional literals are not yet supported"),
         (b'VDU -1E3\n', None, "Exponent literals are not yet supported"),
         (b'PRINT "unterminated\n', None, "Unterminated string"),
-        (b'PRINT EVAL("1")\n', None, "EVAL are unsupported"),
+        (b'PRINT EVAL("1")\n', None, "EVAL is deliberately unsupported"),
         (b'EVAL("1")\n', None, "EVAL is deliberately unsupported"),
         (b'LOCAL a%\n', None, "Unsupported statement LOCAL"),
         (b'DEF PROCtest\n', None, "Unsupported statement DEF"),
@@ -128,7 +129,7 @@ def main() -> None:
         (sdcard / f"t{index}.bin").write_bytes(sentinel)
     # Compile the same input again to check re-entrancy and determinism.
     (sdcard / "repeat.bas").write_bytes(cases[0][0])
-    definitions = (TASK_ROOT / "compiler.bas").read_text().split("1000 DEF", 1)[1]
+    definitions = args.compiler.read_text().split("1000 DEF", 1)[1]
     driver = [
         "10 PROCinit:RESTORE 200", "20 test%=0", "30 test%=test%+1",
         f'40 IF test%>{len(cases)+1} THEN PRINT "COMPILE_DONE":OSCLI "BYE"',
@@ -181,7 +182,7 @@ def main() -> None:
         "deterministic_repeat": True, "assembler_oracle": True,
         "duration_seconds": round(time.monotonic() - started, 3),
         "basic_sha256": hashlib.sha256(basic.read_bytes()).hexdigest(),
-        "compiler_sha256": hashlib.sha256((TASK_ROOT / "compiler.bas").read_bytes()).hexdigest(),
+        "compiler_sha256": hashlib.sha256(args.compiler.read_bytes()).hexdigest(),
         "cli_sha256": hashlib.sha256(cli.read_bytes()).hexdigest(),
         "mos_sha256": hashlib.sha256((profile / "mos_platform.bin").read_bytes()).hexdigest(),
     }

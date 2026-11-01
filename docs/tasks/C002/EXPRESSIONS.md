@@ -6,6 +6,11 @@ without a resident interpreter. The 84-case experiment passed and its exact
 source was promoted to the development tree on 2026-11-01. Main acceptance,
 human review and physical hardware testing remain separate.
 
+This document records the original VDU slice and its qualification. The later
+[numeric output tranche](OUTPUT.md) adds standard math functions and numeric
+PRINT and supersedes those original exclusions. Its record owns the current
+source identity and larger runtime template.
+
 ## Supported slice
 
 1. Use `compiler/compiler.bas` in the project root as the complete numbered BBC
@@ -114,4 +119,5 @@ expressions and 66 independently linked emitted runtime images. The seven
 bounded batches total 330.787 seconds, excluding profile provisioning; this
 is host qualification duration, not physical Agon performance. The frozen
 compiler snapshot is evidence, not a second maintained implementation. The
-promoted compiler has the same SHA-256, `4095e9e61e953a84b2f257717a6642f4609df49a57a15bee5ffd0d84de8f03d2`.
+compiler promoted at that stage had SHA-256
+`4095e9e61e953a84b2f257717a6642f4609df49a57a15bee5ffd0d84de8f03d2`.

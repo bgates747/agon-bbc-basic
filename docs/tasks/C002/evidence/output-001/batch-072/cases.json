@@ -1,0 +1,74 @@
+[
+  {
+    "source": "VDU \"A\"\n",
+    "diagnostic": "Expected a numeric item",
+    "expected": null
+  },
+  {
+    "source": "VDU 65;0\n",
+    "diagnostic": "Unexpected text",
+    "expected": null
+  },
+  {
+    "source": "PRINT STR$(65)\n",
+    "diagnostic": "Unsupported numeric item STR",
+    "expected": null
+  },
+  {
+    "source": "VDU ((((((((((((((((((((1))))))))))))))))))))\n",
+    "diagnostic": "Expression nesting exceeds",
+    "expected": null
+  },
+  {
+    "source": "VDU 65\nGOTO @missing\n",
+    "diagnostic": "Undefined target",
+    "expected": null
+  },
+  {
+    "source": "VDU FALSE AND (1/0)\n",
+    "expected": "Division by zero\n",
+    "status": 1,
+    "diagnostic": null
+  },
+  {
+    "source": "GOSUB @sub:END\n@sub:VDU 1/0:RETURN\n",
+    "expected": "Division by zero\n",
+    "status": 1,
+    "diagnostic": null
+  },
+  {
+    "source": "VDU 65-(1.00=1.0),13,10\n",
+    "expression": "65-(1.00=1.0)",
+    "expected": "B\n",
+    "status": 0,
+    "diagnostic": null
+  },
+  {
+    "source": "VDU 65-(0.0=FALSE),13,10\n",
+    "expression": "65-(0.0=FALSE)",
+    "expected": "B\n",
+    "status": 0,
+    "diagnostic": null
+  },
+  {
+    "source": "VDU 65-((1<2)=(2<3)),13,10\n",
+    "expression": "65-((1<2)=(2<3))",
+    "expected": "B\n",
+    "status": 0,
+    "diagnostic": null
+  },
+  {
+    "source": "VDU 65-((-(1/2))=(0-1/2)),13,10\n",
+    "expression": "65-((-(1/2))=(0-1/2))",
+    "expected": "B\n",
+    "status": 0,
+    "diagnostic": null
+  },
+  {
+    "source": "VDU 65-((+(1/2))=(1/2)),13,10\n",
+    "expression": "65-((+(1/2))=(1/2))",
+    "expected": "B\n",
+    "status": 0,
+    "diagnostic": null
+  }
+]

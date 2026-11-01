@@ -2,14 +2,14 @@
 
 This is the first small implementation of the self-hosting compiler project.
 The compiler is BBC BASIC and emits native eZ80 ADL code directly. It currently
-compiles literal output, labelled control flow and numeric byte VDU expressions;
-it cannot compile itself.
+compiles literal/numeric output, labelled control flow, numeric byte VDU
+expressions and standard math functions. It cannot compile itself.
 The interpreter elsewhere in this repository remains the compatibility
 reference and bootstrap host. The tested implementation was promoted under
 [task C001](../docs/tasks/C001.md) to `compiler/compiler.bas`; sample programs,
-regression tests and tooling are alongside it. The qualified C002 expression
-slice and numeric runtime are now in this development tree. General fractional/
-exponent literals, variables and numeric PRINT remain unsupported. Promotion
+regression tests and tooling are alongside it. C002's qualified numeric
+expressions, output and runtime are now in this development tree. General
+fractional/exponent literals and variables remain unsupported. Promotion
 to `main` awaits accepted testing.
 
 ## Running on Agon
@@ -81,3 +81,6 @@ hardware or prove self-hosting.
 
 For numeric integration and assembly-template regeneration, see the
 [runtime runbook](runtime/README.md) and [C002 expression record](../docs/tasks/C002/EXPRESSIONS.md).
+The [numeric output record](../docs/tasks/C002/OUTPUT.md) describes math functions,
+default PRINT formatting and qualification. [numbers.bas](examples/numbers.bas)
+provides a small executable example.

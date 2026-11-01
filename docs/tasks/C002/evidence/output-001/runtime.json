@@ -1,0 +1,23 @@
+{
+  "bytes": 4028,
+  "relocations": 380,
+  "exports": {
+    "rt_numeric": 212,
+    "rt_literal": 0,
+    "rt_negate": 12,
+    "rt_printnum": 113
+  },
+  "independent_link_bases": [
+    266240,
+    290816
+  ],
+  "unresolved_symbols": 0,
+  "hashes": {
+    "docs/tasks/C002/output/numeric.s": "406b7c0cc54bead665e009ba189f28139c5b6f15ac0c71699866b8f9233d5c3a",
+    "docs/tasks/C002/output/expression_runtime.s": "5c205fd9f8cd5ba6d46e2d5c6ca80e11ca6590c2bfd2412bc0fbb4b754976826",
+    "compiler/runtime/vendor/MATH.Z80": "1f92ffc352b22051ff77f0a48d206d04012fb5e404c0a70e47d76342ce7aece3",
+    "compiler/runtime/vendor/LICENSE.txt": "cc8e92d92cf12fb1d04ddae0b573367f14188df5fcd6c7909d36486ff53a108a",
+    "docs/tasks/C002/build/output-runtime/runtime_data.bas": "dd69ee7dace4c5fc73214a2a694820ba2522650c214205f07b345e8a6e11619c",
+    "docs/tasks/C002/build/output-runtime/runtime-0.bin": "bdb5eb917ea7600e9a21b11425f4c26f48b5f0d7c2d2298c1fc5812886c4ea2d"
+  }
+}

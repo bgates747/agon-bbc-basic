@@ -13,6 +13,10 @@ the live compiler test runner, then run numeric qualification:
   --cli /tmp/bbc-compiler-cli-target/release/agon-cli-emulator
 .venv/bin/python docs/tasks/C002/tools/test_numeric.py \
   --cli /tmp/bbc-compiler-cli-target/release/agon-cli-emulator
+.venv/bin/python docs/tasks/C002/tools/test_format.py \
+  --cli /tmp/bbc-compiler-cli-target/release/agon-cli-emulator
+.venv/bin/python docs/tasks/C002/tools/test_output.py \
+  --cli /tmp/bbc-compiler-cli-target/release/agon-cli-emulator
 ```
 
 The CLI binary must be host-native. [The compiler runbook](../../../compiler/README.md)
@@ -43,3 +47,9 @@ hardware timing or self-hosting.
 The subsequent [native expression integration](EXPRESSIONS.md) qualified and
 promoted native arithmetic consumed by VDU. Its scope, limitations, evidence
 and reproduction commands are documented separately.
+
+The [numeric output tranche](OUTPUT.md) extends this to standard unary math
+functions and default numeric PRINT. Current numeric qualification has 449
+cases; the separate 45-case formatter probe tests its distinct pointer ABI,
+including a buffer crossing a page boundary. These remain task-owned tests of
+the single live compiler/runtime, with frozen historical sources in evidence.

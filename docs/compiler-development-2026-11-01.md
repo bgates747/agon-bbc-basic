@@ -1,9 +1,10 @@
 # Compiler development — 2026-11-01
 
-The compiler now emits native numeric VDU expressions using the qualified BBC
-arithmetic runtime. Its 84-case integration suite passed before promotion to
-the development tree. General literals, formatting, variables and self-hosting
-remain incomplete; accepted testing is required before promotion to main.
+The compiler now emits native numeric VDU expressions, standard unary math
+functions and default numeric PRINT using the qualified BBC arithmetic runtime.
+Packed arithmetic and exact output comparisons pass in the Pi5 CLI emulator.
+General fractional/exponent literals, variables and self-hosting remain
+incomplete; accepted testing is required before promotion to main.
 
 The later C007 search establishes a curated testing/benchmark source catalogue
 and measurement contract. It adds no compiler behavior or measured speedup.
@@ -169,3 +170,68 @@ covered the earlier dirt.
    C002 remains open for broader literals, numeric formatting/functions and
    semantic coverage. New changes remain uncommitted for Author review; the
    pre-tranche checkpoint is pushed and main is untouched.
+
+## C002 standard math functions and numeric output
+
+1. At the Author's request, committed all previous dirt as `b1b708c` and pushed
+   it to `https://github.com/bgates747/agon-bbc-basic.git` on the existing
+   `codex/native-bbc-compiler` branch before starting this tranche. Main remains
+   `2998edd4ceb6030d6840cb4e3d587e75d94dc44c`. Refined the scope and acceptance
+   in [C002](tasks/C002.md) before implementation. Oryx remains unavailable;
+   all automated work used the Pi5's existing canonical CLI fixture.
+2. Added ABS/ACS/ASN/ATN/COS/DEG/EXP/INT/LN/LOG/NOT/RAD/SGN/SIN/SQR/TAN and PI
+   to the BBC compiler, with the reference's tight item binding. PRINT now
+   accepts numeric expressions mixed with string literals using semicolons,
+   default G9 output, initial ten-character numeric fields and the reference's
+   padding/newline rules. General fractional/exponent source literals, variables,
+   source VAL/STR$, @% assignment and other PRINT formatting remain excluded.
+3. Expanded the assembly adapter's unary selector boundary and added a separate
+   STR formatter bridge, respecting its format/output pointer ABI rather than
+   treating it as a binary numeric operation. No vendor math or interpreter
+   source was changed. Explicit NUL termination and full ADL pointer subtraction
+   avoid the interpreter's page-aligned ACCS assumption; PRINT owns 32 bytes of
+   synchronous scratch. The combined runtime totals 4028 bytes/380 relocations
+   with no unresolved symbols; independent links at &41000/&47000 match.
+4. Initial qualification passed **449 packed numeric/ABI cases** in **17.578
+   seconds**, **45 formatter cases** in **2.037 seconds**, **22 integration
+   programs** (14 native/eight rejected, including 58 legacy arithmetic
+   observations) in **121.758 seconds**, and the **39-case/15-execution**
+   baseline in **22.532 seconds**. Two selected legacy batches passed 24 more
+   cases in **8.145/41.568 seconds**. Fixed a reporting-only relative-path bug
+   and reran those batches; target arithmetic did not change.
+   Retained [initial source, oracles and logs](tasks/C002/evidence/output-001/summary.json).
+5. Formatter qualification includes exact packed minimum/maximum BBC floats,
+   integer boundaries and exponents; the output buffer begins at page offset
+   251 and crosses a page boundary. The probe checks NUL/length/canaries,
+   readonly input, flags and IX/IY/SP preservation. Actual BASIC supplies all
+   numeric/formatting expectations; Python only orchestrates and compares.
+   Integration compares complete output transcripts and independently links
+   each emitted runtime. Numeric errors, GOSUB exit and unsupported syntax are
+   covered. These durations are host qualification evidence, not benchmarks.
+6. Promoted the exact qualified compiler and runtime helpers from C002/output
+   into the single live `compiler/` source tree, retaining historical snapshots
+   in evidence. Compiler SHA-256 is
+   `fa57cc43b08ee279e42fef3fbe78e549a9c6ecbfcf4eea65778e49788643aa41`.
+   Regenerated DATA preserves those bytes. Added the tested
+   [numbers example](../compiler/examples/numbers.bas). The formatter probe and
+   all qualification harnesses remain task-owned.
+7. Live-location checks passed **449 numeric cases** in **17.447 seconds**,
+   **45 formatter cases** in **2.036 seconds**, the **39-case/15-execution**
+   baseline in **22.534 seconds**, and **18 output programs** (10 native/eight
+   rejected, with the new demonstration and `--skip-legacy`) in **62.599
+   seconds**. Deterministic repeats, independent runtime links and the original
+   complete literal-only assembly golden pass. Retained
+   [promotion evidence](tasks/C002/evidence/output-promotion-001/summary.json).
+8. Updated the specification/matrix, reference dependencies, runbooks, handoff
+   and sole TODO. C002 remains open for general fractional/exponent literals
+   and broader numeric semantic coverage; C003–C006 remain unstarted. All new
+   tranche changes remain uncommitted for Author review. No Oryx connection,
+   graphical emulator review, hardware deployment or performance run occurred.
+9. Final review resolved 71 local document links, parsed six Python tools and
+   the retained JSON, checked all 544 ordered BASIC source lines against the
+   255-byte limit, confirmed byte-identical promotion and unchanged vendor
+   math/license, and passed `git diff --check`. Removed redundant identical
+   assembly include paths and strengthened the baseline EVAL diagnostic check;
+   repeated the 39-case baseline in **22.532 seconds** and all 449 numeric
+   cases in **17.549 seconds**. Final reports/tool hashes are retained in
+   promotion evidence. These orchestration edits do not change target bytes.

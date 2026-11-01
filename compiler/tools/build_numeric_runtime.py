@@ -44,7 +44,7 @@ def build(toolchain):
         fields = line.split()
         if len(fields) == 3 and fields[1] in ("t", "T"):
             symbols[fields[2]] = int(fields[0], 16)
-    exports = [symbols[name] for name in ("rt_numeric", "rt_literal", "rt_negate")]
+    exports = [symbols[name] for name in ("rt_numeric", "rt_literal", "rt_negate", "rt_printnum")]
     images = {}
     for base in (0, 0x41000, 0x47000):
         path = output / f"runtime-{base:x}.bin"
@@ -69,7 +69,7 @@ def build(toolchain):
     (output / "runtime_data.bas").write_text(data)
     report = {
         "bytes": len(template), "relocations": len(relocations),
-        "exports": dict(zip(("rt_numeric", "rt_literal", "rt_negate"), exports)),
+        "exports": dict(zip(("rt_numeric", "rt_literal", "rt_negate", "rt_printnum"), exports)),
         "independent_link_bases": [0x41000, 0x47000],
         "unresolved_symbols": 0,
         "hashes": {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()

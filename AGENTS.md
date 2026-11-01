@@ -26,8 +26,9 @@ automated test pass as human emulator validation or commit approval.
 
 C001 was promoted after its recorded 39-case/15-execution qualification and
 repeat validation at the live location. C002 is active: the adapter and numeric
-VDU expression slice are promoted; general literals/formatting/functions remain
-pending. Read `docs/tasks/C002/EXPRESSIONS.md`,
+VDU expressions, standard unary math functions and default numeric PRINT are
+promoted; general fractional/exponent literals remain pending.
+Read `docs/tasks/C002/OUTPUT.md`, `docs/tasks/C002/EXPRESSIONS.md`,
 `docs/tasks/C002/ABI.md` and its task record for scope/results. C003–C006 remain
 unstarted. The compiler is still BBC BASIC; assembly is runtime code, not a
 replacement compiler implementation.
@@ -36,7 +37,8 @@ Use `.venv/bin/python` explicitly. `compiler/README.md` contains build/test
 commands. `.emulator/` is an ignored automated CLI fixture, not a graphical
 human review instance. No graphical emulator or hardware has been deployed.
 The Author explicitly requested pre-tranche checkpoints on 2026-11-01:
-`a45a15f`, `ccd09af` before C007, and `227b620` before expression integration.
+`a45a15f`, `ccd09af` before C007, `227b620` before expression integration,
+and `b1b708c` before numeric functions/output.
 All are pushed to the Author's origin. Keep this development branch and promote
 to `main` only after testing is accepted; do not create a redundant `compiled`
 branch. Oryx is down for maintenance until the Author says otherwise: use the

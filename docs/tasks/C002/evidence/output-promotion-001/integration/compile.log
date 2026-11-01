@@ -1,0 +1,37 @@
+Warning: unused arguments left: ["--firmware", "platform"].
+Tom's Fake VDP Version 1.03
+unknown packet VDU 0x17, 0, 0xf8
+unknown packet VDU 0x17, 0, 0x99
+uunknown packet VDU 0x17, 0, 0x94
+
+Agon Platform MOS Version 3.0.2 Arthur
+
+OK:p0.bas
+OK:p1.bas
+OK:p2.bas
+OK:p3.bas
+OK:p4.bas
+OK:p5.bas
+OK:p6.bas
+OK:p7.bas
+OK:p8.bas
+ERR:p9.bas
+p9.bas:1:11: EVAL is deliberately unsupported at 3250
+ERR:p10.bas
+p10.bas:1:10: Unsupported numeric item STR at 3250
+ERR:p11.bas
+p11.bas:1:7: Expected a numeric item at 3250
+ERR:p12.bas
+p12.bas:1:10: Unexpected text after statement at 3250
+ERR:p13.bas
+p13.bas:1:11: Expected a numeric item at 3250
+ERR:p14.bas
+p14.bas:1:11: Expected a numeric item at 3250
+ERR:p15.bas
+p15.bas:1:9: Unexpected text after statement at 3250
+ERR:p16.bas
+p16.bas:1:12: Expected ) at 3250
+OK:p17.bas
+OK:p0.bas
+OUTPUT_COMPILE_DONE
+/ *
