@@ -1,0 +1,16 @@
+Warning: unused arguments left: ["--firmware", "platform"].
+Tom's Fake VDP Version 1.03
+unknown packet VDU 0x17, 0, 0xf8
+unknown packet VDU 0x17, 0, 0x99
+uunknown packet VDU 0x17, 0, 0x94
+
+Agon Platform MOS Version 3.0.2 Arthur
+
+OK:p0.bas
+ERR:p1.bas
+p1.bas:3:5: Unsupported statement DATA at 3250
+ERR:p2.bas
+p2.bas:2:19: Unsupported statement DATA at 3250
+OK:p0.bas
+OUTPUT_COMPILE_DONE
+/ *

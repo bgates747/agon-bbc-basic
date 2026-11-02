@@ -1,0 +1,21 @@
+{
+  "bytes": 734,
+  "relocations": 83,
+  "exports": {
+    "mem_alloc": 0,
+    "array_dim": 110,
+    "array_addr": 342,
+    "dim_step": 65,
+    "array_prefix": 356
+  },
+  "independent_link_bases": [
+    270336,
+    294912
+  ],
+  "unresolved_symbols": 0,
+  "hashes": {
+    "docs/tasks/C005/memory/memory.s": "03b636cb23ee424f7c03be78325c47f365c814cea096c331a03ae7795678da0b",
+    "docs/tasks/C005/build/memory-runtime/runtime_data.bas": "8728f3229576fc7e259dfe710c2c5ad79ef65f8d78aa2688e6f99641cb7ee471",
+    "docs/tasks/C005/build/memory-runtime/runtime-0.bin": "f2b61865d28e83cd729ede7ead5b4061af04de8c0c993194bb409f7f9c421cb7"
+  }
+}

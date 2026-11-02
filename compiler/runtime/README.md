@@ -44,9 +44,11 @@ C003 conversions extend the enclosing template by 432 bytes and seven
 relocations (4460 bytes/387 relocations total). The packer supports isolated
 --source/--output/--compiler paths; default paths remain live source/build.
 
-C003 adds `strings.s`, a separate 623-byte standalone library: the original
+C003/C005 supply `strings.s`, a separate633-byte standalone library: the original
 264-byte core plus 105 bytes for slices/comparisons, 164 for search/repetition
-and 90 for slice assignment.
+and90 for slice assignment, followed by10 for bounded FN transfer. The new
+entry copies LEN+1 bytes; full256-byte caller-prefix snapshots stay unchanged.
+See [resource qualification](../../docs/tasks/C005/RESOURCES.md).
 Its two internal 24-bit relocations are rebased by the BBC compiler. Its descriptor,
 private allocator context, calling conventions and provenance are documented
 in the [string contract](../../docs/tasks/C003/STRINGS.md) and

@@ -1,0 +1,24 @@
+[
+  {
+    "source": "s$=FNa:PRINT RIGHT$(s$);\":\";RIGHT$(FNa,1);\":\";RIGHT$(FNa+\"\");\":\";RIGHT$(LEFT$(FNa,2))\nPRINT STRING$(2,FNa+\"\")\nEND\nDEF FNa=\"ABC\"\n",
+    "reference_source": "s$=FNa:PRINT RIGHT$(s$);\":\";RIGHT$(FNa,1);\":\";RIGHT$(FNa+\"\");\":\";RIGHT$(LEFT$(FNa,2))\nPRINT STRING$(2,FNa+\"\")\n",
+    "reference_definitions": [
+      "DEF FNa=\"ABC\""
+    ],
+    "reference": true,
+    "status": 0,
+    "expected": "C:C:C:B\nABCABC\n"
+  },
+  {
+    "source": "PRINT RIGHT$(FNa)\nEND\nDEF FNa=\"ABC\"\n",
+    "diagnostic": "Omitted RIGHT$ on a FN string result is unqualified"
+  },
+  {
+    "source": "PRINT STRING$(2,FNa)\nEND\nDEF FNa=\"ABC\"\n",
+    "diagnostic": "STRING$ on a FN string result is unqualified"
+  },
+  {
+    "source": "PRINT RIGHT$(LEFT$((FNa)))\nEND\nDEF FNa=\"ABC\"\n",
+    "diagnostic": "Omitted RIGHT$ on a FN string result is unqualified"
+  }
+]

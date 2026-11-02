@@ -145,3 +145,49 @@ unchanged earlier runtimes. Remove C004 from TODO. Continue C005's source invent
 and bootstrap closure under the Author's authorization; no Oryx/hardware/benchmark
 claim is made. Preliminary source inventory counts140 definitions against the
 current128-definition cap, plus arrays, memory access, DATA, I/O and error facilities.
+
+## C005 inventory and first bootstrap gap
+
+Checkpoint37a5a0a (completed C004 initial scope) is pushed. Static source inventory
+counts140 routines (109 PROC/31 FN). An actual interpreted compiler-on-source
+probe rejects physical line1073 at the128-definition cap in295.201s, preserving
+existing output. The C005 brief/PLAN define capacity, arrays/indirection, DATA,
+MOS I/O, error recovery and measured memory closure before implementation.
+First raise signature capacity to256 and identify the next actual gap.
+
+
+## C005 initial resource checkpoint qualified and promoted
+
+The capacity-only self-source probe reaches Unsupported statement ON in780.740s;
+this is not self-hosting. The bounded633-byte string helper passes native ABI
+1.068s, FN smoke92.787s, three string-consumer programs230.767s and baseline62.095s.
+The256-routine batch produces two complete images and expected rejections before
+its900s guard during a fresh repeat; retain as partial, not passed.
+
+A BBC sorted integer symbol index preserves insertion/address order. Revised
+five-case qualification passes in611.470s with256 routines, empty/max/NUL FN
+results,257/DATA rejections, native execution, repeat and independent links.
+Both complete images match the linear-lookup outputs byte for byte. Baseline
+39/15/GNU golden passes66.030s. Exact1564-line SHA0f0884ca is promoted with
+633-byte/two-relocation strings; four runtime packers reproduce it. Live passes
+baseline65.921s, resource smoke102.772s and carrier4-case74.472s. No other
+runtime/vendor/interpreter source changes; no hardware or benchmark gain claim.
+
+## C005 array helpers and corrected reference audit
+
+An experimental734-byte/83-relocation allocator/array helper independently links
+and passes native ABI1.016s, including65537-byte zeroing, exact bounds/overflow,
+widths/strides,16 dimensions, early checks, failure atomicity and IX/IY/SP.
+No array/DIM/indirection syntax is promoted. Initial reference21 cases expose
+wrong assumptions: repeated DIM evaluates subscripts and can give Syntax16 after
+mutating an element; raw DIM seeds the target with its address's low16 bits, not
+zero. Clean30-case follow-up confirms that relation, variant marker0 and survival
+of a RHS-mutated high byte after the low24 pointer store.
+
+The first extended reference run stalls at nested DIM and reaches its180s guard;
+retain the29 complete observations as partial evidence, not a passed batch. The
+clean follow-up omits that case and passes. ARRAY contract and unintegrated BBC
+frontend must preserve these quirks and explicitly reject unqualified FN/address
+expressions in array DIM bounds. Interpreter findings are separate upstream ideas.
+C005/C006 remain the only unfinished TODO entries. Continue implementation under
+the Author's authorization; Oryx is not contacted and no human gate is invented.

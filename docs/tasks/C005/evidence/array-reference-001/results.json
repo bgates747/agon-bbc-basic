@@ -1,0 +1,32 @@
+{
+  "scope": "Pinned interpreted BASIC observations only; no native array implementation",
+  "duration_seconds": 1.016,
+  "observations": {
+    "array-widths": "0:0:0:0:0\n4:12\n1:5:5\n-123:1:-1:2:255\n",
+    "fractional-dim-index": "7\n",
+    "negative-dim": "ERR=10\nBad DIM\n",
+    "wide-dim": "ERR=10\nBad DIM\n",
+    "overflow-dim": "ERR=11\nDIM space\n",
+    "negative-index": "ERR=15\nBad subscript\n",
+    "wide-index": "ERR=15\nBad subscript\n",
+    "high-index": "ERR=15\nBad subscript\n",
+    "undimensioned-read": "ERR=26\nNo such variable\n",
+    "undimensioned-write": "ERR=14\nBad use of array\n",
+    "too-few-indices": "ERR=5\nMissing ,\n",
+    "too-many-indices": "ERR=27\nMissing )\n",
+    "redim-before-expression": "SIDE EFFECT\nERR=16\nSyntax error\n",
+    "block-zero-before-size": "30246:0\n",
+    "block-zero-size": "0\n",
+    "block-and-indirection": "0:0\n252:77\n-123456789:-123456789\n255\n-1\n",
+    "local-pointer": "0:0\n123\n",
+    "array-scalar-namespace": "7:9\n",
+    "bad-dim-before-next": "ERR=10\nBad DIM\n",
+    "bad-index-before-next": "ERR=15\nBad subscript\n",
+    "missing-before-index": "ERR=26\nNo such variable\n"
+  },
+  "hashes": {
+    "docs/tasks/C005/array_oracle.py": "fa9885b1ecdd6e1b787e401858140ec316391f48ee433919be9efbac524d24bd",
+    "docs/tasks/C005/evidence/array-reference-001/reference.bas": "0e9218783bf154291f452889ca96fee38bcfce3bd6215c03292aac9ced921b0f",
+    "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d"
+  }
+}

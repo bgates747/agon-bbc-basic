@@ -150,7 +150,7 @@ The Author accepted the corrected C002 baseline for a development checkpoint.
     static shared per-loop limit storage. Arrays/indirect FOR variables remain C005.
 
 20. Line-leading DEF PROC signatures support forward/recursive scalar by-value
-    calls,128 definitions and16 arguments. No-argument forms omit parentheses;
+    calls,256 definitions and16 arguments. No-argument forms omit parentheses;
     empty lists, RETURN/array parameters and other declaration placements are
     rejected. Formal prior values are saved before actual evaluation; all actuals
     finish before reverse-order binding/conversion. ENDPROC restores recognised
@@ -172,7 +172,7 @@ The Author accepted the corrected C002 baseline for a development checkpoint.
     this initial activation scope.
 
 23. DEF FN and =expression provide distinct function activation/results. PROC/FN
-    share128 line-leading definitions and16 scalar arguments. Result kinds are
+    share256 line-leading definitions and16 scalar arguments. Result kinds are
     inferred from actual return expressions and dependencies; unsuffixed string
     returns and optional $ names are admitted (the suffix does not force result
     kind). A unique stable numeric/string kind is required; mixed or unresolved
@@ -237,9 +237,9 @@ The Author accepted the corrected C002 baseline for a development checkpoint.
 10. Strings use five-byte length/capacity/u24-pointer descriptors and separate
     existence flags. Private 256-byte expression buffers are limited to 16
     simultaneous values; parser nesting shares the numeric 32-entry bound.
-    Assignment copies into independently owned contents. A separate 623-byte
-    runtime retains the former 533-byte core/slices/comparison/search prefix
-    and adds 90 bytes for slice assignment, with two rebased relocations.
+    Assignment copies into independently owned contents. A separate 633-byte
+    runtime retains the former623-byte core/slices/comparison/search/write prefix
+    and adds10 bytes for bounded FN value transfer, with two rebased relocations.
     It adapts reference descriptor/storage conventions with an explicit
     FREE/limit context, capacity reuse, tail growth and geometric non-tail
     growth. Allocation checks precede descriptor/context changes. No interpreter

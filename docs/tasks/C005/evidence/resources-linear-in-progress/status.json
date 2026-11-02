@@ -1,0 +1,15 @@
+{
+  "status": "partial-timeout",
+  "guard_seconds": 900,
+  "compiled_programs": [
+    "p0.bas",
+    "p1.bas"
+  ],
+  "rejections_observed": [
+    "p2.bas",
+    "p3.bas",
+    "p4.bas"
+  ],
+  "incomplete": "fresh repeat of256-routine p0 and native execution phase",
+  "qualification_pass": false
+}

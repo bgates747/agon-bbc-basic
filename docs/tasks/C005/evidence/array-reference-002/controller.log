@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/Agon/mystuff/bbc-basic-v-adl/docs/tasks/C005/array_oracle.py", line 111, in <module>
+    main()
+    ~~~~^^
+  File "/Agon/mystuff/bbc-basic-v-adl/docs/tasks/C005/array_oracle.py", line 96, in main
+    log = h.run_profile(profile, 'load /bin/basic.bin\nrun . /array-oracle.bas\n',
+                        'ARRAY_ORACLE_DONE', 'array-oracle.log')
+  File "/Agon/mystuff/bbc-basic-v-adl/compiler/tools/test_compiler.py", line 44, in run_profile
+    raise AssertionError(f"Timed out waiting for {marker}; see {log_path}")
+AssertionError: Timed out waiting for ARRAY_ORACLE_DONE; see /Agon/mystuff/bbc-basic-v-adl/.emulator/array-oracle.log

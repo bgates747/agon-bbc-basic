@@ -154,3 +154,8 @@ Mixed/unresolved result kinds and interpreter-dependent direct FN carriers in
 omitted RIGHT$/STRING$ are rejected clearly; see the compatibility matrix.
 C004 is complete for its initial scope. Arrays, indirection, DATA, I/O and source
 error handlers remain C005 before the compiler can compile itself.
+
+[Bootstrap resources](../docs/tasks/C005/RESOURCES.md) qualify256 shared routine
+definitions, bounded FN value transfer and a sorted BBC symbol index. Arrays,
+indirection, DATA, I/O and source error handlers are still C005 work; the
+compiler cannot compile itself yet.

@@ -66,4 +66,6 @@ if __name__=='__main__':
  lines=compiler.read_text().splitlines();ids=[int(l.split()[0]) for l in lines]
  assert ids==sorted(set(ids)) and max(len(l.split(' ',1)[1]) for l in lines)<=255
  h.TASK=TASK;h.programs=(lambda:programs()[:1]) if smoke else programs
- sys.argv+=['--isolate-reference','--skip-legacy','--string-runtime',str(ROOT/'compiler/build/string-runtime')];h.main()
+ sys.argv+=['--isolate-reference','--skip-legacy']
+ if '--string-runtime' not in sys.argv:sys.argv+=['--string-runtime',str(ROOT/'compiler/build/string-runtime')]
+ h.main()

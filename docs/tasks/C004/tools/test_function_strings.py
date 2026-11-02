@@ -21,4 +21,6 @@ def programs():
  return result
 if __name__=='__main__':
  spec=importlib.util.spec_from_file_location('o',ROOT/'docs/tasks/C002/tools/test_output.py');h=importlib.util.module_from_spec(spec);spec.loader.exec_module(h)
- h.TASK=TASK;h.programs=programs;sys.argv+=['--isolate-reference','--skip-legacy','--string-runtime',str(ROOT/'compiler/build/string-runtime')];h.main()
+ h.TASK=TASK;h.programs=programs;sys.argv+=['--isolate-reference','--skip-legacy']
+ if '--string-runtime' not in sys.argv:sys.argv+=['--string-runtime',str(ROOT/'compiler/build/string-runtime')]
+ h.main()

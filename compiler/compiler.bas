@@ -8,9 +8,9 @@
 80 PRINT "Wrote ";coutput$
 90 END
 1000 DEF PROCinit
-1010 DIM ccode% 65535,csname$(1023),csaddr%(1023)
+1010 DIM ccode% 65535,csname$(1023),csaddr%(1023),csort%(1023)
 1020 DIM crname$(2047),craddr%(2047),crline%(2047),crcol%(2047)
-1021 DIM cpname$(127),cpline%(127),cparcnt%(127),cpar%(127,15),cargkind%(31,15),cargindex%(31,15),cpkind%(127),cpret%(127),creturn$(511),cretdef%(511),cretline%(511),cretcol%(511)
+1021 DIM cpname$(255),cpline%(255),cparcnt%(255),cpar%(255,15),cargkind%(31,15),cargindex%(31,15),cpkind%(255),cpret%(255),creturn$(511),cretdef%(511),cretline%(511),cretcol%(511)
 1022 PROCloadnumbers
 1023 PROCloadacts
 1024 DIM cvname$(127),cvsize%(127),cvstatic%(127),cvtype%(127),ckwords$(4)
@@ -210,16 +210,20 @@
 2480 cpos%=cpos%+1
 2490 ENDPROC
 2500 DEF FNsymbol(cn$)
-2510 LOCAL ci%,cfound%
-2520 ci%=0:cfound%=-1
-2530 WHILE ci%<csnum%
-2532 IF csname$(ci%)=cn$ cfound%=ci%
-2534 ci%=ci%+1
+2502 LOCAL clo%,chi%,cmid%,ci%,cfound%
+2510 clo%=0:chi%=csnum%-1:cfound%=-1
+2520 WHILE clo%<=chi% AND cfound%<0
+2522 cmid%=(clo%+chi%) DIV 2:ci%=csort%(cmid%)
+2530 IF csname$(ci%)=cn$ THEN cfound%=ci% ELSE IF csname$(ci%)<cn$ THEN clo%=cmid%+1 ELSE chi%=cmid%-1
 2540 ENDWHILE
+2542 csinsert%=clo%
 2550 =cfound%
 2560 DEF PROClabel(cn$)
+2562 LOCAL ci%
 2570 IF FNsymbol(cn$)>=0 PROCbad("Duplicate target "+cn$)
 2580 IF csnum%=1024 PROCbad("Too many labels")
+2582 IF csnum%>csinsert% THEN FOR ci%=csnum%-1 TO csinsert% STEP -1:csort%(ci%+1)=csort%(ci%):NEXT
+2584 csort%(csinsert%)=csnum%
 2590 csname$(csnum%)=cn$:csaddr%(csnum%)=&40000+cpc%:csnum%=csnum%+1
 2600 ENDPROC
 2610 DEF PROCaddr(ch$,cn$)
@@ -557,7 +561,7 @@
 6610 =cf%
 7000 DEF PROCloadstrings
 7010 LOCAL ci%,cj%,cs$,ca%,cb%
-7020 RESTORE 30000:READ cssize%,csrelocs%,csliteral%,csload%,cscat%,csstore%,csprint%,csleft%,csright%,csmid%,cscmp%,csinstr%,csrepeat%,cswrite%
+7020 RESTORE 30000:READ cssize%,csrelocs%,csliteral%,csload%,cscat%,csstore%,csprint%,csleft%,csright%,csmid%,cscmp%,csinstr%,csrepeat%,cswrite%,cscopy%
 7030 DIM csimage% cssize%-1,csreloc%(csrelocs%)
 7040 FOR ci%=0 TO cssize%-1 STEP 40
 7050 READ cs$
@@ -651,6 +655,7 @@
 7860 PROClabel("$strrepeat"):csaddr%(csnum%-1)=&40000+cbase%+csrepeat%
 7861 PROClabel("$strwrite"):csaddr%(csnum%-1)=&40000+cbase%+cswrite%
 7862 PROClabel("$strerror"):PROCbytes("FE13"):PROCaddr("CA","$strlong")
+7863 PROClabel("$strcopy"):csaddr%(csnum%-1)=&40000+cbase%+cscopy%
 7870 PROCtext("No room"):PROCnewline:PROCaddr("C3","$error")
 7880 PROClabel("$strlong"):PROCtext("String too long"):PROCnewline:PROCaddr("C3","$error")
 7890 FOR ci%=0 TO csslots%-1
@@ -917,6 +922,7 @@
 13190 clnum%=clnum%+1:cpos%=1:PROCreadline(ch%):PROCspace
 13200 IF FNdigit(FNpeek) ci%=FNnumber(65279)
 13210 PROCspace:IF FNword("DEF") PROCscandef
+13214 IF FNword("DATA") OR FNword("REM") cpos%=LEN(cline$)+1
 13215 IF cfunction%>=0 PROCcollectreturns(cfunction%,cpos%)
 13220 ENDWHILE
 13225 PROCinferreturns
@@ -927,7 +933,7 @@
 13270 ck%=0:IF MID$(cline$,cpos%,2)="FN" ck%=1
 13272 IF ck%=0 AND MID$(cline$,cpos%,4)<>"PROC" PROCbad("Expected PROC or FN after DEF")
 13280 cpos%=cpos%+4-2*ck%:cn$=FNcallname(ck%):IF FNprocfind(MID$("PF",ck%+1,1)+cn$)>=0 PROCbad("Duplicate definition "+cn$)
-13290 IF cpnum%=128 PROCbad("Procedure limit exceeds 128")
+13290 IF cpnum%=256 PROCbad("Procedure limit exceeds 256")
 13300 ci%=cpnum%:cpnum%=cpnum%+1:cpname$(ci%)=MID$("PF",ck%+1,1)+cn$:cpline%(ci%)=clnum%:cpkind%(ci%)=ck%:cpret%(ci%)=-1:PROCprocparams(ci%,TRUE)
 13305 cfunction%=-1:IF ck%=1 cfunction%=ci%
 13310 ENDPROC
@@ -1052,7 +1058,7 @@
 15215 IF cpret%(ci%)=1 csunsafe%(csdepth%-1)=TRUE
 15220 cvaluekind%=cpret%(ci%):ccalldepth%=ccalldepth%-1:ENDPROC
 15230 DEF PROCcopystr(cf$,ct$)
-15240 PROCaddr("21",cf$):PROCaddr("11",ct$):PROCbytes("01000100EDB0"):ENDPROC
+15240 PROCaddr("21",cf$):PROCaddr("11",ct$):PROCaddr("CD","$strcopy"):ENDPROC
 15250 DEF PROCfnreturn
 15260 PROCuseacts:cfunctions%=TRUE:cndepth%=0:csdepth%=0:PROCexpr(1)
 15270 IF cscope%>0 THEN IF cpkind%(cscope%-1)=1 AND cpret%(cscope%-1)<>cvaluekind% PROCbad("Mixed numeric/string FN results are unsupported")
@@ -1064,7 +1070,7 @@
 15330 WHILE cp%<=LEN(cline$)
 15340 cc$=MID$(cline$,cp%,1)
 15350 IF cc$=CHR$(34) THEN cq%=NOT cq%
-15355 IF NOT cq% AND cd%=0 THEN IF FNkindword(cline$,cp%,"REM") cp%=LEN(cline$)+1
+15355 IF NOT cq% AND cd%=0 THEN IF FNkindword(cline$,cp%,"REM") OR FNkindword(cline$,cp%,"DATA") cp%=LEN(cline$)+1
 15360 IF NOT cq% THEN IF cc$="=" AND cd%=0 AND FNreturnmark(cp%,cs%) THEN ce%=FNreturnend(cp%+1):PROCrememberreturn(ci%,MID$(cline$,cp%+1,ce%-cp%-1),cp%+1):cp%=ce%-1
 15370 IF NOT cq% THEN IF cc$="(" cd%=cd%+1
 15380 IF NOT cq% THEN IF cc$=")" cd%=cd%-1
@@ -1294,7 +1300,7 @@
 21300 DATA 3851,3866,3877,3881,3887,3901,3931,3940,3949,3953,3957,3980,3984,3989,3994,4027,4031,4056,4060,4064
 21310 DATA 4068,4072,4076,4080,4084,4088,4092,4105,4109,4119,4127,4131,4135,4149,4153,4162,4174,4181,4187,4192
 21320 DATA 4196,4200,4331,4335,4433,4437,4443
-30000 DATA 623,2,0,14,37,82,234,264,272,283,326,369,481,533
+30000 DATA 633,2,0,14,37,82,234,264,272,283,326,369,481,533,623
 30010 DATA "E1DDE5D1010000004E03EDB0E5C9FD7E00DD7700B7C8010000004FFD2702DDE5D113EDB0C9DD7E00"
 30020 DATA "47FD4E0081381EDD770079B7C8DDE5E123110000005819EBFDE5E123010000004FEDB0AFC93E13B7"
 30030 DATA "37C9DDE5FDE5E5DD7E01FDBE00306DFDE5E5FDE1FD1700FD2703FDE1E5D5DD270201000000DD4E01"
@@ -1310,7 +1316,7 @@
 30130 DATA "C9B7282D0100000047DD4E0079B7C8ED4C78B7C24D000079DD4600DD770090280E480600DDE5E123"
 30140 DATA "E5D109EB4FEDB0AFC9DD7700C901000000444DC5E101000000FD4E00DD4600DD17027D3C200F2424"
 30150 DATA "79BC30016778943001AF6F18127C3C200678D6023827677DB830227CB83803783D677C9538173CB9"
-30160 DATA "38017901000000604FB72809EB19EBFDE5E123EDB0AFC9"
+30160 DATA "38017901000000604FB72809EB19EBFDE5E123EDB0AFC9010000004E03EDB0AFC9"
 30170 DATA 407,500
 40000 DATA 8657,30,0,9,72,129,146,167,180,243,454,462,465,8657
 40010 DATA "21D1010022CE0100C9DDE5E5C5D5F5DD2ACE010021D12100DDE5C1B7ED42281FF1D1C1E1DD7700DD"

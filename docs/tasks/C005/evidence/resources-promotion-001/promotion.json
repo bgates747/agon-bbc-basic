@@ -1,0 +1,10 @@
+{
+  "prototype": "docs/tasks/C005/evidence/resources-indexed-001/compiler.bas",
+  "files": {
+    "compiler/compiler.bas": "0f0884ca11790d51c991cee68d8caa180e21f0fdecf512b7dcf341bbc7fafc4c",
+    "compiler/runtime/strings.s": "0117edc59bfa4607bc200f796235d328fabf51d849d35e6b58b6e41571510a31",
+    "compiler/tools/build_strings_runtime.py": "576e7f4a92c9d9a311e81efc4870a9e9f9374fac7e392c4d9e98694752d95d8a",
+    "docs/tasks/C005/qualify_live_resources.py": "8522cbef42d8397cd2939d55cbef6de7e3552ddf50a6c3cac08f2ce89e776fa4"
+  },
+  "human_hardware_validation": false
+}

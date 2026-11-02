@@ -1,0 +1,18 @@
+{
+  "allocator_zero_and_wide_count": true,
+  "exact_bounds_and_overflow": true,
+  "dimension_widths_and_strides": true,
+  "zero_initialization": true,
+  "error_atomicity": true,
+  "subscript_checks": true,
+  "maximum_dimensions": true,
+  "poisoned_upper_bc": true,
+  "index_and_stack_preservation": true,
+  "guards_unchanged": true,
+  "duration_seconds": 1.016,
+  "hashes": {
+    "docs/tasks/C005/memory/abi.s": "5d7bc07ad3dacb8c9f56422021453072d099bb666694d38cc77f7c467aa84b7d",
+    "docs/tasks/C005/build/memory-abi/probe.bin": "924243d6ea2ae5ce7fd8feb0aaf723725387128e7f5edbee396a18df16d1e0ef",
+    "docs/tasks/C005/build/memory-runtime/runtime-0.bin": "f2b61865d28e83cd729ede7ead5b4061af04de8c0c993194bb409f7f9c421cb7"
+  }
+}

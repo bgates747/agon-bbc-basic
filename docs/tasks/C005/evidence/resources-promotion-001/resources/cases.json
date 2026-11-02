@@ -1,0 +1,23 @@
+[
+  {
+    "source": "PRINT ;LEN FNempty;\":\";LEN FNmaximum;\":\";FNmaximum=STRING$(255,\"q\")\nPRINT ;ASC FNbytes;\":\";ASC MID$(FNbytes,2);\":\";ASC RIGHT$(FNbytes,1)\nPRINT FNtext;\":\";FNempty+\"end\"\nEND\nDEF FNempty=\"\"\nDEF FNmaximum=STRING$(255,\"q\")\nDEF FNbytes=CHR$(0)+CHR$(128)+CHR$(255)\nDEF FNtext=\"DATA REM = text\"\n",
+    "reference_source": "PRINT ;LEN FNempty;\":\";LEN FNmaximum;\":\";FNmaximum=STRING$(255,\"q\")\nPRINT ;ASC FNbytes;\":\";ASC MID$(FNbytes,2);\":\";ASC RIGHT$(FNbytes,1)\nPRINT FNtext;\":\";FNempty+\"end\"\n",
+    "reference_definitions": [
+      "DEF FNempty=\"\"",
+      "DEF FNmaximum=STRING$(255,\"q\")",
+      "DEF FNbytes=CHR$(0)+CHR$(128)+CHR$(255)",
+      "DEF FNtext=\"DATA REM = text\""
+    ],
+    "reference": true,
+    "status": 0,
+    "expected": "0:255:-1\n0:128:255\nDATA REM = text:end\n"
+  },
+  {
+    "source": "PRINT FNvalue:END\nDEF FNvalue=3\nDATA : =\"not a return\"\n",
+    "diagnostic": "Unsupported statement DATA"
+  },
+  {
+    "source": "PRINT FNvalue:END\nDEF FNvalue=3:DATA : =\"not a return\"\n",
+    "diagnostic": "Unsupported statement DATA"
+  }
+]

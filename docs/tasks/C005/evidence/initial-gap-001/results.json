@@ -1,0 +1,8 @@
+{
+  "scope": "Initial bootstrap-gap probe, not self-hosting",
+  "compiler_sha256": "6feb0b21b09ac4353347876df89043caf8800727b5a8c4f985588c3e6741c8f4",
+  "diagnostic": "bootstrap-source.bas:1073:23: Procedure limit exceeds 128\n",
+  "existing_output_preserved": true,
+  "duration_seconds": 295.201,
+  "human_hardware_validation": false
+}

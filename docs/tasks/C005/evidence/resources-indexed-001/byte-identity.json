@@ -1,0 +1,7 @@
+{
+  "complete_images_equal_to_linear_lookup": [
+    "p0.dat",
+    "p1.dat"
+  ],
+  "compiler_algorithm_only": true
+}

@@ -1,0 +1,8 @@
+{
+  "scope": "Initial bootstrap-gap probe, not self-hosting",
+  "compiler_sha256": "bc9586a81065fd4067359a684381015f90089b4a09d1647b47c36c5189084efe",
+  "diagnostic": "bootstrap-source.bas:3:6: Unsupported statement ON\n",
+  "existing_output_preserved": true,
+  "duration_seconds": 780.74,
+  "human_hardware_validation": false
+}

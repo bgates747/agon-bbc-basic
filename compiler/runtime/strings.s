@@ -499,3 +499,15 @@ str_write_copy:
 str_write_done:
     xor a
     ret
+
+; C005 bounded owned-value transfer. New entry; existing623-byte prefix unchanged.
+; HL=length-prefixed source, DE=256-byte destination (disjoint or identical).
+; Copy header+logical bytes only. IX/IY/SP preserved; A0/Z/NC; others volatile.
+    .global rt_strcopy
+rt_strcopy:
+    ld bc,0                    ; explicit full24 count, including poisoned callers
+    ld c,(hl)
+    inc bc                     ; 1..256, never a zero-length LDIR
+    ldir
+    xor a
+    ret

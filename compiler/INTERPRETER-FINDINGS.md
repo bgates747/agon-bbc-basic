@@ -81,3 +81,23 @@ Unfinished authorized work is tracked only in [TODO.md](../TODO.md).
    reject them at compile time. Assignment/reload, concatenation and explicit
    slices establish qualified values. C004 records tests and this intentional
    partial admission; the compiler does not emulate interpreter-private stale RAM.
+
+## DIM target mutation and reentrant allocation
+
+1. C005's [clean reference observations](../docs/tasks/C005/evidence/array-reference-003/results.json)
+   confirm that raw DIM initially stores the target address's low16 bits, with
+   integer marker0, before evaluating size. `DIM p% p%` therefore allocates
+   `(^p% AND &FFFF)+1` bytes. DIM8's EXX/STOREN path explains this source-level
+   dependency; the compiler must preserve it rather than assume the comment's
+   intended zero store. DIM3 subsequently writes only the low24 pointer bits,
+   preserving a top byte/exponent changed by the size expression.
+2. An existing array takes DIM4's VAR path: subscripts evaluate, numeric targets
+   are seeded and a missing following size gives Syntax error16. String targets
+   give Bad DIM10. A premature native Bad DIM would change effects and error order.
+3. [Failed nested-DIM probe](../docs/tasks/C005/evidence/array-reference-002/status.json)
+   stalls at `DIM a%(FNinnerdim)` where FNinnerdim itself DIMs that array. The
+   controlled180s guard terminates the CLI; this is failed/partial evidence.
+   Descriptor allocation against a changing FREE is a source-inferred cause,
+   not a proved corruption address. Further upstream repair needs separate
+   interpreter work. Initial compiler array-DIM admissions reject FN/address-of
+   bound expressions clearly instead of silently assigning new behavior.

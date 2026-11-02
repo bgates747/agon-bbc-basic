@@ -1,0 +1,17 @@
+{
+  "empty_copies_header_only": true,
+  "maximum_256_byte_transfer": true,
+  "logical_tail_unchanged": true,
+  "source_read_only": true,
+  "page_crossing": true,
+  "poisoned_upper_bc": true,
+  "index_and_stack_preservation": true,
+  "guards_unchanged": true,
+  "identical_buffer": true,
+  "duration_seconds": 1.068,
+  "hashes": {
+    "docs/tasks/C005/copy/abi.s": "75278faf3e7792344b7e6c62586c2a6f36b3759b4e5f55ed2a64228f9016e702",
+    "docs/tasks/C005/build/copy-abi/probe.bin": "007243b59c5d5de1118be4a8adedb6d5911e982ed45062f38080f0c9c25dfcbe",
+    "docs/tasks/C005/build/string-runtime/runtime-0.bin": "4e617e8783191501a0c12e490069da082373be677a042de59fece11ac34a91f7"
+  }
+}
