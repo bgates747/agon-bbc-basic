@@ -433,3 +433,8 @@ covered the earlier dirt.
    Accepted that checkpoint on the development branch, with all qualification
    and historical failed evidence retained. C003 remains in TODO for strings;
    human/hardware validation and main promotion remain separate.
+2. Scalar checkpoint `4577673` was pushed to the Author's origin. Staging
+   exposed that C003 lacked a build-directory ignore rule, so disposable build
+   copies entered that checkpoint. A follow-up removes them from version control
+   without deleting local outputs, adds a general task build ignore, and keeps
+   the selected evidence/manifests under `evidence/`.

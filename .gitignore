@@ -28,3 +28,6 @@ include/.DS_Store
 /compiler/build/
 __pycache__/
 /docs/tasks/C007/build/
+
+# All task-local disposable build outputs
+/docs/tasks/*/build/
