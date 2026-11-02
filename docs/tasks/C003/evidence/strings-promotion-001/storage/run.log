@@ -1,0 +1,126 @@
+{
+  "bindings": 15,
+  "undefined_bindings": 1,
+  "string_content_mismatches": 0,
+  "descriptor_bounds_checked": true,
+  "independent_ownership": true,
+  "heap_budget": 16384,
+  "heap_used": 1055,
+  "heap_guard_bytes": 15361,
+  "unexpected_memory_writes": 0,
+  "records": [
+    {
+      "name": "empty$",
+      "length": 0,
+      "capacity": 0,
+      "pointer": 0,
+      "contents": ""
+    },
+    {
+      "name": "zero$",
+      "length": 3,
+      "capacity": 3,
+      "pointer": 270944,
+      "contents": "0078ff"
+    },
+    {
+      "name": "original$",
+      "length": 1,
+      "capacity": 5,
+      "pointer": 270947,
+      "contents": "7a"
+    },
+    {
+      "name": "copy$",
+      "length": 5,
+      "capacity": 5,
+      "pointer": 270952,
+      "contents": "68656c6c6f"
+    },
+    {
+      "name": "tail$",
+      "length": 2,
+      "capacity": 7,
+      "pointer": 270961,
+      "contents": "7879"
+    },
+    {
+      "name": "block$",
+      "length": 1,
+      "capacity": 1,
+      "pointer": 270960,
+      "contents": "71"
+    },
+    {
+      "name": "Case$",
+      "length": 2,
+      "capacity": 2,
+      "pointer": 270968,
+      "contents": "5550"
+    },
+    {
+      "name": "case$",
+      "length": 3,
+      "capacity": 3,
+      "pointer": 270970,
+      "contents": "6c6f77"
+    },
+    {
+      "name": "fresh$",
+      "length": 3,
+      "capacity": 3,
+      "pointer": 270973,
+      "contents": "6e6577"
+    },
+    {
+      "name": "left$",
+      "length": 128,
+      "capacity": 128,
+      "pointer": 270976,
+      "contents": "6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c"
+    },
+    {
+      "name": "right$",
+      "length": 127,
+      "capacity": 127,
+      "pointer": 271104,
+      "contents": "72727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272"
+    },
+    {
+      "name": "maximum$",
+      "length": 1,
+      "capacity": 255,
+      "pointer": 271231,
+      "contents": "6d"
+    },
+    {
+      "name": "independent$",
+      "length": 255,
+      "capacity": 255,
+      "pointer": 271486,
+      "contents": "6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c72727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272"
+    },
+    {
+      "name": "churn$",
+      "length": 255,
+      "capacity": 255,
+      "pointer": 271744,
+      "contents": "6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c72727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272"
+    },
+    {
+      "name": "barrier$",
+      "length": 2,
+      "capacity": 2,
+      "pointer": 271742,
+      "contents": "6262"
+    }
+  ],
+  "duration_seconds": 53.419,
+  "hashes": {
+    "compiler/compiler.bas": "2f1c96a70756f07b7a833707092c52a91ab680e66aa81d286ed936b1195b9458",
+    "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+    "docs/tasks/C003/build/string-storage/source.bas": "9b4973d00d9ca6823fe3a4338e247b14dca55f7344f3c732dca39a1657de0a1a",
+    "docs/tasks/C003/build/string-storage/expected.dat": "c71c63fa449342d108fcb1ba52055ecdd88e74b1d1b5f5c7f71075aff54c20f6",
+    "docs/tasks/C003/build/string-storage/native.dat": "90a195db60094011b28c8a95e8782bad926c067e4b99b61d1b8562342469fb3c"
+  }
+}

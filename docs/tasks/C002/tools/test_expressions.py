@@ -89,7 +89,7 @@ def cases():
         ("VDU a%(0)\n", "Arrays and function calls"),
         ("VDU \"A\"\n", "Expected a numeric item"),
         ("VDU 65;0\n", "Unexpected text"),
-        ("PRINT STR$(65)\n", "Unsupported numeric item STR"),
+        ("PRINT STR$(65)\n", "Unsupported string item STR"),
         ("VDU "+"("*20+"1"+")"*20+"\n", "Expression nesting exceeds"),
         ("VDU 65\nGOTO @missing\n", "Undefined target"),
     ]

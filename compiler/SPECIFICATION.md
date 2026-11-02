@@ -3,7 +3,7 @@
 The current implementation proves the path from BBC BASIC source to a MOS
 native executable. Later stages must preserve BBC BASIC values and activation
 semantics before broadening the accepted language. This draft describes the
-promoted C001 bootstrap and qualified C002 numeric expression/output slices in
+promoted C001 bootstrap, C002 numeric expression/output and C003 scalar/string slices in
 `compiler/compiler.bas`. These remain on the development branch pending
 accepted testing before promotion to main.
 Task documents and experimental silos follow
@@ -27,7 +27,7 @@ The Author accepted the corrected C002 baseline for a development checkpoint.
    and column positions, independent of optional BASIC line numbers.
 2. Keywords are uppercase. Names are case-sensitive, begin with an ASCII
    letter or underscore, and contain letters, digits or underscores, with a
-   maximum body length of 32; scalar numeric suffixes are separate. Keyword
+   maximum body length of 32; scalar type suffixes are separate. Keyword
    abbreviations and ambiguous keyword-prefix variable forms are unsupported.
 3. Optional decimal line numbers are labels in file order. Numbered lines must
    increase strictly and be in 0..65279. Mixed numbered and unnumbered source
@@ -52,13 +52,13 @@ The Author accepted the corrected C002 baseline for a development checkpoint.
    compile errors. Computed destinations are unsupported.
 6. Colon separates statements. A named label may precede a statement on the
    same line. `REM` consumes the rest of the physical line, including colons.
-7. `PRINT` accepts string literals and numeric expressions in a semicolon list.
+7. `PRINT` accepts string and numeric expressions in a semicolon list.
    Numeric output uses the reference's default G9 format and an initial minimum
    field width of ten characters. A semicolon sets subsequent numeric padding
    to zero; a final semicolon suppresses the newline. A leading semicolon is
    supported. Bare `PRINT` emits CR/LF. Doubled quotes represent one quote;
    colon inside a string is data. Comma zones, TAB/SPC, hexadecimal PRINT,
-   @% assignment, string expressions and source-level STR$ remain unsupported.
+   @% assignment and source-level STR$ remain unsupported.
 8. `VDU` accepts comma-separated numeric byte expressions, converts each through
    the package's SFIX semantics and emits the low byte. Negative values and
    byte wrapping are supported when conversion fits a signed integer. Word
@@ -76,8 +76,17 @@ The Author accepted the corrected C002 baseline for a development checkpoint.
     including its range failures; byte stores the low byte. A%–Z% are predefined
     at zero. Other bindings are created at zero before their first assignment
     RHS executes; reading an uncreated binding reports `No such variable`.
-    GOSUB shares these global bindings. Strings, arrays, pseudo-variable
-    assignments and LOCAL remain rejected. See the [scalar contract](../docs/tasks/C003/SCALARS.md).
+    GOSUB shares these global bindings. Arrays, pseudo-variable assignments
+    and LOCAL remain rejected. See the [scalar contract](../docs/tasks/C003/SCALARS.md).
+12. String assignment accepts `name$=expression`, optionally preceded by LET.
+    `$` names are independent of numeric suffix variants. Assignment creates
+    an empty binding before the RHS and copies the completed value. Strings
+    contain 0..255 bytes including embedded NUL. Concatenation uses + and
+    parentheses; groups finish before an enclosing length check. LEN consumes
+    a string item and returns an integer; CHR$ consumes a numeric item, applies
+    reference SFIX and takes its low byte. Undefined reads and GOSUB sharing
+    follow numeric bindings. Slicing, string comparison, VAL/STR$ and other
+    string functions remain rejected. See the [string contract](../docs/tasks/C003/STRINGS.md).
 
 ## Current backend and runtime contract
 
@@ -114,12 +123,27 @@ The Author accepted the corrected C002 baseline for a development checkpoint.
    template is included once per numeric program and omitted otherwise.
    Up to 32 five-byte temporary slots are allocated. There are no user calls
    inside admitted expressions; future FN calls need an activation-safe stack.
-9. Up to 128 scalar numeric bindings have statically allocated physical payloads
+9. Up to 128 scalar bindings have statically allocated physical payloads
    of one, four or five bytes and separate runtime existence flags. Native byte
    copies move values to/from packed expression temporaries. Writes set existence
    before RHS evaluation; reads check it when executed. The binding/error glue
    is emitted only when needed, outside the unchanged numeric template. This
    is global scalar storage; it does not implement LOCAL or activation records.
+10. Strings use five-byte length/capacity/u24-pointer descriptors and separate
+    existence flags. Private 256-byte expression buffers are limited to 16
+    simultaneous values; parser nesting shares the numeric 32-entry bound.
+    Assignment copies into independently owned contents. A separate 264-byte
+    runtime adapts reference descriptor/storage conventions with an explicit
+    FREE/limit context, capacity reuse, tail growth and geometric non-tail
+    growth. Allocation checks precede descriptor/context changes. No interpreter
+    globals or parser entries are linked. Failure reports `No room`; length
+    overflow reports `String too long`.
+11. Heap workspace starts after the image and reserves 1024 bytes per declared
+    string binding, without adding file padding. Compilation rejects an end
+    above &B0000. Monotone capacities bound abandoned plus live blocks below
+    768 bytes per binding in this global-only, no-deletion tranche. Future
+    LOCAL, deletion or dynamic bindings require a new ownership/allocation audit.
+    See the string contract for the bound, ABI and qualification.
 
 ## Current numeric expression subset
 

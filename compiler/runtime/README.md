@@ -1,4 +1,4 @@
-# Standalone numeric runtime
+# Standalone runtimes
 
 The BBC compiler embeds this runtime as DATA and emits it only when a program
 uses numeric expressions. It preserves four-byte integers and five-byte BBC
@@ -37,4 +37,19 @@ is 4028 bytes before temporary slots and error-message glue.
 C003's scalar storage glue is emitted by the BBC compiler outside this template.
 Physical one/four/five-byte payloads and separate existence flags use native
 byte copies; integer/byte assignment calls the existing qualified SFIX adapter.
-The template, vendor package and pointer ABI remain unchanged.
+The numeric template, vendor package and pointer ABI remain unchanged.
+
+C003 adds `strings.s`, a separate 264-byte standalone string core. Its descriptor,
+private allocator context, calling conventions and provenance are documented
+in the [string contract](../../docs/tasks/C003/STRINGS.md). Regenerate its
+embedded DATA independently:
+
+```bash
+.venv/bin/python compiler/tools/build_strings_runtime.py --compiler compiler/compiler.bas
+```
+
+The string packer checks independent links at &42000 and &48000 and writes
+ignored `compiler/build/string-runtime/` artifacts. String DATA starts at 30000;
+numeric regeneration at 20000 preserves it. Neither template needs an assembler
+or a separate runtime file on the target. Literal-only PRINT still uses its
+original compact path and complete assembly golden.

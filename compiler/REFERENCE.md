@@ -121,6 +121,18 @@ source features remain partial or unsupported in the compatibility matrix.
    are linked. [Scalar qualification](../docs/tasks/C003/SCALARS.md) includes
    physical-memory comparison and keeps LOCAL explicitly unimplemented.
 
+6. C003's mutable string core adapts the local baseline EXEC.Z80 STORES/
+   STORE4STR and EVAL.Z80 LOADS/CHRS/LEN/string addition. The new standalone
+   `runtime/strings.s` keeps the five-byte length/capacity/u24-pointer layout,
+   capacity reuse, tail extension and geometric non-tail growth. An explicit
+   private FREE/limit context replaces interpreter globals; owned expression
+   buffers replace ACCS. Byte counts initialise all 24 BC bits; pointer fields
+   deliberately use exact ADL three-byte accesses. The code retains repository
+   licensing/provenance and is marked as an adaptation, not an extracted stable
+   entry ABI. No interpreter parser/error/variable-chain dependencies remain.
+   [String ABI and memory qualification](../docs/tasks/C003/STRINGS.md) document
+   preservation, error returns, workspace bounds and ownership.
+
 ## Procedures, functions and LOCAL
 
 1. Dean's `FN`/`PROC` at `exec.asm:942` onward parse definitions and arguments,

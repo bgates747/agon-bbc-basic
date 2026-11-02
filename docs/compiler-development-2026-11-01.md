@@ -438,3 +438,76 @@ covered the earlier dirt.
    copies entered that checkpoint. A follow-up removes them from version control
    without deleting local outputs, adds a general task build ignore, and keeps
    the selected evidence/manifests under `evidence/`.
+
+## C003 mutable string core begins
+
+1. Pushed scalar support as `4577673` and its task-build cleanup as `c9f0b5f`.
+   Refined C003's string scope before implementation. Audited length/capacity/
+   pointer storage, copied assignment, capacity reuse/tail growth, CHR$ and LEN.
+   Existing interpreter entry points depend on ACCS/FREE/HIMEM and cannot be
+   called unchanged from standalone code.
+2. The initial core uses private length-prefixed expression buffers and an
+   allocator context, preserving logical contents and value-copy semantics.
+   Its workspace has an explicit per-binding bound for this no-LOCAL tranche.
+   Numeric math/vendor bytes remain unchanged; further string functions and
+   activation features remain outside this tranche. No interpreter improvement
+   is adopted and no Oryx connection is made.
+3. Completed the scalar checkpoint evidence in `58feb04`: four selected binary
+   snapshots had matched the local manifests but were excluded by the global
+   binary ignore. Explicitly tracked those selected snapshots, leaving generated
+   build outputs ignored. Their hashes and original reports are unchanged.
+4. String smoke qualification caught an empty opcode-prefix emission bug and
+   review caught incomplete 24-bit BC clearing. Full qualification then exposed
+   a pre-existing scalar reentrancy bug: FOR 0 TO -1 still compared one stale
+   binding after resetting the count. Switched lookup to WHILE and added paired
+   same-first-name compilations to numeric/string suites. All failed records
+   remain task-owned evidence, not passing qualification.
+5. Prototype qualification passes **23 programs** (**14 native/nine rejected**)
+   in **88.088 seconds**. The same-source oracle preserves LEN/CHR$ binding,
+   copied ownership, empty/max-length contents, undefined reads and grouped
+   error order. Determinism and independently linked runtime checks pass.
+6. A raw-memory probe passes **15 string bindings**, an uncreated descriptor
+   and a four-byte LEN result in **53.404 seconds**: exact reference contents,
+   independent blocks, descriptor bounds and unchanged image/heap guards.
+   The direct ABI probe passes in **1.016 seconds**, including upper-BC poison,
+   IX/IY/SP, page-crossing descriptors, zero/255 inline records, unchanged
+   concatenation overflow and allocation failure. Its initial fixture forgot
+   whole-program MOS register preservation; that failed run is retained and
+   the fixture correction does not change the qualified runtime.
+7. Froze [prototype evidence](tasks/C003/evidence/strings-001/summary.json), then
+   promoted byte-identical compiler/runtime to `compiler/compiler.bas` and
+   `compiler/runtime/strings.s`. Promoted the assembly packer with path changes
+   only. Numeric DATA/vendor/assembly/license remain unchanged; numeric
+   regeneration now preserves string DATA. Both packers reproduce the compiler
+   exactly. Historical prototypes remain evidence, not maintained forks.
+8. Added the [string contract](tasks/C003/STRINGS.md), example and updates to
+   specification, compatibility, reference audit, handoff and TODO. Slicing,
+   comparison and VAL/STR$ remain C003; activation/LOCAL remain C004. Live-location
+   checks run sequentially on the Pi5. New tranche changes remain uncommitted;
+   no Oryx, graphical/hardware qualification or benchmark is claimed.
+9. Live rechecks pass the **39-case/15-execution** baseline in **27.761s**,
+   **23 string programs** in **93.371s**, **15 string bindings plus guards** in
+   **53.419s**, the ABI repeat in **1.017s** and expanded alias/full-failure-state
+   checks in **1.015s**. The example and two explicit string-limit rejections
+   pass in **27.974s**. The initial limit fixture order violated the shared
+   runner's first-success repeat convention; its failed assertion is retained,
+   and reordering the fixtures required no compiler/runtime change.
+10. Numeric regressions pass **29 scalar programs** in **128.957s**, **28 prior
+    output programs** (58 earlier arithmetic observations) in **176.706s**, and
+    expression batches of **12** and **26** in **71.224s** and **60.208s**.
+    An ad-hoc archival script selected the parent expression build path after
+    the first passing batch; corrected the copy from batch-000 without changing
+    or rerunning results. [Live evidence](tasks/C003/evidence/strings-promotion-001/summary.json)
+    retains reports, sources, logs, binary snapshots and a complete manifest.
+11. Final checks verify byte-identical compiler/runtime promotion, both DATA
+    sections, unchanged numeric library/vendor/license, source line limits,
+    Python/JSON parsing, document links and manifest inclusion under normal Git
+    staging. HEAD/upstream remain `58feb04`, main remains `2998edd`. New string
+    work stays uncommitted for review; C003 remains in TODO for broader strings.
+
+## String core development checkpoint accepted
+
+1. The Author explicitly requested commit/push and continuation into C003
+   slicing and comparisons. Accepted the qualified mutable string core for a
+   development checkpoint, retaining all source, successful and failed evidence.
+   Main remains unchanged; graphical/hardware acceptance is not asserted.

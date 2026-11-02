@@ -1,0 +1,15 @@
+[
+  {
+    "source": "PRINT \"x\"+(\"x\"+(\"x\"+(\"x\"+(\"x\"+(\"x\"+(\"x\"+(\"x\"+(\"x\"+(\"x\"+(\"x\"+(\"x\"+(\"x\"+(\"x\"+(\"x\"+(\"x\"+(\"x\"))))))))))))))))\n",
+    "diagnostic": "String temporary limit exceeds 16"
+  },
+  {
+    "source": "PRINT (((((((((((((((((((((((((((((((((\"x\")))))))))))))))))))))))))))))))))\n",
+    "diagnostic": "Expression nesting exceeds 32"
+  },
+  {
+    "source": "REM Owned strings, embedded zeros, LEN and CHR$.\nmessage$=\"Hello\"\ncopy$=message$\nmessage$=message$+\", Agon\"\nPRINT message$;\"!\"\nPRINT copy$;\" stayed unchanged.\"\nPRINT \"Length: \";LEN(message$)\nzero$=CHR$(0)+\"x\"\nPRINT \"Embedded-zero length: \";LEN(zero$)\nGOSUB @append\nPRINT message$\nEND\n@append:\nmessage$=message$+CHR$(33)\nRETURN\n",
+    "status": 0,
+    "expected": "Hello, Agon!\nHello stayed unchanged.\nLength: 11\nEmbedded-zero length: 2\nHello, Agon!\n"
+  }
+]

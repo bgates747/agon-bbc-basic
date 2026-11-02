@@ -90,6 +90,7 @@ if __name__ == "__main__":
     report = build(args.toolchain)
     if args.update_compiler:
         compiler = COMPILER / "compiler.bas"
-        source = compiler.read_text().split("20000 DATA", 1)[0]
-        compiler.write_text(source + (COMPILER / "build/numeric-runtime/runtime_data.bas").read_text())
+        source, previous = compiler.read_text().split("20000 DATA", 1)
+        strings = "30000 DATA" + previous.split("30000 DATA", 1)[1] if "30000 DATA" in previous else ""
+        compiler.write_text(source + (COMPILER / "build/numeric-runtime/runtime_data.bas").read_text() + strings)
     print(json.dumps(report, indent=2))

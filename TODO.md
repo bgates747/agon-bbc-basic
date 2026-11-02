@@ -6,11 +6,11 @@ directory. See [the task convention](docs/tasks/README.md). Feature status is in
 `compiler/COMPATIBILITY.md`. C000–C002's qualified initial scopes are complete
 and retained in their task documents and dated logs. C007's corpus search is
 complete and retained alongside them. C003 scalar numeric bindings are
-promoted; mutable strings remain unfinished.
+promoted alongside the mutable string core; further string operations remain unfinished.
 C004–C006 are unstarted scopes.
 
-1. [ ] [C003](docs/tasks/C003.md) — Complete mutable strings with defined ownership, allocation limits and
-   reference assignment/conversion behavior; retain the qualified scalar numeric baseline.
+1. [ ] [C003](docs/tasks/C003.md) — Complete remaining string operations/conversions (slicing, comparison and VAL/STR$)
+   with reference behavior; retain qualified numeric bindings and the owned mutable string core.
 2. [ ] [C004](docs/tasks/C004.md) — Add structured control flow and separate PROC/FN activation
    records, arguments, recursion, and LOCAL save/restore, including strings.
 3. [ ] [C005](docs/tasks/C005.md) — Add arrays, byte/word indirection, binary/text file operations,

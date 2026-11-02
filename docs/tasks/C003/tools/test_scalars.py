@@ -38,7 +38,7 @@ def programs():
         ('x=1:GOSUB @sub:PRINT ;x:END\n@sub:x=x+1:RETURN\n','2\n',0),
     ]]
     result += [dict(source=s,diagnostic=d) for s,d in [
-        ('text$="x"\n','String variables'),
+        ('text$(0)="x"\n','Arrays and function calls'),
         ('a%(0)=1\n','Arrays and function calls'),
         ('a%%=1\n','Unsupported numeric suffix'),
         ('x+=1\n','Expected ='),
@@ -52,6 +52,7 @@ def programs():
         (''.join(f'v{i}=0\n' for i in range(129)),'Scalar variable limit exceeds 128'),
     ]]
     result.append(dict(source=(ROOT/"compiler/examples/variables.bas").read_text(),reference=True,status=0))
+    result += [dict(source=f'reused={value}:PRINT ;reused\n',reference=True,status=0) for value in (1,2)]
     return result
 
 

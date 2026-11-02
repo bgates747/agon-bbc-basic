@@ -1,0 +1,20 @@
+{
+  "stage": "prototype qualification before promotion",
+  "compiler_sha256": "2f1c96a70756f07b7a833707092c52a91ab680e66aa81d286ed936b1195b9458",
+  "transcript_programs": 23,
+  "native_executions": 14,
+  "rejected_sources": 9,
+  "string_bindings": 15,
+  "undefined_bindings": 1,
+  "string_content_mismatches": 0,
+  "unexpected_memory_writes": 0,
+  "independent_ownership": true,
+  "direct_abi_pass": true,
+  "deterministic_repeat": true,
+  "duration_seconds": {
+    "transcripts": 88.088,
+    "storage": 53.404,
+    "abi": 1.016
+  },
+  "human_validation": false
+}

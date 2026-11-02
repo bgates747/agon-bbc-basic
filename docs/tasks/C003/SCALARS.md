@@ -53,7 +53,7 @@ activation remain outside this tranche; their semantics are not approximated.
 
 ## Boundaries
 
-1. At most 128 numeric bindings are admitted, subject to existing image,
+1. At most 128 scalar bindings (shared with strings) are admitted, subject to existing image,
    symbol, relocation and expression limits. Identifiers have at most 32 body
    characters, begin with an ASCII letter/underscore and contain ASCII letters,
    underscores or digits. The optional numeric suffix is separate from that
@@ -64,9 +64,10 @@ activation remain outside this tranche; their semantics are not approximated.
    General keyword crunching, abbreviations, pseudo variables and ambiguous
    keyword-prefix forms are unsupported. Functions are not silently accepted
    as user variable names.
-3. String suffixes, arrays, indirection, extended numeric suffixes, @% and other
+3. Arrays, indirection, extended numeric suffixes, @% and other
    pseudo-variable assignments, PROC/FN/LOCAL and compound assignment remain
-   rejected. Mutable string ownership, allocation and string operations remain
+   rejected. The later [string core tranche](STRINGS.md) adds `$` bindings,
+   ownership, allocation and core operations. Further string functions remain
    C003 work in the sole TODO.
 
 ## Qualification
@@ -137,3 +138,10 @@ Historical compiler snapshots remain evidence, not maintained forks.
    runtime relocation, deterministic compilation and the baseline assembly
    golden pass. New scalar changes remain uncommitted for Author review;
    mutable strings remain C003 work.
+6. The string-core tranche corrects stale metadata on consecutive compilations
+   starting with the same variable name. The promoted compiler now passes
+   **29 scalar programs** (**17 native/12 rejected**) in **128.957 seconds**,
+   with paired same-first-name cases. The numeric template remains unchanged;
+   [string live-location evidence](evidence/strings-promotion-001/summary.json)
+   records this requalification. Scalar checkpoint approval/push preceded the
+   still-uncommitted string tranche.

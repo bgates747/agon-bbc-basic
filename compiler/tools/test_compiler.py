@@ -109,7 +109,7 @@ def main() -> None:
         (b'EVAL("1")\n', None, "EVAL is deliberately unsupported"),
         (b'LOCAL a%\n', None, "Unsupported statement LOCAL"),
         (b'DEF PROCtest\n', None, "Unsupported statement DEF"),
-        (b'a$="x"\n', None, "String variables"),
+        (b'a$(0)="x"\n', None, "Arrays and function calls"),
         (b'GOTO a%\n', None, "Expected an unsigned integer constant"),
         (b'GOTO @A\n@a:END\n', None, "Undefined target @A"),
         (b'@no_colon\n', None, "Expected :"),

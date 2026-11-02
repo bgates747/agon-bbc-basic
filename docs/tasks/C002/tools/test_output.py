@@ -52,7 +52,7 @@ def programs():
                        expected="4\ndone\n", reference=False, status=0))
     result += [dict(source=s, diagnostic=d) for s, d in [
         ('PRINT EVAL("1")\n', "EVAL is deliberately unsupported"),
-        ('PRINT STR$(1)\n', "Unsupported numeric item STR"),
+        ('PRINT STR$(1)\n', "Unsupported string item STR"),
         ('PRINT ~65\n', "Expected a numeric item"),
         ('PRINT "x",1\n', "Unexpected text after statement"),
         ('PRINT SQR()\n', "Expected a numeric item"),
@@ -79,6 +79,7 @@ def main():
     parser.add_argument("--compiler", type=Path, default=ROOT / "compiler/compiler.bas")
     parser.add_argument("--runtime-build", type=Path, default=ROOT / "compiler/build/numeric-runtime")
     parser.add_argument("--skip-legacy", action="store_true")
+    parser.add_argument("--string-runtime", type=Path, help="optional string runtime build to check independently")
     parser.add_argument("--isolate-reference", action="store_true", help="reset variables before each reference program")
     parser.add_argument("--timeout", type=float, default=180, help="compile-batch guard in seconds")
     args = parser.parse_args()
@@ -154,18 +155,31 @@ def main():
     assert (sd / "p0.bin").read_bytes() == (sd / "output-repeat.bin").read_bytes()
     template = (args.runtime_build / "runtime-0.bin").read_bytes()
     linked_bases = []
+    string_link_bases = []
     for i, case in enumerate(tests):
         if "diagnostic" in case:
             continue
         image = (sd / f"p{i}.bin").read_bytes()
-        position = image.index(template[:20])
-        base = 0x40000 + position
-        output = build / f"runtime-{base:x}.bin"
-        subprocess.run(["/Agon/agondev/release/bin/ez80-none-elf-ld", f"-Ttext=0x{base:x}",
-                        "-e", "rt_numeric", "--oformat=binary", "-o", str(output),
-                        str(args.runtime_build / "runtime.o")], check=True)
-        assert image[position:position+len(template)] == output.read_bytes()
-        linked_bases.append(base)
+        position = image.find(template[:20])
+        if position >= 0:
+            base = 0x40000 + position
+            output = build / f"runtime-{base:x}.bin"
+            subprocess.run(["/Agon/agondev/release/bin/ez80-none-elf-ld", f"-Ttext=0x{base:x}",
+                            "-e", "rt_numeric", "--oformat=binary", "-o", str(output),
+                            str(args.runtime_build / "runtime.o")], check=True)
+            assert image[position:position+len(template)] == output.read_bytes()
+            linked_bases.append(base)
+        if args.string_runtime:
+            strings = (args.string_runtime / "runtime-0.bin").read_bytes()
+            position = image.find(strings[:20])
+            if position >= 0:
+                base = 0x40000 + position
+                output = build / f"strings-{base:x}.bin"
+                subprocess.run(["/Agon/agondev/release/bin/ez80-none-elf-ld", f"-Ttext=0x{base:x}",
+                                "-e", "rt_strliteral", "--oformat=binary", "-o", str(output),
+                                str(args.string_runtime / "runtime.o")], check=True)
+                assert image[position:position+len(strings)] == output.read_bytes()
+                string_link_bases.append(base)
     commands = []
     for i, case in enumerate(tests):
         if "diagnostic" not in case:
@@ -178,11 +192,12 @@ def main():
         if "diagnostic" not in case:
             got = native.split(f"OUTPUT_BEGIN_{i}\n", 1)[1].split(f"OUTPUT_END_{i}\n", 1)[0]
             assert got == case["expected"]+f'OUTPUT_STATUS:{case["status"]}\n', (i, repr(got), case)
-    report = dict(programs=len(tests), native_executions=len(linked_bases),
-                  rejected_sources=len(tests)-len(linked_bases),
+    report = dict(programs=len(tests), native_executions=sum("diagnostic" not in c for c in tests),
+                  rejected_sources=sum("diagnostic" in c for c in tests),
                   reference_output_programs=sum(bool(c.get("reference")) for c in tests),
                   legacy_arithmetic_observations=sum(c.get("legacy_observations", 0) for c in tests),
                   deterministic_repeat=True, independent_link_bases=linked_bases,
+                  string_link_bases=string_link_bases,
                   duration_seconds=round(time.monotonic()-started,3),
                   hashes={str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
                           for p in [args.compiler, ROOT / "bin/basic.bin", build / "cases.json"]})

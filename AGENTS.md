@@ -36,8 +36,10 @@ The earlier exact-decimal experiment and its altered test oracles are superseded
 Read `docs/tasks/C002/LITERALS.md`, `docs/tasks/C002/OUTPUT.md`, `docs/tasks/C002/EXPRESSIONS.md`,
 `docs/tasks/C002/ABI.md` and its task record for scope/results. C003 scalar
 numeric bindings are promoted and the Author approved their development
-checkpoint on 2026-11-01; mutable strings remain active C003 work. Read
-`docs/tasks/C003/SCALARS.md` and its task record. C004–C006 remain unstarted. The compiler is still BBC BASIC; assembly is runtime code, not a
+checkpoint on 2026-11-01 (`4577673`, build-ignore cleanup `c9f0b5f`, complete
+binary evidence `58feb04`, all pushed). The mutable string core is now promoted
+for development review; slicing/comparison/further conversions remain C003. Read
+`docs/tasks/C003/SCALARS.md`, `docs/tasks/C003/STRINGS.md` and the task record. C004–C006 remain unstarted. The compiler is still BBC BASIC; assembly is runtime code, not a
 replacement compiler implementation.
 
 Use `.venv/bin/python` explicitly. `compiler/README.md` contains build/test

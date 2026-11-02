@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/Agon/mystuff/bbc-basic-v-adl/docs/tasks/C003/tools/test_string_limits.py", line 26, in <module>
+    output.main()
+    ~~~~~~~~~~~^^
+  File "/Agon/mystuff/bbc-basic-v-adl/docs/tasks/C002/tools/test_output.py", line 155, in main
+    assert (sd / "p0.bin").read_bytes() == (sd / "output-repeat.bin").read_bytes()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

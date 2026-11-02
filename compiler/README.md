@@ -3,7 +3,8 @@
 This is the first small implementation of the self-hosting compiler project.
 The compiler is BBC BASIC and emits native eZ80 ADL code directly. It currently
 compiles literal/numeric output, labelled control flow, numeric byte VDU
-expressions, standard math functions and scalar numeric variables. It cannot
+expressions, standard math functions, scalar numeric variables and a mutable
+string core. It cannot
 compile itself.
 The interpreter elsewhere in this repository remains the compatibility
 reference and bootstrap host. The tested implementation was promoted under
@@ -11,8 +12,8 @@ reference and bootstrap host. The tested implementation was promoted under
 regression tests and tooling are alongside it. C002's numeric expressions, output,
 fractional/scientific literals and runtime
 are in this development tree, with the corrected C002 baseline accepted for
-a development checkpoint. C003 scalar numeric bindings are promoted; mutable
-strings remain unsupported. Promotion to `main` awaits accepted testing.
+a development checkpoint. C003 numeric bindings and the mutable string core
+are promoted; further string functions/conversions remain unfinished. Promotion to `main` awaits accepted testing.
 
 ## Running on Agon
 
@@ -27,7 +28,7 @@ replaces the interpreter at `&40000`; reload BASIC for another compilation.
 without a preprocessor. Programs being compiled may omit line numbers. The
 compiler performs source parsing, symbol resolution, relocation, runtime
 emission and binary output itself; the Python harness only runs tests. The
-numeric runtime template is already embedded as DATA, so the Agon compiler
+numeric and string runtime templates are already embedded as DATA, so the Agon compiler
 needs no separate runtime image or assembler.
 
 ## Current documents
@@ -98,5 +99,9 @@ are retained separately as research; the compiler must not silently adopt them.
 [Scalar numeric bindings](../docs/tasks/C003/SCALARS.md) documents plain/LET
 assignment, numeric suffixes, physical storage and reference existence rules.
 [variables.bas](examples/variables.bas) demonstrates them. C003-owned transcript
-and memory probes qualify the single live compiler; mutable strings remain
-unfinished in TODO.
+and memory probes qualify the single live compiler.
+
+[Mutable string core](../docs/tasks/C003/STRINGS.md) documents `$` assignment,
+independent copying, concatenation, LEN/CHR$, five-byte descriptors and the
+bounded private heap. [strings.bas](examples/strings.bas) demonstrates it.
+Slicing, comparison and further string conversions remain unfinished in TODO.

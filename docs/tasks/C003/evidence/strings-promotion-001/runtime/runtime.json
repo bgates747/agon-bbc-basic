@@ -1,0 +1,21 @@
+{
+  "bytes": 264,
+  "relocations": 0,
+  "exports": {
+    "rt_strliteral": 0,
+    "rt_strload": 14,
+    "rt_strcat": 37,
+    "rt_strstore": 82,
+    "rt_strprint": 234
+  },
+  "independent_link_bases": [
+    270336,
+    294912
+  ],
+  "unresolved_symbols": 0,
+  "hashes": {
+    "compiler/runtime/strings.s": "ee7178bf9551fbdb9d01b5c7aa671bb012d57a6788ae26ee20886bf29db97b18",
+    "compiler/build/string-runtime/runtime_data.bas": "97350cfa3c3c45f3b2b77f0ae4c91b1dd8faf2680d061d12c8b20601ff700ad7",
+    "compiler/build/string-runtime/runtime-0.bin": "9bced3e4014c6dddc5152babba623f76ca1ad0293e66b3d7f038397ee43b5da6"
+  }
+}
