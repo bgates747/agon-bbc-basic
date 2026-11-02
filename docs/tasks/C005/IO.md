@@ -1,8 +1,8 @@
 # File and console I/O implementation contract
 
 The native compiler must read source files, write executables and use its actual
-interactive filename prompts. This contract audits the pinned interpreter's MOS
-bridges before adding standalone I/O; it is not evidence that I/O is implemented.
+interactive filename prompts. The pinned interpreter's MOS bridges guide a qualified standalone runtime and BBC frontend;
+source handlers and remaining bootstrap facilities are separate work.
 
 ## Reference audit and dependency boundary
 
@@ -70,3 +70,48 @@ bridges before adding standalone I/O; it is not evidence that I/O is implemented
    Success A0/Z/NC. Escape returns A17/NZ/C after CRLF; caller must leave its
    destination descriptor unchanged. This API does not implement the language
    prompt or variable binding; the BBC frontend owns their evaluation order.
+
+## Current experimental frontend evidence
+
+Exact BBC source SHA483e1730 passes two generated file programs124.445s, including
+binary values, EOF, string LF/semicolon behavior and255-byte payloads. The initial
+independent-link lookup used a prefix containing a relocated operand and asserted
+after the language suite passed. Corrected lookup uses12 invariant bytes; both
+complete788-byte modules match independent GNU links. `io-smoke-001` retains the
+original controller traceback and corrected io-links.json; it is not an unqualified
+claim that the original controller passed.
+
+Actual keyboard-driven INPUT LINE matches reference prompts/output for ordinary,
+empty,255-byte and default-prompt inputs in67.855s; `input-language-001` retains
+the exact source/image/logs. File language full qualification remains separate.
+
+`io-reference-stall-001` retains the first full reference batch:11 cases complete
+before OPENIN STRING$(255,"q") fails its45s guard. A separate255-character variable
+filename also fails its20s guard after printing the correct length. Those are
+bounded stalled observations, not passing path coverage or a proven root cause.
+The full suite excludes this case. The native maximum-filename ABI test qualifies
+copy/termination guards using an early control terminator; it does not qualify
+opening a255-character non-control path. No new compiler/MOS behavior is invented.
+
+## Qualified development promotion
+
+Exact1849-line SHA483e17305c6448f513f0408ca0cbc6a2e36570f75ba2f7693045ca62f78c2cf1
+passes the29-source scope (23 native/6 rejection) in706.307s, deterministic repeat
+and independent GNU numeric/string/I/O links. Baseline39/15, repeat and complete
+assembler golden pass76.161s. Same-session END/fall-through/uncaught-error cleanup
+passes59.299s; all eight MOS handles are available after each path. Earlier direct
+file/input ABI and keyboard frontend evidence remains separately scoped.
+
+Promotion copies the exact BBC source to compiler/compiler.bas, the unchanged
+788-byte helper to compiler/runtime/io.s and its DATA61000 packer to compiler/tools.
+DATA and source handlers remain experimental/unimplemented, respectively. No
+human/hardware/self-hosting or benchmark-speed result is claimed.
+
+The direct native helper on the255-character non-control path returns within
+1.016s, as does an independent page-aligned direct MOS call. BBC's two bounded
+stalls remain unexplained; this is an explicit unqualified compatibility boundary.
+Do not describe it as a shared MOS hang or use a redesigned result as an oracle.
+
+Selected exact live I/O smoke passes123.702s; `io-promotion-001` retains two
+native images, repeated output, reference logs and complete GNU helper links.
+All six packers reproduce the promoted source (`io-repack-001`).

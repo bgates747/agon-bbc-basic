@@ -54,8 +54,11 @@ Read docs/tasks/C004.md, conditionals/AUDIT.md, loops/CONTROL.md,
 activations/PROCEDURES.md and functions/RETURN-KINDS.md. C005 is active. Its256-definition/resource checkpoint is promoted at SHA0f0884ca, with633-byte strings and a sorted BBC symbol index. Read docs/tasks/C005.md, C005/PLAN.md, C005/RESOURCES.md and C005/ARRAYS.md. Global arrays, raw DIM and indirection are qualified/promoted at SHAd0368b1e
 (1777 lines,256 shared bindings,4096 fixups). Read C005/MEMORY.md; retain the
 actual DIM quirks. Full53-case scope, binding capacity5, baseline/FN and selected
-live checks pass. I/O helpers are experimental; file/input language, DATA and
-source error handlers remain open. C006 remains unstarted. The compiler is still BBC BASIC; assembly is runtime code, not a
+live checks pass. File/input language is qualified/promoted at SHA483e1730
+(1849 lines,788-byte/7-relocation I/O helper). Full29 sources, actual keyboard
+INPUT LINE, same-session exit cleanup and baseline pass; read C005/IO.md for
+unqualified FN carriers and255-character path boundary. DATA frontend/helpers
+are prepared experiments; source handlers and resource closure remain open. C006 remains unstarted. The compiler is still BBC BASIC; assembly is runtime code, not a
 replacement compiler implementation.
 
 Use `.venv/bin/python` explicitly. `compiler/README.md` contains build/test

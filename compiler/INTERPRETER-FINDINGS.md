@@ -101,3 +101,13 @@ Unfinished authorized work is tracked only in [TODO.md](../TODO.md).
    not a proved corruption address. Further upstream repair needs separate
    interpreter work. Initial compiler array-DIM admissions reject FN/address-of
    bound expressions clearly instead of silently assigning new behavior.
+
+## C005 maximum-length filename boundary
+
+Actual OPENIN STRING$(255,"q") stalls through a45s guard in the reference; a
+separate255-character variable path stalls through20s. The direct standalone
+helper and a page-aligned direct MOS call return within1.016s each. This isolates
+a reference/native boundary but does not establish a root cause or authorize an
+interpreter change. Retained C005 long-path/reference-stall evidence owns the
+observations. The compiler's file admission records this as unqualified; it is
+not a faster-open benchmark or an accepted behavioral improvement.

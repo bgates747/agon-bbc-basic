@@ -1,0 +1,15 @@
+{
+  "scope": "Actual reference only; includes keyboard exit from untrapped BASIC",
+  "observations": {
+    "local-at-root": "Warning: unused arguments left: [\"--firmware\", \"platform\"].\nTom's Fake VDP Version 1.03\nunknown packet VDU 0x17, 0, 0xf8\nunknown packet VDU 0x17, 0, 0x99\nuunknown packet VDU 0x17, 0, 0x94\n\u0080\nAgon Platform MOS Version 3.0.2 Arthur\n\nROOT=100\nERROR_EDGE_DONE\n/ *",
+    "local-under-loop": "Warning: unused arguments left: [\"--firmware\", \"platform\"].\nTom's Fake VDP Version 1.03\nunknown packet VDU 0x17, 0, 0xf8\nunknown packet VDU 0x17, 0, 0x99\nuunknown packet VDU 0x17, 0, 0x94\n\u0080\nAgon Platform MOS Version 3.0.2 Arthur\n\nLOOP=100\nERROR_EDGE_DONE\n/ *",
+    "retained-strings": "Warning: unused arguments left: [\"--firmware\", \"platform\"].\nTom's Fake VDP Version 1.03\nunknown packet VDU 0x17, 0, 0xf8\nunknown packet VDU 0x17, 0, 0x99\nuunknown packet VDU 0x17, 0, 0x94\n\u0080\nAgon Platform MOS Version 3.0.2 Arthur\n\nbefore:after\nbefore:after\n42:outer:after\nERROR_EDGE_DONE\n/ *",
+    "local-off-restores": "Warning: unused arguments left: [\"--firmware\", \"platform\"].\nTom's Fake VDP Version 1.03\nunknown packet VDU 0x17, 0, 0xf8\nunknown packet VDU 0x17, 0, 0x99\nuunknown packet VDU 0x17, 0, 0x94\n\u0080\nAgon Platform MOS Version 3.0.2 Arthur\n\nRESTORED=100\nERROR_EDGE_DONE\n/ *",
+    "code-conversion-order": "Warning: unused arguments left: [\"--firmware\", \"platform\"].\nTom's Fake VDP Version 1.03\nunknown packet VDU 0x17, 0, 0xf8\nunknown packet VDU 0x17, 0, 0x99\nuunknown packet VDU 0x17, 0, 0x94\n\u0080\nAgon Platform MOS Version 3.0.2 Arthur\n\nCODE=20\nERROR_EDGE_DONE\n/ *",
+    "fatal-zero": "Warning: unused arguments left: [\"--firmware\", \"platform\"].\nTom's Fake VDP Version 1.03\nunknown packet VDU 0x17, 0, 0xf8\nunknown packet VDU 0x17, 0, 0x99\nuunknown packet VDU 0x17, 0, 0x94\n\u0080\nAgon Platform MOS Version 3.0.2 Arthur\n\n\nMSG_fatal-zero at line 20\n>*BYE\nERROR_EDGE_DONE\n/ *",
+    "fatal-wrap": "Warning: unused arguments left: [\"--firmware\", \"platform\"].\nTom's Fake VDP Version 1.03\nunknown packet VDU 0x17, 0, 0xf8\nunknown packet VDU 0x17, 0, 0x99\nuunknown packet VDU 0x17, 0, 0x94\n\u0080\nAgon Platform MOS Version 3.0.2 Arthur\n\n\nMSG_fatal-wrap at line 20\n>*BYE\nERROR_EDGE_DONE\n/ *",
+    "off": "Warning: unused arguments left: [\"--firmware\", \"platform\"].\nTom's Fake VDP Version 1.03\nunknown packet VDU 0x17, 0, 0xf8\nunknown packet VDU 0x17, 0, 0x99\nuunknown packet VDU 0x17, 0, 0x94\n\u0080\nAgon Platform MOS Version 3.0.2 Arthur\n\n\nMSG_off at line 30\n>*BYE\nERROR_EDGE_DONE\n/ *"
+  },
+  "duration_seconds": 11.436,
+  "basic_sha256": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d"
+}

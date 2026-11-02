@@ -1,0 +1,20 @@
+{
+  "local-at-root.log": "c3d15bf935a9ad11ebc2810d35f0ef530cd616ef5eacc51363dd0d7d4b7c2c44",
+  "local-under-loop.bas": "e8f2c9f1f230161793afcfa953dabc4d12cfebdc16f8a1262993e1588ad6f3eb",
+  "edge_reference.py": "f01a5db1ad2048eef0a194a4c2f388b17fce483d904786c19a1b41ed70c2c75c",
+  "fatal-zero.log": "514eba079dbdd5e81f028ce64bd9d5027197e05f385467b3a29356a3071d1292",
+  "fatal-wrap.log": "0d98a31274efa0a1b5e8d7774377be186ff0397efa1c6a1bdfe44672f38a6fc4",
+  "off.bas": "140183e30f68ada122257c2688f52530a48f9a82f112b4254acf39d58e3a110f",
+  "retained-strings.bas": "74320ee94569a35a973af795078e0daec4c5bf61b1344f353cb2a7397356c728",
+  "off.log": "0d389a205f2f622a074049ebac8b45370151170b6cbbd021f0fc7cc589d1efdc",
+  "code-conversion-order.log": "6ba955824e1b5558e4d6469c8c6831feda1cd015aea331c209b2fb37b648af35",
+  "code-conversion-order.bas": "73270704ac6db76db3546720e6cab31157091c7210923e60c6f7def2fcbee9bb",
+  "local-at-root.bas": "6b9f322fdc1ceab2c30c071583a1ee4656f81c40e1512b7e9a2385abe121f29b",
+  "retained-strings.log": "03c5fa78c3bf21f46e326247d612a65c57175141c20c31ef10715a2448db918b",
+  "local-off-restores.log": "52e617ad78763444fab24086d20ce22be3393a2ed75f76483e838e99541fb6e1",
+  "fatal-zero.bas": "2d9e3bafdef9f60c586dcefb82b7dc110829f9a7824a1e27ebe73141071fbec5",
+  "fatal-wrap.bas": "1766dc5eec8321072723bdc27e088dfa99687d43d27edd95bcb0d22dbb2ba489",
+  "local-under-loop.log": "a67b403928df3adfcd43fa5aa840465eebf5d056a59a365d7256f7f26a7a8d9d",
+  "local-off-restores.bas": "9f790091c92d035360ff2ac19254053d6f2f30782be9d5920eafd24481655bd0",
+  "results.json": "d0cf45ff3fff083ca7b82bc18d9e60353fd6a454d906c22b91c43940674dbc88"
+}

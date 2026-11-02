@@ -209,3 +209,31 @@ line input10.377s; actual13-case BBC file reference passes1.607s. Direct FN
 filenames expose a full-DE pointer dependency and require explicit qualification
 or rejection. IO.md/DATA.md own the bounded contracts. No I/O language promotion
 is claimed yet. Continue C005 and C006 under the Author's authorization.
+
+## C005 file/input qualification and next bootstrap contracts
+
+Exact1849-line SHA483e1730 passes29 sources (23 native/6 rejected) in706.307s,
+deterministic repeat and all numeric/string/I/O GNU links. Actual MOS keyboard
+INPUT LINE matches reference ordinary/empty/255/default prompt67.855s; existing
+39/15 baseline/golden76.161s. Same-session END/fall-through/uncaught-error cleanup
+returns all eight handles59.299s. Exact source and788-byte/7-relocation I/O module
+are promoted with their packer; selected live checks are recorded separately.
+
+First full reference batch stalls at a255-character path. The variable follow-up
+also stalls; direct native helper and aligned MOS probes return. Retain failed
+bounded observations, exclude from passing scope, and record the boundary rather
+than invent equivalent results or change interpreter code. The first smoke's
+language suite passed, but its link lookup asserted on a relocated prefix; fixed
+lookup proves full module equality. Full corrected controller passes.
+
+DATA18 reference cases1.606s and native helper ABI1.016s establish empty fields,
+raw text, deferred errors and captured-cursor commit. A BBC frontend is prepared
+but unqualified. Error9+8 reference cases1.105/11.436s establish discarded LOCAL
+values, retained earlier locals, handler persistence, LOCAL ERROR no-op, fatal
+zero/OFF and REPORT/ERL behavior. No source-handler runtime is implemented yet.
+STREAMING.md records measured-host versus native resource distinctions and the
+static1958-numbered-line/symbol cap gap. C005/C006 remain the only TODO entries.
+
+Selected exact live I/O smoke passes123.702s; `io-promotion-001` retains two
+native images, repeated output, reference logs and complete GNU helper links.
+All six packers reproduce the promoted source (`io-repack-001`).

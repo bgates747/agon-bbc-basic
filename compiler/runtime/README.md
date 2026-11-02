@@ -106,3 +106,12 @@ storage glue remains BBC BASIC. DATA60000 follows the activation template;
 regenerate with `.venv/bin/python compiler/tools/build_memory_runtime.py
 --compiler compiler/compiler.bas`. Independent links at&42000/&48000 and native
 guard/register/error probes are retained in [C005](../../docs/tasks/C005/MEMORY.md).
+
+## MOS file and line-input helpers
+
+`io.s` is788 bytes with7 internal ADL24 relocations. It uses MOS API calls
+RST.LIL08, private256-byte filename/input buffers and explicit length-aware
+string writes. It preserves IX/IY/SP. `build_io_runtime.py --compiler
+compiler/compiler.bas` packages DATA61000 and verifies links at&42000/&48000.
+[I/O contract](../../docs/tasks/C005/IO.md) distinguishes direct helper ABI,
+actual keyboard-driven input, generated language tests and unqualified boundaries.

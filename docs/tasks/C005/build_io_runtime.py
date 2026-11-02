@@ -50,7 +50,9 @@ def main():
     (build/'runtime_data.bas').write_text(data)
     if args.compiler:
         original=args.compiler.read_text().split('61000 DATA',1)[0]
-        args.compiler.write_text(original+data)
+        suffix=args.compiler.read_text()
+        following='62000 DATA'+suffix.split('62000 DATA',1)[1] if '62000 DATA' in suffix else ''
+        args.compiler.write_text(original+data+following)
     report=dict(bytes=len(template),relocations=len(relocations),exports={n:syms[n] for n in EXPORTS},
                 independent_link_bases=[0x42000,0x48000],unresolved_symbols=0,
                 hashes={str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest()

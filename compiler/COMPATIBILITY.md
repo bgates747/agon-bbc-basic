@@ -43,7 +43,8 @@ existing string/numeric regressions on the reauthorized Pi5 CLI.
 | LOCAL, recursion with locals | Partial | Scalar numeric/string LOCAL and implicit parameter locals; dynamically visible, reverse restoration; newly created bindings remain defined;32768-byte arena and shared256 control records; LOCAL DATA/ERROR/arrays unsupported |
 | Arrays and DIM | Partial | Global byte/integer/variant/string arrays,1..16 dimensions and consistent static arity; row-major inclusive counts, SFIX/bounds, zero initialization, owned strings; raw %/variant DIM blocks and reference target mutation/repeated-DIM errors; LOCAL/whole arrays, array formals/FOR/slice targets, byte raw targets, DIM LOCAL and FN/address-of in array bounds rejected |
 | DATA/READ/RESTORE | Unsupported | Input to compiler may not use these yet |
-| File I/O and INPUT in compiled programs | Unsupported | Compiler itself uses host BASIC file I/O |
+| File I/O | Partial | OPENIN/OPENOUT/OPENUP, BGET/EOF/CLOSE and numeric/string BPUT; low-byte handles, binary data, LF/semicolon behavior and cleanup on exit; direct FN filename carriers rejected;255-character non-control paths unqualified; PTR/EXT and other file forms unsupported |
+| INPUT | Partial | INPUT LINE with one scalar string and optional literal prompt; actual MOS line editor, ordinary/empty/255-byte input, Escape17; separators, multiple targets, numeric/CSV INPUT and INPUT# unsupported |
 | Indirection and address-of | Partial | Unary ?/!/\| (byte/32-bit/five-byte variant), binary numeric base?offset/base!offset, unary ^scalar/element; low24 addresses and ITEM/SFIX precedence; string indirection and array-element binary targets excluded |
 | CALL/USR, inline assembler | Unsupported | No interpreter fallback |
 | Errors/ON ERROR in compiled programs | Unsupported | Built-in GOSUB/numeric/string errors only; no source error handlers |

@@ -1,0 +1,7 @@
+{
+  "passed": false,
+  "stage": "reference case11 OPENIN STRING$(255,\"q\")",
+  "guard_seconds": 45,
+  "completed_cases": 11,
+  "native_compilation_started": false
+}

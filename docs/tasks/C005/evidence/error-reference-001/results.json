@@ -1,0 +1,16 @@
+{
+  "scope": "Actual interpreted reference; no native recovery implementation",
+  "observations": {
+    "global-numeric": "ERR=100:1000:99\nboom\n",
+    "global-string": "inner\ninner\n",
+    "local-before": "ERR=100:1020:99\n42:7\n",
+    "local-after": "ERR=100:1020:99\n42:99\n",
+    "local-string-after": "inner\ninner\n42:inner\ninner\n",
+    "retained-handler": "100:1\n100:2\n",
+    "local-error-nop": "100:99\n",
+    "code-and-report": "1:20\none\n",
+    "negative-code": "255:20\nnegative\n"
+  },
+  "duration_seconds": 1.105,
+  "basic_sha256": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d"
+}

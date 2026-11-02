@@ -1,0 +1,25 @@
+{
+  "scope": "Actual interpreted DATA observations only",
+  "observations": {
+    "numeric": "-123:1:1:0.333333333:-1\n128:126:0\n",
+    "strings": "22:leading and trailing  :5:a,b:c:3:a\"b:5:123  :0\n",
+    "empty-strings": "0:0:0:0\n",
+    "empty-numeric": "REF_ERR=16:100\nSyntax error\n",
+    "blank-data": "0\n1\n",
+    "quoted-numeric": "REF_ERR=6:100\nType mismatch\n",
+    "numeric-expression": "8:8\n",
+    "colon-unquoted": "abc:def:ghi\n",
+    "colon-numeric": "REF_ERR=42:100\nOut of DATA\n",
+    "restore": "11:11:22:22\n",
+    "nonleading": "3\n",
+    "empty-target-order": "REF_ERR=42:100\nOut of DATA\n",
+    "nested-cursor": "11\n11:22\n",
+    "numeric-overflow-string": "1E1000\n",
+    "numeric-overflow": "REF_ERR=20:100\nNumber too big\n",
+    "trailing-quoted": "a:\n",
+    "retry-conversion": "6\nretry\n",
+    "retry-store": "20\n1E20\n"
+  },
+  "duration_seconds": 1.606,
+  "basic_sha256": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d"
+}

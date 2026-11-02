@@ -1,0 +1,178 @@
+10 ON ERROR REPORT:PRINT:OSCLI "BYE"
+20 @%=&90A
+100 CLEAR
+110 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+120 PRINT "REF_BEGIN_0"
+130 h%=OPENOUT("file.dat"):BPUT#h%,0:BPUT#h%,127:BPUT#h%,128:BPUT#h%,255:CLOSE#h%
+140 h%=OPENIN("file.dat"):PRINT ;h%>0;":";EOF#h%
+150 WHILE NOT EOF#h%:PRINT ;BGET#h%;",";:ENDWHILE:PRINT:PRINT ;EOF#h%:CLOSE#h%
+160 PRINT "REF_END_0"
+170 CLEAR
+180 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+190 PRINT "REF_BEGIN_1"
+200 h%=OPENOUT("file.dat"):BPUT#h%,CHR$(0)+CHR$(128)+CHR$(255)
+210 BPUT#h%,"";:BPUT#h%,"":BPUT#h%,STRING$(255,"q");:CLOSE#h%
+220 h%=OPENIN("file.dat"):PRINT ;h%>0;":";EOF#h%
+230 WHILE NOT EOF#h%:PRINT ;BGET#h%;",";:ENDWHILE:PRINT:PRINT ;EOF#h%:CLOSE#h%
+240 PRINT "REF_END_1"
+250 CLEAR
+260 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+270 PRINT "REF_BEGIN_2"
+280 PRINT ;OPENIN("io-impossible-no-file.dat");":";OPENUP("io-impossible-no-file.dat")
+290 PRINT "REF_END_2"
+300 CLEAR
+310 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+320 PRINT "REF_BEGIN_3"
+330 h%=OPENOUT("file.dat"):CLOSE#h%:h%=OPENIN("file.dat"):PRINT ;EOF#h%;":";BGET#h%:CLOSE#h%
+340 PRINT "REF_END_3"
+350 CLEAR
+360 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+370 PRINT "REF_BEGIN_4"
+380 h%=OPENOUT("file.dat"):BPUT#h%,0:BPUT#h%,127:BPUT#h%,128:BPUT#h%,255:CLOSE#h%
+390 h%=OPENOUT("file.dat"):BPUT#h%,65:CLOSE#h%
+400 h%=OPENIN("file.dat"):PRINT ;h%>0;":";EOF#h%
+410 WHILE NOT EOF#h%:PRINT ;BGET#h%;",";:ENDWHILE:PRINT:PRINT ;EOF#h%:CLOSE#h%
+420 PRINT "REF_END_4"
+430 CLEAR
+440 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+450 PRINT "REF_BEGIN_5"
+460 h%=OPENOUT("file.dat"):BPUT#h%,0:BPUT#h%,127:BPUT#h%,128:BPUT#h%,255:CLOSE#h%
+470 h%=OPENUP("file.dat"):BPUT#h%,42:CLOSE#h%
+480 h%=OPENIN("file.dat"):PRINT ;h%>0;":";EOF#h%
+490 WHILE NOT EOF#h%:PRINT ;BGET#h%;",";:ENDWHILE:PRINT:PRINT ;EOF#h%:CLOSE#h%
+500 PRINT "REF_END_5"
+510 CLEAR
+520 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+530 PRINT "REF_BEGIN_6"
+540 h%=OPENOUT("file.dat"):BPUT#h%,0:BPUT#h%,127:BPUT#h%,128:BPUT#h%,255:CLOSE#h%
+550 h%=OPENIN("file.dat"):BPUT#h%,42:CLOSE#h%
+560 h%=OPENIN("file.dat"):PRINT ;h%>0;":";EOF#h%
+570 WHILE NOT EOF#h%:PRINT ;BGET#h%;",";:ENDWHILE:PRINT:PRINT ;EOF#h%:CLOSE#h%
+580 PRINT "REF_END_6"
+590 CLEAR
+600 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+610 PRINT "REF_BEGIN_7"
+620 h%=OPENOUT("file.dat"):BPUT#h%,0:BPUT#h%,127:BPUT#h%,128:BPUT#h%,255:CLOSE#h%
+630 h%=OPENIN("file.dat"):PRINT ;BGET#(h%+256);":";EOF#(h%+256):CLOSE#(h%+256)
+640 PRINT ;BGET#0;":";EOF#0;":";BGET#255;":";EOF#255
+650 PRINT "REF_END_7"
+660 CLEAR
+670 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+680 PRINT "REF_BEGIN_8"
+690 h%=OPENOUT("file.dat"):BPUT#h%,0:BPUT#h%,127:BPUT#h%,128:BPUT#h%,255:CLOSE#h%
+700 h%=OPENIN("file.dat"):FOR i%=1 TO 4:v%=BGET#h%:NEXT
+710 PRINT ;BGET#h%;":";BGET#h%;":";EOF#h%:CLOSE#h%
+720 PRINT "REF_END_8"
+730 CLEAR
+740 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+750 PRINT "REF_BEGIN_9"
+760 h%=OPENOUT("file.dat"):BPUT#h%,0:BPUT#h%,127:BPUT#h%,128:BPUT#h%,255:CLOSE#h%
+770 DIM f%(8):FOR i%=0 TO 8:f%(i%)=OPENIN("file.dat"):PRINT ;f%(i%);",";:NEXT:PRINT
+780 CLOSE#255:h%=OPENIN("file.dat"):PRINT ;h%:CLOSE#0
+790 PRINT "REF_END_9"
+800 CLEAR
+810 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+820 PRINT "REF_BEGIN_10"
+830 h%=OPENOUT("file.dat"):BPUT#h%,0:BPUT#h%,127:BPUT#h%,128:BPUT#h%,255:CLOSE#h%
+840 h%=OPENIN("file.dat"+CHR$(0)+"ignored"):PRINT ;h%>0:CLOSE#h%
+850 h%=OPENIN("file.dat"+CHR$(13)+"ignored"):PRINT ;h%>0:CLOSE#h%
+860 PRINT "REF_END_10"
+870 CLEAR
+880 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+890 PRINT "REF_BEGIN_11"
+900 h%=OPENOUT("file.dat"):BPUT#h%,0:BPUT#h%,127:BPUT#h%,128:BPUT#h%,255:CLOSE#h%
+910 PRINT ;OPENIN(STRING$(255,"q"))
+920 PRINT "REF_END_11"
+930 CLEAR
+940 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+950 PRINT "REF_BEGIN_12"
+960 h%=OPENOUT("file.dat"):BPUT#h%,0:BPUT#h%,127:BPUT#h%,128:BPUT#h%,255:CLOSE#h%
+970 h%=OPENIN("file.dat"):PRINT ;BGET#h%+BGET#h%;":";BGET#h%+BGET#h%:CLOSE#h%
+980 PRINT "REF_END_12"
+990 CLEAR
+1000 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+1010 PRINT "REF_BEGIN_13"
+1020 h%=OPENOUT("file.dat"):BPUT#h%,0:BPUT#h%,127:BPUT#h%,128:BPUT#h%,255:CLOSE#h%
+1030 h%=OPENIN("file.dat"):PRINT ;100+BGET#FNgethandle;":";h%:CLOSE#h%
+1040 PRINT "REF_END_13"
+1050 CLEAR
+1060 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+1070 PRINT "REF_BEGIN_14"
+1080 h%=OPENOUT("file.dat"):old%=h%:BPUT#h%,FNputbyte:CLOSE#old%
+1090 h%=OPENIN("file.dat"):PRINT ;h%>0;":";EOF#h%
+1100 WHILE NOT EOF#h%:PRINT ;BGET#h%;",";:ENDWHILE:PRINT:PRINT ;EOF#h%:CLOSE#h%
+1110 PRINT "REF_END_14"
+1120 CLEAR
+1130 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+1140 PRINT "REF_BEGIN_15"
+1150 h%=OPENOUT("file.dat"):old%=h%:BPUT#h%,FNputstr;:CLOSE#old%
+1160 h%=OPENIN("file.dat"):PRINT ;h%>0;":";EOF#h%
+1170 WHILE NOT EOF#h%:PRINT ;BGET#h%;",";:ENDWHILE:PRINT:PRINT ;EOF#h%:CLOSE#h%
+1180 PRINT "REF_END_15"
+1190 CLEAR
+1200 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+1210 PRINT "REF_BEGIN_16"
+1220 h%=OPENOUT("file.dat"):BPUT#h%,0:BPUT#h%,127:BPUT#h%,128:BPUT#h%,255:CLOSE#h%
+1230 scratch$="file.datX":h%=OPENIN(FNfilename+""):PRINT ;h%>0:CLOSE#h%
+1240 PRINT "REF_END_16"
+1250 CLEAR
+1260 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+1270 PRINT "REF_BEGIN_17"
+1280 h%=OPENOUT("file.dat"):BPUT#h%,0:BPUT#h%,127:BPUT#h%,128:BPUT#h%,255:CLOSE#h%
+1290 f$=FNfilename:h%=OPENIN f$:PRINT ;h%>0:CLOSE#h%
+1300 PRINT "REF_END_17"
+1310 CLEAR
+1320 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+1330 PRINT "REF_BEGIN_18"
+1340 h%=OPENOUT("file.dat"):BPUT#h%,-0.9:BPUT#h%,-1:BPUT#h%,256.9:CLOSE#h%
+1350 h%=OPENIN("file.dat"):PRINT ;h%>0;":";EOF#h%
+1360 WHILE NOT EOF#h%:PRINT ;BGET#h%;",";:ENDWHILE:PRINT:PRINT ;EOF#h%:CLOSE#h%
+1370 PRINT "REF_END_18"
+1380 CLEAR
+1390 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+1400 PRINT "REF_BEGIN_19"
+1410 h%=OPENOUT("file.dat"):BPUT#h%,0:BPUT#h%,127:BPUT#h%,128:BPUT#h%,255:CLOSE#h%
+1420 PRINT ;BGET#(256.9);":";EOF#(256.9):CLOSE#-1
+1430 PRINT "REF_END_19"
+1440 CLEAR
+1450 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+1460 PRINT "REF_BEGIN_20"
+1470 PROCerror20
+1480 PRINT "REF_END_20"
+1490 CLEAR
+1500 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+1510 PRINT "REF_BEGIN_21"
+1520 PROCerror21
+1530 PRINT "REF_END_21"
+1540 CLEAR
+1550 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+1560 PRINT "REF_BEGIN_22"
+1570 PROCerror22
+1580 PRINT "REF_END_22"
+1590 CLEAR
+1600 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+1610 PRINT "REF_BEGIN_23"
+1620 PROCerror23
+1630 PRINT "REF_END_23"
+9000 PRINT "OUTPUT_REFERENCE_DONE":OSCLI "BYE"
+41300 DEF FNgethandle=h%
+41400 DEF FNputbyte:h%=0:=257
+41500 DEF FNputstr:h%=0:=CHR$(0)+CHR$(128)+CHR$(255)
+41600 DEF FNfilename="file.dat"
+41700 DEF FNfilename="file.dat"
+12000 DEF PROCerror20:LOCAL ERROR
+12001 ON ERROR LOCAL REPORT:PRINT:ENDPROC
+12002 PRINT BGET#1E20
+12090 ENDPROC
+12100 DEF PROCerror21:LOCAL ERROR
+12101 ON ERROR LOCAL REPORT:PRINT:ENDPROC
+12102 PRINT EOF#1E20
+12190 ENDPROC
+12200 DEF PROCerror22:LOCAL ERROR
+12201 ON ERROR LOCAL REPORT:PRINT:ENDPROC
+12202 CLOSE#1E20
+12290 ENDPROC
+12300 DEF PROCerror23:LOCAL ERROR
+12301 ON ERROR LOCAL REPORT:PRINT:ENDPROC
+12302 h%=OPENOUT("file.dat"):BPUT#h%,1E20
+12390 ENDPROC

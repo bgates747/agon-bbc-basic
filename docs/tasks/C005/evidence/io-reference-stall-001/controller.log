@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/Agon/mystuff/bbc-basic-v-adl/docs/tasks/C005/test_io.py", line 70, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/Agon/mystuff/bbc-basic-v-adl/docs/tasks/C005/test_io.py", line 60, in main
+    h.main()
+    ~~~~~~^^
+  File "/Agon/mystuff/bbc-basic-v-adl/docs/tasks/C002/tools/test_output.py", line 125, in main
+    oracle = harness.run_profile(profile, "load /bin/basic.bin\nrun . /output-reference.bas\n",
+                                  "OUTPUT_REFERENCE_DONE", "output-reference.log")
+  File "/Agon/mystuff/bbc-basic-v-adl/compiler/tools/test_compiler.py", line 44, in run_profile
+    raise AssertionError(f"Timed out waiting for {marker}; see {log_path}")
+AssertionError: Timed out waiting for OUTPUT_REFERENCE_DONE; see /Agon/mystuff/bbc-basic-v-adl/.emulator/output-reference.log

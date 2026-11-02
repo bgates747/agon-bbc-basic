@@ -46,9 +46,8 @@ The Author accepted the corrected C002 baseline for a development checkpoint.
    ```
 
    `@` followed by a name distinguishes a label from a variable, PROC, FN,
-   and BASIC's `@%` format variable. Labels share a program-wide namespace in
-   this milestone. Later procedure-local labels must not permit branches
-   across activation boundaries.
+   and BASIC's `@%` format variable. Labels belong to the global or current
+   PROC/FN scope; branches across activation boundaries are rejected.
 5. `GOTO` and `GOSUB` accept numeric line constants or named labels. Forward
    references are resolved after parsing. Duplicate and undefined labels are
    compile errors. Computed destinations are unsupported.
@@ -198,6 +197,20 @@ The Author accepted the corrected C002 baseline for a development checkpoint.
     index is validated before the next expression. Preserve the reference raw-DIM
     target-address seed and repeated-DIM error path. LOCAL/whole arrays, array
     formal parameters and unqualified reentrant DIM-bound expressions are rejected.
+
+27. OPENIN/OPENOUT/OPENUP evaluate one string item and return a MOS byte handle,
+    zero on failure. BGET/EOF/CLOSE use # plus an ITEM/SFIX low-byte channel. BGET
+    preserves actual MOS EOF/invalid-handle values; EOF is -1 only for MOS result1.
+    BPUT evaluates the channel before its RHS; numeric values use SFIX/low-byte,
+    strings write their exact bytes and append LF unless followed by semicolon.
+    File-using programs close handles on END, fall-through and uncaught exit.
+    Direct FN filename carriers are clearly rejected; the reference's stalled
+    255-character non-control filename boundary remains unqualified.
+28. INPUT LINE accepts one scalar string and an optional adjacent literal prompt.
+    Without a prompt it prints `? `. MOS line editing supplies up to255 bytes.
+    CRLF precedes storing a successful input; Escape17 leaves the prior value.
+    Separators, multiple destinations, numeric/CSV INPUT and INPUT# are rejected.
+    [I/O qualification](../docs/tasks/C005/IO.md) owns actual evidence and limits.
 
 ## Current backend and runtime contract
 

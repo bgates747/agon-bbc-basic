@@ -1,0 +1,6 @@
+10 s$="outer"
+20 ON ERROR PRINT s$:PROCoverwrite:PRINT s$:OSCLI "BYE"
+30 PROCfail
+40 PRINT "WRONG":OSCLI "BYE"
+1000 DEF PROCfail:LOCAL s$:s$="inner":ERROR 100,"boom"
+1010 DEF PROCoverwrite:LOCAL t$:t$=STRING$(255,"q"):ENDPROC

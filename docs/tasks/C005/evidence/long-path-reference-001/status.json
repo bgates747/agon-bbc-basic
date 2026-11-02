@@ -1,0 +1,6 @@
+{
+  "passed": false,
+  "guard_seconds": 20,
+  "observation": "255-byte variable filename: length printed, OPENIN did not return within guard",
+  "scope": "Interpreted reference only; no native result or root-cause claim"
+}

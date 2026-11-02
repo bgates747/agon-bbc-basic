@@ -47,3 +47,17 @@ and string contents; Python must neither parse programs nor implement READ.
    empty/maximal text, repeated reads, nested calls and byte-exact runtime loader
    records. Independently inspect/link the helper and recheck existing suites.
    No DATA syntax or self-hosting claim follows from this design document.
+
+## First actual observations
+
+`data-reference-001` passes18 cases in1.606s. Empty/blank/trailing string fields
+are empty; empty numeric fields give Syntax16, quoted numeric gives Type6. Leading
+spaces are removed and unquoted trailing spaces retained. Doubled quotes and
+quoted comma/colon survive. Numeric DATA expressions really evaluate; initial
+literal-only admission must reject them clearly. Nonleading DATA is not searched.
+RESTORE may target an existing non-DATA line and finds its next DATA, but the
+initial constant DATA-line admission can remain narrower and explicit. Exhaustion
+raises42 before destination effects; nested destination READ commits the captured
+outer next pointer. Conversion/store failure leaves the field for retry. Numeric
+overflow text reads as a string without error. Trailing junk after quoted fields
+and numeric colon terminators have parser quirks; reject those unqualified forms.

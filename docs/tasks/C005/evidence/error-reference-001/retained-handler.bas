@@ -1,0 +1,4 @@
+10 n%=0
+20 ON ERROR n%=n%+1:PRINT ;ERR;":";n%:IF n%<2 THEN GOTO 40 ELSE OSCLI "BYE"
+30 REM skip
+40 ERROR 100,"again"

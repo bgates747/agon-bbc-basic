@@ -1,0 +1,14 @@
+{
+  "local-before.bas": "7a9c7aaaf4c4b8b2c6d58c2fd00a904c43abc804a02d9e374a68c2e35b45420d",
+  "negative-code.bas": "3c3867817957c927b725d9afcffc836534c7d357876fb1d4e084066de90e1d41",
+  "code-and-report.bas": "008d1eb714a63a5bdcb14d1fb4f51fea23ba63afc99550546221ddc3c9f0c971",
+  "local-error-nop.bas": "dc965ceb02e12fa55656397e7b60a60e1cd26289c29ef822bfd0fbf8f722b2fd",
+  "global-numeric.bas": "c6c724525ae8df6fc19dacdce7c60a5da9fa62a7f711225b803235f38c0b1906",
+  "local-string-after.bas": "7e2c18a7b400bf4a1fbe05a2efd4b1c6ed28bcc4cd8e107fadc57cc248b52b13",
+  "reference.log": "819feb304918a4706bf4a724959f5a7fbeeff2ef14275301af9fd890b649aa6f",
+  "global-string.bas": "01f0191efd1237791d8f9fb18c96489d4d63863c6db71e3d4885119a3295f416",
+  "reference.py": "dd68aa947aa1a24e62cb0239bb24215e16aa972ca976c3fbdf7afa9157bd94bd",
+  "local-after.bas": "330abc183b64dcfbb61cb063bb5698a8fdaa9d9a6e5aefa7a4968ce06e559327",
+  "retained-handler.bas": "b846ed750a072574f892ffe89752bea579f91628337bcc6aa7600df1af6f151a",
+  "results.json": "1bdc7cc7687f1fb65fd4103021cdd4faccd174dc057111b5b327b43d3a606d80"
+}

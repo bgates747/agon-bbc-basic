@@ -1,0 +1,2 @@
+10 ON ERROR PRINT "WRONG":OSCLI "BYE"
+20 ERROR 0,"MSG_fatal-zero"

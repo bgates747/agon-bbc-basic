@@ -1,0 +1,1 @@
+h%=OPENIN("file.dat")

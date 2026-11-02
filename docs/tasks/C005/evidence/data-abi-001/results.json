@@ -1,0 +1,14 @@
+{
+  "scope": "Native DATA helper ABI, not frontend language qualification",
+  "exhaustion_before_destination": true,
+  "deferred_error_atomicity": true,
+  "empty_binary_and_maximum_strings": true,
+  "captured_cursor_commit": true,
+  "guards_and_index_stack_preservation": true,
+  "duration_seconds": 1.016,
+  "hashes": {
+    "docs/tasks/C005/data/abi.s": "d0e9a86b69c99a8badb10d9ebd7476044b1481179e75d93fa7d2dab3df122b49",
+    "docs/tasks/C005/build/data-abi/probe.bin": "41a520d7d37444dce653910b5f5c7459e95d6b9d27c35ceac0c2a90bca2bb85d",
+    "docs/tasks/C005/build/data-runtime/runtime-0.bin": "533864b6c4608d1a9e371f136fd7a6fa2417d487069cc5054cbd74ec49068e05"
+  }
+}

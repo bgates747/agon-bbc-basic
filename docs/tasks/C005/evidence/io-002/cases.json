@@ -1,0 +1,224 @@
+[
+  {
+    "source": "h%=OPENOUT(\"file.dat\"):BPUT#h%,0:BPUT#h%,127:BPUT#h%,128:BPUT#h%,255:CLOSE#h%\nh%=OPENIN(\"file.dat\"):PRINT ;h%>0;\":\";EOF#h%\nWHILE NOT EOF#h%:PRINT ;BGET#h%;\",\";:ENDWHILE:PRINT:PRINT ;EOF#h%:CLOSE#h%\nEND\n",
+    "reference_source": "h%=OPENOUT(\"file.dat\"):BPUT#h%,0:BPUT#h%,127:BPUT#h%,128:BPUT#h%,255:CLOSE#h%\nh%=OPENIN(\"file.dat\"):PRINT ;h%>0;\":\";EOF#h%\nWHILE NOT EOF#h%:PRINT ;BGET#h%;\",\";:ENDWHILE:PRINT:PRINT ;EOF#h%:CLOSE#h%\n",
+    "reference_definitions": [],
+    "reference": true,
+    "status": 0,
+    "expected": "-1:0\n0,127,128,255,\n-1\n"
+  },
+  {
+    "source": "h%=OPENOUT(\"file.dat\"):BPUT#h%,CHR$(0)+CHR$(128)+CHR$(255)\nBPUT#h%,\"\";:BPUT#h%,\"\":BPUT#h%,STRING$(255,\"q\");:CLOSE#h%\nh%=OPENIN(\"file.dat\"):PRINT ;h%>0;\":\";EOF#h%\nWHILE NOT EOF#h%:PRINT ;BGET#h%;\",\";:ENDWHILE:PRINT:PRINT ;EOF#h%:CLOSE#h%\nEND\n",
+    "reference_source": "h%=OPENOUT(\"file.dat\"):BPUT#h%,CHR$(0)+CHR$(128)+CHR$(255)\nBPUT#h%,\"\";:BPUT#h%,\"\":BPUT#h%,STRING$(255,\"q\");:CLOSE#h%\nh%=OPENIN(\"file.dat\"):PRINT ;h%>0;\":\";EOF#h%\nWHILE NOT EOF#h%:PRINT ;BGET#h%;\",\";:ENDWHILE:PRINT:PRINT ;EOF#h%:CLOSE#h%\n",
+    "reference_definitions": [],
+    "reference": true,
+    "status": 0,
+    "expected": "-1:0\n0,128,255,10,10,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,\n-1\n"
+  },
+  {
+    "source": "PRINT ;OPENIN(\"io-impossible-no-file.dat\");\":\";OPENUP(\"io-impossible-no-file.dat\")\nEND\n",
+    "reference_source": "PRINT ;OPENIN(\"io-impossible-no-file.dat\");\":\";OPENUP(\"io-impossible-no-file.dat\")\n",
+    "reference_definitions": [],
+    "reference": true,
+    "status": 0,
+    "expected": "0:0\n"
+  },
+  {
+    "source": "h%=OPENOUT(\"file.dat\"):CLOSE#h%:h%=OPENIN(\"file.dat\"):PRINT ;EOF#h%;\":\";BGET#h%:CLOSE#h%\nEND\n",
+    "reference_source": "h%=OPENOUT(\"file.dat\"):CLOSE#h%:h%=OPENIN(\"file.dat\"):PRINT ;EOF#h%;\":\";BGET#h%:CLOSE#h%\n",
+    "reference_definitions": [],
+    "reference": true,
+    "status": 0,
+    "expected": "-1:0\n"
+  },
+  {
+    "source": "h%=OPENOUT(\"file.dat\"):BPUT#h%,0:BPUT#h%,127:BPUT#h%,128:BPUT#h%,255:CLOSE#h%\nh%=OPENOUT(\"file.dat\"):BPUT#h%,65:CLOSE#h%\nh%=OPENIN(\"file.dat\"):PRINT ;h%>0;\":\";EOF#h%\nWHILE NOT EOF#h%:PRINT ;BGET#h%;\",\";:ENDWHILE:PRINT:PRINT ;EOF#h%:CLOSE#h%\nEND\n",
+    "reference_source": "h%=OPENOUT(\"file.dat\"):BPUT#h%,0:BPUT#h%,127:BPUT#h%,128:BPUT#h%,255:CLOSE#h%\nh%=OPENOUT(\"file.dat\"):BPUT#h%,65:CLOSE#h%\nh%=OPENIN(\"file.dat\"):PRINT ;h%>0;\":\";EOF#h%\nWHILE NOT EOF#h%:PRINT ;BGET#h%;\",\";:ENDWHILE:PRINT:PRINT ;EOF#h%:CLOSE#h%\n",
+    "reference_definitions": [],
+    "reference": true,
+    "status": 0,
+    "expected": "-1:0\n65,\n-1\n"
+  },
+  {
+    "source": "h%=OPENOUT(\"file.dat\"):BPUT#h%,0:BPUT#h%,127:BPUT#h%,128:BPUT#h%,255:CLOSE#h%\nh%=OPENUP(\"file.dat\"):BPUT#h%,42:CLOSE#h%\nh%=OPENIN(\"file.dat\"):PRINT ;h%>0;\":\";EOF#h%\nWHILE NOT EOF#h%:PRINT ;BGET#h%;\",\";:ENDWHILE:PRINT:PRINT ;EOF#h%:CLOSE#h%\nEND\n",
+    "reference_source": "h%=OPENOUT(\"file.dat\"):BPUT#h%,0:BPUT#h%,127:BPUT#h%,128:BPUT#h%,255:CLOSE#h%\nh%=OPENUP(\"file.dat\"):BPUT#h%,42:CLOSE#h%\nh%=OPENIN(\"file.dat\"):PRINT ;h%>0;\":\";EOF#h%\nWHILE NOT EOF#h%:PRINT ;BGET#h%;\",\";:ENDWHILE:PRINT:PRINT ;EOF#h%:CLOSE#h%\n",
+    "reference_definitions": [],
+    "reference": true,
+    "status": 0,
+    "expected": "-1:0\n42,127,128,255,\n-1\n"
+  },
+  {
+    "source": "h%=OPENOUT(\"file.dat\"):BPUT#h%,0:BPUT#h%,127:BPUT#h%,128:BPUT#h%,255:CLOSE#h%\nh%=OPENIN(\"file.dat\"):BPUT#h%,42:CLOSE#h%\nh%=OPENIN(\"file.dat\"):PRINT ;h%>0;\":\";EOF#h%\nWHILE NOT EOF#h%:PRINT ;BGET#h%;\",\";:ENDWHILE:PRINT:PRINT ;EOF#h%:CLOSE#h%\nEND\n",
+    "reference_source": "h%=OPENOUT(\"file.dat\"):BPUT#h%,0:BPUT#h%,127:BPUT#h%,128:BPUT#h%,255:CLOSE#h%\nh%=OPENIN(\"file.dat\"):BPUT#h%,42:CLOSE#h%\nh%=OPENIN(\"file.dat\"):PRINT ;h%>0;\":\";EOF#h%\nWHILE NOT EOF#h%:PRINT ;BGET#h%;\",\";:ENDWHILE:PRINT:PRINT ;EOF#h%:CLOSE#h%\n",
+    "reference_definitions": [],
+    "reference": true,
+    "status": 0,
+    "expected": "-1:0\n0,127,128,255,\n-1\n"
+  },
+  {
+    "source": "h%=OPENOUT(\"file.dat\"):BPUT#h%,0:BPUT#h%,127:BPUT#h%,128:BPUT#h%,255:CLOSE#h%\nh%=OPENIN(\"file.dat\"):PRINT ;BGET#(h%+256);\":\";EOF#(h%+256):CLOSE#(h%+256)\nPRINT ;BGET#0;\":\";EOF#0;\":\";BGET#255;\":\";EOF#255\nEND\n",
+    "reference_source": "h%=OPENOUT(\"file.dat\"):BPUT#h%,0:BPUT#h%,127:BPUT#h%,128:BPUT#h%,255:CLOSE#h%\nh%=OPENIN(\"file.dat\"):PRINT ;BGET#(h%+256);\":\";EOF#(h%+256):CLOSE#(h%+256)\nPRINT ;BGET#0;\":\";EOF#0;\":\";BGET#255;\":\";EOF#255\n",
+    "reference_definitions": [],
+    "reference": true,
+    "status": 0,
+    "expected": "0:0\n0:0:0:0\n"
+  },
+  {
+    "source": "h%=OPENOUT(\"file.dat\"):BPUT#h%,0:BPUT#h%,127:BPUT#h%,128:BPUT#h%,255:CLOSE#h%\nh%=OPENIN(\"file.dat\"):FOR i%=1 TO 4:v%=BGET#h%:NEXT\nPRINT ;BGET#h%;\":\";BGET#h%;\":\";EOF#h%:CLOSE#h%\nEND\n",
+    "reference_source": "h%=OPENOUT(\"file.dat\"):BPUT#h%,0:BPUT#h%,127:BPUT#h%,128:BPUT#h%,255:CLOSE#h%\nh%=OPENIN(\"file.dat\"):FOR i%=1 TO 4:v%=BGET#h%:NEXT\nPRINT ;BGET#h%;\":\";BGET#h%;\":\";EOF#h%:CLOSE#h%\n",
+    "reference_definitions": [],
+    "reference": true,
+    "status": 0,
+    "expected": "0:0:-1\n"
+  },
+  {
+    "source": "h%=OPENOUT(\"file.dat\"):BPUT#h%,0:BPUT#h%,127:BPUT#h%,128:BPUT#h%,255:CLOSE#h%\nDIM f%(8):FOR i%=0 TO 8:f%(i%)=OPENIN(\"file.dat\"):PRINT ;f%(i%);\",\";:NEXT:PRINT\nCLOSE#255:h%=OPENIN(\"file.dat\"):PRINT ;h%:CLOSE#0\nEND\n",
+    "reference_source": "h%=OPENOUT(\"file.dat\"):BPUT#h%,0:BPUT#h%,127:BPUT#h%,128:BPUT#h%,255:CLOSE#h%\nDIM f%(8):FOR i%=0 TO 8:f%(i%)=OPENIN(\"file.dat\"):PRINT ;f%(i%);\",\";:NEXT:PRINT\nCLOSE#255:h%=OPENIN(\"file.dat\"):PRINT ;h%:CLOSE#0\n",
+    "reference_definitions": [],
+    "reference": true,
+    "status": 0,
+    "expected": "1,2,3,4,5,6,7,8,0,\n1\n"
+  },
+  {
+    "source": "h%=OPENOUT(\"file.dat\"):BPUT#h%,0:BPUT#h%,127:BPUT#h%,128:BPUT#h%,255:CLOSE#h%\nh%=OPENIN(\"file.dat\"+CHR$(0)+\"ignored\"):PRINT ;h%>0:CLOSE#h%\nh%=OPENIN(\"file.dat\"+CHR$(13)+\"ignored\"):PRINT ;h%>0:CLOSE#h%\nEND\n",
+    "reference_source": "h%=OPENOUT(\"file.dat\"):BPUT#h%,0:BPUT#h%,127:BPUT#h%,128:BPUT#h%,255:CLOSE#h%\nh%=OPENIN(\"file.dat\"+CHR$(0)+\"ignored\"):PRINT ;h%>0:CLOSE#h%\nh%=OPENIN(\"file.dat\"+CHR$(13)+\"ignored\"):PRINT ;h%>0:CLOSE#h%\n",
+    "reference_definitions": [],
+    "reference": true,
+    "status": 0,
+    "expected": "-1\n-1\n"
+  },
+  {
+    "source": "h%=OPENOUT(\"file.dat\"):BPUT#h%,0:BPUT#h%,127:BPUT#h%,128:BPUT#h%,255:CLOSE#h%\nh%=OPENIN(\"file.dat\"):PRINT ;BGET#h%+BGET#h%;\":\";BGET#h%+BGET#h%:CLOSE#h%\nEND\n",
+    "reference_source": "h%=OPENOUT(\"file.dat\"):BPUT#h%,0:BPUT#h%,127:BPUT#h%,128:BPUT#h%,255:CLOSE#h%\nh%=OPENIN(\"file.dat\"):PRINT ;BGET#h%+BGET#h%;\":\";BGET#h%+BGET#h%:CLOSE#h%\n",
+    "reference_definitions": [],
+    "reference": true,
+    "status": 0,
+    "expected": "127:383\n"
+  },
+  {
+    "source": "h%=OPENOUT(\"file.dat\"):BPUT#h%,0:BPUT#h%,127:BPUT#h%,128:BPUT#h%,255:CLOSE#h%\nh%=OPENIN(\"file.dat\"):PRINT ;100+BGET#FNgethandle;\":\";h%:CLOSE#h%\nEND\nDEF FNgethandle=h%\n",
+    "reference_source": "h%=OPENOUT(\"file.dat\"):BPUT#h%,0:BPUT#h%,127:BPUT#h%,128:BPUT#h%,255:CLOSE#h%\nh%=OPENIN(\"file.dat\"):PRINT ;100+BGET#FNgethandle;\":\";h%:CLOSE#h%\n",
+    "reference_definitions": [
+      "DEF FNgethandle=h%"
+    ],
+    "reference": true,
+    "status": 0,
+    "expected": "100:1\n"
+  },
+  {
+    "source": "h%=OPENOUT(\"file.dat\"):old%=h%:BPUT#h%,FNputbyte:CLOSE#old%\nh%=OPENIN(\"file.dat\"):PRINT ;h%>0;\":\";EOF#h%\nWHILE NOT EOF#h%:PRINT ;BGET#h%;\",\";:ENDWHILE:PRINT:PRINT ;EOF#h%:CLOSE#h%\nEND\nDEF FNputbyte:h%=0:=257\n",
+    "reference_source": "h%=OPENOUT(\"file.dat\"):old%=h%:BPUT#h%,FNputbyte:CLOSE#old%\nh%=OPENIN(\"file.dat\"):PRINT ;h%>0;\":\";EOF#h%\nWHILE NOT EOF#h%:PRINT ;BGET#h%;\",\";:ENDWHILE:PRINT:PRINT ;EOF#h%:CLOSE#h%\n",
+    "reference_definitions": [
+      "DEF FNputbyte:h%=0:=257"
+    ],
+    "reference": true,
+    "status": 0,
+    "expected": "-1:0\n1,\n-1\n"
+  },
+  {
+    "source": "h%=OPENOUT(\"file.dat\"):old%=h%:BPUT#h%,FNputstr;:CLOSE#old%\nh%=OPENIN(\"file.dat\"):PRINT ;h%>0;\":\";EOF#h%\nWHILE NOT EOF#h%:PRINT ;BGET#h%;\",\";:ENDWHILE:PRINT:PRINT ;EOF#h%:CLOSE#h%\nEND\nDEF FNputstr:h%=0:=CHR$(0)+CHR$(128)+CHR$(255)\n",
+    "reference_source": "h%=OPENOUT(\"file.dat\"):old%=h%:BPUT#h%,FNputstr;:CLOSE#old%\nh%=OPENIN(\"file.dat\"):PRINT ;h%>0;\":\";EOF#h%\nWHILE NOT EOF#h%:PRINT ;BGET#h%;\",\";:ENDWHILE:PRINT:PRINT ;EOF#h%:CLOSE#h%\n",
+    "reference_definitions": [
+      "DEF FNputstr:h%=0:=CHR$(0)+CHR$(128)+CHR$(255)"
+    ],
+    "reference": true,
+    "status": 0,
+    "expected": "-1:0\n0,128,255,\n-1\n"
+  },
+  {
+    "source": "h%=OPENOUT(\"file.dat\"):BPUT#h%,0:BPUT#h%,127:BPUT#h%,128:BPUT#h%,255:CLOSE#h%\nscratch$=\"file.datX\":h%=OPENIN(FNfilename+\"\"):PRINT ;h%>0:CLOSE#h%\nEND\nDEF FNfilename=\"file.dat\"\n",
+    "reference_source": "h%=OPENOUT(\"file.dat\"):BPUT#h%,0:BPUT#h%,127:BPUT#h%,128:BPUT#h%,255:CLOSE#h%\nscratch$=\"file.datX\":h%=OPENIN(FNfilename+\"\"):PRINT ;h%>0:CLOSE#h%\n",
+    "reference_definitions": [
+      "DEF FNfilename=\"file.dat\""
+    ],
+    "reference": true,
+    "status": 0,
+    "expected": "-1\n"
+  },
+  {
+    "source": "h%=OPENOUT(\"file.dat\"):BPUT#h%,0:BPUT#h%,127:BPUT#h%,128:BPUT#h%,255:CLOSE#h%\nf$=FNfilename:h%=OPENIN f$:PRINT ;h%>0:CLOSE#h%\nEND\nDEF FNfilename=\"file.dat\"\n",
+    "reference_source": "h%=OPENOUT(\"file.dat\"):BPUT#h%,0:BPUT#h%,127:BPUT#h%,128:BPUT#h%,255:CLOSE#h%\nf$=FNfilename:h%=OPENIN f$:PRINT ;h%>0:CLOSE#h%\n",
+    "reference_definitions": [
+      "DEF FNfilename=\"file.dat\""
+    ],
+    "reference": true,
+    "status": 0,
+    "expected": "-1\n"
+  },
+  {
+    "source": "h%=OPENOUT(\"file.dat\"):BPUT#h%,-0.9:BPUT#h%,-1:BPUT#h%,256.9:CLOSE#h%\nh%=OPENIN(\"file.dat\"):PRINT ;h%>0;\":\";EOF#h%\nWHILE NOT EOF#h%:PRINT ;BGET#h%;\",\";:ENDWHILE:PRINT:PRINT ;EOF#h%:CLOSE#h%\nEND\n",
+    "reference_source": "h%=OPENOUT(\"file.dat\"):BPUT#h%,-0.9:BPUT#h%,-1:BPUT#h%,256.9:CLOSE#h%\nh%=OPENIN(\"file.dat\"):PRINT ;h%>0;\":\";EOF#h%\nWHILE NOT EOF#h%:PRINT ;BGET#h%;\",\";:ENDWHILE:PRINT:PRINT ;EOF#h%:CLOSE#h%\n",
+    "reference_definitions": [],
+    "reference": true,
+    "status": 0,
+    "expected": "-1:0\n0,255,0,\n-1\n"
+  },
+  {
+    "source": "h%=OPENOUT(\"file.dat\"):BPUT#h%,0:BPUT#h%,127:BPUT#h%,128:BPUT#h%,255:CLOSE#h%\nPRINT ;BGET#(256.9);\":\";EOF#(256.9):CLOSE#-1\nEND\n",
+    "reference_source": "h%=OPENOUT(\"file.dat\"):BPUT#h%,0:BPUT#h%,127:BPUT#h%,128:BPUT#h%,255:CLOSE#h%\nPRINT ;BGET#(256.9);\":\";EOF#(256.9):CLOSE#-1\n",
+    "reference_definitions": [],
+    "reference": true,
+    "status": 0,
+    "expected": "0:0\n"
+  },
+  {
+    "source": "PRINT BGET#1E20\nEND\n",
+    "reference_source": "PRINT BGET#1E20\n",
+    "reference_definitions": [],
+    "reference": true,
+    "status": 1,
+    "reference_error": true,
+    "expected": "Number too big\n"
+  },
+  {
+    "source": "PRINT EOF#1E20\nEND\n",
+    "reference_source": "PRINT EOF#1E20\n",
+    "reference_definitions": [],
+    "reference": true,
+    "status": 1,
+    "reference_error": true,
+    "expected": "Number too big\n"
+  },
+  {
+    "source": "CLOSE#1E20\nEND\n",
+    "reference_source": "CLOSE#1E20\n",
+    "reference_definitions": [],
+    "reference": true,
+    "status": 1,
+    "reference_error": true,
+    "expected": "Number too big\n"
+  },
+  {
+    "source": "h%=OPENOUT(\"file.dat\"):BPUT#h%,1E20\nEND\n",
+    "reference_source": "h%=OPENOUT(\"file.dat\"):BPUT#h%,1E20\n",
+    "reference_definitions": [],
+    "reference": true,
+    "status": 1,
+    "reference_error": true,
+    "expected": "Number too big\n"
+  },
+  {
+    "source": "h%=OPENIN FNfile\nEND\nDEF FNfile=\"file.dat\"\n",
+    "diagnostic": "Direct FN filename carriers are unqualified"
+  },
+  {
+    "source": "INPUT a%\n",
+    "diagnostic": "Only INPUT LINE is supported"
+  },
+  {
+    "source": "INPUT LINE a%\n",
+    "diagnostic": "INPUT LINE requires one scalar string variable"
+  },
+  {
+    "source": "INPUT LINE \"p\";a$\n",
+    "diagnostic": "Expected a name"
+  },
+  {
+    "source": "INPUT LINE a$,b$\n",
+    "diagnostic": "INPUT LINE separators and multiple targets are unsupported"
+  },
+  {
+    "source": "BPUT#1,2;\n",
+    "diagnostic": "Unexpected text after statement"
+  }
+]

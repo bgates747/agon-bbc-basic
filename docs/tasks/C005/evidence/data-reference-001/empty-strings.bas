@@ -1,0 +1,4 @@
+10 ON ERROR PRINT "REF_ERR=";ERR;":";ERL:REPORT:PRINT:OSCLI "BYE"
+100 READ a$,b$,c$,d$:PRINT ;LEN a$;":";LEN b$;":";LEN c$;":";LEN d$
+490 OSCLI "BYE"
+500 DATA ,, ,
