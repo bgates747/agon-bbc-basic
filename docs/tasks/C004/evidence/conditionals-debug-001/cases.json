@@ -1,0 +1,143 @@
+[
+  {
+    "source": "IF 1 THEN PRINT \"yes\" ELSE PRINT \"bad\"\nIF 0 THEN PRINT \"bad\" ELSE PRINT \"no\"\nIF 1 PRINT \"omitted\"\nIF 0 PRINT \"bad\"\nPRINT \"done\"\n",
+    "reference": true,
+    "status": 0,
+    "expected": "yes\nno\nomitted\ndone\n"
+  },
+  {
+    "source": "IF 0 THEN PRINT \"true\" ELSE PRINT \"false\"\nIF 1 THEN PRINT \"true\" ELSE PRINT \"false\"\nIF -1 THEN PRINT \"true\" ELSE PRINT \"false\"\nIF .9 THEN PRINT \"true\" ELSE PRINT \"false\"\nIF -.9 THEN PRINT \"true\" ELSE PRINT \"false\"\nIF 1.9 THEN PRINT \"true\" ELSE PRINT \"false\"\nIF -1.9 THEN PRINT \"true\" ELSE PRINT \"false\"\nIF &80000000 THEN PRINT \"true\" ELSE PRINT \"false\"\nIF &7FFFFFFF THEN PRINT \"true\" ELSE PRINT \"false\"\nIF 65536 THEN PRINT \"true\" ELSE PRINT \"false\"\nIF 16777216 THEN PRINT \"true\" ELSE PRINT \"false\"\nIF TRUE THEN PRINT \"true\" ELSE PRINT \"false\"\nIF FALSE THEN PRINT \"true\" ELSE PRINT \"false\"\nIF 1=1 THEN PRINT \"true\" ELSE PRINT \"false\"\nIF \"a\"<\"b\" THEN PRINT \"true\" ELSE PRINT \"false\"\n",
+    "reference": true,
+    "status": 0,
+    "expected": "false\ntrue\ntrue\nfalse\nfalse\ntrue\ntrue\ntrue\ntrue\ntrue\ntrue\ntrue\nfalse\ntrue\ntrue\n"
+  },
+  {
+    "source": "IF 0 THEN IF 0 THEN PRINT \"inner-yes\" ELSE PRINT \"inner-no\" ELSE PRINT \"outer-no\"\nIF 0 THEN IF 1 THEN PRINT \"inner-yes\" ELSE PRINT \"inner-no\" ELSE PRINT \"outer-no\"\nIF 1 THEN IF 0 THEN PRINT \"inner-yes\" ELSE PRINT \"inner-no\" ELSE PRINT \"outer-no\"\nIF 1 THEN IF 1 THEN PRINT \"inner-yes\" ELSE PRINT \"inner-no\" ELSE PRINT \"outer-no\"\n",
+    "reference": true,
+    "status": 0,
+    "expected": "inner-no\ninner-no\ninner-no\ninner-yes\n"
+  },
+  {
+    "source": "IF 0 THEN PRINT \"bad\":PRINT \"bad\" ELSE PRINT \"else\":PRINT \"tail\"\nIF 1 THEN PRINT \"then\":PRINT \"tail\" ELSE PRINT \"bad\":PRINT \"bad\"\nIF 0 THEN PRINT \"bad\" ELSE IF 1 THEN PRINT \"nested\" ELSE PRINT \"bad\"\n",
+    "reference": true,
+    "status": 0,
+    "expected": "else\ntail\nthen\ntail\nnested\n"
+  },
+  {
+    "source": "IF 1 THEN PRINT \"ELSE : THEN\" ELSE PRINT \"bad\"\nIF 0 THEN PRINT \"ELSE\" ELSE PRINT \"\"\"quoted\"\"\"\nIF 0 THEN REM ELSE PRINT \"bad\"\nIF 1 THEN REM ELSE PRINT \"bad\"\nPRINT \"after REM\"\n",
+    "reference": true,
+    "status": 0,
+    "expected": "ELSE : THEN\n\"quoted\"\nafter REM\n"
+  },
+  {
+    "source": "IF 1 THEN PRINT ELSE PRINT \"bad\"\nIF 0 THEN PRINT \"bad\" ELSE PRINT\nIF 0 THEN PRINT \"bad\" ELSE PRINT ;\nIF 1 THEN PRINT ;1 ELSE PRINT ;2\nIF 1 THEN PRINT \"x\"; ELSE PRINT \"bad\"\nPRINT \"y\"\n",
+    "reference": true,
+    "status": 0,
+    "expected": "\n\n1\nxy\n"
+  },
+  {
+    "source": "IF 0 THEN missing%=missing%+1:PRINT missing$\nIF 0 THEN PRINT 1E39 ELSE PRINT \"skipped overflow\"\nIF 1 THEN PRINT \"skipped error\" ELSE PRINT 1/0\n",
+    "reference": true,
+    "status": 0,
+    "expected": "skipped overflow\nskipped error\n"
+  },
+  {
+    "source": "IF 0 THEN\nPRINT \"bad\"\nELSE\nPRINT \"outer else\"\nIF 1 THEN\nPRINT \"inner true\"\nELSE\nPRINT \"bad\"\nENDIF\nENDIF\nPRINT \"done\"\n",
+    "reference": true,
+    "status": 0,
+    "expected": "outer else\ninner true\ndone\n"
+  },
+  {
+    "source": "IF 1 THEN\nPRINT \"true\"\nIF 0 THEN\nPRINT \"bad\"\nELSE PRINT \"inner else\"\nENDIF\nELSE PRINT \"bad\"\nENDIF\nIF 0 THEN\nPRINT \"bad\"\nENDIF\nPRINT \"done\"\n",
+    "reference": true,
+    "status": 0,
+    "expected": "true\ninner else\ndone\n"
+  },
+  {
+    "source": "IF 1 THEN a$=\"abc\":VDU 65,13,10 ELSE PRINT \"bad\"\nIF a$=\"abc\" THEN PRINT a$ ELSE PRINT \"bad\"\n",
+    "reference": true,
+    "status": 0,
+    "expected": "A\nabc\n"
+  },
+  {
+    "source": "IF missing THEN PRINT \"bad\"\n",
+    "reference": true,
+    "reference_error": true,
+    "status": 1,
+    "expected": "No such variable\n"
+  },
+  {
+    "source": "IF 1/0 THEN PRINT \"bad\"\n",
+    "reference": true,
+    "reference_error": true,
+    "status": 1,
+    "expected": "Division by zero\n"
+  },
+  {
+    "source": "IF 2147483648 THEN PRINT \"bad\"\n",
+    "reference": true,
+    "reference_error": true,
+    "status": 1,
+    "expected": "Number too big\n"
+  },
+  {
+    "source": "IF 1 THEN PRINT missing$ ELSE PRINT \"bad\"\n",
+    "reference": true,
+    "reference_error": true,
+    "status": 1,
+    "expected": "No such variable\n"
+  },
+  {
+    "source": "IF 0 THEN PRINT \"bad\" ELSE PRINT 1E39\n",
+    "reference": true,
+    "reference_error": true,
+    "status": 1,
+    "expected": "Number too big\n"
+  },
+  {
+    "source": "10 IF 0 THEN 40 ELSE 30\n20 PRINT \"bad\":END\n30 PRINT \"line\":END\n40 PRINT \"bad\":END\n",
+    "expected": "line\n",
+    "status": 0
+  },
+  {
+    "source": "IF 0 THEN GOTO @bad ELSE GOSUB @sub\nPRINT \"done\":END\n@bad:PRINT \"bad\":END\n@sub:PRINT \"sub\":RETURN\n",
+    "expected": "sub\ndone\n",
+    "status": 0
+  },
+  {
+    "source": "IF 1 THEN\nPRINT \"x\"\n",
+    "diagnostic": "Missing ENDIF"
+  },
+  {
+    "source": "ELSE\n",
+    "diagnostic": "ELSE without multiline IF"
+  },
+  {
+    "source": "ENDIF\n",
+    "diagnostic": "ENDIF without multiline IF"
+  },
+  {
+    "source": "IF 1 THEN\nELSE\nELSE\nENDIF\n",
+    "diagnostic": "Duplicate multiline ELSE"
+  },
+  {
+    "source": "PRINT 1 ELSE PRINT 2\n",
+    "diagnostic": "ELSE without inline IF"
+  },
+  {
+    "source": "IF \"x\" THEN PRINT 1\n",
+    "diagnostic": "String value used as a numeric item"
+  },
+  {
+    "source": "IF 1 THEN IF 1 THEN\nENDIF\n",
+    "diagnostic": "Multiline IF inside inline IF is unsupported"
+  },
+  {
+    "source": "IF 1 THEN\nIF 1 THEN\nIF 1 THEN\nIF 1 THEN\nIF 1 THEN\nIF 1 THEN\nIF 1 THEN\nIF 1 THEN\nIF 1 THEN\nIF 1 THEN\nIF 1 THEN\nIF 1 THEN\nIF 1 THEN\nIF 1 THEN\nIF 1 THEN\nIF 1 THEN\nIF 1 THEN\nIF 1 THEN\nIF 1 THEN\nIF 1 THEN\nIF 1 THEN\nIF 1 THEN\nIF 1 THEN\nIF 1 THEN\nIF 1 THEN\nIF 1 THEN\nIF 1 THEN\nIF 1 THEN\nIF 1 THEN\nIF 1 THEN\nIF 1 THEN\nIF 1 THEN\nIF 1 THEN\nENDIF\nENDIF\nENDIF\nENDIF\nENDIF\nENDIF\nENDIF\nENDIF\nENDIF\nENDIF\nENDIF\nENDIF\nENDIF\nENDIF\nENDIF\nENDIF\nENDIF\nENDIF\nENDIF\nENDIF\nENDIF\nENDIF\nENDIF\nENDIF\nENDIF\nENDIF\nENDIF\nENDIF\nENDIF\nENDIF\nENDIF\nENDIF\nENDIF\n",
+    "diagnostic": "Block nesting exceeds 32"
+  },
+  {
+    "source": "IF 1 THEN IF 1 THEN IF 1 THEN IF 1 THEN IF 1 THEN IF 1 THEN IF 1 THEN IF 1 THEN IF 1 THEN IF 1 THEN IF 1 THEN IF 1 THEN IF 1 THEN IF 1 THEN IF 1 THEN IF 1 THEN IF 1 THEN IF 1 THEN IF 1 THEN IF 1 THEN IF 1 THEN IF 1 THEN IF 1 THEN IF 1 THEN IF 1 THEN IF 1 THEN IF 1 THEN IF 1 THEN IF 1 THEN IF 1 THEN IF 1 THEN IF 1 THEN IF 1 THEN PRINT 1\n",
+    "diagnostic": "Source line exceeds 255 bytes"
+  }
+]

@@ -3,7 +3,7 @@
 This matrix describes the compiler, not the reference interpreter. A feature
 is implemented only for the stated scope. C001 output/control flow, C002 numeric
 expressions, C003 scalar numeric bindings, the mutable string core, expression slicing, comparisons, VAL/STR$/ASC and INSTR/STRING$ are
-promoted in the development tree. Broader strings and self-hosting remain unfinished. The Author accepted
+promoted in the development tree. C003 initial scalar/string scope is complete; broader facilities and self-hosting remain unfinished. The Author accepted
 the corrected C002 baseline for a development checkpoint; accepted testing is
 still required before main promotion. Execution speed is the only intended
 observable runtime difference for supported conventional programs. Possible
@@ -31,11 +31,12 @@ existing string/numeric regressions on the reauthorized Pi5 CLI.
 | Arithmetic and conversion | Partial | Binary + - * / ^ DIV MOD, unary signs, package overflow/promotion and VDU SFIX |
 | Standard math functions and PI | Implemented subset | ABS ACS ASN ATN COS DEG EXP INT LN LOG NOT RAD SGN SIN SQR TAN, PI; RND and OS functions remain unsupported |
 | Numeric formatting | Partial | Fixed G9, matching the reference; @% assignment and other PRINT formats unsupported |
-| Comparison and Boolean expressions | Partial | Numeric and string = <> <= >= < >, numeric NOT/AND/EOR/OR and TRUE/FALSE in expressions, assignments, VDU/PRINT; comparisons return -1/0; no shifts or IF statements |
+| Comparison and Boolean expressions | Partial | Numeric and string = <> <= >= < >, numeric NOT/AND/EOR/OR and TRUE/FALSE in expressions, assignments, VDU/PRINT; comparisons return -1/0; no shifts |
 | Numeric variables | Implemented subset | Plain/LET assignment and reads; five-byte unsuffixed variants, four-byte %, one-byte &; 128 bindings; runtime creation/undefined-read checks, predefined A%–Z%; global GOSUB mutation |
 | Mutable strings and string variables | Partial | Plain/LET `$` assignment, owned copying/self-assignment, + and parentheses, 0..255 bytes including NUL, LEN/CHR$/ASC, VAL and STR$ (default G9 or ~ hex), INSTR/STRING$, string PRINT, runtime existence; bounded private heap; LEFT$/RIGHT$/MID$ expressions with reference low-byte counts/optional arguments and six string relations; LEFT$/RIGHT$/MID$ scalar slice assignment with unchanged length/allocation and reference range markers; further I/O-dependent string functions unsupported |
 | Variable suffixes and default numeric variables | Partial | Case-sensitive numeric/string names with %/&/$ suffixes; 32-character ASCII body limit; ambiguous keyword prefixes, pseudo variables and other suffixes rejected |
-| IF/CASE/FOR/WHILE/REPEAT | Unsupported | Structured control flow pending |
+| IF/THEN/ELSE/ENDIF | Partial | Inline colon lists, omitted THEN, constant THEN/ELSE line targets and multiline blocks; SFIX truth and reference first-ELSE association; 32 nesting entries; block ELSE/ENDIF begin their line; multiline IF inside inline IF rejected |
+| CASE/FOR/WHILE/REPEAT | Unsupported | Loop and CASE implementation pending |
 | DEF PROC / ENDPROC | Unsupported | Never treated as GOSUB/RETURN |
 | DEF FN / function return | Unsupported | Separate activation semantics pending |
 | LOCAL, recursion with locals | Unsupported | Save/restore semantics required |

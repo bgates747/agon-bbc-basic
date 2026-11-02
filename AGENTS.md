@@ -45,7 +45,7 @@ development; selected live checks and earlier regressions pass.
 Slice assignment is qualified and promoted; C003 initial scalar/string scope is complete. Read
 `docs/tasks/C003/SCALARS.md`, `docs/tasks/C003/STRINGS.md`,
 `docs/tasks/C003/SLICES.md`, `docs/tasks/C003/CONVERSIONS.md`,
-`docs/tasks/C003/SEARCH-REPEAT.md`, `docs/tasks/C003/SLICE-STORE.md` and the task record. C004 conditionals are next; C005–C006 remain unstarted. The compiler is still BBC BASIC; assembly is runtime code, not a
+`docs/tasks/C003/SEARCH-REPEAT.md`, `docs/tasks/C003/SLICE-STORE.md` and the task record. C004 conditionals are qualified/promoted (26 programs); loops and activation are active next. C005–C006 remain unstarted. Read docs/tasks/C004.md and conditionals/AUDIT.md. The compiler is still BBC BASIC; assembly is runtime code, not a
 replacement compiler implementation.
 
 Use `.venv/bin/python` explicitly. `compiler/README.md` contains build/test

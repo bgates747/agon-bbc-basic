@@ -123,6 +123,17 @@ The Author accepted the corrected C002 baseline for a development checkpoint.
     always evaluated. Reference range markers, short-RHS right alignment and
     self-reference are preserved. See [slice assignment](../docs/tasks/C003/SLICE-STORE.md).
 
+18. IF accepts numeric conditions, inline THEN/ELSE colon lists, omitted THEN
+    before an inline statement, conventional constant THEN/ELSE line targets,
+    and multiline IF THEN / ELSE / ENDIF. Conditions pass through reference SFIX
+    then test all four integer bytes. Inline false paths select the first
+    unquoted ELSE before REM/end-of-line, including through nested inline IFs;
+    executed ELSE skips the remaining line. Block ELSE/ENDIF begin their physical
+    statement line; opening a multiline IF inside an inline IF is rejected.
+    Inline and multiline nesting each have32 entries. Invalid structures fail
+    before output creation. Unselected arms do not execute their binding creation,
+    arithmetic or literal-error code.
+
 ## Current backend and runtime contract
 
 1. The compiler owns a 65536-byte output buffer. Code loads at `&040000`, with

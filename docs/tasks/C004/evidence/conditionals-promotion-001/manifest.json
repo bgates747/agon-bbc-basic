@@ -1,0 +1,22 @@
+{
+  "conditionals-smoke.log": "c6982f7db05643f5d8884d8490cfbfc95c7745cd779f2fa5178ed16f2bf60799",
+  "baseline.log": "a8f5f30a4abef230fd3937cb6f3eb7df4f701dfb6dc6422ecd5ebcdfba27168f",
+  "compiler.bas": "21c91592682d25b3516ded16230432942b54085efa61d403989ac929ad4b25e7",
+  "slice-store-smoke.log": "18c507271bb4ef95141d1b79d7957c159e7e4726cb30961a46da6ec5c2afe03b",
+  "summary.json": "01d4da28f98f0dda73a73ed873b4cfdc0d8e6d180c49f25875cef16f56a6e8f1",
+  "baseline/test-results.json": "a8f5f30a4abef230fd3937cb6f3eb7df4f701dfb6dc6422ecd5ebcdfba27168f",
+  "conditionals-smoke/cases.json": "2fba214d2f39756df7b61c4443bd8443510a3bbd792c606b5c25103175f6ccd6",
+  "conditionals-smoke/native.log": "ebdc503c26d186119d00493234b0290daa708c9f027969abce9dcf4a07d62129",
+  "conditionals-smoke/reference.bas": "a561c83648f0e4e0acb62d95cd71a8402cf8bd26d0adacce7321482dac2ca7a4",
+  "conditionals-smoke/driver.bas": "9817744db4325691dcfe31bef07cbc255c7f18d53d393064eebb4d277ebdde0f",
+  "conditionals-smoke/reference.log": "7d71b01bc4f08cd04ac8e4ab1d3957ac3a02e05bba193b96bce75125ced10942",
+  "conditionals-smoke/compile.log": "b5b7c384d53ffda33d1d42482f07b70ed499a0c1415b19c4927bfe0ed7ac2cda",
+  "conditionals-smoke/results.json": "c6982f7db05643f5d8884d8490cfbfc95c7745cd779f2fa5178ed16f2bf60799",
+  "slice-store-smoke/cases.json": "43ef32211c1f4d2f5a19409e3f90619ad1f42e785b78532bad40ba57c6209c41",
+  "slice-store-smoke/native.log": "6cd93ed5d53167d0b5e6011f4624276b4ebd782d5ee0a459ff3b821d54cbe239",
+  "slice-store-smoke/reference.bas": "80c7e467bb203a79d10b8b83589587a3411530d8b210dfc785c7e9b4b806b488",
+  "slice-store-smoke/driver.bas": "9817744db4325691dcfe31bef07cbc255c7f18d53d393064eebb4d277ebdde0f",
+  "slice-store-smoke/reference.log": "31ccf9089b2ce4dbd998a77b3bd8ee381973abd2c565dfb9d860492e8f8e3ed4",
+  "slice-store-smoke/compile.log": "b5b7c384d53ffda33d1d42482f07b70ed499a0c1415b19c4927bfe0ed7ac2cda",
+  "slice-store-smoke/results.json": "18c507271bb4ef95141d1b79d7957c159e7e4726cb30961a46da6ec5c2afe03b"
+}

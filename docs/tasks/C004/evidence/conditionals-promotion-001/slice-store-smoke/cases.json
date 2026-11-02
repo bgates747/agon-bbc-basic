@@ -1,0 +1,8 @@
+[
+  {
+    "source": "a$=\"abcdef\":LEFT$(a$)=\"XYZ\":PRINT a$\na$=\"abcdef\":RIGHT$(a$)=\"XYZ\":PRINT a$\na$=\"abcdef\":MID$(a$,2)=\"XYZ\":PRINT a$\na$=\"abcdef\":MID$(a$,0)=\"XYZ\":PRINT a$\na$=\"abcdef\":MID$(a$,0,2)=\"XYZ\":PRINT a$\n",
+    "reference": true,
+    "status": 0,
+    "expected": "XYZdef\nabcdeX\naXYZef\nabcdef\nabcdXY\n"
+  }
+]

@@ -1,0 +1,8 @@
+{
+  "byte_identical_promotion": true,
+  "full_prototype_programs": 26,
+  "full_prototype_native": 17,
+  "full_prototype_rejected": 9,
+  "selected_live": true,
+  "human_hardware_validation": false
+}

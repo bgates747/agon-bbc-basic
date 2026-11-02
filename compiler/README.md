@@ -12,7 +12,8 @@ regression tests and tooling are alongside it. C002's numeric expressions, outpu
 fractional/scientific literals and runtime
 are in this development tree, with the corrected C002 baseline accepted for
 a development checkpoint. C003 numeric bindings and the mutable string core
-and conversions are promoted; further string functions remain unfinished. Promotion to `main` awaits accepted testing.
+and required scalar/string operations are qualified and promoted. Numeric IF with
+inline THEN/ELSE and multiline IF/ELSE/ENDIF is also promoted under C004. Promotion to `main` awaits accepted testing.
 
 ## Running on Agon
 
@@ -125,3 +126,9 @@ stops. See C003 for the exact qualification scope and evidence.
 [Slice assignment](../docs/tasks/C003/SLICE-STORE.md) updates existing scalar
 string contents with reference range rules. [slice-store.bas](examples/slice-store.bas)
 is the qualified mixed example; length and allocation stay unchanged.
+
+[Conditional control flow](../docs/tasks/C004/conditionals/AUDIT.md) supports
+inline statement lists, conventional THEN/ELSE line targets and multiline blocks.
+Conditions use reference SFIX integer truth, including fractional-zero behavior;
+nested inline IF preserves first-ELSE association. Block ELSE/ENDIF must start
+their physical statement line. C004 remains active for loops, PROC/FN and LOCAL.

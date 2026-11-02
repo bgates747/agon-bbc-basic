@@ -17,3 +17,24 @@ no-allocation slice writes, deterministic output and prior regressions qualified
 Removed C003 from the sole TODO. Arrays/I/O remain C005 and LOCAL C004.
 The Author authorized checkpointing and continuing without prior approval stops.
 No Oryx contact, human/hardware validation or benchmark is claimed.
+
+## C004 conditionals started
+
+C003 checkpoint020546f is committed/pushed. Reference-only IF probes establish
+SFIX truth and first-ELSE association through nested inline IFs. The BBC prototype
+emits native jumps, with bounded multiline/inline parser state and unchanged
+numeric/string runtime. Initial mixed smoke passes (22.894s). A full compile
+caught an inserted source line numbered after its containing ENDPROC, causing
+ELSE-line targets to be rejected. Corrected its number/order, added a loader-safe
+source check to the harness and retained the failed attempt separately. Full
+qualification repeats; this is not yet a live promotion or C004 completion.
+
+## Conditionals qualified and promoted
+
+All26 programs pass (17 native/nine rejected) in152.941s, with15 actual-BASIC
+reference cases. Baseline39/15 passes at prototype33.146s and live33.142s; exact
+source SHA21c91592682d25b3516ded16230432942b54085efa61d403989ac929ad4b25e7
+is promoted. Live conditional smoke21.758s and slice-write regression33.114s pass.
+Frozen evidence retains both scopes and the earlier loader-order correction.
+Unchanged numeric/string runtimes and original golden protect earlier behavior.
+C004 remains active; the next prototype introduces typed loop/GOSUB records.

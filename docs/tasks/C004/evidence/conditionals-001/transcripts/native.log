@@ -1,0 +1,114 @@
+Warning: unused arguments left: ["--firmware", "platform"].
+Tom's Fake VDP Version 1.03
+unknown packet VDU 0x17, 0, 0xf8
+unknown packet VDU 0x17, 0, 0x99
+uunknown packet VDU 0x17, 0, 0x94
+
+Agon Platform MOS Version 3.0.2 Arthur
+
+OUTPUT_BEGIN_0
+yes
+no
+omitted
+done
+OUTPUT_STATUS:0
+OUTPUT_END_0
+OUTPUT_BEGIN_1
+false
+true
+true
+false
+false
+true
+true
+true
+true
+true
+true
+true
+false
+true
+true
+OUTPUT_STATUS:0
+OUTPUT_END_1
+OUTPUT_BEGIN_2
+inner-no
+inner-no
+inner-no
+inner-yes
+OUTPUT_STATUS:0
+OUTPUT_END_2
+OUTPUT_BEGIN_3
+else
+tail
+then
+tail
+nested
+OUTPUT_STATUS:0
+OUTPUT_END_3
+OUTPUT_BEGIN_4
+ELSE : THEN
+"quoted"
+after REM
+OUTPUT_STATUS:0
+OUTPUT_END_4
+OUTPUT_BEGIN_5
+
+
+1
+xy
+OUTPUT_STATUS:0
+OUTPUT_END_5
+OUTPUT_BEGIN_6
+skipped overflow
+skipped error
+OUTPUT_STATUS:0
+OUTPUT_END_6
+OUTPUT_BEGIN_7
+outer else
+inner true
+done
+OUTPUT_STATUS:0
+OUTPUT_END_7
+OUTPUT_BEGIN_8
+true
+inner else
+done
+OUTPUT_STATUS:0
+OUTPUT_END_8
+OUTPUT_BEGIN_9
+A
+abc
+OUTPUT_STATUS:0
+OUTPUT_END_9
+OUTPUT_BEGIN_10
+No such variable
+OUTPUT_STATUS:1
+OUTPUT_END_10
+OUTPUT_BEGIN_11
+Division by zero
+OUTPUT_STATUS:1
+OUTPUT_END_11
+OUTPUT_BEGIN_12
+Number too big
+OUTPUT_STATUS:1
+OUTPUT_END_12
+OUTPUT_BEGIN_13
+No such variable
+OUTPUT_STATUS:1
+OUTPUT_END_13
+OUTPUT_BEGIN_14
+Number too big
+OUTPUT_STATUS:1
+OUTPUT_END_14
+OUTPUT_BEGIN_15
+line
+OUTPUT_STATUS:0
+OUTPUT_END_15
+OUTPUT_BEGIN_16
+sub
+done
+OUTPUT_STATUS:0
+OUTPUT_END_16
+OUTPUT_NATIVE_DONE
+/ *

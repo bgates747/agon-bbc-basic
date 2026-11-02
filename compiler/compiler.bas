@@ -14,11 +14,13 @@
 1024 DIM cvname$(127),cvsize%(127),cvstatic%(127),cvtype%(127),ckwords$(4)
 1026 PROCkeywords
 1028 PROCloadstrings
+1029 DIM cifid$(31),cbid$(31),cbelse%(31)
 1030 ENDPROC
 1040 DEF PROCcompile(csource$,ctarget$)
 1050 LOCAL ci%,cj%,cn%,cfh%,coh%
 1060 cpc%=0:csnum%=0:crnum%=0:clnum%=0:cpos%=1:clast%=-1:ccr%=FALSE
 1062 cnumeric%=FALSE:cnslots%=0:cnparse%=0:cndepth%=0:cvnum%=0:cstrings%=FALSE:csdepth%=0:csslots%=0:csvars%=0:cvaluekind%=0
+1064 cflow%=0:cbnum%=0
 1070 IF csource$=ctarget$ PROCbad("Source and output must differ")
 1080 cfh%=OPENIN(csource$)
 1090 IF cfh%=0 PROCbad("Cannot open source")
@@ -36,6 +38,7 @@
 1210 PROCline
 1220 ENDWHILE
 1230 CLOSE#cfh%:cfh%=0
+1232 IF cbnum%<>0 PROCbad("Missing ENDIF")
 1240 PROCaddr("C3","$end")
 1250 PROCruntime
 1260 FOR ci%=0 TO crnum%-1
@@ -64,16 +67,19 @@
 1490 cline$=cline$+CHR$(cb%)
 1500 ENDPROC
 1510 DEF PROCline
-1520 LOCAL cn%,cw$,ct%
+1520 LOCAL cn%,cw$,ct%,cinum%,cleid$,ccont%,cfirst%,cinseen%
+1522 cinum%=0:cleid$="":cfirst%=TRUE:cinseen%=FALSE
 1530 PROCspace
 1540 IF FNdigit(FNpeek) PROCnumberlabel
 1570 PROCspace
 1580 WHILE FNpeek<>""
 1590 WHILE FNpeek=":":cpos%=cpos%+1:PROCspace:ENDWHILE
-1595 IF FNpeek<>"" PROCstatement
+1595 ccont%=FALSE:IF FNpeek<>"" PROCstatement
 1600 PROCspace
-1610 IF FNpeek<>"" AND FNpeek<>":" PROCbad("Unexpected text after statement")
+1605 cfirst%=FALSE
+1610 IF FNpeek<>"" AND FNpeek<>":" AND NOT ccont% AND NOT FNword("ELSE") PROCbad("Unexpected text after statement")
 1615 ENDWHILE
+1618 PROCiffalse:IF cleid$<>"" PROClabel(cleid$)
 1620 ENDPROC
 1622 DEF PROCnumberlabel
 1624 LOCAL cn%
@@ -85,6 +91,9 @@
 1650 IF FNpeek="@" THEN cpos%=cpos%+1:cn$=FNname:PROCexpect(":"):PROClabel("@"+cn$):cpos%=cpos%-1:ENDPROC
 1660 cw$=FNname
 1662 IF (cw$="LEFT" OR cw$="RIGHT" OR cw$="MID") AND FNpeek="$" THEN cpos%=cpos%+1:PROCstrsliceassign(cw$):ENDPROC
+1664 IF cw$="IF" THEN PROCif:ENDPROC
+1666 IF cw$="ELSE" THEN PROCelse:ENDPROC
+1668 IF cw$="ENDIF" THEN PROCendif:ENDPROC
 1670 IF cw$="REM" THEN cpos%=LEN(cline$)+1:ENDPROC
 1680 IF cw$="PRINT" THEN PROCprint:ENDPROC
 1690 IF cw$="VDU" THEN PROCvdu:ENDPROC
@@ -106,11 +115,11 @@
 1830 DEF PROCprint
 1840 LOCAL cs$,cmore%,csuppress%,cwidth%
 1850 PROCspace:csuppress%=FALSE:cwidth%=10
-1860 IF FNpeek="" OR FNpeek=":" THEN PROCnewline:ENDPROC
+1860 IF FNstmtend THEN PROCnewline:ENDPROC
 1870 REPEAT
 1872 WHILE FNpeek=";":cpos%=cpos%+1:PROCspace:csuppress%=TRUE:cwidth%=0:ENDWHILE
 1874 cmore%=FALSE
-1880 IF FNpeek<>"" AND FNpeek<>":" THEN csuppress%=FALSE:PROCprintitem
+1880 IF NOT FNstmtend THEN csuppress%=FALSE:PROCprintitem
 1920 UNTIL NOT cmore%
 1930 IF NOT csuppress% PROCnewline
 1940 ENDPROC
@@ -547,7 +556,7 @@
 7210 cp%=cpos%
 7220 IF FNpeek<>CHR$(34) THEN PROCprintnumber:ENDPROC
 7230 cs$=FNstring:PROCspace
-7240 IF FNpeek="" OR FNpeek=":" OR FNpeek=";" THEN PROCtext(cs$):ENDPROC
+7240 IF FNstmtend OR FNpeek=";" THEN PROCtext(cs$):ENDPROC
 7250 cpos%=cp%:PROCprintnumber
 7260 ENDPROC
 7270 DEF PROCprintstrvalue
@@ -716,6 +725,51 @@
 9030 DEF PROCwriterange
 9040 cpos%=cpos%+1:PROCbyte(&E5):PROCcount:PROCbyte(&E1)
 9050 PROCbytes("B7280D3D8567300C7D3C280826FE180421010000"):ENDPROC
+9100 DEF FNword(cw$)
+9110 =MID$(cline$,cpos%,LEN(cw$))=cw$ AND NOT FNalpha(MID$(cline$,cpos%+LEN(cw$),1)) AND NOT FNdigit(MID$(cline$,cpos%+LEN(cw$),1))
+9120 DEF FNstmtend
+9130 =(FNpeek="" OR FNpeek=":" OR FNword("ELSE"))
+9140 DEF FNflow
+9150 cflow%=cflow%+1:="$if"+STR$(cflow%)
+9160 DEF PROCcondition
+9170 cndepth%=0:csdepth%=0:PROCexpr(1):PROCneednumber:PROCnumindices(0,0):PROCnumcall(38)
+9180 PROCbytes("DD7E00DDB601DDB602DDB603"):cndepth%=0
+9190 ENDPROC
+9200 DEF PROCif
+9210 LOCAL cid$,cthen%
+9220 PROCcondition:cid$=FNflow:PROCspace:cthen%=FNword("THEN")
+9230 IF cthen% THEN cpos%=cpos%+4:PROCspace
+9240 IF cthen% AND FNpeek="" THEN PROCifblock(cid$):ENDPROC
+9250 IF cinum%=32 PROCbad("Inline IF nesting exceeds 32")
+9260 cifid$(cinum%)=cid$:cinum%=cinum%+1:cinseen%=TRUE
+9270 PROCaddr("CA",cid$):ccont%=TRUE
+9280 IF cthen% AND FNdigit(FNpeek) PROCbranch("GOTO"):ccont%=FALSE
+9290 ENDPROC
+9300 DEF PROCifblock(cid$)
+9310 IF cinum%<>0 PROCbad("Multiline IF inside inline IF is unsupported")
+9320 IF cbnum%=32 PROCbad("Block nesting exceeds 32")
+9330 cbid$(cbnum%)=cid$:cbelse%(cbnum%)=FALSE:cbnum%=cbnum%+1:PROCaddr("CA",cid$)
+9340 ENDPROC
+9350 DEF PROCiffalse
+9360 WHILE cinum%>0:cinum%=cinum%-1:PROClabel(cifid$(cinum%)):ENDWHILE
+9370 ENDPROC
+9380 DEF PROCelse
+9390 IF NOT cfirst% THEN PROCinlineelse:ENDPROC
+9400 IF cbnum%=0 PROCbad("ELSE without multiline IF")
+9410 IF cbelse%(cbnum%-1) PROCbad("Duplicate multiline ELSE")
+9420 PROCaddr("C3",cbid$(cbnum%-1)+"e"):PROClabel(cbid$(cbnum%-1)):cbelse%(cbnum%-1)=TRUE:ccont%=TRUE
+9430 ENDPROC
+9440 DEF PROCinlineelse
+9450 IF NOT cinseen% PROCbad("ELSE without inline IF")
+9460 IF cleid$="" cleid$=FNflow
+9470 PROCaddr("C3",cleid$):PROCiffalse:ccont%=TRUE:PROCspace
+9475 IF FNdigit(FNpeek) PROCbranch("GOTO"):ccont%=FALSE
+9480 ENDPROC
+9490 DEF PROCendif
+9500 IF NOT cfirst% PROCbad("ENDIF must begin a statement line")
+9510 IF cbnum%=0 PROCbad("ENDIF without multiline IF")
+9520 cbnum%=cbnum%-1:IF cbelse%(cbnum%) THEN PROClabel(cbid$(cbnum%)+"e") ELSE PROClabel(cbid$(cbnum%))
+9530 ENDPROC
 20000 DATA 4460,387,644,0,12,113,212,267,283
 20010 DATA "E1DDE5D101050000EDB0E5C9DD7E04B72809DD7E03EE80DD7703C9DDE5E10604377E2FCE00772310"
 20020 DATA "F8C9DDE5FDE50100000021000000DD6E02DD6603DD4E04D921000000DD6E00DD6601D9FDE5D1DD21"

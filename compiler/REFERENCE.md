@@ -216,3 +216,13 @@ remain in [TODO.md](../TODO.md).
    and numeric runtime/vendor/license remain unchanged. Same source attribution
    and repository license apply. [Qualification](../docs/tasks/C003/SLICE-STORE.md)
    compares exact reference bytes, metadata, no-allocation and guard behavior.
+
+## Conditional adaptation
+
+EXEC.Z80 IF/IFNOT/IFTHEN/MELSE uses EXPRI/SFIX and four-byte TEST, first-ELSE
+inline scanning, and multiline THEN-at-line-end scanning. Native branches replace
+token dispatch; BBC compile-time labels/state replace runtime token pointers.
+No interpreter entry/global or new arithmetic implementation is linked.
+[Audit and actual reference probes](../docs/tasks/C004/conditionals/AUDIT.md)
+record first-ELSE and fractional truth behavior; the numeric/string runtime is
+unchanged. C004 records differential qualification and exact promotion.

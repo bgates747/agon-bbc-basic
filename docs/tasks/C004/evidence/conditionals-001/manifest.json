@@ -1,0 +1,20 @@
+{
+  "oracle.log": "d44300405df9c9f07173dcfaff5a8a5dce949284a693dfa4ccb4107b4841600d",
+  "check-source.py": "65280eb8172785ab43bc5223a3537c6459c354c99eacc4d2d572f8f5625fa8c9",
+  "qualification-driver.py": "76ddd0148c4b53fdfdb86d17bcea4d0e7672d3f8d3c794b1b23f9f58b1b68c8b",
+  "AUDIT.md": "9af9f35950a7bf719862e81c3af65c521c6e2ddfee6e81fb24a22ef894a0a67c",
+  "baseline.log": "b838026560b20e24e7412df24788c545b5a6d4293769692dad889b1a9d5218b3",
+  "oracle.bas": "05096ba64a386a61da984d446604f37c2293c2822a2bed56a85b6bc4fc55c162",
+  "compiler.bas": "21c91592682d25b3516ded16230432942b54085efa61d403989ac929ad4b25e7",
+  "summary.json": "5ee5ea2592339ac47110bbdf5fcd54ba232a22859a8ab8e3d04c31df4531766d",
+  "test_conditionals.py": "65d12b88d377065ac00daed1f73d4d6e6b768cb1363ad6f2186feb924db5dc6c",
+  "oracle.py": "7b27b3fd4f95447b10aaee3fbfa8eec726712563fdda30a2fc633bcaa3137f05",
+  "baseline/test-results.json": "b838026560b20e24e7412df24788c545b5a6d4293769692dad889b1a9d5218b3",
+  "transcripts/cases.json": "e57a9107df0a470d5e7660e64755081bf68cdaa7da27e869f860e0abefec84e3",
+  "transcripts/native.log": "8b7042cb58037ac217f5948504b7200179d56e31dcbef557b4ec71b0df20149a",
+  "transcripts/reference.bas": "790f47194d0d5b8e3fca1f84a4d9f7bdd1e1d390b97863e31c7a12477feca28c",
+  "transcripts/driver.bas": "3b2a771fd9fc5ff50c827394415a15509e08dbd030d35b61968f01b068caa155",
+  "transcripts/reference.log": "62a547db32844d19b609d605cb054738f495a6853e38372db20033a06d80c370",
+  "transcripts/compile.log": "a17cc1f67d2da336d5155070927952499a28f056600cf74082d182641f60c97d",
+  "transcripts/results.json": "025c790f1f2c814578b41e953d8581a0b88ec7a8779e02126be09bbfb83c215b"
+}

@@ -1,0 +1,54 @@
+{
+  "scope": "Full prototype conditional qualification",
+  "results": {
+    "programs": 26,
+    "native_executions": 17,
+    "rejected_sources": 9,
+    "reference_output_programs": 15,
+    "legacy_arithmetic_observations": 0,
+    "deterministic_repeat": true,
+    "independent_link_bases": [
+      262687,
+      263815,
+      263051,
+      262762,
+      262671,
+      262807,
+      262830,
+      262566,
+      262626,
+      262771,
+      262438,
+      262463,
+      262429,
+      262473,
+      262476,
+      262486,
+      262490
+    ],
+    "string_link_bases": [
+      268527,
+      267586,
+      267517,
+      267219
+    ],
+    "duration_seconds": 152.941,
+    "hashes": {
+      "docs/tasks/C004/conditionals/compiler.bas": "21c91592682d25b3516ded16230432942b54085efa61d403989ac929ad4b25e7",
+      "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+      "docs/tasks/C004/build/output-integration/cases.json": "e57a9107df0a470d5e7660e64755081bf68cdaa7da27e869f860e0abefec84e3"
+    }
+  },
+  "baseline": {
+    "cases": 39,
+    "native_executions": 15,
+    "deterministic_repeat": true,
+    "assembler_oracle": true,
+    "duration_seconds": 33.146,
+    "basic_sha256": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+    "compiler_sha256": "21c91592682d25b3516ded16230432942b54085efa61d403989ac929ad4b25e7",
+    "cli_sha256": "bf5f29b243b8214e54c515dcc26edf47399ce440356af2ebc3ce3d7664ae11eb",
+    "mos_sha256": "d564243283972690933a4554296ad6202ca4ef54572279533a942960846bebae"
+  },
+  "human_hardware_validation": false
+}
