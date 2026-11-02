@@ -1,0 +1,144 @@
+[
+  {
+    "source": "a=1:PRINT ;a:a=a+2:PRINT ;a\nLET b%=7/2:PRINT ;b%\nb%=-7/2:PRINT ;b%\nbyte&=-1:PRINT ;byte&\nbyte&=321:PRINT ;byte&\n",
+    "reference": true,
+    "status": 0,
+    "expected": "1\n3\n3\n-3\n255\n65\n"
+  },
+  {
+    "source": "PRINT ;A%;\":\";Z%\nfresh=fresh+1:PRINT ;fresh\nfresh%=fresh%+2:PRINT ;fresh%\nfresh&=fresh&+3:PRINT ;fresh&\n",
+    "reference": true,
+    "status": 0,
+    "expected": "0:0\n1\n2\n3\n"
+  },
+  {
+    "source": "upper=1:UPPER=2:upper%=3:upper&=4:PRINT ;upper;\":\";UPPER;\":\";upper%;\":\";upper&\n_test9=5:COUNTtotal=6:PIvalue=7:PRINT ;_test9;\":\";COUNTtotal;\":\";PIvalue\n",
+    "reference": true,
+    "status": 0,
+    "expected": "1:2:3:4\n5:6:7\n"
+  },
+  {
+    "source": "value=1/3:copy=value:PRINT ;value;\":\";copy;\":\";(value=copy)\nvalue=4294967296.0:PRINT ;value\nbig%=&80000000:PRINT ;big%\nbig%=&7FFFFFFF:PRINT ;big%\nn=&80000000:big%=n:PRINT ;big%\nbyte&=-1.5:PRINT ;byte&\n",
+    "reference": true,
+    "status": 0,
+    "expected": "0.333333333:0.333333333:-1\n4.29496729E9\n-2.14748365E9\n2.14748365E9\n-2.14748365E9\n255\n"
+  },
+  {
+    "source": "PRINT ;not_created\n",
+    "reference": true,
+    "reference_error": true,
+    "status": 1,
+    "expected": "No such variable\n"
+  },
+  {
+    "source": "PRINT ;a%\n",
+    "reference": true,
+    "reference_error": true,
+    "status": 1,
+    "expected": "No such variable\n"
+  },
+  {
+    "source": "PRINT ;missing&\n",
+    "reference": true,
+    "reference_error": true,
+    "status": 1,
+    "expected": "No such variable\n"
+  },
+  {
+    "source": "x%=2147483648\n",
+    "reference": true,
+    "reference_error": true,
+    "status": 1,
+    "expected": "Number too big\n"
+  },
+  {
+    "source": "n=-2147483648:big%=n\n",
+    "reference": true,
+    "reference_error": true,
+    "status": 1,
+    "expected": "Number too big\n"
+  },
+  {
+    "source": "x&=2147483648\n",
+    "reference": true,
+    "reference_error": true,
+    "status": 1,
+    "expected": "Number too big\n"
+  },
+  {
+    "source": "fresh=fresh+1:PRINT ;fresh:PRINT ;other\n",
+    "reference": true,
+    "reference_error": true,
+    "status": 1,
+    "expected": "1\nNo such variable\n"
+  },
+  {
+    "source": "GOTO @after\nvalue=1\n@after:PRINT ;value\n",
+    "expected": "No such variable\n",
+    "status": 1
+  },
+  {
+    "source": "GOSUB @sub:PRINT ;shared:END\n@sub:shared=5:RETURN\n",
+    "expected": "5\n",
+    "status": 0
+  },
+  {
+    "source": "x=1:GOSUB @sub:PRINT ;x:END\n@sub:x=x+1:RETURN\n",
+    "expected": "2\n",
+    "status": 0
+  },
+  {
+    "source": "text$=\"x\"\n",
+    "diagnostic": "String variables"
+  },
+  {
+    "source": "a%(0)=1\n",
+    "diagnostic": "Arrays and function calls"
+  },
+  {
+    "source": "a%%=1\n",
+    "diagnostic": "Unsupported numeric suffix"
+  },
+  {
+    "source": "x+=1\n",
+    "diagnostic": "Expected ="
+  },
+  {
+    "source": "x?0=1\n",
+    "diagnostic": "Variable indirection"
+  },
+  {
+    "source": "LOCAL x\n",
+    "diagnostic": "Unsupported statement LOCAL"
+  },
+  {
+    "source": "RUN=1\n",
+    "diagnostic": "Unsupported statement RUN"
+  },
+  {
+    "source": "SQRname=1\n",
+    "diagnostic": "Unsupported statement SQRname"
+  },
+  {
+    "source": "PRINT SQRname\n",
+    "diagnostic": "Unsupported numeric item SQRname"
+  },
+  {
+    "source": "LET PI=1\n",
+    "diagnostic": "Unsupported variable name PI"
+  },
+  {
+    "source": "x=((((((((((((((((((((1))))))))))))))))))))\n",
+    "diagnostic": "Expression nesting exceeds"
+  },
+  {
+    "source": "v0=0\nv1=0\nv2=0\nv3=0\nv4=0\nv5=0\nv6=0\nv7=0\nv8=0\nv9=0\nv10=0\nv11=0\nv12=0\nv13=0\nv14=0\nv15=0\nv16=0\nv17=0\nv18=0\nv19=0\nv20=0\nv21=0\nv22=0\nv23=0\nv24=0\nv25=0\nv26=0\nv27=0\nv28=0\nv29=0\nv30=0\nv31=0\nv32=0\nv33=0\nv34=0\nv35=0\nv36=0\nv37=0\nv38=0\nv39=0\nv40=0\nv41=0\nv42=0\nv43=0\nv44=0\nv45=0\nv46=0\nv47=0\nv48=0\nv49=0\nv50=0\nv51=0\nv52=0\nv53=0\nv54=0\nv55=0\nv56=0\nv57=0\nv58=0\nv59=0\nv60=0\nv61=0\nv62=0\nv63=0\nv64=0\nv65=0\nv66=0\nv67=0\nv68=0\nv69=0\nv70=0\nv71=0\nv72=0\nv73=0\nv74=0\nv75=0\nv76=0\nv77=0\nv78=0\nv79=0\nv80=0\nv81=0\nv82=0\nv83=0\nv84=0\nv85=0\nv86=0\nv87=0\nv88=0\nv89=0\nv90=0\nv91=0\nv92=0\nv93=0\nv94=0\nv95=0\nv96=0\nv97=0\nv98=0\nv99=0\nv100=0\nv101=0\nv102=0\nv103=0\nv104=0\nv105=0\nv106=0\nv107=0\nv108=0\nv109=0\nv110=0\nv111=0\nv112=0\nv113=0\nv114=0\nv115=0\nv116=0\nv117=0\nv118=0\nv119=0\nv120=0\nv121=0\nv122=0\nv123=0\nv124=0\nv125=0\nv126=0\nv127=0\nv128=0\n",
+    "diagnostic": "Scalar variable limit exceeds 128"
+  },
+  {
+    "source": "REM Scalar numeric values retain BBC BASIC storage and conversion rules.\nLET count%=7/2\nratio=1/3\nbyte&=-1\nPRINT \"Integer: \";count%\nPRINT \"Fraction: \";ratio\nPRINT \"Byte: \";byte&\nfresh=fresh+1\nPRINT \"Created before RHS: \";fresh\n",
+    "reference": true,
+    "status": 0,
+    "expected": "Integer: 3\nFraction: 0.333333333\nByte: 255\nCreated before RHS: 1\n"
+  }
+]

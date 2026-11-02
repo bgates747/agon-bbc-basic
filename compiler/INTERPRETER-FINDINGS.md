@@ -40,3 +40,13 @@ change; no proposal here authorizes changing compiler results.
    do not override reference behavior in compiler qualification.
 
 Unfinished authorized work is tracked only in [TODO.md](../TODO.md).
+
+## Floating-to-integer negative boundary
+
+1. C003's [reference probe](../docs/tasks/C003/evidence/reference-probe-001/README.md)
+   records that `n=-2147483648:big%=n` reports `Number too big`, while storing
+   the integer bit pattern `n=&80000000:big%=n` succeeds. The distinction passes
+   through STORE/SFIX, not merely decimal display formatting.
+2. Preserve this behavior in compiled code. Its consistency with the intended
+   interpreter conversion range is a candidate for a separately reviewed
+   upstream investigation, not an accepted compiler correction.

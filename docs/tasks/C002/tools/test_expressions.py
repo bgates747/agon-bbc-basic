@@ -86,7 +86,7 @@ def cases():
         ("VDU &100000000\n", "Hex literal exceeds"),
         ("VDU 1.2.3\n", "Unexpected text"),
         ("VDU EVAL(\"1\")\n", "EVAL is deliberately unsupported"),
-        ("VDU a%\n", "Unsupported numeric item"),
+        ("VDU a%(0)\n", "Arrays and function calls"),
         ("VDU \"A\"\n", "Expected a numeric item"),
         ("VDU 65;0\n", "Unexpected text"),
         ("PRINT STR$(65)\n", "Unsupported numeric item STR"),

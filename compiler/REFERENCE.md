@@ -113,7 +113,13 @@ source features remain partial or unsupported in the compatibility matrix.
 5. `GETVAR`, `PUTVAR` and `CREATE` in `main.asm` parse names via IY and depend
    on dynamic variable chains, type encodings and the interpreter heap.
    Compiled symbol resolution can remove this name-search work, while runtime
-   binding slots retain the required type and LOCAL behavior.
+   binding slots retain the required type and LOCAL behavior. C003 now emits
+   scalar byte/four-byte/five-byte payloads with separate existence flags and
+   bytewise loads/stores. ASSIGN creates the destination before evaluating its
+   RHS; STORE5 preserves the numeric variant. `%`/`&` stores reuse qualified
+   SFIX. No interpreter variable lookup, heap globals or fixed entry addresses
+   are linked. [Scalar qualification](../docs/tasks/C003/SCALARS.md) includes
+   physical-memory comparison and keeps LOCAL explicitly unimplemented.
 
 ## Procedures, functions and LOCAL
 

@@ -33,3 +33,8 @@ is 4028 bytes before temporary slots and error-message glue.
    [numeric ABI probe](../../docs/tasks/C002/README.md) after runtime changes.
    They share one automated CLI profile and must run sequentially. Human
    validation and promotion to main remain separate from automated qualification.
+
+C003's scalar storage glue is emitted by the BBC compiler outside this template.
+Physical one/four/five-byte payloads and separate existence flags use native
+byte copies; integer/byte assignment calls the existing qualified SFIX adapter.
+The template, vendor package and pointer ABI remain unchanged.

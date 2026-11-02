@@ -1,13 +1,12 @@
 # Compiler compatibility matrix
 
 This matrix describes the compiler, not the reference interpreter. A feature
-is implemented only for the scope stated here. The compiler is not yet
-self-hosting and has no variables or mutable-string runtime. Implemented
-statuses describe the C001 bootstrap and qualified C002 numeric expressions/output in
-`compiler/compiler.bas`. These are development-branch promotions; accepted
-testing is still required before promotion to main. The Author accepted corrected C002 reference literal behavior
-and qualification for a development checkpoint. Execution speed is the only intended
-observable runtime difference for supported conventional programs; possible
+is implemented only for the stated scope. C001 output/control flow, C002 numeric
+expressions and C003 scalar numeric bindings are promoted in the development
+tree. Mutable strings and self-hosting remain unsupported. The Author accepted
+the corrected C002 baseline for a development checkpoint; accepted testing is
+still required before main promotion. Execution speed is the only intended
+observable runtime difference for supported conventional programs. Possible
 [interpreter improvements](INTERPRETER-FINDINGS.md) are research only.
 
 | Feature | Status | Current scope or constraint |
@@ -24,14 +23,14 @@ observable runtime difference for supported conventional programs; possible
 | VDU and CLS | Partial | Numeric byte expressions use SFIX and low-byte wrapping; no word/zero-fill forms |
 | 32-bit integer values | Implemented | Exact four-byte payloads and signed hex bit patterns; no ADL narrowing |
 | Numeric literals | Partial | Decimal whole/fraction/uppercase E forms within 255-byte source lines; reference reader results/types/errors preserved, including quirks; lowercase e and crunched text after exponents rejected; hex up to eight uppercase digits; binary literals unsupported |
-| 40-bit floating-point values | Implemented for numeric expressions | Five-byte literals/arithmetic/promoted values; reference conversion and range behavior; reader errors occur when executed; variables remain C003 |
+| 40-bit floating-point values | Implemented for numeric expressions | Five-byte literals/arithmetic/promoted values; reference conversion and range behavior; five-byte scalar variants; reader errors occur when executed |
 | Arithmetic and conversion | Partial | Binary + - * / ^ DIV MOD, unary signs, package overflow/promotion and VDU SFIX |
 | Standard math functions and PI | Implemented subset | ABS ACS ASN ATN COS DEG EXP INT LN LOG NOT RAD SGN SIN SQR TAN, PI; source VAL/STR$, RND and OS functions remain unsupported |
 | Numeric formatting | Partial | Fixed G9, matching the reference; @% assignment and other PRINT formats unsupported |
 | Comparison and Boolean expressions | Partial | Numeric = <> <= >= < >, NOT/AND/EOR/OR and TRUE/FALSE in VDU/PRINT; no shifts or IF statements |
-| Numeric variables | Unsupported | Assignment/storage/bindings remain C003 |
+| Numeric variables | Implemented subset | Plain/LET assignment and reads; five-byte unsuffixed variants, four-byte %, one-byte &; 128 bindings; runtime creation/undefined-read checks, predefined A%–Z%; global GOSUB mutation |
 | Mutable strings and string variables | Unsupported | Literal output does not implement assignment |
-| Variable suffixes and default numeric variables | Unsupported | Assignment rejected |
+| Variable suffixes and default numeric variables | Partial | Case-sensitive numeric names and %/& suffixes; 32-character ASCII body limit; ambiguous keyword prefixes, pseudo variables and other suffixes rejected; strings pending |
 | IF/CASE/FOR/WHILE/REPEAT | Unsupported | Structured control flow pending |
 | DEF PROC / ENDPROC | Unsupported | Never treated as GOSUB/RETURN |
 | DEF FN / function return | Unsupported | Separate activation semantics pending |
@@ -45,6 +44,9 @@ observable runtime difference for supported conventional programs; possible
 | STOP, RUN, CHAIN, OSCLI | Unsupported | STOP is not silently compiled as END |
 | Tokenised source, abbreviations, lowercase keywords | Unsupported | No silent tokenisation assumptions |
 | Self-compilation | Unsupported | Bootstrap closure and physical qualification pending |
+
+The [C003 scalar record](../docs/tasks/C003/SCALARS.md) describes reference
+creation/storage rules, scope and qualification.
 
 See [the specification](SPECIFICATION.md) for exact limits and
 [TODO.md](../TODO.md) for unfinished work.

@@ -34,8 +34,10 @@ documented scope. Interpreter improvement ideas belong in
 `compiler/INTERPRETER-FINDINGS.md`; they do not authorize compiler divergences.
 The earlier exact-decimal experiment and its altered test oracles are superseded.
 Read `docs/tasks/C002/LITERALS.md`, `docs/tasks/C002/OUTPUT.md`, `docs/tasks/C002/EXPRESSIONS.md`,
-`docs/tasks/C002/ABI.md` and its task record for scope/results. C003–C006 remain
-unstarted. The compiler is still BBC BASIC; assembly is runtime code, not a
+`docs/tasks/C002/ABI.md` and its task record for scope/results. C003 scalar
+numeric bindings are promoted and the Author approved their development
+checkpoint on 2026-11-01; mutable strings remain active C003 work. Read
+`docs/tasks/C003/SCALARS.md` and its task record. C004–C006 remain unstarted. The compiler is still BBC BASIC; assembly is runtime code, not a
 replacement compiler implementation.
 
 Use `.venv/bin/python` explicitly. `compiler/README.md` contains build/test

@@ -1,0 +1,54 @@
+Warning: unused arguments left: ["--firmware", "platform"].
+Tom's Fake VDP Version 1.03
+unknown packet VDU 0x17, 0, 0xf8
+unknown packet VDU 0x17, 0, 0x99
+uunknown packet VDU 0x17, 0, 0x94
+
+Agon Platform MOS Version 3.0.2 Arthur
+
+ERR:e0.bas
+e0.bas:1:7: Expected a numeric item at 3250
+ERR:e1.bas
+e1.bas:1:9: Expected ) at 3250
+ERR:e2.bas
+e2.bas:1:8: Chained comparisons require parentheses at 3250
+ERR:e3.bas
+e3.bas:1:6: Shift operators are unsupported at 3250
+ERR:e4.bas
+e4.bas:1:6: Unexpected text after statement at 3250
+ERR:e5.bas
+e5.bas:1:9: Unexpected text after statement at 3250
+ERR:e6.bas
+e6.bas:1:8: Unsupported crunched text after exponent at 3250
+ERR:e7.bas
+e7.bas:1:6: Expected digits in numeric literal at 3250
+ERR:e8.bas
+e8.bas:1:15: Hex literal exceeds eight digits at 3250
+ERR:e9.bas
+e9.bas:1:8: Unexpected text after statement at 3250
+ERR:e10.bas
+e10.bas:1:9: EVAL is deliberately unsupported at 3250
+ERR:e11.bas
+e11.bas:1:7: Arrays and function calls are not yet supported at 3250
+ERR:e12.bas
+e12.bas:1:5: Expected a numeric item at 3250
+ERR:e13.bas
+e13.bas:1:7: Unexpected text after statement at 3250
+ERR:e14.bas
+e14.bas:1:10: Unsupported numeric item STR at 3250
+ERR:e15.bas
+e15.bas:1:21: Expression nesting exceeds 32 at 3250
+ERR:e16.bas
+e16.bas:2:14: Undefined target @missing at 3250
+OK:e17.bas
+OK:e18.bas
+OK:e19.bas
+OK:e20.bas
+OK:e21.bas
+OK:e22.bas
+OK:e23.bas
+OK:e24.bas
+OK:e25.bas
+OK:e17.bas
+EXPR_COMPILE_DONE
+/ *

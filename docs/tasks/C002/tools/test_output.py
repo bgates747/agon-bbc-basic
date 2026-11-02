@@ -79,6 +79,7 @@ def main():
     parser.add_argument("--compiler", type=Path, default=ROOT / "compiler/compiler.bas")
     parser.add_argument("--runtime-build", type=Path, default=ROOT / "compiler/build/numeric-runtime")
     parser.add_argument("--skip-legacy", action="store_true")
+    parser.add_argument("--isolate-reference", action="store_true", help="reset variables before each reference program")
     parser.add_argument("--timeout", type=float, default=180, help="compile-batch guard in seconds")
     args = parser.parse_args()
     args.compiler = args.compiler.resolve(strict=True)
@@ -101,6 +102,8 @@ def main():
     error_definitions = []
     for i, case in enumerate(tests):
         if case.get("reference"):
+            if args.isolate_reference:
+                reference += ['CLEAR', ':'.join(f'{letter}%=0' for letter in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ')]
             body = case["source"].splitlines()
             if case.get("reference_error"):
                 n = 10000+i*100

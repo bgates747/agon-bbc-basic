@@ -3,14 +3,16 @@
 This is the first small implementation of the self-hosting compiler project.
 The compiler is BBC BASIC and emits native eZ80 ADL code directly. It currently
 compiles literal/numeric output, labelled control flow, numeric byte VDU
-expressions and standard math functions. It cannot compile itself.
+expressions, standard math functions and scalar numeric variables. It cannot
+compile itself.
 The interpreter elsewhere in this repository remains the compatibility
 reference and bootstrap host. The tested implementation was promoted under
 [task C001](../docs/tasks/C001.md) to `compiler/compiler.bas`; sample programs,
-regression tests and tooling are alongside it. C002's numeric expressions, output, fractional/scientific literals and runtime
+regression tests and tooling are alongside it. C002's numeric expressions, output,
+fractional/scientific literals and runtime
 are in this development tree, with the corrected C002 baseline accepted for
-a development checkpoint. Variables remain unsupported. Promotion to `main` awaits
-accepted testing.
+a development checkpoint. C003 scalar numeric bindings are promoted; mutable
+strings remain unsupported. Promotion to `main` awaits accepted testing.
 
 ## Running on Agon
 
@@ -92,3 +94,9 @@ reference conversion dependency, source grammar and differential qualification.
 Execution speed is the only intended observable runtime difference for supported
 conventional BBC programs. Possible [interpreter improvements](INTERPRETER-FINDINGS.md)
 are retained separately as research; the compiler must not silently adopt them.
+
+[Scalar numeric bindings](../docs/tasks/C003/SCALARS.md) documents plain/LET
+assignment, numeric suffixes, physical storage and reference existence rules.
+[variables.bas](examples/variables.bas) demonstrates them. C003-owned transcript
+and memory probes qualify the single live compiler; mutable strings remain
+unfinished in TODO.

@@ -60,6 +60,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--cli", required=True, type=Path)
     parser.add_argument("--compiler", type=Path, default=TASK_ROOT / "compiler.bas")
+    parser.add_argument("--timeout", type=float, default=180, help="compile-batch guard in seconds")
     parser.add_argument("--runtime", type=Path, default=Path.home() / "Agon/fab-agon-emulator")
     parser.add_argument("--setup", type=Path, default=Path.home() / "Agon/mystuff/agon-dev-env/scripts/setup_emulator.py")
     parser.add_argument("--assembler", type=Path, default=Path.home() / "Agon/agondev/release/bin/ez80-none-elf-as")
@@ -108,7 +109,7 @@ def main() -> None:
         (b'EVAL("1")\n', None, "EVAL is deliberately unsupported"),
         (b'LOCAL a%\n', None, "Unsupported statement LOCAL"),
         (b'DEF PROCtest\n', None, "Unsupported statement DEF"),
-        (b'a%=1\n', None, "Unsupported statement a"),
+        (b'a$="x"\n', None, "String variables"),
         (b'GOTO a%\n', None, "Expected an unsigned integer constant"),
         (b'GOTO @A\n@a:END\n', None, "Undefined target @A"),
         (b'@no_colon\n', None, "Expected :"),
@@ -143,7 +144,7 @@ def main() -> None:
     (sdcard / "driver.bas").write_text("\n".join(driver)+"\n1000 DEF"+definitions)
     started = time.monotonic()
     output = run_profile(profile, "load /bin/basic.bin\nrun . /driver.bas\n",
-                         "COMPILE_DONE", "compile.log")
+                         "COMPILE_DONE", "compile.log", timeout_seconds=args.timeout)
     for index, (_, _, diagnostic) in enumerate(cases):
         if diagnostic is None:
             assert f"CASE_OK:t{index}.bas\n" in output, output

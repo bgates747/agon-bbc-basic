@@ -6,7 +6,9 @@ Packed arithmetic and exact output comparisons pass in the Pi5 CLI emulator.
 The Author rejected the decimal converter's deliberate reader improvements.
 The corrected C002 baseline is accepted for the development checkpoint;
 the exact-conversion experiment remains historical research only.
-Variables and self-hosting remain incomplete; accepted testing is required
+Scalar numeric variables are now promoted with reference-compatible creation,
+storage and assignment. Mutable strings and self-hosting remain incomplete;
+accepted testing is required
 before promotion to main.
 
 The later C007 search establishes a curated testing/benchmark source catalogue
@@ -367,3 +369,67 @@ covered the earlier dirt.
 2. C003 is next: refine and qualify scalar numeric bindings before mutable
    strings, following the interpreter's existing behavior rather than inventing
    default initialisation or assignment semantics. Oryx remains unavailable.
+
+## C003 scalar numeric tranche begins
+
+1. Committed all corrected C002 work and retained research as `b20c377` and
+   pushed to the Author's origin on `codex/native-bbc-compiler`. Refined the
+   [C003 scope](tasks/C003.md) before implementation. Main is unchanged.
+2. Audited reference variable creation, lookup and byte/four-byte/five-byte
+   storage. Assignment creates a missing destination before evaluating the
+   RHS; ordinary undefined reads fail, while A%–Z% are predefined. Unsuffixed
+   storage retains the numeric variant rather than forcing floating point.
+   These behaviors define the experiment; no interpreter improvements apply.
+3. Implemented the C003 prototype in BBC BASIC: plain/LET scalar assignments,
+   case/suffix-specific names, runtime existence, static A%–Z%, SFIX stores and
+   one/four/five-byte payloads. Native byte copies and flag checks are emitted
+   by BBC BASIC; the arithmetic/runtime template and vendor files are unchanged.
+   Names that would conflict with unsupported keyword/pseudo-variable syntax
+   are rejected instead of silently becoming language extensions.
+4. Qualification corrected three assumptions/implementation mistakes, retaining
+   their failed evidence: the reference rejects SFIX of the floating negative
+   integer boundary; an early function result with an active FOR frame produced
+   `Not in a FN`; and reusing the constants-only reference namespace leaked a
+   variable between scalar programs. The revised predicate completes its loops,
+   and the scalar reference suite resets dynamic variables and A%–Z% per case.
+   Added the conversion observation to interpreter research without changing it.
+5. Prototype qualification passes **26 programs** (**14 native/12 rejected**)
+   in **169.295 seconds**, plus **20 exact physical payloads**, existence flags,
+   an unreachable undefined binding and unchanged-image guards in **44.231
+   seconds**. BBC supplies byte expectations; MOS SAVE retrieves native memory.
+   Runtime images match independent GNU links and repeat compilation matches.
+   [Initial evidence](tasks/C003/evidence/scalars-001/summary.json) retains source,
+   fixtures, maps, binary snapshots and logs; failed attempts remain separate.
+6. Promoted byte-identical source to the single live compiler, SHA-256
+   `7de07d887b68cd13442474b1c0c4e26668c7054c927b5fc93aa2ff4f00ecbbd7`.
+   Removed the maintained prototype, added `compiler/examples/variables.bas`
+   and updated the specification, matrix, reference audit, handoff and TODO.
+   C003 remains unfinished for mutable strings; no activation features began.
+7. Live qualification passes the **39-case/15-execution** baseline in **47.362
+   seconds** with its full assembly golden, **27 scalar programs** (**15 native/
+   12 rejected**) including the example in **118.424 seconds**, and the same
+   **20 physical payloads** in **22.663 seconds**. Host duration varies; these
+   are not performance benchmarks. The obsolete 45-second baseline compile guard
+   expired during ordinary progress, so the runner gained an explicit compile
+   timeout. Updated obsolete numeric-variable rejection fixtures to strings/arrays
+   while retaining their rejection and output-preservation coverage.
+8. Broader live regressions pass **28 numeric-output programs** (**20 native/
+   eight rejected**, including **58 earlier arithmetic observations**) in
+   **156.036 seconds**, and **26 targeted expressions** (**nine native/17
+   rejected**) in **53.916 seconds**. Independent runtime links, output/error
+   transcripts and deterministic repeats pass. [Live evidence](tasks/C003/evidence/scalars-promotion-001/summary.json)
+   includes all reports, exact source/tool snapshots and hash manifests.
+9. Static verification confirms byte-identical promotion, valid source-line
+   order/length, unchanged numeric DATA/runtime/vendor/license, Python/JSON
+   parsing, valid document links and clean whitespace. The original checkpoint
+   remains pushed at `b20c377`; all C003 tranche changes remain uncommitted for
+   Author review. C003 stays in TODO for strings; main is unchanged. All
+   automated work used the Pi5, with no Oryx, graphical/hardware validation or
+   benchmark performance measurement.
+
+## Scalar development checkpoint accepted
+
+1. The Author requested commit/push and continuation after the scalar tranche.
+   Accepted that checkpoint on the development branch, with all qualification
+   and historical failed evidence retained. C003 remains in TODO for strings;
+   human/hardware validation and main promotion remain separate.

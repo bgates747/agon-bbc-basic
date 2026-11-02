@@ -1,0 +1,157 @@
+{
+  "bindings": 20,
+  "undefined_bindings": 1,
+  "packed_mismatches": 0,
+  "unexpected_memory_writes": 0,
+  "independent_runtime_link_base": 263474,
+  "records": [
+    {
+      "name": "integer",
+      "size": 5,
+      "expected": "0100000000",
+      "actual": "0100000000",
+      "offset": 5644
+    },
+    {
+      "name": "floating",
+      "size": 5,
+      "expected": "0000000080",
+      "actual": "0000000080",
+      "offset": 5650
+    },
+    {
+      "name": "fraction",
+      "size": 5,
+      "expected": "abaaaa2a7e",
+      "actual": "abaaaa2a7e",
+      "offset": 5656
+    },
+    {
+      "name": "copy",
+      "size": 5,
+      "expected": "abaaaa2a7e",
+      "actual": "abaaaa2a7e",
+      "offset": 5662
+    },
+    {
+      "name": "large",
+      "size": 5,
+      "expected": "faffff7f9f",
+      "actual": "faffff7f9f",
+      "offset": 5668
+    },
+    {
+      "name": "positive%",
+      "size": 4,
+      "expected": "ffffff7f",
+      "actual": "ffffff7f",
+      "offset": 5674
+    },
+    {
+      "name": "negative%",
+      "size": 4,
+      "expected": "00000080",
+      "actual": "00000080",
+      "offset": 5679
+    },
+    {
+      "name": "byte&",
+      "size": 1,
+      "expected": "ff",
+      "actual": "ff",
+      "offset": 5684
+    },
+    {
+      "name": "fraction%",
+      "size": 4,
+      "expected": "fdffffff",
+      "actual": "fdffffff",
+      "offset": 5686
+    },
+    {
+      "name": "A%",
+      "size": 4,
+      "expected": "ffffffff",
+      "actual": "ffffffff",
+      "offset": 5691
+    },
+    {
+      "name": "fresh",
+      "size": 5,
+      "expected": "0100000000",
+      "actual": "0100000000",
+      "offset": 5696
+    },
+    {
+      "name": "upper",
+      "size": 5,
+      "expected": "0100000000",
+      "actual": "0100000000",
+      "offset": 5702
+    },
+    {
+      "name": "UPPER",
+      "size": 5,
+      "expected": "0200000000",
+      "actual": "0200000000",
+      "offset": 5708
+    },
+    {
+      "name": "upper%",
+      "size": 4,
+      "expected": "03000000",
+      "actual": "03000000",
+      "offset": 5714
+    },
+    {
+      "name": "upper&",
+      "size": 1,
+      "expected": "04",
+      "actual": "04",
+      "offset": 5719
+    },
+    {
+      "name": "_test9",
+      "size": 5,
+      "expected": "0500000000",
+      "actual": "0500000000",
+      "offset": 5721
+    },
+    {
+      "name": "floatcopy",
+      "size": 5,
+      "expected": "0000000080",
+      "actual": "0000000080",
+      "offset": 5727
+    },
+    {
+      "name": "converted%",
+      "size": 4,
+      "expected": "01000000",
+      "actual": "01000000",
+      "offset": 5733
+    },
+    {
+      "name": "small&",
+      "size": 1,
+      "expected": "41",
+      "actual": "41",
+      "offset": 5738
+    },
+    {
+      "name": "Z%",
+      "size": 4,
+      "expected": "00000000",
+      "actual": "00000000",
+      "offset": 5740
+    }
+  ],
+  "duration_seconds": 44.231,
+  "hashes": {
+    "docs/tasks/C003/scalar/compiler.bas": "7de07d887b68cd13442474b1c0c4e26668c7054c927b5fc93aa2ff4f00ecbbd7",
+    "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+    "docs/tasks/C003/build/storage/source.bas": "3524060f6161ff859f5118c15f33183ac9f0cbfc292386dc5e8b6c772357f473",
+    "docs/tasks/C003/build/storage/expected.dat": "114947f286f4f9aa4c37300b30dec6e03d48bd598cf6b58d51d947c96a7cc8e8",
+    "docs/tasks/C003/build/storage/native.dat": "f728730d92a2d99d277f624e7345c249ab88bb98ed842f193b54cc437111bca4"
+  }
+}

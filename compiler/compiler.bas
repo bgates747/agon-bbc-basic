@@ -11,11 +11,13 @@
 1010 DIM ccode% 65535,csname$(1023),csaddr%(1023)
 1020 DIM crname$(2047),craddr%(2047),crline%(2047),crcol%(2047)
 1022 PROCloadnumbers
+1024 DIM cvname$(127),cvsize%(127),cvstatic%(127),ckwords$(4)
+1026 PROCkeywords
 1030 ENDPROC
 1040 DEF PROCcompile(csource$,ctarget$)
 1050 LOCAL ci%,cj%,cn%,cfh%,coh%
 1060 cpc%=0:csnum%=0:crnum%=0:clnum%=0:cpos%=1:clast%=-1:ccr%=FALSE
-1062 cnumeric%=FALSE:cnslots%=0:cnparse%=0:cndepth%=0
+1062 cnumeric%=FALSE:cnslots%=0:cnparse%=0:cndepth%=0:cvnum%=0
 1070 IF csource$=ctarget$ PROCbad("Source and output must differ")
 1080 cfh%=OPENIN(csource$)
 1090 IF cfh%=0 PROCbad("Cannot open source")
@@ -89,7 +91,9 @@
 1720 IF cw$="RETURN" THEN PROCaddr("C3","$return"):ENDPROC
 1730 IF cw$="GOTO" OR cw$="GOSUB" THEN PROCbranch(cw$):ENDPROC
 1740 IF cw$="EVAL" PROCbad("EVAL is deliberately unsupported")
-1750 PROCbad("Unsupported statement "+cw$)
+1742 IF cw$="LET" THEN cw$=FNname:PROCassign(cw$):ENDPROC
+1744 IF FNreserved(cw$) PROCbad("Unsupported statement "+cw$)
+1750 PROCassign(cw$)
 1760 ENDPROC
 1770 DEF PROCbranch(cw$)
 1780 LOCAL cn$
@@ -252,6 +256,7 @@
 3210 PROClabel("$savedsp"):PROCbytes("000000")
 3220 PROClabel("$depth"):PROCbyte(0)
 3222 IF cnumeric% PROCnumruntime
+3224 IF cvnum%>0 PROCvarruntime
 3230 ENDPROC
 3240 DEF PROCbad(cm$)
 3250 ERROR 100,LEFT$(csource$,80)+":"+STR$(clnum%)+":"+STR$(cpos%)+": "+LEFT$(cm$,130)
@@ -357,7 +362,8 @@
 4870 IF cw$="FALSE" THEN PROCvalue(0):ENDPROC
 4880 IF cw$="PI" THEN PROCvalue(0):PROCnumindices(cndepth%-1,cndepth%-1):PROCnumcall(35):ENDPROC
 4890 IF cw$="EVAL" PROCbad("EVAL is deliberately unsupported")
-4900 PROCbad("Unsupported numeric item "+cw$)
+4892 IF FNreserved(cw$) OR FNpeek="$" PROCbad("Unsupported numeric item "+cw$)
+4900 PROCvariable(cw$)
 4910 ENDPROC
 4920 DEF PROCconstant
 4930 IF FNpeek<>"&" THEN PROCdecimal:ENDPROC
@@ -429,6 +435,73 @@
 5430 PROCtext(cm$):PROCnewline:PROCaddr("C3","$error")
 5440 NEXT
 5450 ENDPROC
+6000 DEF FNvariable(cn$)
+6010 LOCAL ci%,cf%,ct%,cs%
+6020 ct%=5:cs%=FALSE
+6030 IF FNpeek="%" THEN ct%=4:cs%=(LEN(cn$)=1 AND INSTR("ABCDEFGHIJKLMNOPQRSTUVWXYZ",cn$)>0)
+6040 IF FNpeek="&" ct%=1
+6050 IF ct%<>5 THEN cn$=cn$+FNpeek:cpos%=cpos%+1
+6060 IF FNpeek="$" PROCbad("String variables are not yet supported")
+6070 IF FNpeek="(" PROCbad("Arrays and function calls are not yet supported")
+6080 IF FNpeek="%" OR FNpeek="&" OR FNpeek="#" PROCbad("Unsupported numeric suffix")
+6090 IF FNpeek="!" OR FNpeek="?" OR FNpeek="|" PROCbad("Variable indirection is not yet supported")
+6100 cf%=-1:FOR ci%=0 TO cvnum%-1:IF cvname$(ci%)=cn$ cf%=ci%
+6110 NEXT
+6120 IF cf%>=0 THEN =cf%
+6130 IF cvnum%=128 PROCbad("Scalar variable limit exceeds 128")
+6140 cf%=cvnum%:cvname$(cf%)=cn$:cvsize%(cf%)=ct%:cvstatic%(cf%)=cs%:cvnum%=cvnum%+1
+6150 =cf%
+6160 DEF PROCassign(cn$)
+6170 LOCAL ci%,ct%
+6180 IF FNreserved(cn$) PROCbad("Unsupported variable name "+cn$)
+6190 ci%=FNvariable(cn$):ct%=cvsize%(ci%):PROCexpect("=")
+6200 REM ASSIGN creates a missing destination before the RHS is evaluated.
+6210 PROCbytes("3E01"):PROCaddr("32","$bind"+STR$(ci%))
+6220 cndepth%=0:PROCexpr(1)
+6230 IF ct%<>5 THEN PROCnumindices(0,0):PROCnumcall(38)
+6240 PROCvarcopy("$v0","$var"+STR$(ci%),ct%):cndepth%=0
+6250 ENDPROC
+6260 DEF PROCvariable(cn$)
+6270 LOCAL ci%,ct%,cs$,cj%
+6280 ci%=FNvariable(cn$):ct%=cvsize%(ci%)
+6290 PROCaddr("3A","$bind"+STR$(ci%)):PROCbyte(&B7):PROCaddr("CA","$novar")
+6300 PROCnumslot:cs$="$v"+STR$(cndepth%-1)
+6310 PROCvarcopy("$var"+STR$(ci%),cs$,ct%)
+6320 IF ct%<5 THEN PROCbyte(&AF):FOR cj%=ct% TO 4:PROCbytes("1213"):NEXT
+6330 ENDPROC
+6340 DEF PROCvarcopy(cf$,ct$,cn%)
+6350 PROCaddr("21",cf$):PROCaddr("11",ct$)
+6360 PROCbyte(&01):PROCbyte(cn%):PROCbytes("0000EDB0")
+6370 ENDPROC
+6380 DEF PROCvarruntime
+6390 LOCAL ci%,cj%
+6400 PROClabel("$novar"):PROCtext("No such variable"):PROCnewline:PROCaddr("C3","$error")
+6410 FOR ci%=0 TO cvnum%-1
+6420 PROClabel("$bind"+STR$(ci%)):PROCbyte(ABS(cvstatic%(ci%)))
+6430 PROClabel("$var"+STR$(ci%)):FOR cj%=1 TO cvsize%(ci%):PROCbyte(0):NEXT
+6440 NEXT
+6450 ENDPROC
+6460 DEF PROCkeywords:LOCAL ci%
+6461 FOR ci%=0 TO 4:ckwords$(ci%)="~|":NEXT
+6462 ckwords$(0)="AND|ABS|ACS|ADVAL|ASC|ASN|ATN|BGET!|BPUT!|BY!|COLOUR|COLOR|CALL|CASE|CHAIN|CLEAR!|CLOSE!|CLG!|CLS!|COS|COUNT!|CIRCLE|DATA|DEG|DEF|DIV|DIM|DRAW|ENDPROC!|ENDWHILE!|ENDCASE!|ENDIF!|END!|ENVELOPE|ELSE|EVAL|ERL!|"
+6464 ckwords$(1)="ERROR|EOF!|EOR|ERR!|EXIT!|EXP|EXT!|ELLIPSE|FOR|FALSE!|FILL|FN|GOTO|GET|GOSUB|GCOL|HIMEM|INPUT|IF|INKEY|INT|INSTALL|LINE|LOMEM|LOCAL|LEN|LET|LOG|LN|MODE|MOD|MOVE|MOUSE|NEXT|NOT|ON|OFF!|OF!|ORIGIN|OR|OPENIN|"
+6466 ckwords$(2)="OPENOUT|OPENUP|OSCLI|OTHERWISE|PRINT|PAGE|PTR|PI!|PLOT|POINT!|PROC|POS!|PUT|QUIT!|RETURN!|REPEAT|REPORT!|READ|REM|RUN!|RAD|RESTORE|RND!|RECTANGLE|STEP|SGN|SIN|SQR|SPC|SOUND|STOP!|SUM|SWAP|SYS|TAN|THEN|TIME|"
+6468 ckwords$(3)="TO|TRACE|TRUE!|UNTIL|USR|VDU|VAL|VPOS!|WHILE|WHEN|WAIT!|WIDTH|"
+6480 ENDPROC
+6500 DEF FNreserved(cn$)
+6510 LOCAL ck$,ci%,cj%,cw$,cb%,ck%,cf%
+6512 IF ASC(cn$)<65 OR ASC(cn$)>90 THEN =FALSE
+6514 cf%=FALSE
+6520 FOR ck%=0 TO 4
+6530 ck$=ckwords$(ck%):ci%=1
+6540 REPEAT
+6550 cj%=INSTR(ck$,"|",ci%):cw$=MID$(ck$,ci%,cj%-ci%):cb%=(RIGHT$(cw$,1)="!")
+6560 IF cb% cw$=LEFT$(cw$,LEN(cw$)-1)
+6570 IF LEFT$(cn$,LEN(cw$))=cw$ AND (NOT cb% OR LEN(cn$)=LEN(cw$)) cf%=TRUE
+6580 ci%=cj%+1
+6590 UNTIL ci%>LEN(ck$)
+6600 NEXT
+6610 =cf%
 20000 DATA 4028,380,212,0,12,113
 20010 DATA "E1DDE5D101050000EDB0E5C9DD7E04B72809DD7E03EE80DD7703C9DDE5E10604377E2FCE00772310"
 20020 DATA "F8C9DDE5FDE50100000021000000DD6E02DD6603DD4E04D921000000DD6E00DD6601D9FDE5D1DD21"

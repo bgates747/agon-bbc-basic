@@ -27,7 +27,8 @@ The Author accepted the corrected C002 baseline for a development checkpoint.
    and column positions, independent of optional BASIC line numbers.
 2. Keywords are uppercase. Names are case-sensitive, begin with an ASCII
    letter or underscore, and contain letters, digits or underscores, with a
-   maximum length of 32. Keyword abbreviations are unsupported.
+   maximum body length of 32; scalar numeric suffixes are separate. Keyword
+   abbreviations and ambiguous keyword-prefix variable forms are unsupported.
 3. Optional decimal line numbers are labels in file order. Numbered lines must
    increase strictly and be in 0..65279. Mixed numbered and unnumbered source
    is allowed. The compiler does not reorder physical lines.
@@ -68,6 +69,15 @@ The Author accepted the corrected C002 baseline for a development checkpoint.
 10. Unsupported statements and trailing unparsed text are compile errors.
     `EVAL` is deliberately excluded. No compound assignment or other unrelated
     syntax is introduced.
+11. Scalar numeric assignment accepts `name=expression` and `LET name=expression`.
+    Names and suffix variants are case-sensitive. Unsuffixed variables preserve
+    five-byte numeric variants; `%` stores four signed integer bytes and `&`
+    stores one unsigned byte. Integer/byte assignment uses reference SFIX,
+    including its range failures; byte stores the low byte. A%–Z% are predefined
+    at zero. Other bindings are created at zero before their first assignment
+    RHS executes; reading an uncreated binding reports `No such variable`.
+    GOSUB shares these global bindings. Strings, arrays, pseudo-variable
+    assignments and LOCAL remain rejected. See the [scalar contract](../docs/tasks/C003/SCALARS.md).
 
 ## Current backend and runtime contract
 
@@ -104,6 +114,12 @@ The Author accepted the corrected C002 baseline for a development checkpoint.
    template is included once per numeric program and omitted otherwise.
    Up to 32 five-byte temporary slots are allocated. There are no user calls
    inside admitted expressions; future FN calls need an activation-safe stack.
+9. Up to 128 scalar numeric bindings have statically allocated physical payloads
+   of one, four or five bytes and separate runtime existence flags. Native byte
+   copies move values to/from packed expression temporaries. Writes set existence
+   before RHS evaluation; reads check it when executed. The binding/error glue
+   is emitted only when needed, outside the unchanged numeric template. This
+   is global scalar storage; it does not implement LOCAL or activation records.
 
 ## Current numeric expression subset
 
@@ -114,7 +130,8 @@ The Author accepted the corrected C002 baseline for a development checkpoint.
    added. EOR remains an operator boundary (`1EOR2`). Unspaced alphabetic text
    after a scientific exponent is rejected as an unsupported tokenisation form.
    Hex uses one to eight uppercase digits and denotes signed 32-bit bit patterns.
-   Binary literals, variables and user function calls remain unsupported.
+   Binary literals and user function calls remain unsupported; scalar numeric
+   variables are admitted.
 2. Precedence from tightest is item/unary, ^, * / DIV MOD, + -, comparisons,
    AND, EOR/OR. Binary operators associate left-to-right. In particular,
    `2^3^2=64` and `-2^2=4` follow the reference evaluator. Comparisons accept

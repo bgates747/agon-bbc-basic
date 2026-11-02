@@ -1,0 +1,48 @@
+{
+  "stage": "live-source qualification; new tranche uncommitted for review",
+  "checkpoint_commit": "b20c377",
+  "compiler_sha256": "7de07d887b68cd13442474b1c0c4e26668c7054c927b5fc93aa2ff4f00ecbbd7",
+  "scalar_programs": 27,
+  "scalar_native_executions": 15,
+  "scalar_rejections": 12,
+  "physical_payloads": 20,
+  "undefined_binding_checked": true,
+  "packed_mismatches": 0,
+  "unexpected_memory_writes": 0,
+  "numeric_output_programs": 28,
+  "legacy_arithmetic_observations": 58,
+  "expression_cases": 26,
+  "baseline_cases": 39,
+  "baseline_native_executions": 15,
+  "deterministic_repeat": true,
+  "independent_assembler_checks": true,
+  "unchanged_runtime_vendor_and_license": true,
+  "human_validation": false,
+  "host": "raspberrypi/aarch64",
+  "benchmark_performance_measured": false,
+  "reports": [
+    "baseline.json",
+    "transcripts/results.json",
+    "storage/results.json",
+    "numeric-output/results.json",
+    "expressions/results.json"
+  ],
+  "duration_seconds": {
+    "baseline": 47.362,
+    "scalar_transcripts": 118.424,
+    "scalar_storage": 22.663,
+    "numeric_output": 156.036,
+    "expressions": 53.916
+  },
+  "source_hashes": {
+    "compiler/tools/test_compiler.py": "d95e916367f33d98ccf6e7d7c5b20956a39efa19a39ebcb1cbca113f86fe5c54",
+    "docs/tasks/C002/tools/test_output.py": "de29a567a9bab83f22d4a3bb81b3848a71aa8c8296f773f40f4a8e118ed2064b",
+    "docs/tasks/C002/tools/test_expressions.py": "16ffd6c122df397b5e6293cb3d657df47bf60a3de224f1f76ae7ee83903d0dfc",
+    "docs/tasks/C003/tools/test_scalars.py": "07088f15f66764db1e7bb62bfb118a5bb507a08988a18690d9831e1bc7bf099f",
+    "docs/tasks/C003/tools/test_storage.py": "4b901da0eafdbc992a22cfa33032cd625d982fea60cf661a17d647550d1d9408",
+    "compiler/runtime/numeric.s": "406b7c0cc54bead665e009ba189f28139c5b6f15ac0c71699866b8f9233d5c3a",
+    "compiler/runtime/expression_runtime.s": "5c205fd9f8cd5ba6d46e2d5c6ca80e11ca6590c2bfd2412bc0fbb4b754976826",
+    "compiler/runtime/vendor/MATH.Z80": "1f92ffc352b22051ff77f0a48d206d04012fb5e404c0a70e47d76342ce7aece3",
+    "compiler/runtime/vendor/LICENSE.txt": "cc8e92d92cf12fb1d04ddae0b573367f14188df5fcd6c7909d36486ff53a108a"
+  }
+}
