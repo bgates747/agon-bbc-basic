@@ -1,0 +1,190 @@
+Warning: unused arguments left: ["--firmware", "platform"].
+Tom's Fake VDP Version 1.03
+unknown packet VDU 0x17, 0, 0xf8
+unknown packet VDU 0x17, 0, 0x99
+uunknown packet VDU 0x17, 0, 0x94
+
+Agon Platform MOS Version 3.0.2 Arthur
+
+OUTPUT_BEGIN_0
+ab:c:bc
+ab:bc:b
+-1:-1:0
+-1
+A
+OUTPUT_STATUS:0
+OUTPUT_END_0
+OUTPUT_BEGIN_1
+[]:[]
+[a]:[d]
+[abcd]:[abcd]
+[abcd]:[abcd]
+[abcd]:[abcd]
+[]:[]
+[abcd]:[abcd]
+[]:[]
+[a]:[d]
+[abcd]:[abcd]
+[]:[]
+[a]:[d]
+OUTPUT_STATUS:0
+OUTPUT_END_1
+OUTPUT_BEGIN_2
+[abcd]:[ab]
+[abcd]:[ab]
+[bcd]:[bc]
+[d]:[d]
+[]:[]
+[]:[]
+[abcd]:[ab]
+[]:[]
+[abcd]:[ab]
+[abcd]:[ab]
+[]:[]
+[abcd]:[ab]
+[bcd]:[bc]
+OUTPUT_STATUS:0
+OUTPUT_END_2
+OUTPUT_BEGIN_3
+[]
+[b]
+[bcd]
+[bcd]
+[bcd]
+[bcd]
+[]
+[b]
+[bcd]
+[]
+OUTPUT_STATUS:0
+OUTPUT_END_3
+OUTPUT_BEGIN_4
+[]
+         0:0:0
+ab:abc:b
+abyz
+bc
+OUTPUT_STATUS:0
+OUTPUT_END_4
+OUTPUT_BEGIN_5
+bc
+b
+bcd
+cd
+4
+1:-1:1
+-1:-1
+OUTPUT_STATUS:0
+OUTPUT_END_5
+OUTPUT_BEGIN_6
+         1:2:3
+-1:-1:-1
+-1:-1
+OUTPUT_STATUS:0
+OUTPUT_END_6
+OUTPUT_BEGIN_7
+-1
+0
+0
+-1
+0
+-1
+OUTPUT_STATUS:0
+OUTPUT_END_7
+OUTPUT_BEGIN_8
+0
+-1
+-1
+-1
+0
+0
+OUTPUT_STATUS:0
+OUTPUT_END_8
+OUTPUT_BEGIN_9
+0
+-1
+0
+0
+-1
+-1
+OUTPUT_STATUS:0
+OUTPUT_END_9
+OUTPUT_BEGIN_10
+0
+-1
+-1
+-1
+0
+0
+OUTPUT_STATUS:0
+OUTPUT_END_10
+OUTPUT_BEGIN_11
+0
+-1
+0
+0
+-1
+-1
+OUTPUT_STATUS:0
+OUTPUT_END_11
+OUTPUT_BEGIN_12
+0
+-1
+-1
+-1
+0
+0
+OUTPUT_STATUS:0
+OUTPUT_END_12
+OUTPUT_BEGIN_13
+       255:255:1
+-1:-1:-1
+OUTPUT_STATUS:0
+OUTPUT_END_13
+OUTPUT_BEGIN_14
+deep
+abc:a
+OUTPUT_STATUS:0
+OUTPUT_END_14
+OUTPUT_BEGIN_15
+Number too big
+OUTPUT_STATUS:1
+OUTPUT_END_15
+OUTPUT_BEGIN_16
+Number too big
+OUTPUT_STATUS:1
+OUTPUT_END_16
+OUTPUT_BEGIN_17
+Number too big
+OUTPUT_STATUS:1
+OUTPUT_END_17
+OUTPUT_BEGIN_18
+Number too big
+OUTPUT_STATUS:1
+OUTPUT_END_18
+OUTPUT_BEGIN_19
+No such variable
+OUTPUT_STATUS:1
+OUTPUT_END_19
+OUTPUT_BEGIN_20
+Division by zero
+OUTPUT_STATUS:1
+OUTPUT_END_20
+OUTPUT_BEGIN_21
+Division by zero
+OUTPUT_STATUS:1
+OUTPUT_END_21
+OUTPUT_BEGIN_22
+No such variable
+OUTPUT_STATUS:1
+OUTPUT_END_22
+OUTPUT_BEGIN_23
+Division by zero
+OUTPUT_STATUS:1
+OUTPUT_END_23
+OUTPUT_BEGIN_24
+String too long
+OUTPUT_STATUS:1
+OUTPUT_END_24
+OUTPUT_NATIVE_DONE
+/ *

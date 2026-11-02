@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/Agon/mystuff/bbc-basic-v-adl/docs/tasks/C002/tools/test_output.py", line 209, in <module>
+    main()
+    ~~~~^^
+  File "/Agon/mystuff/bbc-basic-v-adl/docs/tasks/C002/tools/test_output.py", line 145, in main
+    compiled = harness.run_profile(profile, "load /bin/basic.bin\nrun . /output-driver.bas\n",
+                                    "OUTPUT_COMPILE_DONE", "output-compile.log", timeout_seconds=args.timeout)
+  File "/Agon/mystuff/bbc-basic-v-adl/compiler/tools/test_compiler.py", line 44, in run_profile
+    raise AssertionError(f"Timed out waiting for {marker}; see {log_path}")
+AssertionError: Timed out waiting for OUTPUT_COMPILE_DONE; see /Agon/mystuff/bbc-basic-v-adl/.emulator/output-compile.log

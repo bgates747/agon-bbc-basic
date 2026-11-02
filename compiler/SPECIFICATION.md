@@ -3,7 +3,7 @@
 The current implementation proves the path from BBC BASIC source to a MOS
 native executable. Later stages must preserve BBC BASIC values and activation
 semantics before broadening the accepted language. This draft describes the
-promoted C001 bootstrap, C002 numeric expression/output and C003 scalar/string slices in
+promoted C001 bootstrap, C002 numeric expression/output and C003 scalar/string operations and conversions in
 `compiler/compiler.bas`. These remain on the development branch pending
 accepted testing before promotion to main.
 Task documents and experimental silos follow
@@ -23,7 +23,9 @@ The Author accepted the corrected C002 baseline for a development checkpoint.
 
 1. Input is plain byte text with LF, CRLF or CR line endings; final newline is
    optional. Maximum physical line length is 255 bytes. Tokenised `.bbc` input
-   and UTF-8 identifiers are unsupported. Diagnostics use physical file line
+   and UTF-8 identifiers are unsupported. Raw control bytes inside quoted source
+   are rejected; construct them with CHR$. The reference text loader drops such
+   bytes, so accepting them literally would change behavior. Diagnostics use physical file line
    and column positions, independent of optional BASIC line numbers.
 2. Keywords are uppercase. Names are case-sensitive, begin with an ASCII
    letter or underscore, and contain letters, digits or underscores, with a
@@ -58,7 +60,7 @@ The Author accepted the corrected C002 baseline for a development checkpoint.
    to zero; a final semicolon suppresses the newline. A leading semicolon is
    supported. Bare `PRINT` emits CR/LF. Doubled quotes represent one quote;
    colon inside a string is data. Comma zones, TAB/SPC, hexadecimal PRINT,
-   @% assignment and source-level STR$ remain unsupported.
+   @% assignment remain unsupported. STR$ and STR$~ are string expressions.
 8. `VDU` accepts comma-separated numeric byte expressions, converts each through
    the package's SFIX semantics and emits the low byte. Negative values and
    byte wrapping are supported when conversion fits a signed integer. Word
@@ -85,8 +87,27 @@ The Author accepted the corrected C002 baseline for a development checkpoint.
     parentheses; groups finish before an enclosing length check. LEN consumes
     a string item and returns an integer; CHR$ consumes a numeric item, applies
     reference SFIX and takes its low byte. Undefined reads and GOSUB sharing
-    follow numeric bindings. Slicing, string comparison, VAL/STR$ and other
-    string functions remain rejected. See the [string contract](../docs/tasks/C003/STRINGS.md).
+    follow numeric bindings. See the [string contract](../docs/tasks/C003/STRINGS.md).
+13. LEFT$/RIGHT$/MID$ expression forms require parentheses. Counts and MID$
+    starts use the low byte after reference signed SFIX. LEFT$(s$) removes the
+    final byte, RIGHT$(s$) returns the final byte, MID$(s$,0) retains the full
+    string, and an optional MID$ count applies LEFT$ to that result. Empty
+    results still evaluate explicit count expressions. Slice assignment,
+    INSTR/STRING$ and further string functions remain rejected.
+14. String =, <>, <, <=, > and >= compare unsigned bytes then prefix lengths,
+    including NUL/high bytes. Results are ordinary integer -1/0 and work in
+    numeric assignments, arithmetic, Boolean expressions, parentheses, functions,
+    PRINT and VDU. Concatenation binds before relations, which bind before
+    AND/EOR/OR. Comparisons require parentheses to chain. Invalid type mixing
+    is rejected at compile time. See the [slice/comparison contract](../docs/tasks/C003/SLICES.md).
+
+15. VAL consumes a string item and calls the unchanged reference decimal-prefix
+    reader, preserving numeric types, suffix/NUL stopping, exponent quirks and
+    runtime range errors. STR$ consumes a numeric item and returns unpadded G9
+    text; STR$~ uses SFIX then uppercase hex, including eight digits for negative
+    integers. ASC consumes a string item and returns integer -1 for empty or
+    the first unsigned byte. Parentheses admit expressions. Mutable @% remains
+    unsupported. See [conversion contract](../docs/tasks/C003/CONVERSIONS.md).
 
 ## Current backend and runtime contract
 
@@ -116,9 +137,10 @@ The Author accepted the corrected C002 baseline for a development checkpoint.
    leave an incomplete file. Exact identical source/output path strings are
    rejected; path aliases are not canonicalised, so use distinct files.
 8. Numeric expressions use the standalone packed numeric runtime in
-   `runtime/`. Its 4028-byte template includes the qualified adapter/package,
-   literal/unary helpers, formatter and private 32-byte display scratch.
-   BBC BASIC copies and rebases its 380 internal
+   `runtime/`. Its 4460-byte template includes the qualified adapter/package,
+   literal/unary helpers, formatter/conversion bridges, private 32-byte display
+   scratch and 256-byte VAL scratch. Scratch is synchronous and non-reentrant.
+   BBC BASIC copies and rebases its 387 internal
    three-byte relocations; these do not occupy the source-fixup array. The
    template is included once per numeric program and omitted otherwise.
    Up to 32 five-byte temporary slots are allocated. There are no user calls
@@ -127,13 +149,14 @@ The Author accepted the corrected C002 baseline for a development checkpoint.
    of one, four or five bytes and separate runtime existence flags. Native byte
    copies move values to/from packed expression temporaries. Writes set existence
    before RHS evaluation; reads check it when executed. The binding/error glue
-   is emitted only when needed, outside the unchanged numeric template. This
+   is emitted only when needed, outside the numeric template. This
    is global scalar storage; it does not implement LOCAL or activation records.
 10. Strings use five-byte length/capacity/u24-pointer descriptors and separate
     existence flags. Private 256-byte expression buffers are limited to 16
     simultaneous values; parser nesting shares the numeric 32-entry bound.
-    Assignment copies into independently owned contents. A separate 264-byte
-    runtime adapts reference descriptor/storage conventions with an explicit
+    Assignment copies into independently owned contents. A separate 369-byte
+    runtime retains the 264-byte core and adds 105 bytes for slices/comparisons.
+    It adapts reference descriptor/storage conventions with an explicit
     FREE/limit context, capacity reuse, tail growth and geometric non-tail
     growth. Allocation checks precede descriptor/context changes. No interpreter
     globals or parser entries are linked. Failure reports `No room`; length
@@ -182,9 +205,12 @@ The Author accepted the corrected C002 baseline for a development checkpoint.
    truncation. Invalid domains propagate the package's numeric error codes.
 5. Binary operations use selectors 0..15 of the qualified package. Runtime
    errors report their message and return status 1 through the saved-stack
-   exit. Source-level VAL/STR$ and mutable format control remain unavailable.
+   exit. VAL/STR$ use separate pointer bridges into the same package; mutable
+   format control remains unavailable.
    Parser recursion is capped at 32 entries,
-   counting both expression and item routines. See the C002 task for evidence.
+   counting numeric expression frames and all item routines. String expression
+   frames retain their earlier accounting and do not charge an extra entry.
+   The 16-buffer string limit remains separate. See C002/C003 for evidence.
 
 ## Required semantics for subsequent implementation
 

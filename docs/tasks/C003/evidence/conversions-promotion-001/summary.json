@@ -1,0 +1,463 @@
+{
+  "scope": "Selected live-location rechecks and numeric regressions after exact prototype promotion; full 29-program conversion suite is in conversions-001",
+  "results": {
+    "baseline": {
+      "cases": 39,
+      "native_executions": 15,
+      "deterministic_repeat": true,
+      "assembler_oracle": true,
+      "duration_seconds": 30.453,
+      "basic_sha256": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+      "compiler_sha256": "49621eebb9dadc8701b782aa72eb88035d4300d2b8150041d7f88301923caf7c",
+      "cli_sha256": "bf5f29b243b8214e54c515dcc26edf47399ce440356af2ebc3ce3d7664ae11eb",
+      "mos_sha256": "d564243283972690933a4554296ad6202ca4ef54572279533a942960846bebae"
+    },
+    "conversion-smoke": {
+      "programs": 1,
+      "native_executions": 1,
+      "rejected_sources": 0,
+      "reference_output_programs": 1,
+      "legacy_arithmetic_observations": 0,
+      "deterministic_repeat": true,
+      "independent_link_bases": [
+        263394
+      ],
+      "string_link_bases": [
+        268157
+      ],
+      "duration_seconds": 34.183,
+      "hashes": {
+        "compiler/compiler.bas": "49621eebb9dadc8701b782aa72eb88035d4300d2b8150041d7f88301923caf7c",
+        "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+        "docs/tasks/C003/build/output-integration/cases.json": "a3af417fddb7c00035273f6495bc68f2e0ed44e2fbbf204cdcb1de8c96fab248"
+      }
+    },
+    "abi": {
+      "poisoned_upper_bc": true,
+      "checked_index_and_stack_preservation": true,
+      "empty_and_maximum_strings": true,
+      "embedded_nul_prefix": true,
+      "numeric_and_string_inputs_read_only": true,
+      "range_error_preserves_outputs": true,
+      "buffer_guards_unchanged": true,
+      "duration_seconds": 1.016,
+      "hashes": {
+        "docs/tasks/C003/conversions/abi.s": "6173f935bd4100def15e0bc0764d205a7c347de58ec916a683ab50844d80b9f9",
+        "docs/tasks/C003/build/conversion-abi/probe.bin": "29a22cea9447f924e59b0768a49be8590852cebd95bbb4bd18af47a8cefa4978",
+        "compiler/build/numeric-runtime/runtime-0.bin": "dbb59e07b90b344b038afa95ae6d1deeda96e2096fa053aed6bfe2258e5945fd"
+      }
+    },
+    "storage": {
+      "bindings": 14,
+      "undefined_bindings": 1,
+      "string_content_mismatches": 0,
+      "descriptor_bounds_checked": true,
+      "independent_ownership": true,
+      "heap_budget": 15360,
+      "heap_used": 584,
+      "heap_guard_bytes": 14808,
+      "unexpected_memory_writes": 0,
+      "records": [
+        {
+          "name": "empty$",
+          "length": 1,
+          "capacity": 1,
+          "pointer": 271388,
+          "contents": "30"
+        },
+        {
+          "name": "zero$",
+          "length": 1,
+          "capacity": 1,
+          "pointer": 271389,
+          "contents": "30"
+        },
+        {
+          "name": "third$",
+          "length": 11,
+          "capacity": 11,
+          "pointer": 271390,
+          "contents": "302e333333333333333333"
+        },
+        {
+          "name": "large$",
+          "length": 4,
+          "capacity": 4,
+          "pointer": 271401,
+          "contents": "31453338"
+        },
+        {
+          "name": "small$",
+          "length": 5,
+          "capacity": 5,
+          "pointer": 271405,
+          "contents": "31452d3338"
+        },
+        {
+          "name": "negative$",
+          "length": 12,
+          "capacity": 12,
+          "pointer": 271410,
+          "contents": "2d302e333333333333333333"
+        },
+        {
+          "name": "hexzero$",
+          "length": 1,
+          "capacity": 1,
+          "pointer": 271422,
+          "contents": "30"
+        },
+        {
+          "name": "hexmax$",
+          "length": 8,
+          "capacity": 8,
+          "pointer": 271423,
+          "contents": "4646464646464646"
+        },
+        {
+          "name": "hexmin$",
+          "length": 8,
+          "capacity": 8,
+          "pointer": 271431,
+          "contents": "3830303030303030"
+        },
+        {
+          "name": "nested$",
+          "length": 8,
+          "capacity": 15,
+          "pointer": 271957,
+          "contents": "4646464646464634"
+        },
+        {
+          "name": "left$",
+          "length": 128,
+          "capacity": 128,
+          "pointer": 271443,
+          "contents": "2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020"
+        },
+        {
+          "name": "right$",
+          "length": 127,
+          "capacity": 127,
+          "pointer": 271571,
+          "contents": "20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020203132"
+        },
+        {
+          "name": "maximum$",
+          "length": 255,
+          "capacity": 255,
+          "pointer": 271698,
+          "contents": "202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020203132"
+        },
+        {
+          "name": "copy$",
+          "length": 4,
+          "capacity": 4,
+          "pointer": 271953,
+          "contents": "31322e35"
+        }
+      ],
+      "numeric_records": [
+        {
+          "name": "value0",
+          "size": 5,
+          "expected": "0000000000",
+          "actual": "0000000000"
+        },
+        {
+          "name": "value1",
+          "size": 5,
+          "expected": "0000000000",
+          "actual": "0000000000"
+        },
+        {
+          "name": "value2",
+          "size": 5,
+          "expected": "0000000080",
+          "actual": "0000000080"
+        },
+        {
+          "name": "value3",
+          "size": 5,
+          "expected": "0000008080",
+          "actual": "0000008080"
+        },
+        {
+          "name": "value4",
+          "size": 5,
+          "expected": "ffffff7f00",
+          "actual": "ffffff7f00"
+        },
+        {
+          "name": "value5",
+          "size": 5,
+          "expected": "000000009f",
+          "actual": "000000009f"
+        },
+        {
+          "name": "value6",
+          "size": 5,
+          "expected": "ffffff7f9f",
+          "actual": "ffffff7f9f"
+        },
+        {
+          "name": "value7",
+          "size": 5,
+          "expected": "faffff7f9f",
+          "actual": "faffff7f9f"
+        },
+        {
+          "name": "value8",
+          "size": 5,
+          "expected": "000000809f",
+          "actual": "000000809f"
+        },
+        {
+          "name": "value9",
+          "size": 5,
+          "expected": "1452061e80",
+          "actual": "1452061e80"
+        },
+        {
+          "name": "value10",
+          "size": 5,
+          "expected": "eadcc75901",
+          "actual": "eadcc75901"
+        },
+        {
+          "name": "value11",
+          "size": 5,
+          "expected": "0000000000",
+          "actual": "0000000000"
+        },
+        {
+          "name": "value12",
+          "size": 5,
+          "expected": "0000004886",
+          "actual": "0000004886"
+        },
+        {
+          "name": "value13",
+          "size": 5,
+          "expected": "0100000000",
+          "actual": "0100000000"
+        },
+        {
+          "name": "value14",
+          "size": 5,
+          "expected": "0100000000",
+          "actual": "0100000000"
+        },
+        {
+          "name": "value15",
+          "size": 5,
+          "expected": "0000000000",
+          "actual": "0000000000"
+        },
+        {
+          "name": "value16",
+          "size": 5,
+          "expected": "0000000000",
+          "actual": "0000000000"
+        },
+        {
+          "name": "maximumval",
+          "size": 5,
+          "expected": "0c00000000",
+          "actual": "0c00000000"
+        },
+        {
+          "name": "nulval",
+          "size": 5,
+          "expected": "0c00000000",
+          "actual": "0c00000000"
+        },
+        {
+          "name": "asempty%",
+          "size": 4,
+          "expected": "ffffffff",
+          "actual": "ffffffff"
+        },
+        {
+          "name": "ashigh%",
+          "size": 4,
+          "expected": "ff000000",
+          "actual": "ff000000"
+        },
+        {
+          "name": "asnul%",
+          "size": 4,
+          "expected": "00000000",
+          "actual": "00000000"
+        }
+      ],
+      "duration_seconds": 65.113,
+      "hashes": {
+        "compiler/compiler.bas": "49621eebb9dadc8701b782aa72eb88035d4300d2b8150041d7f88301923caf7c",
+        "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+        "docs/tasks/C003/build/conversion-storage/source.bas": "038f475f114e4b9a6f832b76852442dc302c63aa1e17f0354f7f79e675b03697",
+        "docs/tasks/C003/build/conversion-storage/expected.dat": "a5d7b07f14a6fd5da0357de5d4e6ccbf9369e13df679f3ca5acd988c77813fd7",
+        "docs/tasks/C003/build/conversion-storage/native.dat": "9377436595062f3d9c3a769e74ea80909656ed7e1ab29652752d7b7dd64575de"
+      }
+    },
+    "slice-smoke": {
+      "programs": 1,
+      "native_executions": 1,
+      "rejected_sources": 0,
+      "reference_output_programs": 1,
+      "legacy_arithmetic_observations": 0,
+      "deterministic_repeat": true,
+      "independent_link_bases": [
+        263638
+      ],
+      "string_link_bases": [
+        268394
+      ],
+      "duration_seconds": 35.985,
+      "hashes": {
+        "compiler/compiler.bas": "49621eebb9dadc8701b782aa72eb88035d4300d2b8150041d7f88301923caf7c",
+        "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+        "docs/tasks/C003/build/output-integration/cases.json": "16d19227cf16daf4c193c87c1d73c91235c424cb487d8f78fdecfe0a46b27a3e"
+      }
+    },
+    "string-limits": {
+      "programs": 3,
+      "native_executions": 1,
+      "rejected_sources": 2,
+      "reference_output_programs": 0,
+      "legacy_arithmetic_observations": 0,
+      "deterministic_repeat": true,
+      "independent_link_bases": [
+        263101
+      ],
+      "string_link_bases": [
+        267859
+      ],
+      "duration_seconds": 33.881,
+      "hashes": {
+        "compiler/compiler.bas": "49621eebb9dadc8701b782aa72eb88035d4300d2b8150041d7f88301923caf7c",
+        "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+        "docs/tasks/C003/build/output-integration/cases.json": "13d4e260f4a38caad9d81582919fb1dd43a628dd0b243dc6a028307a68952d00"
+      }
+    },
+    "numeric-abi": {
+      "cases": 449,
+      "failures": [],
+      "fixture_record_bytes": 18,
+      "packed_result_bytes": 5,
+      "independent_precision_anchors": 4,
+      "unresolved_numeric_symbols": 0,
+      "duration_seconds": 17.574,
+      "status_counts": {
+        "0": 391,
+        "1": 7,
+        "18": 1,
+        "20": 15,
+        "21": 13,
+        "22": 11,
+        "23": 9,
+        "24": 2
+      },
+      "hashes": {
+        "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+        "compiler/runtime/numeric.s": "406b7c0cc54bead665e009ba189f28139c5b6f15ac0c71699866b8f9233d5c3a",
+        "docs/tasks/C002/probe.s": "d03f7b7a07d678a45242538b74c51b66d7a819c8d53f627f85730d5652832c36",
+        "compiler/runtime/vendor/MATH.Z80": "1f92ffc352b22051ff77f0a48d206d04012fb5e404c0a70e47d76342ce7aece3",
+        "docs/tasks/C002/build/cases.dat": "4a6724796fac1b0093b567d6c5173cf7f3e41f27d262424cc6c35d1f090927c4",
+        "docs/tasks/C002/build/probe.bin": "32d5ade1dcbd7f3a338989de56dfab6c5087aff31882410f5f2b6c0002b2524f"
+      }
+    },
+    "formatter": {
+      "cases": 45,
+      "mismatches": 0,
+      "buffer_bytes": 32,
+      "buffer_alignment": 251,
+      "nul_checked": true,
+      "stack_index_input_canaries_checked": true,
+      "duration_seconds": 2.036,
+      "hashes": {
+        "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+        "compiler/runtime/expression_runtime.s": "0c0d5d0e2af066a0d29e837be99593c061f2748d79b984ea6dd3b12f6ef9f440",
+        "compiler/runtime/numeric.s": "406b7c0cc54bead665e009ba189f28139c5b6f15ac0c71699866b8f9233d5c3a",
+        "docs/tasks/C002/build/format/format.dat": "d84c625ca3bfad329cd6804b9b38c18befa73766487b718c7d1f40efd33f7d7c"
+      }
+    },
+    "numeric-output": {
+      "programs": 28,
+      "native_executions": 20,
+      "rejected_sources": 8,
+      "reference_output_programs": 18,
+      "legacy_arithmetic_observations": 58,
+      "deterministic_repeat": true,
+      "independent_link_bases": [
+        262850,
+        264267,
+        263169,
+        262753,
+        263407,
+        262464,
+        262420,
+        262420,
+        262454,
+        262441,
+        262441,
+        262441,
+        262429,
+        262453,
+        265201,
+        265085,
+        264891,
+        265374,
+        264240,
+        262957
+      ],
+      "string_link_bases": [],
+      "duration_seconds": 205.4,
+      "hashes": {
+        "compiler/compiler.bas": "49621eebb9dadc8701b782aa72eb88035d4300d2b8150041d7f88301923caf7c",
+        "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+        "docs/tasks/C002/build/output-integration/cases.json": "2802122e900fb26948bbd60cae9205b787600f05f5ecb6be7d79e697fb241bab"
+      }
+    },
+    "expressions": {
+      "start": 0,
+      "cases": 12,
+      "reference_expressions": 12,
+      "native_executions": 12,
+      "rejected_sources": 0,
+      "deterministic_repeat": true,
+      "nonnumeric_assembly_golden": false,
+      "independently_linked_image_bases": [
+        262616,
+        262616,
+        262616,
+        262616,
+        262591,
+        262600,
+        262625,
+        262566,
+        262566,
+        262582,
+        262600,
+        262600
+      ],
+      "duration_seconds": 81.334,
+      "host": "raspberrypi/aarch64",
+      "human_validation": false,
+      "hashes": {
+        "compiler/compiler.bas": "49621eebb9dadc8701b782aa72eb88035d4300d2b8150041d7f88301923caf7c",
+        "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+        "docs/tasks/C002/build/expressions/promotion/batch-000/oracle.dat": "a65d1fca86fcdc5a3aa9ac1ba1f382c600f67a5470ba503d73ad31e8e0c610c5"
+      }
+    }
+  },
+  "prototype_compiler_sha256": "49621eebb9dadc8701b782aa72eb88035d4300d2b8150041d7f88301923caf7c",
+  "live_compiler_sha256": "49621eebb9dadc8701b782aa72eb88035d4300d2b8150041d7f88301923caf7c",
+  "numeric_runtime_bytes": 4460,
+  "numeric_runtime_relocations": 387,
+  "vendor_and_license_unchanged": true,
+  "both_data_packers_reproduce_source": true,
+  "human_or_hardware_validation": false,
+  "new_benchmark_performance_measured": false,
+  "new_tranche_committed": false
+}

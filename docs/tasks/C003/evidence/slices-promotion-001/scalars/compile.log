@@ -1,0 +1,52 @@
+Warning: unused arguments left: ["--firmware", "platform"].
+Tom's Fake VDP Version 1.03
+unknown packet VDU 0x17, 0, 0xf8
+unknown packet VDU 0x17, 0, 0x99
+uunknown packet VDU 0x17, 0, 0x94
+
+Agon Platform MOS Version 3.0.2 Arthur
+
+OK:p0.bas
+OK:p1.bas
+OK:p2.bas
+OK:p3.bas
+OK:p4.bas
+OK:p5.bas
+OK:p6.bas
+OK:p7.bas
+OK:p8.bas
+OK:p9.bas
+OK:p10.bas
+OK:p11.bas
+OK:p12.bas
+OK:p13.bas
+ERR:p14.bas
+p14.bas:1:6: Arrays and function calls are not yet supported at 3250
+ERR:p15.bas
+p15.bas:1:3: Arrays and function calls are not yet supported at 3250
+ERR:p16.bas
+p16.bas:1:3: Unsupported numeric suffix at 3250
+ERR:p17.bas
+p17.bas:1:2: Expected = at 3250
+ERR:p18.bas
+p18.bas:1:2: Variable indirection is not yet supported at 3250
+ERR:p19.bas
+p19.bas:1:6: Unsupported statement LOCAL at 3250
+ERR:p20.bas
+p20.bas:1:4: Unsupported statement RUN at 3250
+ERR:p21.bas
+p21.bas:1:8: Unsupported statement SQRname at 3250
+ERR:p22.bas
+p22.bas:1:14: Unsupported numeric item SQRname at 3250
+ERR:p23.bas
+p23.bas:1:7: Unsupported variable name PI at 3250
+ERR:p24.bas
+p24.bas:1:19: Expression nesting exceeds 32 at 3250
+ERR:p25.bas
+p25.bas:129:5: Scalar variable limit exceeds 128 at 3250
+OK:p26.bas
+OK:p27.bas
+OK:p28.bas
+OK:p0.bas
+OUTPUT_COMPILE_DONE
+/ *

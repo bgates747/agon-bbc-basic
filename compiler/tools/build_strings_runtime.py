@@ -7,7 +7,7 @@ import re
 import subprocess
 
 ROOT=Path(__file__).resolve().parents[2]
-EXPORTS=('rt_strliteral','rt_strload','rt_strcat','rt_strstore','rt_strprint')
+EXPORTS=('rt_strliteral','rt_strload','rt_strcat','rt_strstore','rt_strprint','rt_strleft','rt_strright','rt_strmid','rt_strcompare')
 
 
 def main():

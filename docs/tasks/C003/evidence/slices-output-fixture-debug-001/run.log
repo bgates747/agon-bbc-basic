@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/Agon/mystuff/bbc-basic-v-adl/docs/tasks/C002/tools/test_output.py", line 209, in <module>
+    main()
+    ~~~~^^
+  File "/Agon/mystuff/bbc-basic-v-adl/docs/tasks/C002/tools/test_output.py", line 151, in main
+    assert case["diagnostic"] in record, (i, record)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (19, 'p19.bas:1:15: String value used as a numeric item at 3250\n')

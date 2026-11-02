@@ -3,14 +3,16 @@
 The BBC compiler embeds this runtime as DATA and emits it only when a program
 uses numeric expressions. It preserves four-byte integers and five-byte BBC
 floats; generated programs execute without the interpreter. The current image
-is 4028 bytes before temporary slots and error-message glue.
+is 4460 bytes before temporary slots and error-message glue.
 
 1. `numeric.s` is the qualified pointer adapter plus required bytewise helpers.
    [ABI](../../docs/tasks/C002/ABI.md) documents selectors, preservation, aliases
    and error handling. C002 qualified binary/conversion calls first, then
    standard unary math functions and PI without altering the vendor source.
 2. `expression_runtime.s` adds inline packed-literal copying, unary minus,
-   a read-only G9 formatter and numeric PRINT output.
+   a read-only G9 formatter, numeric PRINT output and VAL/STR$ bridges.
+   [Conversion ABI](../../docs/tasks/C003/CONVERSIONS.md) documents copied
+   NUL-terminated VAL input, G9/hex output, private scratch and preservation.
    It includes `numeric.s` last because the unchanged vendor source ends with
    assembler END. All numeric-field accesses in these helpers are byte-sized.
 3. `vendor/MATH.Z80` is the unchanged pinned BASIC V package. Keep its
@@ -37,11 +39,16 @@ is 4028 bytes before temporary slots and error-message glue.
 C003's scalar storage glue is emitted by the BBC compiler outside this template.
 Physical one/four/five-byte payloads and separate existence flags use native
 byte copies; integer/byte assignment calls the existing qualified SFIX adapter.
-The numeric template, vendor package and pointer ABI remain unchanged.
+The numeric adapter/vendor package and its pointer ABI remain unchanged;
+C003 conversions extend the enclosing template by 432 bytes and seven
+relocations (4460 bytes/387 relocations total). The packer supports isolated
+--source/--output/--compiler paths; default paths remain live source/build.
 
-C003 adds `strings.s`, a separate 264-byte standalone string core. Its descriptor,
+C003 adds `strings.s`, a separate 369-byte standalone library: the original
+264-byte core plus 105 bytes for expression slices and comparisons. Its descriptor,
 private allocator context, calling conventions and provenance are documented
-in the [string contract](../../docs/tasks/C003/STRINGS.md). Regenerate its
+in the [string contract](../../docs/tasks/C003/STRINGS.md) and
+[slice/comparison contract](../../docs/tasks/C003/SLICES.md). Regenerate its
 embedded DATA independently:
 
 ```bash

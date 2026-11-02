@@ -1,0 +1,40 @@
+10 empty$=STR$(0)
+20 zero$=STR$ ASC CHR$(0)
+30 third$=STR$(1/3)
+40 large$=STR$(1E38)
+50 small$=STR$(1E-38)
+60 negative$=STR$(-1/3)
+70 hexzero$=STR$~0
+80 hexmax$=STR$~&FFFFFFFF
+90 hexmin$=STR$~&80000000
+100 nested$=STR$ VAL "12.5"
+110 left$="                                                                                                                                "
+120 right$="                                                                                                                             12"
+130 maximum$=left$+right$
+140 copy$=nested$
+150 nested$=STR$~(-12.9)
+160 value0=VAL("0")
+170 value1=VAL("-0")
+180 value2=VAL("1.0")
+190 value3=VAL("-1.0")
+200 value4=VAL("2147483647")
+210 value5=VAL("2147483648")
+220 value6=VAL("4294967295")
+230 value7=VAL("4294967296")
+240 value8=VAL("-2147483648")
+250 value9=VAL("1.234567890123456789")
+260 value10=VAL("1E-38")
+270 value11=VAL("1E-99")
+280 value12=VAL("1E 2")
+290 value13=VAL("1E+ 2")
+300 value14=VAL("1e2")
+310 value15=VAL("&FF")
+320 value16=VAL("words")
+330 maximumval=VAL maximum$
+340 nulval=VAL("12"+CHR$(0)+"34")
+350 asempty%=ASC ""
+360 ashigh%=ASC CHR$(255)
+370 asnul%=ASC CHR$(0)
+900 GOTO 1000
+910 PRINT missing$
+1000 END

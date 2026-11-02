@@ -36,3 +36,9 @@ original license and copyright headers are retained.
    Expanded qualification covers 449 packed numeric cases and 45 formatter
    cases, plus native output comparisons; see
    [the output record](../../../docs/tasks/C002/OUTPUT.md).
+8. C003's string conversions add native bridges to unchanged VAL/STR selectors
+   and an explicitly adapted EVAL.Z80 HEXSTR in `../expression_runtime.s`.
+   Full pointer lengths and caller-owned buffers replace ACCS's page alignment;
+   private NUL-terminated scratch replaces the interpreter's VAL accumulator.
+   The same license covers these adaptations. The vendor math/license remain
+   byte-identical. See [conversion audit/ABI](../../../docs/tasks/C003/CONVERSIONS.md).

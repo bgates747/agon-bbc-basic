@@ -511,3 +511,139 @@ covered the earlier dirt.
    slicing and comparisons. Accepted the qualified mutable string core for a
    development checkpoint, retaining all source, successful and failed evidence.
    Main remains unchanged; graphical/hardware acceptance is not asserted.
+
+## C003 slicing and comparison tranche begins
+
+1. Pushed qualified string core as `be0f299` before new work. Refined the next
+   C003 tranche before coding: expression slicing and six string comparisons,
+   with typed expression results. VAL/STR$ and slice assignments stay outside
+   this tranche; no activation work starts. Oryx remains unavailable.
+2. Reference audit finds that slice indices/counts use only the low byte after
+   signed SFIX. Omitted LEFT$ drops the final byte; omitted RIGHT$ selects one
+   final byte; MID$ start zero retains the full string. These are compatibility
+   requirements, not opportunities to change BASIC's behavior. SCP0 compares
+   unsigned bytes and then lengths. Runtime adaptations use private buffers
+   rather than ACCS/page alignment or interpreter expression/stack entries.
+3. Implemented private-buffer LEFT/RIGHT/MID and unsigned lexicographic ordering
+   as a 105-byte addition to the unchanged 264-byte string core. The numeric
+   runtime and allocator remain unchanged. The first smoke compile exposed an
+   inline nested-IF dispatch ambiguity; replaced it with an explicit helper.
+   The corrected mixed slice/comparison smoke passes in 33.284s.
+4. The first full suite compiled all accepted sources, then stopped on an
+   incorrect expected diagnostic for a rejected slice-assignment target. That
+   incomplete run is retained separately. Corrected the fixture and preserved
+   the prior string-specific recursion accounting: numeric expression frames
+   and all items count toward the shared 32-entry budget; string expression
+   frames are not charged twice. Added a deep previously admitted string case
+   before repeating. No language behavior is inferred from test expectations.
+5. Prototype qualification passes **36 programs** (**25 native/11 rejected**)
+   in **277.395s**, with actual BASIC transcripts, ordered errors, independent
+   links and determinism. A native ABI probe passes in **1.016s**, including
+   0/255 lengths, unsigned/prefix ordering, read-only operands, zero-count moves,
+   poisoned upper BC, guards and IX/IY/SP preservation.
+6. Raw qualification passes **23 string bindings**, an uncreated descriptor and
+   packed integer results in **86.461s**, with exact reference contents, distinct
+   ownership, bounds and no unexpected writes. Heap use is 1574/24576 bytes and
+   23034 bytes after FREE remain untouched. A copy script initially selected
+   transcript-only cases.json for this raw probe; corrected the archival file
+   list without repeating or changing the passing run. The baseline passes
+   **39 cases/15 native executions** plus its complete assembly golden in
+   **29.518s**. [Prototype evidence](tasks/C003/evidence/slices-001/summary.json)
+   retains sources, reports, snapshots and logs.
+7. Promoted exact tested compiler/runtime to their single live paths; compiler
+   SHA-256 `09e736f210007086a5c4645e4e96e14a717f28f340acbe1860c170bf19dcfbc0`.
+   Runtime size is 369 bytes, preserving the old 264-byte prefix. Numeric
+   DATA/assembly/vendor/license remain unchanged. Removed maintained prototype
+   compiler/runtime/packer copies, retained task-owned qualification tools and
+   froze historical source. Both live packers reproduce the promoted compiler.
+8. Updated specification, matrix, reference audit, runtime/reader guides,
+   handoff, C003 contract and TODO. Live validation uses sequential Pi5 CLI
+   runs. No Oryx, graphical/hardware review or performance benchmark is claimed;
+   new tranche work remains uncommitted pending review.
+9. Live checks pass the **39-case/15-execution** baseline in **29.361s**, the
+   selected mixed integration in **33.787s**, the new and old native ABI probes
+   in **1.016s** each, and **23 raw string bindings** plus guards in **85.953s**.
+   The old **23 string programs** pass in **99.288s**; the example and both
+   buffer/nesting limits pass in **31.882s**.
+10. Numeric regressions pass **29 scalar programs** in **137.337s**, **28 output
+    programs** (58 earlier arithmetic observations) in **191.359s**, and expression
+    batches of **12** and **26** in **75.989s** and **64.386s**. A failed output
+    attempt expected the old diagnostic for ABS("x"); the new parser correctly
+    rejected the string argument. Retained that attempt, corrected only the
+    expected diagnostic and repeated. No compiler/runtime or valid output changed.
+11. Review added a focused same-source check for PRINT beginning directly with
+    a quoted-literal comparison, plus fields, arithmetic/functions and a slice
+    count reading its original target. It passes in **30.774s** and becomes the
+    maintained suite's 37th case. The earlier complete 36-case prototype result
+    remains distinct from selected live rechecks. [Live evidence](tasks/C003/evidence/slices-promotion-001/summary.json)
+    retains exact source/tools, scripts, reports, logs, bytes and manifests.
+12. Final verification checks source order/loader limits, byte-identical
+    promotion and DATA regeneration, unchanged numeric library/vendor/license
+    and old string core, Python/JSON, links and manifest inclusion. HEAD/origin
+    remain `be0f299`, main is unchanged, and the new tranche stays uncommitted.
+    C003 remains in TODO for remaining string functions/conversions and slice
+    assignment; no Oryx, benchmark or graphical/hardware qualification occurred.
+
+## C003 conversion tranche started
+
+The Author's “go” authorizes the next bounded implementation: VAL, STR$ (G9 and
+hex) and ASC. The slicing/comparison changes remain uncommitted. Audited
+EVAL.Z80 VAL/STRS/HEXSTR/ASC and MATH.Z80 VAL/CON/NUMBER/SIGNQ/FPP/STR. The numeric
+package already provides decimal conversion; the compiler will use that exact
+code with private buffers rather than implementing a replacement parser.
+The C003 brief records scope and qualification before implementation. Search,
+repetition, mutable @% and slice assignment remain outside this tranche.
+
+## C003 conversions qualified and promoted
+
+The prototype passes 29 programs (18 native/11 rejected) in 201.849s,
+14 string bindings plus 22 raw numeric records in 65.521s, the native ABI probe
+in 1.016s and the 39-case/15-execution baseline in 30.454s. VAL executes unchanged
+FPP selector 36; STR$ calls the existing G9 formatter, STR$~ adapts HEXSTR, and
+ASC is emitted directly. The compiler remains BBC BASIC. Vendor math/license,
+the numeric pointer adapter and the string runtime are unchanged.
+
+The broad run exposed a fixture distinction: OSLOAD_TXT2 removes raw control
+bytes even inside quoted text. Tests now construct TAB with CHR$(9), and the
+compiler clearly rejects raw quoted control bytes pending loader normalization.
+A stale longer MOS SAVE target also required fixture cleanup before a shorter
+memory capture. Failed fixture and timeout attempts are retained separately.
+
+Promoted byte-identical compiler SHA-256
+`49621eebb9dadc8701b782aa72eb88035d4300d2b8150041d7f88301923caf7c`
+and expression runtime to their live locations; the mixed example is also
+promoted. No maintained compiler fork remains. Numeric DATA now embeds 4460
+bytes/387 relocations and regenerates exactly, preserving string DATA. Live
+checks follow; no new commit, benchmark, Oryx contact or hardware review is claimed.
+
+## C003 conversion live checks completed
+
+The exact live source passes baseline39/15 (30.453s), conversion example
+(34.183s), ABI (1.016s), 14-string/22-numeric memory probe (65.113s), selected
+slices (35.985s), and string example/limits (33.881s). Numeric regression passes
+449 ABI cases (17.574s), 45 formatter cases (2.036s), 28 output programs with
+58 arithmetic observations (205.400s), and 12 expressions (81.334s). Independent
+links, determinism and the complete baseline assembly golden pass.
+
+The output batch needed a 360-second guard after its old 180-second guard
+expired during progress. That failed attempt is retained separately; the shared
+output harness default is now calibrated to 360 seconds. Compiler/runtime code
+was unchanged for the repeat. Both DATA packers reproduce the exact promoted
+source. Full prototype and selected live scopes remain distinguished in their
+manifests/summaries. C003 stays active for INSTR/STRING$, other required string
+functions and slice assignment. All new work remains uncommitted for review.
+
+Final checks confirm 828 ordered loader-safe BBC lines, byte-identical promotion,
+matching numeric/string DATA, unchanged adapter/vendor/license/string runtime and
+reference interpreter, valid source/tool/document formats, and 418 prior manifest
+members. Removed an ignored Python cache from the evidence before rebuilding its
+manifest; archived evidence is stageable. HEAD/upstream remain be0f299, main
+2998edd. New work remains uncommitted and no Oryx/hardware/benchmark claim is made.
+
+## Slice/conversion checkpoint authorized
+
+The Author explicitly requested committing/pushing all dirt before continuing.
+Verified all 516 C003 evidence manifest members and clean whitespace. The
+qualified slicing/comparison and conversion work is accepted for a development
+checkpoint on codex/native-bbc-compiler; main and human/hardware acceptance
+remain separate. The next bounded C003 tranche is INSTR and STRING$.

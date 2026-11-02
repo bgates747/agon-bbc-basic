@@ -1,0 +1,15 @@
+{
+  "poisoned_upper_bc": true,
+  "checked_index_and_stack_preservation": true,
+  "empty_and_maximum_strings": true,
+  "embedded_nul_prefix": true,
+  "numeric_and_string_inputs_read_only": true,
+  "range_error_preserves_outputs": true,
+  "buffer_guards_unchanged": true,
+  "duration_seconds": 1.016,
+  "hashes": {
+    "docs/tasks/C003/conversions/abi.s": "6173f935bd4100def15e0bc0764d205a7c347de58ec916a683ab50844d80b9f9",
+    "docs/tasks/C003/build/conversion-abi/probe.bin": "29a22cea9447f924e59b0768a49be8590852cebd95bbb4bd18af47a8cefa4978",
+    "compiler/build/numeric-runtime/runtime-0.bin": "dbb59e07b90b344b038afa95ae6d1deeda96e2096fa053aed6bfe2258e5945fd"
+  }
+}

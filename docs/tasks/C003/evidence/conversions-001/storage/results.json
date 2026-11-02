@@ -1,0 +1,253 @@
+{
+  "bindings": 14,
+  "undefined_bindings": 1,
+  "string_content_mismatches": 0,
+  "descriptor_bounds_checked": true,
+  "independent_ownership": true,
+  "heap_budget": 15360,
+  "heap_used": 584,
+  "heap_guard_bytes": 14808,
+  "unexpected_memory_writes": 0,
+  "records": [
+    {
+      "name": "empty$",
+      "length": 1,
+      "capacity": 1,
+      "pointer": 271388,
+      "contents": "30"
+    },
+    {
+      "name": "zero$",
+      "length": 1,
+      "capacity": 1,
+      "pointer": 271389,
+      "contents": "30"
+    },
+    {
+      "name": "third$",
+      "length": 11,
+      "capacity": 11,
+      "pointer": 271390,
+      "contents": "302e333333333333333333"
+    },
+    {
+      "name": "large$",
+      "length": 4,
+      "capacity": 4,
+      "pointer": 271401,
+      "contents": "31453338"
+    },
+    {
+      "name": "small$",
+      "length": 5,
+      "capacity": 5,
+      "pointer": 271405,
+      "contents": "31452d3338"
+    },
+    {
+      "name": "negative$",
+      "length": 12,
+      "capacity": 12,
+      "pointer": 271410,
+      "contents": "2d302e333333333333333333"
+    },
+    {
+      "name": "hexzero$",
+      "length": 1,
+      "capacity": 1,
+      "pointer": 271422,
+      "contents": "30"
+    },
+    {
+      "name": "hexmax$",
+      "length": 8,
+      "capacity": 8,
+      "pointer": 271423,
+      "contents": "4646464646464646"
+    },
+    {
+      "name": "hexmin$",
+      "length": 8,
+      "capacity": 8,
+      "pointer": 271431,
+      "contents": "3830303030303030"
+    },
+    {
+      "name": "nested$",
+      "length": 8,
+      "capacity": 15,
+      "pointer": 271957,
+      "contents": "4646464646464634"
+    },
+    {
+      "name": "left$",
+      "length": 128,
+      "capacity": 128,
+      "pointer": 271443,
+      "contents": "2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020"
+    },
+    {
+      "name": "right$",
+      "length": 127,
+      "capacity": 127,
+      "pointer": 271571,
+      "contents": "20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020203132"
+    },
+    {
+      "name": "maximum$",
+      "length": 255,
+      "capacity": 255,
+      "pointer": 271698,
+      "contents": "202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020203132"
+    },
+    {
+      "name": "copy$",
+      "length": 4,
+      "capacity": 4,
+      "pointer": 271953,
+      "contents": "31322e35"
+    }
+  ],
+  "numeric_records": [
+    {
+      "name": "value0",
+      "size": 5,
+      "expected": "0000000000",
+      "actual": "0000000000"
+    },
+    {
+      "name": "value1",
+      "size": 5,
+      "expected": "0000000000",
+      "actual": "0000000000"
+    },
+    {
+      "name": "value2",
+      "size": 5,
+      "expected": "0000000080",
+      "actual": "0000000080"
+    },
+    {
+      "name": "value3",
+      "size": 5,
+      "expected": "0000008080",
+      "actual": "0000008080"
+    },
+    {
+      "name": "value4",
+      "size": 5,
+      "expected": "ffffff7f00",
+      "actual": "ffffff7f00"
+    },
+    {
+      "name": "value5",
+      "size": 5,
+      "expected": "000000009f",
+      "actual": "000000009f"
+    },
+    {
+      "name": "value6",
+      "size": 5,
+      "expected": "ffffff7f9f",
+      "actual": "ffffff7f9f"
+    },
+    {
+      "name": "value7",
+      "size": 5,
+      "expected": "faffff7f9f",
+      "actual": "faffff7f9f"
+    },
+    {
+      "name": "value8",
+      "size": 5,
+      "expected": "000000809f",
+      "actual": "000000809f"
+    },
+    {
+      "name": "value9",
+      "size": 5,
+      "expected": "1452061e80",
+      "actual": "1452061e80"
+    },
+    {
+      "name": "value10",
+      "size": 5,
+      "expected": "eadcc75901",
+      "actual": "eadcc75901"
+    },
+    {
+      "name": "value11",
+      "size": 5,
+      "expected": "0000000000",
+      "actual": "0000000000"
+    },
+    {
+      "name": "value12",
+      "size": 5,
+      "expected": "0000004886",
+      "actual": "0000004886"
+    },
+    {
+      "name": "value13",
+      "size": 5,
+      "expected": "0100000000",
+      "actual": "0100000000"
+    },
+    {
+      "name": "value14",
+      "size": 5,
+      "expected": "0100000000",
+      "actual": "0100000000"
+    },
+    {
+      "name": "value15",
+      "size": 5,
+      "expected": "0000000000",
+      "actual": "0000000000"
+    },
+    {
+      "name": "value16",
+      "size": 5,
+      "expected": "0000000000",
+      "actual": "0000000000"
+    },
+    {
+      "name": "maximumval",
+      "size": 5,
+      "expected": "0c00000000",
+      "actual": "0c00000000"
+    },
+    {
+      "name": "nulval",
+      "size": 5,
+      "expected": "0c00000000",
+      "actual": "0c00000000"
+    },
+    {
+      "name": "asempty%",
+      "size": 4,
+      "expected": "ffffffff",
+      "actual": "ffffffff"
+    },
+    {
+      "name": "ashigh%",
+      "size": 4,
+      "expected": "ff000000",
+      "actual": "ff000000"
+    },
+    {
+      "name": "asnul%",
+      "size": 4,
+      "expected": "00000000",
+      "actual": "00000000"
+    }
+  ],
+  "duration_seconds": 65.521,
+  "hashes": {
+    "docs/tasks/C003/conversions/compiler.bas": "49621eebb9dadc8701b782aa72eb88035d4300d2b8150041d7f88301923caf7c",
+    "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+    "docs/tasks/C003/build/conversion-storage/source.bas": "038f475f114e4b9a6f832b76852442dc302c63aa1e17f0354f7f79e675b03697",
+    "docs/tasks/C003/build/conversion-storage/expected.dat": "a5d7b07f14a6fd5da0357de5d4e6ccbf9369e13df679f3ca5acd988c77813fd7",
+    "docs/tasks/C003/build/conversion-storage/native.dat": "9377436595062f3d9c3a769e74ea80909656ed7e1ab29652752d7b7dd64575de"
+  }
+}

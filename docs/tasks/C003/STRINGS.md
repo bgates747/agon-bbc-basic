@@ -3,7 +3,8 @@
 The live BBC compiler now supports owned string variables, copying,
 concatenation, string PRINT, LEN and CHR$. Qualification compares real BASIC
 execution and raw contents, with separate memory and native calling-convention
-probes. Slicing, string comparison and further conversions remain C003 work;
+probes. Expression slicing and string comparisons are now covered by the later
+[SLICES.md](SLICES.md) tranche and VAL/STR$/ASC in [CONVERSIONS.md](CONVERSIONS.md); further functions and slice assignment remain C003 work;
 this does not close C003 or establish self-hosting.
 
 ## Source behavior
@@ -26,8 +27,9 @@ this does not close C003 or establish self-hosting.
    Parentheses admit complete expressions; unparenthesised function binding
    matches the reference. PRINT retains numeric field-width/semicolon behavior
    while string expressions write exact bytes through MOS character output.
-5. String/numeric mixing, string comparisons, arrays, slicing, STR$/VAL and
-   additional string functions are compile-time errors. No compound assignment
+5. Invalid string/numeric mixing, arrays, slice assignment and
+   additional string functions are compile-time errors. Expression slices and
+   string relations are documented in SLICES.md; VAL/STR$/ASC in CONVERSIONS.md. No compound assignment
    or alternate numeric representation is introduced.
 
 ## Storage, allocation and ownership
@@ -68,8 +70,8 @@ this does not close C003 or establish self-hosting.
 
 ## Runtime interface and provenance
 
-The live [strings.s](../../../compiler/runtime/strings.s) is a 264-byte
-standalone adaptation/new glue based on the baseline's EXEC.Z80 STORES/STORE4STR
+The live [strings.s](../../../compiler/runtime/strings.s) now contains the original 264-byte core plus 105 bytes of slices/comparisons.
+It is standalone adaptation/new glue based on the baseline's EXEC.Z80 STORES/STORE4STR
 and EVAL.Z80 LOADS, CHRS, LEN and string addition. Baseline commit is
 `2998edd4ceb6030d6840cb4e3d587e75d94dc44c`; the repository [license](../../../license.txt)
 applies. Upstream source and notices remain intact. No interpreter parser,
@@ -122,7 +124,7 @@ The storage probe used 1055 bytes of its 16384-byte heap reserve and checked
 checks a LEN result in a four-byte integer binding. Binary snapshots use
 `.dat` without altering their bytes; manifests cover retained files.
 
-The byte-identical compiler SHA-256 is
+The initial string-core promotion's compiler SHA-256 is
 `2f1c96a70756f07b7a833707092c52a91ab680e66aa81d286ed936b1195b9458`.
 [Live-location evidence](evidence/strings-promotion-001/summary.json) passes
 23 string programs in 93.371s, 15 string bindings plus guards in 53.419s,

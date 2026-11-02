@@ -52,11 +52,11 @@ def programs():
                        expected="4\ndone\n", reference=False, status=0))
     result += [dict(source=s, diagnostic=d) for s, d in [
         ('PRINT EVAL("1")\n', "EVAL is deliberately unsupported"),
-        ('PRINT STR$(1)\n', "Unsupported string item STR"),
+        ('PRINT STRING$(2,CHR$(120))\n', "Unsupported string item STRING"),
         ('PRINT ~65\n', "Expected a numeric item"),
         ('PRINT "x",1\n', "Unexpected text after statement"),
         ('PRINT SQR()\n', "Expected a numeric item"),
-        ('PRINT ABS("x")\n', "Expected a numeric item"),
+        ('PRINT ABS("x")\n', "String value used as a numeric item"),
         ('PRINT PI()\n', "Unexpected text after statement"),
         ('PRINT SQR(1,2)\n', "Expected )"),
     ]]
@@ -81,7 +81,7 @@ def main():
     parser.add_argument("--skip-legacy", action="store_true")
     parser.add_argument("--string-runtime", type=Path, help="optional string runtime build to check independently")
     parser.add_argument("--isolate-reference", action="store_true", help="reset variables before each reference program")
-    parser.add_argument("--timeout", type=float, default=180, help="compile-batch guard in seconds")
+    parser.add_argument("--timeout", type=float, default=360, help="compile-batch guard in seconds")
     args = parser.parse_args()
     args.compiler = args.compiler.resolve(strict=True)
     args.runtime_build = args.runtime_build.resolve(strict=True)

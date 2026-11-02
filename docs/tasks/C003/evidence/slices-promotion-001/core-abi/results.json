@@ -1,0 +1,21 @@
+{
+  "poisoned_upper_bc": true,
+  "checked_index_and_stack_preservation": true,
+  "concat_overflow_unchanged": true,
+  "allocation_failure_unchanged": true,
+  "full_failure_descriptor_and_context_checked": true,
+  "same_buffer_concat": true,
+  "allocation_guard_bytes": 15,
+  "empty_null_descriptor": true,
+  "inline_lengths": [
+    0,
+    255
+  ],
+  "cross_page_descriptor": true,
+  "duration_seconds": 1.016,
+  "hashes": {
+    "docs/tasks/C003/strings/abi.s": "69b384c48e69d5c5d130e970c34ed8c28795fd9cd91747a3dbea526ee7781b15",
+    "docs/tasks/C003/build/string-abi/probe.bin": "4bd851bd8aa01889a68c2d0a09dce59d507cbdfe87ad2c19f0d5dd9cb815114c",
+    "compiler/build/string-runtime/runtime-0.bin": "8a195e9041167396f02dc7cc7011ce79542f8655a73ccd9802b4ea95de28f680"
+  }
+}

@@ -145,3 +145,8 @@ Historical compiler snapshots remain evidence, not maintained forks.
    [string live-location evidence](evidence/strings-promotion-001/summary.json)
    records this requalification. Scalar checkpoint approval/push preceded the
    still-uncommitted string tranche.
+7. Slicing/comparison integration requalifies the same numeric storage/runtime
+   through **29 scalar programs** in **137.337s**. The [new live record](evidence/slices-promotion-001/summary.json)
+   includes prior output/precedence regressions and confirms unchanged numeric
+   runtime/vendor bytes. String relations produce ordinary four-byte integer
+   Boolean payloads with a zero numeric marker in five-byte variant slots.

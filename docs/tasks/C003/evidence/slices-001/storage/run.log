@@ -1,0 +1,182 @@
+{
+  "bindings": 23,
+  "undefined_bindings": 1,
+  "string_content_mismatches": 0,
+  "descriptor_bounds_checked": true,
+  "independent_ownership": true,
+  "heap_budget": 24576,
+  "heap_used": 1574,
+  "heap_guard_bytes": 23034,
+  "unexpected_memory_writes": 0,
+  "records": [
+    {
+      "name": "empty$",
+      "length": 0,
+      "capacity": 0,
+      "pointer": 0,
+      "contents": ""
+    },
+    {
+      "name": "zero$",
+      "length": 3,
+      "capacity": 3,
+      "pointer": 272623,
+      "contents": "0078ff"
+    },
+    {
+      "name": "original$",
+      "length": 1,
+      "capacity": 5,
+      "pointer": 272626,
+      "contents": "7a"
+    },
+    {
+      "name": "copy$",
+      "length": 5,
+      "capacity": 5,
+      "pointer": 272631,
+      "contents": "68656c6c6f"
+    },
+    {
+      "name": "tail$",
+      "length": 2,
+      "capacity": 7,
+      "pointer": 272640,
+      "contents": "7879"
+    },
+    {
+      "name": "block$",
+      "length": 1,
+      "capacity": 1,
+      "pointer": 272639,
+      "contents": "71"
+    },
+    {
+      "name": "Case$",
+      "length": 2,
+      "capacity": 2,
+      "pointer": 272647,
+      "contents": "5550"
+    },
+    {
+      "name": "case$",
+      "length": 3,
+      "capacity": 3,
+      "pointer": 272649,
+      "contents": "6c6f77"
+    },
+    {
+      "name": "fresh$",
+      "length": 3,
+      "capacity": 3,
+      "pointer": 272652,
+      "contents": "6e6577"
+    },
+    {
+      "name": "left$",
+      "length": 128,
+      "capacity": 128,
+      "pointer": 272655,
+      "contents": "6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c"
+    },
+    {
+      "name": "right$",
+      "length": 127,
+      "capacity": 127,
+      "pointer": 272783,
+      "contents": "72727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272"
+    },
+    {
+      "name": "maximum$",
+      "length": 1,
+      "capacity": 255,
+      "pointer": 272910,
+      "contents": "6d"
+    },
+    {
+      "name": "independent$",
+      "length": 255,
+      "capacity": 255,
+      "pointer": 273165,
+      "contents": "6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c72727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272"
+    },
+    {
+      "name": "churn$",
+      "length": 255,
+      "capacity": 255,
+      "pointer": 273423,
+      "contents": "6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c72727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272"
+    },
+    {
+      "name": "barrier$",
+      "length": 2,
+      "capacity": 2,
+      "pointer": 273421,
+      "contents": "6262"
+    },
+    {
+      "name": "full$",
+      "length": 255,
+      "capacity": 255,
+      "pointer": 273678,
+      "contents": "6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c72727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272"
+    },
+    {
+      "name": "cutleft$",
+      "length": 129,
+      "capacity": 129,
+      "pointer": 273933,
+      "contents": "6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c72"
+    },
+    {
+      "name": "cutright$",
+      "length": 128,
+      "capacity": 128,
+      "pointer": 274062,
+      "contents": "6c72727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272727272"
+    },
+    {
+      "name": "cutmid$",
+      "length": 3,
+      "capacity": 3,
+      "pointer": 274190,
+      "contents": "6c7272"
+    },
+    {
+      "name": "lowzero$",
+      "length": 1,
+      "capacity": 1,
+      "pointer": 274193,
+      "contents": "00"
+    },
+    {
+      "name": "wrap$",
+      "length": 1,
+      "capacity": 1,
+      "pointer": 274194,
+      "contents": "6c"
+    },
+    {
+      "name": "chained$",
+      "length": 2,
+      "capacity": 2,
+      "pointer": 274195,
+      "contents": "7272"
+    },
+    {
+      "name": "emptycut$",
+      "length": 0,
+      "capacity": 0,
+      "pointer": 0,
+      "contents": ""
+    }
+  ],
+  "duration_seconds": 86.461,
+  "hashes": {
+    "docs/tasks/C003/slices/compiler.bas": "09e736f210007086a5c4645e4e96e14a717f28f340acbe1860c170bf19dcfbc0",
+    "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+    "docs/tasks/C003/build/slice-storage/source.bas": "dc2c09ac9e46f99c79c591103dca08f3ca445f23801468d34302f27810b30ac3",
+    "docs/tasks/C003/build/slice-storage/expected.dat": "8bda42f6b2f5b51518438f73abb479f47ed3434c545070c8ebfd4db28ac29a1f",
+    "docs/tasks/C003/build/slice-storage/native.dat": "052f40f2cb94b68067d0c38d71aa72927af57ad97a7c6e4f4ec8cc439b8bd597"
+  }
+}

@@ -1,0 +1,165 @@
+Warning: unused arguments left: ["--firmware", "platform"].
+Tom's Fake VDP Version 1.03
+unknown packet VDU 0x17, 0, 0xf8
+unknown packet VDU 0x17, 0, 0x99
+uunknown packet VDU 0x17, 0, 0x94
+
+Agon Platform MOS Version 3.0.2 Arthur
+
+REF_BEGIN_0
+ab:c:bc
+ab:bc:b
+-1:-1:0
+-1
+A
+REF_END_0
+REF_BEGIN_1
+[]:[]
+[a]:[d]
+[abcd]:[abcd]
+[abcd]:[abcd]
+[abcd]:[abcd]
+[]:[]
+[abcd]:[abcd]
+[]:[]
+[a]:[d]
+[abcd]:[abcd]
+[]:[]
+[a]:[d]
+REF_END_1
+REF_BEGIN_2
+[abcd]:[ab]
+[abcd]:[ab]
+[bcd]:[bc]
+[d]:[d]
+[]:[]
+[]:[]
+[abcd]:[ab]
+[]:[]
+[abcd]:[ab]
+[abcd]:[ab]
+[]:[]
+[abcd]:[ab]
+[bcd]:[bc]
+REF_END_2
+REF_BEGIN_3
+[]
+[b]
+[bcd]
+[bcd]
+[bcd]
+[bcd]
+[]
+[b]
+[bcd]
+[]
+REF_END_3
+REF_BEGIN_4
+[]
+         0:0:0
+ab:abc:b
+abyz
+bc
+REF_END_4
+REF_BEGIN_5
+bc
+b
+bcd
+cd
+4
+1:-1:1
+-1:-1
+REF_END_5
+REF_BEGIN_6
+         1:2:3
+-1:-1:-1
+-1:-1
+REF_END_6
+REF_BEGIN_7
+-1
+0
+0
+-1
+0
+-1
+REF_END_7
+REF_BEGIN_8
+0
+-1
+-1
+-1
+0
+0
+REF_END_8
+REF_BEGIN_9
+0
+-1
+0
+0
+-1
+-1
+REF_END_9
+REF_BEGIN_10
+0
+-1
+-1
+-1
+0
+0
+REF_END_10
+REF_BEGIN_11
+0
+-1
+0
+0
+-1
+-1
+REF_END_11
+REF_BEGIN_12
+0
+-1
+-1
+-1
+0
+0
+REF_END_12
+REF_BEGIN_13
+       255:255:1
+-1:-1:-1
+REF_END_13
+REF_BEGIN_14
+deep
+abc:a
+REF_END_14
+REF_BEGIN_15
+Number too big
+REF_END_15
+REF_BEGIN_16
+Number too big
+REF_END_16
+REF_BEGIN_17
+Number too big
+REF_END_17
+REF_BEGIN_18
+Number too big
+REF_END_18
+REF_BEGIN_19
+No such variable
+REF_END_19
+REF_BEGIN_20
+Division by zero
+REF_END_20
+REF_BEGIN_21
+Division by zero
+REF_END_21
+REF_BEGIN_22
+No such variable
+REF_END_22
+REF_BEGIN_23
+Division by zero
+REF_END_23
+REF_BEGIN_24
+String too long
+REF_END_24
+OUTPUT_REFERENCE_DONE
+/ *

@@ -20,14 +20,15 @@ def run(*args):
     return subprocess.check_output([str(arg) for arg in args], text=True)
 
 
-def build(toolchain):
-    output = COMPILER / "build/numeric-runtime"
+def build(toolchain, source=None, output=None):
+    source = (source or TASK / "expression_runtime.s").resolve(strict=True)
+    output = (output or COMPILER / "build/numeric-runtime").resolve()
     output.mkdir(parents=True, exist_ok=True)
     assembler = toolchain / "ez80-none-elf-as"
     linker = toolchain / "ez80-none-elf-ld"
     obj = output / "runtime.o"
     run(assembler, "-march=ez80+full", "-I", TASK,
-        f"-al={output / 'runtime.lst'}", "-o", obj, TASK / "expression_runtime.s")
+        f"-al={output / 'runtime.lst'}", "-o", obj, source)
     undefined = run(toolchain / "ez80-none-elf-nm", "-u", obj)
     assert not undefined.strip(), undefined
     relocations = []
@@ -44,7 +45,8 @@ def build(toolchain):
         fields = line.split()
         if len(fields) == 3 and fields[1] in ("t", "T"):
             symbols[fields[2]] = int(fields[0], 16)
-    exports = [symbols[name] for name in ("rt_numeric", "rt_literal", "rt_negate", "rt_printnum")]
+    names = ("rt_numeric", "rt_literal", "rt_negate", "rt_printnum", "rt_val", "rt_strnum", "rt_strhex")
+    exports = [symbols[name] for name in names]
     images = {}
     for base in (0, 0x41000, 0x47000):
         path = output / f"runtime-{base:x}.bin"
@@ -69,11 +71,12 @@ def build(toolchain):
     (output / "runtime_data.bas").write_text(data)
     report = {
         "bytes": len(template), "relocations": len(relocations),
-        "exports": dict(zip(("rt_numeric", "rt_literal", "rt_negate", "rt_printnum"), exports)),
+        "exports": dict(zip(names, exports)),
         "independent_link_bases": [0x41000, 0x47000],
         "unresolved_symbols": 0,
+        "scratch": {"val_text": {"offset": symbols["val_text"], "bytes": 256}},
         "hashes": {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
-                   for p in [TASK / "numeric.s", TASK / "expression_runtime.s",
+                   for p in [TASK / "numeric.s", source,
                              TASK / "vendor/MATH.Z80", TASK / "vendor/LICENSE.txt",
                              output / "runtime_data.bas", output / "runtime-0.bin"]},
     }
@@ -86,11 +89,14 @@ if __name__ == "__main__":
     parser.add_argument("--toolchain", type=Path,
                         default=Path("/Agon/agondev/release/bin"))
     parser.add_argument("--update-compiler", action="store_true")
+    parser.add_argument("--source", type=Path)
+    parser.add_argument("--output", type=Path, default=COMPILER / "build/numeric-runtime")
+    parser.add_argument("--compiler", type=Path, default=COMPILER / "compiler.bas")
     args = parser.parse_args()
-    report = build(args.toolchain)
+    report = build(args.toolchain, args.source, args.output)
     if args.update_compiler:
-        compiler = COMPILER / "compiler.bas"
+        compiler = args.compiler
         source, previous = compiler.read_text().split("20000 DATA", 1)
         strings = "30000 DATA" + previous.split("30000 DATA", 1)[1] if "30000 DATA" in previous else ""
-        compiler.write_text(source + (COMPILER / "build/numeric-runtime/runtime_data.bas").read_text() + strings)
+        compiler.write_text(source + (args.output / "runtime_data.bas").read_text() + strings)
     print(json.dumps(report, indent=2))

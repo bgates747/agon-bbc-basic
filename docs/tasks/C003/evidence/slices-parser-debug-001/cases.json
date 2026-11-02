@@ -1,0 +1,8 @@
+[
+  {
+    "source": "a$=\"abc\":PRINT LEFT$(a$);\":\";RIGHT$(a$);\":\";MID$(a$,2)\nPRINT LEFT$(a$,2);\":\";RIGHT$(a$,2);\":\";MID$(a$,2,1)\nPRINT ;(\"a\"<\"b\");\":\";(\"abc\"=\"abc\");\":\";(\"a\">=\"b\")\nn%=((\"a\"=\"a\") AND (\"ab\">\"a\")):PRINT ;n%:VDU 65-(\"a\"=\"b\"),13,10\n",
+    "reference": true,
+    "status": 0,
+    "expected": "ab:c:bc\nab:bc:b\n-1:-1:0\n-1\nA\n"
+  }
+]

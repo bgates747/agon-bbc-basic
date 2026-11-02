@@ -72,9 +72,8 @@ source features remain partial or unsupported in the compatibility matrix.
    The reference constant reader also stores `4294967296.0` differently from
    `2147483648.0*2`. The compiler must preserve that distinction. Its BBC
    literal scanner delegates conversion to host VAL, which uses the same CON
-   path, and copies the exact packed result. Source VAL remains unsupported
-   in compiled programs; implementing its string-pointer runtime belongs to
-   bootstrap closure. See [literal compatibility](../docs/tasks/C002/LITERALS.md)
+   path, and copies the exact packed result. C003 now supplies a native string-pointer bridge for source VAL using this
+   same unchanged package. See [literal compatibility](../docs/tasks/C002/LITERALS.md)
    and the separate [interpreter research record](INTERPRETER-FINDINGS.md).
 
 8. Numeric output calls the package's STR entry through a separate pointer
@@ -132,6 +131,27 @@ source features remain partial or unsupported in the compatibility matrix.
    entry ABI. No interpreter parser/error/variable-chain dependencies remain.
    [String ABI and memory qualification](../docs/tasks/C003/STRINGS.md) document
    preservation, error returns, workspace bounds and ownership.
+
+7. C003 expression slices adapt EVAL.Z80 MIDS/LEFTS/RIGHTS/LEFT1/RIGHT1:
+   indices/counts use the low byte after SFIX; omitted LEFT$ drops a final byte,
+   omitted RIGHT$ selects one, and MID$ start zero preserves the full string.
+   EXPR2S/SCP0 establishes unsigned-byte/prefix-length relations and integer
+   Boolean results. A 105-byte addition to the unchanged string core replaces
+   interpreter stack/ACCS assumptions with explicit length-prefixed buffers.
+   The BBC parser tracks numeric/string result kinds; numeric values and the
+   qualified math package remain unchanged. [Qualification](../docs/tasks/C003/SLICES.md)
+   checks actual source behavior, physical contents and native preservation.
+
+8. C003 conversions call unchanged MATH.Z80 VAL (selector 36) and STR
+   (selector 37). EVAL.Z80 VAL0 supplies the NUL-terminated-input contract;
+   STRS selects default G9 and HEXSTR supplies SFIX/nibble conversion. The
+   standalone bridges replace ACCS/STAVAR and page assumptions with private
+   bounded scratch and full pointer lengths. ASC is emitted directly from
+   EVAL.Z80 ASC/COUNT0 semantics. The vendor/license stay identical.
+   Agon OSLOAD_TXT2 drops raw control bytes even inside quotes; the compiler
+   rejects these source literals and admits runtime bytes through CHR$.
+   [Conversion qualification](../docs/tasks/C003/CONVERSIONS.md) checks packed
+   records, owned string bytes, errors and the native ABI.
 
 ## Procedures, functions and LOCAL
 

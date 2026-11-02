@@ -1,0 +1,21 @@
+{
+  "README.md": "2357afd91d7f8a9f80f9430c34b52486f6c487633580cfb080ca6436b9030629",
+  "storage.log": "e074647d33768bb73b0fa4c9131b7258b3e8873fff1aee88e33bf6f9f9b385da",
+  "compiler.bas": "533b3b12beb31afa9f64987d92978a0833cc54f0260b206336189793e6628756",
+  "transcripts/cases.json": "61df7be5635da78325113983171e39f6c30ffa433bc54c3dc835c46e577aa8b6",
+  "transcripts/native.log": "a07cabd18f942437cc7866ff632962e14ea28f7a9badbb5c12ba168eebb5813a",
+  "transcripts/reference.bas": "7c66fd26ccff53715ac31f659e946a69ebbc23b4ca5a4abbeb44f12d059a2f96",
+  "transcripts/driver.bas": "b0397e4251e8d641f80464439ddfd3fa1d7b8d6f251677585beb372c882de957",
+  "transcripts/reference.log": "b563a72404faeb318717eac33897df704be61e1047a14d86d3064c91c3bad732",
+  "transcripts/compile.log": "cacb88c0713fc6e00261512456b8aa60018409e40ca3928322609361532f0f5c",
+  "storage/native.dat": "4f3569a1aebc1ea57fc1305cf7b494dd50c758870623c444ae6d7d8fe893a5d7",
+  "storage/native.log": "e2f5718f10843acf1242cd2ff6088ee95100deb2fd40b2e8e21ad6a10ab1198b",
+  "storage/reference.bas": "91ee2f681fca343e7bd9e3c2b78b05a655d6ede0654a3ee29805456e020c254c",
+  "storage/driver.bas": "8eb74919fd7417308dcf4e73345a0d8b23b9479ad4e39f6fe228e80f5ec42b0c",
+  "storage/compiled.dat": "63f9ac188fec0043778c55514578a3fb8c92fa58cfc9704477e97171f03b4775",
+  "storage/reference.log": "b09110b8d3c499634e4eb51a021f56d4f3ab46c849ec9bb63aa9062588d29221",
+  "storage/compile.log": "873661f3b393410bb7dd538451eb39b4e4a4415d5f6f0924787615adb4cc31d5",
+  "storage/layout.txt": "0bed29efb29dfa6c999108a0dc0dabcbd5cadf2fa40a02e1ec2fcf6d2d72f2b5",
+  "storage/expected.dat": "a5d7b07f14a6fd5da0357de5d4e6ccbf9369e13df679f3ca5acd988c77813fd7",
+  "storage/source.bas": "038f475f114e4b9a6f832b76852442dc302c63aa1e17f0354f7f79e675b03697"
+}

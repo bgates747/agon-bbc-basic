@@ -43,13 +43,13 @@ def programs():
     result += [dict(source=s,diagnostic=d) for s,d in [
         ('a$=1\n','Expected a string item'),
         ('a%=s$\n','String value used as a numeric item'),
-        ('a$="x"+1\n','Expected a string item'),
-        ('PRINT LEFT$("abc",1)\n','Unsupported string item LEFT'),
+        ('a$="x"+1\n','Numeric/string type mismatch'),
+        ('PRINT STRING$(2,"x")\n','Unsupported string item STRING'),
         ('PRINT STR$(1)\n','Unsupported string item STR'),
         ('PRINT VAL("1")\n','Unsupported numeric item VAL'),
         ('a$(0)="x"\n','Arrays and function calls'),
         ('a$+="x"\n','Expected ='),
-        ('PRINT "a"="b"\n','Unexpected text'),
+        ('PRINT "a"="b"="c"\n','Chained comparisons'),
     ]]
     return result
 

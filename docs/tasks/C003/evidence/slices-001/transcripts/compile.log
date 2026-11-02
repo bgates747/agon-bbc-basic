@@ -1,0 +1,58 @@
+Warning: unused arguments left: ["--firmware", "platform"].
+Tom's Fake VDP Version 1.03
+unknown packet VDU 0x17, 0, 0xf8
+unknown packet VDU 0x17, 0, 0x99
+uunknown packet VDU 0x17, 0, 0x94
+
+Agon Platform MOS Version 3.0.2 Arthur
+
+OK:p0.bas
+OK:p1.bas
+OK:p2.bas
+OK:p3.bas
+OK:p4.bas
+OK:p5.bas
+OK:p6.bas
+OK:p7.bas
+OK:p8.bas
+OK:p9.bas
+OK:p10.bas
+OK:p11.bas
+OK:p12.bas
+OK:p13.bas
+OK:p14.bas
+OK:p15.bas
+OK:p16.bas
+OK:p17.bas
+OK:p18.bas
+OK:p19.bas
+OK:p20.bas
+OK:p21.bas
+OK:p22.bas
+OK:p23.bas
+OK:p24.bas
+ERR:p25.bas
+p25.bas:1:5: Unsupported string item LEFT at 3250
+ERR:p26.bas
+p26.bas:1:18: Expected ) at 3250
+ERR:p27.bas
+p27.bas:1:15: Expected , at 3250
+ERR:p28.bas
+p28.bas:1:14: Expected a string item at 3250
+ERR:p29.bas
+p29.bas:1:21: String value used as a numeric item at 3250
+ERR:p30.bas
+p30.bas:1:12: Numeric/string type mismatch at 3250
+ERR:p31.bas
+p31.bas:1:12: Numeric/string type mismatch at 3250
+ERR:p32.bas
+p32.bas:1:14: Chained comparisons require parentheses at 3250
+ERR:p33.bas
+p33.bas:1:14: Only concatenation and comparisons support strings at 3250
+ERR:p34.bas
+p34.bas:1:11: EVAL is deliberately unsupported at 3250
+ERR:p35.bas
+p35.bas:1:10: Unsupported string item STR at 3250
+OK:p0.bas
+OUTPUT_COMPILE_DONE
+/ *

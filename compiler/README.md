@@ -4,8 +4,7 @@ This is the first small implementation of the self-hosting compiler project.
 The compiler is BBC BASIC and emits native eZ80 ADL code directly. It currently
 compiles literal/numeric output, labelled control flow, numeric byte VDU
 expressions, standard math functions, scalar numeric variables and a mutable
-string core. It cannot
-compile itself.
+string core with expression slicing, comparisons, VAL/STR$ and ASC. It cannot compile itself.
 The interpreter elsewhere in this repository remains the compatibility
 reference and bootstrap host. The tested implementation was promoted under
 [task C001](../docs/tasks/C001.md) to `compiler/compiler.bas`; sample programs,
@@ -13,7 +12,7 @@ regression tests and tooling are alongside it. C002's numeric expressions, outpu
 fractional/scientific literals and runtime
 are in this development tree, with the corrected C002 baseline accepted for
 a development checkpoint. C003 numeric bindings and the mutable string core
-are promoted; further string functions/conversions remain unfinished. Promotion to `main` awaits accepted testing.
+and conversions are promoted; further string functions remain unfinished. Promotion to `main` awaits accepted testing.
 
 ## Running on Agon
 
@@ -104,4 +103,12 @@ and memory probes qualify the single live compiler.
 [Mutable string core](../docs/tasks/C003/STRINGS.md) documents `$` assignment,
 independent copying, concatenation, LEN/CHR$, five-byte descriptors and the
 bounded private heap. [strings.bas](examples/strings.bas) demonstrates it.
-Slicing, comparison and further string conversions remain unfinished in TODO.
+[String slices and comparisons](../docs/tasks/C003/SLICES.md) adds LEFT$/RIGHT$/MID$
+expressions and six relations returning ordinary -1/0 Booleans. The reference
+low-byte index/count behavior is preserved. Slice assignment, further string
+functions remain unfinished in TODO.
+
+[String conversions](../docs/tasks/C003/CONVERSIONS.md) adds VAL, G9/hex STR$ and
+ASC with reference types, text and errors. [conversions.bas](examples/conversions.bas)
+is the qualified mixed example. Raw source control bytes inside quotes are
+rejected; construct such string data with CHR$.

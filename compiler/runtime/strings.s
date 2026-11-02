@@ -189,3 +189,101 @@ str_print_loop:
     pop ix
     xor a
     ret
+
+; Slices/comparison adapt EVAL.Z80 LEFT1/RIGHT1/MIDS/SCP0, baseline
+; 2998edd4ceb6030d6840cb4e3d587e75d94dc44c, Richard T. Russell 1981-2025.
+; Altered standalone interfaces; repository license.txt applies. No ACCS,
+; page alignment, expression parser, alternate-register or error-state imports.
+    .global rt_strleft,rt_strright,rt_strmid,rt_strcompare
+
+; IX=length-prefixed buffer, A=already-SFIX-converted low-byte count.
+; Keep first min(count,length) bytes. IX/IY/SP preserved, others volatile.
+rt_strleft:
+    cp (ix+0)
+    ret nc
+    ld (ix+0),a
+    ret
+
+; IX=buffer, A=count low byte. Keep final min(count,length) bytes.
+rt_strright:
+    ld c,a
+    ld a,(ix+0)
+    cp c
+    ret c
+    ret z
+    sub c
+    ld b,c
+    jr str_slice_move
+
+; IX=buffer, A=one-based start low byte. Zero preserves the full string.
+; Start beyond length gives empty. IX/IY/SP preserved, others volatile.
+rt_strmid:
+    or a
+    ret z
+    dec a
+    ld c,a
+    ld a,(ix+0)
+    sub c
+    jr c,str_slice_empty
+    jr z,str_slice_empty
+    ld b,a
+    ld a,c
+str_slice_move:
+    ld (ix+0),b
+    push ix
+    pop hl
+    inc hl
+    push hl
+    pop de
+    ld bc,0          ; Clear all count/offset bits, including poisoned BCU.
+    ld c,a
+    add hl,bc
+    ld c,(ix+0)
+    ld a,c
+    or a
+    ret z            ; LDIR with zero would copy 2^24 bytes.
+    ldir
+    ret
+str_slice_empty:
+    xor a
+    ld (ix+0),a
+    ret
+
+; IX=lhs buffer, IY=rhs buffer. Unsigned byte lexicographic ordering.
+; A=255 less, 0 equal, 1 greater. Input bytes unchanged, including length.
+; IX/IY/SP preserved; flags and BC/DE/HL volatile. No wide memory access.
+rt_strcompare:
+    ld b,(ix+0)
+    ld c,(iy+0)
+    push ix
+    pop hl
+    inc hl
+    push iy
+    pop de
+    inc de
+str_compare_loop:
+    ld a,b
+    or a
+    jr z,str_compare_left_end
+    ld a,c
+    or a
+    jr z,str_compare_greater
+    ld a,(de)
+    cp (hl)
+    jr c,str_compare_greater
+    jr nz,str_compare_less
+    inc hl
+    inc de
+    dec b
+    dec c
+    jr str_compare_loop
+str_compare_left_end:
+    ld a,c
+    or a
+    ret z
+str_compare_less:
+    ld a,255
+    ret
+str_compare_greater:
+    ld a,1
+    ret

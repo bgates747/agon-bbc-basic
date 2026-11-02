@@ -1,0 +1,8 @@
+[
+  {
+    "source": "PRINT \"a\"=\"a\"\nPRINT \"b\"<\"a\"\nPRINT \"a\"+\"b\"=\"ab\"\nPRINT ;\"a\"=\"a\";\":\";\"x\"<\"y\"\nPRINT (\"a\"=\"a\")+2\nPRINT ABS(\"a\"=\"a\")\na$=\"abcde\":a$=MID$(a$,2,LEN(a$)-1):PRINT a$\n",
+    "reference": true,
+    "status": 0,
+    "expected": "        -1\n         0\n        -1\n-1:-1\n         1\n         1\nbcde\n"
+  }
+]

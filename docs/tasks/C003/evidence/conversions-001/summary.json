@@ -1,0 +1,348 @@
+{
+  "scope": "Prototype conversion qualification, separate from live-location rechecks and human/hardware acceptance",
+  "transcripts": {
+    "programs": 29,
+    "native_executions": 18,
+    "rejected_sources": 11,
+    "reference_output_programs": 17,
+    "legacy_arithmetic_observations": 0,
+    "deterministic_repeat": true,
+    "independent_link_bases": [
+      263394,
+      264075,
+      263541,
+      263693,
+      263975,
+      263253,
+      263657,
+      263458,
+      262472,
+      262432,
+      262433,
+      262412,
+      262421,
+      262441,
+      262449,
+      262446,
+      262484,
+      262814
+    ],
+    "string_link_bases": [
+      268157,
+      268782,
+      268248,
+      268451,
+      268682,
+      267965,
+      268413,
+      268170,
+      267179,
+      267139,
+      267140,
+      267119,
+      267128,
+      267187,
+      267195,
+      267158,
+      267196,
+      267566
+    ],
+    "duration_seconds": 201.849,
+    "hashes": {
+      "docs/tasks/C003/conversions/compiler.bas": "49621eebb9dadc8701b782aa72eb88035d4300d2b8150041d7f88301923caf7c",
+      "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+      "docs/tasks/C003/build/output-integration/cases.json": "45019ebe88e6c01118113210f5c8eccc2462e053186cc67f799d712082fa8d0d"
+    }
+  },
+  "abi": {
+    "poisoned_upper_bc": true,
+    "checked_index_and_stack_preservation": true,
+    "empty_and_maximum_strings": true,
+    "embedded_nul_prefix": true,
+    "numeric_and_string_inputs_read_only": true,
+    "range_error_preserves_outputs": true,
+    "buffer_guards_unchanged": true,
+    "duration_seconds": 1.016,
+    "hashes": {
+      "docs/tasks/C003/conversions/abi.s": "6173f935bd4100def15e0bc0764d205a7c347de58ec916a683ab50844d80b9f9",
+      "docs/tasks/C003/build/conversion-abi/probe.bin": "29a22cea9447f924e59b0768a49be8590852cebd95bbb4bd18af47a8cefa4978",
+      "docs/tasks/C003/build/conversion-runtime/runtime-0.bin": "dbb59e07b90b344b038afa95ae6d1deeda96e2096fa053aed6bfe2258e5945fd"
+    }
+  },
+  "storage": {
+    "bindings": 14,
+    "undefined_bindings": 1,
+    "string_content_mismatches": 0,
+    "descriptor_bounds_checked": true,
+    "independent_ownership": true,
+    "heap_budget": 15360,
+    "heap_used": 584,
+    "heap_guard_bytes": 14808,
+    "unexpected_memory_writes": 0,
+    "records": [
+      {
+        "name": "empty$",
+        "length": 1,
+        "capacity": 1,
+        "pointer": 271388,
+        "contents": "30"
+      },
+      {
+        "name": "zero$",
+        "length": 1,
+        "capacity": 1,
+        "pointer": 271389,
+        "contents": "30"
+      },
+      {
+        "name": "third$",
+        "length": 11,
+        "capacity": 11,
+        "pointer": 271390,
+        "contents": "302e333333333333333333"
+      },
+      {
+        "name": "large$",
+        "length": 4,
+        "capacity": 4,
+        "pointer": 271401,
+        "contents": "31453338"
+      },
+      {
+        "name": "small$",
+        "length": 5,
+        "capacity": 5,
+        "pointer": 271405,
+        "contents": "31452d3338"
+      },
+      {
+        "name": "negative$",
+        "length": 12,
+        "capacity": 12,
+        "pointer": 271410,
+        "contents": "2d302e333333333333333333"
+      },
+      {
+        "name": "hexzero$",
+        "length": 1,
+        "capacity": 1,
+        "pointer": 271422,
+        "contents": "30"
+      },
+      {
+        "name": "hexmax$",
+        "length": 8,
+        "capacity": 8,
+        "pointer": 271423,
+        "contents": "4646464646464646"
+      },
+      {
+        "name": "hexmin$",
+        "length": 8,
+        "capacity": 8,
+        "pointer": 271431,
+        "contents": "3830303030303030"
+      },
+      {
+        "name": "nested$",
+        "length": 8,
+        "capacity": 15,
+        "pointer": 271957,
+        "contents": "4646464646464634"
+      },
+      {
+        "name": "left$",
+        "length": 128,
+        "capacity": 128,
+        "pointer": 271443,
+        "contents": "2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020"
+      },
+      {
+        "name": "right$",
+        "length": 127,
+        "capacity": 127,
+        "pointer": 271571,
+        "contents": "20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020203132"
+      },
+      {
+        "name": "maximum$",
+        "length": 255,
+        "capacity": 255,
+        "pointer": 271698,
+        "contents": "202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020203132"
+      },
+      {
+        "name": "copy$",
+        "length": 4,
+        "capacity": 4,
+        "pointer": 271953,
+        "contents": "31322e35"
+      }
+    ],
+    "numeric_records": [
+      {
+        "name": "value0",
+        "size": 5,
+        "expected": "0000000000",
+        "actual": "0000000000"
+      },
+      {
+        "name": "value1",
+        "size": 5,
+        "expected": "0000000000",
+        "actual": "0000000000"
+      },
+      {
+        "name": "value2",
+        "size": 5,
+        "expected": "0000000080",
+        "actual": "0000000080"
+      },
+      {
+        "name": "value3",
+        "size": 5,
+        "expected": "0000008080",
+        "actual": "0000008080"
+      },
+      {
+        "name": "value4",
+        "size": 5,
+        "expected": "ffffff7f00",
+        "actual": "ffffff7f00"
+      },
+      {
+        "name": "value5",
+        "size": 5,
+        "expected": "000000009f",
+        "actual": "000000009f"
+      },
+      {
+        "name": "value6",
+        "size": 5,
+        "expected": "ffffff7f9f",
+        "actual": "ffffff7f9f"
+      },
+      {
+        "name": "value7",
+        "size": 5,
+        "expected": "faffff7f9f",
+        "actual": "faffff7f9f"
+      },
+      {
+        "name": "value8",
+        "size": 5,
+        "expected": "000000809f",
+        "actual": "000000809f"
+      },
+      {
+        "name": "value9",
+        "size": 5,
+        "expected": "1452061e80",
+        "actual": "1452061e80"
+      },
+      {
+        "name": "value10",
+        "size": 5,
+        "expected": "eadcc75901",
+        "actual": "eadcc75901"
+      },
+      {
+        "name": "value11",
+        "size": 5,
+        "expected": "0000000000",
+        "actual": "0000000000"
+      },
+      {
+        "name": "value12",
+        "size": 5,
+        "expected": "0000004886",
+        "actual": "0000004886"
+      },
+      {
+        "name": "value13",
+        "size": 5,
+        "expected": "0100000000",
+        "actual": "0100000000"
+      },
+      {
+        "name": "value14",
+        "size": 5,
+        "expected": "0100000000",
+        "actual": "0100000000"
+      },
+      {
+        "name": "value15",
+        "size": 5,
+        "expected": "0000000000",
+        "actual": "0000000000"
+      },
+      {
+        "name": "value16",
+        "size": 5,
+        "expected": "0000000000",
+        "actual": "0000000000"
+      },
+      {
+        "name": "maximumval",
+        "size": 5,
+        "expected": "0c00000000",
+        "actual": "0c00000000"
+      },
+      {
+        "name": "nulval",
+        "size": 5,
+        "expected": "0c00000000",
+        "actual": "0c00000000"
+      },
+      {
+        "name": "asempty%",
+        "size": 4,
+        "expected": "ffffffff",
+        "actual": "ffffffff"
+      },
+      {
+        "name": "ashigh%",
+        "size": 4,
+        "expected": "ff000000",
+        "actual": "ff000000"
+      },
+      {
+        "name": "asnul%",
+        "size": 4,
+        "expected": "00000000",
+        "actual": "00000000"
+      }
+    ],
+    "duration_seconds": 65.521,
+    "hashes": {
+      "docs/tasks/C003/conversions/compiler.bas": "49621eebb9dadc8701b782aa72eb88035d4300d2b8150041d7f88301923caf7c",
+      "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+      "docs/tasks/C003/build/conversion-storage/source.bas": "038f475f114e4b9a6f832b76852442dc302c63aa1e17f0354f7f79e675b03697",
+      "docs/tasks/C003/build/conversion-storage/expected.dat": "a5d7b07f14a6fd5da0357de5d4e6ccbf9369e13df679f3ca5acd988c77813fd7",
+      "docs/tasks/C003/build/conversion-storage/native.dat": "9377436595062f3d9c3a769e74ea80909656ed7e1ab29652752d7b7dd64575de"
+    }
+  },
+  "baseline": {
+    "cases": 39,
+    "native_executions": 15,
+    "deterministic_repeat": true,
+    "assembler_oracle": true,
+    "duration_seconds": 30.454,
+    "basic_sha256": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+    "compiler_sha256": "49621eebb9dadc8701b782aa72eb88035d4300d2b8150041d7f88301923caf7c",
+    "cli_sha256": "bf5f29b243b8214e54c515dcc26edf47399ce440356af2ebc3ce3d7664ae11eb",
+    "mos_sha256": "d564243283972690933a4554296ad6202ca4ef54572279533a942960846bebae"
+  },
+  "promoted_to": [
+    "compiler/compiler.bas",
+    "compiler/runtime/expression_runtime.s",
+    "compiler/examples/conversions.bas"
+  ],
+  "compiler_sha256": "49621eebb9dadc8701b782aa72eb88035d4300d2b8150041d7f88301923caf7c",
+  "runtime_bytes": 4460,
+  "runtime_relocations": 387,
+  "vendor_and_license_unchanged": true,
+  "performance_benchmark_measured": false,
+  "human_or_hardware_validation": false,
+  "commit_authorization_for_new_work": false
+}

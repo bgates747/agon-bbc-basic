@@ -2,7 +2,7 @@
 
 This matrix describes the compiler, not the reference interpreter. A feature
 is implemented only for the stated scope. C001 output/control flow, C002 numeric
-expressions, C003 scalar numeric bindings and the mutable string core are
+expressions, C003 scalar numeric bindings, the mutable string core, expression slicing, comparisons and VAL/STR$/ASC are
 promoted in the development tree. Broader strings and self-hosting remain unfinished. The Author accepted
 the corrected C002 baseline for a development checkpoint; accepted testing is
 still required before main promotion. Execution speed is the only intended
@@ -15,6 +15,7 @@ observable runtime difference for supported conventional programs. Possible
 | MOS native executable | Implemented | Direct eZ80 ADL emission, load at &40000 |
 | Unnumbered programs | Implemented | Plain-text input |
 | Optional line numbers | Partial | Increasing 0..65279; no source sorting or renumbering |
+| Control bytes in source | Partial | Line endings and whitespace tabs supported; quoted bytes below ASCII 32 rejected (use CHR$); reference text-loader normalization pending |
 | Named labels | Implemented extension | `@name:`, `GOTO @name`, `GOSUB @name` |
 | Conventional GOTO/GOSUB | Partial | Constant targets only; 255 nested GOSUBs |
 | RETURN and END | Implemented | Checked return; END restores MOS stack |
@@ -25,11 +26,11 @@ observable runtime difference for supported conventional programs. Possible
 | Numeric literals | Partial | Decimal whole/fraction/uppercase E forms within 255-byte source lines; reference reader results/types/errors preserved, including quirks; lowercase e and crunched text after exponents rejected; hex up to eight uppercase digits; binary literals unsupported |
 | 40-bit floating-point values | Implemented for numeric expressions | Five-byte literals/arithmetic/promoted values; reference conversion and range behavior; five-byte scalar variants; reader errors occur when executed |
 | Arithmetic and conversion | Partial | Binary + - * / ^ DIV MOD, unary signs, package overflow/promotion and VDU SFIX |
-| Standard math functions and PI | Implemented subset | ABS ACS ASN ATN COS DEG EXP INT LN LOG NOT RAD SGN SIN SQR TAN, PI; source VAL/STR$, RND and OS functions remain unsupported |
+| Standard math functions and PI | Implemented subset | ABS ACS ASN ATN COS DEG EXP INT LN LOG NOT RAD SGN SIN SQR TAN, PI; RND and OS functions remain unsupported |
 | Numeric formatting | Partial | Fixed G9, matching the reference; @% assignment and other PRINT formats unsupported |
-| Comparison and Boolean expressions | Partial | Numeric = <> <= >= < >, NOT/AND/EOR/OR and TRUE/FALSE in VDU/PRINT; no shifts or IF statements |
+| Comparison and Boolean expressions | Partial | Numeric and string = <> <= >= < >, numeric NOT/AND/EOR/OR and TRUE/FALSE in expressions, assignments, VDU/PRINT; comparisons return -1/0; no shifts or IF statements |
 | Numeric variables | Implemented subset | Plain/LET assignment and reads; five-byte unsuffixed variants, four-byte %, one-byte &; 128 bindings; runtime creation/undefined-read checks, predefined A%–Z%; global GOSUB mutation |
-| Mutable strings and string variables | Partial | Plain/LET `$` assignment, owned copying/self-assignment, + and parentheses, 0..255 bytes including NUL, LEN/CHR$, string PRINT, runtime existence; bounded private heap; slicing, string comparison, VAL/STR$ and further string functions unsupported |
+| Mutable strings and string variables | Partial | Plain/LET `$` assignment, owned copying/self-assignment, + and parentheses, 0..255 bytes including NUL, LEN/CHR$/ASC, VAL and STR$ (default G9 or ~ hex), string PRINT, runtime existence; bounded private heap; LEFT$/RIGHT$/MID$ expressions with reference low-byte counts/optional arguments and six string relations; slice assignment, INSTR/STRING$ and further string functions unsupported |
 | Variable suffixes and default numeric variables | Partial | Case-sensitive numeric/string names with %/&/$ suffixes; 32-character ASCII body limit; ambiguous keyword prefixes, pseudo variables and other suffixes rejected |
 | IF/CASE/FOR/WHILE/REPEAT | Unsupported | Structured control flow pending |
 | DEF PROC / ENDPROC | Unsupported | Never treated as GOSUB/RETURN |
@@ -46,7 +47,9 @@ observable runtime difference for supported conventional programs. Possible
 | Self-compilation | Unsupported | Bootstrap closure and physical qualification pending |
 
 The [C003 scalar record](../docs/tasks/C003/SCALARS.md) describes reference
-creation/storage rules, scope and qualification; the [string core record](../docs/tasks/C003/STRINGS.md) adds ownership, allocation and ABI evidence.
+creation/storage rules, scope and qualification; the [string core record](../docs/tasks/C003/STRINGS.md) adds ownership, allocation and ABI evidence. [Slices and comparisons](../docs/tasks/C003/SLICES.md) records the typed expression extension and reference boundaries.
+
+[String conversions](../docs/tasks/C003/CONVERSIONS.md) records the unchanged VAL/STR package calls, adapted HEXSTR and raw-byte qualification.
 
 See [the specification](SPECIFICATION.md) for exact limits and
 [TODO.md](../TODO.md) for unfinished work.

@@ -1,0 +1,12 @@
+{
+  "README.md": "2455903badb221104b27b8463e3c55075427c06527a0ff106e58bbd145c300aa",
+  "numeric-output.log": "cdf0de1707bb1c29fcfc27ade2904e930c31d64a25a61ae12ce3a23b21b0fe21",
+  "compile.log": "796d7deeed118571a36a4b3918d14bf30ecf7c54685d84bc0e360199740e5643",
+  "test_output.py": "f8a34718e2d4396e7614f639dcc81eb37bf42e7092ad329e016d4945e8b22e10",
+  "numeric-output/cases.json": "2802122e900fb26948bbd60cae9205b787600f05f5ecb6be7d79e697fb241bab",
+  "numeric-output/native.log": "942bd3749bac9f08100248a6c0b75de178ed8865707e85b59c504b046ba87a86",
+  "numeric-output/reference.bas": "afd12e85ff76ce257502cd2a6d68429171594e84cd31579e2f3fac875020c40e",
+  "numeric-output/driver.bas": "6c3337aea01dc49671b34a6ac2d8736811eed7b673ce955f9b273e27542903c2",
+  "numeric-output/reference.log": "410e7d001df76f8a368f3177da93a163a1d42b0a2113033d2f93f59be449629a",
+  "numeric-output/compile.log": "e403531a0c6e95438fe6995732659e117f1169c4053c627767b65ba873da02d4"
+}

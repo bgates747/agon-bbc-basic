@@ -133,5 +133,123 @@ num_format:
 num_text:
     .space 32
 
+; C003 bridges: same pinned FPP selectors and reference HEXSTR algorithm.
+    .global rt_val,rt_strnum,rt_strhex
+
+; IX = writable five-byte result, IY = read-only length-prefixed string.
+; Success A=0/Z/NC; failure A=code/NZ/C and result unchanged.
+; IX/IY/SP preserved. Other registers volatile. Private scratch is synchronous,
+; non-reentrant. Copy all 0..255 bytes then NUL, as EVAL.Z80 VAL0 does in ACCS.
+rt_val:
+    push ix
+    push iy
+    push iy
+    pop hl
+    ld bc,0
+    ld c,(hl)
+    inc hl
+    ld de,val_text
+    ld a,c
+    or a
+    jr z,val_terminate
+    ldir
+val_terminate:
+    xor a
+    ld (de),a
+    ld ix,val_text
+    ld a,36
+    call FPP
+    jr c,val_error
+    pop iy
+    pop ix
+    call STORE5
+    xor a
+    ret
+val_error:
+    pop iy
+    pop ix
+    or a
+    scf
+    ret
+
+; IX = read-only number, IY = writable 256-byte length-prefixed string buffer.
+; Default G9 exactly as EVAL.Z80 STRS when @%'s high byte is zero.
+; Same status/preservation as rt_val. Result length committed only on success;
+; character scratch may be written before an error. Input numeric is unchanged.
+rt_strnum:
+    push iy
+    inc iy
+    call rt_format
+    pop iy
+    ret c
+    ld (iy+0),l
+    xor a
+    ret
+
+; Same operands/status as rt_strnum. Adapted EVAL.Z80 HEXSTR, SFIX first.
+; Full pointers replace ACCS's implicit aligned page; length uses subtraction.
+rt_strhex:
+    push ix
+    push iy
+    ld bc,0
+    ld hl,0
+    ld l,(ix+2)
+    ld h,(ix+3)
+    ld c,(ix+4)
+    exx
+    ld hl,0
+    ld l,(ix+0)
+    ld h,(ix+1)
+    exx
+    ld a,38
+    call FPP
+    jr c,val_error
+    ld bc,8
+    push iy
+    pop de
+    inc de
+hex_next:
+    push bc
+    ld b,4
+    xor a
+hex_bits:
+    exx
+    add.s hl,hl
+    exx
+    adc.s hl,hl
+    rla
+    djnz hex_bits
+    pop bc
+    dec c
+    jp m,hex_done
+    jr z,hex_digit
+    or a
+    jr nz,hex_digit
+    cp b
+    jr z,hex_next
+hex_digit:
+    add a,0x90
+    daa
+    adc a,0x40
+    daa
+    ld (de),a
+    inc de
+    ld b,a
+    jr hex_next
+hex_done:
+    ex de,hl
+    push iy
+    pop de
+    or a
+    sbc hl,de
+    dec hl
+    ld (iy+0),l
+    pop iy
+    pop ix
+    xor a
+    ret
+val_text:
+    .space 256
+
 ; The vendor file ends with assembler END. It must be included last.
     .include "numeric.s"
