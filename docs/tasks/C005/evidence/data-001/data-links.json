@@ -1,0 +1,112 @@
+[
+  {
+    "program": 0,
+    "base": 269184,
+    "bytes": 120
+  },
+  {
+    "program": 1,
+    "base": 271481,
+    "bytes": 120
+  },
+  {
+    "program": 2,
+    "base": 267700,
+    "bytes": 120
+  },
+  {
+    "program": 3,
+    "base": 267364,
+    "bytes": 120
+  },
+  {
+    "program": 4,
+    "base": 267336,
+    "bytes": 120
+  },
+  {
+    "program": 5,
+    "base": 267336,
+    "bytes": 120
+  },
+  {
+    "program": 6,
+    "base": 268147,
+    "bytes": 120
+  },
+  {
+    "program": 7,
+    "base": 268060,
+    "bytes": 120
+  },
+  {
+    "program": 8,
+    "base": 267549,
+    "bytes": 120
+  },
+  {
+    "program": 9,
+    "base": 267361,
+    "bytes": 120
+  },
+  {
+    "program": 10,
+    "base": 267686,
+    "bytes": 120
+  },
+  {
+    "program": 11,
+    "base": 268361,
+    "bytes": 120
+  },
+  {
+    "program": 12,
+    "base": 268701,
+    "bytes": 120
+  },
+  {
+    "program": 13,
+    "base": 267163,
+    "bytes": 120
+  },
+  {
+    "program": 14,
+    "base": 267171,
+    "bytes": 120
+  },
+  {
+    "program": 15,
+    "base": 267171,
+    "bytes": 120
+  },
+  {
+    "program": 16,
+    "base": 267171,
+    "bytes": 120
+  },
+  {
+    "program": 17,
+    "base": 267191,
+    "bytes": 120
+  },
+  {
+    "program": 18,
+    "base": 267191,
+    "bytes": 120
+  },
+  {
+    "program": 19,
+    "base": 267255,
+    "bytes": 120
+  },
+  {
+    "program": 20,
+    "base": 267567,
+    "bytes": 120
+  },
+  {
+    "program": 21,
+    "base": 267678,
+    "bytes": 120
+  }
+]

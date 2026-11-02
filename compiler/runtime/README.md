@@ -115,3 +115,15 @@ string writes. It preserves IX/IY/SP. `build_io_runtime.py --compiler
 compiler/compiler.bas` packages DATA61000 and verifies links at&42000/&48000.
 [I/O contract](../../docs/tasks/C005/IO.md) distinguishes direct helper ABI,
 actual keyboard-driven input, generated language tests and unqualified boundaries.
+
+## DATA record helpers
+
+`data.s` is120 position-independent bytes with no relocations. Explicit records
+hold raw text, deferred numeric error and the original five-byte numeric packet.
+The helper captures a record before the READ target, copies typed contents and
+commits its captured next pointer only after successful storage. Empty and255-byte
+strings are bounded; numeric errors do not affect string reads.
+`build_data_runtime.py --compiler compiler/compiler.bas` packages DATA62000 and
+checks independent links. All field parsing/literal conversion/table emission
+remains BBC BASIC; no new numeric parser/package or host compiler is introduced.
+See [C005](../../docs/tasks/C005/DATA.md) for scope and qualification.

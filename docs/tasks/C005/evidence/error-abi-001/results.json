@@ -1,0 +1,19 @@
+{
+  "scope": "Native error adapter ABI; no source-handler language yet",
+  "global_and_local_stack_transfer": true,
+  "root_and_loop_installation": true,
+  "handler_retained": true,
+  "fatal_zero_bypasses": true,
+  "discarded_numeric_values_remain": true,
+  "retained_local_normal_restoration": true,
+  "repeated_and_maximum_string_rescue": true,
+  "empty_descriptor_future_growth": true,
+  "report_NUL_and_full_line_packet": true,
+  "subsequent_local_arena_overwrite": true,
+  "duration_seconds": 1.02,
+  "hashes": {
+    "docs/tasks/C005/errors/abi.s": "789a8560ccad96800fe4c9ddbb12de27908726a2c3c9a99d6654186b70674890",
+    "docs/tasks/C005/build/error-abi/probe.bin": "69ceafb6875425fdbfb98d0d75dc7fcc9da01bcff5fa83d78c6f457002bb9f88",
+    "docs/tasks/C005/build/error-runtime/runtime-0.bin": "ffda4a56ee311ec3b7dfed2b655140989cb2b16cf97bab0c0137b94d518fa4a2"
+  }
+}

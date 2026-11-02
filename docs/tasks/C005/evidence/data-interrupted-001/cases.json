@@ -1,0 +1,276 @@
+[
+  {
+    "source": "RESTORE 50000\nREAD a%,b&,x,y,z:PRINT ;a%;\":\";b&;\":\";x;\":\";y;\":\";z\nPRINT ;?(^x+4);\":\";?(^y+4);\":\";?(^z+4)\nREAD s$,t$,u$,v$,w$:PRINT ;LEN s$;\":\";s$;\":\";t$;\":\";u$;\":\";v$;\":\";LEN w$\nRESTORE:READ a%:PRINT ;a%:RESTORE 50010:READ s$:PRINT s$\nEND\n50000 DATA -123,257,1.0,1E-3,&FFFFFFFF\n50010 DATA \"leading and trailing  \",\"a,b:c\",\"a\"\"b\", 123  ,\"\"\n",
+    "reference_source": "RESTORE 40000\nREAD a%,b&,x,y,z:PRINT ;a%;\":\";b&;\":\";x;\":\";y;\":\";z\nPRINT ;?(^x+4);\":\";?(^y+4);\":\";?(^z+4)\nREAD s$,t$,u$,v$,w$:PRINT ;LEN s$;\":\";s$;\":\";t$;\":\";u$;\":\";v$;\":\";LEN w$\nRESTORE 40000:READ a%:PRINT ;a%:RESTORE 40001:READ s$:PRINT s$\n",
+    "reference_definitions": [
+      "DATA -123,257,1.0,1E-3,&FFFFFFFF",
+      "DATA \"leading and trailing  \",\"a,b:c\",\"a\"\"b\", 123  ,\"\""
+    ],
+    "reference": true,
+    "status": 0,
+    "expected": "-123:1:1:1E-3:-1\n128:118:0\n22:leading and trailing  :a,b:c:a\"b:123  :0\n-123\nleading and trailing  \n"
+  },
+  {
+    "source": "RESTORE 50000\nDIM a%(1),b&(1),x(1),s$(1)\nREAD a%(0),b&(0),x(0),s$(0):READ a%(1),b&(1),x(1),s$(1)\nPRINT ;a%(0);\":\";b&(0);\":\";x(0);\":\";s$(0)\nPRINT ;a%(1);\":\";b&(1);\":\";x(1);\":\";LEN s$(1)\ns$(0)=\"changed\":PRINT ;LEN s$(1)\nEND\n50000 DATA &80000000,257,1E-20,\"first\",2147483647,-1,.0,\"last\"\n",
+    "reference_source": "RESTORE 40100\nDIM a%(1),b&(1),x(1),s$(1)\nREAD a%(0),b&(0),x(0),s$(0):READ a%(1),b&(1),x(1),s$(1)\nPRINT ;a%(0);\":\";b&(0);\":\";x(0);\":\";s$(0)\nPRINT ;a%(1);\":\";b&(1);\":\";x(1);\":\";LEN s$(1)\ns$(0)=\"changed\":PRINT ;LEN s$(1)\n",
+    "reference_definitions": [
+      "DATA &80000000,257,1E-20,\"first\",2147483647,-1,.0,\"last\""
+    ],
+    "reference": true,
+    "status": 0,
+    "expected": "-2.14748365E9:1:1E-20:first\n2.14748365E9:255:0:4\n4\n"
+  },
+  {
+    "source": "RESTORE 50000\nREAD a$,b$,c$,d$:PRINT ;LEN a$;\":\";LEN b$;\":\";LEN c$;\":\";LEN d$\nEND\n50000 DATA ,, ,\n",
+    "reference_source": "RESTORE 40200\nREAD a$,b$,c$,d$:PRINT ;LEN a$;\":\";LEN b$;\":\";LEN c$;\":\";LEN d$\n",
+    "reference_definitions": [
+      "DATA ,, ,"
+    ],
+    "reference": true,
+    "status": 0,
+    "expected": "0:0:0:0\n"
+  },
+  {
+    "source": "RESTORE 50000\nREAD a$,b$:PRINT ;LEN a$;\":\";b$\nEND\n50000 DATA \n50010 DATA \"b\"\n",
+    "reference_source": "RESTORE 40300\nREAD a$,b$:PRINT ;LEN a$;\":\";b$\n",
+    "reference_definitions": [
+      "DATA ",
+      "DATA \"b\""
+    ],
+    "reference": true,
+    "status": 0,
+    "expected": "0:b\n"
+  },
+  {
+    "source": "RESTORE 50000\nREAD a$,b$:PRINT a$;\":\";b$\nEND\n50000 DATA abc:def,ghi\n",
+    "reference_source": "RESTORE 40400\nREAD a$,b$:PRINT a$;\":\";b$\n",
+    "reference_definitions": [
+      "DATA abc:def,ghi"
+    ],
+    "reference": true,
+    "status": 0,
+    "expected": "abc:def:ghi\n"
+  },
+  {
+    "source": "RESTORE 50000\nREAD a$,b$:PRINT a$;\":\";b$\nEND\n50000 DATA 1E1000,a%+2\n",
+    "reference_source": "RESTORE 40500\nREAD a$,b$:PRINT a$;\":\";b$\n",
+    "reference_definitions": [
+      "DATA 1E1000,a%+2"
+    ],
+    "reference": true,
+    "status": 0,
+    "expected": "1E1000:a%+2\n"
+  },
+  {
+    "source": "RESTORE 50000\nDIM a%(0):READ a%(FNreadindex):READ b%:PRINT ;a%(0);\":\";b%\nEND\nDEF FNreadindex:READ z%:PRINT ;z%:RESTORE:=0\n50000 DATA 11,22,33\n",
+    "reference_source": "RESTORE 40600\nDIM a%(0):READ a%(FNreadindex):READ b%:PRINT ;a%(0);\":\";b%\n",
+    "reference_definitions": [
+      "DATA 11,22,33",
+      "DEF FNreadindex:READ z%:PRINT ;z%:RESTORE 40600:=0"
+    ],
+    "reference": true,
+    "status": 0,
+    "expected": "11\n11:22\n"
+  },
+  {
+    "source": "RESTORE 50000\nDIM s$(0):READ s$(FNstrreadindex):READ b$:PRINT s$(0);\":\";b$\nEND\nDEF FNstrreadindex:READ z$:PRINT z$:RESTORE:=0\n50000 DATA \"one\",\"two\",\"three\"\n",
+    "reference_source": "RESTORE 40700\nDIM s$(0):READ s$(FNstrreadindex):READ b$:PRINT s$(0);\":\";b$\n",
+    "reference_definitions": [
+      "DATA \"one\",\"two\",\"three\"",
+      "DEF FNstrreadindex:READ z$:PRINT z$:RESTORE 40700:=0"
+    ],
+    "reference": true,
+    "status": 0,
+    "expected": "one\none:two\n"
+  },
+  {
+    "source": "RESTORE 50000\nREAD x:PROClocalread:READ y:PRINT ;x;\":\";y\nEND\nDEF PROClocalread:LOCAL x:READ x:PRINT ;x:ENDPROC\n50000 DATA 1,2,3\n",
+    "reference_source": "RESTORE 40800\nREAD x:PROClocalread:READ y:PRINT ;x;\":\";y\n",
+    "reference_definitions": [
+      "DATA 1,2,3",
+      "DEF PROClocalread:LOCAL x:READ x:PRINT ;x:ENDPROC"
+    ],
+    "reference": true,
+    "status": 0,
+    "expected": "2\n1:3\n"
+  },
+  {
+    "source": "RESTORE 50000\nRESTORE 50010:READ x:RESTORE 50000:READ y:PRINT ;x;\":\";y\nEND\n50000 DATA 17\n50010 DATA 23\n",
+    "reference_source": "RESTORE 40900\nRESTORE 40901:READ x:RESTORE 40900:READ y:PRINT ;x;\":\";y\n",
+    "reference_definitions": [
+      "DATA 17",
+      "DATA 23"
+    ],
+    "reference": true,
+    "status": 0,
+    "expected": "23:17\n"
+  },
+  {
+    "source": "RESTORE 50000\nPRINT ;FNdatarec(3)\nEND\nDEF FNdatarec(n%):LOCAL x:READ x:IF n%=0 THEN =x ELSE =x+FNdatarec(n%-1)\n50000 DATA 1,2,3,4\n",
+    "reference_source": "RESTORE 41000\nPRINT ;FNdatarec(3)\n",
+    "reference_definitions": [
+      "DATA 1,2,3,4",
+      "DEF FNdatarec(n%):LOCAL x:READ x:IF n%=0 THEN =x ELSE =x+FNdatarec(n%-1)"
+    ],
+    "reference": true,
+    "status": 0,
+    "expected": "10\n"
+  },
+  {
+    "source": "RESTORE 50000\nREAD a,b,c,d,e:PRINT ;a;\":\";b;\":\";c;\":\";d;\":\";e\nPRINT ;?(^a+4);\":\";?(^b+4);\":\";?(^c+4);\":\";?(^d+4);\":\";?(^e+4)\nEND\n50000 DATA -&80000000,+&FFFFFFFF,-0.0,-1E-50,4294967296.0\n",
+    "reference_source": "RESTORE 41100\nREAD a,b,c,d,e:PRINT ;a;\":\";b;\":\";c;\":\";d;\":\";e\nPRINT ;?(^a+4);\":\";?(^b+4);\":\";?(^c+4);\":\";?(^d+4);\":\";?(^e+4)\n",
+    "reference_definitions": [
+      "DATA -&80000000,+&FFFFFFFF,-0.0,-1E-50,4294967296.0"
+    ],
+    "reference": true,
+    "status": 0,
+    "expected": "-2.14748365E9:-1:0:0:4.29496729E9\n0:0:0:0:159\n"
+  },
+  {
+    "source": "RESTORE 50000\nREAD n%,r%,e%:READ raw$:DIM reloc%(1):READ reloc%(0),reloc%(1)\nPRINT ;n%;\":\";r%;\":\";e%;\":\";raw$;\":\";reloc%(0);\":\";reloc%(1)\nEND\n50000 DATA 633,2,0\n50010 DATA \"E1DDE5D1010000004E03EDB0E5C9\"\n50020 DATA 407,500\n",
+    "reference_source": "RESTORE 41200\nREAD n%,r%,e%:READ raw$:DIM reloc%(1):READ reloc%(0),reloc%(1)\nPRINT ;n%;\":\";r%;\":\";e%;\":\";raw$;\":\";reloc%(0);\":\";reloc%(1)\n",
+    "reference_definitions": [
+      "DATA 633,2,0",
+      "DATA \"E1DDE5D1010000004E03EDB0E5C9\"",
+      "DATA 407,500"
+    ],
+    "reference": true,
+    "status": 0,
+    "expected": "633:2:0:E1DDE5D1010000004E03EDB0E5C9:407:500\n"
+  },
+  {
+    "source": "READ x\nEND\n",
+    "reference_source": "READ x\n",
+    "reference_definitions": [],
+    "reference": false,
+    "status": 1,
+    "expected": "Out of DATA\n"
+  },
+  {
+    "source": "RESTORE 50000\nREAD x\nEND\n50000 DATA \n",
+    "reference_source": "RESTORE 41400\nREAD x\n",
+    "reference_definitions": [
+      "DATA "
+    ],
+    "reference": true,
+    "status": 1,
+    "reference_error": true,
+    "expected": "Syntax error\n"
+  },
+  {
+    "source": "RESTORE 50000\nREAD x\nEND\n50000 DATA \"123\"\n",
+    "reference_source": "RESTORE 41500\nREAD x\n",
+    "reference_definitions": [
+      "DATA \"123\""
+    ],
+    "reference": true,
+    "status": 1,
+    "reference_error": true,
+    "expected": "Type mismatch\n"
+  },
+  {
+    "source": "RESTORE 50000\nREAD x\nEND\n50000 DATA 1E1000\n",
+    "reference_source": "RESTORE 41600\nREAD x\n",
+    "reference_definitions": [
+      "DATA 1E1000"
+    ],
+    "reference": true,
+    "status": 1,
+    "reference_error": true,
+    "expected": "Number too big\n"
+  },
+  {
+    "source": "RESTORE 50000\nREAD x%\nEND\n50000 DATA -2147483648\n",
+    "reference_source": "RESTORE 41700\nREAD x%\n",
+    "reference_definitions": [
+      "DATA -2147483648"
+    ],
+    "reference": true,
+    "status": 1,
+    "reference_error": true,
+    "expected": "Number too big\n"
+  },
+  {
+    "source": "RESTORE 50000\nREAD x%\nEND\n50000 DATA 1E20\n",
+    "reference_source": "RESTORE 41800\nREAD x%\n",
+    "reference_definitions": [
+      "DATA 1E20"
+    ],
+    "reference": true,
+    "status": 1,
+    "reference_error": true,
+    "expected": "Number too big\n"
+  },
+  {
+    "source": "RESTORE 50000\nREAD a,b\nEND\n50000 DATA 1\n",
+    "reference_source": "RESTORE 41900\nREAD a,b\n",
+    "reference_definitions": [
+      "DATA 1"
+    ],
+    "reference": true,
+    "status": 1,
+    "reference_error": true,
+    "expected": ""
+  },
+  {
+    "source": "RESTORE 50000\nDIM a%(0):READ a%(1)\nEND\n50000 DATA 1\n",
+    "reference_source": "RESTORE 42000\nDIM a%(0):READ a%(1)\n",
+    "reference_definitions": [
+      "DATA 1"
+    ],
+    "reference": true,
+    "status": 1,
+    "reference_error": true,
+    "expected": "Bad subscript\n"
+  },
+  {
+    "source": "DIM a%(0):READ a%(FNneverindex)\nEND\nDEF FNneverindex:PRINT \"WRONG\":=0\n",
+    "reference_source": "DIM a%(0):READ a%(FNneverindex)\n",
+    "reference_definitions": [
+      "DEF FNneverindex:PRINT \"WRONG\":=0"
+    ],
+    "reference": false,
+    "status": 1,
+    "expected": "Out of DATA\n"
+  },
+  {
+    "source": "READ x\nDATA 1+2\n",
+    "diagnostic": "Numeric READ requires literal DATA fields"
+  },
+  {
+    "source": "READ x\nDATA name\n",
+    "diagnostic": "Numeric READ requires literal DATA fields"
+  },
+  {
+    "source": "PRINT \"x\":DATA 1\n",
+    "diagnostic": "DATA must lead a physical line"
+  },
+  {
+    "source": "READ s$\nDATA \"a\"junk\n",
+    "diagnostic": "Trailing text after quoted DATA is unqualified"
+  },
+  {
+    "source": "RESTORE variable\n",
+    "diagnostic": "Expected an unsigned integer constant"
+  },
+  {
+    "source": "RESTORE +1\n",
+    "diagnostic": "Expected an unsigned integer constant"
+  },
+  {
+    "source": "RESTORE LOCAL\n",
+    "diagnostic": "Expected an unsigned integer constant"
+  },
+  {
+    "source": "RESTORE 500\n",
+    "diagnostic": "Undefined target $data#500"
+  },
+  {
+    "source": "READ ?p%\n",
+    "diagnostic": "Expected a name"
+  },
+  {
+    "source": "READ s$\nDATA ab\u0001cd\n",
+    "diagnostic": "Control bytes in DATA are unsupported"
+  }
+]

@@ -1,0 +1,11 @@
+{
+  "cases": 39,
+  "native_executions": 15,
+  "deterministic_repeat": true,
+  "assembler_oracle": true,
+  "duration_seconds": 80.355,
+  "basic_sha256": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+  "compiler_sha256": "55643c54bbbff7c0d36f139cad2e9824cec5e36a7078e9f7274b30ebf2d7b8fa",
+  "cli_sha256": "bf5f29b243b8214e54c515dcc26edf47399ce440356af2ebc3ce3d7664ae11eb",
+  "mos_sha256": "d564243283972690933a4554296ad6202ca4ef54572279533a942960846bebae"
+}

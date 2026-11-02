@@ -15,10 +15,13 @@ def main():
  shutil.copy2(ROOT/'.emulator/sdcard/output-repeat.bin',d/'repeat.dat')
  for prefix,key in [('runtime','independent_link_bases'),('strings','string_link_bases')]:
   for base in set(report[key]):shutil.copy2(b/f'{prefix}-{base:x}.bin',d/f'{prefix}-{base:x}.dat')
- for module in ['io','memory']:
+ for module in ['io','memory','data']:
   link=b/(module+'-links.json')
   if link.is_file() and link.stat().st_mtime>=(b/'cases.json').stat().st_mtime:
    shutil.copy2(link,d/link.name)
+   if module=='data':
+    shutil.copy2(TASK/'build/data-runtime/runtime-0.bin',d/'data-runtime.dat')
+    continue
    for row in json.loads(link.read_text()):
     q=b/f'{module}-{row["base"]:x}.dat'
     if not q.exists():q=q.with_suffix('.bin')

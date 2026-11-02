@@ -5,7 +5,8 @@ The compiler is BBC BASIC and emits native eZ80 ADL code directly. It currently
 compiles literal/numeric output, labelled control flow, numeric byte VDU
 expressions, standard math functions, scalar numeric variables and a mutable
 string core with expression/assignment slicing, comparisons, VAL/STR$/ASC and INSTR/STRING$, typed loops, scalar PROC/FN/LOCAL, global arrays, raw DIM and
-byte/integer/variant indirection, file byte/string I/O and scalar INPUT LINE.
+byte/integer/variant indirection, file byte/string I/O, scalar INPUT LINE and
+literal DATA/READ/RESTORE.
 It cannot compile itself.
 The interpreter elsewhere in this repository remains the compatibility
 reference and bootstrap host. The tested implementation was promoted under

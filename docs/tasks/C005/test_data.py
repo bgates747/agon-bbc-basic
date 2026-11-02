@@ -1,6 +1,6 @@
 """Reference differential DATA/READ/RESTORE programs; BBC performs all compilation."""
 from pathlib import Path
-import importlib.util,json,subprocess,sys
+import importlib.util,json,re,subprocess,sys
 TASK=Path(__file__).resolve().parent;ROOT=TASK.parents[2]
 def mod(n,p):
  s=importlib.util.spec_from_file_location(n,p);m=importlib.util.module_from_spec(s);s.loader.exec_module(m);return m
@@ -10,22 +10,32 @@ def programs():
   # Explicit fixture line mapping for common reference harness's DATA footer.
   refbase=40000+len(out)*100
   def replace(rows,base):return [x.replace('@DATA@',str(base)).replace('@NEXTDATA@',str(base+10)) for x in rows]
-  src='\n'.join([*replace(main,50000),'END',*defs,*[f'{50000+j*10} DATA {x}' for j,x in enumerate(data)]])+'\n'
-  ref='\n'.join([x.replace('@DATA@',str(refbase)).replace('@NEXTDATA@',str(refbase+1)) for x in main])+'\n'
-  result=dict(source=src,reference_source=ref,reference_definitions=['DATA '+x for x in data]+list(defs),reference=True,status=int(error))
-  if error:result['reference_error']=True
+  native_main=(['RESTORE @DATA@'] if data else [])+list(main)
+  src='\n'.join([*replace(native_main,50000),'END',*defs,*[f'{50000+j*10} DATA {x}' for j,x in enumerate(data)]])+'\n'
+  # CLEAR does not reset DATPTR. Each shared-reference fixture starts at its
+  # own explicit footer, and bare RESTORE in its main/definitions uses that
+  # same fixture origin. Programs with no DATA use the separately observed42
+  # oracle; shared global DATA cannot represent a no-DATA program.
+  def reference_line(x):
+   x=x.replace('@DATA@',str(refbase)).replace('@NEXTDATA@',str(refbase+1))
+   return re.sub(r'\bRESTORE(?=[:\n]|$)',f'RESTORE {refbase}',x)
+  ref='\n'.join(reference_line(x) for x in native_main)+'\n'
+  isolated=(not data or (main==['READ a,b'] and data==['1']))
+  result=dict(source=src,reference_source=ref,reference_definitions=['DATA '+x for x in data]+[reference_line(x) for x in defs],reference=not isolated,status=int(error))
+  if error and not isolated:result['reference_error']=True
+  if isolated:result['expected']='Out of DATA\n'
   out.append(result)
  case(['READ a%,b&,x,y,z:PRINT ;a%;":";b&;":";x;":";y;":";z',
        'PRINT ;?(^x+4);":";?(^y+4);":";?(^z+4)',
        'READ s$,t$,u$,v$,w$:PRINT ;LEN s$;":";s$;":";t$;":";u$;":";v$;":";LEN w$',
        'RESTORE:READ a%:PRINT ;a%:RESTORE @NEXTDATA@:READ s$:PRINT s$'],
-      ['-123,257,1.0,1E-3,&FFFFFFFF',' leading and trailing  ,"a,b:c","a""b", 123  ,""'])
+      ['-123,257,1.0,1E-3,&FFFFFFFF','"leading and trailing  ","a,b:c","a""b", 123  ,""'])
  case(['DIM a%(1),b&(1),x(1),s$(1)',
        'READ a%(0),b&(0),x(0),s$(0):READ a%(1),b&(1),x(1),s$(1)',
        'PRINT ;a%(0);":";b&(0);":";x(0);":";s$(0)',
        'PRINT ;a%(1);":";b&(1);":";x(1);":";LEN s$(1)',
        's$(0)="changed":PRINT ;LEN s$(1)'],
-      ['-2147483648,257,1E-20,"first",2147483647,-1,.0,"last"'])
+      ['&80000000,257,1E-20,"first",2147483647,-1,.0,"last"'])
  case(['READ a$,b$,c$,d$:PRINT ;LEN a$;":";LEN b$;":";LEN c$;":";LEN d$'],[',, ,'])
  case(['READ a$,b$:PRINT ;LEN a$;":";b$'],['','"b"'])
  case(['READ a$,b$:PRINT a$;":";b$'],['abc:def,ghi'])
@@ -49,7 +59,7 @@ def programs():
       ['633,2,0','"E1DDE5D1010000004E03EDB0E5C9"','407,500'])
  for main,data,defs in [
   (['READ x'],[],()),(['READ x'],[''],()),(['READ x'],['"123"'],()),
-  (['READ x'],['1E1000'],()),(['READ x%'],['1E20'],()),
+  (['READ x'],['1E1000'],()),(['READ x%'],['-2147483648'],()),(['READ x%'],['1E20'],()),
   (['READ a,b'],['1'],()),(['DIM a%(0):READ a%(1)'],['1'],()),
   (['DIM a%(0):READ a%(FNneverindex)'],[],['DEF FNneverindex:PRINT "WRONG":=0']),
  ]:case(main,data,defs,error=True)

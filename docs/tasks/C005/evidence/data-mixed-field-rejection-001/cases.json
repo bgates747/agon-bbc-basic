@@ -1,0 +1,23 @@
+[
+  {
+    "source": "RESTORE 50000\nREAD a%,b&,x,y,z:PRINT ;a%;\":\";b&;\":\";x;\":\";y;\":\";z\nPRINT ;?(^x+4);\":\";?(^y+4);\":\";?(^z+4)\nREAD s$,t$,u$,v$,w$:PRINT ;LEN s$;\":\";s$;\":\";t$;\":\";u$;\":\";v$;\":\";LEN w$\nRESTORE:READ a%:PRINT ;a%:RESTORE 50010:READ s$:PRINT s$\nEND\n50000 DATA -123,257,1.0,1E-3,&FFFFFFFF\n50010 DATA  leading and trailing  ,\"a,b:c\",\"a\"\"b\", 123  ,\"\"\n",
+    "reference_source": "RESTORE 40000\nREAD a%,b&,x,y,z:PRINT ;a%;\":\";b&;\":\";x;\":\";y;\":\";z\nPRINT ;?(^x+4);\":\";?(^y+4);\":\";?(^z+4)\nREAD s$,t$,u$,v$,w$:PRINT ;LEN s$;\":\";s$;\":\";t$;\":\";u$;\":\";v$;\":\";LEN w$\nRESTORE 40000:READ a%:PRINT ;a%:RESTORE 40001:READ s$:PRINT s$\n",
+    "reference_definitions": [
+      "DATA -123,257,1.0,1E-3,&FFFFFFFF",
+      "DATA  leading and trailing  ,\"a,b:c\",\"a\"\"b\", 123  ,\"\""
+    ],
+    "reference": true,
+    "status": 0,
+    "expected": "-123:1:1:1E-3:-1\n128:118:0\n22:leading and trailing  :a,b:c:a\"b:123  :0\n-123\nleading and trailing  \n"
+  },
+  {
+    "source": "RESTORE 50000\nDIM a%(1),b&(1),x(1),s$(1)\nREAD a%(0),b&(0),x(0),s$(0):READ a%(1),b&(1),x(1),s$(1)\nPRINT ;a%(0);\":\";b&(0);\":\";x(0);\":\";s$(0)\nPRINT ;a%(1);\":\";b&(1);\":\";x(1);\":\";LEN s$(1)\ns$(0)=\"changed\":PRINT ;LEN s$(1)\nEND\n50000 DATA &80000000,257,1E-20,\"first\",2147483647,-1,.0,\"last\"\n",
+    "reference_source": "RESTORE 40100\nDIM a%(1),b&(1),x(1),s$(1)\nREAD a%(0),b&(0),x(0),s$(0):READ a%(1),b&(1),x(1),s$(1)\nPRINT ;a%(0);\":\";b&(0);\":\";x(0);\":\";s$(0)\nPRINT ;a%(1);\":\";b&(1);\":\";x(1);\":\";LEN s$(1)\ns$(0)=\"changed\":PRINT ;LEN s$(1)\n",
+    "reference_definitions": [
+      "DATA &80000000,257,1E-20,\"first\",2147483647,-1,.0,\"last\""
+    ],
+    "reference": true,
+    "status": 0,
+    "expected": "-2.14748365E9:1:1E-20:first\n2.14748365E9:255:0:4\n4\n"
+  }
+]

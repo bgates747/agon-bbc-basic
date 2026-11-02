@@ -1,0 +1,39 @@
+{
+  "bytes": 1511,
+  "relocations": 116,
+  "exports": {
+    "err_init": 0,
+    "err_install": 93,
+    "err_raise": 326,
+    "err_inline": 324,
+    "err_report": 775,
+    "err_line": 80,
+    "err_code": 933,
+    "err_current": 934,
+    "err_lastline": 938,
+    "err_message": 942,
+    "err_state": 909,
+    "err_ctlpush_slot": 870,
+    "err_strload_slot": 874,
+    "err_strstore_slot": 878,
+    "err_exit_slot": 882,
+    "err_cfg_ctltop": 885,
+    "err_cfg_acttop": 888,
+    "err_cfg_frames": 891,
+    "err_cfg_base": 894,
+    "err_cfg_limit": 897,
+    "err_cfg_rootsp": 900,
+    "err_cfg_depth": 903,
+    "err_cfg_heap": 906
+  },
+  "independent_link_bases": [
+    270336,
+    294912
+  ],
+  "unresolved_symbols": 0,
+  "hashes": {
+    "docs/tasks/C005/errors/errors.s": "c39d139cefbac56fcc5d852a39dd4ee9a2e412c95c71dc9b8203d0cd36151ee5",
+    "docs/tasks/C005/build/error-runtime/runtime_data.bas": "afdf20f8d0e7220cf2232bd776f462881a63398c4d46a9f0484cdb4af54c609c",
+    "docs/tasks/C005/build/error-runtime/runtime-0.bin": "ffda4a56ee311ec3b7dfed2b655140989cb2b16cf97bab0c0137b94d518fa4a2"
+  }
+}

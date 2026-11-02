@@ -1,0 +1,6 @@
+{
+  "passed": false,
+  "stage": "shared interpreted fixture",
+  "native_compilation_started": false,
+  "cause": "CLEAR does not reset the shared DATA cursor; per-case RESTORE missing"
+}

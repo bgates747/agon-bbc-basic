@@ -1,0 +1,10 @@
+{
+  "numeric": "exact source reproduced; independent links passed",
+  "strings": "exact source reproduced; independent links passed",
+  "control": "exact source reproduced; independent links passed",
+  "procedure": "exact source reproduced; independent links passed",
+  "memory": "exact source reproduced; independent links passed",
+  "io": "exact source reproduced; independent links passed",
+  "data": "exact source reproduced; independent links passed",
+  "source_sha256": "55643c54bbbff7c0d36f139cad2e9824cec5e36a7078e9f7274b30ebf2d7b8fa"
+}

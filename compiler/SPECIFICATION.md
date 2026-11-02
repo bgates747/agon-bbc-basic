@@ -212,6 +212,17 @@ The Author accepted the corrected C002 baseline for a development checkpoint.
     Separators, multiple destinations, numeric/CSV INPUT and INPUT# are rejected.
     [I/O qualification](../docs/tasks/C005/IO.md) owns actual evidence and limits.
 
+29. DATA must lead its physical line. READ supports scalar/array numeric and string
+    destinations. It captures the next item before evaluating the destination and
+    advances the cursor only after conversion/storage succeeds. Empty fields are
+    empty strings or numeric Syntax16; quoted numeric reads give Type6. Numeric
+    overflow stays deferred until numeric READ, while string READ retains raw text.
+    Leading unquoted spaces are skipped and trailing spaces retained. Numeric READ
+    currently requires literal unquoted fields throughout the program; string-only
+    READ may consume unquoted text. RESTORE resets or names a constant numbered
+    DATA line. Dynamic/non-DATA targets, expressions, LOCAL DATA and READ# remain
+    excluded. [DATA qualification](../docs/tasks/C005/DATA.md) owns exact evidence.
+
 ## Current backend and runtime contract
 
 1. The compiler owns a 65536-byte output buffer. Code loads at `&040000`, with

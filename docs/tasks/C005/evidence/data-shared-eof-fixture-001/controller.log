@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/Agon/mystuff/bbc-basic-v-adl/docs/tasks/C005/resume_data.py", line 51, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/Agon/mystuff/bbc-basic-v-adl/docs/tasks/C005/resume_data.py", line 41, in main
+    got=native.split(f'OUTPUT_BEGIN_{i}\n',1)[1].split(f'OUTPUT_END_{i}\n',1)[0];assert got==c['expected']+f'OUTPUT_STATUS:{c["status"]}\n',(i,repr(got),c)
+                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (19, "'Out of DATA\\nOUTPUT_STATUS:1\\n'", {'source': 'RESTORE 50000\nREAD a,b\nEND\n50000 DATA 1\n', 'reference_source': 'RESTORE 41900\nREAD a,b\n', 'reference_definitions': ['DATA 1'], 'reference': True, 'status': 1, 'reference_error': True, 'expected': ''})

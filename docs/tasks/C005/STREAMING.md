@@ -40,7 +40,7 @@ require it; no streaming implementation or size result is claimed.
 
 ## Static numbered-line pressure before the next source probe
 
-The prepared source has1958 numbered lines, exceeding the1024-symbol cap before
+The promoted DATA source has1962 numbered lines, exceeding the1024-symbol cap before
 counting its emitted control/variable/runtime labels. PROCnumberlabel currently
 creates a symbol for every numbered line. This is an explicit static gap, not a
 measured native image result. A BBC prescan can collect numeric GOTO/GOSUB targets

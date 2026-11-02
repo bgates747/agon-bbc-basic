@@ -1,0 +1,8 @@
+{
+  "cases.json": "98bbe81dbd35ef5e157699350d757a8a98ad8e0556647f105b54e39140e0f8d5",
+  "compiler.bas": "55643c54bbbff7c0d36f139cad2e9824cec5e36a7078e9f7274b30ebf2d7b8fa",
+  "status.json": "bf20cdf93a70ecc9d306f7b87aa4c5a2713ba3556ae51ec48b409b8380f1d9ec",
+  "test_data.py": "4ceab3afd35d298321de400b0e8658fce20ab013de90217b7c6ba7c7555aaf05",
+  "reference.log": "4139536269e14377507cd601dac7b298d56512431c3eb0e1bab400f4e6e1a5b1",
+  "compile.log": "ebf5993b5260dbca659b4f4716e2a115548a1641641086349eb25dc88ea5b52c"
+}

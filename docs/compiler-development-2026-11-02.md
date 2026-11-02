@@ -237,3 +237,36 @@ static1958-numbered-line/symbol cap gap. C005/C006 remain the only TODO entries.
 Selected exact live I/O smoke passes123.702s; `io-promotion-001` retains two
 native images, repeated output, reference logs and complete GNU helper links.
 All six packers reproduce the promoted source (`io-repack-001`).
+
+## C005 DATA smoke and interrupted full qualification
+
+Prototype SHA55643c54 (1962 lines,120-byte position-independent DATA helper) passes
+smoke2 in170.554s. Reference fixture corrections preserve actual CLEAR/DATPTR and
+signed-min READ behavior; conservative mixed-field admission remains explicit.
+Full32-source compilation yields22 images/10 intended rejections, then the host
+controller ends143 before reporting its final phases. Native PID1/systemd owned
+process inspection finds no surviving CLI; cause is unknown. The retained partial
+and exact driver/source checks precede resume_data.py's fresh repeat and all native
+outputs/GNU links. No full pass is claimed before those finish.
+
+A1511-byte/116-relocation standalone error adapter independently links. Its native
+ABI probe is prepared but not executed yet; source handlers remain unimplemented.
+Conventional ERL uses BASIC line numbers; the proposed unnumbered dialect returns0,
+while compile diagnostics retain physical positions. Default uncaught formatting
+must preserve the observed leading CRLF/message/optional line/trailing CRLF.
+
+## C005 DATA qualified and promoted; error adapter ABI
+
+Source SHA55643c54 completes32-case scope (22 native/10 rejected) after verified
+resume. The shared EOF fixture's wrong expectation is corrected using3 isolated
+reference programs (1.016s), without compiler/numeric changes. Fresh repeat and
+all outputs/links/bridges/DATA entry resets/arena checks pass. Final3.477s is only
+resume validation/execution/link time, not full compilation. Baseline80.355s and
+exact live smoke170.183s pass; seven packers reproduce it. DATA.md records exact
+120-byte PIC promotion and all partial/failed fixture evidence.
+
+Error adapter1511 bytes/116 relocs passes native ABI1.020s, including current lost
+max/empty/repeated string ownership, root/loop install, nested transfer, normal
+retained-local restoration, handler persistence and fatal/NUL/line formatting.
+Its BBC frontend is prepared; source-handler language is still unimplemented.
+Continue C005 errors/resources and C006 under the Author's authorization.

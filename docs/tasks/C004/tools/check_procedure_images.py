@@ -2,7 +2,7 @@
 from pathlib import Path
 import json,subprocess
 ROOT=Path(__file__).resolve().parents[4];TASK=ROOT/'docs/tasks/C004'
-def check(limit=None,procedure_runtime=None,case_indices=None):
+def check(limit=None,procedure_runtime=None,case_indices=None,entry_resolver=None):
  build=TASK/'build/output-integration';sd=ROOT/'.emulator/sdcard'
  paths={'numeric':ROOT/'compiler/build/numeric-runtime','control':ROOT/'compiler/build/control-runtime','procedure':ROOT/'compiler/build/procedure-runtime'}
  if procedure_runtime is not None:paths['procedure']=Path(procedure_runtime).resolve(strict=True)
@@ -23,7 +23,9 @@ def check(limit=None,procedure_runtime=None,case_indices=None):
    else:fixups={**{f'act_{n}slot':controlbase+metadata['control']['exports'][f'ctl_{n}'] for n in ['push','check','pop']},'act_numslot':numaddr}
    for slot,addr in fixups.items():offset=exports[slot];expected[offset:offset+3]=addr.to_bytes(3,'little')
    assert image[pos:pos+len(expected)]==expected,(i,name,pos)
-  start=int.from_bytes(image[1:4],'little')-0x40000;hook=image[start:start+22]
+  start=int.from_bytes(image[1:4],'little')-0x40000
+  if entry_resolver is not None:start=entry_resolver(image,start)
+  hook=image[start:start+22]
   assert hook[:5]==b'\xcd'+(controlbase+metadata['control']['exports']['ctl_init']).to_bytes(3,'little')+b'\xd5'
   assert hook[5]==0x21 and hook[9]==0x11
   arena=int.from_bytes(hook[6:9],'little');limit=int.from_bytes(hook[10:13],'little')

@@ -61,3 +61,46 @@ raises42 before destination effects; nested destination READ commits the capture
 outer next pointer. Conversion/store failure leaves the field for retry. Numeric
 overflow text reads as a string without error. Trailing junk after quoted fields
 and numeric colon terminators have parser quirks; reject those unqualified forms.
+
+## Frontend qualification history
+
+The1962-line BBC prototype SHA55643c54bbbff7c0d36f139cad2e9824cec5e36a7078e9f7274b30ebf2d7b8fa
+passes two generated smoke programs170.554s, with typed scalar/array values,
+strings, literal records, RESTORE, repeat and numeric/string/PIC DATA identity.
+The first shared reference fixture omitted RESTORE (CLEAR
+keeps DATPTR); the next success fixture incorrectly expected decimal signed-min
+integer READ to succeed. A stepped reference gives20 at that first READ. The
+success boundary uses &80000000; decimal -2147483648 is retained as an error case.
+The mixed-data fixture also needed to respect the declared conservative admission:
+quote nonnumeric text when the program has numeric READ. Retain all failed fixture
+records rather than altering observed reference results or the numeric package.
+
+The full32-source controller exits143 after22 native images and10 expected
+rejections, before fresh repeat/native execution reporting. The cause is unknown;
+a native owned-process check finds no remaining CLI. `resume_data.py` verifies
+exact compiler definitions/DATA against the retained driver and every source,
+status/image or rejection sentinel before resuming only the missing repeat,
+execution and independent link/entry phases. The partial archive is not a pass.
+
+## Qualified development promotion
+
+Exact SHA55643c54 passes the32-source scope:22 native/10 rejected,19 shared reference
+oracles plus3 independent exhaustion cases. A shared EOF fixture had consumed the
+following case's DATA; isolated runs prove Out of DATA for no fields, one missing
+field and exhaustion before FN index effects. `data-shared-eof-fixture-001` retains
+the wrong shared expectation; `data-exhaustion-reference-001` supplies the actual
+three oracles in1.016s. No compiler source/numeric runtime change corrected them.
+
+The verified fresh repeat matches p0 byte for byte. All22 native outputs and
+NUM/string/memory/control/activation links, bridges, arena and DATA cursor-entry
+reset checks pass. `data-001` retains resumed completion. Its3.477s measures only
+the final resume validation/execution/link phase; interrupted compilation and the
+earlier fresh repeat are excluded. It is not a32-program compile duration.
+
+Baseline39/15/repeat/GNU golden passes80.355s. Exact live smoke2 passes170.183s
+with PIC template and entry/memory checks; all seven packers reproduce the source.
+Promotion copies the unchanged source to compiler/compiler.bas, the120-byte/no-
+relocation helper to compiler/runtime/data.s and its packer to compiler/tools.
+Numeric/vendor and earlier runtime sources are unchanged. Source handlers, native
+compiler resource closure and C006 remain open; this is not self-hosting, human
+review, hardware or benchmark evidence.

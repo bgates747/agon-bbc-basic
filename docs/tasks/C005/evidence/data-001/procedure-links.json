@@ -1,0 +1,46 @@
+{
+  "independent_control_and_procedure_links": [
+    {
+      "case": 6,
+      "numeric": 263430,
+      "control": 268429,
+      "procedure": 277335,
+      "arena": 687872,
+      "limit": 720640
+    },
+    {
+      "case": 7,
+      "numeric": 263343,
+      "control": 268344,
+      "procedure": 277250,
+      "arena": 687872,
+      "limit": 720640
+    },
+    {
+      "case": 8,
+      "numeric": 262837,
+      "control": 267829,
+      "procedure": 276735,
+      "arena": 277678,
+      "limit": 310446
+    },
+    {
+      "case": 10,
+      "numeric": 262969,
+      "control": 267965,
+      "procedure": 276871,
+      "arena": 278084,
+      "limit": 310852
+    },
+    {
+      "case": 21,
+      "numeric": 262961,
+      "control": 267950,
+      "procedure": 276856,
+      "arena": 687872,
+      "limit": 720640
+    }
+  ],
+  "all_external_bridges_checked": true,
+  "entry_reset_and_workspace_checked": true
+}

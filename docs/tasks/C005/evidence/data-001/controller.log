@@ -1,0 +1,100 @@
+{
+  "independent_control_and_procedure_links": [
+    {
+      "case": 6,
+      "numeric": 263430,
+      "control": 268429,
+      "procedure": 277335,
+      "arena": 687872,
+      "limit": 720640
+    },
+    {
+      "case": 7,
+      "numeric": 263343,
+      "control": 268344,
+      "procedure": 277250,
+      "arena": 687872,
+      "limit": 720640
+    },
+    {
+      "case": 8,
+      "numeric": 262837,
+      "control": 267829,
+      "procedure": 276735,
+      "arena": 277678,
+      "limit": 310446
+    },
+    {
+      "case": 10,
+      "numeric": 262969,
+      "control": 267965,
+      "procedure": 276871,
+      "arena": 278084,
+      "limit": 310852
+    },
+    {
+      "case": 21,
+      "numeric": 262961,
+      "control": 267950,
+      "procedure": 276856,
+      "arena": 687872,
+      "limit": 720640
+    }
+  ],
+  "all_external_bridges_checked": true,
+  "entry_reset_and_workspace_checked": true
+}
+DATA entry resets: 22 memory links: 8 activation images: [6, 7, 8, 10, 21]
+{
+  "programs": 32,
+  "native_executions": 22,
+  "rejected_sources": 10,
+  "reference_output_programs": 19,
+  "deterministic_repeat": true,
+  "compiler_driver_byte_match": true,
+  "resumed_after_exit143": true,
+  "reference_eof_fixture_corrected": true,
+  "fresh_repeat_reused": true,
+  "interrupted_compile_duration_unreported": true,
+  "duration_seconds": 3.477,
+  "duration_scope": "Current resume validation/execution/link checks; earlier interrupted compilation and reused fresh repeat excluded",
+  "independent_link_bases": [
+    264472,
+    266764,
+    262993,
+    262657,
+    262629,
+    262629,
+    263430,
+    263343,
+    262837,
+    262649,
+    262969,
+    263649,
+    263984,
+    262451,
+    262459,
+    262459,
+    262459,
+    262479,
+    262479,
+    262543,
+    262850,
+    262961
+  ],
+  "string_link_bases": [
+    269657,
+    271881,
+    268036,
+    267673,
+    267654,
+    267654,
+    278462,
+    269093
+  ],
+  "hashes": {
+    "docs/tasks/C005/compiler.bas": "55643c54bbbff7c0d36f139cad2e9824cec5e36a7078e9f7274b30ebf2d7b8fa",
+    "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+    "docs/tasks/C005/build/output-integration/cases.json": "2b1a71716031f2bd27183e45f494aefe01f2e7d5bb58cd1facf9896d1fcb9cef"
+  }
+}

@@ -57,8 +57,13 @@ actual DIM quirks. Full53-case scope, binding capacity5, baseline/FN and selecte
 live checks pass. File/input language is qualified/promoted at SHA483e1730
 (1849 lines,788-byte/7-relocation I/O helper). Full29 sources, actual keyboard
 INPUT LINE, same-session exit cleanup and baseline pass; read C005/IO.md for
-unqualified FN carriers and255-character path boundary. DATA frontend/helpers
-are prepared experiments; source handlers and resource closure remain open. C006 remains unstarted. The compiler is still BBC BASIC; assembly is runtime code, not a
+unqualified FN carriers and255-character path boundary. DATA/READ/RESTORE is now qualified/promoted at SHA55643c54
+(1962 lines,120-byte PIC helper). Full32 sources (22 native/10 rejection), verified
+fresh repeat/resumed output/GNU+entry checks, baseline80.355s and live smoke170.183s
+pass; seven packers reproduce it. Read C005/DATA.md for fixture corrections,
+separate exhaustion oracles and explicit literal-only admissions. Source handlers
+and resource closure remain open. The1511-byte error adapter passes native ABI
+1.020s; its BBC frontend is prepared but not integrated. Read C005/ERRORS.md. C006 remains unstarted. The compiler is still BBC BASIC; assembly is runtime code, not a
 replacement compiler implementation.
 
 Use `.venv/bin/python` explicitly. `compiler/README.md` contains build/test

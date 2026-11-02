@@ -39,7 +39,7 @@ no-op; ERROR257 reports1, ERROR-1 reports255 and REPORT stops at embedded NUL.
 ERL names the actual failing definition line, not the caller's line. These results
 qualify the source audit; they do not prove the unimplemented native recovery.
 
-## Proposed native recovery boundary, not yet implemented
+## Native recovery boundary and source integration contract
 
 1. A handler state holds the native target, local/global mode, saved GOSUB depth,
    captured CPU SP, typed-control top and activation-arena top. LOCAL installation
@@ -73,3 +73,28 @@ LOCAL OFF restores the prior handler on normal return. Error-number conversion
 fails before message-FN effects. Actual ERROR0, wrapped256 and OFF paths bypass
 the handler, print the message/line and return to BASIC's prompt; keyboard BYE
 finishes each session. No native-handler result is inferred from these probes.
+
+## Standalone helper experiment, not language promotion
+
+`errors/errors.s` currently packages1511 bytes/116 internal ADL24 relocations and
+passes two independent link checks. Its explicit patch slots connect control,
+activation bounds, heap/string helpers, saved entry SP and exit. Four opaque5-byte
+LOCAL state snapshots preserve normal restoration; error transfer instead rescues
+current lost string values and discards records. Fatal exits skip value rescue.
+The native ABI probe now passes1.020s; source-handler language and self-hosting
+remain unqualified. The BBC frontend is prepared but has not integrated this module.
+
+Conventional ERL uses the supplied BASIC line number (0..65279). The proposed
+line-numberless dialect uses0 when the failing physical line has no BASIC number;
+compile diagnostics continue to use physical file positions. Uncaught errors
+need the actual reference leading CRLF, REPORT text, optional ` at line n` and
+trailing CRLF before returning to MOS; source handlers still get REPORT without
+an implicit newline. A small unsigned16 metadata formatter implements line output
+without replacing the BBC numeric representation/package. The unqualified helper
+now includes this formatter; its ABI probe must cover65279 and NUL truncation.
+
+`error-abi-001` qualifies root/loop LOCAL installation, global/local CPU/control/
+arena transfer, retained handlers, fatal zero, numeric discard versus earlier
+normal restoration, repeated/max255/empty string rescue and growth, subsequent
+arena overwrites, full line packet, REPORT NUL truncation and line65279 display.
+The complete probe and exact module/other runtime metadata are retained.

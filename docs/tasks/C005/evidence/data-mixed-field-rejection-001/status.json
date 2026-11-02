@@ -1,0 +1,6 @@
+{
+  "passed": false,
+  "scope": "Smoke case0 contradicts declared conservative admission: numeric READ plus unquoted nonnumeric DATA",
+  "compiled_case1": true,
+  "native_executions": 0
+}

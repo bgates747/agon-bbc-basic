@@ -1,0 +1,8 @@
+{
+  "resume_passed": false,
+  "cause": "Shared reference erroneously consumed the next case DATA instead of EOF",
+  "fresh_repeat_passed": true,
+  "all_22_native_programs_executed": true,
+  "isolated_actual_oracle": "Out of DATA\n",
+  "compiler_source_change_required": false
+}

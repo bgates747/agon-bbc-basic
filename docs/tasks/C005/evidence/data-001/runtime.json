@@ -1,0 +1,20 @@
+{
+  "bytes": 120,
+  "relocations": 0,
+  "exports": {
+    "data_peek": 0,
+    "data_number": 29,
+    "data_string": 61,
+    "data_commit": 99
+  },
+  "independent_link_bases": [
+    270336,
+    294912
+  ],
+  "unresolved_symbols": 0,
+  "hashes": {
+    "docs/tasks/C005/data/data.s": "fc3b9f1e90f07fc25827939473bc9e9642979ec4af5c11983ef3ef49c97c2c89",
+    "docs/tasks/C005/build/data-runtime/runtime_data.bas": "2f11b06896bf09988c852631c99e3c203fbc99f52937fdcd4a590fcf898f8e99",
+    "docs/tasks/C005/build/data-runtime/runtime-0.bin": "533864b6c4608d1a9e371f136fd7a6fa2417d487069cc5054cbd74ec49068e05"
+  }
+}
