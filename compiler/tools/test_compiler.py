@@ -109,7 +109,7 @@ def main() -> None:
         (b'EVAL("1")\n', None, "EVAL is deliberately unsupported"),
         (b'CALL &40000\n', None, "Unsupported statement CALL"),
         (b'SYS 1\n', None, "Unsupported statement SYS"),
-        (b'a$(0)="x"\n', None, "Arrays and function calls"),
+        (b'CASE 1\n', None, "Unsupported statement CASE"),
         (b'GOTO a%\n', None, "Expected an unsigned integer constant"),
         (b'GOTO @A\n@a:END\n', None, "Undefined target @A"),
         (b'@no_colon\n', None, "Expected :"),

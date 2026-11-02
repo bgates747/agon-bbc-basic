@@ -1,0 +1,16 @@
+{
+  "cases.json": "7b6bca31e7efcec229ac481e1fba177ab140d37e6b2724c84ab4c4e91868cc23",
+  "native.log": "eb4c8122c9ce3f28b4bb1aea597a59cbb7e5474fe1671418f52e2ddd905cd851",
+  "reference.bas": "a6fe8a53150041e934a4d6099d73449e89a8d543707bfa3e6687efab9acdcb04",
+  "status.json": "f34e5fd2fd2a94cb801f3ffa4c6f5780a4dbea76b3127df6a7898ef7331b7799",
+  "strings-43e00.dat": "d03e552c817ca17618d03e1250965c8e411b96e3a387f4c187ae48409d89f040",
+  "driver.bas": "f66c8e9f8babd89675cc2f6fccba0b0c13f9e9d63ac65ec11b32950050de1449",
+  "test_functions.py": "6305ac89bb7d494c6b40e91d31fb5c849052bceb7d69b901cae472c4f5ebe781",
+  "p0.dat": "a8cc0383e0be6ccedeb339868520ba389baeef7ecedc3231c978bd4d9626b3e1",
+  "controller.log": "522a7867e7a367621e23de47458760ef35ecce98047a3300044e96aeb2efc715",
+  "reference.log": "b17e0a95186517382325bf48d6dcd0df9d9be1e18610f622d5f7ff6b149636e0",
+  "compile.log": "b5b7c384d53ffda33d1d42482f07b70ed499a0c1415b19c4927bfe0ed7ac2cda",
+  "runtime-40409.dat": "639c3a1b8e7aaee1769f1d8686dbe9b6dcc1988eb34eb2d068aa3efe019c6edc",
+  "repeat.dat": "a8cc0383e0be6ccedeb339868520ba389baeef7ecedc3231c978bd4d9626b3e1",
+  "results.json": "522a7867e7a367621e23de47458760ef35ecce98047a3300044e96aeb2efc715"
+}

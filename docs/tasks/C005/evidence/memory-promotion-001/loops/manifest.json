@@ -1,0 +1,15 @@
+{
+  "cases.json": "968d407f1be6f07c5861972deb9efdf7e3a2fc48c6b4d95d88806c4c71205d40",
+  "runtime-40419.dat": "58548ab1533626068be48525feebf23084e6bfb6a1d2530d2cb5946aab012974",
+  "native.log": "baa81c66cca2bb806613d2ecdbb80bd8cca57297598581544c8af55bc4e64649",
+  "reference.bas": "826fd53114bea0de93c12b4d858a0819457641a67d9d7cb4e93c69e40bbd1cde",
+  "status.json": "adc1ac738abd9229b621b0601116eb7ab554b1ee8b9c44c2babbb7a12c6a8324",
+  "test_loops.py": "805361b0f8b89aaad8a7ce4293db77189b2972cfc823f3c5d100ad105feef075",
+  "driver.bas": "f66c8e9f8babd89675cc2f6fccba0b0c13f9e9d63ac65ec11b32950050de1449",
+  "p0.dat": "c02d6aa75cbb11fe870551bd09e461c26b2fb2e1ff1071a9b59888af5b7354af",
+  "controller.log": "484481d7242f5b015325507685db9d57b2126385bedd5c267f2b8741f2656587",
+  "reference.log": "db93cd47fd0e2269af1c479242a49727bbde88264f982beaefd3e06355293f3c",
+  "compile.log": "b5b7c384d53ffda33d1d42482f07b70ed499a0c1415b19c4927bfe0ed7ac2cda",
+  "repeat.dat": "c02d6aa75cbb11fe870551bd09e461c26b2fb2e1ff1071a9b59888af5b7354af",
+  "results.json": "f2dd6a0665da562371ce78efceaa2b7f2fc58c107cf9f52b1cdebc37280662eb"
+}

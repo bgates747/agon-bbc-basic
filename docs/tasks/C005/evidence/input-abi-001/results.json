@@ -1,0 +1,15 @@
+{
+  "scope": "Actual MOS input helper with keyboard injection, not human review",
+  "ordinary_empty_and_maximal_input": true,
+  "escape_status": true,
+  "guards": true,
+  "index_and_stack_preservation": true,
+  "logical_tail_unchanged": true,
+  "duration_seconds": 10.377,
+  "hashes": {
+    "docs/tasks/C005/io/input-abi.s": "6e1996b8b3813b16b4009bb67a230a45a9852f8eda05b8f3bdfcf48b19032855",
+    "docs/tasks/C005/io/interactive.py": "19344b24104476212a374677e3b67a80aa5f517613a1c39c446384fb94ebd1a9",
+    "docs/tasks/C005/build/input-abi/probe.bin": "90941989d48c5744bd26e47bf2382bc45e1bd47fba890bd6d9437eb8dc01cc92",
+    "docs/tasks/C005/build/io-runtime/runtime-0.bin": "bde255025daeae570075a3910a0d102e7fbeb2f20058390c781b3e3be5b98115"
+  }
+}

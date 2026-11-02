@@ -1,0 +1,102 @@
+{
+  "independent_control_and_procedure_links": [
+    {
+      "case": 1,
+      "numeric": 269961,
+      "control": 274748,
+      "procedure": 283654,
+      "arena": 687872,
+      "limit": 720640
+    },
+    {
+      "case": 8,
+      "numeric": 263392,
+      "control": 268151,
+      "procedure": 277057,
+      "arena": 687872,
+      "limit": 720640
+    },
+    {
+      "case": 9,
+      "numeric": 263468,
+      "control": 268222,
+      "procedure": 277128,
+      "arena": 687872,
+      "limit": 720640
+    },
+    {
+      "case": 10,
+      "numeric": 263948,
+      "control": 268702,
+      "procedure": 277608,
+      "arena": 687872,
+      "limit": 720640
+    },
+    {
+      "case": 11,
+      "numeric": 263717,
+      "control": 268481,
+      "procedure": 277387,
+      "arena": 687872,
+      "limit": 720640
+    },
+    {
+      "case": 12,
+      "numeric": 263894,
+      "control": 268658,
+      "procedure": 277564,
+      "arena": 687872,
+      "limit": 720640
+    },
+    {
+      "case": 14,
+      "numeric": 263058,
+      "control": 267818,
+      "procedure": 276724,
+      "arena": 687872,
+      "limit": 720640
+    },
+    {
+      "case": 16,
+      "numeric": 262902,
+      "control": 267658,
+      "procedure": 276564,
+      "arena": 687872,
+      "limit": 720640
+    },
+    {
+      "case": 17,
+      "numeric": 262791,
+      "control": 267541,
+      "procedure": 276447,
+      "arena": 687872,
+      "limit": 720640
+    },
+    {
+      "case": 18,
+      "numeric": 263286,
+      "control": 268047,
+      "procedure": 276953,
+      "arena": 687872,
+      "limit": 720640
+    },
+    {
+      "case": 21,
+      "numeric": 263064,
+      "control": 267819,
+      "procedure": 276725,
+      "arena": 687872,
+      "limit": 720640
+    },
+    {
+      "case": 22,
+      "numeric": 263148,
+      "control": 267908,
+      "procedure": 276814,
+      "arena": 687872,
+      "limit": 720640
+    }
+  ],
+  "all_external_bridges_checked": true,
+  "entry_reset_and_workspace_checked": true
+}

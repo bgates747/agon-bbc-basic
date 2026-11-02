@@ -3,8 +3,8 @@
 Arrays and memory access are required by the compiler's real BBC source. This
 tranche preserves the reference's numeric/string widths, dimension evaluation
 and error boundaries; it supplies standalone runtime state instead of linking
-the interpreter's parser, variable chains, FREE or error machinery. Nothing in
-this document is a qualification result.
+the interpreter's parser, variable chains, FREE or error machinery. This document retains the source audit;
+[MEMORY.md](MEMORY.md) records corrections, qualification and live promotion.
 
 ## Reference and dependency audit
 

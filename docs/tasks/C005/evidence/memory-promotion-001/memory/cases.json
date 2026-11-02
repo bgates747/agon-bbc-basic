@@ -1,0 +1,18 @@
+[
+  {
+    "source": "DIM a%(0):PRINT ;a%(0)\n",
+    "reference": true,
+    "status": 0,
+    "expected": "0\n"
+  },
+  {
+    "source": "DIM a%(1,2),b&(2),x(1),s$(1),mem% 15\nPRINT ;a%(0,0);\":\";b&(2);\":\";x(1);\":\";LEN s$(1)\na%(1,2)=-123:b&(2)=257:x(1)=1/3:s$(1)=\"ABC\"\nPRINT ;a%(1,2);\":\";b&(2);\":\";x(1)=1/3;\":\";LEN s$(1)\nPRINT ;^a%(0,1)-^a%(0,0);\":\";^a%(1,0)-^a%(0,0)\nPRINT ;^b&(1)-^b&(0);\":\";^x(1)-^x(0);\":\";^s$(1)-^s$(0)\nmem%?0=17:!(mem%+4)=-77:|(mem%+9)=1/3\nPRINT ;?mem%;\":\";mem%!(4);\":\";|(mem%+9)=1/3\ncopy$=s$(1):s$(1)=\"changed\":PRINT copy$;\":\";s$(1)\nPRINT ;FNtouch(1);\":\";a%(1,2)\nEND\nDEF FNtouch(i%):a%(i%,2)=a%(i%,2)+1:=a%(i%,2)\n",
+    "reference_source": "DIM a%(1,2),b&(2),x(1),s$(1),mem% 15\nPRINT ;a%(0,0);\":\";b&(2);\":\";x(1);\":\";LEN s$(1)\na%(1,2)=-123:b&(2)=257:x(1)=1/3:s$(1)=\"ABC\"\nPRINT ;a%(1,2);\":\";b&(2);\":\";x(1)=1/3;\":\";LEN s$(1)\nPRINT ;^a%(0,1)-^a%(0,0);\":\";^a%(1,0)-^a%(0,0)\nPRINT ;^b&(1)-^b&(0);\":\";^x(1)-^x(0);\":\";^s$(1)-^s$(0)\nmem%?0=17:!(mem%+4)=-77:|(mem%+9)=1/3\nPRINT ;?mem%;\":\";mem%!(4);\":\";|(mem%+9)=1/3\ncopy$=s$(1):s$(1)=\"changed\":PRINT copy$;\":\";s$(1)\nPRINT ;FNtouch(1);\":\";a%(1,2)\n",
+    "reference_definitions": [
+      "DEF FNtouch(i%):a%(i%,2)=a%(i%,2)+1:=a%(i%,2)"
+    ],
+    "reference": true,
+    "status": 0,
+    "expected": "0:0:0:0\n-123:1:-1:3\n4:12\n1:5:5\n17:-77:-1\nABC:changed\n-122:-122\n"
+  }
+]

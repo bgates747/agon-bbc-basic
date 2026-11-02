@@ -32,7 +32,7 @@ existing string/numeric regressions on the reauthorized Pi5 CLI.
 | Standard math functions and PI | Implemented subset | ABS ACS ASN ATN COS DEG EXP INT LN LOG NOT RAD SGN SIN SQR TAN, PI; RND and OS functions remain unsupported |
 | Numeric formatting | Partial | Fixed G9, matching the reference; @% assignment and other PRINT formats unsupported |
 | Comparison and Boolean expressions | Partial | Numeric and string = <> <= >= < >, numeric NOT/AND/EOR/OR and TRUE/FALSE in expressions, assignments, VDU/PRINT; comparisons return -1/0; no shifts |
-| Numeric variables | Implemented subset | Plain/LET assignment and reads; five-byte unsuffixed variants, four-byte %, one-byte &; 128 bindings; runtime creation/undefined-read checks, predefined A%–Z%; global GOSUB mutation |
+| Numeric variables | Implemented subset | Plain/LET assignment and reads; five-byte unsuffixed variants, four-byte %, one-byte &;256 bindings shared with arrays; runtime creation/undefined-read checks, predefined A%–Z%; global GOSUB mutation |
 | Mutable strings and string variables | Partial | Plain/LET `$` assignment, owned copying/self-assignment, + and parentheses, 0..255 bytes including NUL, LEN/CHR$/ASC, VAL and STR$ (default G9 or ~ hex), INSTR/STRING$, string PRINT, runtime existence; bounded private heap; LEFT$/RIGHT$/MID$ expressions with reference low-byte counts/optional arguments and six string relations; LEFT$/RIGHT$/MID$ scalar slice assignment with unchanged length/allocation and reference range markers; further I/O-dependent string functions unsupported; omitted RIGHT$ and STRING$ on direct FN-derived carriers rejected (see findings) |
 | Variable suffixes and default numeric variables | Partial | Case-sensitive numeric/string names with %/&/$ suffixes; 32-character ASCII body limit; ambiguous keyword prefixes, pseudo variables and other suffixes rejected |
 | IF/THEN/ELSE/ENDIF | Partial | Inline colon lists, omitted THEN, constant THEN/ELSE line targets and multiline blocks; SFIX truth and reference first-ELSE association; 32 nesting entries; block ELSE/ENDIF begin their line; multiline IF inside inline IF rejected |
@@ -41,10 +41,11 @@ existing string/numeric regressions on the reauthorized Pi5 CLI.
 | DEF PROC / ENDPROC | Partial | Forward/recursive scalar by-value calls; staged arguments and reverse binding;256 line-leading definitions,16 arguments; no empty parentheses, RETURN/array parameters; ENDPROC requires PROC marker after restoring locals |
 | DEF FN / function return | Partial | Forward/recursive scalar functions with a unique inferred numeric/string result kind; unsuffixed string results and optional $ names; saved caller temporaries and distinct FN exit; mixed/unresolved kinds rejected |
 | LOCAL, recursion with locals | Partial | Scalar numeric/string LOCAL and implicit parameter locals; dynamically visible, reverse restoration; newly created bindings remain defined;32768-byte arena and shared256 control records; LOCAL DATA/ERROR/arrays unsupported |
-| Arrays and DIM | Unsupported | Including local arrays |
+| Arrays and DIM | Partial | Global byte/integer/variant/string arrays,1..16 dimensions and consistent static arity; row-major inclusive counts, SFIX/bounds, zero initialization, owned strings; raw %/variant DIM blocks and reference target mutation/repeated-DIM errors; LOCAL/whole arrays, array formals/FOR/slice targets, byte raw targets, DIM LOCAL and FN/address-of in array bounds rejected |
 | DATA/READ/RESTORE | Unsupported | Input to compiler may not use these yet |
 | File I/O and INPUT in compiled programs | Unsupported | Compiler itself uses host BASIC file I/O |
-| Indirection, CALL/USR, inline assembler | Unsupported | Needed bootstrap facilities tracked in TODO |
+| Indirection and address-of | Partial | Unary ?/!/\| (byte/32-bit/five-byte variant), binary numeric base?offset/base!offset, unary ^scalar/element; low24 addresses and ITEM/SFIX precedence; string indirection and array-element binary targets excluded |
+| CALL/USR, inline assembler | Unsupported | No interpreter fallback |
 | Errors/ON ERROR in compiled programs | Unsupported | Built-in GOSUB/numeric/string errors only; no source error handlers |
 | EVAL | Deliberately unsupported | Compile-time rejection; absent from initial language |
 | STOP, RUN, CHAIN, OSCLI | Unsupported | STOP is not silently compiled as END |
@@ -53,6 +54,9 @@ existing string/numeric regressions on the reauthorized Pi5 CLI.
 
 The [C003 scalar record](../docs/tasks/C003/SCALARS.md) describes reference
 creation/storage rules, scope and qualification; the [string core record](../docs/tasks/C003/STRINGS.md) adds ownership, allocation and ABI evidence. [Slices and comparisons](../docs/tasks/C003/SLICES.md) records the typed expression extension and reference boundaries.
+
+[Arrays and memory](../docs/tasks/C005/MEMORY.md) records exact admissions,
+DIM quirks, resource limits and native/reference qualification.
 
 [String conversions](../docs/tasks/C003/CONVERSIONS.md) records the unchanged VAL/STR package calls, adapted HEXSTR and raw-byte qualification.
 

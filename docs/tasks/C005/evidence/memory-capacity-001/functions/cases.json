@@ -1,0 +1,13 @@
+[
+  {
+    "source": "PRINT ;FNadd(2,3);\":\";FNtext(\"x\")\nPRINT ;7+FNadd(4,5);\":\";\"a\"+FNtext(\"b\")+\"c\"\nEND\nDEF FNadd(a,b)=a+b\nDEF FNtext(s$)=s$+s$\n",
+    "reference_source": "PRINT ;FNadd(2,3);\":\";FNtext(\"x\")\nPRINT ;7+FNadd(4,5);\":\";\"a\"+FNtext(\"b\")+\"c\"\n",
+    "reference_definitions": [
+      "DEF FNadd(a,b)=a+b",
+      "DEF FNtext(s$)=s$+s$"
+    ],
+    "reference": true,
+    "status": 0,
+    "expected": "5:xx\n16:abbc\n"
+  }
+]

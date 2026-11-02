@@ -3,7 +3,7 @@
 The current implementation proves the path from BBC BASIC source to a MOS
 native executable. Later stages must preserve BBC BASIC values and activation
 semantics before broadening the accepted language. This draft describes the
-promoted C001 bootstrap, C002 numeric expression/output and C003 scalar/string operations and conversions in
+promoted C001 bootstrap, C002 numeric expression/output and C003 scalar/string operations, C004 control/activations and C005 memory facilities in
 `compiler/compiler.bas`. These remain on the development branch pending
 accepted testing before promotion to main.
 Task documents and experimental silos follow
@@ -192,6 +192,13 @@ The Author accepted the corrected C002 baseline for a development checkpoint.
     show first-byte/stale-tail behavior; the compiler does not silently replace
     those results with intended string operations or emulate interpreter-private RAM.
 
+26. Global arrays, raw DIM and unary/binary memory access follow
+    [C005 memory qualification](../docs/tasks/C005/MEMORY.md). Array elements
+    retain byte/integer/variant/string widths and row-major bounds. Each bound or
+    index is validated before the next expression. Preserve the reference raw-DIM
+    target-address seed and repeated-DIM error path. LOCAL/whole arrays, array
+    formal parameters and unqualified reentrant DIM-bound expressions are rejected.
+
 ## Current backend and runtime contract
 
 1. The compiler owns a 65536-byte output buffer. Code loads at `&040000`, with
@@ -210,9 +217,10 @@ The Author accepted the corrected C002 baseline for a development checkpoint.
    no call. This is a literal-output representation, not a mutable string ABI.
 5. GOSUB loads a target into HL and calls the checked dispatch routine. That
    routine increments an eight-bit depth and jumps to the target; RETURN
-   decrements depth and executes RET. PROC/FN are rejected rather than routed
-   through this mechanism. Other register values and flags are volatile.
-6. Limits are 1024 symbols including runtime symbols and 2048 relocations
+   decrements depth and executes RET in the original C001 path. Current C004
+   programs use distinct typed GOSUB/PROC/FN records and matching exits, as above.
+   Other register values and flags are volatile.
+6. Limits are 1024 symbols including runtime symbols and 4096 relocations
    including runtime references. Limit breaches are diagnosed. Relocations
    carry their originating source location.
 7. Source and relocations validate before opening the output. A compilation
@@ -226,14 +234,15 @@ The Author accepted the corrected C002 baseline for a development checkpoint.
    BBC BASIC copies and rebases its 387 internal
    three-byte relocations; these do not occupy the source-fixup array. The
    template is included once per numeric program and omitted otherwise.
-   Up to 32 five-byte temporary slots are allocated. There are no user calls
-   inside admitted expressions; future FN calls need an activation-safe stack.
-9. Up to 128 scalar bindings have statically allocated physical payloads
+   Up to32 five-byte temporary slots are allocated. C004 FN calls preserve live
+   numeric/string temporary prefixes in their bounded activation arena.
+9. Up to256 shared scalar/array bindings have statically allocated physical payloads
    of one, four or five bytes and separate runtime existence flags. Native byte
    copies move values to/from packed expression temporaries. Writes set existence
    before RHS evaluation; reads check it when executed. The binding/error glue
    is emitted only when needed, outside the numeric template. This
-   is global scalar storage; it does not implement LOCAL or activation records.
+   supports dynamic scalar LOCAL through C004 activation snapshots. Array bindings
+   instead contain a three-byte pointer cell; their payloads are heap allocated.
 10. Strings use five-byte length/capacity/u24-pointer descriptors and separate
     existence flags. Private 256-byte expression buffers are limited to 16
     simultaneous values; parser nesting shares the numeric 32-entry bound.
@@ -245,12 +254,13 @@ The Author accepted the corrected C002 baseline for a development checkpoint.
     growth. Allocation checks precede descriptor/context changes. No interpreter
     globals or parser entries are linked. Failure reports `No room`; length
     overflow reports `String too long`.
-11. Heap workspace starts after the image and reserves 1024 bytes per declared
+11. Without C005 memory facilities, heap workspace starts after the image and reserves1024 bytes per declared
     string binding, without adding file padding. Compilation rejects an end
     above &B0000. Monotone capacities bound abandoned plus live blocks below
-    768 bytes per binding in this global-only, no-deletion tranche. Future
-    LOCAL, deletion or dynamic bindings require a new ownership/allocation audit.
-    See the string contract for the bound, ABI and qualification.
+    768 bytes per global binding in the original no-deletion tranche. C004 locals
+    use private arena buffers. With C005 memory facilities, DIM and strings share
+    an explicit heap ending at&AFF00, excluding the32768-byte activation arena
+    when present. See the string and C005 memory contracts for ownership.
 
 ## Current numeric expression subset
 
@@ -261,8 +271,8 @@ The Author accepted the corrected C002 baseline for a development checkpoint.
    added. EOR remains an operator boundary (`1EOR2`). Unspaced alphabetic text
    after a scientific exponent is rejected as an unsupported tokenisation form.
    Hex uses one to eight uppercase digits and denotes signed 32-bit bit patterns.
-   Binary literals and user function calls remain unsupported; scalar numeric
-   variables are admitted.
+   Binary literals remain unsupported; typed scalar/array values, indirection and
+   qualified C004 user function calls are admitted.
 2. Precedence from tightest is item/unary, ^, * / DIV MOD, + -, comparisons,
    AND, EOR/OR. Binary operators associate left-to-right. In particular,
    `2^3^2=64` and `-2^2=4` follow the reference evaluator. Comparisons accept
@@ -313,7 +323,8 @@ The Author accepted the corrected C002 baseline for a development checkpoint.
    ownership, and restore them in reverse order on return. Recursive calls must
    observe dynamically installed local values as the reference does; simply
    allocating unrelated C-style locals is insufficient. Error unwinding must
-   eventually perform equivalent restoration.
+    follow the actual reference handler/stack behavior; do not assume that an
+    error restores discarded LOCAL records. C005 must qualify that separately.
 5. A small adapter boundary hides the numeric package's split register
    representation from callers. C002 defines the qualified packed-value
    pointer ABI in `docs/tasks/C002/ABI.md`; the compiler expression/value-stack

@@ -96,3 +96,13 @@ counts never dereference null pools. FN records store arena checkpoint, pool
 pointers/counts and restore locals then caller prefixes; result transfer storage
 is separate. PROC and FN exits reject the other marker. Caller IX/IY/SP preservation
 and both old/new ABI probes pass.
+
+## Global array and raw memory helpers
+
+`memory.s` is734 bytes with83 internal ADL24 relocations. It implements bounded
+zeroed allocation, inclusive row-major array dimensions/subscripts and the
+reference raw-DIM seed/final pointer-store convention. All compiler parsing and
+storage glue remains BBC BASIC. DATA60000 follows the activation template;
+regenerate with `.venv/bin/python compiler/tools/build_memory_runtime.py
+--compiler compiler/compiler.bas`. Independent links at&42000/&48000 and native
+guard/register/error probes are retained in [C005](../../docs/tasks/C005/MEMORY.md).

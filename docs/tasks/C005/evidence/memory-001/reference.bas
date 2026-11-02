@@ -1,0 +1,304 @@
+10 ON ERROR REPORT:PRINT:OSCLI "BYE"
+20 @%=&90A
+100 CLEAR
+110 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+120 PRINT "REF_BEGIN_0"
+130 DIM a%(0):PRINT ;a%(0)
+140 PRINT "REF_END_0"
+150 CLEAR
+160 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+170 PRINT "REF_BEGIN_1"
+180 DIM a%(1,2),b&(2),x(1),s$(1),mem% 15
+190 PRINT ;a%(0,0);":";b&(2);":";x(1);":";LEN s$(1)
+200 a%(1,2)=-123:b&(2)=257:x(1)=1/3:s$(1)="ABC"
+210 PRINT ;a%(1,2);":";b&(2);":";x(1)=1/3;":";LEN s$(1)
+220 PRINT ;^a%(0,1)-^a%(0,0);":";^a%(1,0)-^a%(0,0)
+230 PRINT ;^b&(1)-^b&(0);":";^x(1)-^x(0);":";^s$(1)-^s$(0)
+240 mem%?0=17:!(mem%+4)=-77:|(mem%+9)=1/3
+250 PRINT ;?mem%;":";mem%!(4);":";|(mem%+9)=1/3
+260 copy$=s$(1):s$(1)="changed":PRINT copy$;":";s$(1)
+270 PRINT ;FNtouch(1);":";a%(1,2)
+280 PRINT "REF_END_1"
+290 CLEAR
+300 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+310 PRINT "REF_BEGIN_2"
+320 DIM a&(100000):a&(100000)=255:PRINT ;a&(0);":";a&(100000)
+330 PRINT ;^a&(100000)-^a&(0)
+340 PRINT "REF_END_2"
+350 CLEAR
+360 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+370 PRINT "REF_BEGIN_3"
+380 DIM a&(300,300):a&(300,300)=127:PRINT ;a&(0,0);":";a&(300,300)
+390 PRINT ;^a&(1,0)-^a&(0,0)
+400 PRINT "REF_END_3"
+410 CLEAR
+420 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+430 PRINT "REF_BEGIN_4"
+440 DIM a%(-0.9):a%(0.9)=7:PRINT ;a%(0)
+450 PRINT "REF_END_4"
+460 CLEAR
+470 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+480 PRINT "REF_BEGIN_5"
+490 DIM a%(0),b&(0),x(0):a%(0)=&80000000:b&(0)=-1:x(0)=-0.9
+500 PRINT ;a%(0);":";b&(0);":";x(0)=-0.9
+510 a%(0)=x(0):b&(0)=x(0):PRINT ;a%(0);":";b&(0)
+520 PRINT "REF_END_5"
+530 CLEAR
+540 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+550 PRINT "REF_BEGIN_6"
+560 a%=7:DIM a%(1),A%(0):a%(0)=9:PRINT ;a%;":";a%(0);":";A%;":";A%(0)
+570 PRINT "REF_END_6"
+580 CLEAR
+590 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+600 PRINT "REF_BEGIN_7"
+610 DIM s$(2):s$(0)=STRING$(255,"q"):s$(1)=s$(0):s$(2)=CHR$(0)+CHR$(128)+CHR$(255)
+620 s$(0)="changed":PRINT ;LEN s$(1);":";ASC s$(1);":";LEN s$(2);":";ASC RIGHT$(s$(2))
+630 PRINT "REF_END_7"
+640 CLEAR
+650 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+660 PRINT "REF_BEGIN_8"
+670 DIM a%(2):i%=1:a%(i%)=FNrhsarray
+680 PRINT ;a%(1);":";a%(2);":";i%
+690 PRINT "REF_END_8"
+700 CLEAR
+710 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+720 PRINT "REF_BEGIN_9"
+730 DIM a%(1):a%(0)=10:a%(1)=20:PRINT ;a%(FNindexone)+a%(FNindextwo)
+740 PRINT "REF_END_9"
+750 CLEAR
+760 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+770 PRINT "REF_BEGIN_10"
+780 DIM s$(1):s$(0)="outer":s$(FNstrindex)=FNstrrhs:PRINT s$(0);":";s$(1)
+790 PRINT RIGHT$(s$(0));":";STRING$(2,s$(0))
+800 PRINT "REF_END_10"
+810 CLEAR
+820 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+830 PRINT "REF_BEGIN_11"
+840 DIM a%(4):FOR i%=0 TO 4:a%(i%)=i%*10:NEXT:PRINT ;FNarraysum(4)
+850 PRINT "REF_END_11"
+860 CLEAR
+870 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+880 PRINT "REF_BEGIN_12"
+890 DIM a%(3):PROCarrayfill(3):PRINT ;a%(0);":";a%(1);":";a%(2);":";a%(3)
+900 PRINT "REF_END_12"
+910 CLEAR
+920 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+930 PRINT "REF_BEGIN_13"
+940 DIM a%(2):FOR i%=0 TO 2:a%(i%)=i%:NEXT
+950 IF a%(2)>1 THEN a%(1)=9 ELSE a%(1)=8
+960 PRINT ;a%(0)+a%(1)+a%(2)
+970 PRINT "REF_END_13"
+980 CLEAR
+990 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+1000 PRINT "REF_BEGIN_14"
+1010 p%=7:q%=0:expected%=^p% AND &FFFF:DIM p% FNrawseed:DIM q% 0:PRINT ;q%-p%=1
+1020 PRINT "REF_END_14"
+1030 CLEAR
+1040 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+1050 PRINT "REF_BEGIN_15"
+1060 p%=7:q%=0:DIM p% p%:DIM q% 0:PRINT ;q%-p%=(^p% AND &FFFF)+1
+1070 PRINT "REF_END_15"
+1080 CLEAR
+1090 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+1100 PRINT "REF_BEGIN_16"
+1110 x=7.25:expected%=^x AND &FFFF:DIM x FNvariantseed
+1120 PRINT "REF_END_16"
+1130 CLEAR
+1140 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+1150 PRINT "REF_BEGIN_17"
+1160 p%=7:DIM p% FNrawmutate:PRINT ;?(^p%+3)
+1170 PRINT "REF_END_17"
+1180 CLEAR
+1190 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+1200 PRINT "REF_BEGIN_18"
+1210 x=7:DIM x FNrawfloat:PRINT ;?(^x+3)=hi%;":";?(^x+4)=ex%
+1220 PRINT "REF_END_18"
+1230 CLEAR
+1240 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+1250 PRINT "REF_BEGIN_19"
+1260 p%=0:q%=0:DIM p% -1:DIM q% 0:PRINT ;q%-p%
+1270 DIM wide% 65536:wide%?65536=99:PRINT ;?wide%;":";wide%?65536
+1280 PRINT "REF_END_19"
+1290 CLEAR
+1300 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+1310 PRINT "REF_BEGIN_20"
+1320 DIM p% 15:p%?1=250:p%?3=77:PRINT ;p%?1+2;":";?(p%+3)
+1330 !(p%+4)=-123456789:PRINT ;!(p%+4);":";p%!(4)
+1340 p%?8=255:PRINT ;?(p%+16777216+8)
+1350 |(p%+9)=1/3:PRINT ;|(p%+9)=1/3
+1360 PRINT "REF_END_20"
+1370 CLEAR
+1380 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+1390 PRINT "REF_BEGIN_21"
+1400 DIM p% 3:old%=p%:p%?1=FNrawrhs:PRINT ;old%?1;":";p%=old%
+1410 PRINT "REF_END_21"
+1420 CLEAR
+1430 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+1440 PRINT "REF_BEGIN_22"
+1450 DIM first% 0:p%=123:PROClocalraw:PRINT ;p%:DIM second% 0:PRINT ;second%-first%>1
+1460 PRINT "REF_END_22"
+1470 CLEAR
+1480 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+1490 PRINT "REF_BEGIN_23"
+1500 PRINT ;^missing%>0;":";missing%:PRINT ;^missing$>0;":";LEN missing$
+1510 PRINT "REF_END_23"
+1520 CLEAR
+1530 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+1540 PRINT "REF_BEGIN_24"
+1550 PROCerror24
+1560 PRINT "REF_END_24"
+1570 CLEAR
+1580 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+1590 PRINT "REF_BEGIN_25"
+1600 PROCerror25
+1610 PRINT "REF_END_25"
+1620 CLEAR
+1630 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+1640 PRINT "REF_BEGIN_26"
+1650 PROCerror26
+1660 PRINT "REF_END_26"
+1670 CLEAR
+1680 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+1690 PRINT "REF_BEGIN_27"
+1700 PROCerror27
+1710 PRINT "REF_END_27"
+1720 CLEAR
+1730 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+1740 PRINT "REF_BEGIN_28"
+1750 PROCerror28
+1760 PRINT "REF_END_28"
+1770 CLEAR
+1780 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+1790 PRINT "REF_BEGIN_29"
+1800 PROCerror29
+1810 PRINT "REF_END_29"
+1820 CLEAR
+1830 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+1840 PRINT "REF_BEGIN_30"
+1850 PROCerror30
+1860 PRINT "REF_END_30"
+1870 CLEAR
+1880 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+1890 PRINT "REF_BEGIN_31"
+1900 PROCerror31
+1910 PRINT "REF_END_31"
+1920 CLEAR
+1930 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+1940 PRINT "REF_BEGIN_32"
+1950 PROCerror32
+1960 PRINT "REF_END_32"
+1970 CLEAR
+1980 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+1990 PRINT "REF_BEGIN_33"
+2000 PROCerror33
+2010 PRINT "REF_END_33"
+2020 CLEAR
+2030 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+2040 PRINT "REF_BEGIN_34"
+2050 PROCerror34
+2060 PRINT "REF_END_34"
+2070 CLEAR
+2080 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+2090 PRINT "REF_BEGIN_35"
+2100 PROCerror35
+2110 PRINT "REF_END_35"
+2120 CLEAR
+2130 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+2140 PRINT "REF_BEGIN_36"
+2150 PROCerror36
+2160 PRINT "REF_END_36"
+2170 CLEAR
+2180 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+2190 PRINT "REF_BEGIN_37"
+2200 PROCerror37
+2210 PRINT "REF_END_37"
+2220 CLEAR
+2230 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+2240 PRINT "REF_BEGIN_38"
+2250 PROCerror38
+2260 PRINT "REF_END_38"
+2270 CLEAR
+2280 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+2290 PRINT "REF_BEGIN_39"
+2300 PROCerror39
+2310 PRINT "REF_END_39"
+9000 PRINT "OUTPUT_REFERENCE_DONE":OSCLI "BYE"
+40100 DEF FNtouch(i%):a%(i%,2)=a%(i%,2)+1:=a%(i%,2)
+40800 DEF FNrhsarray:i%=2:=99
+40900 DEF FNindexone=0
+40901 DEF FNindextwo=1
+41000 DEF FNstrindex=0
+41001 DEF FNstrrhs:s$(1)="side":="new"
+41100 DEF FNarraysum(n%):IF n%=0 THEN =a%(0) ELSE =a%(n%)+FNarraysum(n%-1)
+41200 DEF PROCarrayfill(n%):LOCAL t%:t%=n%:IF n%>0 THEN PROCarrayfill(n%-1)
+41201 a%(t%)=t%*10:ENDPROC
+41400 DEF FNrawseed:PRINT ;p%=expected%:=0
+41600 DEF FNvariantseed:PRINT ;x=expected%;":";?(^x+4):=0
+41700 DEF FNrawmutate:p%=-1:=0
+41800 DEF FNrawfloat:x=1/3:hi%=?(^x+3):ex%=?(^x+4):=0
+42100 DEF FNrawrhs:p%=0:=255
+42200 DEF PROClocalraw:LOCAL p%:DIM p% 7:PRINT ;?p%;":";p%?7:ENDPROC
+12400 DEF PROCerror24:LOCAL ERROR
+12401 ON ERROR LOCAL REPORT:PRINT:ENDPROC
+12402 DIM a%(-1)
+12490 ENDPROC
+12500 DEF PROCerror25:LOCAL ERROR
+12501 ON ERROR LOCAL REPORT:PRINT:ENDPROC
+12502 DIM a%(16777216)
+12590 ENDPROC
+12600 DEF PROCerror26:LOCAL ERROR
+12601 ON ERROR LOCAL REPORT:PRINT:ENDPROC
+12602 DIM a%(16777215)
+12690 ENDPROC
+12700 DEF PROCerror27:LOCAL ERROR
+12701 ON ERROR LOCAL REPORT:PRINT:ENDPROC
+12702 DIM a%(65535,65535)
+12790 ENDPROC
+12800 DEF PROCerror28:LOCAL ERROR
+12801 ON ERROR LOCAL REPORT:PRINT:ENDPROC
+12802 DIM a%(1):PRINT a%(-1)
+12890 ENDPROC
+12900 DEF PROCerror29:LOCAL ERROR
+12901 ON ERROR LOCAL REPORT:PRINT:ENDPROC
+12902 DIM a%(1):PRINT a%(16777216)
+12990 ENDPROC
+13000 DEF PROCerror30:LOCAL ERROR
+13001 ON ERROR LOCAL REPORT:PRINT:ENDPROC
+13002 DIM a%(1):PRINT a%(2)
+13090 ENDPROC
+13100 DEF PROCerror31:LOCAL ERROR
+13101 ON ERROR LOCAL REPORT:PRINT:ENDPROC
+13102 PRINT missing%(0)
+13190 ENDPROC
+13200 DEF PROCerror32:LOCAL ERROR
+13201 ON ERROR LOCAL REPORT:PRINT:ENDPROC
+13202 missing%(0)=7
+13290 ENDPROC
+13300 DEF PROCerror33:LOCAL ERROR
+13301 ON ERROR LOCAL REPORT:PRINT:ENDPROC
+13302 PRINT ^missing%(0)
+13390 ENDPROC
+13400 DEF PROCerror34:LOCAL ERROR
+13401 ON ERROR LOCAL REPORT:PRINT:ENDPROC
+13402 DIM a%(1):DIM a%(0)
+13490 ENDPROC
+13500 DEF PROCerror35:LOCAL ERROR
+13501 ON ERROR LOCAL REPORT:PRINT:ENDPROC
+13502 DIM s$(1):DIM s$(0)
+13590 ENDPROC
+13600 DEF PROCerror36:LOCAL ERROR
+13601 ON ERROR LOCAL REPORT:PRINT:ENDPROC
+13602 DIM b&(1):DIM b&(0)
+13690 ENDPROC
+13700 DEF PROCerror37:LOCAL ERROR
+13701 ON ERROR LOCAL REPORT:PRINT:ENDPROC
+13702 DIM a%(1):DIM a%(-1)
+13790 ENDPROC
+13800 DEF PROCerror38:LOCAL ERROR
+13801 ON ERROR LOCAL REPORT:PRINT:ENDPROC
+13802 DIM a%(0):a%(0)=1E20
+13890 ENDPROC
+13900 DEF PROCerror39:LOCAL ERROR
+13901 ON ERROR LOCAL REPORT:PRINT:ENDPROC
+13902 DIM p% 3:!p%=1E20
+13990 ENDPROC

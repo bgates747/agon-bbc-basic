@@ -1,0 +1,17 @@
+{
+  "scope": "Direct MOS helper ABI, not BASIC frontend qualification",
+  "binary_reads": true,
+  "eof_boolean": true,
+  "handle_wrap_and_invalid_api": true,
+  "byte_and_string_writes": true,
+  "empty_and_maximum_strings": true,
+  "maximum_filename_copy_guards": true,
+  "index_and_stack_preservation": true,
+  "duration_seconds": 1.016,
+  "hashes": {
+    "docs/tasks/C005/io/file-abi.s": "108d20bf0250769000060ab1ad2fd740b031ab66ad2514f93810f0dd189d1c22",
+    "docs/tasks/C005/build/file-abi/probe.bin": "8ba14b5ca9fe9a30aed78f3bf787b63cf3438707894441f8991cceff04693290",
+    "docs/tasks/C005/build/file-abi/written.dat": "231ea472050829021407d01fcf8e04002f8a4edbbf5d9c35b343b3134f07bcdc",
+    "docs/tasks/C005/build/io-runtime/runtime-0.bin": "bde255025daeae570075a3910a0d102e7fbeb2f20058390c781b3e3be5b98115"
+  }
+}

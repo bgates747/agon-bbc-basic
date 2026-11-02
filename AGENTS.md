@@ -51,7 +51,11 @@ selected live/string integration pass. Source SHA6feb0b21b09ac4353347876df89043c
 Mixed/unresolved FN kinds and interpreter-dependent direct FN carriers in omitted
 RIGHT$/STRING$ are clearly rejected; see compiler/INTERPRETER-FINDINGS.md.
 Read docs/tasks/C004.md, conditionals/AUDIT.md, loops/CONTROL.md,
-activations/PROCEDURES.md and functions/RETURN-KINDS.md. C005 is active. Its256-definition/resource checkpoint is promoted at SHA0f0884ca, with633-byte strings and a sorted BBC symbol index. Read docs/tasks/C005.md, C005/PLAN.md, C005/RESOURCES.md and C005/ARRAYS.md. Array syntax remains unpromoted; actual DIM probes contradict the initial simplified audit and must guide implementation. C006 remains unstarted. The compiler is still BBC BASIC; assembly is runtime code, not a
+activations/PROCEDURES.md and functions/RETURN-KINDS.md. C005 is active. Its256-definition/resource checkpoint is promoted at SHA0f0884ca, with633-byte strings and a sorted BBC symbol index. Read docs/tasks/C005.md, C005/PLAN.md, C005/RESOURCES.md and C005/ARRAYS.md. Global arrays, raw DIM and indirection are qualified/promoted at SHAd0368b1e
+(1777 lines,256 shared bindings,4096 fixups). Read C005/MEMORY.md; retain the
+actual DIM quirks. Full53-case scope, binding capacity5, baseline/FN and selected
+live checks pass. I/O helpers are experimental; file/input language, DATA and
+source error handlers remain open. C006 remains unstarted. The compiler is still BBC BASIC; assembly is runtime code, not a
 replacement compiler implementation.
 
 Use `.venv/bin/python` explicitly. `compiler/README.md` contains build/test

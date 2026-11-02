@@ -1,0 +1,6 @@
+{
+  "status": "failed",
+  "qualification_pass": false,
+  "reason": "2048 fixups exhausted at228 scalar assignments and224 mixed bindings before256 binding boundary",
+  "source_unchanged": true
+}

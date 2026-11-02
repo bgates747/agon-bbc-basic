@@ -9,21 +9,22 @@
 90 END
 1000 DEF PROCinit
 1010 DIM ccode% 65535,csname$(1023),csaddr%(1023),csort%(1023)
-1020 DIM crname$(2047),craddr%(2047),crline%(2047),crcol%(2047)
+1020 DIM crname$(4095),craddr%(4095),crline%(4095),crcol%(4095)
 1021 DIM cpname$(255),cpline%(255),cparcnt%(255),cpar%(255,15),cargkind%(31,15),cargindex%(31,15),cpkind%(255),cpret%(255),creturn$(511),cretdef%(511),cretline%(511),cretcol%(511)
 1022 PROCloadnumbers
 1023 PROCloadacts
-1024 DIM cvname$(127),cvsize%(127),cvstatic%(127),cvtype%(127),ckwords$(4)
+1024 DIM cvname$(255),cvsize%(255),cvstatic%(255),cvtype%(255),cvdim%(255),ckwords$(4)
 1025 DIM csunsafe%(15)
 1026 PROCkeywords
 1027 PROCloadcontrol
-1028 PROCloadstrings
+1028 PROCloadstrings:PROCloadmemory
 1029 DIM cifid$(31),cbid$(31),cbelse%(31),clkind%(31),clname$(31),clvar%(31)
 1030 ENDPROC
 1040 DEF PROCcompile(csource$,ctarget$)
 1050 LOCAL ci%,cj%,cn%,cfh%,coh%
 1060 cpc%=0:csnum%=0:crnum%=0:clnum%=0:cpos%=1:clast%=-1:ccr%=FALSE
 1062 cnumeric%=FALSE:cnslots%=0:cnparse%=0:cndepth%=0:cvnum%=0:cstrings%=FALSE:csdepth%=0:csslots%=0:csvars%=0:cvaluekind%=0
+1063 cmemory%=FALSE:cdimparse%=0
 1064 cflow%=0:cbnum%=0
 1066 cloops%=FALSE:cltop%=0:cstructure$=""
 1068 cacts%=FALSE:cfunctions%=FALSE:cpnum%=0:cscope%=0:cretnum%=0:ccalldepth%=0:ckinddepth%=0
@@ -97,6 +98,7 @@
 1630 ENDPROC
 1632 DEF PROCstatement
 1640 LOCAL cw$,ct%,cn$,csuppress%
+1642 IF FNpeek="?" OR FNpeek="!" OR FNpeek="|" THEN PROCmemassign(FNpeek):ENDPROC
 1645 IF FNpeek="=" THEN cpos%=cpos%+1:PROCfnreturn:ENDPROC
 1650 IF FNpeek="@" THEN cpos%=cpos%+1:cn$=FNname:PROCexpect(":"):PROClabel(FNtarget("@"+cn$)):cpos%=cpos%-1:ENDPROC
 1655 IF MID$(cline$,cpos%,4)="PROC" THEN cpos%=cpos%+4:PROCproccall:ENDPROC
@@ -108,6 +110,7 @@
 1669 IF cw$="REPEAT" OR cw$="WHILE" OR cw$="FOR" THEN PROCloop(cw$):ENDPROC
 1670 IF cw$="REM" THEN cpos%=LEN(cline$)+1:ENDPROC
 1672 IF cw$="UNTIL" OR cw$="ENDWHILE" OR cw$="NEXT" THEN PROCloopend(cw$):ENDPROC
+1673 IF cw$="DIM" THEN PROCdim:ENDPROC
 1674 IF cw$="DEF" THEN PROCdefinition:ENDPROC
 1676 IF cw$="LOCAL" THEN PROClocal:ENDPROC
 1678 IF cw$="ENDPROC" THEN PROCuseacts:PROCaddr("CD","$actleave"):PROCaddr("DA","$acterror"):PROCbyte(&C9):ENDPROC
@@ -228,7 +231,7 @@
 2600 ENDPROC
 2610 DEF PROCaddr(ch$,cn$)
 2620 IF ch$<>"" PROCbytes(ch$)
-2630 IF crnum%=2048 PROCbad("Too many address fixups")
+2630 IF crnum%=4096 PROCbad("Too many address fixups")
 2640 crname$(crnum%)=cn$:craddr%(crnum%)=cpc%
 2650 crline%(crnum%)=clnum%:crcol%(crnum%)=cpos%:crnum%=crnum%+1
 2660 PROCbyte(0):PROCbyte(0):PROCbyte(0)
@@ -296,8 +299,10 @@
 3225 IF cloops% PROCflowruntime
 3226 IF cacts% PROCactruntime
 3227 IF cstrings% PROCstrruntime
-3228 IF cacts% PROCactworkspace
-3230 ENDPROC
+3228 IF cmemory% PROCmemoryruntime
+3229 IF cmemory% PROCmemoryworkspace
+3230 IF cacts% PROCactworkspace
+3232 ENDPROC
 3240 DEF PROCbad(cm$)
 3250 ERROR 100,LEFT$(csource$,80)+":"+STR$(clnum%)+":"+STR$(cpos%)+": "+LEFT$(cm$,130)
 3260 ENDPROC
@@ -383,6 +388,7 @@
 4760 IF cc$="-" THEN PROCaddr("DD21","$v"+STR$(cndepth%-1)):PROCaddr("CD","$numneg")
 4770 IF cc$="(" THEN cpos%=cpos%+1:PROCexpr(1):PROCexpect(")"):cdone%=TRUE
 4780 IF cc$="&" OR cc$="." OR FNdigit(cc$) THEN PROCconstant:cdone%=TRUE
+4782 IF NOT cdone% THEN IF cc$="^" OR cc$="?" OR cc$="!" OR cc$="|" THEN PROCmemitem(cc$):cdone%=TRUE
 4785 IF NOT cdone% AND MID$(cline$,cpos%,2)="FN" THEN cpos%=cpos%+2:PROCfncall:cdone%=TRUE
 4790 IF NOT cdone% PROCtypeditem
 4800 cnparse%=cnparse%-1
@@ -493,24 +499,28 @@
 6044 IF ct%=129 AND FNstrreserved(cn$) PROCbad("Unsupported string item "+cn$)
 6050 IF ct%<>5 THEN cn$=cn$+FNpeek:cpos%=cpos%+1
 6060 IF FNpeek="$" PROCbad("Unsupported string suffix")
-6070 IF FNpeek="(" PROCbad("Arrays and function calls are not yet supported")
+6070 IF FNpeek="(" THEN cn$=cn$+"(":ct%=ct%+256:cs%=FALSE
 6080 IF FNpeek="%" OR FNpeek="&" OR FNpeek="#" PROCbad("Unsupported numeric suffix")
-6090 IF FNpeek="!" OR FNpeek="?" OR FNpeek="|" PROCbad("Variable indirection is not yet supported")
+6090 IF FNpeek="|" PROCbad("Binary variant indirection is unsupported")
 6100 cf%=-1:ci%=0
 6102 WHILE ci%<cvnum%
 6104 IF cvname$(ci%)=cn$ cf%=ci%
 6106 ci%=ci%+1
 6110 ENDWHILE
 6120 IF cf%>=0 THEN =cf%
-6130 IF cvnum%=128 PROCbad("Scalar variable limit exceeds 128")
-6140 cw%=ct%:IF ct%=129 THEN cw%=5:cstrings%=TRUE:csvars%=csvars%+1
-6142 cf%=cvnum%:cvname$(cf%)=cn$:cvsize%(cf%)=cw%:cvtype%(cf%)=ct%:cvstatic%(cf%)=cs%:cvnum%=cvnum%+1
+6130 IF cvnum%=256 PROCbad("Variable limit exceeds 256")
+6140 cw%=ct% AND 255:IF cw%=129 THEN cw%=5:cstrings%=TRUE:csvars%=csvars%+1
+6141 IF ct%>255 cw%=3
+6142 cf%=cvnum%:cvname$(cf%)=cn$:cvsize%(cf%)=cw%:cvtype%(cf%)=ct%:cvstatic%(cf%)=cs%:cvdim%(cf%)=0:cvnum%=cvnum%+1
 6150 =cf%
 6160 DEF PROCassign(cn$)
 6170 LOCAL ci%,ct%
 6180 IF FNreserved(cn$) PROCbad("Unsupported variable name "+cn$)
-6190 ci%=FNvariable(cn$):ct%=cvtype%(ci%):PROCexpect("=")
-6192 IF ct%=129 THEN PROCstrassign(ci%):ENDPROC
+6190 ci%=FNvariable(cn$):ct%=cvtype%(ci%)
+6191 IF ct%>255 THEN PROCarrayassign(ci%):ENDPROC
+6192 IF FNpeek="?" OR FNpeek="!" THEN PROCindirectassign(ci%):ENDPROC
+6193 PROCexpect("=")
+6194 IF ct%=129 THEN PROCstrassign(ci%):ENDPROC
 6200 REM ASSIGN creates a missing destination before the RHS is evaluated.
 6210 PROCbytes("3E01"):PROCaddr("32","$bind"+STR$(ci%))
 6220 cndepth%=0:PROCexpr(1):PROCneednumber
@@ -518,13 +528,9 @@
 6240 PROCvarcopy("$v0","$var"+STR$(ci%),ct%):cndepth%=0
 6250 ENDPROC
 6260 DEF PROCvariable(cn$)
-6270 LOCAL ci%,ct%,cs$,cj%
-6280 ci%=FNvariable(cn$):ct%=cvsize%(ci%)
-6282 IF cvtype%(ci%)=129 PROCbad("String value used as a numeric item")
-6290 PROCaddr("3A","$bind"+STR$(ci%)):PROCbyte(&B7):PROCaddr("CA","$novar")
-6300 PROCnumslot:cs$="$v"+STR$(cndepth%-1)
-6310 PROCvarcopy("$var"+STR$(ci%),cs$,ct%)
-6320 IF ct%<5 THEN PROCbyte(&AF):FOR cj%=ct% TO 4:PROCbytes("1213"):NEXT
+6270 LOCAL ci%:ci%=FNvariable(cn$)
+6280 IF cvtype%(ci%)>255 THEN PROCarrayread(ci%):ENDPROC
+6290 PROCreadscalar(ci%):PROCmemtail
 6330 ENDPROC
 6340 DEF PROCvarcopy(cf$,ct$,cn%)
 6350 PROCaddr("21",cf$):PROCaddr("11",ct$)
@@ -614,7 +620,9 @@
 7500 IF FNpeek=CHR$(34) THEN PROCstrliteral:ENDPROC
 7510 IF NOT FNalpha(FNpeek) PROCbad("Expected a string item")
 7520 cs$=FNname:IF FNreserved(cs$) PROCbad("Unsupported string item "+cs$)
-7530 ci%=FNvariable(cs$):IF cvtype%(ci%)<>129 PROCbad("Expected a string variable")
+7530 ci%=FNvariable(cs$)
+7532 IF cvtype%(ci%)>255 THEN PROCarrayread(ci%):ENDPROC
+7534 IF cvtype%(ci%)<>129 PROCbad("Expected a string variable")
 7540 PROCaddr("3A","$bind"+STR$(ci%)):PROCbyte(&B7):PROCaddr("CA","$novar")
 7550 PROCstrslot:PROCaddr("DD21","$s"+STR$(csdepth%-1)):PROCaddr("FD21","$var"+STR$(ci%)):PROCaddr("CD","$strload")
 7560 ENDPROC
@@ -661,9 +669,9 @@
 7890 FOR ci%=0 TO csslots%-1
 7900 PROClabel("$s"+STR$(ci%)):FOR cj%=0 TO 255:PROCbyte(0):NEXT
 7910 NEXT
-7920 PROClabel("$sheapctx"):PROCaddr("","$sheap"):PROCaddr("","$sheapend")
-7930 PROClabel("$sheap"):PROClabel("$sheapend"):csaddr%(csnum%-1)=csaddr%(csnum%-1)+1024*csvars%
-7940 IF csaddr%(csnum%-1)>&B0000 PROCbad("String workspace exceeds user RAM")
+7920 IF NOT cmemory% THEN PROClabel("$sheapctx"):PROCaddr("","$sheap"):PROCaddr("","$sheapend")
+7930 IF NOT cmemory% THEN PROClabel("$sheap"):PROClabel("$sheapend"):csaddr%(csnum%-1)=csaddr%(csnum%-1)+1024*csvars%
+7940 IF NOT cmemory% AND csaddr%(csnum%-1)>&B0000 PROCbad("String workspace exceeds user RAM")
 7950 ENDPROC
 7960 DEF PROCstrrelocate(cb%,ci%)
 7970 LOCAL cp%,cv%
@@ -745,6 +753,7 @@
 8900 DEF PROCstrsliceassign(ct$)
 8910 LOCAL cn$,ci%
 8920 PROCexpect("("):cn$=FNname:ci%=FNvariable(cn$)
+8922 IF cvtype%(ci%)>255 PROCbad("Array slice assignment is unsupported")
 8930 IF cvtype%(ci%)<>129 PROCbad("Expected a string variable")
 8940 PROCaddr("3A","$bind"+STR$(ci%)):PROCbyte(&B7):PROCaddr("CA","$novar")
 8950 cndepth%=0:csdepth%=0
@@ -835,6 +844,7 @@
 11250 DEF PROCfor(cid$)
 11260 LOCAL cn$,ci%,cp%
 11270 cn$=FNname:cp%=cpos%:ci%=FNvariable(cn$):IF cvtype%(ci%)=129 PROCbad("FOR needs a numeric variable")
+11272 IF cvtype%(ci%)>255 PROCbad("Array FOR variables are unsupported")
 11280 clvar%(cltop%-1)=ci%:cpos%=cp%:PROCassign(cn$):PROCexpectword("TO")
 11290 cndepth%=0:PROCexpr(1):PROCneednumber:PROCspace
 11300 IF FNword("STEP") THEN cpos%=cpos%+4:PROCexpr(1):PROCneednumber ELSE PROCvalue(1)
@@ -946,6 +956,7 @@
 13370 IF cj%=16 PROCbad("Procedure argument limit exceeds 16")
 13380 cn$=FNname:IF FNreserved(cn$) PROCbad("Unsupported formal parameter "+cn$)
 13390 cv%=FNvariable(cn$):ck%=0
+13392 IF cvtype%(cv%)>255 PROCbad("Array formal parameters are unsupported")
 13400 WHILE ck%<cj%:IF cpar%(ci%,ck%)=cv% PROCbad("Duplicate formal parameter")
 13410 ck%=ck%+1:ENDWHILE
 13420 IF csave% THEN cpar%(ci%,cj%)=cv% ELSE IF cpar%(ci%,cj%)<>cv% PROCbad("Procedure signature changed")
@@ -1005,7 +1016,9 @@
 13920 PROCuseacts
 13930 REPEAT
 13940 cn$=FNname:IF FNreserved(cn$) PROCbad("Unsupported LOCAL form "+cn$)
-13950 ci%=FNvariable(cn$):PROCsavebinding(ci%):PROCaddr("CD","$actinstall")
+13950 ci%=FNvariable(cn$)
+13952 IF cvtype%(ci%)>255 PROCbad("LOCAL arrays are unsupported")
+13954 PROCsavebinding(ci%):PROCaddr("CD","$actinstall")
 13960 PROCspace:cmore%=(FNpeek=","):IF cmore% cpos%=cpos%+1
 13970 UNTIL NOT cmore%
 13980 ENDPROC
@@ -1029,7 +1042,7 @@
 14130 ENDPROC
 14140 DEF PROCactworkspace
 14150 LOCAL cp%,ci%
-14160 cp%=&40000+cpc%:IF cstrings% cp%=csaddr%(FNsymbol("$sheapend"))
+14160 cp%=&40000+cpc%:IF cstrings% OR cmemory% cp%=csaddr%(FNsymbol("$sheapend"))
 14170 PROClabel("$actbase"):csaddr%(csnum%-1)=cp%:PROClabel("$actlimit"):csaddr%(csnum%-1)=cp%+32768
 14180 IF cp%+32768>&B0000 PROCbad("Activation workspace exceeds user RAM")
 14190 ENDPROC
@@ -1043,6 +1056,7 @@
 15070 =(cpret%(ci%)=1)
 15080 DEF PROCfncall
 15090 LOCAL cn$,ci%,cj%,ccount%,cframe%,cnstart%,csstart%,ck%
+15095 IF cdimparse%>0 PROCbad("FN calls in array DIM expressions are unqualified")
 15100 cn$=FNcallname(1):ci%=FNprocfind("F"+cn$):IF ci%<0 PROCbad("Undefined FN "+cn$)
 15110 PROCuseacts:cfunctions%=TRUE:cnstart%=cndepth%:csstart%=csdepth%:cframe%=ccalldepth%:ccalldepth%=ccalldepth%+1
 15120 IF ccalldepth%>32 PROCbad("Call expression nesting exceeds 32")
@@ -1167,6 +1181,180 @@
 16300 DEF FNinferkind(cs$)
 16310 LOCAL ck%:ckinddepth%=ckinddepth%+1:IF ckinddepth%>32 PROCbad("FN kind expression nesting exceeds 32")
 16320 ck%=FNinferkindcore(cs$):ckinddepth%=ckinddepth%-1:=ck%
+16400 DEF PROCloadmemory
+16402 LOCAL ci%,cj%,cs$
+16404 RESTORE 60000:READ cmsize%,cmrelocs%,cmalloc%,cmdim%,cmaddr%,cmstep%,cmprefix%
+16406 DIM cmimage% cmsize%-1,cmreloc%(cmrelocs%-1)
+16408 FOR ci%=0 TO cmsize%-1 STEP 40:READ cs$
+16410 FOR cj%=1 TO LEN(cs$) STEP 2:cmimage%?(ci%+(cj%-1) DIV 2)=FNhexbyte(MID$(cs$,cj%,2)):NEXT:NEXT
+16412 IF cmrelocs%>0 THEN FOR ci%=0 TO cmrelocs%-1:READ cmreloc%(ci%):NEXT
+16414 ENDPROC
+16416 DEF PROCusememory
+16418 cmemory%=TRUE:cnumeric%=TRUE:ENDPROC
+16420 DEF PROCmemoryruntime
+16422 LOCAL cb%,ci%,cp%,cv%,ce%,cm$
+16424 cb%=cpc%:FOR ci%=0 TO cmsize%-1:PROCbyte(cmimage%?ci%):NEXT
+16426 FOR ci%=0 TO cmrelocs%-1:cp%=cb%+cmreloc%(ci%)
+16428 cv%=ccode%?cp%+256*ccode%?(cp%+1)+65536*ccode%?(cp%+2):PROCpatch(cp%,cv%+&40000+cb%):NEXT
+16430 PROCctlexport("$memalloc",cb%+cmalloc%):PROCctlexport("$arraydim",cb%+cmdim%):PROCctlexport("$arrayaddr",cb%+cmaddr%)
+16432 PROCctlexport("$dimstep",cb%+cmstep%):PROCctlexport("$arrayprefix",cb%+cmprefix%)
+16434 PROClabel("$memerror")
+16436 FOR ci%=0 TO 6:ce%=VAL(MID$("05101114151627",ci%*2+1,2)):PROCbyte(&FE):PROCbyte(ce%):PROCaddr("CA","$me"+STR$(ce%)):NEXT
+16438 PROCtext("No room"):PROCnewline:PROCaddr("C3","$error")
+16440 FOR ci%=0 TO 6:ce%=VAL(MID$("05101114151627",ci%*2+1,2)):cm$=""
+16442 IF ce%=5 cm$="Missing ,"
+16444 IF ce%=10 cm$="Bad DIM"
+16446 IF ce%=11 cm$="DIM space"
+16448 IF ce%=14 cm$="Bad use of array"
+16450 IF ce%=15 cm$="Bad subscript"
+16452 IF ce%=16 cm$="Syntax error"
+16454 IF ce%=27 cm$="Missing )"
+16456 PROClabel("$me"+STR$(ce%)):PROCtext(cm$):PROCnewline:PROCaddr("C3","$error"):NEXT
+16458 ENDPROC
+16460 DEF PROCmemoryworkspace
+16462 LOCAL cp%
+16464 PROClabel("$sheapctx"):PROCaddr("","$sheap"):PROCaddr("","$sheapend")
+16466 PROClabel("$sheap"):cp%=&AFF00-32768*ABS(cacts%)
+16468 IF cp%<&40000+cpc% PROCbad("Memory workspace exceeds user RAM")
+16470 PROClabel("$sheapend"):csaddr%(csnum%-1)=cp%:ENDPROC
+16472 DEF FNmemwidth(ci%)
+16474 LOCAL ct%:ct%=cvtype%(ci%) AND 255:IF ct%=129 ct%=5
+16476 =ct%
+16478 DEF PROCarrayarity(ci%,cn%)
+16480 IF cvdim%(ci%)=0 cvdim%(ci%)=cn%
+16482 IF cvdim%(ci%)<>cn% PROCbad("Array arity must be consistent in this compiler subset")
+16484 ENDPROC
+16486 DEF PROCarraycall(cr$,ci%,cn%,cs%)
+16488 PROCaddr("DD21","$var"+STR$(ci%)):PROCaddr("FD21","$v"+STR$(cs%))
+16490 PROCbyte(&06):PROCbyte(FNmemwidth(ci%)):PROCbyte(&3E):PROCbyte(cn%)
+16492 PROCaddr("CD",cr$):PROCaddr("DA","$memerror"):ENDPROC
+16494 DEF PROCarrayaddress(ci%,cw%)
+16496 LOCAL cp%,cs%,cn%,cmore%
+16498 PROCusememory:PROCvalue(0):cp%=cndepth%-1:cs%=cndepth%:cn%=0
+16500 IF cw% THEN PROCbytes("3E01"):PROCaddr("32","$bind"+STR$(ci%)) ELSE PROCaddr("3A","$bind"+STR$(ci%)):PROCbyte(&B7):PROCaddr("CA","$novar")
+16502 PROCexpect("("):IF FNpeek=")" PROCbad("Whole-array values are unsupported")
+16504 PROCarraycall("$arrayprefix",ci%,0,cs%)
+16506 REPEAT
+16508 IF cn%=16 PROCbad("Array dimension limit exceeds 16")
+16510 IF cn%>0 PROCexpect(",")
+16512 PROCexpr(1):PROCneednumber:PROCnumindices(cndepth%-1,cndepth%-1):PROCnumcall(38)
+16514 cn%=cn%+1:PROCarraycall("$arrayprefix",ci%,cn%,cs%)
+16516 PROCspace:cmore%=(FNpeek=",")
+16518 UNTIL NOT cmore%
+16520 PROCexpect(")"):PROCarrayarity(ci%,cn%):PROCarraycall("$arrayaddr",ci%,cn%,cs%)
+16522 PROCaddr("22","$v"+STR$(cp%)):cndepth%=cp%+1:ENDPROC
+16524 DEF PROCarrayread(ci%)
+16526 LOCAL ct%,cp%,cj%
+16528 PROCarrayaddress(ci%,FALSE):ct%=cvtype%(ci%) AND 255:cp%=cndepth%-1
+16530 IF ct%=129 THEN PROCstrslot:PROCaddr("DD21","$s"+STR$(csdepth%-1)):PROCaddr("FD2A","$v"+STR$(cp%)):PROCaddr("CD","$strload"):cndepth%=cp%:cvaluekind%=1:ENDPROC
+16532 PROCaddr("2A","$v"+STR$(cp%)):PROCaddr("11","$v"+STR$(cp%))
+16534 PROCbyte(&01):PROCbyte(ct%):PROCbytes("0000EDB0")
+16536 IF ct%<5 THEN PROCbyte(&AF):FOR cj%=ct% TO 4:PROCbytes("1213"):NEXT
+16538 cvaluekind%=0:ENDPROC
+16540 DEF PROCarrayassign(ci%)
+16542 LOCAL ct%:ct%=cvtype%(ci%) AND 255:cndepth%=0:csdepth%=0:PROCarrayaddress(ci%,TRUE):PROCexpect("=")
+16544 PROCexpr(1)
+16546 IF ct%=129 THEN IF cvaluekind%<>1 PROCbad("Expected a string item")
+16548 IF ct%=129 THEN PROCaddr("DD2A","$v0"):PROCaddr("FD21","$s0"):PROCaddr("21","$sheapctx"):PROCaddr("CD","$strstore"):PROCaddr("DA","$strerror"):cndepth%=0:csdepth%=0:ENDPROC
+16550 PROCneednumber:IF ct%<>5 THEN PROCnumindices(1,1):PROCnumcall(38)
+16552 PROCaddr("21","$v1"):PROCaddr("ED5B","$v0"):PROCbyte(&01):PROCbyte(ct%):PROCbytes("0000EDB0")
+16554 cndepth%=0:csdepth%=0:ENDPROC
+16556 DEF PROCdim
+16558 LOCAL cn$,ci%,cmore%,ct%,cj%
+16560 PROCusememory
+16562 REPEAT
+16564 cn$=FNname:IF FNreserved(cn$) PROCbad("Unsupported DIM target "+cn$)
+16566 ci%=FNvariable(cn$):ct%=cvtype%(ci%):PROCspace
+16568 IF ct%>255 THEN PROCdimarray(ci%) ELSE PROCdimblock(ci%)
+16570 PROCspace:cmore%=(FNpeek=","):IF cmore% cpos%=cpos%+1
+16572 UNTIL NOT cmore%
+16574 ENDPROC
+16576 DEF PROCdimarray(ci%)
+16578 LOCAL cn%,cs%,cmore%,cnew$,ct%
+16580 PROCbytes("3E01"):PROCaddr("32","$bind"+STR$(ci%))
+16582 cndepth%=0:csdepth%=0:PROCvalue(1):PROCvalue(0):PROCaddr("2A","$var"+STR$(ci%)):PROCaddr("22","$v1")
+16584 cs%=cndepth%:cn%=0:PROCexpect("("):cnew$=FNflow:PROCdimbranch(cnew$,TRUE):PROCarraycall("$arrayprefix",ci%,0,cs%):PROClabel(cnew$)
+16586 IF FNpeek=")" PROCbad("Empty DIM dimensions are unsupported")
+16588 REPEAT
+16590 IF cn%=16 PROCbad("Array dimension limit exceeds 16")
+16592 IF cn%>0 PROCexpect(",")
+16594 cdimparse%=cdimparse%+1:PROCexpr(1):cdimparse%=cdimparse%-1:PROCneednumber:PROCnumindices(cndepth%-1,cndepth%-1):PROCnumcall(38)
+16596 cn%=cn%+1:PROCdimchoice(ci%,cn%,cs%)
+16598 PROCspace:cmore%=(FNpeek=",")
+16600 UNTIL NOT cmore%
+16602 PROCexpect(")"):PROCarrayarity(ci%,cn%):cnew$=FNflow:PROCdimbranch(cnew$,TRUE)
+16604 PROCarraycall("$arrayaddr",ci%,cn%,cs%):ct%=cvtype%(ci%) AND 255
+16606 IF ct%=129 THEN PROCbytes("3E0A"):PROCaddr("C3","$memerror") ELSE PROCdimseed(ct%):PROCbytes("3E10"):PROCaddr("C3","$memerror")
+16608 PROClabel(cnew$):PROCaddr("21","$sheapctx"):PROCarraycall("$arraydim",ci%,cn%,cs%):cndepth%=0:ENDPROC
+16610 DEF PROCdimblock(ci%)
+16612 LOCAL ct%,cj%:ct%=cvtype%(ci%)
+16614 IF ct%<>4 AND ct%<>5 PROCbad("Raw DIM requires a four-byte or variant numeric target")
+16616 IF FNword("LOCAL") PROCbad("DIM LOCAL storage is unsupported")
+16618 PROCbytes("3E01"):PROCaddr("32","$bind"+STR$(ci%)):PROCaddr("21","$var"+STR$(ci%)):PROCdimseed(ct%)
+16620 cndepth%=0:csdepth%=0:PROCexpr(1):PROCneednumber:PROCnumindices(0,0):PROCnumcall(38)
+16622 PROCaddr("2A","$v0"):PROCbyte(&23):PROCaddr("DD21","$sheapctx"):PROCaddr("CD","$memalloc"):PROCaddr("DA","$memerror")
+16624 PROCaddr("ED53","$var"+STR$(ci%)):cndepth%=0:ENDPROC
+16626 DEF PROCreadscalar(ci%)
+16628 LOCAL ct%,cs$,cj%:ct%=cvsize%(ci%)
+16630 IF cvtype%(ci%)=129 PROCbad("String value used as a numeric item")
+16632 PROCaddr("3A","$bind"+STR$(ci%)):PROCbyte(&B7):PROCaddr("CA","$novar")
+16634 PROCnumslot:cs$="$v"+STR$(cndepth%-1):PROCvarcopy("$var"+STR$(ci%),cs$,ct%)
+16636 IF ct%<5 THEN PROCbyte(&AF):FOR cj%=ct% TO 4:PROCbytes("1213"):NEXT
+16638 cvaluekind%=0:ENDPROC
+16640 DEF PROCmemtail
+16642 LOCAL ct%:IF FNpeek<>"?" AND FNpeek<>"!" ENDPROC
+16644 ct%=1:IF FNpeek="!" ct%=4
+16646 cpos%=cpos%+1:PROCmemoffset:PROCmemload(ct%):ENDPROC
+16648 DEF PROCmemoffset
+16650 LOCAL cp%:cp%=cndepth%-1:PROCnumindices(cp%,cp%):PROCnumcall(38)
+16652 PROCitem:PROCneednumber:PROCnumindices(cndepth%-1,cndepth%-1):PROCnumcall(38)
+16654 PROCaddr("2A","$v"+STR$(cp%)):PROCaddr("ED5B","$v"+STR$(cndepth%-1)):PROCbyte(&19)
+16656 PROCaddr("22","$v"+STR$(cp%)):PROCaddr("21","$v"+STR$(cp%)):PROCbytes("232323AF772377")
+16658 cndepth%=cp%+1:ENDPROC
+16660 DEF PROCmemload(ct%)
+16662 LOCAL cp%,cj%:cp%=cndepth%-1:PROCusememory
+16664 PROCaddr("2A","$v"+STR$(cp%)):PROCaddr("11","$v"+STR$(cp%))
+16666 PROCbyte(&01):PROCbyte(ct%):PROCbytes("0000EDB0")
+16668 IF ct%<5 THEN PROCbyte(&AF):FOR cj%=ct% TO 4:PROCbytes("1213"):NEXT
+16670 cvaluekind%=0:ENDPROC
+16672 DEF PROCmemitem(cc$)
+16674 LOCAL ct%
+16676 IF cc$="^" THEN cpos%=cpos%+1:PROCaddress:ENDPROC
+16678 ct%=1:IF cc$="!" ct%=4
+16680 IF cc$="|" ct%=5
+16682 cpos%=cpos%+1:PROCitem:PROCneednumber:PROCnumindices(cndepth%-1,cndepth%-1):PROCnumcall(38)
+16684 PROCmemload(ct%):ENDPROC
+16686 DEF PROCaddress
+16688 LOCAL cn$,ci%,cp%
+16690 IF cdimparse%>0 PROCbad("Address-of in array DIM expressions is unqualified")
+16692 cn$=FNname:IF FNreserved(cn$) PROCbad("Unsupported address target "+cn$)
+16694 ci%=FNvariable(cn$):IF cvtype%(ci%)>255 THEN PROCarrayaddress(ci%,TRUE):cvaluekind%=0:ENDPROC
+16696 PROCbytes("3E01"):PROCaddr("32","$bind"+STR$(ci%)):PROCvalue(0):cp%=cndepth%-1
+16698 PROCaddr("21","$var"+STR$(ci%)):PROCaddr("22","$v"+STR$(cp%)):cvaluekind%=0:ENDPROC
+16700 DEF PROCindirectassign(ci%)
+16702 LOCAL ct%:ct%=1:IF FNpeek="!" ct%=4
+16704 cndepth%=0:csdepth%=0:PROCreadscalar(ci%):cpos%=cpos%+1:PROCmemoffset:PROCmemstore(ct%):ENDPROC
+16706 DEF PROCmemassign(cc$)
+16708 LOCAL ct%:ct%=1:IF cc$="!" ct%=4
+16710 IF cc$="|" ct%=5
+16712 PROCusememory:cndepth%=0:csdepth%=0:cpos%=cpos%+1:PROCitem:PROCneednumber:PROCnumindices(0,0):PROCnumcall(38)
+16714 PROCmemstore(ct%):ENDPROC
+16716 DEF PROCmemstore(ct%)
+16718 PROCusememory:PROCexpect("="):PROCexpr(1):PROCneednumber
+16720 IF ct%<>5 THEN PROCnumindices(1,1):PROCnumcall(38)
+16722 PROCaddr("21","$v1"):PROCaddr("ED5B","$v0"):PROCbyte(&01):PROCbyte(ct%):PROCbytes("0000EDB0")
+16724 cndepth%=0:csdepth%=0:ENDPROC
+16726 DEF PROCdimseed(ct%)
+16728 LOCAL cj%
+16730 IF ct%=1 THEN PROCbytes("7D77"):ENDPROC
+16732 PROCbytes("E5D173237223AF"):FOR cj%=3 TO ct%:PROCbytes("7723"):NEXT:ENDPROC
+16734 DEF PROCdimbranch(cn$,cz%)
+16736 LOCAL cr$:cr$="C2":IF cz% cr$="CA"
+16738 PROCaddr("2A","$v1"):PROCbytes("01000000B7ED42"):PROCaddr(cr$,cn$):ENDPROC
+16740 DEF PROCdimchoice(ci%,cn%,cs%)
+16742 LOCAL cold$,cend$:cold$=FNflow:cend$=FNflow:PROCdimbranch(cold$,FALSE)
+16744 PROCnumindices(0,cndepth%-1):PROCaddr("CD","$dimstep"):PROCaddr("DA","$memerror"):PROCaddr("C3",cend$)
+16746 PROClabel(cold$):PROCarraycall("$arrayprefix",ci%,cn%,cs%):PROClabel(cend$):ENDPROC
 20000 DATA 4460,387,644,0,12,113,212,267,283
 20010 DATA "E1DDE5D101050000EDB0E5C9DD7E04B72809DD7E03EE80DD7703C9DDE5E10604377E2FCE00772310"
 20020 DATA "F8C9DDE5FDE50100000021000000DD6E02DD6603DD4E04D921000000DD6E00DD6601D9FDE5D1DD21"
@@ -1562,3 +1750,28 @@
 50210 DATA 1,6,11,17,28,36,44,48,94,100,114,118,136,141,181,187,193,197,276,281
 50220 DATA 308,331,404,414,427,460,466,470,479,529,533,539,562,567,572,577,581,585,594,609
 50230 DATA 614,627,631,637,641,647,651,659,666,674,681,689,693,697,715,719,733,737
+60000 DATA 734,83,0,110,342,65,356
+60010 DATA "E5DD170019380CE5DD0703B7ED4238092807E1E13E0BB737C9E1DD2F00C1D5E521000000B7ED4228"
+60020 DATA "14EB3600E5D1130BE521000000B7ED42E12802EDB0E1D1AFC9FD7E03B7201DFD27002311000000B7"
+60030 DATA "ED522815E5C1DD2700CD520200380ADD2F00AFC93E0AB737C93E0BB737C9DDE5FDE5DD2297020022"
+60040 DATA "9A020032A9020032AA02007832AB0200DD270011000000B7ED52C24301003AA90200B7CA430100FE"
+60050 DATA "11D243010032AD0200DD21AE020021010000229D0200FD7E03B7C2430100FD27002311000000B7ED"
+60060 DATA "52CA470100DD2F00E5C12A9D0200CD520200DA470100229D020011050000FD19DD23DD23DD233AAA"
+60070 DATA "02003D32AA020020BD010000003AAB02004FCD520200DA470100E5210003003AA902006FED6C2322"
+60080 DATA "A30200D119DA470100DD2A9A0200CD000000DA4901002A970200ED1F21AD0200ED4BA30200EDB0C3"
+60090 DATA "5001003E0A18023E0BFDE1DDE1B737C9FDE1DDE1AFC9DDE5FDE5F53E0132AC0200F1180BDDE5FDE5"
+60100 DATA "F5AF32AC0200F132A9020032AA02007832AB0200DD270011020000B7ED52DA3A0200197EB7CA3A02"
+60110 DATA "003AAC0200B728143AA90200BEDA460200C24C0200B7CA3A020018123AA90200BECABE0100D24C02"
+60120 DATA "00B7CA50010023E5DDE121000000229D0200FD7E03B7C2400200FD270022A00200DD0700B7ED42D2"
+60130 DATA "4002002A9D0200CD520200DA400200ED5BA0020019DA400200229D020011050000FD19DD23DD23DD"
+60140 DATA "233AAA02003D32AA020020B63AAC0200B7CA500100010000003AAB02004FCD520200DA400200DDE5"
+60150 DATA "D119DA400200C35001003E0EC34901003E0FC34901003E05C34901003E1BC3490100ED43A6020011"
+60160 DATA "000000EB3AA60200CB47280219D83AA80200CB3F32A802003AA70200CB1F32A702003AA60200CB1F"
+60170 DATA "32A602004F3AA70200B14F3AA80200B1C8EB29EBD818C50000000000000000000000000000000000"
+60180 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
+60190 DATA "0000000000000000000000000000"
+60200 DATA 90,116,120,124,128,133,147,151,156,162,166,171,179,187,202,211,215,219,223,239
+60210 DATA 244,254,259,263,272,280,286,291,295,299,303,309,314,320,350,363,368,372,377,391
+60220 DATA 398,402,409,414,418,423,429,434,438,443,455,463,470,480,484,488,492,497,502,506
+60230 DATA 522,527,533,538,546,551,555,563,567,573,579,585,591,596,605,615,621,625,631,635
+60240 DATA 641,646,652

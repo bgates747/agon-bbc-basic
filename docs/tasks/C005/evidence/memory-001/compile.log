@@ -1,0 +1,77 @@
+Warning: unused arguments left: ["--firmware", "platform"].
+Tom's Fake VDP Version 1.03
+unknown packet VDU 0x17, 0, 0xf8
+unknown packet VDU 0x17, 0, 0x99
+uunknown packet VDU 0x17, 0, 0x94
+
+Agon Platform MOS Version 3.0.2 Arthur
+
+OK:p0.bas
+OK:p1.bas
+OK:p2.bas
+OK:p3.bas
+OK:p4.bas
+OK:p5.bas
+OK:p6.bas
+OK:p7.bas
+OK:p8.bas
+OK:p9.bas
+OK:p10.bas
+OK:p11.bas
+OK:p12.bas
+OK:p13.bas
+OK:p14.bas
+OK:p15.bas
+OK:p16.bas
+OK:p17.bas
+OK:p18.bas
+OK:p19.bas
+OK:p20.bas
+OK:p21.bas
+OK:p22.bas
+OK:p23.bas
+OK:p24.bas
+OK:p25.bas
+OK:p26.bas
+OK:p27.bas
+OK:p28.bas
+OK:p29.bas
+OK:p30.bas
+OK:p31.bas
+OK:p32.bas
+OK:p33.bas
+OK:p34.bas
+OK:p35.bas
+OK:p36.bas
+OK:p37.bas
+OK:p38.bas
+OK:p39.bas
+ERR:p40.bas
+p40.bas:1:24: Array arity must be consistent in this compiler subset at 3250
+ERR:p41.bas
+p41.bas:1:24: Array arity must be consistent in this compiler subset at 3250
+ERR:p42.bas
+p42.bas:1:8: Empty DIM dimensions are unsupported at 3250
+ERR:p43.bas
+p43.bas:1:14: Whole-array values are unsupported at 3250
+ERR:p44.bas
+p44.bas:1:8: Raw DIM requires a four-byte or variant numeric target at 3250
+ERR:p45.bas
+p45.bas:1:8: DIM LOCAL storage is unsupported at 3250
+ERR:p46.bas
+p46.bas:1:10: FN calls in array DIM expressions are unqualified at 3250
+ERR:p47.bas
+p47.bas:1:10: Address-of in array DIM expressions is unqualified at 3250
+ERR:p48.bas
+p48.bas:1:15: Array formal parameters are unsupported at 3250
+ERR:p49.bas
+p49.bas:1:21: LOCAL arrays are unsupported at 3250
+ERR:p50.bas
+p50.bas:1:19: Array slice assignment is unsupported at 3250
+ERR:p51.bas
+p51.bas:1:17: Array FOR variables are unsupported at 3250
+ERR:p52.bas
+p52.bas:1:38: Omitted RIGHT$ on a FN string result is unqualified; use an explicit count at 3250
+OK:p0.bas
+OUTPUT_COMPILE_DONE
+/ *

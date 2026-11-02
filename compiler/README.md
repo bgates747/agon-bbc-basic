@@ -4,7 +4,8 @@ This is the first small implementation of the self-hosting compiler project.
 The compiler is BBC BASIC and emits native eZ80 ADL code directly. It currently
 compiles literal/numeric output, labelled control flow, numeric byte VDU
 expressions, standard math functions, scalar numeric variables and a mutable
-string core with expression/assignment slicing, comparisons, VAL/STR$/ASC and INSTR/STRING$. It cannot compile itself.
+string core with expression/assignment slicing, comparisons, VAL/STR$/ASC and INSTR/STRING$, typed loops, scalar PROC/FN/LOCAL, global arrays, raw DIM and
+byte/integer/variant indirection. It cannot compile itself.
 The interpreter elsewhere in this repository remains the compatibility
 reference and bootstrap host. The tested implementation was promoted under
 [task C001](../docs/tasks/C001.md) to `compiler/compiler.bas`; sample programs,
@@ -40,7 +41,7 @@ needs no separate runtime image or assembler.
    register conventions, dependencies and licensing.
 4. [Tasks](../TODO.md) — the single unfinished-work list, linked to detailed
    immutable-ID documents in `docs/tasks/`.
-5. [Development log](../docs/compiler-development-2026-11-01.md) — experiments
+5. [Development log](../docs/compiler-development-2026-11-02.md) — experiments
    and verification evidence.
 6. [Testing and benchmarking corpus](TESTING.md) — curated source programs,
    eligibility, correctness oracles and measurement protocol.

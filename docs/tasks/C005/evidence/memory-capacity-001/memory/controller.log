@@ -1,0 +1,166 @@
+{
+  "programs": 53,
+  "native_executions": 40,
+  "rejected_sources": 13,
+  "reference_output_programs": 40,
+  "legacy_arithmetic_observations": 0,
+  "deterministic_repeat": true,
+  "independent_link_bases": [
+    262782,
+    269961,
+    263418,
+    263791,
+    262968,
+    265114,
+    263524,
+    264373,
+    263392,
+    263468,
+    263948,
+    263717,
+    263894,
+    264027,
+    263058,
+    262854,
+    262902,
+    262791,
+    263286,
+    263208,
+    264105,
+    263064,
+    263148,
+    262650,
+    262628,
+    262619,
+    262619,
+    262712,
+    262795,
+    262786,
+    262786,
+    262534,
+    262540,
+    262514,
+    262871,
+    262849,
+    262853,
+    262880,
+    262792,
+    262540
+  ],
+  "string_link_bases": [
+    284819,
+    269127,
+    278773,
+    267406,
+    267603
+  ],
+  "duration_seconds": 998.133,
+  "hashes": {
+    "docs/tasks/C005/compiler.bas": "d0368b1ea7ebc0ac26da0f13d07c3f40d6c776c9f5f2b0c4a2c31bc78576ab1c",
+    "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+    "docs/tasks/C005/build/output-integration/cases.json": "d6f24601f49bd46e453226676751a0b96e7e8b62f801bc83b10d8af0cdb26e0f"
+  }
+}
+Independent memory helper links: [{'program': 0, 'base': 267536, 'bytes': 734}, {'program': 1, 'base': 285770, 'bytes': 734}, {'program': 2, 'base': 268172, 'bytes': 734}, {'program': 3, 'base': 268550, 'bytes': 734}, {'program': 4, 'base': 267722, 'bytes': 734}, {'program': 5, 'base': 269876, 'bytes': 734}, {'program': 6, 'base': 268292, 'bytes': 734}, {'program': 7, 'base': 270334, 'bytes': 734}, {'program': 8, 'base': 278222, 'bytes': 734}, {'program': 9, 'base': 278293, 'bytes': 734}, {'program': 10, 'base': 279724, 'bytes': 734}, {'program': 11, 'base': 278552, 'bytes': 734}, {'program': 12, 'base': 278468, 'bytes': 734}, {'program': 13, 'base': 277678, 'bytes': 734}, {'program': 14, 'base': 277889, 'bytes': 734}, {'program': 15, 'base': 267614, 'bytes': 734}, {'program': 16, 'base': 277729, 'bytes': 734}, {'program': 17, 'base': 277612, 'bytes': 734}, {'program': 18, 'base': 278118, 'bytes': 734}, {'program': 19, 'base': 267968, 'bytes': 734}, {'program': 20, 'base': 268860, 'bytes': 734}, {'program': 21, 'base': 277890, 'bytes': 734}, {'program': 22, 'base': 277718, 'bytes': 734}, {'program': 24, 'base': 267382, 'bytes': 734}, {'program': 25, 'base': 267373, 'bytes': 734}, {'program': 26, 'base': 267373, 'bytes': 734}, {'program': 27, 'base': 267471, 'bytes': 734}, {'program': 28, 'base': 267549, 'bytes': 734}, {'program': 29, 'base': 267540, 'bytes': 734}, {'program': 30, 'base': 267540, 'bytes': 734}, {'program': 31, 'base': 267283, 'bytes': 734}, {'program': 32, 'base': 267289, 'bytes': 734}, {'program': 33, 'base': 267263, 'bytes': 734}, {'program': 34, 'base': 267625, 'bytes': 734}, {'program': 35, 'base': 268554, 'bytes': 734}, {'program': 36, 'base': 267607, 'bytes': 734}, {'program': 37, 'base': 267634, 'bytes': 734}, {'program': 38, 'base': 267546, 'bytes': 734}, {'program': 39, 'base': 267290, 'bytes': 734}]
+{
+  "independent_control_and_procedure_links": [
+    {
+      "case": 1,
+      "numeric": 269961,
+      "control": 274748,
+      "procedure": 283654,
+      "arena": 687872,
+      "limit": 720640
+    },
+    {
+      "case": 8,
+      "numeric": 263392,
+      "control": 268151,
+      "procedure": 277057,
+      "arena": 687872,
+      "limit": 720640
+    },
+    {
+      "case": 9,
+      "numeric": 263468,
+      "control": 268222,
+      "procedure": 277128,
+      "arena": 687872,
+      "limit": 720640
+    },
+    {
+      "case": 10,
+      "numeric": 263948,
+      "control": 268702,
+      "procedure": 277608,
+      "arena": 687872,
+      "limit": 720640
+    },
+    {
+      "case": 11,
+      "numeric": 263717,
+      "control": 268481,
+      "procedure": 277387,
+      "arena": 687872,
+      "limit": 720640
+    },
+    {
+      "case": 12,
+      "numeric": 263894,
+      "control": 268658,
+      "procedure": 277564,
+      "arena": 687872,
+      "limit": 720640
+    },
+    {
+      "case": 14,
+      "numeric": 263058,
+      "control": 267818,
+      "procedure": 276724,
+      "arena": 687872,
+      "limit": 720640
+    },
+    {
+      "case": 16,
+      "numeric": 262902,
+      "control": 267658,
+      "procedure": 276564,
+      "arena": 687872,
+      "limit": 720640
+    },
+    {
+      "case": 17,
+      "numeric": 262791,
+      "control": 267541,
+      "procedure": 276447,
+      "arena": 687872,
+      "limit": 720640
+    },
+    {
+      "case": 18,
+      "numeric": 263286,
+      "control": 268047,
+      "procedure": 276953,
+      "arena": 687872,
+      "limit": 720640
+    },
+    {
+      "case": 21,
+      "numeric": 263064,
+      "control": 267819,
+      "procedure": 276725,
+      "arena": 687872,
+      "limit": 720640
+    },
+    {
+      "case": 22,
+      "numeric": 263148,
+      "control": 267908,
+      "procedure": 276814,
+      "arena": 687872,
+      "limit": 720640
+    }
+  ],
+  "all_external_bridges_checked": true,
+  "entry_reset_and_workspace_checked": true
+}

@@ -1,0 +1,8 @@
+{
+  "scope": "Pinned interpreted compiler host after PROCinit; not native compiler memory",
+  "compiler_sha256": "d865116e94245c5bc07eb4070b2c2c6cfed57f2a079cf10a6b181060612d255b",
+  "himem": 720896,
+  "heap_end": 557133,
+  "free_bytes": 163763,
+  "duration_seconds": 19.832
+}

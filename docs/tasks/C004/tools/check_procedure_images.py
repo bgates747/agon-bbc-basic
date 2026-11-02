@@ -2,7 +2,7 @@
 from pathlib import Path
 import json,subprocess
 ROOT=Path(__file__).resolve().parents[4];TASK=ROOT/'docs/tasks/C004'
-def check(limit=None,procedure_runtime=None):
+def check(limit=None,procedure_runtime=None,case_indices=None):
  build=TASK/'build/output-integration';sd=ROOT/'.emulator/sdcard'
  paths={'numeric':ROOT/'compiler/build/numeric-runtime','control':ROOT/'compiler/build/control-runtime','procedure':ROOT/'compiler/build/procedure-runtime'}
  if procedure_runtime is not None:paths['procedure']=Path(procedure_runtime).resolve(strict=True)
@@ -10,6 +10,7 @@ def check(limit=None,procedure_runtime=None):
  metadata={name:json.loads((p/'runtime.json').read_text()) for name,p in paths.items()}
  templates={name:(p/'runtime-0.bin').read_bytes() for name,p in paths.items()};bases=[]
  for i,case in enumerate(json.loads((build/'cases.json').read_text())[:limit]):
+  if case_indices is not None and i not in case_indices:continue
   if 'diagnostic' in case:continue
   image=(sd/f'p{i}.bin').read_bytes();numpos=image.find(templates['numeric'][:20]);controlpos=image.find(templates['control'][9:15])-9;actpos=image.find(templates['procedure'][20:28])-20
   assert min(numpos,controlpos,actpos)>=0,(i,numpos,controlpos,actpos)

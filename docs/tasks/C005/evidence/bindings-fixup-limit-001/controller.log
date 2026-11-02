@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/Agon/mystuff/bbc-basic-v-adl/docs/tasks/C005/test_bindings.py", line 28, in <module>
+    h.main()
+    ~~~~~~^^
+  File "/Agon/mystuff/bbc-basic-v-adl/docs/tasks/C002/tools/test_output.py", line 156, in main
+    assert f"OK:p{i}.bas\n" in compiled, (i, compiled)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (1, 'Warning: unused arguments left: ["--firmware", "platform"].\nTom\'s Fake VDP Version 1.03\nunknown packet VDU 0x17, 0, 0xf8\nunknown packet VDU 0x17, 0, 0x99\nuunknown packet VDU 0x17, 0, 0x94\n\x80\nAgon Platform MOS Version 3.0.2 Arthur\n\nOK:p0.bas\nERR:p1.bas\np1.bas:228:10: Too many address fixups at 3250\nERR:p2.bas\np2.bas:228:10: Too many address fixups at 3250\nERR:p3.bas\np3.bas:224:10: Too many address fixups at 3250\nOK:p0.bas\nOUTPUT_COMPILE_DONE\n/ *')

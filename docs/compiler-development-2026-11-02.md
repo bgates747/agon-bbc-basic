@@ -191,3 +191,21 @@ frontend must preserve these quirks and explicitly reject unqualified FN/address
 expressions in array DIM bounds. Interpreter findings are separate upstream ideas.
 C005/C006 remain the only unfinished TODO entries. Continue implementation under
 the Author's authorization; Oryx is not contacted and no human gate is invented.
+
+## C005 arrays/memory qualification and promotion
+
+The corrected BBC frontend and734-byte/83-relocation standalone runtime preserve
+raw DIM's address seed, low24 final store, repeated-DIM side effects/errors and
+per-index evaluation checks. Full53-case differential scope passes40 native/13
+rejections. Binding stress exposes2048-fixup exhaustion before256 bindings;
+measured host headroom supports raising only four tables to4096. Exact final
+1777-line SHAd0368b1e passes the full53 again, binding5 scope1289.261s,
+baseline71.307s and FN83.489s. Five packers reproduce it. Exact live baseline,
+memory and loops pass71.907/145.424/70.781s controller times. MEMORY.md and
+curated manifests retain evidence; no human/hardware/self-hosting/benchmark claim.
+
+MOS I/O preparation independently passes native file ABI1.016s and keyboard-driven
+line input10.377s; actual13-case BBC file reference passes1.607s. Direct FN
+filenames expose a full-DE pointer dependency and require explicit qualification
+or rejection. IO.md/DATA.md own the bounded contracts. No I/O language promotion
+is claimed yet. Continue C005 and C006 under the Author's authorization.

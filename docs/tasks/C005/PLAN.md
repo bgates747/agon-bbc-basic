@@ -73,3 +73,18 @@ work remains bounded by the compatibility matrix and actual BBC reference tests.
    run the baseline assembler golden, duplicate/missing target rejections and
    string/function resource cases. Retain any time-limited earlier attempt as
    partial evidence; a timeout is not successful qualification or a program error.
+
+## Bounded fixup increase before implementation
+
+1. The array prototype's256-binding stress reaches the2048-address-fixup cap at
+   scalar assignment228 (mixed bindings224). Retain that failed test: an admitted
+   binding count is also constrained by the independent relocation limit.
+2. Actual pinned-BASIC PROCinit measurement reports163763 free bytes, HIMEM720896
+   and heap end557133. Doubling only the four fixup arrays adds34816 payload bytes
+   (five-byte string descriptors and three four-byte numeric tables), leaving
+   roughly129KB before later source/metadata allocations; measure again afterward.
+3. Raise this bounded cap to4096 and qualify256/257 bindings, mixed array/string
+   bindings and an actual oversized branch source. Recheck the array scope and
+   baseline against the exact new source. This is not proof that a native compiler
+   fits RAM; C005's final resource closure must still avoid a large output/fixup
+   allocation in the self-hosted compiler when actual measurements require it.
