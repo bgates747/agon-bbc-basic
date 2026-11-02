@@ -77,7 +77,7 @@ ABI/status/qualification. No interpreter globals or entry addresses are linked.
 
 ## Scalar procedure/local helpers
 
-`procedures.s` is502 bytes with27 internal ADL24 relocations. Four compiler
+`procedures.s` is783 bytes with58 internal ADL24 relocations. Four compiler
 patches connect control push/check/pop and numeric conversion. IX/IY/SP are
 preserved on ordinary calls; HL returns a saved-local record where documented.
 A distinct PROC marker and LOCAL records own a bounded32768-byte private arena;
@@ -86,3 +86,11 @@ The arena is reserved after emitted runtime/string workspace and is not emitted
 as zero padding. Entry initialises it while preserving MOS DE.
 `build_procedure_runtime.py` packages DATA50000 and independent link checks.
 [Contract](../../docs/tasks/C004/activations/PROCEDURES.md) owns admission/ABI.
+
+FN entries extend the same module with a distinct marker, checked prefix allocation
+and matching return. B/C are numeric/string prefix counts; IX/IY identify pool
+starts. Upper count bits are explicitly cleared before multibyte copies. Zero
+counts never dereference null pools. FN records store arena checkpoint, pool
+pointers/counts and restore locals then caller prefixes; result transfer storage
+is separate. PROC and FN exits reject the other marker. Caller IX/IY/SP preservation
+and both old/new ABI probes pass.

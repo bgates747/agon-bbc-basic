@@ -10,10 +10,11 @@
 1000 DEF PROCinit
 1010 DIM ccode% 65535,csname$(1023),csaddr%(1023)
 1020 DIM crname$(2047),craddr%(2047),crline%(2047),crcol%(2047)
-1021 DIM cpname$(127),cpline%(127),cparcnt%(127),cpar%(127,15),cargkind%(15),cargindex%(15)
+1021 DIM cpname$(127),cpline%(127),cparcnt%(127),cpar%(127,15),cargkind%(31,15),cargindex%(31,15),cpkind%(127),cpret%(127),creturn$(511),cretdef%(511),cretline%(511),cretcol%(511)
 1022 PROCloadnumbers
 1023 PROCloadacts
 1024 DIM cvname$(127),cvsize%(127),cvstatic%(127),cvtype%(127),ckwords$(4)
+1025 DIM csunsafe%(15)
 1026 PROCkeywords
 1027 PROCloadcontrol
 1028 PROCloadstrings
@@ -25,7 +26,7 @@
 1062 cnumeric%=FALSE:cnslots%=0:cnparse%=0:cndepth%=0:cvnum%=0:cstrings%=FALSE:csdepth%=0:csslots%=0:csvars%=0:cvaluekind%=0
 1064 cflow%=0:cbnum%=0
 1066 cloops%=FALSE:cltop%=0:cstructure$=""
-1068 cacts%=FALSE:cpnum%=0:cscope%=0
+1068 cacts%=FALSE:cfunctions%=FALSE:cpnum%=0:cscope%=0:cretnum%=0:ccalldepth%=0:ckinddepth%=0
 1070 IF csource$=ctarget$ PROCbad("Source and output must differ")
 1080 cfh%=OPENIN(csource$)
 1090 IF cfh%=0 PROCbad("Cannot open source")
@@ -96,6 +97,7 @@
 1630 ENDPROC
 1632 DEF PROCstatement
 1640 LOCAL cw$,ct%,cn$,csuppress%
+1645 IF FNpeek="=" THEN cpos%=cpos%+1:PROCfnreturn:ENDPROC
 1650 IF FNpeek="@" THEN cpos%=cpos%+1:cn$=FNname:PROCexpect(":"):PROClabel(FNtarget("@"+cn$)):cpos%=cpos%-1:ENDPROC
 1655 IF MID$(cline$,cpos%,4)="PROC" THEN cpos%=cpos%+4:PROCproccall:ENDPROC
 1660 cw$=FNname
@@ -377,6 +379,7 @@
 4760 IF cc$="-" THEN PROCaddr("DD21","$v"+STR$(cndepth%-1)):PROCaddr("CD","$numneg")
 4770 IF cc$="(" THEN cpos%=cpos%+1:PROCexpr(1):PROCexpect(")"):cdone%=TRUE
 4780 IF cc$="&" OR cc$="." OR FNdigit(cc$) THEN PROCconstant:cdone%=TRUE
+4785 IF NOT cdone% AND MID$(cline$,cpos%,2)="FN" THEN cpos%=cpos%+2:PROCfncall:cdone%=TRUE
 4790 IF NOT cdone% PROCtypeditem
 4800 cnparse%=cnparse%-1
 4810 ENDPROC
@@ -568,6 +571,7 @@
 7130 cp%=cpos%
 7140 WHILE MID$(cline$,cp%,1)=" " OR MID$(cline$,cp%,1)=CHR$(9) OR MID$(cline$,cp%,1)="(":cp%=cp%+1:ENDWHILE
 7150 cc$=MID$(cline$,cp%,1)
+7155 IF MID$(cline$,cp%,2)="FN" THEN =FNfnstring(cp%)
 7160 IF cc$=CHR$(34) OR MID$(cline$,cp%,4)="CHR$" THEN =TRUE
 7170 WHILE FNalpha(MID$(cline$,cp%,1)) OR FNdigit(MID$(cline$,cp%,1)):cp%=cp%+1:ENDWHILE
 7180 =(MID$(cline$,cp%,1)="$")
@@ -586,6 +590,7 @@
 7310 IF csdepth%=16 PROCbad("String temporary limit exceeds 16")
 7320 csdepth%=csdepth%+1:cstrings%=TRUE
 7322 IF csdepth%>csslots% csslots%=csdepth%
+7324 csunsafe%(csdepth%-1)=FALSE
 7330 ENDPROC
 7340 DEF PROCstrexpr
 7350 PROCexpr(1):IF cvaluekind%<>1 PROCbad("Expected a string item")
@@ -672,6 +677,7 @@
 8170 IF co%<>11 PROCbad("Only concatenation and comparisons support strings")
 8180 PROCaddr("DD21","$s"+STR$(csdepth%-2)):PROCaddr("FD21","$s"+STR$(csdepth%-1))
 8190 PROCaddr("CD","$strcat"):PROCaddr("DA","$strerror"):csdepth%=csdepth%-1:cvaluekind%=1
+8195 csunsafe%(csdepth%-1)=FALSE
 8200 ENDPROC
 8210 DEF PROCstrcompare(co%)
 8220 LOCAL cc%,cj%
@@ -687,9 +693,10 @@
 8320 DEF PROCslice(ct%)
 8330 LOCAL ci%,cr$
 8340 PROCexpect("("):PROCstrexpr:ci%=csdepth%-1:PROCspace
-8350 IF ct%=2 THEN PROCexpect(","):PROCcount:PROCaddr("DD21","$s"+STR$(ci%)):PROCaddr("CD","$strmid"):PROCspace
-8360 IF FNpeek="," THEN cpos%=cpos%+1:PROCcount:PROCslicecount(ct%,ci%):PROCexpect(")"):ENDPROC
+8350 IF ct%=2 THEN PROCexpect(","):PROCcount:PROCaddr("DD21","$s"+STR$(ci%)):PROCaddr("CD","$strmid"):PROCspace:csunsafe%(ci%)=FALSE
+8360 IF FNpeek="," THEN cpos%=cpos%+1:PROCcount:PROCslicecount(ct%,ci%):PROCexpect(")"):csunsafe%(ci%)=FALSE:ENDPROC
 8370 PROCexpect(")"):PROCaddr("DD21","$s"+STR$(ci%))
+8375 IF ct%=1 AND csunsafe%(ci%) PROCbad("Omitted RIGHT$ on a FN string result is unqualified; use an explicit count")
 8380 IF ct%=0 PROCbytes("DD7E00B728043DDD7700")
 8390 IF ct%=1 THEN PROCbytes("3E01"):PROCaddr("CD","$strright")
 8400 ENDPROC
@@ -728,6 +735,7 @@
 8780 cpos%=cpos%+1:PROCcount:ENDPROC
 8790 DEF PROCstrrepeat
 8800 PROCexpect("("):PROCcount:PROCbyte(&F5):PROCexpect(","):PROCstrexpr:PROCexpect(")")
+8805 IF csunsafe%(csdepth%-1) PROCbad("STRING$ on a FN string result is unqualified; establish a string value first")
 8810 PROCbyte(&F1):PROCaddr("DD21","$s"+STR$(csdepth%-1)):PROCaddr("CD","$strrepeat"):PROCaddr("DA","$strerror"):ENDPROC
 8900 DEF PROCstrsliceassign(ct$)
 8910 LOCAL cn$,ci%
@@ -889,7 +897,7 @@
 11920 =cs$
 13000 DEF PROCloadacts
 13010 LOCAL ci%,cj%,cs$
-13020 RESTORE 50000:READ casize%,carelocs%,cainit%,cabegin%,casave%,cainstall%,cabind%,caleave%,capushslot%,cacheckslot%,capopslot%,canumslot%,catop%
+13020 RESTORE 50000:READ casize%,carelocs%,cainit%,cabegin%,casave%,cainstall%,cabind%,caleave%,capushslot%,cacheckslot%,capopslot%,canumslot%,catop%,cafnbegin%,cafnleave%
 13030 DIM caimage% casize%-1,careloc%(carelocs%-1)
 13040 FOR ci%=0 TO casize%-1 STEP 40:READ cs$
 13050 FOR cj%=1 TO LEN(cs$) STEP 2:caimage%?(ci%+(cj%-1) DIV 2)=FNhexbyte(MID$(cs$,cj%,2)):NEXT:NEXT
@@ -904,20 +912,24 @@
 13140 ci%=ci%+1:ENDWHILE
 13150 =cf%
 13160 DEF PROCprocscan(ch%)
-13170 LOCAL ci%,cn$
+13170 LOCAL ci%,cn$,cfunction%:cfunction%=-1
 13180 WHILE NOT EOF#ch%
 13190 clnum%=clnum%+1:cpos%=1:PROCreadline(ch%):PROCspace
 13200 IF FNdigit(FNpeek) ci%=FNnumber(65279)
 13210 PROCspace:IF FNword("DEF") PROCscandef
+13215 IF cfunction%>=0 PROCcollectreturns(cfunction%,cpos%)
 13220 ENDWHILE
+13225 PROCinferreturns
 13230 ENDPROC
 13240 DEF PROCscandef
-13250 LOCAL cn$,ci%
+13250 LOCAL cn$,ci%,ck%
 13260 cpos%=cpos%+3:PROCspace
-13270 IF MID$(cline$,cpos%,4)<>"PROC" PROCbad("Only DEF PROC is supported in this tranche")
-13280 cpos%=cpos%+4:cn$=FNname:IF FNprocfind(cn$)>=0 PROCbad("Duplicate PROC "+cn$)
+13270 ck%=0:IF MID$(cline$,cpos%,2)="FN" ck%=1
+13272 IF ck%=0 AND MID$(cline$,cpos%,4)<>"PROC" PROCbad("Expected PROC or FN after DEF")
+13280 cpos%=cpos%+4-2*ck%:cn$=FNcallname(ck%):IF FNprocfind(MID$("PF",ck%+1,1)+cn$)>=0 PROCbad("Duplicate definition "+cn$)
 13290 IF cpnum%=128 PROCbad("Procedure limit exceeds 128")
-13300 ci%=cpnum%:cpnum%=cpnum%+1:cpname$(ci%)=cn$:cpline%(ci%)=clnum%:PROCprocparams(ci%,TRUE)
+13300 ci%=cpnum%:cpnum%=cpnum%+1:cpname$(ci%)=MID$("PF",ck%+1,1)+cn$:cpline%(ci%)=clnum%:cpkind%(ci%)=ck%:cpret%(ci%)=-1:PROCprocparams(ci%,TRUE)
+13305 cfunction%=-1:IF ck%=1 cfunction%=ci%
 13310 ENDPROC
 13320 DEF PROCprocparams(ci%,csave%)
 13330 LOCAL cn$,cj%,ck%,cv%,cmore%
@@ -946,16 +958,19 @@
 13550 IF cscope%=0 THEN =cn$
 13560 ="$p"+STR$(cscope%)+cn$
 13570 DEF PROCdefinition
-13580 LOCAL cn$,ci%
-13590 PROCspace:IF MID$(cline$,cpos%,4)<>"PROC" PROCbad("Only DEF PROC is supported in this tranche")
-13600 cpos%=cpos%+4:cn$=FNname:ci%=FNprocfind(cn$)
-13610 IF ci%<0 PROCbad("DEF PROC must begin its physical statement line")
-13620 IF cpline%(ci%)<>clnum% PROCbad("DEF PROC must begin its physical statement line")
+13580 LOCAL cn$,ci%,ck%
+13590 PROCspace:ck%=0:IF MID$(cline$,cpos%,2)="FN" ck%=1
+13595 IF ck%=0 AND MID$(cline$,cpos%,4)<>"PROC" PROCbad("Expected PROC or FN after DEF")
+13600 cpos%=cpos%+4-2*ck%:cn$=FNcallname(ck%):ci%=FNprocfind(MID$("PF",ck%+1,1)+cn$)
+13610 IF ci%<0 PROCbad("DEF must begin its physical statement line")
+13620 IF cpline%(ci%)<>clnum% PROCbad("DEF must begin its physical statement line")
 13630 PROCprocparams(ci%,FALSE):cdeclskip$=FNflow:PROCaddr("C3",cdeclskip$):PROClabel("$proc"+STR$(ci%))
+13635 PROCspace:IF ck%=1 AND FNpeek="=" ccont%=TRUE
 13640 ENDPROC
 13650 DEF PROCproccall
-13660 LOCAL cn$,ci%,cj%,cv%,ccount%,ck%
-13670 cn$=FNname:ci%=FNprocfind(cn$):IF ci%<0 PROCbad("Undefined PROC "+cn$)
+13660 LOCAL cn$,ci%,cj%,cv%,ccount%,ck%,cframe%
+13670 cn$=FNname:ci%=FNprocfind("P"+cn$):IF ci%<0 PROCbad("Undefined PROC "+cn$)
+13675 cframe%=ccalldepth%:ccalldepth%=ccalldepth%+1:IF ccalldepth%>32 PROCbad("Call expression nesting exceeds 32")
 13680 PROCuseacts:PROCaddr("CD","$actbegin"):PROCaddr("DA","$acterror"):ccount%=cparcnt%(ci%)
 13690 IF ccount%>0 THEN FOR cj%=0 TO ccount%-1:PROCsavebinding(cpar%(ci%,cj%)):NEXT
 13700 cndepth%=0:csdepth%=0:PROCspace
@@ -963,17 +978,18 @@
 13720 IF ccount%>0 THEN PROCexpect("("):FOR cj%=0 TO ccount%-1:PROCprocarg(ci%,cj%):NEXT:PROCexpect(")")
 13730 IF ccount%>0 THEN FOR cj%=ccount%-1 TO 0 STEP -1:PROCprocbind(cj%,ccount%-1-cj%):NEXT
 13740 PROCaddr("CD","$proc"+STR$(ci%)):cndepth%=0:csdepth%=0
+13745 ccalldepth%=ccalldepth%-1
 13750 ENDPROC
 13760 DEF PROCprocarg(ci%,cj%)
 13770 LOCAL cv%,ck%
 13780 IF cj%>0 PROCexpect(",")
 13790 PROCexpr(1):cv%=cpar%(ci%,cj%):ck%=ABS(cvtype%(cv%)=129)
 13800 IF cvaluekind%<>ck% PROCbad("Procedure argument type mismatch")
-13810 cargkind%(cj%)=ck%:IF ck%=0 THEN cargindex%(cj%)=cndepth%-1 ELSE cargindex%(cj%)=csdepth%-1
+13810 cargkind%(cframe%,cj%)=ck%:IF ck%=0 THEN cargindex%(cframe%,cj%)=cndepth%-1 ELSE cargindex%(cframe%,cj%)=csdepth%-1
 13820 ENDPROC
 13830 DEF PROCprocbind(ci%,co%)
-13840 LOCAL cn$:cn$="$v":IF cargkind%(ci%)=1 cn$="$s"
-13850 PROCbyte(&3E):PROCbyte(co%):PROCaddr("FD21",cn$+STR$(cargindex%(ci%))):PROCaddr("CD","$actbind"):PROCaddr("DA","$acterror")
+13840 LOCAL cn$:cn$="$v":IF cargkind%(cframe%,ci%)=1 cn$="$s"
+13850 PROCbyte(&3E):PROCbyte(co%):PROCaddr("FD21",cn$+STR$(cargindex%(cframe%,ci%))):PROCaddr("CD","$actbind"):PROCaddr("DA","$acterror")
 13860 ENDPROC
 13870 DEF PROCsavebinding(ci%)
 13880 PROCaddr("DD21","$bind"+STR$(ci%)):PROCbyte(&3E):PROCbyte(cvtype%(ci%)):PROCaddr("CD","$actsave"):PROCaddr("DA","$acterror")
@@ -994,12 +1010,16 @@
 14040 IF carelocs%>0 THEN FOR ci%=0 TO carelocs%-1:cp%=cb%+careloc%(ci%):cv%=ccode%?cp%+256*ccode%?(cp%+1)+65536*ccode%?(cp%+2):PROCpatch(cp%,cv%+&40000+cb%):NEXT
 14050 PROCctlexport("$actinit",cb%+cainit%):PROCctlexport("$actbegin",cb%+cabegin%):PROCctlexport("$actsave",cb%+casave%)
 14060 PROCctlexport("$actinstall",cb%+cainstall%):PROCctlexport("$actbind",cb%+cabind%):PROCctlexport("$actleave",cb%+caleave%)
+14065 PROCctlexport("$fnbegin",cb%+cafnbegin%):PROCctlexport("$fnleave",cb%+cafnleave%)
 14070 csave%=cpc%:cpc%=cb%+capushslot%:PROCaddr("","$ctlpush"):cpc%=cb%+cacheckslot%:PROCaddr("","$ctlcheck")
 14080 cpc%=cb%+capopslot%:PROCaddr("","$ctlpop"):cpc%=cb%+canumslot%:PROCaddr("","$numop"):cpc%=csave%
 14090 PROClabel("$acterror"):PROCbytes("B7"):PROCaddr("CA","$flowerr0")
-14100 PROCbytes("FE0C"):PROCaddr("CA","$notlocal"):PROCbytes("FE0D"):PROCaddr("CA","$notproc"):PROCaddr("C3","$numerror")
+14100 PROCbytes("FE0C"):PROCaddr("CA","$notlocal"):PROCbytes("FE0D"):PROCaddr("CA","$notproc"):PROCbytes("FE07"):PROCaddr("CA","$notfn"):PROCaddr("C3","$numerror")
+14105 REM Act error7 must be dispatched before falling through to numeric error.
 14110 PROClabel("$notlocal"):PROCtext("Not in a FN or PROC"):PROCnewline:PROCaddr("C3","$error")
 14120 PROClabel("$notproc"):PROCtext("Not in a PROC"):PROCnewline:PROCaddr("C3","$error")
+14125 PROClabel("$notfn"):PROCtext("Not in a FN"):PROCnewline:PROCaddr("C3","$error")
+14127 IF cfunctions% THEN PROClabel("$fnnum"):PROCbytes("0000000000"):PROClabel("$fnstr"):FOR ci%=0 TO 255:PROCbyte(0):NEXT
 14130 ENDPROC
 14140 DEF PROCactworkspace
 14150 LOCAL cp%,ci%
@@ -1007,6 +1027,140 @@
 14170 PROClabel("$actbase"):csaddr%(csnum%-1)=cp%:PROClabel("$actlimit"):csaddr%(csnum%-1)=cp%+32768
 14180 IF cp%+32768>&B0000 PROCbad("Activation workspace exceeds user RAM")
 14190 ENDPROC
+15000 DEF FNcallname(ck%)
+15010 LOCAL cn$:cn$=FNname
+15020 IF ck%=1 AND FNpeek="$" THEN cn$=cn$+"$":cpos%=cpos%+1
+15030 =cn$
+15040 DEF FNfnstring(cp%)
+15050 LOCAL cs%,ci%:cs%=cpos%:cpos%=cp%+2:ci%=FNprocfind("F"+FNcallname(1)):cpos%=cs%
+15060 IF ci%<0 THEN =FALSE
+15070 =(cpret%(ci%)=1)
+15080 DEF PROCfncall
+15090 LOCAL cn$,ci%,cj%,ccount%,cframe%,cnstart%,csstart%,ck%
+15100 cn$=FNcallname(1):ci%=FNprocfind("F"+cn$):IF ci%<0 PROCbad("Undefined FN "+cn$)
+15110 PROCuseacts:cfunctions%=TRUE:cnstart%=cndepth%:csstart%=csdepth%:cframe%=ccalldepth%:ccalldepth%=ccalldepth%+1
+15120 IF ccalldepth%>32 PROCbad("Call expression nesting exceeds 32")
+15130 IF cnstart%>0 THEN PROCaddr("DD21","$v0") ELSE PROCbytes("DD21000000")
+15140 IF csstart%>0 THEN PROCaddr("FD21","$s0") ELSE PROCbytes("FD21000000")
+15150 PROCbytes("0100000006"):PROCbyte(cnstart%):PROCbyte(&0E):PROCbyte(csstart%):PROCaddr("CD","$fnbegin"):PROCaddr("DA","$acterror")
+15160 ccount%=cparcnt%(ci%):IF ccount%>0 THEN FOR cj%=0 TO ccount%-1:PROCsavebinding(cpar%(ci%,cj%)):NEXT
+15170 PROCspace:IF ccount%=0 AND FNpeek="(" PROCbad("Empty call argument lists are unsupported")
+15180 IF ccount%>0 THEN PROCexpect("("):FOR cj%=0 TO ccount%-1:PROCprocarg(ci%,cj%):NEXT:PROCexpect(")")
+15190 IF ccount%>0 THEN FOR cj%=ccount%-1 TO 0 STEP -1:PROCprocbind(cj%,ccount%-1-cj%):NEXT
+15200 PROCaddr("CD","$proc"+STR$(ci%)):cndepth%=cnstart%:csdepth%=csstart%
+15210 IF cpret%(ci%)=0 THEN PROCnumslot:PROCvarcopy("$fnnum","$v"+STR$(cndepth%-1),5) ELSE PROCstrslot:PROCcopystr("$fnstr","$s"+STR$(csdepth%-1))
+15215 IF cpret%(ci%)=1 csunsafe%(csdepth%-1)=TRUE
+15220 cvaluekind%=cpret%(ci%):ccalldepth%=ccalldepth%-1:ENDPROC
+15230 DEF PROCcopystr(cf$,ct$)
+15240 PROCaddr("21",cf$):PROCaddr("11",ct$):PROCbytes("01000100EDB0"):ENDPROC
+15250 DEF PROCfnreturn
+15260 PROCuseacts:cfunctions%=TRUE:cndepth%=0:csdepth%=0:PROCexpr(1)
+15270 IF cscope%>0 THEN IF cpkind%(cscope%-1)=1 AND cpret%(cscope%-1)<>cvaluekind% PROCbad("Mixed numeric/string FN results are unsupported")
+15280 IF cvaluekind%=0 THEN PROCvarcopy("$v0","$fnnum",5) ELSE PROCcopystr("$s0","$fnstr")
+15290 PROCaddr("CD","$fnleave"):PROCaddr("DA","$acterror"):PROCbyte(&C9):cndepth%=0:csdepth%=0:ENDPROC
+15300 DEF PROCcollectreturns(ci%,cs%)
+15310 LOCAL cp%,cq%,cd%,ce%,cc$
+15320 cp%=cs%:cq%=FALSE:cd%=0
+15330 WHILE cp%<=LEN(cline$)
+15340 cc$=MID$(cline$,cp%,1)
+15350 IF cc$=CHR$(34) THEN cq%=NOT cq%
+15355 IF NOT cq% AND cd%=0 THEN IF FNkindword(cline$,cp%,"REM") cp%=LEN(cline$)+1
+15360 IF NOT cq% THEN IF cc$="=" AND cd%=0 AND FNreturnmark(cp%,cs%) THEN ce%=FNreturnend(cp%+1):PROCrememberreturn(ci%,MID$(cline$,cp%+1,ce%-cp%-1),cp%+1):cp%=ce%-1
+15370 IF NOT cq% THEN IF cc$="(" cd%=cd%+1
+15380 IF NOT cq% THEN IF cc$=")" cd%=cd%-1
+15390 cp%=cp%+1:ENDWHILE
+15400 ENDPROC
+15410 DEF FNreturnmark(cp%,cs%)
+15420 cp%=cp%-1:WHILE cp%>=cs% AND (MID$(cline$,cp%,1)=" " OR MID$(cline$,cp%,1)=CHR$(9)):cp%=cp%-1:ENDWHILE
+15430 IF cp%<cs% OR MID$(cline$,cp%,1)=":" THEN =TRUE
+15435 IF cp%<4 THEN =FALSE
+15440 =FNkindword(cline$,cp%-3,"THEN") OR FNkindword(cline$,cp%-3,"ELSE")
+15450 DEF FNreturnend(cp%)
+15460 LOCAL cq%,cd%,cc%,cf%:cq%=FALSE:cd%=0:cf%=FALSE
+15470 WHILE cp%<=LEN(cline$) AND NOT cf%
+15480 cc%=ASC(MID$(cline$,cp%,1)):IF cc%=34 cq%=NOT cq%
+15490 IF NOT cq% AND cd%=0 THEN IF cc%=58 OR FNkindword(cline$,cp%,"ELSE") cf%=TRUE
+15500 IF NOT cq% THEN IF cc%=40 cd%=cd%+1
+15510 IF NOT cq% THEN IF cc%=41 cd%=cd%-1
+15520 IF NOT cf% cp%=cp%+1
+15530 ENDWHILE
+15540 =cp%
+15550 DEF PROCrememberreturn(ci%,cs$,ccol%)
+15560 IF cretnum%=512 PROCbad("FN result expression limit exceeds 512")
+15570 creturn$(cretnum%)=cs$:cretdef%(cretnum%)=ci%:cretline%(cretnum%)=clnum%:cretcol%(cretnum%)=ccol%:cretnum%=cretnum%+1:ENDPROC
+15580 DEF PROCinferreturns
+15590 LOCAL ci%,cj%,ck%,cchange%
+15600 REPEAT
+15610 cchange%=FALSE:ci%=0
+15620 WHILE ci%<cretnum%
+15625 clnum%=cretline%(ci%):cpos%=cretcol%(ci%)
+15630 cj%=cretdef%(ci%):ck%=FNinferkind(creturn$(ci%))
+15640 IF ck%>=0 AND cpret%(cj%)>=0 AND ck%<>cpret%(cj%) PROCbad("Mixed numeric/string FN results are unsupported")
+15650 IF ck%>=0 AND cpret%(cj%)<0 THEN cpret%(cj%)=ck%:cchange%=TRUE
+15660 ci%=ci%+1:ENDWHILE
+15670 UNTIL NOT cchange%
+15680 ci%=0:WHILE ci%<cpnum%
+15690 IF cpkind%(ci%)=1 AND cpret%(ci%)<0 THEN clnum%=cpline%(ci%):cpos%=1:PROCbad("Unresolved FN result kind "+cpname$(ci%))
+15700 ci%=ci%+1:ENDWHILE
+15710 ENDPROC
+15720 DEF FNinferkindcore(cs$)
+15730 LOCAL cp%,cd%,cq%,cc$,co%,ci%,ck%,cl%,cr%,cn$
+15740 cs$=FNkindtrim(cs$):IF cs$="" PROCbad("Missing FN result expression")
+15750 WHILE LEFT$(cs$,1)="(" AND FNkindouter(cs$):cs$=FNkindtrim(MID$(cs$,2,LEN(cs$)-2)):ENDWHILE
+15760 cp%=1:cd%=0:cq%=FALSE:co%=0
+15770 WHILE cp%<=LEN(cs$)
+15780 cc$=MID$(cs$,cp%,1):IF cc$=CHR$(34) cq%=NOT cq%
+15790 IF NOT cq% AND cd%=0 AND INSTR("<>=*/^-",cc$)>0 co%=1
+15800 IF NOT cq% AND cd%=0 THEN IF FNkindword(cs$,cp%,"AND") OR FNkindword(cs$,cp%,"OR") OR FNkindword(cs$,cp%,"EOR") OR FNkindword(cs$,cp%,"DIV") OR FNkindword(cs$,cp%,"MOD") co%=1
+15810 IF NOT cq% THEN IF cc$="(" cd%=cd%+1
+15820 IF NOT cq% THEN IF cc$=")" cd%=cd%-1
+15830 cp%=cp%+1:ENDWHILE
+15840 IF co%=1 THEN =0
+15845 IF LEFT$(cs$,1)="+" THEN =0
+15850 cp%=FNkindplus(cs$):IF cp%>0 THEN cl%=FNinferkind(LEFT$(cs$,cp%-1)):cr%=FNinferkind(MID$(cs$,cp%+1)):PROCkindpair: =ck%
+15860 IF LEFT$(cs$,1)=CHR$(34) THEN =1
+15870 IF LEFT$(cs$,2)="FN" THEN cp%=3:cn$=FNkindname(cs$,cp%):ci%=FNprocfind("F"+cn$):IF ci%<0 PROCbad("Undefined FN "+cn$)
+15880 IF LEFT$(cs$,2)="FN" THEN =cpret%(ci%)
+15890 cp%=1:cn$=FNkindname(cs$,cp%):IF RIGHT$(cn$,1)="$" THEN =1
+15900 =0
+15910 DEF PROCkindpair
+15920 ck%=cl%:IF ck%<0 ck%=cr%
+15930 IF cl%>=0 AND cr%>=0 AND cl%<>cr% PROCbad("Numeric/string type mismatch in FN result")
+15940 ENDPROC
+15950 DEF FNkindname(cs$,cp%)
+15960 LOCAL cn$:cn$=""
+15970 WHILE FNalpha(MID$(cs$,cp%,1)) OR FNdigit(MID$(cs$,cp%,1)):cn$=cn$+MID$(cs$,cp%,1):cp%=cp%+1:ENDWHILE
+15980 IF MID$(cs$,cp%,1)="$" cn$=cn$+"$"
+15990 =cn$
+16000 DEF FNkindtrim(cs$)
+16010 WHILE LEFT$(cs$,1)=" " OR LEFT$(cs$,1)=CHR$(9):cs$=MID$(cs$,2):ENDWHILE
+16020 WHILE RIGHT$(cs$,1)=" " OR RIGHT$(cs$,1)=CHR$(9):cs$=LEFT$(cs$,LEN(cs$)-1):ENDWHILE
+16030 =cs$
+16040 DEF FNkindouter(cs$)
+16050 LOCAL cp%,cd%,cq%,cf%,cc$:cp%=1:cd%=0:cq%=FALSE:cf%=TRUE
+16060 WHILE cp%<=LEN(cs$)
+16070 cc$=MID$(cs$,cp%,1):IF cc$=CHR$(34) cq%=NOT cq%
+16080 IF NOT cq% THEN IF cc$="(" cd%=cd%+1
+16090 IF NOT cq% THEN IF cc$=")" cd%=cd%-1
+16100 IF NOT cq% AND cd%=0 AND cp%<LEN(cs$) cf%=FALSE
+16110 cp%=cp%+1:ENDWHILE
+16120 =(cf% AND cd%=0)
+16130 DEF FNkindword(cs$,cp%,cw$)
+16135 LOCAL cb$,ca$:cb$="":IF cp%>1 cb$=MID$(cs$,cp%-1,1)
+16137 ca$=MID$(cs$,cp%+LEN(cw$),1)
+16140 =(MID$(cs$,cp%,LEN(cw$))=cw$ AND NOT FNalpha(cb$) AND NOT FNdigit(cb$) AND NOT FNalpha(ca$) AND NOT FNdigit(ca$))
+16150 DEF FNkindplus(cs$)
+16160 LOCAL cp%,cd%,cq%,cf%,cc$:cp%=1:cd%=0:cq%=FALSE:cf%=0
+16170 WHILE cp%<=LEN(cs$) AND cf%=0
+16180 cc$=MID$(cs$,cp%,1):IF cc$=CHR$(34) cq%=NOT cq%
+16190 IF NOT cq% AND cd%=0 AND cc$="+" cf%=cp%
+16200 IF NOT cq% THEN IF cc$="(" cd%=cd%+1
+16210 IF NOT cq% THEN IF cc$=")" cd%=cd%-1
+16220 cp%=cp%+1:ENDWHILE
+16230 =cf%
+16300 DEF FNinferkind(cs$)
+16310 LOCAL ck%:ckinddepth%=ckinddepth%+1:IF ckinddepth%>32 PROCbad("FN kind expression nesting exceeds 32")
+16320 ck%=FNinferkindcore(cs$):ckinddepth%=ckinddepth%-1:=ck%
 20000 DATA 4460,387,644,0,12,113,212,267,283
 20010 DATA "E1DDE5D101050000EDB0E5C9DD7E04B72809DD7E03EE80DD7703C9DDE5E10604377E2FCE00772310"
 20020 DATA "F8C9DDE5FDE50100000021000000DD6E02DD6603DD4E04D921000000DD6E00DD6601D9FDE5D1DD21"
@@ -1378,19 +1532,27 @@
 42170 DATA "0000000000000000000000000000000000"
 42180 DATA 1,5,17,21,56,74,78,87,130,141,150,158,170,183,196,251,256,281,287,297
 42190 DATA 305,309,316,330,349,372,380,421,429,436
-50000 DATA 502,27,0,10,20,207,260,389,478,482,486,490,493
-50010 DATA "22ED0100ED53F00100C92AED01003E05C3DD0100DDE5FDE5F53E06CDE10100300A3E05CDE10100DA"
-50020 DATA "C90000F14F47FE8120020605DD7E00B7200DDD360001DDE5E123AF772310FC79F5110E0000FE8120"
-50030 DATA "04110D01002AED010019ED5BF00100B7ED5238092807F1AF37C3C400002AED0100F1110E0000FE81"
-50040 DATA "2004110D01001922F30100FD2AED0100DDE5E1FD2F0023FD2F03FD7706010000004FFE8120020E05"
-50050 DATA "FDE5D113131313131313EDB02AED01003E06CDDD0100380C2AF3010022ED0100FDE5E1AFFDE1DDE1"
-50060 DATA "C9F13E0C3718F5DDE5FDE5E5DDE1DD3103DD7E06FE81280B47FDE5E1AF772310FC1813FD360000FD"
-50070 DATA "3601FFDDE5E1110E000019FD2F02FDE1DDE1AFC9DDE5FDE5F53E06CDE10100C1DA800100E5210000"
-50080 DATA "00682929292929EBE1B7ED522323ED27E5DDE1CDCF0000DD7E06FE812826FE052810DDE5FDE5DDE1"
-50090 DATA "3E26CDE90100DDE1383101000000DD4E06DD1703FDE5E1EDB0AF181FFD7E00DD170312B728150100"
-50100 DATA "00004FDDE5E1110E000019EBFDE5E123EDB0AFFDE1DDE1C93E0C3718F6DDE5FDE53E06CDE1010038"
-50110 DATA "2E2323ED27E5DDE122ED0100DD170301000000DD4E0679FE8120020E05DDE5E123232323232323ED"
-50120 DATA "B0CDE5010018CA3E05CDE10100380E2323ED2722ED0100CDE5010018033E0D37FDE1DDE1C9C30000"
-50130 DATA "00C3000000C3000000C3000000000000000000000000"
-50140 DATA 1,6,11,17,28,36,40,86,92,106,110,128,133,173,179,185,189,268,273,300
-50150 DATA 323,396,409,442,450,460,464
+50000 DATA 783,58,0,10,20,215,268,397,747,751,755,759,762,556,401
+50010 DATA "22FA0200ED53FD0200C92AFA02003E05C3EA0200DDE5FDE5F53E06CDEE020030123E05CDEE020030"
+50020 DATA "0A3E07CDEE0200DAD10000F14F47FE8120020605DD7E00B7200DDD360001DDE5E123AF772310FC79"
+50030 DATA "F5110E0000FE812004110D01002AFA020019ED5BFD0200B7ED5238092807F1AF37C3CC00002AFA02"
+50040 DATA "00F1110E0000FE812004110D01001922000300FD2AFA0200DDE5E1FD2F0023FD2F03FD7706010000"
+50050 DATA "004FFE8120020E05FDE5D113131313131313EDB02AFA02003E06CDEA0200380C2A00030022FA0200"
+50060 DATA "FDE5E1AFFDE1DDE1C9F13E0C3718F5DDE5FDE5E5DDE1DD3103DD7E06FE81280B47FDE5E1AF772310"
+50070 DATA "FC1813FD360000FD3601FFDDE5E1110E000019FD2F02FDE1DDE1AFC9DDE5FDE5F53E06CDEE0200C1"
+50080 DATA "DA880100E521000000682929292929EBE1B7ED522323ED27E5DDE1CDD70000DD7E06FE812826FE05"
+50090 DATA "2810DDE5FDE5DDE13E26CDF60200DDE1383101000000DD4E06DD1703FDE5E1EDB0AF181FFD7E00DD"
+50100 DATA "170312B72815010000004FDDE5E1110E000019EBFDE5E123EDB0AFFDE1DDE1C93E0C3718F63E0518"
+50110 DATA "023E0732030300DDE5FDE53E06CDEE0200382E2323ED27E5DDE122FA0200DD170301000000DD4E06"
+50120 DATA "79FE8120020E05DDE5E123232323232323EDB0CDF2020018CA3A030300CDEE0200383FE5DDE13A03"
+50130 DATA "0300FE072027DD2702DD1705DD7E08B7280B01000000470E05ED4CEDB0DD1709DD7E0CB728070100"
+50140 DATA "000047EDB0DD270222FA0200CDF20200180D3A030300FE073E0728023E0D37FDE1DDE1C9DDE5FDE5"
+50150 DATA "DD22040300FD2207030078320D030079320E03002AFA0200220A030011000000513A0D0300010000"
+50160 DATA "00470E05ED4C091922000300ED5BFD0200B7ED5238082806AF37C3E502002A0A03003E07CDEA0200"
+50170 DATA "DAE502003E07CDEE0200DAE50200E5DDE1ED5B040300DD1F053A0D0300DD7708ED5B070300DD1F09"
+50180 DATA "3A0E0300DD770CED5B0A03002A0403003A0D0300B7280B01000000470E05ED4CEDB02A0703003A0E"
+50190 DATA "0300B728070100000047EDB02A00030022FA0200AFFDE1DDE1C9C3000000C3000000C3000000C300"
+50200 DATA "0000000000000000000000000000000000000000000000"
+50210 DATA 1,6,11,17,28,36,44,48,94,100,114,118,136,141,181,187,193,197,276,281
+50220 DATA 308,331,404,414,427,460,466,470,479,529,533,539,562,567,572,577,581,585,594,609
+50230 DATA 614,627,631,637,641,647,651,659,666,674,681,689,693,697,715,719,733,737

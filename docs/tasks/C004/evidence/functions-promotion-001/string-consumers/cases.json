@@ -1,0 +1,40 @@
+[
+  {
+    "source": "PRINT LEFT$(FNletters);\":\";LEFT$(FNletters,2);\":\";RIGHT$(FNletters,2)\nPRINT MID$(FNletters,2);\":\";MID$(FNletters,0);\":\";MID$(FNletters,2,3)\nPRINT ;LEN FNletters;\":\";ASC FNletters;\":\";VAL FNdigits;\":\";INSTR(FNletters,FNneedle)\nPRINT ;INSTR(FNletters,FNneedle,FNcount);\":\";(FNletters=\"ABCDEF\");\":\";(\"ABCDEF\"=FNletters)\nPRINT ;ASC LEFT$(FNbytes);\":\";ASC MID$(FNbytes,0,1);\":\";ASC RIGHT$(FNbytes,1)\nPRINT \"[\"+LEFT$(FNletters)+\"]\";\":\";STRING$(2,STR$ FNnumber)\nEND\nDEF FNletters=\"ABCDEF\"\nDEF FNneedle=\"CD\"\nDEF FNdigits=\"12.5\"\nDEF FNcount:scratch$=\"changed\":=2\nDEF FNbytes=CHR$(0)+CHR$(128)+CHR$(255)\nDEF FNnumber=3\n",
+    "reference_source": "PRINT LEFT$(FNletters);\":\";LEFT$(FNletters,2);\":\";RIGHT$(FNletters,2)\nPRINT MID$(FNletters,2);\":\";MID$(FNletters,0);\":\";MID$(FNletters,2,3)\nPRINT ;LEN FNletters;\":\";ASC FNletters;\":\";VAL FNdigits;\":\";INSTR(FNletters,FNneedle)\nPRINT ;INSTR(FNletters,FNneedle,FNcount);\":\";(FNletters=\"ABCDEF\");\":\";(\"ABCDEF\"=FNletters)\nPRINT ;ASC LEFT$(FNbytes);\":\";ASC MID$(FNbytes,0,1);\":\";ASC RIGHT$(FNbytes,1)\nPRINT \"[\"+LEFT$(FNletters)+\"]\";\":\";STRING$(2,STR$ FNnumber)\n",
+    "reference_definitions": [
+      "DEF FNletters=\"ABCDEF\"",
+      "DEF FNneedle=\"CD\"",
+      "DEF FNdigits=\"12.5\"",
+      "DEF FNcount:scratch$=\"changed\":=2",
+      "DEF FNbytes=CHR$(0)+CHR$(128)+CHR$(255)",
+      "DEF FNnumber=3"
+    ],
+    "reference": true,
+    "status": 0,
+    "expected": "ABCDE:AB:EF\nBCDEF:ABCDEF:BCD\n6:65:12.5:3\n3:-1:-1\n0:0:255\n[ABCDE]:33\n"
+  },
+  {
+    "source": "s$=\"abcdef\":MID$(s$,2,3)=FNchange:PRINT s$\ns$=\"abcdef\":MID$(s$,FNstart,2)=\"XY\":PRINT s$\ns$=\"abcdef\":guard$=\"guard\":MID$(s$,2,2)=FNreallocate:PRINT s$;\":\";guard$\nEND\nDEF FNchange:s$=\"1234\":=\"XY\"\nDEF FNstart:s$=\"12\":=2\nDEF FNreallocate:s$=STRING$(12,\"q\"):=\"YZ\"\n",
+    "reference_source": "s$=\"abcdef\":MID$(s$,2,3)=FNchange:PRINT s$\ns$=\"abcdef\":MID$(s$,FNstart,2)=\"XY\":PRINT s$\ns$=\"abcdef\":guard$=\"guard\":MID$(s$,2,2)=FNreallocate:PRINT s$;\":\";guard$\n",
+    "reference_definitions": [
+      "DEF FNchange:s$=\"1234\":=\"XY\"",
+      "DEF FNstart:s$=\"12\":=2",
+      "DEF FNreallocate:s$=STRING$(12,\"q\"):=\"YZ\""
+    ],
+    "reference": true,
+    "status": 0,
+    "expected": "1XY4\n1X\nqYZqqqqqqqqq:guard\n"
+  },
+  {
+    "source": "MID$(missing$,1)=FNcreate\nEND\nDEF FNcreate:missing$=\"new\":PRINT \"called\":=\"x\"\n",
+    "reference_source": "MID$(missing$,1)=FNcreate\n",
+    "reference_definitions": [
+      "DEF FNcreate:missing$=\"new\":PRINT \"called\":=\"x\""
+    ],
+    "reference": true,
+    "status": 1,
+    "reference_error": true,
+    "expected": "No such variable\n"
+  }
+]

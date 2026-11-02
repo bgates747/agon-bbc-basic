@@ -1,0 +1,14 @@
+{
+  "independent_control_and_procedure_links": [
+    {
+      "case": 0,
+      "numeric": 263183,
+      "control": 267951,
+      "procedure": 276857,
+      "arena": 280249,
+      "limit": 313017
+    }
+  ],
+  "all_external_bridges_checked": true,
+  "entry_reset_and_workspace_checked": true
+}

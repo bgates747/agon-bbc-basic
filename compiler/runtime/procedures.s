@@ -3,6 +3,7 @@
     .assume adl=1
     .text
     .global act_init,act_begin,act_save,act_install,act_bind,act_leave
+    .global act_fn_begin,act_fn_leave
     .global act_pushslot,act_checkslot,act_popslot,act_numslot,act_top
 ; HL=arena base, DE=exclusive limit. Caller preserves MOS DE at entry.
 act_init:
@@ -24,6 +25,9 @@ act_save:
     call act_check
     jr nc,act_save_context
     ld a,5
+    call act_check
+    jr nc,act_save_context
+    ld a,7
     call act_check
     jp c,act_save_badcontext
 act_save_context:
@@ -225,6 +229,12 @@ act_bind_bad:
     jr act_bind_done
 ; Restore LOCAL records, then require the distinct PROC marker.
 act_leave:
+    ld a,5
+    jr act_leave_start
+act_fn_leave:
+    ld a,7
+act_leave_start:
+    ld (act_leave_kind),a
     push ix
     push iy
 act_leave_loop:
@@ -258,19 +268,121 @@ act_leave_copy:
     call act_pop
     jr act_leave_loop
 act_leave_marker:
-    ld a,5
+    ld a,(act_leave_kind)
     call act_check
     jr c,act_leave_bad
-    inc hl
-    inc hl
-    ld hl,(hl)                 ; ADL24 OK: arena checkpoint
+    push hl
+    pop ix
+    ld a,(act_leave_kind)
+    cp 7
+    jr nz,act_leave_checkpoint
+    ld hl,(ix+2)               ; ADL24 OK: arena checkpoint/prefix source
+    ld de,(ix+5)               ; ADL24 OK: caller numeric pool
+    ld a,(ix+8)
+    or a
+    jr z,act_leave_strings
+    ld bc,0
+    ld b,a
+    ld c,5
+    mlt bc
+    ldir
+act_leave_strings:
+    ld de,(ix+9)               ; ADL24 OK: caller string pool
+    ld a,(ix+12)
+    or a
+    jr z,act_leave_checkpoint
+    ld bc,0
+    ld b,a                     ; full24 count = string_count *256
+    ldir
+act_leave_checkpoint:
+    ld hl,(ix+2)
     ld (act_top),hl
     call act_pop
     jr act_leave_done
 act_leave_bad:
+    ld a,(act_leave_kind)
+    cp 7
+    ld a,7
+    jr z,act_leave_failure
     ld a,13
+act_leave_failure:
     scf
 act_leave_done:
+    pop iy
+    pop ix
+    ret
+ ; B=numeric prefix count, C=string prefix count, IX/IY=pool starts.
+; Save caller prefixes in a separate bounded FN activation before actuals.
+act_fn_begin:
+    push ix
+    push iy
+    ld (act_fn_num),ix          ; ADL24 OK: synchronous leaf scratch pointer
+    ld (act_fn_str),iy
+    ld a,b
+    ld (act_fn_n),a
+    ld a,c
+    ld (act_fn_s),a
+    ld hl,(act_top)
+    ld (act_fn_checkpoint),hl
+    ld de,0
+    ld d,c                     ; full24 count = string_count *256
+    ld a,(act_fn_n)
+    ld bc,0
+    ld b,a
+    ld c,5
+    mlt bc
+    add hl,bc
+    add hl,de
+    ld (act_candidate),hl
+    ld de,(act_limit)
+    or a
+    sbc hl,de
+    jr c,act_fn_space
+    jr z,act_fn_space
+    xor a
+    scf
+    jp act_fn_done
+act_fn_space:
+    ld hl,(act_fn_checkpoint)
+    ld a,7
+    call act_push
+    jp c,act_fn_done
+    ld a,7
+    call act_check
+    jp c,act_fn_done
+    push hl
+    pop ix
+    ld de,(act_fn_num)
+    ld (ix+5),de               ; ADL24 OK: caller numeric pool bytes5..7
+    ld a,(act_fn_n)
+    ld (ix+8),a
+    ld de,(act_fn_str)
+    ld (ix+9),de               ; ADL24 OK: caller string pool bytes9..11
+    ld a,(act_fn_s)
+    ld (ix+12),a
+    ld de,(act_fn_checkpoint)
+    ld hl,(act_fn_num)
+    ld a,(act_fn_n)
+    or a
+    jr z,act_fn_strings
+    ld bc,0
+    ld b,a
+    ld c,5
+    mlt bc
+    ldir
+act_fn_strings:
+    ld hl,(act_fn_str)
+    ld a,(act_fn_s)
+    or a
+    jr z,act_fn_finish
+    ld bc,0
+    ld b,a
+    ldir
+act_fn_finish:
+    ld hl,(act_candidate)
+    ld (act_top),hl
+    xor a
+act_fn_done:
     pop iy
     pop ix
     ret
@@ -289,3 +401,9 @@ act_numslot: .d24 0
 act_top: .d24 0
 act_limit: .d24 0
 act_candidate: .d24 0
+act_leave_kind: .byte 0
+act_fn_num: .d24 0
+act_fn_str: .d24 0
+act_fn_checkpoint: .d24 0
+act_fn_n: .byte 0
+act_fn_s: .byte 0

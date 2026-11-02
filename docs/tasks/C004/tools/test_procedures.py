@@ -45,9 +45,9 @@ def programs():
   ('PROCsub:PRINT "done":END\nDEF PROCsub\nGOSUB @sub\nENDPROC\n@sub:PRINT "gosub":RETURN\n','gosub\ndone\n',0),
  ]]
  result += [dict(source=s,diagnostic=d) for s,d in [
-  ('PROCmissing\n','Undefined PROC missing'),('DEF PROCp\nDEF PROCp\n','Duplicate PROC p'),
+  ('PROCmissing\n','Undefined PROC missing'),('DEF PROCp\nDEF PROCp\n','Duplicate definition p'),
   ('DEF PROCp(a%,a%)\n','Duplicate formal parameter'),('DEF PROCp(RETURN a%)\n','Unsupported formal parameter RETURN'),
-  ('DEF FNx=1\n','Only DEF PROC is supported'),('LOCAL ERROR\n','Unsupported LOCAL form ERROR'),
+  ('DEF invalid\n','Expected PROC or FN after DEF'),('LOCAL ERROR\n','Unsupported LOCAL form ERROR'),
   ('PROCp(1)\nEND\nDEF PROCp(s$):ENDPROC\n','Procedure argument type mismatch'),
   ('PROCp(1,2)\nEND\nDEF PROCp(a%):ENDPROC\n','Expected )'),
   ('PROCp\nEND\nDEF PROCp(a%):ENDPROC\n','Expected ('),

@@ -1,0 +1,112 @@
+{
+  "scope": "Revised full FN prototype with explicit carrier exclusions",
+  "full": {
+    "programs": 28,
+    "native_executions": 15,
+    "rejected_sources": 13,
+    "reference_output_programs": 14,
+    "legacy_arithmetic_observations": 0,
+    "deterministic_repeat": true,
+    "independent_link_bases": [
+      263183,
+      264148,
+      264725,
+      264847,
+      263354,
+      263488,
+      262511,
+      262627,
+      262514,
+      262614,
+      262561,
+      262550,
+      262450,
+      262468,
+      262430
+    ],
+    "string_link_bases": [
+      278022,
+      279552,
+      279728,
+      278192,
+      278309,
+      277328
+    ],
+    "duration_seconds": 610.517,
+    "hashes": {
+      "docs/tasks/C004/functions/compiler.bas": "6feb0b21b09ac4353347876df89043caf8800727b5a8c4f985588c3e6741c8f4",
+      "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+      "docs/tasks/C004/build/output-integration/cases.json": "674f522aed97c23e1e644a54d700d9e698209ee085cbe137597dd69f9ae9be01"
+    }
+  },
+  "edges": {
+    "programs": 5,
+    "native_executions": 5,
+    "rejected_sources": 0,
+    "reference_output_programs": 4,
+    "legacy_arithmetic_observations": 0,
+    "deterministic_repeat": true,
+    "independent_link_bases": [
+      262760,
+      263521,
+      263383,
+      263198,
+      262806
+    ],
+    "string_link_bases": [
+      278365,
+      278215,
+      278015
+    ],
+    "duration_seconds": 220.521,
+    "hashes": {
+      "docs/tasks/C004/functions/compiler.bas": "6feb0b21b09ac4353347876df89043caf8800727b5a8c4f985588c3e6741c8f4",
+      "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+      "docs/tasks/C004/build/output-integration/cases.json": "e2f14741c6574d879ffbf55d4a93a02d6bb1a0846a1e1672f0c29bee61f50dea"
+    }
+  },
+  "abi": {
+    "checked_index_and_stack_preservation": true,
+    "poisoned_upper_bc": true,
+    "numeric_and_string_prefix_restoration": true,
+    "nested_prefixes": true,
+    "local_restoration_under_fn": true,
+    "distinct_proc_fn_markers": true,
+    "zero_counts_and_null_pools": true,
+    "exact_arena_capacity_checked": true,
+    "duration_seconds": 1.016,
+    "hashes": {
+      "docs/tasks/C004/functions/abi.s": "10dfc934e3f78b3a2f3479eb9d61da9cbff74cc6edb151606c22779684a0937d",
+      "docs/tasks/C004/build/function-abi/probe.bin": "bd188caac17de75b1ba917960955efdf0c5072cae21f0e5db76109f0912aa208",
+      "docs/tasks/C004/build/function-runtime/runtime-0.bin": "db52a06ca96c060ddb75b75563b95269e9d08330ef28a514d0ca59d5757bee22"
+    }
+  },
+  "procedure_abi": {
+    "checked_index_and_stack_preservation": true,
+    "distinct_marker_errors": true,
+    "numeric_and_string_restoration": true,
+    "new_bindings_remain_defined": true,
+    "nested_local_restoration": true,
+    "maximum_string_copy": true,
+    "exact_arena_capacity_checked": true,
+    "duration_seconds": 1.016,
+    "hashes": {
+      "docs/tasks/C004/activations/abi.s": "7437d241115ccae6068b920db8564bcd26ee359f012d8327a4b274be842bdf56",
+      "docs/tasks/C004/build/procedure-abi/probe.bin": "46a351b71d2a0ddbde93d47b959324c55bcbe008b26b3d4aa0a115ea40b6e922",
+      "docs/tasks/C004/build/function-runtime/runtime-0.bin": "db52a06ca96c060ddb75b75563b95269e9d08330ef28a514d0ca59d5757bee22"
+    }
+  },
+  "baseline": {
+    "cases": 39,
+    "native_executions": 15,
+    "deterministic_repeat": true,
+    "assembler_oracle": true,
+    "duration_seconds": 62.201,
+    "basic_sha256": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+    "compiler_sha256": "6feb0b21b09ac4353347876df89043caf8800727b5a8c4f985588c3e6741c8f4",
+    "cli_sha256": "bf5f29b243b8214e54c515dcc26edf47399ce440356af2ebc3ce3d7664ae11eb",
+    "mos_sha256": "d564243283972690933a4554296ad6202ca4ef54572279533a942960846bebae"
+  },
+  "earlier_attempt_failed_on_reference_carrier_mismatch": true,
+  "human_hardware_validation": false
+}

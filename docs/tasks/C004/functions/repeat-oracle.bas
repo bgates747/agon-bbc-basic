@@ -1,0 +1,8 @@
+10 ON ERROR REPORT:PRINT:PRINT "FN_REPEAT_DONE":OSCLI "BYE"
+20 scratch$="123456":r$=STRING$(2,FNa)
+30 PRINT ;LEN r$;":";ASC MID$(r$,1);":";ASC MID$(r$,2);":";ASC MID$(r$,3);":";ASC MID$(r$,4);":";ASC MID$(r$,5);":";ASC MID$(r$,6)
+40 scratch$="UVWXYZ":r$=STRING$(2,FNa)
+50 PRINT ;ASC MID$(r$,4);":";ASC MID$(r$,5);":";ASC MID$(r$,6)
+60 r$=STRING$(2,FNa+""):PRINT r$
+70 PRINT "FN_REPEAT_DONE":OSCLI "BYE"
+1000 DEF FNa="ABC"

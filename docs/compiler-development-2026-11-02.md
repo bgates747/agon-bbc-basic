@@ -92,3 +92,56 @@ baseline55.860s, PROC109.848s, ABI1.015s, loops60.113s, conditionals37.000s and
 slice-write52.537s. Exact evidence remains distinct from full prototype scope.
 Checkpoint qualified work, then continue FN under C004. FN783-byte prefix-save
 runtime experiments have direct ABI results but no compiler promotion yet.
+
+## FN result/caller-prefix tranche started
+
+Qualified PROC/LOCAL checkpoint520e05e is committed/pushed. The FN prototype
+infers actual result kinds (including unsuffixed string functions) and stages
+recursive/nested calls while saving live five-byte numeric and256-byte string
+prefixes in its arena. The extended helper is783 bytes/58 relocations. Direct
+prefix ABI passes in1.016s (poisoned upper BC, zero/null pools, nested prefixes,
+LOCAL restoration, marker distinctions and capacity); the prior PROC ABI also
+passes against it in1.016s after correcting relative-path report packaging.
+Initial numeric/string/pending-expression smoke matches BASIC in88.631s.
+
+The full25-case attempt was interrupted after compilation, before its final
+repeat/native phase. Confirmed no remaining fixture process, preserved partial
+inputs/logs and resumed using a fresh BBC repeat plus all15 native outputs.
+Fourteen matched; the string case exposed a real reference discrepancy at
+ASC RIGHT$(FNnul). This run is failed evidence, not full qualification.
+
+## FN accumulator-carrier finding and scope refinement
+
+Actual pinned-BASIC probes show RIGHT$(FN returning "ABC") selects the original
+first byte, while explicit count1 selects the last. STRING$(2,FNa) can expose
+prior accumulator bytes: "ABC456" after a prior "123456" assignment, and "ABCXYZ"
+after "UVWXYZ". Concatenation with an empty string re-establishes ordinary results.
+Source inference identifies consumers relying on DE's complete accumulator
+pointer, which FNEND does not explicitly restore. Exact stray-write addresses
+are not claimed. Retained probes and compiler/INTERPRETER-FINDINGS.md separate
+possible upstream corrections from compiler compatibility policy.
+
+The compiler now tracks unqualified direct FN string carriers through parentheses
+and omitted LEFT$. Omitted RIGHT$ and STRING$ reject those carriers clearly;
+assignment/reload, concatenation and explicit slices remain admitted. The original
+mismatching source is retained as an explicit rejection case, with independent
+positive explicit-count coverage. No reference oracle was changed and no FN code
+has been promoted. A revised full28-case qualification is running. The live
+compiler remains the qualified scalar PROC/LOCAL checkpoint.
+
+## C004 accepted and removed from TODO
+
+Revised FN28-case scope passes in610.517s (15 native/13 rejected,14 reference);
+five supplemental cases in220.521s; both ABI probes in1.016s; baseline39/15 in
+62.201s. Exact source SHA6feb0b21b09ac4353347876df89043caf8800727b5a8c4f985588c3e6741c8f4
+and783-byte/58-relocation helper are promoted, with four packers reproducing
+source. Live baseline62.234s, FN91.636s, carrier4-case84.796s, ABI1.027s,
+PROC125.245s and loops67.055s pass. Three further string-consumer/slice-RHS
+programs pass in224.858s, including target reallocation and pre-RHS existence.
+
+C004's selected structured flow/scalar PROC/FN/LOCAL scope is complete. Preserve
+explicit static-kind and carrier exclusions, failed/interrupted evidence and
+unchanged earlier runtimes. Remove C004 from TODO. Continue C005's source inventory
+and bootstrap closure under the Author's authorization; no Oryx/hardware/benchmark
+claim is made. Preliminary source inventory counts140 definitions against the
+current128-definition cap, plus arrays, memory access, DATA, I/O and error facilities.

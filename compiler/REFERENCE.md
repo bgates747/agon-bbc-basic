@@ -250,3 +250,18 @@ loop markers fail. [Audit](../docs/tasks/C004/activations/AUDIT.md) and
 [contract](../docs/tasks/C004/activations/PROCEDURES.md) record ownership, calling
 conventions and full/selected live qualification. Repository/vendor license and
 numeric/string implementations remain unchanged; new sources identify their origin.
+
+## Function adaptation
+
+EXEC.Z80 FN/FNEND/RESLOC and ARGUE define a separate return marker, actual result
+kind, staged parameters and reverse restoration. The BBC compiler infers a stable
+result kind and emits native calls. Standalone FN records save live five-byte
+numeric/256-byte string prefixes and private owned locals; transfer buffers protect
+results during restoration. The extended helper is783 bytes/58 relocations, with
+all external control/numeric bridges independently checked. No interpreter parser,
+variable table or hidden accumulator is linked.
+
+Actual reference RIGHT$/STRING$ probes expose a string-result pointer dependency.
+[Finding](INTERPRETER-FINDINGS.md) records evidence and a possible separate upstream
+audit. [Function contract](../docs/tasks/C004/functions/RETURN-KINDS.md) documents
+clear rejection of those unqualified carriers rather than divergent output.

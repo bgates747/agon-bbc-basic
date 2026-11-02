@@ -1,0 +1,808 @@
+{
+  "source": "compiler/compiler.bas",
+  "source_sha256": "6feb0b21b09ac4353347876df89043caf8800727b5a8c4f985588c3e6741c8f4",
+  "ordered_source_lines": 1558,
+  "procedure_definitions": 109,
+  "function_definitions": 31,
+  "scope": "Static search inventory; counts are not a compiler parser or feature qualification",
+  "matches": {
+    "definitions": [
+      {
+        "line": 1000,
+        "source": "DEF PROCinit"
+      },
+      {
+        "line": 1040,
+        "source": "DEF PROCcompile(csource$,ctarget$)"
+      },
+      {
+        "line": 1370,
+        "source": "DEF PROCreadline(ch%)"
+      },
+      {
+        "line": 1450,
+        "source": "DEF PROCreadchar(cb%)"
+      },
+      {
+        "line": 1510,
+        "source": "DEF PROCline"
+      },
+      {
+        "line": 1622,
+        "source": "DEF PROCnumberlabel"
+      },
+      {
+        "line": 1632,
+        "source": "DEF PROCstatement"
+      },
+      {
+        "line": 1770,
+        "source": "DEF PROCbranch(cw$)"
+      },
+      {
+        "line": 1830,
+        "source": "DEF PROCprint"
+      },
+      {
+        "line": 1941,
+        "source": "DEF PROCprintitem"
+      },
+      {
+        "line": 1945,
+        "source": "DEF PROCprintnumber"
+      },
+      {
+        "line": 1950,
+        "source": "DEF PROCvdu"
+      },
+      {
+        "line": 2030,
+        "source": "DEF FNstring"
+      },
+      {
+        "line": 2140,
+        "source": "DEF FNname"
+      },
+      {
+        "line": 2230,
+        "source": "DEF FNnumber(cmax%)"
+      },
+      {
+        "line": 2360,
+        "source": "DEF FNalpha(cc$)"
+      },
+      {
+        "line": 2380,
+        "source": "DEF FNdigit(cc$)"
+      },
+      {
+        "line": 2400,
+        "source": "DEF FNpeek"
+      },
+      {
+        "line": 2420,
+        "source": "DEF PROCspace"
+      },
+      {
+        "line": 2450,
+        "source": "DEF PROCexpect(cc$)"
+      },
+      {
+        "line": 2500,
+        "source": "DEF FNsymbol(cn$)"
+      },
+      {
+        "line": 2560,
+        "source": "DEF PROClabel(cn$)"
+      },
+      {
+        "line": 2610,
+        "source": "DEF PROCaddr(ch$,cn$)"
+      },
+      {
+        "line": 2680,
+        "source": "DEF PROCpatch(cp%,cv%)"
+      },
+      {
+        "line": 2720,
+        "source": "DEF PROCbyte(cv%)"
+      },
+      {
+        "line": 2760,
+        "source": "DEF PROCbytes(ch$)"
+      },
+      {
+        "line": 2840,
+        "source": "DEF PROCcharacter(cv%)"
+      },
+      {
+        "line": 2870,
+        "source": "DEF PROCnewline"
+      },
+      {
+        "line": 2900,
+        "source": "DEF PROCtext(cs$)"
+      },
+      {
+        "line": 2950,
+        "source": "DEF PROCruntime"
+      },
+      {
+        "line": 3240,
+        "source": "DEF PROCbad(cm$)"
+      },
+      {
+        "line": 4000,
+        "source": "DEF PROCloadnumbers"
+      },
+      {
+        "line": 4110,
+        "source": "DEF PROCnumslot"
+      },
+      {
+        "line": 4160,
+        "source": "DEF PROCvalue(cv)"
+      },
+      {
+        "line": 4220,
+        "source": "DEF PROCnumindices(cl%,cr%)"
+      },
+      {
+        "line": 4250,
+        "source": "DEF PROCnumcall(co%)"
+      },
+      {
+        "line": 4290,
+        "source": "DEF PROCbinary(co%)"
+      },
+      {
+        "line": 4330,
+        "source": "DEF PROCexpr(cmin%)"
+      },
+      {
+        "line": 4430,
+        "source": "DEF PROCexprtail"
+      },
+      {
+        "line": 4480,
+        "source": "DEF FNoperator"
+      },
+      {
+        "line": 4710,
+        "source": "DEF PROCitem"
+      },
+      {
+        "line": 4820,
+        "source": "DEF PROCworditem"
+      },
+      {
+        "line": 4920,
+        "source": "DEF PROCconstant"
+      },
+      {
+        "line": 5101,
+        "source": "DEF PROCdecimal"
+      },
+      {
+        "line": 5110,
+        "source": "DEF PROCdecexponent"
+      },
+      {
+        "line": 5120,
+        "source": "DEF FNreaddecimal(cs$)"
+      },
+      {
+        "line": 5184,
+        "source": "DEF PROCpacked(cv,ce%)"
+      },
+      {
+        "line": 5192,
+        "source": "DEF PROCnumruntime"
+      },
+      {
+        "line": 6000,
+        "source": "DEF FNvariable(cn$)"
+      },
+      {
+        "line": 6160,
+        "source": "DEF PROCassign(cn$)"
+      },
+      {
+        "line": 6260,
+        "source": "DEF PROCvariable(cn$)"
+      },
+      {
+        "line": 6340,
+        "source": "DEF PROCvarcopy(cf$,ct$,cn%)"
+      },
+      {
+        "line": 6380,
+        "source": "DEF PROCvarruntime"
+      },
+      {
+        "line": 6460,
+        "source": "DEF PROCkeywords:LOCAL ci%"
+      },
+      {
+        "line": 6500,
+        "source": "DEF FNreserved(cn$)"
+      },
+      {
+        "line": 7000,
+        "source": "DEF PROCloadstrings"
+      },
+      {
+        "line": 7110,
+        "source": "DEF FNstringstart"
+      },
+      {
+        "line": 7190,
+        "source": "DEF PROCprintstring"
+      },
+      {
+        "line": 7270,
+        "source": "DEF PROCprintstrvalue"
+      },
+      {
+        "line": 7300,
+        "source": "DEF PROCstrslot"
+      },
+      {
+        "line": 7340,
+        "source": "DEF PROCstrexpr"
+      },
+      {
+        "line": 7420,
+        "source": "DEF PROCstritem"
+      },
+      {
+        "line": 7460,
+        "source": "DEF PROCstratom"
+      },
+      {
+        "line": 7570,
+        "source": "DEF PROCstrliteral"
+      },
+      {
+        "line": 7620,
+        "source": "DEF PROCstrchr"
+      },
+      {
+        "line": 7670,
+        "source": "DEF PROCstrlen"
+      },
+      {
+        "line": 7710,
+        "source": "DEF PROCstrassign(ci%)"
+      },
+      {
+        "line": 7760,
+        "source": "DEF PROCstrruntime"
+      },
+      {
+        "line": 7960,
+        "source": "DEF PROCstrrelocate(cb%,ci%)"
+      },
+      {
+        "line": 8010,
+        "source": "DEF FNstrreserved(cn$)"
+      },
+      {
+        "line": 8100,
+        "source": "DEF PROCneednumber"
+      },
+      {
+        "line": 8130,
+        "source": "DEF PROCtypedbinary"
+      },
+      {
+        "line": 8210,
+        "source": "DEF PROCstrcompare(co%)"
+      },
+      {
+        "line": 8320,
+        "source": "DEF PROCslice(ct%)"
+      },
+      {
+        "line": 8410,
+        "source": "DEF PROCcount"
+      },
+      {
+        "line": 8440,
+        "source": "DEF PROCslicecount(ct%,ci%)"
+      },
+      {
+        "line": 8470,
+        "source": "DEF PROCtypeditem"
+      },
+      {
+        "line": 8500,
+        "source": "DEF PROCstrval"
+      },
+      {
+        "line": 8540,
+        "source": "DEF PROCstrnum"
+      },
+      {
+        "line": 8600,
+        "source": "DEF PROCstrasc"
+      },
+      {
+        "line": 8700,
+        "source": "DEF PROCstrinstr"
+      },
+      {
+        "line": 8760,
+        "source": "DEF PROCsearchstart"
+      },
+      {
+        "line": 8790,
+        "source": "DEF PROCstrrepeat"
+      },
+      {
+        "line": 8900,
+        "source": "DEF PROCstrsliceassign(ct$)"
+      },
+      {
+        "line": 9030,
+        "source": "DEF PROCwriterange"
+      },
+      {
+        "line": 9100,
+        "source": "DEF FNword(cw$)"
+      },
+      {
+        "line": 9120,
+        "source": "DEF FNstmtend"
+      },
+      {
+        "line": 9140,
+        "source": "DEF FNflow"
+      },
+      {
+        "line": 9160,
+        "source": "DEF PROCcondition"
+      },
+      {
+        "line": 9200,
+        "source": "DEF PROCif"
+      },
+      {
+        "line": 9300,
+        "source": "DEF PROCifblock(cid$)"
+      },
+      {
+        "line": 9350,
+        "source": "DEF PROCiffalse"
+      },
+      {
+        "line": 9380,
+        "source": "DEF PROCelse"
+      },
+      {
+        "line": 9440,
+        "source": "DEF PROCinlineelse"
+      },
+      {
+        "line": 9490,
+        "source": "DEF PROCendif"
+      },
+      {
+        "line": 11000,
+        "source": "DEF PROCloadcontrol"
+      },
+      {
+        "line": 11080,
+        "source": "DEF FNhexbyte(cs$)"
+      },
+      {
+        "line": 11100,
+        "source": "DEF PROCflowcheck(ct%)"
+      },
+      {
+        "line": 11130,
+        "source": "DEF PROCloop(cw$)"
+      },
+      {
+        "line": 11250,
+        "source": "DEF PROCfor(cid$)"
+      },
+      {
+        "line": 11340,
+        "source": "DEF PROCexpectword(cw$)"
+      },
+      {
+        "line": 11370,
+        "source": "DEF PROCloopend(cw$)"
+      },
+      {
+        "line": 11480,
+        "source": "DEF PROCnext"
+      },
+      {
+        "line": 11700,
+        "source": "DEF PROCflowruntime"
+      },
+      {
+        "line": 11880,
+        "source": "DEF PROCctlexport(cn$,cp%)"
+      },
+      {
+        "line": 11900,
+        "source": "DEF FNtrim(cs$)"
+      },
+      {
+        "line": 13000,
+        "source": "DEF PROCloadacts"
+      },
+      {
+        "line": 13080,
+        "source": "DEF PROCuseacts"
+      },
+      {
+        "line": 13110,
+        "source": "DEF FNprocfind(cn$)"
+      },
+      {
+        "line": 13160,
+        "source": "DEF PROCprocscan(ch%)"
+      },
+      {
+        "line": 13240,
+        "source": "DEF PROCscandef"
+      },
+      {
+        "line": 13320,
+        "source": "DEF PROCprocparams(ci%,csave%)"
+      },
+      {
+        "line": 13470,
+        "source": "DEF PROCprocscope"
+      },
+      {
+        "line": 13540,
+        "source": "DEF FNtarget(cn$)"
+      },
+      {
+        "line": 13570,
+        "source": "DEF PROCdefinition"
+      },
+      {
+        "line": 13650,
+        "source": "DEF PROCproccall"
+      },
+      {
+        "line": 13760,
+        "source": "DEF PROCprocarg(ci%,cj%)"
+      },
+      {
+        "line": 13830,
+        "source": "DEF PROCprocbind(ci%,co%)"
+      },
+      {
+        "line": 13870,
+        "source": "DEF PROCsavebinding(ci%)"
+      },
+      {
+        "line": 13900,
+        "source": "DEF PROClocal"
+      },
+      {
+        "line": 14000,
+        "source": "DEF PROCactruntime"
+      },
+      {
+        "line": 14140,
+        "source": "DEF PROCactworkspace"
+      },
+      {
+        "line": 15000,
+        "source": "DEF FNcallname(ck%)"
+      },
+      {
+        "line": 15040,
+        "source": "DEF FNfnstring(cp%)"
+      },
+      {
+        "line": 15080,
+        "source": "DEF PROCfncall"
+      },
+      {
+        "line": 15230,
+        "source": "DEF PROCcopystr(cf$,ct$)"
+      },
+      {
+        "line": 15250,
+        "source": "DEF PROCfnreturn"
+      },
+      {
+        "line": 15300,
+        "source": "DEF PROCcollectreturns(ci%,cs%)"
+      },
+      {
+        "line": 15410,
+        "source": "DEF FNreturnmark(cp%,cs%)"
+      },
+      {
+        "line": 15450,
+        "source": "DEF FNreturnend(cp%)"
+      },
+      {
+        "line": 15550,
+        "source": "DEF PROCrememberreturn(ci%,cs$,ccol%)"
+      },
+      {
+        "line": 15580,
+        "source": "DEF PROCinferreturns"
+      },
+      {
+        "line": 15720,
+        "source": "DEF FNinferkindcore(cs$)"
+      },
+      {
+        "line": 15910,
+        "source": "DEF PROCkindpair"
+      },
+      {
+        "line": 15950,
+        "source": "DEF FNkindname(cs$,cp%)"
+      },
+      {
+        "line": 16000,
+        "source": "DEF FNkindtrim(cs$)"
+      },
+      {
+        "line": 16040,
+        "source": "DEF FNkindouter(cs$)"
+      },
+      {
+        "line": 16130,
+        "source": "DEF FNkindword(cs$,cp%,cw$)"
+      },
+      {
+        "line": 16150,
+        "source": "DEF FNkindplus(cs$)"
+      },
+      {
+        "line": 16300,
+        "source": "DEF FNinferkind(cs$)"
+      }
+    ],
+    "arrays_and_blocks": [
+      {
+        "line": 1010,
+        "source": "DIM ccode% 65535,csname$(1023),csaddr%(1023)"
+      },
+      {
+        "line": 1020,
+        "source": "DIM crname$(2047),craddr%(2047),crline%(2047),crcol%(2047)"
+      },
+      {
+        "line": 1021,
+        "source": "DIM cpname$(127),cpline%(127),cparcnt%(127),cpar%(127,15),cargkind%(31,15),cargindex%(31,15),cpkind%(127),cpret%(127),creturn$(511),cretdef%(511),cretline%(511),cretcol%(511)"
+      },
+      {
+        "line": 1024,
+        "source": "DIM cvname$(127),cvsize%(127),cvstatic%(127),cvtype%(127),ckwords$(4)"
+      },
+      {
+        "line": 1025,
+        "source": "DIM csunsafe%(15)"
+      },
+      {
+        "line": 1029,
+        "source": "DIM cifid$(31),cbid$(31),cbelse%(31),clkind%(31),clname$(31),clvar%(31)"
+      },
+      {
+        "line": 4030,
+        "source": "DIM cnimage% cnsize%-1,cnreloc%(cnrelocs%-1)"
+      },
+      {
+        "line": 7030,
+        "source": "DIM csimage% cssize%-1,csreloc%(csrelocs%)"
+      },
+      {
+        "line": 11030,
+        "source": "DIM ctimage% ctsize%-1,ctreloc%(ctrelocs%-1)"
+      },
+      {
+        "line": 13030,
+        "source": "DIM caimage% casize%-1,careloc%(carelocs%-1)"
+      }
+    ],
+    "file_io": [
+      {
+        "line": 30,
+        "source": "ON ERROR REPORT:PRINT:CLOSE#0:END"
+      },
+      {
+        "line": 1080,
+        "source": "cfh%=OPENIN(csource$)"
+      },
+      {
+        "line": 1092,
+        "source": "PROCprocscan(cfh%):CLOSE#cfh%:cfh%=OPENIN(csource$):clnum%=0:cpos%=1:ccr%=FALSE"
+      },
+      {
+        "line": 1180,
+        "source": "WHILE NOT EOF#cfh%"
+      },
+      {
+        "line": 1230,
+        "source": "CLOSE#cfh%:cfh%=0"
+      },
+      {
+        "line": 1320,
+        "source": "coh%=OPENOUT(ctarget$)"
+      },
+      {
+        "line": 1340,
+        "source": "FOR ci%=0 TO cpc%-1:BPUT#coh%,ccode%?ci%:NEXT"
+      },
+      {
+        "line": 1350,
+        "source": "CLOSE#coh%"
+      },
+      {
+        "line": 1400,
+        "source": "WHILE NOT EOF#ch% AND NOT cdone%"
+      },
+      {
+        "line": 1410,
+        "source": "cb%=BGET#ch%"
+      },
+      {
+        "line": 13180,
+        "source": "WHILE NOT EOF#ch%"
+      }
+    ],
+    "interactive_input": [
+      {
+        "line": 50,
+        "source": "INPUT LINE \"\"cinput$"
+      },
+      {
+        "line": 60,
+        "source": "INPUT LINE \"\"coutput$"
+      }
+    ],
+    "data_runtime": [
+      {
+        "line": 4020,
+        "source": "RESTORE 20000:READ cnsize%,cnrelocs%,cnentry%,cnliteral%,cnnegate%,cnprintnum%,cnval%,cnstrnum%,cnstrhex%"
+      },
+      {
+        "line": 4050,
+        "source": "READ cs$"
+      },
+      {
+        "line": 4090,
+        "source": "FOR ci%=0 TO cnrelocs%-1:READ cnreloc%(ci%):NEXT"
+      },
+      {
+        "line": 7020,
+        "source": "RESTORE 30000:READ cssize%,csrelocs%,csliteral%,csload%,cscat%,csstore%,csprint%,csleft%,csright%,csmid%,cscmp%,csinstr%,csrepeat%,cswrite%"
+      },
+      {
+        "line": 7050,
+        "source": "READ cs$"
+      },
+      {
+        "line": 7090,
+        "source": "IF csrelocs%>0 THEN FOR ci%=0 TO csrelocs%-1:READ csreloc%(ci%):NEXT"
+      },
+      {
+        "line": 11020,
+        "source": "RESTORE 40000:READ ctsize%,ctrelocs%,ctinit%,ctpush%,ctcheck%,ctpop%,ctuntil%,ctagain%,ctfor%,ctnext%,ctnumslot%,cttop%,ctframes%,ctend%"
+      },
+      {
+        "line": 11040,
+        "source": "FOR ci%=0 TO ctsize%-1 STEP 40:READ cs$"
+      },
+      {
+        "line": 11060,
+        "source": "IF ctrelocs%>0 THEN FOR ci%=0 TO ctrelocs%-1:READ ctreloc%(ci%):NEXT"
+      },
+      {
+        "line": 13020,
+        "source": "RESTORE 50000:READ casize%,carelocs%,cainit%,cabegin%,casave%,cainstall%,cabind%,caleave%,capushslot%,cacheckslot%,capopslot%,canumslot%,catop%,cafnbegin%,cafnleave%"
+      },
+      {
+        "line": 13040,
+        "source": "FOR ci%=0 TO casize%-1 STEP 40:READ cs$"
+      },
+      {
+        "line": 13060,
+        "source": "IF carelocs%>0 THEN FOR ci%=0 TO carelocs%-1:READ careloc%(ci%):NEXT"
+      }
+    ],
+    "error_facilities": [
+      {
+        "line": 30,
+        "source": "ON ERROR REPORT:PRINT:CLOSE#0:END"
+      },
+      {
+        "line": 3250,
+        "source": "ERROR 100,LEFT$(csource$,80)+\"\"+STR$(clnum%)+\"\"+STR$(cpos%)+\"\"+LEFT$(cm$,130)"
+      },
+      {
+        "line": 5121,
+        "source": "LOCAL ERROR"
+      },
+      {
+        "line": 5122,
+        "source": "ON ERROR LOCAL cnumerr%=ERR:=0"
+      }
+    ],
+    "indirection": [
+      {
+        "line": 1340,
+        "source": "FOR ci%=0 TO cpc%-1:BPUT#coh%,ccode%?ci%:NEXT"
+      },
+      {
+        "line": 2700,
+        "source": "FOR ci%=0 TO 2:ccode%?(cp%+ci%)=cv% MOD 256:cv%=cv% DIV 256:NEXT"
+      },
+      {
+        "line": 2740,
+        "source": "ccode%?cpc%=cv%:cpc%=cpc%+1"
+      },
+      {
+        "line": 4070,
+        "source": "cnimage%?(ci%+(cj%-1) DIV 2)=ca%*16+cb%"
+      },
+      {
+        "line": 4190,
+        "source": "PROCaddr(\"\",\"\"):cp%=^cv"
+      },
+      {
+        "line": 4200,
+        "source": "FOR ci%=0 TO 4:PROCbyte(cp%?ci%):NEXT"
+      },
+      {
+        "line": 5210,
+        "source": "FOR ci%=0 TO cnsize%-1:ccode%?(cbase%+ci%)=cnimage%?ci%:NEXT:cpc%=cpc%+cnsize%"
+      },
+      {
+        "line": 5240,
+        "source": "cv%=ccode%?cp%+256*ccode%?(cp%+1)+65536*ccode%?(cp%+2)"
+      },
+      {
+        "line": 7080,
+        "source": "csimage%?(ci%+(cj%-1) DIV 2)=ca%*16+cb%:NEXT:NEXT"
+      },
+      {
+        "line": 7790,
+        "source": "FOR ci%=0 TO cssize%-1:PROCbyte(csimage%?ci%):NEXT"
+      },
+      {
+        "line": 7980,
+        "source": "cp%=cb%+csreloc%(ci%):cv%=ccode%?cp%+256*ccode%?(cp%+1)+65536*ccode%?(cp%+2)"
+      },
+      {
+        "line": 11050,
+        "source": "FOR cj%=1 TO LEN(cs$) STEP 2:ctimage%?(ci%+(cj%-1) DIV 2)=FNhexbyte(MID$(cs$,cj%,2)):NEXT:NEXT"
+      },
+      {
+        "line": 11725,
+        "source": "FOR ci%=0 TO ctsize%-1:ccode%?(cb%+ci%)=ctimage%?ci%:NEXT:cpc%=cpc%+ctsize%"
+      },
+      {
+        "line": 11730,
+        "source": "IF ctrelocs%>0 THEN FOR ci%=0 TO ctrelocs%-1:cp%=cb%+ctreloc%(ci%):cv%=ccode%?cp%+256*ccode%?(cp%+1)+65536*ccode%?(cp%+2):PROCpatch(cp%,cv%+&40000+cb%):NEXT"
+      },
+      {
+        "line": 13050,
+        "source": "FOR cj%=1 TO LEN(cs$) STEP 2:caimage%?(ci%+(cj%-1) DIV 2)=FNhexbyte(MID$(cs$,cj%,2)):NEXT:NEXT"
+      },
+      {
+        "line": 14030,
+        "source": "FOR ci%=0 TO casize%-1:ccode%?(cb%+ci%)=caimage%?ci%:NEXT:cpc%=cpc%+casize%"
+      },
+      {
+        "line": 14040,
+        "source": "IF carelocs%>0 THEN FOR ci%=0 TO carelocs%-1:cp%=cb%+careloc%(ci%):cv%=ccode%?cp%+256*ccode%?(cp%+1)+65536*ccode%?(cp%+2):PROCpatch(cp%,cv%+&40000+cb%):NEXT"
+      }
+    ]
+  }
+}

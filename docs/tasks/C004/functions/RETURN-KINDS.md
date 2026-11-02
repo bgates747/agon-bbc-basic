@@ -1,6 +1,6 @@
 # FN return kinds and caller temporaries
 
-The next activation tranche will add functions to the qualified PROC/LOCAL
+The qualified activation tranche adds functions to the PROC/LOCAL
 contract. The compiler source requires unsuffixed string-returning functions;
 function result type cannot be inferred solely from a name suffix.
 
@@ -30,4 +30,35 @@ function result type cannot be inferred solely from a name suffix.
    expressions, swapped arguments, nested calls in later actuals, pending string
    and numeric temporaries, LOCAL restoration, marker/type errors, arena limits,
    deterministic output and previous PROC/loop/conditional/string behavior.
-   No FN implementation or qualification is claimed by this preparatory contract.
+   C004.md records full prototype, supplemental and selected live qualification.
+
+## Reference carrier limitation found during qualification
+
+The full FN comparison exposed an actual reference buffer-pointer dependency for
+omitted-count RIGHT$(FNstring) and STRING$(count,FNstring). RIGHT returned the
+original first byte; STRING exposed prior accumulator tail bytes. Reproductions
+and source inference are retained in compiler/INTERPRETER-FINDINGS.md and the
+function oracle fixtures. The failed comparison remains evidence, not a pass.
+
+Compile-time string-value metadata now distinguishes direct FN-derived carriers
+from values re-established by assignment/reload, concatenation or explicit slices.
+Parentheses and omitted LEFT$ preserve that metadata. Omitted RIGHT$ and STRING$
+clearly reject unqualified carriers, including nested forms; the compiler must
+not silently replace the reference behavior with intended string operations.
+
+## Promoted evidence and ABI
+
+1. Compiler SHA6feb0b21b09ac4353347876df89043caf8800727b5a8c4f985588c3e6741c8f4
+   and783-byte/58-relocation module are promoted exactly. Four DATA packers reproduce
+   the source; no maintained FN compiler/runtime fork remains.
+2. FN marker7 stores checkpoint2..4, numeric pool5..7/count8, string pool9..11/
+   count12. LOCAL marker6 records restore first. The arena reserves5 bytes per
+   numeric prefix slot and256 per string slot; zero counts skip copying. Entry/
+   leave preserve IX/IY/SP. Transfer buffers are five numeric and256 string bytes.
+3. Full28 programs (15 native/13 rejected), five supplemental cases, native/old
+   PROC ABI and baseline pass. Selected live checks and three additional string
+   consumer/RHS-side-effect programs pass. Exact durations and archives are in
+   C004.md and the dated log. Failed/interrupted carrier attempts remain separate.
+4. Static kind nesting is bounded32;512 result expressions and128 total PROC/FN
+   definitions are admitted. Mixed/unresolved kinds and unqualified string carriers
+   are explicit partial-feature rejections, not changed reference oracles.

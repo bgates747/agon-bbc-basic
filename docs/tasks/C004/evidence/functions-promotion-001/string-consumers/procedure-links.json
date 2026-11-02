@@ -1,0 +1,30 @@
+{
+  "independent_control_and_procedure_links": [
+    {
+      "case": 0,
+      "numeric": 265153,
+      "control": 269904,
+      "procedure": 278810,
+      "arena": 282202,
+      "limit": 314970
+    },
+    {
+      "case": 1,
+      "numeric": 263540,
+      "control": 268292,
+      "procedure": 277198,
+      "arena": 281358,
+      "limit": 314126
+    },
+    {
+      "case": 2,
+      "numeric": 262608,
+      "control": 267354,
+      "procedure": 276260,
+      "arena": 279396,
+      "limit": 312164
+    }
+  ],
+  "all_external_bridges_checked": true,
+  "entry_reset_and_workspace_checked": true
+}

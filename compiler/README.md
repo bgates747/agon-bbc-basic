@@ -131,7 +131,7 @@ is the qualified mixed example; length and allocation stay unchanged.
 inline statement lists, conventional THEN/ELSE line targets and multiline blocks.
 Conditions use reference SFIX integer truth, including fractional-zero behavior;
 nested inline IF preserves first-ELSE association. Block ELSE/ENDIF must start
-their physical statement line. C004 scalar PROC/LOCAL is now promoted; FN remains active. Numeric FOR/TO/STEP/NEXT,
+their physical statement line. C004 scalar PROC/FN/LOCAL is now promoted for its documented initial scope. Numeric FOR/TO/STEP/NEXT,
 WHILE/ENDWHILE and REPEAT/UNTIL are now promoted with separate typed records.
 
 The [loop record contract](../docs/tasks/C004/loops/CONTROL.md) describes the
@@ -146,3 +146,11 @@ restoration. Definitions must begin their physical statement line; no-argument
 calls omit parentheses. Branch labels belong to their declaration scope. The
 private arena retains owned LOCAL strings without rolling back global writes.
 Rebuild DATA50000 with `.venv/bin/python compiler/tools/build_procedure_runtime.py --compiler compiler/compiler.bas`.
+
+[Functions](../docs/tasks/C004/functions/RETURN-KINDS.md) support forward and
+recursive scalar calls with actual inferred numeric/string result kinds, including
+unsuffixed string functions. Pending numeric/string values survive nested calls.
+Mixed/unresolved result kinds and interpreter-dependent direct FN carriers in
+omitted RIGHT$/STRING$ are rejected clearly; see the compatibility matrix.
+C004 is complete for its initial scope. Arrays, indirection, DATA, I/O and source
+error handlers remain C005 before the compiler can compile itself.

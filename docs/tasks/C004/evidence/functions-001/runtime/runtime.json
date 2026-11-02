@@ -1,0 +1,29 @@
+{
+  "bytes": 783,
+  "relocations": 58,
+  "exports": {
+    "act_init": 0,
+    "act_begin": 10,
+    "act_save": 20,
+    "act_install": 215,
+    "act_bind": 268,
+    "act_leave": 397,
+    "act_pushslot": 747,
+    "act_checkslot": 751,
+    "act_popslot": 755,
+    "act_numslot": 759,
+    "act_top": 762,
+    "act_fn_begin": 556,
+    "act_fn_leave": 401
+  },
+  "independent_link_bases": [
+    270336,
+    294912
+  ],
+  "unresolved_symbols": 0,
+  "hashes": {
+    "docs/tasks/C004/functions/procedures.s": "1156df1f54aaa4d9182baf058bbf141859c3c34f3a250678187676959635d392",
+    "docs/tasks/C004/build/function-runtime/runtime_data.bas": "d1f7370a1247945f346682ef65b319ac8cd8a644924ab3ceb769c433964de6c2",
+    "docs/tasks/C004/build/function-runtime/runtime-0.bin": "db52a06ca96c060ddb75b75563b95269e9d08330ef28a514d0ca59d5757bee22"
+  }
+}

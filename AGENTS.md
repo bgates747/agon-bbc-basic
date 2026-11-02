@@ -45,7 +45,14 @@ development; selected live checks and earlier regressions pass.
 Slice assignment is qualified and promoted; C003 initial scalar/string scope is complete. Read
 `docs/tasks/C003/SCALARS.md`, `docs/tasks/C003/STRINGS.md`,
 `docs/tasks/C003/SLICES.md`, `docs/tasks/C003/CONVERSIONS.md`,
-`docs/tasks/C003/SEARCH-REPEAT.md`, `docs/tasks/C003/SLICE-STORE.md` and the task record. C004 conditionals (26 programs) and typed loops (32 plus six supplemental programs) are qualified/promoted; scalar PROC/LOCAL (28 plus eight supplemental programs) is also qualified/promoted; FN is next. C005–C006 remain unstarted. Read docs/tasks/C004.md, conditionals/AUDIT.md, loops/CONTROL.md and activations/AUDIT.md, activations/PROCEDURES.md and functions/RETURN-KINDS.md. The compiler is still BBC BASIC; assembly is runtime code, not a
+`docs/tasks/C003/SEARCH-REPEAT.md`, `docs/tasks/C003/SLICE-STORE.md` and the task record. C004's selected conditionals, loops and scalar PROC/FN/LOCAL are complete and
+promoted. FN28 programs plus five supplements, both ABI probes, baseline and
+selected live/string integration pass. Source SHA6feb0b21b09ac4353347876df89043caf8800727b5a8c4f985588c3e6741c8f4; activation module783 bytes/58 relocations.
+Mixed/unresolved FN kinds and interpreter-dependent direct FN carriers in omitted
+RIGHT$/STRING$ are clearly rejected; see compiler/INTERPRETER-FINDINGS.md.
+Read docs/tasks/C004.md, conditionals/AUDIT.md, loops/CONTROL.md,
+activations/PROCEDURES.md and functions/RETURN-KINDS.md. C005 source inventory
+is next; C006 remains unstarted. The compiler is still BBC BASIC; assembly is runtime code, not a
 replacement compiler implementation.
 
 Use `.venv/bin/python` explicitly. `compiler/README.md` contains build/test

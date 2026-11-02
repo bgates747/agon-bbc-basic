@@ -7,7 +7,7 @@ import re
 import subprocess
 
 ROOT=Path(__file__).resolve().parents[2]
-EXPORTS=('act_init','act_begin','act_save','act_install','act_bind','act_leave','act_pushslot','act_checkslot','act_popslot','act_numslot','act_top')
+EXPORTS=('act_init','act_begin','act_save','act_install','act_bind','act_leave','act_pushslot','act_checkslot','act_popslot','act_numslot','act_top','act_fn_begin','act_fn_leave')
 
 
 def main():

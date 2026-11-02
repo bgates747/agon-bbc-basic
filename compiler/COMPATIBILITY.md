@@ -33,13 +33,13 @@ existing string/numeric regressions on the reauthorized Pi5 CLI.
 | Numeric formatting | Partial | Fixed G9, matching the reference; @% assignment and other PRINT formats unsupported |
 | Comparison and Boolean expressions | Partial | Numeric and string = <> <= >= < >, numeric NOT/AND/EOR/OR and TRUE/FALSE in expressions, assignments, VDU/PRINT; comparisons return -1/0; no shifts |
 | Numeric variables | Implemented subset | Plain/LET assignment and reads; five-byte unsuffixed variants, four-byte %, one-byte &; 128 bindings; runtime creation/undefined-read checks, predefined A%–Z%; global GOSUB mutation |
-| Mutable strings and string variables | Partial | Plain/LET `$` assignment, owned copying/self-assignment, + and parentheses, 0..255 bytes including NUL, LEN/CHR$/ASC, VAL and STR$ (default G9 or ~ hex), INSTR/STRING$, string PRINT, runtime existence; bounded private heap; LEFT$/RIGHT$/MID$ expressions with reference low-byte counts/optional arguments and six string relations; LEFT$/RIGHT$/MID$ scalar slice assignment with unchanged length/allocation and reference range markers; further I/O-dependent string functions unsupported |
+| Mutable strings and string variables | Partial | Plain/LET `$` assignment, owned copying/self-assignment, + and parentheses, 0..255 bytes including NUL, LEN/CHR$/ASC, VAL and STR$ (default G9 or ~ hex), INSTR/STRING$, string PRINT, runtime existence; bounded private heap; LEFT$/RIGHT$/MID$ expressions with reference low-byte counts/optional arguments and six string relations; LEFT$/RIGHT$/MID$ scalar slice assignment with unchanged length/allocation and reference range markers; further I/O-dependent string functions unsupported; omitted RIGHT$ and STRING$ on direct FN-derived carriers rejected (see findings) |
 | Variable suffixes and default numeric variables | Partial | Case-sensitive numeric/string names with %/&/$ suffixes; 32-character ASCII body limit; ambiguous keyword prefixes, pseudo variables and other suffixes rejected |
 | IF/THEN/ELSE/ENDIF | Partial | Inline colon lists, omitted THEN, constant THEN/ELSE line targets and multiline blocks; SFIX truth and reference first-ELSE association; 32 nesting entries; block ELSE/ENDIF begin their line; multiline IF inside inline IF rejected |
 | FOR/WHILE/REPEAT | Partial | Numeric FOR/TO/STEP/NEXT (including named lists), WHILE/ENDWHILE, REPEAT/UNTIL;32 lexical block levels;256 typed loop/GOSUB records; limit/step captured once; FOR enters body once even past limit; mismatched structures rejected |
 | CASE | Unsupported | Pending |
 | DEF PROC / ENDPROC | Partial | Forward/recursive scalar by-value calls; staged arguments and reverse binding;128 line-leading definitions,16 arguments; no empty parentheses, RETURN/array parameters; ENDPROC requires PROC marker after restoring locals |
-| DEF FN / function return | Unsupported | Separate activation semantics pending |
+| DEF FN / function return | Partial | Forward/recursive scalar functions with a unique inferred numeric/string result kind; unsuffixed string results and optional $ names; saved caller temporaries and distinct FN exit; mixed/unresolved kinds rejected |
 | LOCAL, recursion with locals | Partial | Scalar numeric/string LOCAL and implicit parameter locals; dynamically visible, reverse restoration; newly created bindings remain defined;32768-byte arena and shared256 control records; LOCAL DATA/ERROR/arrays unsupported |
 | Arrays and DIM | Unsupported | Including local arrays |
 | DATA/READ/RESTORE | Unsupported | Input to compiler may not use these yet |
@@ -65,4 +65,11 @@ See [the specification](SPECIFICATION.md) for exact limits and
 
 [Typed loops](../docs/tasks/C004/loops/CONTROL.md) records native marker, numeric-bound and call-stack behavior; C004 owns full/selected live qualification.
 
-[Scalar procedures and LOCAL](../docs/tasks/C004/activations/PROCEDURES.md) records argument snapshots, owned locals, activation-scoped branch labels and resource/error behavior. FN remains unsupported in the promoted compiler.
+[Scalar procedures and LOCAL](../docs/tasks/C004/activations/PROCEDURES.md) records argument snapshots, owned locals, activation-scoped branch labels and resource/error behavior. FN is promoted for the stated static result-kind scope.
+
+[Function qualification](../docs/tasks/C004/functions/RETURN-KINDS.md) records
+actual result-kind inference and preserved pending values. The
+[reference carrier finding](INTERPRETER-FINDINGS.md) explains rejected direct
+FN-string inputs to omitted RIGHT$/STRING$; parentheses/omitted LEFT$ propagate
+this restriction. Explicit slices, concatenation and assignment/reload establish
+qualified values. PROC/FN share the128-definition limit.

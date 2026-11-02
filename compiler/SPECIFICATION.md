@@ -168,8 +168,29 @@ The Author accepted the corrected C002 baseline for a development checkpoint.
     global code before definitions has its own scope. Named and numeric GOTO/GOSUB
     targets must belong to the current scope. Declaration execution skips the
     physical line, preserving inline skipping and multiline body fall-through.
-    Function results, LOCAL ERROR/DATA and arrays remain clearly unsupported in
+    LOCAL ERROR/DATA and arrays remain clearly unsupported in
     this initial activation scope.
+
+23. DEF FN and =expression provide distinct function activation/results. PROC/FN
+    share128 line-leading definitions and16 scalar arguments. Result kinds are
+    inferred from actual return expressions and dependencies; unsuffixed string
+    returns and optional $ names are admitted (the suffix does not force result
+    kind). A unique stable numeric/string kind is required; mixed or unresolved
+    kinds are rejected. Calls may be forward/recursive. Caller live numeric/string
+    temporary prefixes survive argument/body execution; completed results are
+    copied independently before locals and caller temporaries restore. Numeric
+    variants retain all five bytes, without an implicit return conversion.
+24. FN uses a distinct control marker and matching exit. Result evaluation precedes
+    marker validation, preserving errors. PROC/FN/GOSUB/loops are not interchangeable
+    exits. Function parameters are implicit dynamic locals with the same staged
+    actuals and prior-value snapshots as PROC. The shared private32768-byte arena
+    holds caller prefixes and locals; exhaustion is checked.
+25. Direct FN string results carry an unqualified interpreter accumulator-pointer
+    dependency. Parentheses and omitted LEFT$ preserve it; omitted RIGHT$ and
+    STRING$ reject it at compile time. Explicit slices, concatenation and variable
+    assignment/reload establish qualified values. The retained reference probes
+    show first-byte/stale-tail behavior; the compiler does not silently replace
+    those results with intended string operations or emulate interpreter-private RAM.
 
 ## Current backend and runtime contract
 

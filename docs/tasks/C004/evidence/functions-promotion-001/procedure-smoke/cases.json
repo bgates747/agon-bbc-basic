@@ -1,0 +1,16 @@
+[
+  {
+    "source": "A%=7:B%=8:PROCswap(A%,B%):PRINT ;A%;\":\";B%\nx%=7:y%=8:PROCstaged(3,x%):PRINT ;x%;\":\";y%\nPROCnew:PRINT ;fresh%;\":\";LEN fresh$\nv%=7:PROCtwice:PRINT ;v%\nEND\nDEF PROCswap(B%,A%):PRINT ;A%;\":\";B%:ENDPROC\nDEF PROCstaged(x%,y%):PRINT ;x%;\":\";y%:ENDPROC\nDEF PROCnew:LOCAL fresh%,fresh$:fresh%=4:fresh$=\"x\":ENDPROC\nDEF PROCtwice:LOCAL v%:v%=3:LOCAL v%:PRINT ;v%:v%=4:ENDPROC\n",
+    "reference_source": "A%=7:B%=8:PROCswap(A%,B%):PRINT ;A%;\":\";B%\nx%=7:y%=8:PROCstaged(3,x%):PRINT ;x%;\":\";y%\nPROCnew:PRINT ;fresh%;\":\";LEN fresh$\nv%=7:PROCtwice:PRINT ;v%\n",
+    "reference_definitions": [
+      "DEF PROCswap(B%,A%):PRINT ;A%;\":\";B%:ENDPROC",
+      "DEF PROCstaged(x%,y%):PRINT ;x%;\":\";y%:ENDPROC",
+      "DEF PROCnew:LOCAL fresh%,fresh$:fresh%=4:fresh$=\"x\":ENDPROC",
+      "DEF PROCtwice:LOCAL v%:v%=3:LOCAL v%:PRINT ;v%:v%=4:ENDPROC"
+    ],
+    "reference": true,
+    "status": 0,
+    "procedure_observations": 4,
+    "expected": "8:7\n7:8\n3:7\n7:8\n0:0\n0\n7\n"
+  }
+]

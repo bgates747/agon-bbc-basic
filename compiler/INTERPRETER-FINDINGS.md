@@ -50,3 +50,34 @@ Unfinished authorized work is tracked only in [TODO.md](../TODO.md).
 2. Preserve this behavior in compiled code. Its consistency with the intended
    interpreter conversion range is a candidate for a separately reviewed
    upstream investigation, not an accepted compiler correction.
+
+## String function results and accumulator-pointer consumers
+
+1. Reference remains bin/basic.bin SHA-256
+   `a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d`.
+   C004's [RIGHT probe](../docs/tasks/C004/functions/right-oracle.bas) returns
+   ASC65 for RIGHT$(FNa) where FNa returns "ABC", versus67 with explicit count1.
+   Literal, parameter, concatenated, CHR$ and LOCAL-return producers show the same
+   first-byte result. Parentheses retain it; adding an empty string restores67.
+2. The [STRING probe](../docs/tasks/C004/functions/repeat-oracle.bas) demonstrates
+   dependence on prior accumulator contents: after scratch$="123456", STRING$(2,FNa)
+   produces "ABC456"; changing scratch$ to "UVWXYZ" changes the trailing bytes
+   to "XYZ". STRING$(2,FNa+"") produces "ABCABC". These are actual pinned-BASIC
+   results, not proposed replacement oracles.
+3. Source inference: EVAL.Z80 RIGHTS/RIGHT1 and STRING/STRIN2 use DE as the string
+   accumulator destination. EXEC.Z80 FNEND reconstructs the result length/type
+   without explicitly re-establishing the complete accumulator pointer. PUSHS/POPS
+   in explicit slices and EXPR3 concatenation re-establish the accumulator path.
+   Exact corrupted-write addresses/register lifetimes still require a separate
+   interpreter audit; no claim is made that every such program merely selects
+   its first byte or that stale tails are deterministic language values.
+4. A possible interpreter improvement is to restore the complete string-result
+   pointer contract at function return or at these consumers, preserving flags,
+   lengths and numeric returns. It needs independent upstream qualification.
+   No interpreter source or pinned binary is changed by this finding.
+5. Compiler policy: do not silently emit the mathematically intended last byte or
+   repeated string for these inputs. Direct FN-derived values through parentheses
+   and omitted LEFT$ retain an unqualified-carrier flag; omitted RIGHT$ and STRING$
+   reject them at compile time. Assignment/reload, concatenation and explicit
+   slices establish qualified values. C004 records tests and this intentional
+   partial admission; the compiler does not emulate interpreter-private stale RAM.

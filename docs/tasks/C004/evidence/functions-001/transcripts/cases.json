@@ -1,0 +1,232 @@
+[
+  {
+    "source": "PRINT ;FNadd(2,3);\":\";FNtext(\"x\")\nPRINT ;7+FNadd(4,5);\":\";\"a\"+FNtext(\"b\")+\"c\"\nEND\nDEF FNadd(a,b)=a+b\nDEF FNtext(s$)=s$+s$\n",
+    "reference_source": "PRINT ;FNadd(2,3);\":\";FNtext(\"x\")\nPRINT ;7+FNadd(4,5);\":\";\"a\"+FNtext(\"b\")+\"c\"\n",
+    "reference_definitions": [
+      "DEF FNadd(a,b)=a+b",
+      "DEF FNtext(s$)=s$+s$"
+    ],
+    "reference": true,
+    "status": 0,
+    "expected": "5:xx\n16:abbc\n"
+  },
+  {
+    "source": "PRINT ;FNfact(7);\":\";FNfib(8);\":\";n%\nPRINT ;FNidentity(1/3)=1/3;\":\";FNidentity(&80000000)\nPRINT ;FNwide(&7FFFFFFF);\":\";FNidentity(1.5)\nEND\nDEF FNfact(n%):IF n%=0 THEN =1 ELSE =n%*FNfact(n%-1)\nDEF FNfib(n%):IF n%<2 THEN =n% ELSE =FNfib(n%-1)+FNfib(n%-2)\nDEF FNidentity(x)=x\nDEF FNwide(x)=x+1\n",
+    "reference_source": "PRINT ;FNfact(7);\":\";FNfib(8);\":\";n%\nPRINT ;FNidentity(1/3)=1/3;\":\";FNidentity(&80000000)\nPRINT ;FNwide(&7FFFFFFF);\":\";FNidentity(1.5)\n",
+    "reference_definitions": [
+      "DEF FNfact(n%):IF n%=0 THEN =1 ELSE =n%*FNfact(n%-1)",
+      "DEF FNfib(n%):IF n%<2 THEN =n% ELSE =FNfib(n%-1)+FNfib(n%-2)",
+      "DEF FNidentity(x)=x",
+      "DEF FNwide(x)=x+1"
+    ],
+    "reference": true,
+    "status": 0,
+    "expected": "5040:21:0\n-1:-2.14748365E9\n2.14748365E9:1.5\n"
+  },
+  {
+    "source": "PRINT \"a\"+FNrepeat(3)+\"b\"\nPRINT FNleft(2,\"A\");\":\";FNempty;\":\";FNtag$(\"x\");\":\";FNnumber$\nPRINT ;LEN FNnul;\":\";ASC MID$(FNnul,2);\":\";ASC RIGHT$(FNnul,1)\nPRINT ;LEN FNfull;\":\";ASC FNfull\nEND\nDEF FNrepeat(n%):IF n%=0 THEN =\"x\" ELSE =FNrepeat(n%-1)+\"x\"\nDEF FNleft(n%,s$):IF n%=0 THEN =s$ ELSE =s$+FNleft(n%-1,s$+\"B\")\nDEF FNempty=\"\"\nDEF FNtag$(s$)=s$+\"!\"\nDEF FNnumber$=3\nDEF FNnul=CHR$(0)+CHR$(128)+CHR$(255)\nDEF FNfull=STRING$(255,\"q\")\n",
+    "reference_source": "PRINT \"a\"+FNrepeat(3)+\"b\"\nPRINT FNleft(2,\"A\");\":\";FNempty;\":\";FNtag$(\"x\");\":\";FNnumber$\nPRINT ;LEN FNnul;\":\";ASC MID$(FNnul,2);\":\";ASC RIGHT$(FNnul,1)\nPRINT ;LEN FNfull;\":\";ASC FNfull\n",
+    "reference_definitions": [
+      "DEF FNrepeat(n%):IF n%=0 THEN =\"x\" ELSE =FNrepeat(n%-1)+\"x\"",
+      "DEF FNleft(n%,s$):IF n%=0 THEN =s$ ELSE =s$+FNleft(n%-1,s$+\"B\")",
+      "DEF FNempty=\"\"",
+      "DEF FNtag$(s$)=s$+\"!\"",
+      "DEF FNnumber$=3",
+      "DEF FNnul=CHR$(0)+CHR$(128)+CHR$(255)",
+      "DEF FNfull=STRING$(255,\"q\")"
+    ],
+    "reference": true,
+    "status": 0,
+    "expected": "axxxxb\nAABABB::x!:3\n3:128:255\n255:113\n"
+  },
+  {
+    "source": "A%=7:B%=8:PRINT FNswap(A%,B%):PRINT ;A%;\":\";B%\nPRINT FNjoin(FNdouble(\"a\"),FNdouble(\"b\"))\nPRINT FNcombine(FNsum(1,2),FNsum(3,4),FNdouble(\"z\"))\nPRINT ;FNcreated(newarg%);\":\";newarg%\nx%=7:PRINT ;FNtake(FNside);\":\";x%\nEND\nDEF FNswap(B%,A%)=STR$ A%+\":\"+STR$ B%\nDEF FNjoin(a$,b$)=a$+b$\nDEF FNdouble(s$)=s$+s$\nDEF FNsum(a,b)=a+b\nDEF FNcombine(a%,b%,s$)=STR$ a%+\":\"+STR$ b%+\":\"+s$\nDEF FNcreated(newarg%)=newarg%\nDEF FNtake(x%)=x%\nDEF FNside:x%=9:=1\n",
+    "reference_source": "A%=7:B%=8:PRINT FNswap(A%,B%):PRINT ;A%;\":\";B%\nPRINT FNjoin(FNdouble(\"a\"),FNdouble(\"b\"))\nPRINT FNcombine(FNsum(1,2),FNsum(3,4),FNdouble(\"z\"))\nPRINT ;FNcreated(newarg%);\":\";newarg%\nx%=7:PRINT ;FNtake(FNside);\":\";x%\n",
+    "reference_definitions": [
+      "DEF FNswap(B%,A%)=STR$ A%+\":\"+STR$ B%",
+      "DEF FNjoin(a$,b$)=a$+b$",
+      "DEF FNdouble(s$)=s$+s$",
+      "DEF FNsum(a,b)=a+b",
+      "DEF FNcombine(a%,b%,s$)=STR$ a%+\":\"+STR$ b%+\":\"+s$",
+      "DEF FNcreated(newarg%)=newarg%",
+      "DEF FNtake(x%)=x%",
+      "DEF FNside:x%=9:=1"
+    ],
+    "reference": true,
+    "status": 0,
+    "expected": "8:7\n7:8\naabb\n3:7:zz\n0:0\n1:7\n"
+  },
+  {
+    "source": "s$=\"outer\":PRINT FNglobal:PRINT s$;\":\";retained$\nPRINT FNwithproc(3):PROCprintnum(FNwithproc(2))\nEND\nDEF FNglobal:LOCAL s$:s$=\"inner\":retained$=s$:=s$+\"!\"\nDEF FNwithproc(n%):LOCAL value%:value%=n%+1:PROCsnoop:=value%*2\nDEF PROCsnoop:PRINT ;value%:ENDPROC\nDEF PROCprintnum(n%):PRINT ;n%:ENDPROC\n",
+    "reference_source": "s$=\"outer\":PRINT FNglobal:PRINT s$;\":\";retained$\nPRINT FNwithproc(3):PROCprintnum(FNwithproc(2))\n",
+    "reference_definitions": [
+      "DEF FNglobal:LOCAL s$:s$=\"inner\":retained$=s$:=s$+\"!\"",
+      "DEF FNwithproc(n%):LOCAL value%:value%=n%+1:PROCsnoop:=value%*2",
+      "DEF PROCsnoop:PRINT ;value%:ENDPROC",
+      "DEF PROCprintnum(n%):PRINT ;n%:ENDPROC"
+    ],
+    "reference": true,
+    "status": 0,
+    "expected": "inner!\nouter:inner\n4\n         8\n3\n6\n"
+  },
+  {
+    "source": "PRINT FNforward;\":\";FNcomments;\":\";FNparent(2)\nPRINT ;FNlogic(1);\":\";FNlogic(0);\":\";FNplus\nPRINT FNquoted\nEND\nDEF FNforward=FNlater\nDEF FNlater=\"forward\"\nDEF FNcomments:REM =1 ELSE =0\n=\"comment\"\nDEF FNparent(n%)=(FNlater+STR$ n%)\nDEF FNlogic(n%)=NOT(n%=0) AND TRUE\nDEF FNplus=+1\nDEF FNquoted=\"a:ELSE\"\"THEN\"\n",
+    "reference_source": "PRINT FNforward;\":\";FNcomments;\":\";FNparent(2)\nPRINT ;FNlogic(1);\":\";FNlogic(0);\":\";FNplus\nPRINT FNquoted\n",
+    "reference_definitions": [
+      "DEF FNforward=FNlater",
+      "DEF FNlater=\"forward\"",
+      "DEF FNcomments:REM =1 ELSE =0",
+      "=\"comment\"",
+      "DEF FNparent(n%)=(FNlater+STR$ n%)",
+      "DEF FNlogic(n%)=NOT(n%=0) AND TRUE",
+      "DEF FNplus=+1",
+      "DEF FNquoted=\"a:ELSE\"\"THEN\""
+    ],
+    "reference": true,
+    "status": 0,
+    "expected": "forward:comment:forward2\n-1:0:1\na:ELSE\"THEN\n"
+  },
+  {
+    "source": "PRINT FNoverflow\nEND\nDEF FNoverflow=1E39\n",
+    "reference_source": "PRINT FNoverflow\n",
+    "reference_definitions": [
+      "DEF FNoverflow=1E39"
+    ],
+    "reference": true,
+    "status": 1,
+    "reference_error": true,
+    "expected": "Number too big\n"
+  },
+  {
+    "source": "PRINT FNbadloop\nEND\nDEF FNbadloop:FOR i%=1 TO 1:=1:NEXT\n",
+    "reference_source": "PRINT FNbadloop\n",
+    "reference_definitions": [
+      "DEF FNbadloop:FOR i%=1 TO 1:=1:NEXT"
+    ],
+    "reference": true,
+    "status": 1,
+    "reference_error": true,
+    "expected": "Not in a FN\n"
+  },
+  {
+    "source": "PRINT FNbadend\nEND\nDEF FNbadend:ENDPROC:=1\n",
+    "reference_source": "PRINT FNbadend\n",
+    "reference_definitions": [
+      "DEF FNbadend:ENDPROC:=1"
+    ],
+    "reference": true,
+    "status": 1,
+    "reference_error": true,
+    "expected": "Not in a PROC\n"
+  },
+  {
+    "source": "PRINT FNbadlocal\nEND\nDEF FNbadlocal:WHILE 1:LOCAL x%:ENDWHILE:=1\n",
+    "reference_source": "PRINT FNbadlocal\n",
+    "reference_definitions": [
+      "DEF FNbadlocal:WHILE 1:LOCAL x%:ENDWHILE:=1"
+    ],
+    "reference": true,
+    "status": 1,
+    "reference_error": true,
+    "expected": "Not in a FN or PROC\n"
+  },
+  {
+    "source": "PRINT FNbadparam(2147483648)\nEND\nDEF FNbadparam(n%)=n%\n",
+    "reference_source": "PRINT FNbadparam(2147483648)\n",
+    "reference_definitions": [
+      "DEF FNbadparam(n%)=n%"
+    ],
+    "reference": true,
+    "status": 1,
+    "reference_error": true,
+    "expected": "Number too big\n"
+  },
+  {
+    "source": "PRINT FNbadstring\nEND\nDEF FNbadstring=STRING$(128,\"ab\")\n",
+    "reference_source": "PRINT FNbadstring\n",
+    "reference_definitions": [
+      "DEF FNbadstring=STRING$(128,\"ab\")"
+    ],
+    "reference": true,
+    "status": 1,
+    "reference_error": true,
+    "expected": "String too long\n"
+  },
+  {
+    "source": "PROCwrong\nEND\nDEF PROCwrong:=1\n",
+    "reference_source": "PROCwrong\n",
+    "reference_definitions": [
+      "DEF PROCwrong:=1"
+    ],
+    "reference": true,
+    "status": 1,
+    "reference_error": true,
+    "expected": "Not in a FN\n"
+  },
+  {
+    "source": "=1/0\nEND\n",
+    "reference_source": "=1/0\n",
+    "reference_definitions": [],
+    "reference": true,
+    "status": 1,
+    "reference_error": true,
+    "expected": "Division by zero\n"
+  },
+  {
+    "source": "=1\n",
+    "expected": "Not in a FN\n",
+    "status": 1
+  },
+  {
+    "source": "PRINT FNmissing\n",
+    "diagnostic": "Undefined FN missing"
+  },
+  {
+    "source": "PRINT ;ASC RIGHT$(FNnul)\nEND\nDEF FNnul=CHR$(0)+CHR$(128)+CHR$(255)\n",
+    "diagnostic": "Omitted RIGHT$ on a FN string result is unqualified"
+  },
+  {
+    "source": "PRINT STRING$(2,FNa)\nEND\nDEF FNa=\"ABC\"\n",
+    "diagnostic": "STRING$ on a FN string result is unqualified"
+  },
+  {
+    "source": "PRINT RIGHT$(LEFT$((FNa)))\nEND\nDEF FNa=\"ABC\"\n",
+    "diagnostic": "Omitted RIGHT$ on a FN string result is unqualified"
+  },
+  {
+    "source": "DEF FNbad(n%):IF n%=0 THEN =0 ELSE =\"x\"\n",
+    "diagnostic": "Mixed numeric/string FN results are unsupported"
+  },
+  {
+    "source": "DEF FNfirst=FNsecond\nDEF FNsecond=FNfirst\n",
+    "diagnostic": "Unresolved FN result kind"
+  },
+  {
+    "source": "DEF FNmissing:REM =1\n",
+    "diagnostic": "Unresolved FN result kind"
+  },
+  {
+    "source": "DEF FNp(RETURN x%)=x%\n",
+    "diagnostic": "Unsupported formal parameter RETURN"
+  },
+  {
+    "source": "DEF FNp()=1\n",
+    "diagnostic": "Empty formal parameter lists are unsupported"
+  },
+  {
+    "source": "PRINT FNp()\nEND\nDEF FNp=1\n",
+    "diagnostic": "Empty call argument lists are unsupported"
+  },
+  {
+    "source": "PRINT FNp(\"x\")\nEND\nDEF FNp(n%)=n%\n",
+    "diagnostic": "Procedure argument type mismatch"
+  },
+  {
+    "source": "PRINT FNp(1)\nEND\nDEF FNp(s$)=s$\n",
+    "diagnostic": "Procedure argument type mismatch"
+  },
+  {
+    "source": "@outside:END\nDEF FNp:GOTO @outside:=1\n",
+    "diagnostic": "Undefined target $p1@outside"
+  }
+]

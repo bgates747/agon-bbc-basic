@@ -1,0 +1,126 @@
+{
+  "independent_control_and_procedure_links": [
+    {
+      "case": 0,
+      "numeric": 263183,
+      "control": 267951,
+      "procedure": 276857,
+      "arena": 280249,
+      "limit": 313017
+    },
+    {
+      "case": 1,
+      "numeric": 264148,
+      "control": 268909,
+      "procedure": 277815,
+      "arena": 278980,
+      "limit": 311748
+    },
+    {
+      "case": 2,
+      "numeric": 264725,
+      "control": 269481,
+      "procedure": 278387,
+      "arena": 282035,
+      "limit": 314803
+    },
+    {
+      "case": 3,
+      "numeric": 264847,
+      "control": 269657,
+      "procedure": 278563,
+      "arena": 284003,
+      "limit": 316771
+    },
+    {
+      "case": 4,
+      "numeric": 263354,
+      "control": 268121,
+      "procedure": 277027,
+      "arena": 281443,
+      "limit": 314211
+    },
+    {
+      "case": 5,
+      "numeric": 263488,
+      "control": 268238,
+      "procedure": 277144,
+      "arena": 279512,
+      "limit": 312280
+    },
+    {
+      "case": 6,
+      "numeric": 262511,
+      "control": 267218,
+      "procedure": 276124,
+      "arena": 277289,
+      "limit": 310057
+    },
+    {
+      "case": 7,
+      "numeric": 262627,
+      "control": 267377,
+      "procedure": 276283,
+      "arena": 277448,
+      "limit": 310216
+    },
+    {
+      "case": 8,
+      "numeric": 262514,
+      "control": 267221,
+      "procedure": 276127,
+      "arena": 277292,
+      "limit": 310060
+    },
+    {
+      "case": 9,
+      "numeric": 262614,
+      "control": 267359,
+      "procedure": 276265,
+      "arena": 277430,
+      "limit": 310198
+    },
+    {
+      "case": 10,
+      "numeric": 262561,
+      "control": 267306,
+      "procedure": 276212,
+      "arena": 277377,
+      "limit": 310145
+    },
+    {
+      "case": 11,
+      "numeric": 262550,
+      "control": 267257,
+      "procedure": 276163,
+      "arena": 278275,
+      "limit": 311043
+    },
+    {
+      "case": 12,
+      "numeric": 262450,
+      "control": 267157,
+      "procedure": 276063,
+      "arena": 277228,
+      "limit": 309996
+    },
+    {
+      "case": 13,
+      "numeric": 262468,
+      "control": 267180,
+      "procedure": 276086,
+      "arena": 277251,
+      "limit": 310019
+    },
+    {
+      "case": 14,
+      "numeric": 262430,
+      "control": 267137,
+      "procedure": 276043,
+      "arena": 277208,
+      "limit": 309976
+    }
+  ],
+  "all_external_bridges_checked": true,
+  "entry_reset_and_workspace_checked": true
+}

@@ -1,0 +1,16 @@
+{
+  "checked_index_and_stack_preservation": true,
+  "poisoned_upper_bc": true,
+  "numeric_and_string_prefix_restoration": true,
+  "nested_prefixes": true,
+  "local_restoration_under_fn": true,
+  "distinct_proc_fn_markers": true,
+  "zero_counts_and_null_pools": true,
+  "exact_arena_capacity_checked": true,
+  "duration_seconds": 1.027,
+  "hashes": {
+    "docs/tasks/C004/functions/abi.s": "10dfc934e3f78b3a2f3479eb9d61da9cbff74cc6edb151606c22779684a0937d",
+    "docs/tasks/C004/build/function-abi/probe.bin": "bd188caac17de75b1ba917960955efdf0c5072cae21f0e5db76109f0912aa208",
+    "compiler/build/procedure-runtime/runtime-0.bin": "db52a06ca96c060ddb75b75563b95269e9d08330ef28a514d0ca59d5757bee22"
+  }
+}

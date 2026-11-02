@@ -2,9 +2,10 @@
 from pathlib import Path
 import json,subprocess
 ROOT=Path(__file__).resolve().parents[4];TASK=ROOT/'docs/tasks/C004'
-def check(limit=None):
+def check(limit=None,procedure_runtime=None):
  build=TASK/'build/output-integration';sd=ROOT/'.emulator/sdcard'
  paths={'numeric':ROOT/'compiler/build/numeric-runtime','control':ROOT/'compiler/build/control-runtime','procedure':ROOT/'compiler/build/procedure-runtime'}
+ if procedure_runtime is not None:paths['procedure']=Path(procedure_runtime).resolve(strict=True)
  if not paths['procedure'].exists():paths['procedure']=TASK/'build/procedure-runtime'
  metadata={name:json.loads((p/'runtime.json').read_text()) for name,p in paths.items()}
  templates={name:(p/'runtime-0.bin').read_bytes() for name,p in paths.items()};bases=[]
@@ -32,4 +33,4 @@ def check(limit=None):
  (build/'procedure-links.json').write_text(json.dumps(report,indent=2)+'\n');print(json.dumps(report,indent=2))
 if __name__=='__main__':
  import argparse
- parser=argparse.ArgumentParser();parser.add_argument('--limit',type=int);args=parser.parse_args();check(args.limit)
+ parser=argparse.ArgumentParser();parser.add_argument('--limit',type=int);parser.add_argument('--procedure-runtime',type=Path);args=parser.parse_args();check(args.limit,args.procedure_runtime)

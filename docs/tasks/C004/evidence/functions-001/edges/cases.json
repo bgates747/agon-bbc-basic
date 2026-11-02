@@ -1,0 +1,52 @@
+[
+  {
+    "source": "PROCshared(4):PRINT ;FNshared(5);\":\";n%\nEND\nDEF PROCshared(n%):PRINT ;n%:ENDPROC\nDEF FNshared(n%)=n%+1\n",
+    "reference_source": "PROCshared(4):PRINT ;FNshared(5);\":\";n%\n",
+    "reference_definitions": [
+      "DEF PROCshared(n%):PRINT ;n%:ENDPROC",
+      "DEF FNshared(n%)=n%+1"
+    ],
+    "reference": true,
+    "status": 0,
+    "expected": "4\n6:0\n"
+  },
+  {
+    "source": "PRINT FNpack(7,8,FNjoin(\"a\",FNdecorate(\"b\")))\nPRINT FNjoin(FNdecorate(\"c\"),FNdecorate(\"d\"))\nEND\nDEF FNpack(a%,b%,s$)=STR$ a%+\":\"+STR$ b%+\":\"+s$\nDEF FNjoin(a$,b$)=a$+b$\nDEF FNdecorate(s$)=STR$ LEN(s$)+s$\n",
+    "reference_source": "PRINT FNpack(7,8,FNjoin(\"a\",FNdecorate(\"b\")))\nPRINT FNjoin(FNdecorate(\"c\"),FNdecorate(\"d\"))\n",
+    "reference_definitions": [
+      "DEF FNpack(a%,b%,s$)=STR$ a%+\":\"+STR$ b%+\":\"+s$",
+      "DEF FNjoin(a$,b$)=a$+b$",
+      "DEF FNdecorate(s$)=STR$ LEN(s$)+s$"
+    ],
+    "reference": true,
+    "status": 0,
+    "expected": "7:8:a1b\n1c1d\n"
+  },
+  {
+    "source": "PRINT ;FNfactorial(15);\":\";FNexact(1/3)=1/3\nPRINT ;FNmaximum=STRING$(255,\"q\")\nEND\nDEF FNfactorial(n%):IF n%=0 THEN =1 ELSE =n%*FNfactorial(n%-1)\nDEF FNexact(x)=x\nDEF FNmaximum=STRING$(255,\"q\")\n",
+    "reference_source": "PRINT ;FNfactorial(15);\":\";FNexact(1/3)=1/3\nPRINT ;FNmaximum=STRING$(255,\"q\")\n",
+    "reference_definitions": [
+      "DEF FNfactorial(n%):IF n%=0 THEN =1 ELSE =n%*FNfactorial(n%-1)",
+      "DEF FNexact(x)=x",
+      "DEF FNmaximum=STRING$(255,\"q\")"
+    ],
+    "reference": true,
+    "status": 0,
+    "expected": "1.30767437E12:-1\n-1\n"
+  },
+  {
+    "source": "s$=FNcarrier:PRINT RIGHT$(s$);\":\";RIGHT$(FNcarrier+\"\");\":\";RIGHT$(LEFT$(FNcarrier,2));\":\";RIGHT$(MID$(FNcarrier,1))\nPRINT STRING$(2,FNcarrier+\"\");\":\";STRING$(2,LEFT$(FNcarrier,3))\nEND\nDEF FNcarrier=\"ABC\"\n",
+    "reference_source": "s$=FNcarrier:PRINT RIGHT$(s$);\":\";RIGHT$(FNcarrier+\"\");\":\";RIGHT$(LEFT$(FNcarrier,2));\":\";RIGHT$(MID$(FNcarrier,1))\nPRINT STRING$(2,FNcarrier+\"\");\":\";STRING$(2,LEFT$(FNcarrier,3))\n",
+    "reference_definitions": [
+      "DEF FNcarrier=\"ABC\""
+    ],
+    "reference": true,
+    "status": 0,
+    "expected": "C:C:B:C\nABCABC:ABCABC\n"
+  },
+  {
+    "source": "PRINT FNlimit(0):END\nDEF FNlimit(n%):IF n%<0 THEN =0 ELSE =FNlimit(n%+1)\n",
+    "expected": "No room\n",
+    "status": 1
+  }
+]

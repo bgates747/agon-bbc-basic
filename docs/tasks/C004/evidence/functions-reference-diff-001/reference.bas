@@ -1,0 +1,158 @@
+10 ON ERROR REPORT:PRINT:OSCLI "BYE"
+20 @%=&90A
+100 CLEAR
+110 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+120 PRINT "REF_BEGIN_0"
+130 PRINT ;FNadd(2,3);":";FNtext("x")
+140 PRINT ;7+FNadd(4,5);":";"a"+FNtext("b")+"c"
+150 PRINT "REF_END_0"
+160 CLEAR
+170 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+180 PRINT "REF_BEGIN_1"
+190 PRINT ;FNfact(7);":";FNfib(8);":";n%
+200 PRINT ;FNidentity(1/3)=1/3;":";FNidentity(&80000000)
+210 PRINT ;FNwide(&7FFFFFFF);":";FNidentity(1.5)
+220 PRINT "REF_END_1"
+230 CLEAR
+240 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+250 PRINT "REF_BEGIN_2"
+260 PRINT "a"+FNrepeat(3)+"b"
+270 PRINT FNleft(2,"A");":";FNempty;":";FNtag$("x");":";FNnumber$
+280 PRINT ;LEN FNnul;":";ASC MID$(FNnul,2);":";ASC RIGHT$(FNnul)
+290 PRINT ;LEN FNfull;":";ASC FNfull
+300 PRINT "REF_END_2"
+310 CLEAR
+320 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+330 PRINT "REF_BEGIN_3"
+340 A%=7:B%=8:PRINT FNswap(A%,B%):PRINT ;A%;":";B%
+350 PRINT FNjoin(FNdouble("a"),FNdouble("b"))
+360 PRINT FNcombine(FNsum(1,2),FNsum(3,4),FNdouble("z"))
+370 PRINT ;FNcreated(newarg%);":";newarg%
+380 x%=7:PRINT ;FNtake(FNside);":";x%
+390 PRINT "REF_END_3"
+400 CLEAR
+410 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+420 PRINT "REF_BEGIN_4"
+430 s$="outer":PRINT FNglobal:PRINT s$;":";retained$
+440 PRINT FNwithproc(3):PROCprintnum(FNwithproc(2))
+450 PRINT "REF_END_4"
+460 CLEAR
+470 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+480 PRINT "REF_BEGIN_5"
+490 PRINT FNforward;":";FNcomments;":";FNparent(2)
+500 PRINT ;FNlogic(1);":";FNlogic(0);":";FNplus
+510 PRINT FNquoted
+520 PRINT "REF_END_5"
+530 CLEAR
+540 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+550 PRINT "REF_BEGIN_6"
+560 PROCerror6
+570 PRINT "REF_END_6"
+580 CLEAR
+590 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+600 PRINT "REF_BEGIN_7"
+610 PROCerror7
+620 PRINT "REF_END_7"
+630 CLEAR
+640 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+650 PRINT "REF_BEGIN_8"
+660 PROCerror8
+670 PRINT "REF_END_8"
+680 CLEAR
+690 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+700 PRINT "REF_BEGIN_9"
+710 PROCerror9
+720 PRINT "REF_END_9"
+730 CLEAR
+740 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+750 PRINT "REF_BEGIN_10"
+760 PROCerror10
+770 PRINT "REF_END_10"
+780 CLEAR
+790 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+800 PRINT "REF_BEGIN_11"
+810 PROCerror11
+820 PRINT "REF_END_11"
+830 CLEAR
+840 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+850 PRINT "REF_BEGIN_12"
+860 PROCerror12
+870 PRINT "REF_END_12"
+880 CLEAR
+890 A%=0:B%=0:C%=0:D%=0:E%=0:F%=0:G%=0:H%=0:I%=0:J%=0:K%=0:L%=0:M%=0:N%=0:O%=0:P%=0:Q%=0:R%=0:S%=0:T%=0:U%=0:V%=0:W%=0:X%=0:Y%=0:Z%=0
+900 PRINT "REF_BEGIN_13"
+910 PROCerror13
+920 PRINT "REF_END_13"
+9000 PRINT "OUTPUT_REFERENCE_DONE":OSCLI "BYE"
+40000 DEF FNadd(a,b)=a+b
+40001 DEF FNtext(s$)=s$+s$
+40100 DEF FNfact(n%):IF n%=0 THEN =1 ELSE =n%*FNfact(n%-1)
+40101 DEF FNfib(n%):IF n%<2 THEN =n% ELSE =FNfib(n%-1)+FNfib(n%-2)
+40102 DEF FNidentity(x)=x
+40103 DEF FNwide(x)=x+1
+40200 DEF FNrepeat(n%):IF n%=0 THEN ="x" ELSE =FNrepeat(n%-1)+"x"
+40201 DEF FNleft(n%,s$):IF n%=0 THEN =s$ ELSE =s$+FNleft(n%-1,s$+"B")
+40202 DEF FNempty=""
+40203 DEF FNtag$(s$)=s$+"!"
+40204 DEF FNnumber$=3
+40205 DEF FNnul=CHR$(0)+CHR$(128)+CHR$(255)
+40206 DEF FNfull=STRING$(255,"q")
+40300 DEF FNswap(B%,A%)=STR$ A%+":"+STR$ B%
+40301 DEF FNjoin(a$,b$)=a$+b$
+40302 DEF FNdouble(s$)=s$+s$
+40303 DEF FNsum(a,b)=a+b
+40304 DEF FNcombine(a%,b%,s$)=STR$ a%+":"+STR$ b%+":"+s$
+40305 DEF FNcreated(newarg%)=newarg%
+40306 DEF FNtake(x%)=x%
+40307 DEF FNside:x%=9:=1
+40400 DEF FNglobal:LOCAL s$:s$="inner":retained$=s$:=s$+"!"
+40401 DEF FNwithproc(n%):LOCAL value%:value%=n%+1:PROCsnoop:=value%*2
+40402 DEF PROCsnoop:PRINT ;value%:ENDPROC
+40403 DEF PROCprintnum(n%):PRINT ;n%:ENDPROC
+40500 DEF FNforward=FNlater
+40501 DEF FNlater="forward"
+40502 DEF FNcomments:REM =1 ELSE =0
+40503 ="comment"
+40504 DEF FNparent(n%)=(FNlater+STR$ n%)
+40505 DEF FNlogic(n%)=NOT(n%=0) AND TRUE
+40506 DEF FNplus=+1
+40507 DEF FNquoted="a:ELSE""THEN"
+40600 DEF FNoverflow=1E39
+10600 DEF PROCerror6:LOCAL ERROR
+10601 ON ERROR LOCAL REPORT:PRINT:ENDPROC
+10602 PRINT FNoverflow
+10690 ENDPROC
+40700 DEF FNbadloop:FOR i%=1 TO 1:=1:NEXT
+10700 DEF PROCerror7:LOCAL ERROR
+10701 ON ERROR LOCAL REPORT:PRINT:ENDPROC
+10702 PRINT FNbadloop
+10790 ENDPROC
+40800 DEF FNbadend:ENDPROC:=1
+10800 DEF PROCerror8:LOCAL ERROR
+10801 ON ERROR LOCAL REPORT:PRINT:ENDPROC
+10802 PRINT FNbadend
+10890 ENDPROC
+40900 DEF FNbadlocal:WHILE 1:LOCAL x%:ENDWHILE:=1
+10900 DEF PROCerror9:LOCAL ERROR
+10901 ON ERROR LOCAL REPORT:PRINT:ENDPROC
+10902 PRINT FNbadlocal
+10990 ENDPROC
+41000 DEF FNbadparam(n%)=n%
+11000 DEF PROCerror10:LOCAL ERROR
+11001 ON ERROR LOCAL REPORT:PRINT:ENDPROC
+11002 PRINT FNbadparam(2147483648)
+11090 ENDPROC
+41100 DEF FNbadstring=STRING$(128,"ab")
+11100 DEF PROCerror11:LOCAL ERROR
+11101 ON ERROR LOCAL REPORT:PRINT:ENDPROC
+11102 PRINT FNbadstring
+11190 ENDPROC
+41200 DEF PROCwrong:=1
+11200 DEF PROCerror12:LOCAL ERROR
+11201 ON ERROR LOCAL REPORT:PRINT:ENDPROC
+11202 PROCwrong
+11290 ENDPROC
+11300 DEF PROCerror13:LOCAL ERROR
+11301 ON ERROR LOCAL REPORT:PRINT:ENDPROC
+11302 =1/0
+11390 ENDPROC

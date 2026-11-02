@@ -1,0 +1,33 @@
+{
+  "scope": "Selected live FN rechecks",
+  "compiler_sha256": "6feb0b21b09ac4353347876df89043caf8800727b5a8c4f985588c3e6741c8f4",
+  "byte_identical_promotion": true,
+  "all_four_packers_reproduce_source": true,
+  "activation_runtime_bytes": 783,
+  "activation_relocations": 58,
+  "human_hardware_validation": false,
+  "additional_string_consumers": {
+    "programs": 3,
+    "native_executions": 3,
+    "rejected_sources": 0,
+    "reference_output_programs": 3,
+    "legacy_arithmetic_observations": 0,
+    "deterministic_repeat": true,
+    "independent_link_bases": [
+      265153,
+      263540,
+      262608
+    ],
+    "string_link_bases": [
+      279975,
+      278363,
+      277425
+    ],
+    "duration_seconds": 224.858,
+    "hashes": {
+      "compiler/compiler.bas": "6feb0b21b09ac4353347876df89043caf8800727b5a8c4f985588c3e6741c8f4",
+      "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+      "docs/tasks/C004/build/output-integration/cases.json": "5e9db0555f1f7fb099c389db4c591e07d9b48d8dd57445f0783b611cbcd51d8f"
+    }
+  }
+}
