@@ -5,7 +5,10 @@ is implemented only for the scope stated here. The compiler is not yet
 self-hosting and has no variables or mutable-string runtime. Implemented
 statuses describe the C001 bootstrap and qualified C002 numeric expressions/output in
 `compiler/compiler.bas`. These are development-branch promotions; accepted
-testing is still required before promotion to main.
+testing is still required before promotion to main. The Author accepted corrected C002 reference literal behavior
+and qualification for a development checkpoint. Execution speed is the only intended
+observable runtime difference for supported conventional programs; possible
+[interpreter improvements](INTERPRETER-FINDINGS.md) are research only.
 
 | Feature | Status | Current scope or constraint |
 | --- | --- | --- |
@@ -19,9 +22,9 @@ testing is still required before promotion to main.
 | REM and colon statements | Implemented | Quoted colons remain string data |
 | PRINT | Partial | Literals and numeric expressions; default G9/initial width 10; semicolon padding/newline rules; no comma zones, TAB/SPC, ~ or mutable @% |
 | VDU and CLS | Partial | Numeric byte expressions use SFIX and low-byte wrapping; no word/zero-fill forms |
-| 32-bit integer values | Implemented | Exact four-byte temporaries and signed hex bit patterns; no ADL narrowing |
-| Numeric literals | Partial | Decimal whole values 0..2^32, at most ten digits; optional zero-only fractional suffix; hex up to eight uppercase digits |
-| 40-bit floating-point values | Partial | Five-byte arithmetic/promoted values and whole-valued float literals; general fraction/exponent literals unsupported |
+| 32-bit integer values | Implemented | Exact four-byte payloads and signed hex bit patterns; no ADL narrowing |
+| Numeric literals | Partial | Decimal whole/fraction/uppercase E forms within 255-byte source lines; reference reader results/types/errors preserved, including quirks; lowercase e and crunched text after exponents rejected; hex up to eight uppercase digits; binary literals unsupported |
+| 40-bit floating-point values | Implemented for numeric expressions | Five-byte literals/arithmetic/promoted values; reference conversion and range behavior; reader errors occur when executed; variables remain C003 |
 | Arithmetic and conversion | Partial | Binary + - * / ^ DIV MOD, unary signs, package overflow/promotion and VDU SFIX |
 | Standard math functions and PI | Implemented subset | ABS ACS ASN ATN COS DEG EXP INT LN LOG NOT RAD SGN SIN SQR TAN, PI; source VAL/STR$, RND and OS functions remain unsupported |
 | Numeric formatting | Partial | Fixed G9, matching the reference; @% assignment and other PRINT formats unsupported |

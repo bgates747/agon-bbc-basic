@@ -1,0 +1,44 @@
+Warning: unused arguments left: ["--firmware", "platform"].
+Tom's Fake VDP Version 1.03
+unknown packet VDU 0x17, 0, 0xf8
+unknown packet VDU 0x17, 0, 0x99
+uunknown packet VDU 0x17, 0, 0x94
+
+Agon Platform MOS Version 3.0.2 Arthur
+
+OK:l0.bas
+ERR:l1.bas
+l1.bas:1:9: Expected digits in numeric literal at 3250
+ERR:l2.bas
+l2.bas:1:9: Expected digits in numeric literal at 3250
+ERR:l3.bas
+l3.bas:1:10: Expected exponent digits at 3250
+ERR:l4.bas
+l4.bas:1:11: Expected exponent digits at 3250
+ERR:l5.bas
+l5.bas:1:11: Expected exponent digits at 3250
+ERR:l6.bas
+l6.bas:1:10: Expected exponent digits at 3250
+ERR:l7.bas
+l7.bas:1:11: Expected exponent digits at 3250
+ERR:l8.bas
+l8.bas:1:13: Decimal exponent exceeds 999 at 3250
+ERR:l9.bas
+l9.bas:1:14: Decimal exponent exceeds 999 at 3250
+ERR:l10.bas
+l10.bas:1:12: Numeric literal too big at 3250
+ERR:l11.bas
+l11.bas:1:47: Numeric literal too big at 3250
+ERR:l12.bas
+l12.bas:1:47: Numeric literal too big at 3250
+ERR:l13.bas
+l13.bas:1:11: Unexpected text after statement at 3250
+ERR:l14.bas
+l14.bas:1:11: Unexpected text after statement at 3250
+ERR:l15.bas
+l15.bas:1:18: Hex literal exceeds eight digits at 3250
+ERR:l16.bas
+l16.bas:1:12: EVAL is deliberately unsupported at 3250
+OK:l0.bas
+LITERAL_COMPILE_DONE
+/ *

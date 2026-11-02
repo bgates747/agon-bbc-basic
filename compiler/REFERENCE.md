@@ -70,7 +70,12 @@ source features remain partial or unsupported in the compatibility matrix.
 7. Direct byte checks confirm FONE encodes 1.0 with exponent 128 and exact
    halfway addition uses the package's ODD behavior, not IEEE ties-to-even.
    The reference constant reader also stores `4294967296.0` differently from
-   `2147483648.0*2`; C002 retains this discrepancy for explicit parser design.
+   `2147483648.0*2`. The compiler must preserve that distinction. Its BBC
+   literal scanner delegates conversion to host VAL, which uses the same CON
+   path, and copies the exact packed result. Source VAL remains unsupported
+   in compiled programs; implementing its string-pointer runtime belongs to
+   bootstrap closure. See [literal compatibility](../docs/tasks/C002/LITERALS.md)
+   and the separate [interpreter research record](INTERPRETER-FINDINGS.md).
 
 8. Numeric output calls the package's STR entry through a separate pointer
    ABI: IX supplies private format control and DE supplies an output buffer.

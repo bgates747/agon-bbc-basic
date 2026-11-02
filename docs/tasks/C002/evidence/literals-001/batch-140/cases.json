@@ -1,0 +1,222 @@
+[
+  {
+    "literal": "11754943504117508484985752859750592764641979401860732807246162262714636606588899415959392769082114682532846927642822265625.0E-159",
+    "packed": "FFFFFF7F01",
+    "exact_binary_fixture": true,
+    "expected_packed": "FFFFFF7F01",
+    "reader_packed": "6D0BE57EC5",
+    "reader_error": 0,
+    "expected_text": "1.17549435E-38\n",
+    "compiled_packed": "FFFFFF7F01"
+  },
+  {
+    "literal": "2350988700823501696997150571950118552928395880372146561449232452542927321317779883191878553816422936506569385528564453125.0E-158",
+    "packed": "FFFFFF7F02",
+    "exact_binary_fixture": true,
+    "expected_packed": "FFFFFF7F02",
+    "reader_packed": "8B6FEA4BC3",
+    "reader_error": 0,
+    "expected_text": "2.3509887E-38\n",
+    "compiled_packed": "FFFFFF7F02"
+  },
+  {
+    "literal": "1577721809891010633875509861205227207523485208740546529803641835620897637681991909630596637725830078125.0E-132",
+    "packed": "FFFFFF7F1C",
+    "exact_binary_fixture": true,
+    "expected_packed": "FFFFFF7F1C",
+    "reader_packed": "A6ADC51D87",
+    "reader_error": 0,
+    "expected_text": "1.57772181E-30\n",
+    "compiled_packed": "FFFFFF7F1C"
+  },
+  {
+    "literal": "999999999650754034519195556640625.0E-33",
+    "packed": "FFFFFF7F7F",
+    "exact_binary_fixture": true,
+    "expected_packed": "FFFFFF7F7F",
+    "reader_packed": "FCFFFF7F7F",
+    "reader_error": 0,
+    "expected_text": "1\n",
+    "compiled_packed": "FFFFFF7F7F"
+  },
+  {
+    "literal": "199999999930150806903839111328125.0E-32",
+    "packed": "FFFFFF7F80",
+    "exact_binary_fixture": true,
+    "expected_packed": "FFFFFF7F80",
+    "reader_packed": "FEFFFF7F80",
+    "reader_error": 0,
+    "expected_text": "2\n",
+    "compiled_packed": "FFFFFF7F80"
+  },
+  {
+    "literal": "39999999986030161380767822265625.0E-31",
+    "packed": "FFFFFF7F81",
+    "exact_binary_fixture": true,
+    "expected_packed": "FFFFFF7F81",
+    "reader_packed": "FEFFFF7F81",
+    "reader_error": 0,
+    "expected_text": "4\n",
+    "compiled_packed": "FFFFFF7F81"
+  },
+  {
+    "literal": "214748364725.0E-2",
+    "packed": "FFFFFF7F9E",
+    "exact_binary_fixture": true,
+    "expected_packed": "FFFFFF7F9E",
+    "reader_packed": "FEFFFF7F9E",
+    "reader_error": 0,
+    "expected_text": "2.14748365E9\n",
+    "compiled_packed": "FFFFFF7F9E"
+  },
+  {
+    "literal": "42949672945.0E-1",
+    "packed": "FFFFFF7F9F",
+    "exact_binary_fixture": true,
+    "expected_packed": "FFFFFF7F9F",
+    "reader_packed": "FEFFFF7F9F",
+    "reader_error": 0,
+    "expected_text": "4.2949673E9\n",
+    "compiled_packed": "FFFFFF7F9F"
+  },
+  {
+    "literal": "8589934589.0",
+    "packed": "FFFFFF7FA0",
+    "exact_binary_fixture": true,
+    "expected_packed": "FFFFFF7FA0",
+    "reader_packed": "FAFFFF7FA0",
+    "reader_error": 0,
+    "expected_text": "8.58993459E9\n",
+    "compiled_packed": "FFFFFF7FA0"
+  },
+  {
+    "literal": "2535301199571015087455347933184.0",
+    "packed": "FFFFFF7FE4",
+    "exact_binary_fixture": true,
+    "expected_packed": "FFFFFF7FE4",
+    "reader_packed": "FFFFFF7FE4",
+    "reader_error": 0,
+    "expected_text": "2.5353012E30\n",
+    "compiled_packed": "FFFFFF7FE4"
+  },
+  {
+    "literal": "340282366802096219691978101041452285952.0",
+    "packed": "FFFFFF7FFF",
+    "exact_binary_fixture": true,
+    "expected_packed": "FFFFFF7FFF",
+    "reader_packed": "0000000000",
+    "reader_error": 20,
+    "expected_text": "3.40282367E38\n",
+    "compiled_packed": "FFFFFF7FFF"
+  },
+  {
+    "literal": "11754943506854419548120161201398502107005096845767494412473732129427660598561147624330214256360704894177615642547607421875.0E-159",
+    "packed": "FFFFFF7F01",
+    "exact_binary_fixture": true,
+    "expected_packed": "FFFFFF7F01",
+    "reader_packed": "6D0BE57EC5",
+    "reader_error": 0,
+    "expected_text": "1.17549435E-38\n",
+    "compiled_packed": "FFFFFF7F01"
+  },
+  {
+    "literal": "2350988701370883909624032240279700421401019369153498882494746425885532119712229524866042851272140978835523128509521484375.0E-158",
+    "packed": "FFFFFF7F02",
+    "exact_binary_fixture": true,
+    "expected_packed": "FFFFFF7F02",
+    "reader_packed": "8C6FEA4BC3",
+    "reader_error": 0,
+    "expected_text": "2.3509887E-38\n",
+    "compiled_packed": "FFFFFF7F02"
+  },
+  {
+    "literal": "1577721810258352618507474707445457375405436983058879516294919186092382545893997303210198879241943359375.0E-132",
+    "packed": "FFFFFF7F1C",
+    "exact_binary_fixture": true,
+    "expected_packed": "FFFFFF7F1C",
+    "reader_packed": "A7ADC51D87",
+    "reader_error": 0,
+    "expected_text": "1.57772181E-30\n",
+    "compiled_packed": "FFFFFF7F1C"
+  },
+  {
+    "literal": "999999999883584678173065185546875.0E-33",
+    "packed": "FFFFFF7F7F",
+    "exact_binary_fixture": true,
+    "expected_packed": "FFFFFF7F7F",
+    "reader_packed": "FCFFFF7F7F",
+    "reader_error": 0,
+    "expected_text": "1\n",
+    "compiled_packed": "FFFFFF7F7F"
+  },
+  {
+    "literal": "199999999976716935634613037109375.0E-32",
+    "packed": "FFFFFF7F80",
+    "exact_binary_fixture": true,
+    "expected_packed": "FFFFFF7F80",
+    "reader_packed": "FEFFFF7F80",
+    "reader_error": 0,
+    "expected_text": "2\n",
+    "compiled_packed": "FFFFFF7F80"
+  },
+  {
+    "literal": "39999999995343387126922607421875.0E-31",
+    "packed": "FFFFFF7F81",
+    "exact_binary_fixture": true,
+    "expected_packed": "FFFFFF7F81",
+    "reader_packed": "FFFFFF7F81",
+    "reader_error": 0,
+    "expected_text": "4\n",
+    "compiled_packed": "FFFFFF7F81"
+  },
+  {
+    "literal": "214748364775.0E-2",
+    "packed": "FFFFFF7F9E",
+    "exact_binary_fixture": true,
+    "expected_packed": "FFFFFF7F9E",
+    "reader_packed": "FEFFFF7F9E",
+    "reader_error": 0,
+    "expected_text": "2.14748365E9\n",
+    "compiled_packed": "FFFFFF7F9E"
+  },
+  {
+    "literal": "42949672955.0E-1",
+    "packed": "FFFFFF7F9F",
+    "exact_binary_fixture": true,
+    "expected_packed": "FFFFFF7F9F",
+    "reader_packed": "FFFFFF7F9F",
+    "reader_error": 0,
+    "expected_text": "4.2949673E9\n",
+    "compiled_packed": "FFFFFF7F9F"
+  },
+  {
+    "literal": "8589934591.0",
+    "packed": "FFFFFF7FA0",
+    "exact_binary_fixture": true,
+    "expected_packed": "FFFFFF7FA0",
+    "reader_packed": "FFFFFF7FA0",
+    "reader_error": 0,
+    "expected_text": "8.58993459E9\n",
+    "compiled_packed": "FFFFFF7FA0"
+  },
+  {
+    "literal": "2535301200161310897814053584896.0",
+    "packed": "FFFFFF7FE4",
+    "exact_binary_fixture": true,
+    "expected_packed": "FFFFFF7FE4",
+    "reader_packed": "00000000E5",
+    "reader_error": 0,
+    "expected_text": "2.5353012E30\n",
+    "compiled_packed": "FFFFFF7FE4"
+  },
+  {
+    "literal": "340282366881324382206242438634996236288.0",
+    "packed": "FFFFFF7FFF",
+    "exact_binary_fixture": true,
+    "expected_packed": "FFFFFF7FFF",
+    "reader_packed": "0000000000",
+    "reader_error": 20,
+    "expected_text": "3.40282367E38\n",
+    "compiled_packed": "FFFFFF7FFF"
+  }
+]

@@ -1,0 +1,55 @@
+{
+  "compiler_sha256": "bea645170420bc6ce60bb648dbc5a919ac5bdd56f437ca785719e8e262ff3d31",
+  "cases": 174,
+  "rejected_sources": 16,
+  "packed_mismatches": 0,
+  "reader_differences": 104,
+  "batch_reports": [
+    "batch-000/results.json",
+    "batch-052/results.json",
+    "batch-118/results.json",
+    "batch-140/results.json",
+    "batch-162/results.json"
+  ],
+  "duration_seconds": 574.475,
+  "generation_seconds": 145.081,
+  "independent_binary_fixtures": 110,
+  "batches_with_deterministic_repeats": 4,
+  "single_pass_supplement_start": 52,
+  "runtime_changed": false,
+  "human_validation": false,
+  "physical_hardware_validation": false,
+  "performance_benchmark": false,
+  "output_integration": {
+    "programs": 24,
+    "native_executions": 16,
+    "rejected_sources": 8,
+    "reference_output_programs": 11,
+    "legacy_arithmetic_observations": 58,
+    "deterministic_repeat": true,
+    "independent_link_bases": [
+      262850,
+      264267,
+      263169,
+      262753,
+      263407,
+      262464,
+      262420,
+      262420,
+      262454,
+      262453,
+      265201,
+      265085,
+      264891,
+      265442,
+      264240,
+      262957
+    ],
+    "duration_seconds": 157.554,
+    "hashes": {
+      "docs/tasks/C002/literals/compiler.bas": "bea645170420bc6ce60bb648dbc5a919ac5bdd56f437ca785719e8e262ff3d31",
+      "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+      "docs/tasks/C002/build/output-integration/cases.json": "c7c41bdd30a9b9c12cb841f629a6ef153cdb452e7bb55ae1aa4b9fb26c03fb90"
+    }
+  }
+}

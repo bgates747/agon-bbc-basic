@@ -1,0 +1,33 @@
+{
+  "historical_only": true,
+  "compiler_sha256": "00297719a115aaf14dec0a922314d1ec91edc2ef4226f7a85fd36ec2349654e8",
+  "before_EOR_boundary_fix": true,
+  "batches": [
+    {
+      "start": 0,
+      "cases": 12,
+      "duration_seconds": 18.689
+    },
+    {
+      "start": 12,
+      "cases": 12,
+      "duration_seconds": 34.099
+    },
+    {
+      "start": 24,
+      "cases": 28,
+      "duration_seconds": 76.546
+    },
+    {
+      "start": 52,
+      "cases": 22,
+      "duration_seconds": 111.917
+    },
+    {
+      "start": 74,
+      "cases": 22,
+      "duration_seconds": 112.495
+    }
+  ],
+  "final_qualification": "../literals-001/summary.json"
+}

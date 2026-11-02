@@ -1,0 +1,81 @@
+{
+  "cases": 12,
+  "start": 12,
+  "rejected_sources": 0,
+  "packed_mismatches": 0,
+  "native_output_matches": true,
+  "deterministic_repeat": true,
+  "independent_runtime_link_base": 262807,
+  "reader_differences": [
+    {
+      "literal": "4294967296",
+      "packed": "00000000A0",
+      "expected_packed": "00000000A0",
+      "reader_packed": "FAFFFF7F9F",
+      "reader_error": 0,
+      "expected_text": "4.2949673E9\n",
+      "compiled_packed": "00000000A0"
+    },
+    {
+      "literal": "4294967297",
+      "packed": "01000000A0",
+      "expected_packed": "01000000A0",
+      "reader_packed": "FAFFFF7F9F",
+      "reader_error": 0,
+      "expected_text": "4.2949673E9\n",
+      "compiled_packed": "01000000A0"
+    },
+    {
+      "literal": "4294967298",
+      "packed": "01000000A0",
+      "expected_packed": "01000000A0",
+      "reader_packed": "FAFFFF7F9F",
+      "reader_error": 0,
+      "expected_text": "4.2949673E9\n",
+      "compiled_packed": "01000000A0"
+    },
+    {
+      "literal": "4294967299",
+      "packed": "01000000A0",
+      "expected_packed": "01000000A0",
+      "reader_packed": "FAFFFF7F9F",
+      "reader_error": 0,
+      "expected_text": "4.2949673E9\n",
+      "compiled_packed": "01000000A0"
+    },
+    {
+      "literal": "4294967301",
+      "packed": "03000000A0",
+      "expected_packed": "03000000A0",
+      "reader_packed": "02000000A0",
+      "reader_error": 0,
+      "expected_text": "4.2949673E9\n",
+      "compiled_packed": "03000000A0"
+    },
+    {
+      "literal": "4294967295.75",
+      "packed": "00000000A0",
+      "expected_packed": "00000000A0",
+      "reader_packed": "FFFFFF7F9F",
+      "reader_error": 0,
+      "expected_text": "4.2949673E9\n",
+      "compiled_packed": "00000000A0"
+    },
+    {
+      "literal": "5.87747175411143754E-39",
+      "packed": "0000000001",
+      "expected_packed": "0000000001",
+      "reader_packed": "0000000000",
+      "reader_error": 0,
+      "expected_text": "5.87747176E-39\n",
+      "compiled_packed": "0000000001"
+    }
+  ],
+  "duration_seconds": 30.167,
+  "hashes": {
+    "compiler/compiler.bas": "bea645170420bc6ce60bb648dbc5a919ac5bdd56f437ca785719e8e262ff3d31",
+    "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+    "docs/tasks/C002/build/literals/batch-012/literal.dat": "a5f14bb62cf18648e50435a92e5149908e9dfc7e141941bb95ffca64247b1b84",
+    "docs/tasks/C002/build/literals/batch-012/cases.json": "ca175fc47f2a655c7b01fc868e024740d08f7e0025e278b43218bee28ed2c2d1"
+  }
+}

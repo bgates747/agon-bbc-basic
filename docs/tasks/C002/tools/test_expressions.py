@@ -47,7 +47,7 @@ def cases():
         ("(2147483648.0*2)+1", "(2147483648.0*2)+2"),
         ("(2147483648.0*2)+3", "(2147483648.0*2)+2"),
         ("4294967295", "(2147483648.0*2)-1"),
-        ("4294967296", "2147483648.0*2"),
+        ("4294967296", "4294967290"),
         ("1/2+1/4", "3/4"), ("-1/2", "0-1/2"),
         ("1DIV2", "0"), ("1AND2", "0"),
     ]
@@ -56,17 +56,10 @@ def cases():
         expression = f"65-(({left})=({right}))"
         case = dict(source=f"VDU {expression},13,10\n", expression=expression,
                     expected="B\n", status=0, diagnostic=None)
-        if left == "4294967296":
-            case["expression"] = "65-((2147483648.0*2)=(2147483648.0*2))"
-            case["intentional_reference_literal_correction"] = True
         result.append(case)
-    # Explicit correction of the observed decimal reader defect: reference
-    # uses exact construction. The source difference is retained in evidence.
-    expression = "65-(4294967296.0=(2147483648.0*2))"
-    result.append(dict(source=f"VDU {expression},13,10\n",
-                       expression="65-((2147483648.0*2)=(2147483648.0*2))",
-                       expected="B\n", status=0, diagnostic=None,
-                       intentional_reference_literal_correction=True))
+    expression = "65-(4294967296.0=4294967290)"
+    result.append(dict(source=f"VDU {expression},13,10\n", expression=expression,
+                       expected="B\n", status=0, diagnostic=None))
     for expression in ("65", "321", "-191", "131/2", "-381/2+256"):
         result.append(dict(source=f"VDU {expression},13,10\n", expression=expression,
                            expected="A\n", status=0, diagnostic=None))
@@ -77,8 +70,8 @@ def cases():
              expected="x"*70+"\nA\n", status=0, diagnostic=None),
         dict(source='PRINT "ok":END\n', expected="ok\n", status=0, diagnostic=None),
         dict(source='VDU 1/0:PRINT "bad"\n', expected="Division by zero\n", status=1, diagnostic=None),
-        dict(source='VDU 2^200:PRINT "bad"\n', expected="Too big\n", status=1, diagnostic=None),
-        dict(source='VDU 2147483648\n', expected="Too big\n", status=1, diagnostic=None),
+        dict(source='VDU 2^200:PRINT "bad"\n', expected="Number too big\n", status=1, diagnostic=None),
+        dict(source='VDU 2147483648\n', expected="Number too big\n", status=1, diagnostic=None),
         dict(source='VDU (-2)^(1/2)\n', expected="Log range\n", status=1, diagnostic=None),
     ]
     failures = [
@@ -86,12 +79,12 @@ def cases():
         ("VDU (1+2\n", "Expected )"),
         ("VDU 1<2<3\n", "Chained comparisons"),
         ("VDU 1<<2\n", "Shift operators"),
-        ("VDU 0.5\n", "Fractional literals"),
-        ("VDU 1E3\n", "Exponent literals"),
-        ("VDU 1.\n", "Expected fractional digits"),
+        ("VDU 1e3\n", "Unexpected text"),
+        ("VDU 1E+ 3\n", "Unexpected text"),
+        ("VDU 1E2EOR1\n", "Unsupported crunched text"),
         ("VDU &\n", "Expected digits"),
         ("VDU &100000000\n", "Hex literal exceeds"),
-        ("VDU 4294967297\n", "Decimal whole literal exceeds"),
+        ("VDU 1.2.3\n", "Unexpected text"),
         ("VDU EVAL(\"1\")\n", "EVAL is deliberately unsupported"),
         ("VDU a%\n", "Unsupported numeric item"),
         ("VDU \"A\"\n", "Expected a numeric item"),
@@ -110,6 +103,8 @@ def cases():
                        "65-((-(1/2))=(0-1/2))", "65-((+(1/2))=(1/2))"):
         result.append(dict(source=f"VDU {expression},13,10\n", expression=expression,
                            expected="B\n", status=0, diagnostic=None))
+    for literal in ("65.5", "6.5E1"):
+        result.append(dict(source=f"VDU {literal},13,10\n",expected="A\n",status=0,diagnostic=None))
     return result
 
 

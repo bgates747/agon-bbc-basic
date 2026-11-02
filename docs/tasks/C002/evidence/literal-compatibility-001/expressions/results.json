@@ -1,0 +1,28 @@
+{
+  "start": 60,
+  "cases": 26,
+  "reference_expressions": 5,
+  "native_executions": 9,
+  "rejected_sources": 17,
+  "deterministic_repeat": true,
+  "nonnumeric_assembly_golden": false,
+  "independently_linked_image_bases": [
+    262470,
+    262452,
+    262548,
+    262548,
+    262616,
+    262659,
+    262616,
+    262480,
+    262480
+  ],
+  "duration_seconds": 51.214,
+  "host": "raspberrypi/aarch64",
+  "human_validation": false,
+  "hashes": {
+    "compiler/compiler.bas": "9a33abb5ffd4e9f6818d22c611842d9ac3bd606aa386bbc2bc7a370d68c0e33a",
+    "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+    "docs/tasks/C002/build/expressions/promotion/batch-060/oracle.dat": "0fad32b1e81a318bb7ec37b8b6cd180d1b86cb279240142348a3ecd435cd0742"
+  }
+}

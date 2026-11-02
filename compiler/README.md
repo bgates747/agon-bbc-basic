@@ -7,10 +7,10 @@ expressions and standard math functions. It cannot compile itself.
 The interpreter elsewhere in this repository remains the compatibility
 reference and bootstrap host. The tested implementation was promoted under
 [task C001](../docs/tasks/C001.md) to `compiler/compiler.bas`; sample programs,
-regression tests and tooling are alongside it. C002's qualified numeric
-expressions, output and runtime are now in this development tree. General
-fractional/exponent literals and variables remain unsupported. Promotion
-to `main` awaits accepted testing.
+regression tests and tooling are alongside it. C002's numeric expressions, output, fractional/scientific literals and runtime
+are in this development tree, with the corrected C002 baseline accepted for
+a development checkpoint. Variables remain unsupported. Promotion to `main` awaits
+accepted testing.
 
 ## Running on Agon
 
@@ -41,6 +41,8 @@ needs no separate runtime image or assembler.
    and verification evidence.
 6. [Testing and benchmarking corpus](TESTING.md) — curated source programs,
    eligibility, correctness oracles and measurement protocol.
+7. [Possible interpreter improvements](INTERPRETER-FINDINGS.md) — research
+   observations and reproductions, separate from compiler compatibility.
 
 ## Automated qualification
 
@@ -84,3 +86,9 @@ For numeric integration and assembly-template regeneration, see the
 The [numeric output record](../docs/tasks/C002/OUTPUT.md) describes math functions,
 default PRINT formatting and qualification. [numbers.bas](examples/numbers.bas)
 provides a small executable example.
+
+[Decimal literal compatibility](../docs/tasks/C002/LITERALS.md) records the
+reference conversion dependency, source grammar and differential qualification.
+Execution speed is the only intended observable runtime difference for supported
+conventional BBC programs. Possible [interpreter improvements](INTERPRETER-FINDINGS.md)
+are retained separately as research; the compiler must not silently adopt them.

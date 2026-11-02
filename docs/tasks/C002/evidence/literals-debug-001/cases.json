@@ -1,0 +1,110 @@
+[
+  {
+    "literal": "0",
+    "packed": "0000000000",
+    "expected_packed": "0000000000",
+    "reader_packed": "0000000000",
+    "reader_error": 0,
+    "expected_text": "0\n",
+    "compiled_packed": "0000000000"
+  },
+  {
+    "literal": "1",
+    "packed": "0100000000",
+    "expected_packed": "0100000000",
+    "reader_packed": "0100000000",
+    "reader_error": 0,
+    "expected_text": "1\n",
+    "compiled_packed": "0100000000"
+  },
+  {
+    "literal": "1.0",
+    "packed": "0000000080",
+    "expected_packed": "0000000080",
+    "reader_packed": "0000000080",
+    "reader_error": 0,
+    "expected_text": "1\n",
+    "compiled_packed": "0000004080"
+  },
+  {
+    "literal": ".5",
+    "packed": "000000007F",
+    "expected_packed": "000000007F",
+    "reader_packed": "000000007F",
+    "reader_error": 0,
+    "expected_text": "0.5\n",
+    "compiled_packed": "000000407F"
+  },
+  {
+    "literal": "1.",
+    "packed": "0100000000",
+    "expected_packed": "0100000000",
+    "reader_packed": "0100000000",
+    "reader_error": 0,
+    "expected_text": "1\n",
+    "compiled_packed": "0100000000"
+  },
+  {
+    "literal": "1E0",
+    "packed": "0100000000",
+    "expected_packed": "0100000000",
+    "reader_packed": "0100000000",
+    "reader_error": 0,
+    "expected_text": "1\n",
+    "compiled_packed": "0100000000"
+  },
+  {
+    "literal": "1.E0",
+    "packed": "0100000000",
+    "expected_packed": "0100000000",
+    "reader_packed": "0100000000",
+    "reader_error": 0,
+    "expected_text": "1\n",
+    "compiled_packed": "0100000000"
+  },
+  {
+    "literal": ".0",
+    "packed": "0000000000",
+    "expected_packed": "0000000000",
+    "reader_packed": "0000000000",
+    "reader_error": 0,
+    "expected_text": "0\n",
+    "compiled_packed": "0000000000"
+  },
+  {
+    "literal": "0.1",
+    "packed": "CDCCCC4C7C",
+    "expected_packed": "CDCCCC4C7C",
+    "reader_packed": "CDCCCC4C7C",
+    "reader_error": 0,
+    "expected_text": "0.1\n",
+    "compiled_packed": "0000000081"
+  },
+  {
+    "literal": "1.5",
+    "packed": "0000004080",
+    "expected_packed": "0000004080",
+    "reader_packed": "0000004080",
+    "reader_error": 0,
+    "expected_text": "1.5\n",
+    "compiled_packed": "0000006080"
+  },
+  {
+    "literal": "2147483647",
+    "packed": "FFFFFF7F00",
+    "expected_packed": "FFFFFF7F00",
+    "reader_packed": "FFFFFF7F00",
+    "reader_error": 0,
+    "expected_text": "2.14748365E9\n",
+    "compiled_packed": "414040008A"
+  },
+  {
+    "literal": "2147483648",
+    "packed": "000000009F",
+    "expected_packed": "000000009F",
+    "reader_packed": "000000009F",
+    "reader_error": 0,
+    "expected_text": "2.14748365E9\n",
+    "compiled_packed": "414040008A"
+  }
+]

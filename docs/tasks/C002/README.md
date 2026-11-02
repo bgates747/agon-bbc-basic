@@ -53,3 +53,9 @@ functions and default numeric PRINT. Current numeric qualification has 449
 cases; the separate 45-case formatter probe tests its distinct pointer ABI,
 including a buffer crossing a page boundary. These remain task-owned tests of
 the single live compiler/runtime, with frozen historical sources in evidence.
+
+The [decimal literal correction](LITERALS.md) preserves fractional/scientific
+conversion from the reference interpreter. Its runner compares the same source's
+packed values, errors and native output; independent exact anchors are research
+metadata only. Earlier exact-conversion results are superseded as compatibility
+qualification and remain frozen as experimental evidence.

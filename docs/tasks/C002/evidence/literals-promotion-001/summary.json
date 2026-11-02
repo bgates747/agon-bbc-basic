@@ -1,0 +1,162 @@
+{
+  "checkpoint": "7f45af9",
+  "compiler_sha256": "bea645170420bc6ce60bb648dbc5a919ac5bdd56f437ca785719e8e262ff3d31",
+  "byte_identical_promotion": true,
+  "runtime_data_regeneration_byte_identical": true,
+  "baseline": {
+    "cases": 39,
+    "native_executions": 15,
+    "deterministic_repeat": true,
+    "assembler_oracle": true,
+    "duration_seconds": 23.641,
+    "basic_sha256": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+    "compiler_sha256": "bea645170420bc6ce60bb648dbc5a919ac5bdd56f437ca785719e8e262ff3d31",
+    "cli_sha256": "bf5f29b243b8214e54c515dcc26edf47399ce440356af2ebc3ce3d7664ae11eb",
+    "mos_sha256": "d564243283972690933a4554296ad6202ca4ef54572279533a942960846bebae"
+  },
+  "expressions": {
+    "start": 60,
+    "cases": 26,
+    "reference_expressions": 5,
+    "native_executions": 9,
+    "rejected_sources": 17,
+    "deterministic_repeat": true,
+    "nonnumeric_assembly_golden": false,
+    "independently_linked_image_bases": [
+      262470,
+      262452,
+      262548,
+      262548,
+      262616,
+      262659,
+      262616,
+      262480,
+      262480
+    ],
+    "duration_seconds": 54.504,
+    "host": "raspberrypi/aarch64",
+    "human_validation": false,
+    "hashes": {
+      "compiler/compiler.bas": "bea645170420bc6ce60bb648dbc5a919ac5bdd56f437ca785719e8e262ff3d31",
+      "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+      "docs/tasks/C002/build/expressions/promotion/batch-060/oracle.dat": "0fad32b1e81a318bb7ec37b8b6cd180d1b86cb279240142348a3ecd435cd0742"
+    }
+  },
+  "literals": {
+    "cases": 12,
+    "start": 12,
+    "rejected_sources": 0,
+    "packed_mismatches": 0,
+    "native_output_matches": true,
+    "deterministic_repeat": true,
+    "independent_runtime_link_base": 262807,
+    "reader_differences": [
+      {
+        "literal": "4294967296",
+        "packed": "00000000A0",
+        "expected_packed": "00000000A0",
+        "reader_packed": "FAFFFF7F9F",
+        "reader_error": 0,
+        "expected_text": "4.2949673E9\n",
+        "compiled_packed": "00000000A0"
+      },
+      {
+        "literal": "4294967297",
+        "packed": "01000000A0",
+        "expected_packed": "01000000A0",
+        "reader_packed": "FAFFFF7F9F",
+        "reader_error": 0,
+        "expected_text": "4.2949673E9\n",
+        "compiled_packed": "01000000A0"
+      },
+      {
+        "literal": "4294967298",
+        "packed": "01000000A0",
+        "expected_packed": "01000000A0",
+        "reader_packed": "FAFFFF7F9F",
+        "reader_error": 0,
+        "expected_text": "4.2949673E9\n",
+        "compiled_packed": "01000000A0"
+      },
+      {
+        "literal": "4294967299",
+        "packed": "01000000A0",
+        "expected_packed": "01000000A0",
+        "reader_packed": "FAFFFF7F9F",
+        "reader_error": 0,
+        "expected_text": "4.2949673E9\n",
+        "compiled_packed": "01000000A0"
+      },
+      {
+        "literal": "4294967301",
+        "packed": "03000000A0",
+        "expected_packed": "03000000A0",
+        "reader_packed": "02000000A0",
+        "reader_error": 0,
+        "expected_text": "4.2949673E9\n",
+        "compiled_packed": "03000000A0"
+      },
+      {
+        "literal": "4294967295.75",
+        "packed": "00000000A0",
+        "expected_packed": "00000000A0",
+        "reader_packed": "FFFFFF7F9F",
+        "reader_error": 0,
+        "expected_text": "4.2949673E9\n",
+        "compiled_packed": "00000000A0"
+      },
+      {
+        "literal": "5.87747175411143754E-39",
+        "packed": "0000000001",
+        "expected_packed": "0000000001",
+        "reader_packed": "0000000000",
+        "reader_error": 0,
+        "expected_text": "5.87747176E-39\n",
+        "compiled_packed": "0000000001"
+      }
+    ],
+    "duration_seconds": 30.167,
+    "hashes": {
+      "compiler/compiler.bas": "bea645170420bc6ce60bb648dbc5a919ac5bdd56f437ca785719e8e262ff3d31",
+      "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+      "docs/tasks/C002/build/literals/batch-012/literal.dat": "a5f14bb62cf18648e50435a92e5149908e9dfc7e141941bb95ffca64247b1b84",
+      "docs/tasks/C002/build/literals/batch-012/cases.json": "ca175fc47f2a655c7b01fc868e024740d08f7e0025e278b43218bee28ed2c2d1"
+    }
+  },
+  "runtime": {
+    "bytes": 4028,
+    "relocations": 380,
+    "exports": {
+      "rt_numeric": 212,
+      "rt_literal": 0,
+      "rt_negate": 12,
+      "rt_printnum": 113
+    },
+    "independent_link_bases": [
+      266240,
+      290816
+    ],
+    "unresolved_symbols": 0,
+    "hashes": {
+      "compiler/runtime/numeric.s": "406b7c0cc54bead665e009ba189f28139c5b6f15ac0c71699866b8f9233d5c3a",
+      "compiler/runtime/expression_runtime.s": "5c205fd9f8cd5ba6d46e2d5c6ca80e11ca6590c2bfd2412bc0fbb4b754976826",
+      "compiler/runtime/vendor/MATH.Z80": "1f92ffc352b22051ff77f0a48d206d04012fb5e404c0a70e47d76342ce7aece3",
+      "compiler/runtime/vendor/LICENSE.txt": "cc8e92d92cf12fb1d04ddae0b573367f14188df5fcd6c7909d36486ff53a108a",
+      "compiler/build/numeric-runtime/runtime_data.bas": "dd69ee7dace4c5fc73214a2a694820ba2522650c214205f07b345e8a6e11619c",
+      "compiler/build/numeric-runtime/runtime-0.bin": "bdb5eb917ea7600e9a21b11425f4c26f48b5f0d7c2d2298c1fc5812886c4ea2d"
+    }
+  },
+  "qualification": "../literals-001/summary.json",
+  "qualification_tool_hashes": {
+    "compiler/tools/test_compiler.py": "8860793f8699abd432c06993c485c31aaa2b0643b818aab0b26c3a4f0af9d553",
+    "docs/tasks/C002/tools/test_literals.py": "1fe9ce31f1ca8f16432a5577d2e45a42ead5beeebe33215dc1f8f51158a5caab",
+    "docs/tasks/C002/tools/test_output.py": "4bdadb4d79ad5ed850c55b59aec9fc045372b3663bd41816f823327a7a411b4e",
+    "docs/tasks/C002/tools/test_expressions.py": "a7338856379e559b2015960f73bc494804306235e12cf7d527c2112b2dcd08ec",
+    "docs/tasks/C002/literals/generate.bas": "3f00ef9c75f60a9367ae8fa1ff4ad6cbac6771a48a17a5870f7faaf49a48245a"
+  },
+  "human_validation": false,
+  "physical_validation": false,
+  "performance_benchmark": false,
+  "oryx_contacted": false,
+  "new_tranche_committed": false
+}

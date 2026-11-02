@@ -24,11 +24,16 @@ evidence. Passing experiments can be promoted to live source with the evidence
 and destination recorded in the task document. Do not treat placement or an
 automated test pass as human emulator validation or commit approval.
 
-C001 was promoted after its recorded 39-case/15-execution qualification and
-repeat validation at the live location. C002 is active: the adapter and numeric
-VDU expressions, standard unary math functions and default numeric PRINT are
-promoted; general fractional/exponent literals remain pending.
-Read `docs/tasks/C002/OUTPUT.md`, `docs/tasks/C002/EXPRESSIONS.md`,
+C001 and C002's corrected numeric baseline are promoted on the development
+branch. The Author approved committing/pushing that baseline on 2026-11-01.
+For supported conventional programs, execution speed is the only intended
+observable behavioral difference. Preserve reference quirks, numeric conversions,
+rounding and output; do not fix BBC BASIC as part of this compiler. Agreed
+line-number/label syntax and clearly rejected unsupported features retain their
+documented scope. Interpreter improvement ideas belong in
+`compiler/INTERPRETER-FINDINGS.md`; they do not authorize compiler divergences.
+The earlier exact-decimal experiment and its altered test oracles are superseded.
+Read `docs/tasks/C002/LITERALS.md`, `docs/tasks/C002/OUTPUT.md`, `docs/tasks/C002/EXPRESSIONS.md`,
 `docs/tasks/C002/ABI.md` and its task record for scope/results. C003–C006 remain
 unstarted. The compiler is still BBC BASIC; assembly is runtime code, not a
 replacement compiler implementation.
@@ -38,11 +43,11 @@ commands. `.emulator/` is an ignored automated CLI fixture, not a graphical
 human review instance. No graphical emulator or hardware has been deployed.
 The Author explicitly requested pre-tranche checkpoints on 2026-11-01:
 `a45a15f`, `ccd09af` before C007, `227b620` before expression integration,
-and `b1b708c` before numeric functions/output.
+`b1b708c` before numeric functions/output, and `7f45af9` before decimal literals.
 All are pushed to the Author's origin. Keep this development branch and promote
 to `main` only after testing is accepted; do not create a redundant `compiled`
 branch. Oryx is down for maintenance until the Author says otherwise: use the
 Pi5's automated CLI fixture or defer emulator testing, never contact Oryx.
 C007's completed source search and measurement contract are indexed by
-`compiler/TESTING.md`; no new benchmark performance was measured. New work
-remains uncommitted pending review and the canonical emulator validation policy.
+`compiler/TESTING.md`; no new benchmark performance was measured. New tranche work remains subject to review and the canonical emulator
+validation policy. Commit authorization is not a claim of human validation.

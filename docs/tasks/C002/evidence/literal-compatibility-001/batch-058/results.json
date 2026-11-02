@@ -1,0 +1,20 @@
+{
+  "cases": 122,
+  "start": 58,
+  "rejected_sources": 0,
+  "packed_mismatches": 0,
+  "native_output_matches": true,
+  "deterministic_repeat": true,
+  "independent_runtime_link_base": 266692,
+  "reference_value_cases": 117,
+  "reference_error_cases": 5,
+  "expectation_source": "direct reference BASIC source; no arithmetic substitutions",
+  "duration_seconds": 85.406,
+  "hashes": {
+    "compiler/compiler.bas": "9a33abb5ffd4e9f6818d22c611842d9ac3bd606aa386bbc2bc7a370d68c0e33a",
+    "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+    "docs/tasks/C002/build/literal-compatibility/batch-058/literal.dat": "0060384149b1d28f9bb95a980c6436725ab0fef30dd0e17e9c7b41bc70423d2c",
+    "docs/tasks/C002/build/literal-compatibility/batch-058/cases.json": "681eff6c64354bf2477360a9ba90f522e83e58f2c142c9068fc7507c9060ce40",
+    "docs/tasks/C002/build/literals/generated/cases.tsv": "b9422b2fbd9b7d24a87c0672fe2a97561f4934233a345ca73fe2cbb6009a80d4"
+  }
+}

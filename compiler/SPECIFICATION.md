@@ -11,6 +11,16 @@ Task documents and experimental silos follow
 
 ## Current source language
 
+The reference interpreter defines observable behavior for supported conventional
+programs. Execution speed is the only intended runtime difference. Preserve its
+numeric conversion, rounding, types, errors and output, including quirks; a more
+mathematically accurate result is not a compatibility fix. Optional line numbers
+and named labels are the explicitly agreed syntax extensions. Unsupported
+facilities must be rejected clearly. Possible interpreter improvements are
+recorded separately in [research findings](INTERPRETER-FINDINGS.md) and do not
+change this contract. Earlier deliberate decimal-reader corrections are withdrawn;
+The Author accepted the corrected C002 baseline for a development checkpoint.
+
 1. Input is plain byte text with LF, CRLF or CR line endings; final newline is
    optional. Maximum physical line length is 255 bytes. Tokenised `.bbc` input
    and UTF-8 identifiers are unsupported. Diagnostics use physical file line
@@ -97,26 +107,30 @@ Task documents and experimental silos follow
 
 ## Current numeric expression subset
 
-1. Atoms are decimal whole literals, whole-valued float literals, uppercase
-   hexadecimal literals, TRUE/FALSE and parenthesised expressions. Decimal
-   whole parts have at most ten digits and range from 0 through 2^32 inclusive.
-   Optional fractional suffixes contain one or more zero digits only. Hex
-   values use one to eight digits and denote signed 32-bit bit patterns.
-   General fractions, exponent notation, variables and user function calls remain
-   clear compile-time exclusions. Fractional arithmetic results retain the
-   complete five-byte representation.
+1. Atoms are decimal integer/fraction/scientific literals, uppercase hexadecimal
+   literals, TRUE/FALSE and parenthesised expressions. The reference's uppercase
+   E exponent reader is used, including missing exponent digits and spaces before
+   its optional sign. A decimal point alone reads as zero. Lowercase e is not
+   added. EOR remains an operator boundary (`1EOR2`). Unspaced alphabetic text
+   after a scientific exponent is rejected as an unsupported tokenisation form.
+   Hex uses one to eight uppercase digits and denotes signed 32-bit bit patterns.
+   Binary literals, variables and user function calls remain unsupported.
 2. Precedence from tightest is item/unary, ^, * / DIV MOD, + -, comparisons,
    AND, EOR/OR. Binary operators associate left-to-right. In particular,
    `2^3^2=64` and `-2^2=4` follow the reference evaluator. Comparisons accept
    one operator per expression level; parentheses permit nested comparisons.
    Unary signs and NOT are supported. AND/OR do not short-circuit. Shifts and
    unrelated operator extensions are unsupported.
-3. Literal parsing accumulates exact BBC numeric values within the chosen
-   whole-literal bound; it does not use the reference's decimal constant reader.
-   Both `4294967296` and `4294967296.0` intentionally encode exact 2^32,
-   correcting the recorded reader defect. Hex integer payloads are emitted
-   bytewise, without out-of-range float-to-integer assignment. Integer unary
-   minus preserves integer type, including INT_MIN wrap.
+3. Decimal conversion delegates to the bootstrap BBC interpreter's VAL, which
+   uses the same CON/NUMBER package as numeric source evaluation. The BBC
+   compiler scans the literal boundary and copies the resulting five-byte value,
+   preserving reference truncation/scaling, promotion, underflow and exponent
+   quirks. Numeric reader errors generate a runtime error at the literal's
+   execution point, so an unreachable overflow does not fail compilation or
+   execution. No independent exact-decimal converter supplies language values.
+   See [literal compatibility](../docs/tasks/C002/LITERALS.md) for the audited
+   dependency and direct-source differential evidence. Hex payloads are packed
+   bytewise; integer unary minus retains type, including INT_MIN wrap.
 4. Standard functions ABS, ACS, ASN, ATN, COS, DEG, EXP, INT, LN, LOG, NOT,
    RAD, SGN, SIN, SQR and TAN consume a numeric item, optionally a parenthesised
    expression, matching the reference's tight function binding. PI is a numeric
@@ -127,8 +141,8 @@ Task documents and experimental silos follow
    truncation. Invalid domains propagate the package's numeric error codes.
 5. Binary operations use selectors 0..15 of the qualified package. Runtime
    errors report their message and return status 1 through the saved-stack
-   exit. Source-level VAL/STR$, mutable format control and general literals
-   remain unavailable. Parser recursion is capped at 32 entries,
+   exit. Source-level VAL/STR$ and mutable format control remain unavailable.
+   Parser recursion is capped at 32 entries,
    counting both expression and item routines. See the C002 task for evidence.
 
 ## Required semantics for subsequent implementation

@@ -10,6 +10,14 @@ This document records the original VDU slice and its qualification. The later
 [numeric output tranche](OUTPUT.md) adds standard math functions and numeric
 PRINT and supersedes those original exclusions. Its record owns the current
 source identity and larger runtime template.
+The later [decimal converter](LITERALS.md) supersedes this slice's original
+literal grammar/range restrictions; the original evidence below stays historical.
+
+The Author's subsequent compatibility correction withdraws the original 2^32
+reader exception below. Current tests use the same source in the reference,
+without arithmetic substitutions. [LITERALS.md](LITERALS.md) owns current
+conversion behavior; the earlier bounded-reader description and qualification
+counts below are historical.
 
 ## Supported slice
 
@@ -99,9 +107,9 @@ host build step; the complete compiler source includes its result.
 The integration harness creates BASIC reference bytes, runs the actual BBC
 compiler and executes its standalone outputs. Independently stated predicates
 cover precedence, full-width signed values, promotion, fractions and precision;
-the interpreter independently evaluates them. Two 2^32 literal cases use exact
-arithmetic construction in the reference because the original reader is known
-to disagree. These deliberate source differences remain explicit in case data.
+the interpreter independently evaluates the same source. The two 2^32 cases
+now expect the actual reader result, 4294967290, rather than an exact power of
+two. Historical reports retain the withdrawn substitutions for provenance.
 Repeat the final command with starts 12, 24, 36, 48, 60 and 72 to cover all
 bounded batches; the final batch stops at the end of the case list.
 

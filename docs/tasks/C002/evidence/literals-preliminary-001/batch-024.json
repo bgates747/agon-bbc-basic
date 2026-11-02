@@ -1,0 +1,99 @@
+{
+  "cases": 28,
+  "start": 24,
+  "rejected_sources": 0,
+  "packed_mismatches": 0,
+  "native_output_matches": true,
+  "deterministic_repeat": true,
+  "independent_runtime_link_base": 263399,
+  "reader_differences": [
+    {
+      "literal": "340282366841710300949110269838224261120",
+      "packed": "FFFFFF7FFF",
+      "expected_packed": "FFFFFF7FFF",
+      "reader_packed": "0000000000",
+      "reader_error": 20,
+      "expected_text": "3.40282367E38\n",
+      "compiled_packed": "FFFFFF7FFF"
+    },
+    {
+      "literal": "340282366881324382206242438634996236288",
+      "packed": "FFFFFF7FFF",
+      "expected_packed": "FFFFFF7FFF",
+      "reader_packed": "0000000000",
+      "reader_error": 20,
+      "expected_text": "3.40282367E38\n",
+      "compiled_packed": "FFFFFF7FFF"
+    },
+    {
+      "literal": "0E999",
+      "packed": "0000000000",
+      "expected_packed": "0000000000",
+      "reader_packed": "0000000000",
+      "reader_error": 20,
+      "expected_text": "0\n",
+      "compiled_packed": "0000000000"
+    },
+    {
+      "literal": "1e+3",
+      "packed": "0000007A89",
+      "expected_packed": "0000007A89",
+      "reader_packed": "0100000000",
+      "reader_error": 0,
+      "expected_text": "1000\n",
+      "compiled_packed": "0000007A89"
+    },
+    {
+      "literal": "1e-3",
+      "oracle": "1/1000",
+      "expected_packed": "986E120376",
+      "reader_packed": "0100000000",
+      "reader_error": 0,
+      "expected_text": "1E-3\n",
+      "compiled_packed": "986E120376"
+    },
+    {
+      "literal": "1E000003",
+      "oracle": "1000/1",
+      "expected_packed": "0000007A89",
+      "reader_packed": "0000000000",
+      "reader_error": 20,
+      "expected_text": "1000\n",
+      "compiled_packed": "0000007A89"
+    },
+    {
+      "literal": "100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000E-239",
+      "packed": "0000000080",
+      "expected_packed": "0000000080",
+      "reader_packed": "0000000000",
+      "reader_error": 0,
+      "expected_text": "1\n",
+      "compiled_packed": "0000000080"
+    },
+    {
+      "literal": "0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001E+201",
+      "packed": "0000000080",
+      "expected_packed": "0000000080",
+      "reader_packed": "0000000000",
+      "reader_error": 0,
+      "expected_text": "1\n",
+      "compiled_packed": "0000000080"
+    },
+    {
+      "literal": "1500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000.0E-231",
+      "packed": "0000004080",
+      "expected_packed": "0000004080",
+      "reader_packed": "0000000000",
+      "reader_error": 20,
+      "expected_text": "1.5\n",
+      "compiled_packed": "0000004080"
+    }
+  ],
+  "duration_seconds": 76.546,
+  "hashes": {
+    "docs/tasks/C002/literals/compiler.bas": "00297719a115aaf14dec0a922314d1ec91edc2ef4226f7a85fd36ec2349654e8",
+    "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+    "docs/tasks/C002/build/literals/batch-024/literal.dat": "717ef57f9d9786e07cf67c015e7f1f5b25ccdb627e0e01fb5534cbf9f1945ba0",
+    "docs/tasks/C002/build/literals/batch-024/cases.json": "3135350e478f86865e6d1464e8d658504d435bf00b436737437ddf99713dca19"
+  }
+}

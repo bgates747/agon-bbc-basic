@@ -1,0 +1,23 @@
+Warning: unused arguments left: ["--firmware", "platform"].
+Tom's Fake VDP Version 1.03
+unknown packet VDU 0x17, 0, 0xf8
+unknown packet VDU 0x17, 0, 0x99
+uunknown packet VDU 0x17, 0, 0x94
+
+Agon Platform MOS Version 3.0.2 Arthur
+
+LITERAL_NATIVE_BEGIN
+1
+1
+1
+1
+4.2949673E9
+4.2949673E9
+0
+1
+1
+3.14159265
+0.333333333
+0.142857143
+LITERAL_STATUS:0
+/ *

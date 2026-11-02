@@ -336,7 +336,7 @@
 4750 IF cc$="+" OR cc$="-" THEN cpos%=cpos%+1:PROCitem:cdone%=TRUE
 4760 IF cc$="-" THEN PROCaddr("DD21","$v"+STR$(cndepth%-1)):PROCaddr("CD","$numneg")
 4770 IF cc$="(" THEN cpos%=cpos%+1:PROCexpr(1):PROCexpect(")"):cdone%=TRUE
-4780 IF cc$="&" OR FNdigit(cc$) THEN PROCconstant:cdone%=TRUE
+4780 IF cc$="&" OR cc$="." OR FNdigit(cc$) THEN PROCconstant:cdone%=TRUE
 4790 IF NOT cdone% PROCworditem
 4800 cnparse%=cnparse%-1
 4810 ENDPROC
@@ -360,39 +360,47 @@
 4900 PROCbad("Unsupported numeric item "+cw$)
 4910 ENDPROC
 4920 DEF PROCconstant
-4930 LOCAL cv,cb%,cd%,cc$,cn%,cf%,ch%,ci%
-4940 cv=0:cb%=10:cn%=0:cf%=FALSE:ch%=(FNpeek="&")
-4950 IF ch% THEN cb%=16:cpos%=cpos%+1
+4930 IF FNpeek<>"&" THEN PROCdecimal:ENDPROC
+4940 LOCAL cv,cd%,cc$,cn%
+4950 cv=0:cn%=0:cpos%=cpos%+1
 4960 REPEAT
 4970 cc$=FNpeek:cd%=-1
-4980 IF cc$<>"" cd%=INSTR(LEFT$("0123456789ABCDEF",cb%),cc$)-1
-4990 IF cd%>=0 THEN cv=cv*cb%+cd%:cn%=cn%+1:cpos%=cpos%+1
-5000 IF ch% AND cn%>8 PROCbad("Hex literal exceeds eight digits")
-5010 IF NOT ch% AND (cn%>10 OR cv>2147483648*2) PROCbad("Decimal whole literal exceeds 2^32")
+4980 IF cc$<>"" cd%=INSTR("0123456789ABCDEF",cc$)-1
+4990 IF cd%>=0 THEN cv=cv*16+cd%:cn%=cn%+1:cpos%=cpos%+1
+5000 IF cn%>8 PROCbad("Hex literal exceeds eight digits")
 5020 UNTIL cd%<0
 5030 IF cn%=0 PROCbad("Expected digits in numeric literal")
-5050 IF ch% THEN PROCintbits(cv):ENDPROC
-5060 IF FNpeek="." THEN cpos%=cpos%+1:cf%=TRUE:cn%=0:PROCfractionzeros
-5070 IF FNpeek="E" OR FNpeek="e" PROCbad("Exponent literals are not yet supported")
-5080 IF cf% cv=cv/1
-5090 PROCvalue(cv)
+5050 PROCpacked(cv,0)
 5100 ENDPROC
-5110 DEF PROCfractionzeros
-5120 WHILE FNdigit(FNpeek)
-5130 IF FNpeek<>"0" PROCbad("Fractional literals are not yet supported")
-5140 cn%=cn%+1:cpos%=cpos%+1
-5150 ENDWHILE
-5160 IF cn%=0 PROCbad("Expected fractional digits")
-5170 ENDPROC
-5171 DEF PROCintbits(cv)
-5172 LOCAL ci%,cq
-5173 PROCnumslot:PROCaddr("DD21","$v"+STR$(cndepth%-1)):PROCaddr("CD","$numlit")
-5174 FOR ci%=0 TO 3
-5175 cq=INT(cv/256):PROCbyte(cv-cq*256):cv=cq
-5176 NEXT:PROCbyte(0)
-5177 ENDPROC
-5180 DEF PROCnumruntime
-5190 LOCAL ci%,cp%,cv%,cbase%,cn$,cm$
+5101 DEF PROCdecimal
+5102 LOCAL cs%,cv
+5103 cs%=cpos%
+5104 WHILE FNdigit(FNpeek):cpos%=cpos%+1:ENDWHILE
+5105 IF FNpeek="." THEN cpos%=cpos%+1:WHILE FNdigit(FNpeek):cpos%=cpos%+1:ENDWHILE
+5106 IF FNpeek="E" AND MID$(cline$,cpos%,3)<>"EOR" PROCdecexponent
+5107 cnumerr%=0:cv=FNreaddecimal(MID$(cline$,cs%,cpos%-cs%)):PROCvalue(cv)
+5108 IF cnumerr%<>0 THEN PROCbyte(&3E):PROCbyte(cnumerr%):PROCaddr("C3","$numerror")
+5109 ENDPROC
+5110 DEF PROCdecexponent
+5111 cpos%=cpos%+1
+5112 WHILE FNpeek=" ":cpos%=cpos%+1:ENDWHILE
+5113 IF FNpeek="+" OR FNpeek="-" cpos%=cpos%+1
+5114 WHILE FNdigit(FNpeek):cpos%=cpos%+1:ENDWHILE
+5115 IF FNalpha(FNpeek) PROCbad("Unsupported crunched text after exponent")
+5116 ENDPROC
+5120 DEF FNreaddecimal(cs$)
+5121 LOCAL ERROR
+5122 ON ERROR LOCAL cnumerr%=ERR:=0
+5123 =VAL(cs$)
+5184 DEF PROCpacked(cv,ce%)
+5185 LOCAL ci%,cq
+5186 PROCnumslot:PROCaddr("DD21","$v"+STR$(cndepth%-1)):PROCaddr("CD","$numlit")
+5187 FOR ci%=0 TO 3
+5188 cq=INT(cv/256):PROCbyte(cv-cq*256):cv=cq
+5189 NEXT:PROCbyte(ce%)
+5190 ENDPROC
+5192 DEF PROCnumruntime
+5194 LOCAL ci%,cp%,cv%,cbase%,cn$,cm$
 5200 cbase%=cpc%
 5202 IF cpc%+cnsize%>65536 PROCbad("Executable exceeds 65536 bytes")
 5210 FOR ci%=0 TO cnsize%-1:ccode%?(cbase%+ci%)=cnimage%?ci%:NEXT:cpc%=cpc%+cnsize%
@@ -416,7 +424,7 @@
 5380 PROCtext("Numeric error"):PROCnewline:PROCaddr("C3","$error")
 5390 FOR ci%=0 TO 5
 5400 PROClabel("$ne"+STR$(ci%))
-5410 cm$=MID$("Division by zero Too big          Negative root    Log range        Accuracy lost    Exp range        ",ci%*17+1,17)
+5410 cm$=MID$("Division by zero Number too big   -ve root         Log range        Accuracy lost    Exponent range   ",ci%*17+1,17)
 5420 WHILE RIGHT$(cm$,1)=" ":cm$=LEFT$(cm$,LEN(cm$)-1):ENDWHILE
 5430 PROCtext(cm$):PROCnewline:PROCaddr("C3","$error")
 5440 NEXT

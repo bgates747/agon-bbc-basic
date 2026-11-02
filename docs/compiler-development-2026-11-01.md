@@ -3,8 +3,11 @@
 The compiler now emits native numeric VDU expressions, standard unary math
 functions and default numeric PRINT using the qualified BBC arithmetic runtime.
 Packed arithmetic and exact output comparisons pass in the Pi5 CLI emulator.
-General fractional/exponent literals, variables and self-hosting remain
-incomplete; accepted testing is required before promotion to main.
+The Author rejected the decimal converter's deliberate reader improvements.
+The corrected C002 baseline is accepted for the development checkpoint;
+the exact-conversion experiment remains historical research only.
+Variables and self-hosting remain incomplete; accepted testing is required
+before promotion to main.
 
 The later C007 search establishes a curated testing/benchmark source catalogue
 and measurement contract. It adds no compiler behavior or measured speedup.
@@ -235,3 +238,132 @@ covered the earlier dirt.
    repeated the 39-case baseline in **22.532 seconds** and all 449 numeric
    cases in **17.549 seconds**. Final reports/tool hashes are retained in
    promotion evidence. These orchestration edits do not change target bytes.
+
+## C002 decimal literals
+
+1. The Author requested another checkpoint before the next tranche. Committed
+   all numeric-output dirt as `7f45af9` and pushed it to the authorised origin
+   on `codex/native-bbc-compiler`. Main remains untouched. Refined the decimal
+   tranche in [C002](tasks/C002.md) before implementation; Oryx was not contacted.
+2. Implemented fraction/scientific atoms, leading/trailing decimal points and
+   E/e with bounded signed exponents in the BBC BASIC compiler. Exact integer
+   numerator/denominator workspace produces 32 significand bits and an explicit
+   odd-LSB rounding decision. Output remains standard BBC numeric records;
+   neither Python nor a copied assembly parser implements this conversion.
+3. Preserved the reference's integer/float typing where applicable, canonical
+   zero and underflow flush. Literal overflow, malformed exponents and capacity
+   bounds fail at compile time before output is opened. EOR remains a word
+   operator boundary. [LITERALS.md](tasks/C002/LITERALS.md) owns the detailed
+   grammar, limits, algorithm and deliberate reader corrections.
+4. Final-source qualification passes **174 accepted literals / 16 rejections**
+   with no packed mismatch, matching native output and independently linked
+   runtime images. This includes 110 exact binary/midpoint fixtures generated
+   independently by BASIC decimal digit-string arithmetic. Retained all 104
+   differences from the truncating/scaling reference reader; these stress
+   fixtures are not a representative failure-rate sample. Five batches took
+   **574.475 seconds**, excluding **145.081 seconds** for fixture generation.
+   Four batches repeat deterministically; the supplemental 66-case batch is
+   explicitly single-pass. See [qualification evidence](tasks/C002/evidence/literals-001/summary.json).
+5. Broader output qualification passes **24 programs / 16 native executions /
+   eight rejections**, including 58 legacy arithmetic observations, in
+   **157.554 seconds**. Native numeric functions, semicolon formatting,
+   scientific/operator binding, ordinary crunched EOR, errors, source rejection,
+   destination preservation and repeat determinism still pass.
+6. Corrected an initial nested IF/ELSE carry-append error in the prototype.
+   Oracle setup also needed short source-string chunks, ON ERROR LOCAL for
+   procedure error recovery and conventional spacing after scientific literals
+   in word-operator comparisons. Retained [failed-source/debug evidence](tasks/C002/evidence/literals-debug-001/README.md)
+   and [preliminary reports](tasks/C002/evidence/literals-preliminary-001/summary.json).
+   Final-source qualification supersedes those preliminary runs. The runner
+   now snapshots compiler bytes and rejects edits during a run.
+7. Promoted exactly the tested compiler into `compiler/compiler.bas`, SHA-256
+   `bea645170420bc6ce60bb648dbc5a919ac5bdd56f437ca785719e8e262ff3d31`.
+   Only the independent fixture generator remains in the experiment directory.
+   Regenerated DATA stays byte-identical; the 4028-byte/380-relocation runtime
+   and vendor source/license remain unchanged. Live baseline qualification
+   passes **39 cases / 15 native executions** in **23.641 seconds**, retaining
+   deterministic output and the complete assembly golden.
+8. Live rechecks also pass **26 targeted expressions** (nine native/17 rejected)
+   in **54.504 seconds**, including source diagnostics, numeric error exits in
+   GOSUB and direct decimal/scientific VDU truncation. Repeated **12 boundary
+   literals** in **30.167 seconds** with matching packed/native output,
+   independent links and deterministic recompilation. Retained
+   [live-location evidence](tasks/C002/evidence/literals-promotion-001/summary.json).
+9. **C002 initial numeric baseline complete:** its bounded acceptance criteria
+   now cover storage/ABI, arithmetic, expressions, default formatting and general
+   decimal atoms. Removed its TODO entry and recorded these results as the
+   technical closure rationale. The compatibility matrix retains limits and
+   exclusions; C003–C006 remain unstarted. Updated the specification, reference
+   audit, handoff and runbooks. New work remains uncommitted for Author review;
+   main is untouched. No graphical/hardware validation or performance benchmark
+   occurred. All automated work used the Pi5; Oryx remains unavailable.
+10. Final static checks parsed four changed Python tools and 28 retained JSON
+    files, resolved 81 local document links, and verified all 620 ordered BBC
+    source lines against the 255-byte limit. Confirmed byte-identical promotion,
+    unchanged runtime/vendor/license, the pushed `7f45af9` checkpoint and
+    untouched main refs. `git diff --check` passes. No competing experimental
+    compiler remains outside frozen evidence.
+
+## C002 reopened: reference behavior and separate interpreter research
+
+1. The Author rejected deliberate improvements to BBC BASIC output: execution
+   speed is the only intended observable runtime difference for supported
+   conventional programs. Reopened C002 before correction and strengthened the
+   specification/handoff. Earlier exact-decimal closure and qualification remain
+   historical, explicitly superseded by this policy.
+2. The Author separately authorized keeping interpreter improvement ideas.
+   Added [research findings](../compiler/INTERPRETER-FINDINGS.md), including
+   `4294967296.0` versus arithmetic construction, pinned reader provenance and
+   links to the frozen exact-converter experiment. Its 104 stress differences
+   are candidates for assessment, not 104 proven bugs or approved compiler
+   divergences. No upstream interpreter patch or submission was made.
+3. Restored numeric reading through bootstrap BASIC's VAL after scanning the
+   original atom in BBC BASIC. It shares CON/NUMBER with the direct-source
+   reader; compiled applications still contain packed values and standalone
+   runtime code. Native self-hosting will need source VAL's string-pointer
+   interface; that later implementation is not claimed here. Reader errors
+   become native errors only when executed. Withdrawn lowercase-e grammar and
+   independent exponent limits are not silently retained as extensions.
+4. Removed both earlier 2^32 oracle substitutions and compare identical source
+   in the reference/compiled output suite. Direct-source checks also exposed
+   incorrect emitted numeric messages copied from MATH comments. Actual BASIC
+   reports `Number too big`, `-ve root` and `Exponent range`; corrected those
+   messages and retained the failed run in
+   [debug evidence](tasks/C002/evidence/literal-compatibility-debug-001/README.md).
+5. Corrected literal qualification passes **180 literals**, comprising **170
+   exact packed-value matches** and **ten reference error matches**, plus **eight
+   unsupported-source rejections** preserving existing output. Both batches
+   repeat deterministically and independently linked runtimes match. Durations
+   are **61.998/85.406 seconds**, **147.404 total**, using the previous BASIC-
+   generated stress inputs as spellings rather than exact-value expectations.
+   [Evidence](tasks/C002/evidence/literal-compatibility-001/summary.json) retains
+   compiler/tool snapshots, original-source oracles, fixture bytes and logs.
+6. The corrected output suite passes **28 programs** (**20 native/eight
+   rejected**, including **58 prior arithmetic observations**) in **148.288
+   seconds**. Actual reference REPORT text supplies numeric error expectations;
+   the native fixture also preserves unreachable literal overflow. Targeted
+   expression regressions pass **26 cases** (**nine native/17 rejected**) in
+   **51.214 seconds**. Recompilation is deterministic and independent runtime
+   links match. Retained both reports and logs in the compatibility evidence.
+   Output qualification compares program/REPORT text, not interpreter prompts.
+7. Final-source baseline passes **39 cases/15 native executions** in **23.037
+   seconds**, including the complete assembly golden and deterministic repeat.
+   Compiler SHA-256 is
+   `9a33abb5ffd4e9f6818d22c611842d9ac3bd606aa386bbc2bc7a370d68c0e33a`.
+   Runtime DATA, adapter/formatter assembly and vendor math/license match HEAD;
+   existing numeric/formatter qualification is retained without rerunning
+   unchanged code. Frozen new evidence includes tool/source snapshots and a
+   file hash manifest. C002 remains open for review and C003 unstarted. Updated
+   normative documents; changes remain uncommitted. No Oryx, graphical/hardware
+   validation or benchmark performance measurement occurred.
+
+## Corrected C002 development checkpoint accepted
+
+1. The Author explicitly requested commit/push after the compatibility correction
+   and research separation, then continuation to the next tranche. Accepted the
+   corrected initial C002 scope on the development branch and removed its review
+   entry from TODO. Existing evidence retains its original historical status;
+   this permission does not assert graphical/hardware validation or main acceptance.
+2. C003 is next: refine and qualify scalar numeric bindings before mutable
+   strings, following the interpreter's existing behavior rather than inventing
+   default initialisation or assignment semantics. Oryx remains unavailable.

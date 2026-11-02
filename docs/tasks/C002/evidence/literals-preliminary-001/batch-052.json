@@ -1,0 +1,169 @@
+{
+  "cases": 22,
+  "start": 52,
+  "rejected_sources": 0,
+  "packed_mismatches": 0,
+  "native_output_matches": true,
+  "deterministic_repeat": true,
+  "independent_runtime_link_base": 263177,
+  "reader_differences": [
+    {
+      "literal": "587747175411143753984368268611122838909332778386043760754375853139208629727363586425781250000000000000000000000000000000.0E-158",
+      "packed": "0000000001",
+      "exact_binary_fixture": true,
+      "expected_packed": "0000000001",
+      "reader_packed": "8B6FEA4BC1",
+      "reader_error": 0,
+      "expected_text": "5.87747176E-39\n",
+      "compiled_packed": "0000000001"
+    },
+    {
+      "literal": "117549435082228750796873653722224567781866555677208752150875170627841725945472717285156250000000000000000000000000000000.0E-157",
+      "packed": "0000000002",
+      "exact_binary_fixture": true,
+      "expected_packed": "0000000002",
+      "reader_packed": "D5F22123BF",
+      "reader_error": 0,
+      "expected_text": "1.17549435E-38\n",
+      "compiled_packed": "0000000002"
+    },
+    {
+      "literal": "78886090522101180541172856528278622967320643510902300477027893066406250000000000000000000000000000000.0E-131",
+      "packed": "000000001C",
+      "exact_binary_fixture": true,
+      "expected_packed": "000000001C",
+      "reader_packed": "3F7C6F7C82",
+      "reader_error": 0,
+      "expected_text": "7.88860905E-31\n",
+      "compiled_packed": "000000001C"
+    },
+    {
+      "literal": "4294967296.0",
+      "packed": "00000000A0",
+      "exact_binary_fixture": true,
+      "expected_packed": "00000000A0",
+      "reader_packed": "FAFFFF7F9F",
+      "reader_error": 0,
+      "expected_text": "4.2949673E9\n",
+      "compiled_packed": "00000000A0"
+    },
+    {
+      "literal": "170141183460469231731687303715884105728.0",
+      "packed": "00000000FF",
+      "exact_binary_fixture": true,
+      "expected_packed": "00000000FF",
+      "reader_packed": "01000000FF",
+      "reader_error": 0,
+      "expected_text": "1.70141183E38\n",
+      "compiled_packed": "00000000FF"
+    },
+    {
+      "literal": "587747175684834860297809102775913773145644522776719921277132839810511028924588407262863398727859021164476871490478515625.0E-158",
+      "packed": "0100000001",
+      "exact_binary_fixture": true,
+      "expected_packed": "0100000001",
+      "reader_packed": "8B6FEA4BC1",
+      "reader_error": 0,
+      "expected_text": "5.87747176E-39\n",
+      "compiled_packed": "0100000001"
+    },
+    {
+      "literal": "117549435136966972059561820555182754629128904555343984255426567962102205784917681452572679745571804232895374298095703125.0E-157",
+      "packed": "0100000002",
+      "exact_binary_fixture": true,
+      "expected_packed": "0100000002",
+      "reader_packed": "D8F22123BF",
+      "reader_error": 0,
+      "expected_text": "1.17549435E-38\n",
+      "compiled_packed": "0100000002"
+    },
+    {
+      "literal": "78886090558835379004369341152301639755515820942735599126155628113554740821200539357960224151611328125.0E-131",
+      "packed": "010000001C",
+      "exact_binary_fixture": true,
+      "expected_packed": "010000001C",
+      "reader_packed": "3F7C6F7C82",
+      "reader_error": 0,
+      "expected_text": "7.88860906E-31\n",
+      "compiled_packed": "010000001C"
+    },
+    {
+      "literal": "50000000023283064365386962890625.0E-32",
+      "packed": "010000007F",
+      "exact_binary_fixture": true,
+      "expected_packed": "010000007F",
+      "reader_packed": "000000007F",
+      "reader_error": 0,
+      "expected_text": "0.5\n",
+      "compiled_packed": "010000007F"
+    },
+    {
+      "literal": "10000000004656612873077392578125.0E-31",
+      "packed": "0100000080",
+      "exact_binary_fixture": true,
+      "expected_packed": "0100000080",
+      "reader_packed": "0000000080",
+      "reader_error": 0,
+      "expected_text": "1\n",
+      "compiled_packed": "0100000080"
+    },
+    {
+      "literal": "2000000000931322574615478515625.0E-30",
+      "packed": "0100000081",
+      "exact_binary_fixture": true,
+      "expected_packed": "0100000081",
+      "reader_packed": "0000000081",
+      "reader_error": 0,
+      "expected_text": "2\n",
+      "compiled_packed": "0100000081"
+    },
+    {
+      "literal": "10737418245.0E-1",
+      "packed": "010000009E",
+      "exact_binary_fixture": true,
+      "expected_packed": "010000009E",
+      "reader_packed": "000000009E",
+      "reader_error": 0,
+      "expected_text": "1.07374182E9\n",
+      "compiled_packed": "010000009E"
+    },
+    {
+      "literal": "4294967298.0",
+      "packed": "01000000A0",
+      "exact_binary_fixture": true,
+      "expected_packed": "01000000A0",
+      "reader_packed": "FAFFFF7F9F",
+      "reader_error": 0,
+      "expected_text": "4.2949673E9\n",
+      "compiled_packed": "01000000A0"
+    },
+    {
+      "literal": "1267650600818525211855408857088.0",
+      "packed": "01000000E4",
+      "exact_binary_fixture": true,
+      "expected_packed": "01000000E4",
+      "reader_packed": "00000000E4",
+      "reader_error": 0,
+      "expected_text": "1.2676506E30\n",
+      "compiled_packed": "01000000E4"
+    },
+    {
+      "literal": "170141183539697394245951641309428056064.0",
+      "packed": "01000000FF",
+      "exact_binary_fixture": true,
+      "expected_packed": "01000000FF",
+      "reader_packed": "02000000FF",
+      "reader_error": 0,
+      "expected_text": "1.70141183E38\n",
+      "compiled_packed": "01000000FF"
+    }
+  ],
+  "duration_seconds": 111.917,
+  "hashes": {
+    "docs/tasks/C002/literals/compiler.bas": "00297719a115aaf14dec0a922314d1ec91edc2ef4226f7a85fd36ec2349654e8",
+    "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+    "docs/tasks/C002/build/literals/batch-052/literal.dat": "5066276c85c3bf7928d2fbd5bebe368930578d64342d17e74e2babf38bff4ff9",
+    "docs/tasks/C002/build/literals/batch-052/cases.json": "6589178a0a938f851be2981009b252918db520b3e0724e9bbe01b5594958d423",
+    "docs/tasks/C002/build/literals/generated/cases.tsv": "b9422b2fbd9b7d24a87c0672fe2a97561f4934233a345ca73fe2cbb6009a80d4"
+  }
+}

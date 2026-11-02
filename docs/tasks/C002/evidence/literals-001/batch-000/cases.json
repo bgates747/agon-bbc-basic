@@ -1,0 +1,470 @@
+[
+  {
+    "literal": "0",
+    "packed": "0000000000",
+    "expected_packed": "0000000000",
+    "reader_packed": "0000000000",
+    "reader_error": 0,
+    "expected_text": "0\n",
+    "compiled_packed": "0000000000"
+  },
+  {
+    "literal": "1",
+    "packed": "0100000000",
+    "expected_packed": "0100000000",
+    "reader_packed": "0100000000",
+    "reader_error": 0,
+    "expected_text": "1\n",
+    "compiled_packed": "0100000000"
+  },
+  {
+    "literal": "1.0",
+    "packed": "0000000080",
+    "expected_packed": "0000000080",
+    "reader_packed": "0000000080",
+    "reader_error": 0,
+    "expected_text": "1\n",
+    "compiled_packed": "0000000080"
+  },
+  {
+    "literal": ".5",
+    "packed": "000000007F",
+    "expected_packed": "000000007F",
+    "reader_packed": "000000007F",
+    "reader_error": 0,
+    "expected_text": "0.5\n",
+    "compiled_packed": "000000007F"
+  },
+  {
+    "literal": "1.",
+    "packed": "0100000000",
+    "expected_packed": "0100000000",
+    "reader_packed": "0100000000",
+    "reader_error": 0,
+    "expected_text": "1\n",
+    "compiled_packed": "0100000000"
+  },
+  {
+    "literal": "1E0",
+    "packed": "0100000000",
+    "expected_packed": "0100000000",
+    "reader_packed": "0100000000",
+    "reader_error": 0,
+    "expected_text": "1\n",
+    "compiled_packed": "0100000000"
+  },
+  {
+    "literal": "1.E0",
+    "packed": "0100000000",
+    "expected_packed": "0100000000",
+    "reader_packed": "0100000000",
+    "reader_error": 0,
+    "expected_text": "1\n",
+    "compiled_packed": "0100000000"
+  },
+  {
+    "literal": ".0",
+    "packed": "0000000000",
+    "expected_packed": "0000000000",
+    "reader_packed": "0000000000",
+    "reader_error": 0,
+    "expected_text": "0\n",
+    "compiled_packed": "0000000000"
+  },
+  {
+    "literal": "0.1",
+    "packed": "CDCCCC4C7C",
+    "expected_packed": "CDCCCC4C7C",
+    "reader_packed": "CDCCCC4C7C",
+    "reader_error": 0,
+    "expected_text": "0.1\n",
+    "compiled_packed": "CDCCCC4C7C"
+  },
+  {
+    "literal": "1.5",
+    "packed": "0000004080",
+    "expected_packed": "0000004080",
+    "reader_packed": "0000004080",
+    "reader_error": 0,
+    "expected_text": "1.5\n",
+    "compiled_packed": "0000004080"
+  },
+  {
+    "literal": "2147483647",
+    "packed": "FFFFFF7F00",
+    "expected_packed": "FFFFFF7F00",
+    "reader_packed": "FFFFFF7F00",
+    "reader_error": 0,
+    "expected_text": "2.14748365E9\n",
+    "compiled_packed": "FFFFFF7F00"
+  },
+  {
+    "literal": "2147483648",
+    "packed": "000000009F",
+    "expected_packed": "000000009F",
+    "reader_packed": "000000009F",
+    "reader_error": 0,
+    "expected_text": "2.14748365E9\n",
+    "compiled_packed": "000000009F"
+  },
+  {
+    "literal": "4294967295",
+    "packed": "FFFFFF7F9F",
+    "expected_packed": "FFFFFF7F9F",
+    "reader_packed": "FFFFFF7F9F",
+    "reader_error": 0,
+    "expected_text": "4.2949673E9\n",
+    "compiled_packed": "FFFFFF7F9F"
+  },
+  {
+    "literal": "4294967296",
+    "packed": "00000000A0",
+    "expected_packed": "00000000A0",
+    "reader_packed": "FAFFFF7F9F",
+    "reader_error": 0,
+    "expected_text": "4.2949673E9\n",
+    "compiled_packed": "00000000A0"
+  },
+  {
+    "literal": "4294967297",
+    "packed": "01000000A0",
+    "expected_packed": "01000000A0",
+    "reader_packed": "FAFFFF7F9F",
+    "reader_error": 0,
+    "expected_text": "4.2949673E9\n",
+    "compiled_packed": "01000000A0"
+  },
+  {
+    "literal": "4294967298",
+    "packed": "01000000A0",
+    "expected_packed": "01000000A0",
+    "reader_packed": "FAFFFF7F9F",
+    "reader_error": 0,
+    "expected_text": "4.2949673E9\n",
+    "compiled_packed": "01000000A0"
+  },
+  {
+    "literal": "4294967299",
+    "packed": "01000000A0",
+    "expected_packed": "01000000A0",
+    "reader_packed": "FAFFFF7F9F",
+    "reader_error": 0,
+    "expected_text": "4.2949673E9\n",
+    "compiled_packed": "01000000A0"
+  },
+  {
+    "literal": "4294967300",
+    "packed": "02000000A0",
+    "expected_packed": "02000000A0",
+    "reader_packed": "02000000A0",
+    "reader_error": 0,
+    "expected_text": "4.2949673E9\n",
+    "compiled_packed": "02000000A0"
+  },
+  {
+    "literal": "4294967301",
+    "packed": "03000000A0",
+    "expected_packed": "03000000A0",
+    "reader_packed": "02000000A0",
+    "reader_error": 0,
+    "expected_text": "4.2949673E9\n",
+    "compiled_packed": "03000000A0"
+  },
+  {
+    "literal": "4294967295.5",
+    "packed": "FFFFFF7F9F",
+    "expected_packed": "FFFFFF7F9F",
+    "reader_packed": "FFFFFF7F9F",
+    "reader_error": 0,
+    "expected_text": "4.2949673E9\n",
+    "compiled_packed": "FFFFFF7F9F"
+  },
+  {
+    "literal": "4294967295.75",
+    "packed": "00000000A0",
+    "expected_packed": "00000000A0",
+    "reader_packed": "FFFFFF7F9F",
+    "reader_error": 0,
+    "expected_text": "4.2949673E9\n",
+    "compiled_packed": "00000000A0"
+  },
+  {
+    "literal": "16777217.0",
+    "packed": "8000000098",
+    "expected_packed": "8000000098",
+    "reader_packed": "8000000098",
+    "reader_error": 0,
+    "expected_text": "16777217\n",
+    "compiled_packed": "8000000098"
+  },
+  {
+    "literal": "5.87747175411143754E-39",
+    "packed": "0000000001",
+    "expected_packed": "0000000001",
+    "reader_packed": "0000000000",
+    "reader_error": 0,
+    "expected_text": "5.87747176E-39\n",
+    "compiled_packed": "0000000001"
+  },
+  {
+    "literal": "5.87747175411143753E-39",
+    "packed": "0000000000",
+    "expected_packed": "0000000000",
+    "reader_packed": "0000000000",
+    "reader_error": 0,
+    "expected_text": "0\n",
+    "compiled_packed": "0000000000"
+  },
+  {
+    "literal": "340282366841710300949110269838224261120",
+    "packed": "FFFFFF7FFF",
+    "expected_packed": "FFFFFF7FFF",
+    "reader_packed": "0000000000",
+    "reader_error": 20,
+    "expected_text": "3.40282367E38\n",
+    "compiled_packed": "FFFFFF7FFF"
+  },
+  {
+    "literal": "340282366881324382206242438634996236288",
+    "packed": "FFFFFF7FFF",
+    "expected_packed": "FFFFFF7FFF",
+    "reader_packed": "0000000000",
+    "reader_error": 20,
+    "expected_text": "3.40282367E38\n",
+    "compiled_packed": "FFFFFF7FFF"
+  },
+  {
+    "literal": "0E999",
+    "packed": "0000000000",
+    "expected_packed": "0000000000",
+    "reader_packed": "0000000000",
+    "reader_error": 20,
+    "expected_text": "0\n",
+    "compiled_packed": "0000000000"
+  },
+  {
+    "literal": "1E-999",
+    "packed": "0000000000",
+    "expected_packed": "0000000000",
+    "reader_packed": "0000000000",
+    "reader_error": 0,
+    "expected_text": "0\n",
+    "compiled_packed": "0000000000"
+  },
+  {
+    "literal": "0.00000000000000000000000000000000000000001",
+    "packed": "0000000000",
+    "expected_packed": "0000000000",
+    "reader_packed": "0000000000",
+    "reader_error": 0,
+    "expected_text": "0\n",
+    "compiled_packed": "0000000000"
+  },
+  {
+    "literal": "1e+3",
+    "packed": "0000007A89",
+    "expected_packed": "0000007A89",
+    "reader_packed": "0100000000",
+    "reader_error": 0,
+    "expected_text": "1000\n",
+    "compiled_packed": "0000007A89"
+  },
+  {
+    "literal": "1E-0",
+    "packed": "0100000000",
+    "expected_packed": "0100000000",
+    "reader_packed": "0100000000",
+    "reader_error": 0,
+    "expected_text": "1\n",
+    "compiled_packed": "0100000000"
+  },
+  {
+    "literal": "000000000000000000000000000000000000000001",
+    "packed": "0100000000",
+    "expected_packed": "0100000000",
+    "reader_packed": "0100000000",
+    "reader_error": 0,
+    "expected_text": "1\n",
+    "compiled_packed": "0100000000"
+  },
+  {
+    "literal": ".25",
+    "oracle": "1/4",
+    "expected_packed": "000000007E",
+    "reader_packed": "000000007E",
+    "reader_error": 0,
+    "expected_text": "0.25\n",
+    "compiled_packed": "000000007E"
+  },
+  {
+    "literal": ".125",
+    "oracle": "1/8",
+    "expected_packed": "000000007D",
+    "reader_packed": "000000007D",
+    "reader_error": 0,
+    "expected_text": "0.125\n",
+    "compiled_packed": "000000007D"
+  },
+  {
+    "literal": "12.75",
+    "oracle": "51/4",
+    "expected_packed": "0000004C83",
+    "reader_packed": "0000004C83",
+    "reader_error": 0,
+    "expected_text": "12.75\n",
+    "compiled_packed": "0000004C83"
+  },
+  {
+    "literal": ".01",
+    "oracle": "1/100",
+    "expected_packed": "3D0AD72379",
+    "reader_packed": "3D0AD72379",
+    "reader_error": 0,
+    "expected_text": "1E-2\n",
+    "compiled_packed": "3D0AD72379"
+  },
+  {
+    "literal": ".001",
+    "oracle": "1/1000",
+    "expected_packed": "986E120376",
+    "reader_packed": "986E120376",
+    "reader_error": 0,
+    "expected_text": "1E-3\n",
+    "compiled_packed": "986E120376"
+  },
+  {
+    "literal": "1.001",
+    "oracle": "1001/1000",
+    "expected_packed": "9CC4200080",
+    "reader_packed": "9CC4200080",
+    "reader_error": 0,
+    "expected_text": "1.001\n",
+    "compiled_packed": "9CC4200080"
+  },
+  {
+    "literal": "123.456789",
+    "oracle": "123456789/1000000",
+    "expected_packed": "3FE0E97686",
+    "reader_packed": "3FE0E97686",
+    "reader_error": 0,
+    "expected_text": "123.456789\n",
+    "compiled_packed": "3FE0E97686"
+  },
+  {
+    "literal": "123456.789",
+    "oracle": "123456789/1000",
+    "expected_packed": "FE64207190",
+    "reader_packed": "FE64207190",
+    "reader_error": 0,
+    "expected_text": "123456.789\n",
+    "compiled_packed": "FE64207190"
+  },
+  {
+    "literal": "1E3",
+    "oracle": "1000/1",
+    "expected_packed": "0000007A89",
+    "reader_packed": "0000007A89",
+    "reader_error": 0,
+    "expected_text": "1000\n",
+    "compiled_packed": "0000007A89"
+  },
+  {
+    "literal": "1.E+3",
+    "oracle": "1000/1",
+    "expected_packed": "0000007A89",
+    "reader_packed": "0000007A89",
+    "reader_error": 0,
+    "expected_text": "1000\n",
+    "compiled_packed": "0000007A89"
+  },
+  {
+    "literal": "1e-3",
+    "oracle": "1/1000",
+    "expected_packed": "986E120376",
+    "reader_packed": "0100000000",
+    "reader_error": 0,
+    "expected_text": "1E-3\n",
+    "compiled_packed": "986E120376"
+  },
+  {
+    "literal": ".5E+1",
+    "oracle": "5/1",
+    "expected_packed": "0000002082",
+    "reader_packed": "0000002082",
+    "reader_error": 0,
+    "expected_text": "5\n",
+    "compiled_packed": "0000002082"
+  },
+  {
+    "literal": "500E-3",
+    "oracle": "1/2",
+    "expected_packed": "000000007F",
+    "reader_packed": "000000007F",
+    "reader_error": 0,
+    "expected_text": "0.5\n",
+    "compiled_packed": "000000007F"
+  },
+  {
+    "literal": "1.0E0",
+    "oracle": "1/1",
+    "expected_packed": "0000000080",
+    "reader_packed": "0000000080",
+    "reader_error": 0,
+    "expected_text": "1\n",
+    "compiled_packed": "0000000080"
+  },
+  {
+    "literal": "000123.000",
+    "oracle": "123/1",
+    "expected_packed": "0000007686",
+    "reader_packed": "0000007686",
+    "reader_error": 0,
+    "expected_text": "123\n",
+    "compiled_packed": "0000007686"
+  },
+  {
+    "literal": "1E000003",
+    "oracle": "1000/1",
+    "expected_packed": "0000007A89",
+    "reader_packed": "0000000000",
+    "reader_error": 20,
+    "expected_text": "1000\n",
+    "compiled_packed": "0000007A89"
+  },
+  {
+    "literal": "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001",
+    "packed": "0100000000",
+    "expected_packed": "0100000000",
+    "reader_packed": "0100000000",
+    "reader_error": 0,
+    "expected_text": "1\n",
+    "compiled_packed": "0100000000"
+  },
+  {
+    "literal": "100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000E-239",
+    "packed": "0000000080",
+    "expected_packed": "0000000080",
+    "reader_packed": "0000000000",
+    "reader_error": 0,
+    "expected_text": "1\n",
+    "compiled_packed": "0000000080"
+  },
+  {
+    "literal": "0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001E+201",
+    "packed": "0000000080",
+    "expected_packed": "0000000080",
+    "reader_packed": "0000000000",
+    "reader_error": 0,
+    "expected_text": "1\n",
+    "compiled_packed": "0000000080"
+  },
+  {
+    "literal": "1500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000.0E-231",
+    "packed": "0000004080",
+    "expected_packed": "0000004080",
+    "reader_packed": "0000000000",
+    "reader_error": 20,
+    "expected_text": "1.5\n",
+    "compiled_packed": "0000004080"
+  }
+]

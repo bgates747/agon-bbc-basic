@@ -1,0 +1,506 @@
+[
+  {
+    "literal": "0",
+    "research_anchor": "0000000000",
+    "expected_packed": "0000000000",
+    "reference_error": 0,
+    "expected_text": "0\n",
+    "val_packed": "0000000000",
+    "compiled_packed": "0000000000"
+  },
+  {
+    "literal": "1",
+    "research_anchor": "0100000000",
+    "expected_packed": "0100000000",
+    "reference_error": 0,
+    "expected_text": "1\n",
+    "val_packed": "0100000000",
+    "compiled_packed": "0100000000"
+  },
+  {
+    "literal": "1.0",
+    "research_anchor": "0000000080",
+    "expected_packed": "0000000080",
+    "reference_error": 0,
+    "expected_text": "1\n",
+    "val_packed": "0000000080",
+    "compiled_packed": "0000000080"
+  },
+  {
+    "literal": ".5",
+    "research_anchor": "000000007F",
+    "expected_packed": "000000007F",
+    "reference_error": 0,
+    "expected_text": "0.5\n",
+    "val_packed": "000000007F",
+    "compiled_packed": "000000007F"
+  },
+  {
+    "literal": "1.",
+    "research_anchor": "0100000000",
+    "expected_packed": "0100000000",
+    "reference_error": 0,
+    "expected_text": "1\n",
+    "val_packed": "0100000000",
+    "compiled_packed": "0100000000"
+  },
+  {
+    "literal": "1E0",
+    "research_anchor": "0100000000",
+    "expected_packed": "0100000000",
+    "reference_error": 0,
+    "expected_text": "1\n",
+    "val_packed": "0100000000",
+    "compiled_packed": "0100000000"
+  },
+  {
+    "literal": "1.E0",
+    "research_anchor": "0100000000",
+    "expected_packed": "0100000000",
+    "reference_error": 0,
+    "expected_text": "1\n",
+    "val_packed": "0100000000",
+    "compiled_packed": "0100000000"
+  },
+  {
+    "literal": ".0",
+    "research_anchor": "0000000000",
+    "expected_packed": "0000000000",
+    "reference_error": 0,
+    "expected_text": "0\n",
+    "val_packed": "0000000000",
+    "compiled_packed": "0000000000"
+  },
+  {
+    "literal": "0.1",
+    "research_anchor": "CDCCCC4C7C",
+    "expected_packed": "CDCCCC4C7C",
+    "reference_error": 0,
+    "expected_text": "0.1\n",
+    "val_packed": "CDCCCC4C7C",
+    "compiled_packed": "CDCCCC4C7C"
+  },
+  {
+    "literal": "1.5",
+    "research_anchor": "0000004080",
+    "expected_packed": "0000004080",
+    "reference_error": 0,
+    "expected_text": "1.5\n",
+    "val_packed": "0000004080",
+    "compiled_packed": "0000004080"
+  },
+  {
+    "literal": "2147483647",
+    "research_anchor": "FFFFFF7F00",
+    "expected_packed": "FFFFFF7F00",
+    "reference_error": 0,
+    "expected_text": "2.14748365E9\n",
+    "val_packed": "FFFFFF7F00",
+    "compiled_packed": "FFFFFF7F00"
+  },
+  {
+    "literal": "2147483648",
+    "research_anchor": "000000009F",
+    "expected_packed": "000000009F",
+    "reference_error": 0,
+    "expected_text": "2.14748365E9\n",
+    "val_packed": "000000009F",
+    "compiled_packed": "000000009F"
+  },
+  {
+    "literal": "4294967295",
+    "research_anchor": "FFFFFF7F9F",
+    "expected_packed": "FFFFFF7F9F",
+    "reference_error": 0,
+    "expected_text": "4.2949673E9\n",
+    "val_packed": "FFFFFF7F9F",
+    "compiled_packed": "FFFFFF7F9F"
+  },
+  {
+    "literal": "4294967296",
+    "research_anchor": "00000000A0",
+    "expected_packed": "FAFFFF7F9F",
+    "reference_error": 0,
+    "expected_text": "4.29496729E9\n",
+    "val_packed": "FAFFFF7F9F",
+    "compiled_packed": "FAFFFF7F9F"
+  },
+  {
+    "literal": "4294967297",
+    "research_anchor": "01000000A0",
+    "expected_packed": "FAFFFF7F9F",
+    "reference_error": 0,
+    "expected_text": "4.29496729E9\n",
+    "val_packed": "FAFFFF7F9F",
+    "compiled_packed": "FAFFFF7F9F"
+  },
+  {
+    "literal": "4294967298",
+    "research_anchor": "01000000A0",
+    "expected_packed": "FAFFFF7F9F",
+    "reference_error": 0,
+    "expected_text": "4.29496729E9\n",
+    "val_packed": "FAFFFF7F9F",
+    "compiled_packed": "FAFFFF7F9F"
+  },
+  {
+    "literal": "4294967299",
+    "research_anchor": "01000000A0",
+    "expected_packed": "FAFFFF7F9F",
+    "reference_error": 0,
+    "expected_text": "4.29496729E9\n",
+    "val_packed": "FAFFFF7F9F",
+    "compiled_packed": "FAFFFF7F9F"
+  },
+  {
+    "literal": "4294967300",
+    "research_anchor": "02000000A0",
+    "expected_packed": "02000000A0",
+    "reference_error": 0,
+    "expected_text": "4.2949673E9\n",
+    "val_packed": "02000000A0",
+    "compiled_packed": "02000000A0"
+  },
+  {
+    "literal": "4294967301",
+    "research_anchor": "03000000A0",
+    "expected_packed": "02000000A0",
+    "reference_error": 0,
+    "expected_text": "4.2949673E9\n",
+    "val_packed": "02000000A0",
+    "compiled_packed": "02000000A0"
+  },
+  {
+    "literal": "4294967295.5",
+    "research_anchor": "FFFFFF7F9F",
+    "expected_packed": "FFFFFF7F9F",
+    "reference_error": 0,
+    "expected_text": "4.2949673E9\n",
+    "val_packed": "FFFFFF7F9F",
+    "compiled_packed": "FFFFFF7F9F"
+  },
+  {
+    "literal": "4294967295.75",
+    "research_anchor": "00000000A0",
+    "expected_packed": "FFFFFF7F9F",
+    "reference_error": 0,
+    "expected_text": "4.2949673E9\n",
+    "val_packed": "FFFFFF7F9F",
+    "compiled_packed": "FFFFFF7F9F"
+  },
+  {
+    "literal": "16777217.0",
+    "research_anchor": "8000000098",
+    "expected_packed": "8000000098",
+    "reference_error": 0,
+    "expected_text": "16777217\n",
+    "val_packed": "8000000098",
+    "compiled_packed": "8000000098"
+  },
+  {
+    "literal": "5.87747175411143754E-39",
+    "research_anchor": "0000000001",
+    "expected_packed": "0000000000",
+    "reference_error": 0,
+    "expected_text": "0\n",
+    "val_packed": "0000000000",
+    "compiled_packed": "0000000000"
+  },
+  {
+    "literal": "5.87747175411143753E-39",
+    "research_anchor": "0000000000",
+    "expected_packed": "0000000000",
+    "reference_error": 0,
+    "expected_text": "0\n",
+    "val_packed": "0000000000",
+    "compiled_packed": "0000000000"
+  },
+  {
+    "literal": "340282366841710300949110269838224261120",
+    "research_anchor": "FFFFFF7FFF",
+    "expected_packed": "0000000000",
+    "reference_error": 20,
+    "expected_text": "Number too big\n"
+  },
+  {
+    "literal": "340282366881324382206242438634996236288",
+    "research_anchor": "FFFFFF7FFF",
+    "expected_packed": "0000000000",
+    "reference_error": 20,
+    "expected_text": "Number too big\n"
+  },
+  {
+    "literal": "0E999",
+    "research_anchor": "0000000000",
+    "expected_packed": "0000000000",
+    "reference_error": 20,
+    "expected_text": "Number too big\n"
+  },
+  {
+    "literal": "1E-999",
+    "research_anchor": "0000000000",
+    "expected_packed": "0000000000",
+    "reference_error": 0,
+    "expected_text": "0\n",
+    "val_packed": "0000000000",
+    "compiled_packed": "0000000000"
+  },
+  {
+    "literal": "0.00000000000000000000000000000000000000001",
+    "research_anchor": "0000000000",
+    "expected_packed": "0000000000",
+    "reference_error": 0,
+    "expected_text": "0\n",
+    "val_packed": "0000000000",
+    "compiled_packed": "0000000000"
+  },
+  {
+    "literal": "1E-0",
+    "research_anchor": "0100000000",
+    "expected_packed": "0100000000",
+    "reference_error": 0,
+    "expected_text": "1\n",
+    "val_packed": "0100000000",
+    "compiled_packed": "0100000000"
+  },
+  {
+    "literal": "000000000000000000000000000000000000000001",
+    "research_anchor": "0100000000",
+    "expected_packed": "0100000000",
+    "reference_error": 0,
+    "expected_text": "1\n",
+    "val_packed": "0100000000",
+    "compiled_packed": "0100000000"
+  },
+  {
+    "literal": ".25",
+    "research_expression": "1/4",
+    "expected_packed": "000000007E",
+    "reference_error": 0,
+    "expected_text": "0.25\n",
+    "val_packed": "000000007E",
+    "compiled_packed": "000000007E"
+  },
+  {
+    "literal": ".125",
+    "research_expression": "1/8",
+    "expected_packed": "000000007D",
+    "reference_error": 0,
+    "expected_text": "0.125\n",
+    "val_packed": "000000007D",
+    "compiled_packed": "000000007D"
+  },
+  {
+    "literal": "12.75",
+    "research_expression": "51/4",
+    "expected_packed": "0000004C83",
+    "reference_error": 0,
+    "expected_text": "12.75\n",
+    "val_packed": "0000004C83",
+    "compiled_packed": "0000004C83"
+  },
+  {
+    "literal": ".01",
+    "research_expression": "1/100",
+    "expected_packed": "3D0AD72379",
+    "reference_error": 0,
+    "expected_text": "1E-2\n",
+    "val_packed": "3D0AD72379",
+    "compiled_packed": "3D0AD72379"
+  },
+  {
+    "literal": ".001",
+    "research_expression": "1/1000",
+    "expected_packed": "986E120376",
+    "reference_error": 0,
+    "expected_text": "1E-3\n",
+    "val_packed": "986E120376",
+    "compiled_packed": "986E120376"
+  },
+  {
+    "literal": "1.001",
+    "research_expression": "1001/1000",
+    "expected_packed": "9CC4200080",
+    "reference_error": 0,
+    "expected_text": "1.001\n",
+    "val_packed": "9CC4200080",
+    "compiled_packed": "9CC4200080"
+  },
+  {
+    "literal": "123.456789",
+    "research_expression": "123456789/1000000",
+    "expected_packed": "3FE0E97686",
+    "reference_error": 0,
+    "expected_text": "123.456789\n",
+    "val_packed": "3FE0E97686",
+    "compiled_packed": "3FE0E97686"
+  },
+  {
+    "literal": "123456.789",
+    "research_expression": "123456789/1000",
+    "expected_packed": "FE64207190",
+    "reference_error": 0,
+    "expected_text": "123456.789\n",
+    "val_packed": "FE64207190",
+    "compiled_packed": "FE64207190"
+  },
+  {
+    "literal": "1E3",
+    "research_expression": "1000/1",
+    "expected_packed": "0000007A89",
+    "reference_error": 0,
+    "expected_text": "1000\n",
+    "val_packed": "0000007A89",
+    "compiled_packed": "0000007A89"
+  },
+  {
+    "literal": "1.E+3",
+    "research_expression": "1000/1",
+    "expected_packed": "0000007A89",
+    "reference_error": 0,
+    "expected_text": "1000\n",
+    "val_packed": "0000007A89",
+    "compiled_packed": "0000007A89"
+  },
+  {
+    "literal": ".5E+1",
+    "research_expression": "5/1",
+    "expected_packed": "0000002082",
+    "reference_error": 0,
+    "expected_text": "5\n",
+    "val_packed": "0000002082",
+    "compiled_packed": "0000002082"
+  },
+  {
+    "literal": "500E-3",
+    "research_expression": "1/2",
+    "expected_packed": "000000007F",
+    "reference_error": 0,
+    "expected_text": "0.5\n",
+    "val_packed": "000000007F",
+    "compiled_packed": "000000007F"
+  },
+  {
+    "literal": "1.0E0",
+    "research_expression": "1/1",
+    "expected_packed": "0000000080",
+    "reference_error": 0,
+    "expected_text": "1\n",
+    "val_packed": "0000000080",
+    "compiled_packed": "0000000080"
+  },
+  {
+    "literal": "000123.000",
+    "research_expression": "123/1",
+    "expected_packed": "0000007686",
+    "reference_error": 0,
+    "expected_text": "123\n",
+    "val_packed": "0000007686",
+    "compiled_packed": "0000007686"
+  },
+  {
+    "literal": "1E000003",
+    "research_expression": "1000/1",
+    "expected_packed": "0000000000",
+    "reference_error": 20,
+    "expected_text": "Number too big\n"
+  },
+  {
+    "literal": "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001",
+    "research_anchor": "0100000000",
+    "expected_packed": "0100000000",
+    "reference_error": 0,
+    "expected_text": "1\n",
+    "val_packed": "0100000000",
+    "compiled_packed": "0100000000"
+  },
+  {
+    "literal": "100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000E-239",
+    "research_anchor": "0000000080",
+    "expected_packed": "0000000000",
+    "reference_error": 0,
+    "expected_text": "0\n",
+    "val_packed": "0000000000",
+    "compiled_packed": "0000000000"
+  },
+  {
+    "literal": "0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001E+201",
+    "research_anchor": "0000000080",
+    "expected_packed": "0000000000",
+    "reference_error": 0,
+    "expected_text": "0\n",
+    "val_packed": "0000000000",
+    "compiled_packed": "0000000000"
+  },
+  {
+    "literal": "1500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000.0E-231",
+    "research_anchor": "0000004080",
+    "expected_packed": "0000000000",
+    "reference_error": 20,
+    "expected_text": "Number too big\n"
+  },
+  {
+    "literal": ".",
+    "expected_packed": "0000000000",
+    "reference_error": 0,
+    "expected_text": "0\n",
+    "val_packed": "0000000000",
+    "compiled_packed": "0000000000"
+  },
+  {
+    "literal": ".E1",
+    "expected_packed": "0000000000",
+    "reference_error": 0,
+    "expected_text": "0\n",
+    "val_packed": "0000000000",
+    "compiled_packed": "0000000000"
+  },
+  {
+    "literal": "1E",
+    "expected_packed": "0100000000",
+    "reference_error": 0,
+    "expected_text": "1\n",
+    "val_packed": "0100000000",
+    "compiled_packed": "0100000000"
+  },
+  {
+    "literal": "1E+",
+    "expected_packed": "0100000000",
+    "reference_error": 0,
+    "expected_text": "1\n",
+    "val_packed": "0100000000",
+    "compiled_packed": "0100000000"
+  },
+  {
+    "literal": "1E-",
+    "expected_packed": "0100000000",
+    "reference_error": 0,
+    "expected_text": "1\n",
+    "val_packed": "0100000000",
+    "compiled_packed": "0100000000"
+  },
+  {
+    "literal": "1E 3",
+    "expected_packed": "0000007A89",
+    "reference_error": 0,
+    "expected_text": "1000\n",
+    "val_packed": "0000007A89",
+    "compiled_packed": "0000007A89"
+  },
+  {
+    "literal": "1E  +3",
+    "expected_packed": "0000007A89",
+    "reference_error": 0,
+    "expected_text": "1000\n",
+    "val_packed": "0000007A89",
+    "compiled_packed": "0000007A89"
+  },
+  {
+    "literal": "4294967296.0",
+    "expected_packed": "FAFFFF7F9F",
+    "reference_error": 0,
+    "expected_text": "4.29496729E9\n",
+    "val_packed": "FAFFFF7F9F",
+    "compiled_packed": "FAFFFF7F9F"
+  }
+]

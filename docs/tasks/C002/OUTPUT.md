@@ -6,6 +6,16 @@ arithmetic results and exact printed output with the actual interpreter. General
 fractional/exponent source literals and variables remain unsupported; this is a
 qualified C002 slice, not completion of the whole numeric task or self-hosting.
 
+This record describes the output tranche at its qualification checkpoint.
+The subsequent [decimal literal tranche](LITERALS.md) supersedes its fractional/
+exponent source exclusions and records the current compiler source identity.
+
+Current compatibility qualification uses identical conventional source in BASIC
+and the compiler, including the formerly substituted 2^32 literals. Numeric error
+text comes from the interpreter's actual REPORT$ behavior, not comments in the
+arithmetic package. [LITERALS.md](LITERALS.md) records the subsequent correction;
+earlier counts/source identities below remain historical.
+
 ## Source behavior
 
 1. PRINT accepts numeric expressions alongside literal strings in a semicolon

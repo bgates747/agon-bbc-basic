@@ -32,14 +32,22 @@ def programs():
         ['PRINT "X";1;"/";2', 'PRINT 1;2;', 'PRINT 3', 'PRINT ;;4;;',
          'PRINT "Z"', 'PRINT ;', 'PRINT', 'PRINT "a""b";-7', 'PRINT 1:PRINT 2',
          'PRINT "";:PRINT 6;', 'PRINT "last";'],
+        ['PRINT ;.125;":";-1.5;":";1.E1;":";1.25E-3',
+         'PRINT ;SQR.25;":";INT -1.5;":";2E2+3;":";.5^-2',
+         'PRINT ;2.5E-1^2;":";2E-2-1;":";(1E0=1)',
+         'PRINT ;1EOR2;":";1.EOR2;":";1.0EOR2;":";1E2 EOR 1;":";1.E2 DIV 3;":";2.5E1 MOD 4'],
     ]
     result = [dict(source="\n".join(g)+"\n", reference=True, status=0) for g in groups]
-    result += [dict(source=s, expected=e, reference=False, status=1) for s, e in [
-        ('PRINT "before":PRINT SQR(-1):PRINT "bad"\n', "before\nNegative root\n"),
-        ('PRINT EXP 1000\n', "Exp range\n"),
-        ('PRINT LN 0\n', "Log range\n"),
-        ('PRINT SIN(10^20)\n', "Accuracy lost\n"),
+    result += [dict(source=s, reference=True, reference_error=True, status=1) for s in [
+        'PRINT "before":PRINT SQR(-1):PRINT "bad"\n',
+        'PRINT EXP 1000\n',
+        'PRINT LN 0\n',
+        'PRINT SIN(10^20)\n',
+        *[f'PRINT "before":PRINT ;{literal}:PRINT "bad"\n'
+          for literal in ("1E39", "0E999", "1E000003")],
     ]]
+    result.append(dict(source='GOTO @ok:PRINT 1E39\n@ok:PRINT "ok":END\n',
+                       expected="ok\n", reference=False, status=0))
     result.append(dict(source='GOSUB @sub:PRINT "done":END\n@sub:PRINT ;SQR16:RETURN\n',
                        expected="4\ndone\n", reference=False, status=0))
     result += [dict(source=s, diagnostic=d) for s, d in [
@@ -59,7 +67,6 @@ def programs():
     for start in range(0, len(old_cases), 12):
         block = old_cases[start:start+12]
         result.append(dict(source="".join(c["source"] for c in block), reference=True, status=0,
-                           oracle_source="".join(f'VDU {c["expression"]},13,10\n' for c in block),
                            legacy_observations=len(block)))
     result.append(dict(source=(ROOT / "compiler/examples/numbers.bas").read_text(),
                        reference=True, status=0))
@@ -72,6 +79,7 @@ def main():
     parser.add_argument("--compiler", type=Path, default=ROOT / "compiler/compiler.bas")
     parser.add_argument("--runtime-build", type=Path, default=ROOT / "compiler/build/numeric-runtime")
     parser.add_argument("--skip-legacy", action="store_true")
+    parser.add_argument("--timeout", type=float, default=180, help="compile-batch guard in seconds")
     args = parser.parse_args()
     args.compiler = args.compiler.resolve(strict=True)
     args.runtime_build = args.runtime_build.resolve(strict=True)
@@ -90,12 +98,21 @@ def main():
         tests = [case for case in tests if not case.get("legacy_observations")]
     started = time.monotonic()
     reference = ['10 ON ERROR REPORT:PRINT:OSCLI "BYE"', '20 @%=&90A']
+    error_definitions = []
     for i, case in enumerate(tests):
         if case.get("reference"):
-            reference += [f'PRINT "REF_BEGIN_{i}"',
-                          *case.get("oracle_source", case["source"]).splitlines(), f'PRINT "REF_END_{i}"']
+            body = case["source"].splitlines()
+            if case.get("reference_error"):
+                n = 10000+i*100
+                error_definitions += [f'{n} DEF PROCerror{i}:LOCAL ERROR',
+                                      f'{n+1} ON ERROR LOCAL REPORT:PRINT:ENDPROC',
+                                      *[f'{n+2+j} {line}' for j,line in enumerate(body)],
+                                      f'{n+90} ENDPROC']
+                body = [f'PROCerror{i}']
+            reference += [f'PRINT "REF_BEGIN_{i}"', *body, f'PRINT "REF_END_{i}"']
     reference = reference[:2] + [f'{100+i*10} {line}' for i, line in enumerate(reference[2:])]
     reference.append('9000 PRINT "OUTPUT_REFERENCE_DONE":OSCLI "BYE"')
+    reference += error_definitions
     source = "\n".join(reference)+"\n"
     (build / "reference.bas").write_text(source)
     (sd / "output-reference.bas").write_text(source)
@@ -122,7 +139,7 @@ def main():
     (build / "driver.bas").write_text(source)
     (sd / "output-driver.bas").write_text(source)
     compiled = harness.run_profile(profile, "load /bin/basic.bin\nrun . /output-driver.bas\n",
-                                    "OUTPUT_COMPILE_DONE", "output-compile.log", timeout_seconds=180)
+                                    "OUTPUT_COMPILE_DONE", "output-compile.log", timeout_seconds=args.timeout)
     (build / "compile.log").write_text(compiled)
     for i, case in enumerate(tests):
         if "diagnostic" in case:

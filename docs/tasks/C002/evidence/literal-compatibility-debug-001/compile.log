@@ -1,0 +1,33 @@
+Warning: unused arguments left: ["--firmware", "platform"].
+Tom's Fake VDP Version 1.03
+unknown packet VDU 0x17, 0, 0xf8
+unknown packet VDU 0x17, 0, 0x99
+uunknown packet VDU 0x17, 0, 0x94
+
+Agon Platform MOS Version 3.0.2 Arthur
+
+OK:l0.bas
+OK:l1.bas
+OK:l2.bas
+OK:l3.bas
+OK:l4.bas
+OK:l5.bas
+ERR:l6.bas
+l6.bas:1:9: Unexpected text after statement at 3250
+ERR:l7.bas
+l7.bas:1:9: Unexpected text after statement at 3250
+ERR:l8.bas
+l8.bas:1:12: Unexpected text after statement at 3250
+ERR:l9.bas
+l9.bas:1:11: Unexpected text after statement at 3250
+ERR:l10.bas
+l10.bas:1:11: Unsupported crunched text after exponent at 3250
+ERR:l11.bas
+l11.bas:1:11: Unsupported crunched text after exponent at 3250
+ERR:l12.bas
+l12.bas:1:18: Hex literal exceeds eight digits at 3250
+ERR:l13.bas
+l13.bas:1:12: EVAL is deliberately unsupported at 3250
+OK:l0.bas
+LITERAL_COMPILE_DONE
+/ *
