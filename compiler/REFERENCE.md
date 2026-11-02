@@ -226,3 +226,15 @@ No interpreter entry/global or new arithmetic implementation is linked.
 [Audit and actual reference probes](../docs/tasks/C004/conditionals/AUDIT.md)
 record first-ELSE and fractional truth behavior; the numeric/string runtime is
 unchanged. C004 records differential qualification and exact promotion.
+
+## Loop adaptation
+
+EXEC.Z80 REPEAT/UNTIL/FOR/NEXT/WHILE/ENDWHI/RETURN establishes marker checks,
+EXPRI truth, captured bounds/steps, destination conversion and post-increment
+comparison. The standalone controller uses fixed32-byte typed records, explicit
+capacity and an entry reset; it links only the qualified numeric adapter via
+a patched trampoline. Interpreter stack/token pointers, CHECK and error globals
+are replaced with explicit native state/status. [Contract](../docs/tasks/C004/loops/CONTROL.md)
+and C004 evidence include actual-BASIC transcripts, recursive same-site FOR,
+register/stack/capacity probes and independent links. New control code is marked
+as a standalone implementation guided by these sources.

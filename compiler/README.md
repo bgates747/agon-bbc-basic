@@ -131,4 +131,11 @@ is the qualified mixed example; length and allocation stay unchanged.
 inline statement lists, conventional THEN/ELSE line targets and multiline blocks.
 Conditions use reference SFIX integer truth, including fractional-zero behavior;
 nested inline IF preserves first-ELSE association. Block ELSE/ENDIF must start
-their physical statement line. C004 remains active for loops, PROC/FN and LOCAL.
+their physical statement line. C004 remains active for PROC/FN and LOCAL. Numeric FOR/TO/STEP/NEXT,
+WHILE/ENDWHILE and REPEAT/UNTIL are now promoted with separate typed records.
+
+The [loop record contract](../docs/tasks/C004/loops/CONTROL.md) describes the
+bounded control stack and captured numeric values. Rebuild its embedded template
+with `.venv/bin/python compiler/tools/build_control_runtime.py --compiler compiler/compiler.bas`.
+All runtime DATA sections are supplied in the live compiler; there is no runtime
+dependency on an interpreter binary.

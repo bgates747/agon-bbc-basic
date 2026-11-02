@@ -1,0 +1,72 @@
+[
+  {
+    "name": "swapped",
+    "source": "10 ON ERROR REPORT:PRINT:PRINT \"ACTIVATION_ORACLE_0_DONE\":OSCLI \"BYE\"\n20 A%=7:B%=8:PROCswap(A%,B%):PRINT ;A%;\":\";B%\n30 PRINT \"ACTIVATION_ORACLE_0_DONE\":OSCLI \"BYE\"\n1000 DEF PROCswap(B%,A%):PRINT ;A%;\":\";B%:ENDPROC\n",
+    "log": "Warning: unused arguments left: [\"--firmware\", \"platform\"].\nTom's Fake VDP Version 1.03\nunknown packet VDU 0x17, 0, 0xf8\nunknown packet VDU 0x17, 0, 0x99\nuunknown packet VDU 0x17, 0, 0x94\n\u0080\nAgon Platform MOS Version 3.0.2 Arthur\n\n8:7\n7:8\nACTIVATION_ORACLE_0_DONE\n/ *"
+  },
+  {
+    "name": "new-local",
+    "source": "10 ON ERROR REPORT:PRINT:PRINT \"ACTIVATION_ORACLE_1_DONE\":OSCLI \"BYE\"\n20 PROCnew:PRINT ;fresh%;\":\";LEN fresh$\n30 PRINT \"ACTIVATION_ORACLE_1_DONE\":OSCLI \"BYE\"\n1000 DEF PROCnew:LOCAL fresh%,fresh$:fresh%=4:fresh$=\"x\":ENDPROC\n",
+    "log": "Warning: unused arguments left: [\"--firmware\", \"platform\"].\nTom's Fake VDP Version 1.03\nunknown packet VDU 0x17, 0, 0xf8\nunknown packet VDU 0x17, 0, 0x99\nuunknown packet VDU 0x17, 0, 0x94\n\u0080\nAgon Platform MOS Version 3.0.2 Arthur\n\n0:0\nACTIVATION_ORACLE_1_DONE\n/ *"
+  },
+  {
+    "name": "staged",
+    "source": "10 ON ERROR REPORT:PRINT:PRINT \"ACTIVATION_ORACLE_2_DONE\":OSCLI \"BYE\"\n20 x%=7:y%=8:PROCstage(3,x%):PRINT ;x%;\":\";y%\n30 PRINT \"ACTIVATION_ORACLE_2_DONE\":OSCLI \"BYE\"\n1000 DEF PROCstage(x%,y%):PRINT ;x%;\":\";y%:ENDPROC\n",
+    "log": "Warning: unused arguments left: [\"--firmware\", \"platform\"].\nTom's Fake VDP Version 1.03\nunknown packet VDU 0x17, 0, 0xf8\nunknown packet VDU 0x17, 0, 0x99\nuunknown packet VDU 0x17, 0, 0x94\n\u0080\nAgon Platform MOS Version 3.0.2 Arthur\n\n3:7\n7:8\nACTIVATION_ORACLE_2_DONE\n/ *"
+  },
+  {
+    "name": "snapshot",
+    "source": "10 ON ERROR REPORT:PRINT:PRINT \"ACTIVATION_ORACLE_3_DONE\":OSCLI \"BYE\"\n20 x%=7:PROCtake(FNside):PRINT ;x%\n30 PRINT \"ACTIVATION_ORACLE_3_DONE\":OSCLI \"BYE\"\n1000 DEF PROCtake(x%):PRINT ;x%:ENDPROC\n1010 DEF FNside:x%=9:=1\n",
+    "log": "Warning: unused arguments left: [\"--firmware\", \"platform\"].\nTom's Fake VDP Version 1.03\nunknown packet VDU 0x17, 0, 0xf8\nunknown packet VDU 0x17, 0, 0x99\nuunknown packet VDU 0x17, 0, 0x94\n\u0080\nAgon Platform MOS Version 3.0.2 Arthur\n\n1\n7\nACTIVATION_ORACLE_3_DONE\n/ *"
+  },
+  {
+    "name": "recursive-string",
+    "source": "10 ON ERROR REPORT:PRINT:PRINT \"ACTIVATION_ORACLE_4_DONE\":OSCLI \"BYE\"\n20 PRINT \"a\"+FNrepeat(3)+\"b\"\n30 PRINT \"ACTIVATION_ORACLE_4_DONE\":OSCLI \"BYE\"\n1000 DEF FNrepeat(n%):IF n%=0 THEN =\"x\" ELSE =FNrepeat(n%-1)+\"x\"\n",
+    "log": "Warning: unused arguments left: [\"--firmware\", \"platform\"].\nTom's Fake VDP Version 1.03\nunknown packet VDU 0x17, 0, 0xf8\nunknown packet VDU 0x17, 0, 0x99\nuunknown packet VDU 0x17, 0, 0x94\n\u0080\nAgon Platform MOS Version 3.0.2 Arthur\n\naxxxxb\nACTIVATION_ORACLE_4_DONE\n/ *"
+  },
+  {
+    "name": "local-through-callee",
+    "source": "10 ON ERROR REPORT:PRINT:PRINT \"ACTIVATION_ORACLE_5_DONE\":OSCLI \"BYE\"\n20 text$=\"outer\":PROCouter:PRINT text$\n30 PRINT \"ACTIVATION_ORACLE_5_DONE\":OSCLI \"BYE\"\n1000 DEF PROCouter:LOCAL text$:text$=\"inner\":PROCsee:ENDPROC\n1010 DEF PROCsee:PRINT text$:ENDPROC\n",
+    "log": "Warning: unused arguments left: [\"--firmware\", \"platform\"].\nTom's Fake VDP Version 1.03\nunknown packet VDU 0x17, 0, 0xf8\nunknown packet VDU 0x17, 0, 0x99\nuunknown packet VDU 0x17, 0, 0x94\n\u0080\nAgon Platform MOS Version 3.0.2 Arthur\n\ninner\nouter\nACTIVATION_ORACLE_5_DONE\n/ *"
+  },
+  {
+    "name": "repeat-local",
+    "source": "10 ON ERROR REPORT:PRINT:PRINT \"ACTIVATION_ORACLE_6_DONE\":OSCLI \"BYE\"\n20 v%=7:PROCtwice:PRINT ;v%\n30 PRINT \"ACTIVATION_ORACLE_6_DONE\":OSCLI \"BYE\"\n1000 DEF PROCtwice:LOCAL v%:v%=3:LOCAL v%:PRINT ;v%:v%=4:ENDPROC\n",
+    "log": "Warning: unused arguments left: [\"--firmware\", \"platform\"].\nTom's Fake VDP Version 1.03\nunknown packet VDU 0x17, 0, 0xf8\nunknown packet VDU 0x17, 0, 0x99\nuunknown packet VDU 0x17, 0, 0x94\n\u0080\nAgon Platform MOS Version 3.0.2 Arthur\n\n0\n7\nACTIVATION_ORACLE_6_DONE\n/ *"
+  },
+  {
+    "name": "local-in-loop",
+    "source": "10 ON ERROR REPORT:PRINT:PRINT \"ACTIVATION_ORACLE_7_DONE\":OSCLI \"BYE\"\n20 PROCbad\n30 PRINT \"ACTIVATION_ORACLE_7_DONE\":OSCLI \"BYE\"\n1000 DEF PROCbad:FOR i%=1 TO 1:LOCAL x%:NEXT:ENDPROC\n",
+    "log": "Warning: unused arguments left: [\"--firmware\", \"platform\"].\nTom's Fake VDP Version 1.03\nunknown packet VDU 0x17, 0, 0xf8\nunknown packet VDU 0x17, 0, 0x99\nuunknown packet VDU 0x17, 0, 0x94\n\u0080\nAgon Platform MOS Version 3.0.2 Arthur\n\nNot in a FN or PROC\nACTIVATION_ORACLE_7_DONE\n/ *"
+  },
+  {
+    "name": "exit-in-loop",
+    "source": "10 ON ERROR REPORT:PRINT:PRINT \"ACTIVATION_ORACLE_8_DONE\":OSCLI \"BYE\"\n20 PROCbad\n30 PRINT \"ACTIVATION_ORACLE_8_DONE\":OSCLI \"BYE\"\n1000 DEF PROCbad:FOR i%=1 TO 1:ENDPROC:NEXT\n",
+    "log": "Warning: unused arguments left: [\"--firmware\", \"platform\"].\nTom's Fake VDP Version 1.03\nunknown packet VDU 0x17, 0, 0xf8\nunknown packet VDU 0x17, 0, 0x99\nuunknown packet VDU 0x17, 0, 0x94\n\u0080\nAgon Platform MOS Version 3.0.2 Arthur\n\nNot in a PROC\nACTIVATION_ORACLE_8_DONE\n/ *"
+  },
+  {
+    "name": "fn-exit-in-loop",
+    "source": "10 ON ERROR REPORT:PRINT:PRINT \"ACTIVATION_ORACLE_9_DONE\":OSCLI \"BYE\"\n20 PRINT FNbad\n30 PRINT \"ACTIVATION_ORACLE_9_DONE\":OSCLI \"BYE\"\n1000 DEF FNbad:FOR i%=1 TO 1:=1:NEXT\n",
+    "log": "Warning: unused arguments left: [\"--firmware\", \"platform\"].\nTom's Fake VDP Version 1.03\nunknown packet VDU 0x17, 0, 0xf8\nunknown packet VDU 0x17, 0, 0x99\nuunknown packet VDU 0x17, 0, 0x94\n\u0080\nAgon Platform MOS Version 3.0.2 Arthur\n\nNot in a FN\nACTIVATION_ORACLE_9_DONE\n/ *"
+  },
+  {
+    "name": "local-top",
+    "source": "10 ON ERROR REPORT:PRINT:PRINT \"ACTIVATION_ORACLE_10_DONE\":OSCLI \"BYE\"\n20 LOCAL x%\n30 PRINT \"ACTIVATION_ORACLE_10_DONE\":OSCLI \"BYE\"\n",
+    "log": "Warning: unused arguments left: [\"--firmware\", \"platform\"].\nTom's Fake VDP Version 1.03\nunknown packet VDU 0x17, 0, 0xf8\nunknown packet VDU 0x17, 0, 0x99\nuunknown packet VDU 0x17, 0, 0x94\n\u0080\nAgon Platform MOS Version 3.0.2 Arthur\n\nNot in a FN or PROC\nACTIVATION_ORACLE_10_DONE\n/ *"
+  },
+  {
+    "name": "return-top",
+    "source": "10 ON ERROR REPORT:PRINT:PRINT \"ACTIVATION_ORACLE_11_DONE\":OSCLI \"BYE\"\n20 =1\n30 PRINT \"ACTIVATION_ORACLE_11_DONE\":OSCLI \"BYE\"\n",
+    "log": "Warning: unused arguments left: [\"--firmware\", \"platform\"].\nTom's Fake VDP Version 1.03\nunknown packet VDU 0x17, 0, 0xf8\nunknown packet VDU 0x17, 0, 0x99\nuunknown packet VDU 0x17, 0, 0x94\n\u0080\nAgon Platform MOS Version 3.0.2 Arthur\n\nNot in a FN\nACTIVATION_ORACLE_11_DONE\n/ *"
+  },
+  {
+    "name": "declaration-inline",
+    "source": "10 ON ERROR REPORT:PRINT:PRINT \"ACTIVATION_ORACLE_12_DONE\":OSCLI \"BYE\"\n20 DEF PROCunused:PRINT \"bad\":ENDPROC\n30 PRINT \"after\"\n40 PRINT \"ACTIVATION_ORACLE_12_DONE\":OSCLI \"BYE\"\n",
+    "log": "Warning: unused arguments left: [\"--firmware\", \"platform\"].\nTom's Fake VDP Version 1.03\nunknown packet VDU 0x17, 0, 0xf8\nunknown packet VDU 0x17, 0, 0x99\nuunknown packet VDU 0x17, 0, 0x94\n\u0080\nAgon Platform MOS Version 3.0.2 Arthur\n\nafter\nACTIVATION_ORACLE_12_DONE\n/ *"
+  },
+  {
+    "name": "declaration-fallthrough",
+    "source": "10 ON ERROR REPORT:PRINT:PRINT \"ACTIVATION_ORACLE_13_DONE\":OSCLI \"BYE\"\n20 DEF PROCunused\n30 PRINT \"body\"\n40 ENDPROC\n50 PRINT \"ACTIVATION_ORACLE_13_DONE\":OSCLI \"BYE\"\n",
+    "log": "Warning: unused arguments left: [\"--firmware\", \"platform\"].\nTom's Fake VDP Version 1.03\nunknown packet VDU 0x17, 0, 0xf8\nunknown packet VDU 0x17, 0, 0x99\nuunknown packet VDU 0x17, 0, 0x94\n\u0080\nAgon Platform MOS Version 3.0.2 Arthur\n\nbody\nNot in a PROC\nACTIVATION_ORACLE_13_DONE\n/ *"
+  }
+]

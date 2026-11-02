@@ -1,0 +1,8 @@
+[
+  {
+    "source": "IF 1 THEN PRINT \"yes\" ELSE PRINT \"bad\"\nIF 0 THEN PRINT \"bad\" ELSE PRINT \"no\"\nIF 1 PRINT \"omitted\"\nIF 0 PRINT \"bad\"\nPRINT \"done\"\n",
+    "reference": true,
+    "status": 0,
+    "expected": "yes\nno\nomitted\ndone\n"
+  }
+]

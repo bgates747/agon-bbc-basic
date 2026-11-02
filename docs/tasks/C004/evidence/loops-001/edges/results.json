@@ -1,0 +1,33 @@
+{
+  "programs": 6,
+  "native_executions": 6,
+  "rejected_sources": 0,
+  "reference_output_programs": 5,
+  "legacy_arithmetic_observations": 0,
+  "deterministic_repeat": true,
+  "independent_link_bases": [
+    262964,
+    262964,
+    262819,
+    262835,
+    262564,
+    263002
+  ],
+  "string_link_bases": [],
+  "duration_seconds": 117.44,
+  "hashes": {
+    "docs/tasks/C004/loops/compiler.bas": "2890c6be59a6b9015c69809ad9cb47efedfabacb543d025da3745718dee5b370",
+    "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+    "docs/tasks/C004/build/output-integration/cases.json": "c9a1ebd475f9392c000c010a0a4cc19b17ede56780acb108a8dbbf6044ae5111"
+  },
+  "independent_control_link_bases": [
+    267719,
+    267719,
+    267572,
+    267585,
+    267314,
+    267757
+  ],
+  "control_numeric_bridge_checked": true,
+  "control_entry_reset_checked": true
+}

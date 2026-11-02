@@ -1,0 +1,38 @@
+[
+  {
+    "name": "for-gosub",
+    "source": "10 ON ERROR REPORT:PRINT:PRINT \"LOOP_REF_END_0\":OSCLI \"BYE\"\n20 PRINT \"LOOP_REF_BEGIN_0\"\n30 FOR i%=1 TO 3:GOSUB 1000:NEXT:PRINT \"done\"\n40 PRINT \"LOOP_REF_END_0\":OSCLI \"BYE\"\n1000 PRINT ;i%:RETURN\n",
+    "expected": "1\n2\n3\ndone\n",
+    "actual": "1\n2\n3\ndone\n"
+  },
+  {
+    "name": "repeat-return",
+    "source": "10 ON ERROR REPORT:PRINT:PRINT \"LOOP_REF_END_1\":OSCLI \"BYE\"\n20 PRINT \"LOOP_REF_BEGIN_1\"\n30 GOSUB 1000\n40 PRINT \"LOOP_REF_END_1\":OSCLI \"BYE\"\n1000 REPEAT:RETURN:UNTIL 1\n",
+    "expected": "No GOSUB\n",
+    "actual": "No GOSUB\n"
+  },
+  {
+    "name": "while-return",
+    "source": "10 ON ERROR REPORT:PRINT:PRINT \"LOOP_REF_END_2\":OSCLI \"BYE\"\n20 PRINT \"LOOP_REF_BEGIN_2\"\n30 GOSUB 1000\n40 PRINT \"LOOP_REF_END_2\":OSCLI \"BYE\"\n1000 WHILE 1:RETURN:ENDWHILE\n",
+    "expected": "No GOSUB\n",
+    "actual": "No GOSUB\n"
+  },
+  {
+    "name": "repeat-enter",
+    "source": "10 ON ERROR REPORT:PRINT:PRINT \"LOOP_REF_END_3\":OSCLI \"BYE\"\n20 PRINT \"LOOP_REF_BEGIN_3\"\n30 GOTO 1010\n40 PRINT \"LOOP_REF_END_3\":OSCLI \"BYE\"\n1000 REPEAT\n1010 PRINT \"body\":UNTIL 1\n",
+    "expected": "body\nNot in a REPEAT loop\n",
+    "actual": "body\nNot in a REPEAT loop\n"
+  },
+  {
+    "name": "while-enter",
+    "source": "10 ON ERROR REPORT:PRINT:PRINT \"LOOP_REF_END_4\":OSCLI \"BYE\"\n20 PRINT \"LOOP_REF_BEGIN_4\"\n30 GOTO 1010\n40 PRINT \"LOOP_REF_END_4\":OSCLI \"BYE\"\n1000 WHILE 1\n1010 PRINT \"body\":ENDWHILE\n",
+    "expected": "body\nNot in a WHILE loop\n",
+    "actual": "body\nNot in a WHILE loop\n"
+  },
+  {
+    "name": "for-enter",
+    "source": "10 ON ERROR REPORT:PRINT:PRINT \"LOOP_REF_END_5\":OSCLI \"BYE\"\n20 PRINT \"LOOP_REF_BEGIN_5\"\n30 GOTO 1010\n40 PRINT \"LOOP_REF_END_5\":OSCLI \"BYE\"\n1000 FOR i%=1 TO 1\n1010 PRINT \"body\":NEXT\n",
+    "expected": "body\nNot in a FOR loop\n",
+    "actual": "body\nNot in a FOR loop\n"
+  }
+]

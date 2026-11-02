@@ -1,0 +1,38 @@
+[
+  {
+    "source": "n%=0:FOR i%=1 TO 2 STEP 0:n%=n%+1:PRINT ;i%:IF n%=3 THEN i%=3\nNEXT:PRINT ;i%;\":\";n%\n",
+    "reference": true,
+    "status": 0,
+    "expected": "1\n1\n1\n3:3\n"
+  },
+  {
+    "source": "n%=0:FOR i%=0 TO 1 STEP .5:n%=n%+1:PRINT ;i%:IF n%=3 THEN i%=2\nNEXT:PRINT ;i%;\":\";n%\n",
+    "reference": true,
+    "status": 0,
+    "expected": "0\n0\n0\n2:3\n"
+  },
+  {
+    "source": "FOR x=2147483647 TO 2147483647:PRINT ;x:NEXT:PRINT ;x\nFOR b&=256 TO 0:PRINT ;b&:NEXT:PRINT ;b&\n",
+    "reference": true,
+    "status": 0,
+    "expected": "2.14748365E9\n2.14748365E9\n0\n1\n"
+  },
+  {
+    "source": "i%=0:WHILE -.9:PRINT \"bad\":ENDWHILE:REPEAT:i%=i%+1:UNTIL i%/2:PRINT ;i%\n",
+    "reference": true,
+    "status": 0,
+    "expected": "2\n"
+  },
+  {
+    "source": "FOR i%=&7FFFFFFF TO &7FFFFFFF:PRINT ;i%:NEXT\n",
+    "reference": true,
+    "reference_error": true,
+    "status": 1,
+    "expected": "2.14748365E9\nNumber too big\n"
+  },
+  {
+    "source": "n%=0:GOSUB @sub:PRINT \"done\":END\n@sub:n%=n%+1:FOR i%=1 TO 2:PRINT ;n%;\":\";i%:IF n%<2 THEN GOSUB @sub\nNEXT:n%=n%-1:RETURN\n",
+    "expected": "1:1\n2:1\n2:2\ndone\n",
+    "status": 0
+  }
+]

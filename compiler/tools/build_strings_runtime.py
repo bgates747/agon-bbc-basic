@@ -49,8 +49,9 @@ def main():
     data='\n'.join(f'{30000+i*10} DATA {row}' for i,row in enumerate(rows))+'\n'
     (build/'runtime_data.bas').write_text(data)
     if args.compiler:
-        original=args.compiler.read_text().split('30000 DATA',1)[0]
-        args.compiler.write_text(original+data)
+        original,previous=args.compiler.read_text().split('30000 DATA',1)
+        control='40000 DATA'+previous.split('40000 DATA',1)[1] if '40000 DATA' in previous else ''
+        args.compiler.write_text(original+data+control)
     report=dict(bytes=len(template),relocations=len(relocations),exports={n:syms[n] for n in EXPORTS},
                 independent_link_bases=[0x42000,0x48000],unresolved_symbols=0,
                 hashes={str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest()

@@ -1,0 +1,9 @@
+{
+  "scope": "Selected live checks of exact loop promotion",
+  "compiler_sha256": "2890c6be59a6b9015c69809ad9cb47efedfabacb543d025da3745718dee5b370",
+  "byte_identical_promotion": true,
+  "all_three_data_packers_reproduce_source": true,
+  "control_runtime_bytes": 8657,
+  "control_relocations": 30,
+  "human_hardware_validation": false
+}

@@ -64,3 +64,13 @@ ignored `compiler/build/string-runtime/` artifacts. String DATA starts at 30000;
 numeric regeneration at 20000 preserves it. Neither template needs an assembler
 or a separate runtime file on the target. Literal-only PRINT still uses its
 original compact path and complete assembly golden.
+
+## Native control records
+
+`control.s` implements C004's typed loop/GOSUB stack:8657 bytes (including8192
+record bytes),30 internal ADL24 relocations and one compiler-patched numeric
+bridge operand. `build_control_runtime.py` packages DATA40000 and checks two
+independent link bases. The entry trampoline resets the next-free pointer on
+every native entry;256 records have explicit type/body/variable/limit/step fields.
+[Control contract](../../docs/tasks/C004/loops/CONTROL.md) and C004 evidence own
+ABI/status/qualification. No interpreter globals or entry addresses are linked.

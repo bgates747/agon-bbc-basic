@@ -38,3 +38,28 @@ is promoted. Live conditional smoke21.758s and slice-write regression33.114s pas
 Frozen evidence retains both scopes and the earlier loader-order correction.
 Unchanged numeric/string runtimes and original golden protect earlier behavior.
 C004 remains active; the next prototype introduces typed loop/GOSUB records.
+
+## Typed loops qualified; live rechecks running
+
+The loop prototype passes32 programs (20 native/12 rejected,14 same-source),
+20 independent controller links and entry/numeric bridge checks in313.131s.
+Six supplemental cases pass in117.440s, baseline39/15 in46.754s and ABI in1.016s.
+Six numbered reference probes confirm GOSUB/loop marker error expectations.
+Frozen SHA2890c6be59a6b9015c69809ad9cb47efedfabacb543d025da3745718dee5b370
+and the8657-byte/30-relocation controller are promoted exactly. Three DATA
+packers reproduce source; string packaging preserves the new40000 section.
+Live baseline/loop/ABI/conditional/string checks run before checkpointing.
+
+Preparatory PROC/FN/LOCAL oracles establish staged arguments, prior formal
+snapshot, unsuffixed string results, LOCAL creation/restoration and exact marker
+errors/declaration fall-through. Their audit and fixtures are in C004/activations;
+no activation implementation is claimed.
+
+## Typed loops accepted for development
+
+Selected live checks pass baseline39/15 (44.552s), loop smoke49.677s, ABI1.015s,
+conditional smoke31.064s and slice-write smoke43.676s. Independent links/bridge/
+entry reset pass. Exact promotion and three packers reproduce1245 loader-safe
+BBC lines; numeric/string/vendor/license remain unchanged. Full and selected
+scopes remain separate. Checkpoint this tranche, then continue PROC/LOCAL/FN
+under C004 without an approval stop; C005/C006 remain in the sole TODO.

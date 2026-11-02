@@ -1,0 +1,13 @@
+{
+  "checked_index_and_stack_preservation": true,
+  "typed_marker_errors": true,
+  "full_stack_bound_checked": true,
+  "for_limits_and_steps_copied": true,
+  "for_iteration_continuations": true,
+  "duration_seconds": 1.015,
+  "hashes": {
+    "docs/tasks/C004/loops/abi.s": "e5bd364ad1dfb4832ff35b7f13fb4ebb6a858449a75928a9454cf6c5b0457c90",
+    "docs/tasks/C004/build/control-abi/probe.bin": "50e1d6b7d166522595ff5c8def504c710f4e19265ec9a56e72409c6e15af9e8d",
+    "compiler/build/control-runtime/runtime-0.bin": "8abe4b024278563ffce45b6927a30e553a64f10f9494e6284791106e814e8a75"
+  }
+}

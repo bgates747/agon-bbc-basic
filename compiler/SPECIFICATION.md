@@ -134,6 +134,21 @@ The Author accepted the corrected C002 baseline for a development checkpoint.
     before output creation. Unselected arms do not execute their binding creation,
     arithmetic or literal-error code.
 
+19. REPEAT/UNTIL and WHILE/ENDWHILE use reference SFIX truth. Numeric FOR
+    accepts a scalar numeric variable, TO and optional STEP; NEXT accepts an
+    optional variable/list. Initial assignment precedes limit/step evaluation,
+    both captured once as five-byte values. The body executes at least once.
+    NEXT adds step, applies the destination conversion and compares the full
+    updated value against the captured limit (< for negative step, > otherwise).
+    A byte variable stores its low byte but that immediate comparison uses the
+    full converted result. Explicit zero/fractional steps retain reference behavior.
+    Native typed records distinguish FOR, WHILE, REPEAT and GOSUB, with256 total
+    entries. Closers check markers before expression evaluation. RETURN requires
+    a GOSUB marker, so unfinished loops preserve reference errors. Source blocks
+    have32 total lexical nesting levels; mismatched/crossed blocks and unmatched
+    NEXT names are rejected. Native jumps use recorded body/test addresses, not
+    static shared per-loop limit storage. Arrays/indirect FOR variables remain C005.
+
 ## Current backend and runtime contract
 
 1. The compiler owns a 65536-byte output buffer. Code loads at `&040000`, with

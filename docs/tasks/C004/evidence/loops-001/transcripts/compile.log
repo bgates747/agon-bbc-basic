@@ -1,0 +1,55 @@
+Warning: unused arguments left: ["--firmware", "platform"].
+Tom's Fake VDP Version 1.03
+unknown packet VDU 0x17, 0, 0xf8
+unknown packet VDU 0x17, 0, 0x99
+uunknown packet VDU 0x17, 0, 0x94
+
+Agon Platform MOS Version 3.0.2 Arthur
+
+OK:p0.bas
+OK:p1.bas
+OK:p2.bas
+OK:p3.bas
+OK:p4.bas
+OK:p5.bas
+OK:p6.bas
+OK:p7.bas
+OK:p8.bas
+OK:p9.bas
+OK:p10.bas
+OK:p11.bas
+OK:p12.bas
+OK:p13.bas
+OK:p14.bas
+OK:p15.bas
+OK:p16.bas
+OK:p17.bas
+OK:p18.bas
+OK:p19.bas
+ERR:p20.bas
+p20.bas:1:7: Missing loop terminator at 3250
+ERR:p21.bas
+p21.bas:1:8: Missing loop terminator at 3250
+ERR:p22.bas
+p22.bas:1:14: Missing loop terminator at 3250
+ERR:p23.bas
+p23.bas:1:6: Loop terminator without loop at 3250
+ERR:p24.bas
+p24.bas:1:9: Loop terminator without loop at 3250
+ERR:p25.bas
+p25.bas:1:5: NEXT without FOR at 3250
+ERR:p26.bas
+p26.bas:1:16: Mismatched loop terminator at 3250
+ERR:p27.bas
+p27.bas:1:7: FOR needs a numeric variable at 3250
+ERR:p28.bas
+p28.bas:1:10: Expected TO at 3250
+ERR:p29.bas
+p29.bas:1:22: NEXT variable has no matching FOR at 3250
+ERR:p30.bas
+p30.bas:3:6: ENDIF crosses a loop boundary at 3250
+ERR:p31.bas
+p31.bas:3:9: Mismatched loop terminator at 3250
+OK:p0.bas
+OUTPUT_COMPILE_DONE
+/ *

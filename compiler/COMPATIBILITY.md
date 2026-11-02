@@ -36,7 +36,8 @@ existing string/numeric regressions on the reauthorized Pi5 CLI.
 | Mutable strings and string variables | Partial | Plain/LET `$` assignment, owned copying/self-assignment, + and parentheses, 0..255 bytes including NUL, LEN/CHR$/ASC, VAL and STR$ (default G9 or ~ hex), INSTR/STRING$, string PRINT, runtime existence; bounded private heap; LEFT$/RIGHT$/MID$ expressions with reference low-byte counts/optional arguments and six string relations; LEFT$/RIGHT$/MID$ scalar slice assignment with unchanged length/allocation and reference range markers; further I/O-dependent string functions unsupported |
 | Variable suffixes and default numeric variables | Partial | Case-sensitive numeric/string names with %/&/$ suffixes; 32-character ASCII body limit; ambiguous keyword prefixes, pseudo variables and other suffixes rejected |
 | IF/THEN/ELSE/ENDIF | Partial | Inline colon lists, omitted THEN, constant THEN/ELSE line targets and multiline blocks; SFIX truth and reference first-ELSE association; 32 nesting entries; block ELSE/ENDIF begin their line; multiline IF inside inline IF rejected |
-| CASE/FOR/WHILE/REPEAT | Unsupported | Loop and CASE implementation pending |
+| FOR/WHILE/REPEAT | Partial | Numeric FOR/TO/STEP/NEXT (including named lists), WHILE/ENDWHILE, REPEAT/UNTIL;32 lexical block levels;256 typed loop/GOSUB records; limit/step captured once; FOR enters body once even past limit; mismatched structures rejected |
+| CASE | Unsupported | Pending |
 | DEF PROC / ENDPROC | Unsupported | Never treated as GOSUB/RETURN |
 | DEF FN / function return | Unsupported | Separate activation semantics pending |
 | LOCAL, recursion with locals | Unsupported | Save/restore semantics required |
@@ -61,3 +62,5 @@ creation/storage rules, scope and qualification; the [string core record](../doc
 
 See [the specification](SPECIFICATION.md) for exact limits and
 [TODO.md](../TODO.md) for unfinished work.
+
+[Typed loops](../docs/tasks/C004/loops/CONTROL.md) records native marker, numeric-bound and call-stack behavior; C004 owns full/selected live qualification.
