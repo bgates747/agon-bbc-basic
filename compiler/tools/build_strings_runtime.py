@@ -7,16 +7,17 @@ import re
 import subprocess
 
 ROOT=Path(__file__).resolve().parents[2]
-EXPORTS=('rt_strliteral','rt_strload','rt_strcat','rt_strstore','rt_strprint','rt_strleft','rt_strright','rt_strmid','rt_strcompare')
+EXPORTS=('rt_strliteral','rt_strload','rt_strcat','rt_strstore','rt_strprint','rt_strleft','rt_strright','rt_strmid','rt_strcompare','rt_strinstr','rt_strrepeat')
 
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--source',type=Path,default=ROOT/'compiler/runtime/strings.s')
     parser.add_argument('--compiler',type=Path)
+    parser.add_argument('--output',type=Path,default=ROOT/'compiler/build/string-runtime')
     args=parser.parse_args()
     source=args.source.resolve(strict=True)
-    build=ROOT/'compiler/build/string-runtime';build.mkdir(parents=True,exist_ok=True)
+    build=args.output.resolve();build.mkdir(parents=True,exist_ok=True)
     tc=Path('/Agon/agondev/release/bin')
     def run(name,*arguments):return subprocess.check_output([str(tc/name),*map(str,arguments)],text=True)
     obj=build/'runtime.o'

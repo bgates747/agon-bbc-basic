@@ -1,0 +1,11 @@
+{
+  "README.md": "e09ae4c719c5c1b1efcb3bcbc7ca24d0bb5a6234e6bc4bdb74166c5051fdd598",
+  "strings.log": "523c8f9a915bd900d048ae8ba778576c6ce9daf8a9a232dc6091e70a40b52f5b",
+  "test_strings.py": "2865c8f8323738f4dc9b414aa7fd2bec19a2641bf344cf5e7ef6deb014f37012",
+  "strings/cases.json": "a95c5622a4a56c88f002686af1dd2614dfecfecd65b13e46455198fe13faf1d8",
+  "strings/native.log": "b36836ffae38494cf4f7bee87f396f3922cff44830cf68b0070853204246b92c",
+  "strings/reference.bas": "99707a306758203449c41ca1c3cf51c5397cf6fd33cd58776f545b1dcad48133",
+  "strings/driver.bas": "1d2285afe183bb5a374751cbe04107bb3f43fd6ad1ebcd66c31a15a10a5106e8",
+  "strings/reference.log": "8259c6ddfd79080c558c1e123d63c29021d11cadb5eca6694f3dd9fbfe65d0b8",
+  "strings/compile.log": "bfc1bfadbcac2c002c2b13aaa40cccd53bae8941afb70ac2f0b08a5fb497ff6b"
+}

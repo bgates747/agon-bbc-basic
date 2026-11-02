@@ -1,0 +1,300 @@
+{
+  "scope": "Full prototype search/repetition qualification; live rechecks separate",
+  "transcripts": {
+    "programs": 30,
+    "native_executions": 19,
+    "rejected_sources": 11,
+    "reference_output_programs": 19,
+    "legacy_arithmetic_observations": 0,
+    "deterministic_repeat": true,
+    "independent_link_bases": [
+      263441,
+      266241,
+      264023,
+      264268,
+      265445,
+      263470,
+      263641,
+      263455,
+      262445,
+      262454,
+      262456,
+      262456,
+      262513,
+      262498,
+      262559,
+      262524,
+      262476,
+      262513,
+      262547
+    ],
+    "string_link_bases": [
+      268198,
+      270953,
+      268774,
+      269025,
+      270152,
+      268216,
+      268403,
+      268213,
+      267152,
+      267161,
+      267202,
+      267202,
+      267225,
+      267205,
+      267310,
+      267280,
+      267188,
+      267230,
+      267259
+    ],
+    "duration_seconds": 264.246,
+    "hashes": {
+      "docs/tasks/C003/search-repeat/compiler.bas": "bb2b91cc644f5d8e73841f73a60e93e13f70bdfeacf7ebbc56a0492f0eb61155",
+      "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+      "docs/tasks/C003/build/output-integration/cases.json": "f90f4e1b9937e50de37e850546e156f20998eb4d01484a941468f63ac485137d"
+    }
+  },
+  "abi": {
+    "poisoned_upper_bc": true,
+    "checked_index_and_stack_preservation": true,
+    "maximum_and_empty_search": true,
+    "empty_needle_returns_zero": true,
+    "aliased_search_operands": true,
+    "unsigned_and_nul_bytes": true,
+    "search_inputs_read_only": true,
+    "overlapping_candidates": true,
+    "repetition_overflow_unchanged": true,
+    "page_crossing_buffer": true,
+    "zero_counts_do_not_copy": true,
+    "buffer_guards_unchanged": true,
+    "duration_seconds": 1.016,
+    "hashes": {
+      "docs/tasks/C003/search-repeat/abi.s": "36a992287e86c88a7d063114307d0142fed8332dacd612307241ec4f0fc001aa",
+      "docs/tasks/C003/build/search-repeat-abi/probe.bin": "1c63f9627947ec6d269b131cf5acd8fd026dd988c669b6883dfc9d9feec8decb",
+      "docs/tasks/C003/build/search-repeat-runtime/runtime-0.bin": "634984cc2afecb04ec27925bd8c1e08f1d083ce520fb195ec914119125517246"
+    }
+  },
+  "storage": {
+    "bindings": 12,
+    "undefined_bindings": 1,
+    "string_content_mismatches": 0,
+    "descriptor_bounds_checked": true,
+    "independent_ownership": true,
+    "heap_budget": 13312,
+    "heap_used": 558,
+    "heap_guard_bytes": 12786,
+    "unexpected_memory_writes": 0,
+    "records": [
+      {
+        "name": "pattern$",
+        "length": 3,
+        "capacity": 3,
+        "pointer": 272316,
+        "contents": "0080ff"
+      },
+      {
+        "name": "repeated$",
+        "length": 2,
+        "capacity": 9,
+        "pointer": 272319,
+        "contents": "7171"
+      },
+      {
+        "name": "full$",
+        "length": 255,
+        "capacity": 255,
+        "pointer": 272328,
+        "contents": "0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff"
+      },
+      {
+        "name": "empty$",
+        "length": 0,
+        "capacity": 0,
+        "pointer": 0,
+        "contents": ""
+      },
+      {
+        "name": "wrapped$",
+        "length": 2,
+        "capacity": 2,
+        "pointer": 272583,
+        "contents": "6162"
+      },
+      {
+        "name": "negative$",
+        "length": 255,
+        "capacity": 255,
+        "pointer": 272585,
+        "contents": "787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878"
+      },
+      {
+        "name": "fraction$",
+        "length": 4,
+        "capacity": 4,
+        "pointer": 272840,
+        "contents": "61626162"
+      },
+      {
+        "name": "nested$",
+        "length": 12,
+        "capacity": 12,
+        "pointer": 272844,
+        "contents": "787978797879787978797879"
+      },
+      {
+        "name": "copy$",
+        "length": 9,
+        "capacity": 9,
+        "pointer": 272856,
+        "contents": "0080ff0080ff0080ff"
+      },
+      {
+        "name": "created$",
+        "length": 2,
+        "capacity": 2,
+        "pointer": 272865,
+        "contents": "7a7a"
+      },
+      {
+        "name": "text$",
+        "length": 6,
+        "capacity": 6,
+        "pointer": 272867,
+        "contents": "313231323132"
+      },
+      {
+        "name": "converted$",
+        "length": 1,
+        "capacity": 1,
+        "pointer": 272873,
+        "contents": "32"
+      }
+    ],
+    "numeric_records": [
+      {
+        "name": "result0",
+        "size": 5,
+        "expected": "0100000000",
+        "actual": "0100000000"
+      },
+      {
+        "name": "result1",
+        "size": 5,
+        "expected": "0400000000",
+        "actual": "0400000000"
+      },
+      {
+        "name": "result2",
+        "size": 5,
+        "expected": "fd00000000",
+        "actual": "fd00000000"
+      },
+      {
+        "name": "result3",
+        "size": 5,
+        "expected": "0000000000",
+        "actual": "0000000000"
+      },
+      {
+        "name": "result4",
+        "size": 5,
+        "expected": "ff00000000",
+        "actual": "ff00000000"
+      },
+      {
+        "name": "result5",
+        "size": 5,
+        "expected": "0000000000",
+        "actual": "0000000000"
+      },
+      {
+        "name": "result6",
+        "size": 5,
+        "expected": "0000000000",
+        "actual": "0000000000"
+      },
+      {
+        "name": "result7",
+        "size": 5,
+        "expected": "ff00000000",
+        "actual": "ff00000000"
+      },
+      {
+        "name": "result8",
+        "size": 5,
+        "expected": "0100000000",
+        "actual": "0100000000"
+      },
+      {
+        "name": "result9",
+        "size": 5,
+        "expected": "0300000000",
+        "actual": "0300000000"
+      },
+      {
+        "name": "result10",
+        "size": 5,
+        "expected": "0000000000",
+        "actual": "0000000000"
+      },
+      {
+        "name": "result11",
+        "size": 5,
+        "expected": "0300000000",
+        "actual": "0300000000"
+      },
+      {
+        "name": "result12",
+        "size": 5,
+        "expected": "7cd9010000",
+        "actual": "7cd9010000"
+      },
+      {
+        "name": "position%",
+        "size": 4,
+        "expected": "ff000000",
+        "actual": "ff000000"
+      },
+      {
+        "name": "byte&",
+        "size": 1,
+        "expected": "ff",
+        "actual": "ff"
+      },
+      {
+        "name": "length%",
+        "size": 4,
+        "expected": "ff000000",
+        "actual": "ff000000"
+      }
+    ],
+    "duration_seconds": 69.551,
+    "hashes": {
+      "docs/tasks/C003/search-repeat/compiler.bas": "bb2b91cc644f5d8e73841f73a60e93e13f70bdfeacf7ebbc56a0492f0eb61155",
+      "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+      "docs/tasks/C003/build/search-repeat-storage/source.bas": "f50df2005298f22178d1b371e0d2e8e84f7cd50165679ed8670d55e7553f7785",
+      "docs/tasks/C003/build/search-repeat-storage/expected.dat": "faffe684833e0d84cfd3f39eee141bf86e5611ddd41d14a096ff995b57bcf652",
+      "docs/tasks/C003/build/search-repeat-storage/native.dat": "2cba9d8f1bc8088ed7c56dfb0538ed31e6fddef7d4f64c5747af4c2fb14e2dea"
+    }
+  },
+  "baseline": {
+    "cases": 39,
+    "native_executions": 15,
+    "deterministic_repeat": true,
+    "assembler_oracle": true,
+    "duration_seconds": 31.901,
+    "basic_sha256": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+    "compiler_sha256": "bb2b91cc644f5d8e73841f73a60e93e13f70bdfeacf7ebbc56a0492f0eb61155",
+    "cli_sha256": "bf5f29b243b8214e54c515dcc26edf47399ce440356af2ebc3ce3d7664ae11eb",
+    "mos_sha256": "d564243283972690933a4554296ad6202ca4ef54572279533a942960846bebae"
+  },
+  "compiler_sha256": "bb2b91cc644f5d8e73841f73a60e93e13f70bdfeacf7ebbc56a0492f0eb61155",
+  "runtime_bytes": 533,
+  "runtime_relocations": 2,
+  "old_369_byte_prefix_unchanged": true,
+  "numeric_runtime_vendor_license_unchanged": true,
+  "human_or_hardware_validation": false,
+  "benchmark_measured": false
+}

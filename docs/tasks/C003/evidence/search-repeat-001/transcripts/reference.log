@@ -1,0 +1,117 @@
+Warning: unused arguments left: ["--firmware", "platform"].
+Tom's Fake VDP Version 1.03
+unknown packet VDU 0x17, 0, 0xf8
+unknown packet VDU 0x17, 0, 0x99
+uunknown packet VDU 0x17, 0, 0x94
+
+Agon Platform MOS Version 3.0.2 Arthur
+
+REF_BEGIN_0
+1:8
+ababab:2
+[]:[xyxy]
+3
+6565
+REF_END_0
+REF_BEGIN_1
+2:1
+2:1
+2:4
+5:4
+0:0
+0:0
+0:0
+2:1
+0:0
+2:1
+2:1
+0:0
+2:1
+2:1
+2:1
+0:0
+REF_END_1
+REF_BEGIN_2
+0:0:0
+0:0
+255:255:0
+1:1
+1:0
+0:3:0
+REF_END_2
+REF_BEGIN_3
+1:4:2
+6:0:255
+-1
+4
+REF_END_3
+REF_BEGIN_4
+0:0
+1:0
+2:0
+255:0
+0:0
+1:0
+255:0
+255:0
+0:0
+1:0
+0:0
+1:0
+1:0
+255:0
+REF_END_4
+REF_BEGIN_5
+255:254
+-1:0
+255:254
+1
+REF_END_5
+REF_BEGIN_6
+ababab
+ababab
+xxxxxx2
+6:1212
+5:-1
+A
+REF_END_6
+REF_BEGIN_7
+2:255:0
+:255
+1:1
+REF_END_7
+REF_BEGIN_8
+String too long
+REF_END_8
+REF_BEGIN_9
+String too long
+REF_END_9
+REF_BEGIN_10
+Number too big
+REF_END_10
+REF_BEGIN_11
+No such variable
+REF_END_11
+REF_BEGIN_12
+Division by zero
+REF_END_12
+REF_BEGIN_13
+String too long
+REF_END_13
+REF_BEGIN_14
+No such variable
+REF_END_14
+REF_BEGIN_15
+No such variable
+REF_END_15
+REF_BEGIN_16
+Number too big
+REF_END_16
+REF_BEGIN_17
+Division by zero
+REF_END_17
+REF_BEGIN_18
+Division by zero
+REF_END_18
+OUTPUT_REFERENCE_DONE
+/ *

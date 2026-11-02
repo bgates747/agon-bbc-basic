@@ -44,11 +44,13 @@ C003 conversions extend the enclosing template by 432 bytes and seven
 relocations (4460 bytes/387 relocations total). The packer supports isolated
 --source/--output/--compiler paths; default paths remain live source/build.
 
-C003 adds `strings.s`, a separate 369-byte standalone library: the original
-264-byte core plus 105 bytes for expression slices and comparisons. Its descriptor,
+C003 adds `strings.s`, a separate 533-byte standalone library: the original
+264-byte core plus 105 bytes for slices/comparisons and 164 for search/repetition.
+Its two internal 24-bit relocations are rebased by the BBC compiler. Its descriptor,
 private allocator context, calling conventions and provenance are documented
 in the [string contract](../../docs/tasks/C003/STRINGS.md) and
-[slice/comparison contract](../../docs/tasks/C003/SLICES.md). Regenerate its
+[slice/comparison contract](../../docs/tasks/C003/SLICES.md) and
+[search/repetition contract](../../docs/tasks/C003/SEARCH-REPEAT.md). Regenerate its
 embedded DATA independently:
 
 ```bash

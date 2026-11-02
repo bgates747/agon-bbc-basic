@@ -93,7 +93,7 @@ The Author accepted the corrected C002 baseline for a development checkpoint.
     final byte, RIGHT$(s$) returns the final byte, MID$(s$,0) retains the full
     string, and an optional MID$ count applies LEFT$ to that result. Empty
     results still evaluate explicit count expressions. Slice assignment,
-    INSTR/STRING$ and further string functions remain rejected.
+    further string functions remain rejected.
 14. String =, <>, <, <=, > and >= compare unsigned bytes then prefix lengths,
     including NUL/high bytes. Results are ordinary integer -1/0 and work in
     numeric assignments, arithmetic, Boolean expressions, parentheses, functions,
@@ -108,6 +108,14 @@ The Author accepted the corrected C002 baseline for a development checkpoint.
     integers. ASC consumes a string item and returns integer -1 for empty or
     the first unsigned byte. Parentheses admit expressions. Mutable @% remains
     unsupported. See [conversion contract](../docs/tasks/C003/CONVERSIONS.md).
+
+16. INSTR(main$,sub$[,start]) evaluates its strings then optional numeric
+    start, applies SFIX and uses the low byte. Omitted/zero/one start selects
+    the beginning. It returns integer 1..255 or zero; empty needle returns zero,
+    matching the reference. STRING$(count,s$) evaluates count/SFIX before its
+    string, including when count becomes zero. Low-byte repetition is bounded
+    at 255 bytes and overflows report String too long. See the
+    [search/repetition contract](../docs/tasks/C003/SEARCH-REPEAT.md).
 
 ## Current backend and runtime contract
 
@@ -154,8 +162,9 @@ The Author accepted the corrected C002 baseline for a development checkpoint.
 10. Strings use five-byte length/capacity/u24-pointer descriptors and separate
     existence flags. Private 256-byte expression buffers are limited to 16
     simultaneous values; parser nesting shares the numeric 32-entry bound.
-    Assignment copies into independently owned contents. A separate 369-byte
-    runtime retains the 264-byte core and adds 105 bytes for slices/comparisons.
+    Assignment copies into independently owned contents. A separate 533-byte
+    runtime retains the former 369-byte core/slices/comparison prefix and adds
+    164 bytes for search/repetition, with two rebased 24-bit relocations.
     It adapts reference descriptor/storage conventions with an explicit
     FREE/limit context, capacity reuse, tail growth and geometric non-tail
     growth. Allocation checks precede descriptor/context changes. No interpreter

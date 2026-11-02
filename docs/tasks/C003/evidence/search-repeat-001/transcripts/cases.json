@@ -1,0 +1,171 @@
+[
+  {
+    "source": "a$=\"abracadabra\":PRINT ;INSTR(a$,\"abra\");\":\";INSTR(a$,\"abra\",2)\nb$=STRING$(3,\"ab\"):PRINT b$;\":\";STR$ INSTR(b$,\"ba\")\nPRINT \"[\";STRING$(0,\"x\");\"]:[\";STRING$(2.9,\"xy\");\"]\"\nPRINT ;INSTR(STRING$(4,\"ab\"),\"ab\",INSTR(\"123\",\"2\"))\nPRINT STRING$(INSTR(\"abc\",\"b\"),STR$ ASC \"A\")\n",
+    "reference": true,
+    "status": 0,
+    "expected": "1:8\nababab:2\n[]:[xyxy]\n3\n6565\n"
+  },
+  {
+    "source": "PRINT ;INSTR(\"abcabc\",\"bc\",0);\":\";INSTR(\"abcabc\",\"a\",0)\nPRINT ;INSTR(\"abcabc\",\"bc\",1);\":\";INSTR(\"abcabc\",\"a\",1)\nPRINT ;INSTR(\"abcabc\",\"bc\",2);\":\";INSTR(\"abcabc\",\"a\",2)\nPRINT ;INSTR(\"abcabc\",\"bc\",3);\":\";INSTR(\"abcabc\",\"a\",3)\nPRINT ;INSTR(\"abcabc\",\"bc\",6);\":\";INSTR(\"abcabc\",\"a\",6)\nPRINT ;INSTR(\"abcabc\",\"bc\",7);\":\";INSTR(\"abcabc\",\"a\",7)\nPRINT ;INSTR(\"abcabc\",\"bc\",-1);\":\";INSTR(\"abcabc\",\"a\",-1)\nPRINT ;INSTR(\"abcabc\",\"bc\",-256);\":\";INSTR(\"abcabc\",\"a\",-256)\nPRINT ;INSTR(\"abcabc\",\"bc\",255);\":\";INSTR(\"abcabc\",\"a\",255)\nPRINT ;INSTR(\"abcabc\",\"bc\",256);\":\";INSTR(\"abcabc\",\"a\",256)\nPRINT ;INSTR(\"abcabc\",\"bc\",257);\":\";INSTR(\"abcabc\",\"a\",257)\nPRINT ;INSTR(\"abcabc\",\"bc\",511);\":\";INSTR(\"abcabc\",\"a\",511)\nPRINT ;INSTR(\"abcabc\",\"bc\",65536);\":\";INSTR(\"abcabc\",\"a\",65536)\nPRINT ;INSTR(\"abcabc\",\"bc\",16777217);\":\";INSTR(\"abcabc\",\"a\",16777217)\nPRINT ;INSTR(\"abcabc\",\"bc\",1.9);\":\";INSTR(\"abcabc\",\"a\",1.9)\nPRINT ;INSTR(\"abcabc\",\"bc\",-1.9);\":\";INSTR(\"abcabc\",\"a\",-1.9)\n",
+    "reference": true,
+    "status": 0,
+    "expected": "2:1\n2:1\n2:4\n5:4\n0:0\n0:0\n0:0\n2:1\n0:0\n2:1\n2:1\n0:0\n2:1\n2:1\n2:1\n0:0\n"
+  },
+  {
+    "source": "PRINT ;INSTR(\"\",\"\");\":\";INSTR(\"a\",\"\");\":\";INSTR(\"\",\"a\")\na$=STRING$(255,\"a\"):PRINT ;INSTR(a$,\"\");\":\";INSTR(a$,\"\",255)\nPRINT ;INSTR(a$,\"a\",255);\":\";INSTR(a$,\"a\",-1);\":\";INSTR(a$,\"aa\",255)\nPRINT ;INSTR(a$,\"a\",256);\":\";INSTR(a$,\"a\",0)\nPRINT ;INSTR(a$,a$);\":\";INSTR(a$,a$,2)\nPRINT ;INSTR(\"ab\",\"abc\");\":\";INSTR(\"aaaaab\",\"aaab\");\":\";INSTR(\"aaa\",\"b\")\n",
+    "reference": true,
+    "status": 0,
+    "expected": "0:0:0\n0:0\n255:255:0\n1:1\n1:0\n0:3:0\n"
+  },
+  {
+    "source": "a$=CHR$(0)+CHR$(128)+CHR$(255)+CHR$(0)\nPRINT ;INSTR(a$,CHR$(0));\":\";INSTR(a$,CHR$(0),2);\":\";INSTR(a$,CHR$(128)+CHR$(255))\nb$=STRING$(3,CHR$(0)+CHR$(255)):PRINT ;LEN b$;\":\";ASC b$;\":\";ASC MID$(b$,2)\nPRINT ;(b$=CHR$(0)+CHR$(255)+CHR$(0)+CHR$(255)+CHR$(0)+CHR$(255))\nPRINT ;INSTR(b$,CHR$(255)+CHR$(0),3)\n",
+    "reference": true,
+    "status": 0,
+    "expected": "1:4:2\n6:0:255\n-1\n4\n"
+  },
+  {
+    "source": "PRINT ;LEN STRING$(0,\"x\");\":\";LEN STRING$(0,\"\")\nPRINT ;LEN STRING$(1,\"x\");\":\";LEN STRING$(1,\"\")\nPRINT ;LEN STRING$(2,\"x\");\":\";LEN STRING$(2,\"\")\nPRINT ;LEN STRING$(255,\"x\");\":\";LEN STRING$(255,\"\")\nPRINT ;LEN STRING$(256,\"x\");\":\";LEN STRING$(256,\"\")\nPRINT ;LEN STRING$(257,\"x\");\":\";LEN STRING$(257,\"\")\nPRINT ;LEN STRING$(511,\"x\");\":\";LEN STRING$(511,\"\")\nPRINT ;LEN STRING$(-1,\"x\");\":\";LEN STRING$(-1,\"\")\nPRINT ;LEN STRING$(-256,\"x\");\":\";LEN STRING$(-256,\"\")\nPRINT ;LEN STRING$(-255,\"x\");\":\";LEN STRING$(-255,\"\")\nPRINT ;LEN STRING$(65536,\"x\");\":\";LEN STRING$(65536,\"\")\nPRINT ;LEN STRING$(16777217,\"x\");\":\";LEN STRING$(16777217,\"\")\nPRINT ;LEN STRING$(1.9,\"x\");\":\";LEN STRING$(1.9,\"\")\nPRINT ;LEN STRING$(-1.9,\"x\");\":\";LEN STRING$(-1.9,\"\")\n",
+    "reference": true,
+    "status": 0,
+    "expected": "0:0\n1:0\n2:0\n255:0\n0:0\n1:0\n255:0\n255:0\n0:0\n1:0\n0:0\n1:0\n1:0\n255:0\n"
+  },
+  {
+    "source": "PRINT ;LEN STRING$(85,\"abc\");\":\";LEN STRING$(127,\"ab\")\na$=STRING$(255,\"x\"):PRINT ;(STRING$(1,a$)=a$);\":\";LEN STRING$(0,a$)\nPRINT ;INSTR(STRING$(254,\"x\")+\"y\",\"y\");\":\";INSTR(STRING$(253,\"x\")+\"yz\",\"yz\")\nPRINT ;INSTR(STRING$(255,\"x\"),STRING$(255,\"x\"))\n",
+    "reference": true,
+    "status": 0,
+    "expected": "255:254\n-1:0\n255:254\n1\n"
+  },
+  {
+    "source": "s$=\"ab\":s$=STRING$(3,s$):PRINT s$:t$=s$:s$=\"z\":PRINT t$\nPRINT STRING$(2,STRING$(3,\"x\"))+STR$ INSTR(\"abc\",\"b\")\nPRINT ;LEN STRING$(2,LEFT$(\"abcdef\",3));\":\";VAL STRING$(2,\"12\")\nPRINT ;1+INSTR(\"abc\",\"b\")*2;\":\";(INSTR(\"abc\",\"a\")=1)\nVDU 64+INSTR(\"abc\",\"a\"),13,10\n",
+    "reference": true,
+    "status": 0,
+    "expected": "ababab\nababab\nxxxxxx2\n6:1212\n5:-1\nA\n"
+  },
+  {
+    "source": "n%=INSTR(\"abc\",\"b\"):b&=INSTR(STRING$(255,\"x\"),\"x\",255):r=INSTR(\"x\",\"\")\nPRINT ;n%;\":\";b&;\":\";r\nPRINT STRING$(\"a\"=\"b\",\"x\");\":\";LEN STRING$(\"a\"=\"a\",\"x\")\nPRINT ;INSTR(\"abc\",\"a\",\"a\"=\"b\");\":\";INSTR(\"abc\",\"a\",&80000000)\n",
+    "reference": true,
+    "status": 0,
+    "expected": "2:255:0\n:255\n1:1\n"
+  },
+  {
+    "source": "PRINT STRING$(128,\"ab\")\n",
+    "reference": true,
+    "reference_error": true,
+    "status": 1,
+    "expected": "String too long\n"
+  },
+  {
+    "source": "PRINT STRING$(-1,\"ab\")\n",
+    "reference": true,
+    "reference_error": true,
+    "status": 1,
+    "expected": "String too long\n"
+  },
+  {
+    "source": "PRINT STRING$(2147483648,missing$)\n",
+    "reference": true,
+    "reference_error": true,
+    "status": 1,
+    "expected": "Number too big\n"
+  },
+  {
+    "source": "PRINT STRING$(0,missing$)\n",
+    "reference": true,
+    "reference_error": true,
+    "status": 1,
+    "expected": "No such variable\n"
+  },
+  {
+    "source": "PRINT STRING$(0,CHR$(1/0))\n",
+    "reference": true,
+    "reference_error": true,
+    "status": 1,
+    "expected": "Division by zero\n"
+  },
+  {
+    "source": "PRINT STRING$(2,STRING$(128,\"ab\"))\n",
+    "reference": true,
+    "reference_error": true,
+    "status": 1,
+    "expected": "String too long\n"
+  },
+  {
+    "source": "PRINT INSTR(missing$,CHR$(1/0),2147483648)\n",
+    "reference": true,
+    "reference_error": true,
+    "status": 1,
+    "expected": "No such variable\n"
+  },
+  {
+    "source": "PRINT INSTR(\"x\",missing$,1/0)\n",
+    "reference": true,
+    "reference_error": true,
+    "status": 1,
+    "expected": "No such variable\n"
+  },
+  {
+    "source": "PRINT INSTR(\"\",\"\",2147483648)\n",
+    "reference": true,
+    "reference_error": true,
+    "status": 1,
+    "expected": "Number too big\n"
+  },
+  {
+    "source": "PRINT INSTR(\"abc\",\"\",1/0)\n",
+    "reference": true,
+    "reference_error": true,
+    "status": 1,
+    "expected": "Division by zero\n"
+  },
+  {
+    "source": "PRINT INSTR(\"x\",CHR$(1/0),2147483648)\n",
+    "reference": true,
+    "reference_error": true,
+    "status": 1,
+    "expected": "Division by zero\n"
+  },
+  {
+    "source": "PRINT INSTR(1,\"x\")\n",
+    "diagnostic": "Expected a string item"
+  },
+  {
+    "source": "PRINT INSTR(\"x\",1)\n",
+    "diagnostic": "Expected a string item"
+  },
+  {
+    "source": "PRINT INSTR(\"x\",\"x\",\"x\")\n",
+    "diagnostic": "String value used as a numeric item"
+  },
+  {
+    "source": "PRINT INSTR(\"x\")\n",
+    "diagnostic": "Expected ,"
+  },
+  {
+    "source": "PRINT INSTR(\"x\",\"x\",1,2)\n",
+    "diagnostic": "Expected )"
+  },
+  {
+    "source": "PRINT STRING$(\"x\",\"x\")\n",
+    "diagnostic": "String value used as a numeric item"
+  },
+  {
+    "source": "PRINT STRING$(1,2)\n",
+    "diagnostic": "Expected a string item"
+  },
+  {
+    "source": "PRINT STRING$(1,\"x\",2)\n",
+    "diagnostic": "Expected )"
+  },
+  {
+    "source": "PRINT STRING$(1)\n",
+    "diagnostic": "Expected ,"
+  },
+  {
+    "source": "PRINT INKEY$(1)\n",
+    "diagnostic": "Unsupported string item INKEY"
+  },
+  {
+    "source": "PRINT EVAL(\"1\")\n",
+    "diagnostic": "EVAL is deliberately unsupported"
+  }
+]

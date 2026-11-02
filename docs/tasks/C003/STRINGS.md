@@ -4,7 +4,7 @@ The live BBC compiler now supports owned string variables, copying,
 concatenation, string PRINT, LEN and CHR$. Qualification compares real BASIC
 execution and raw contents, with separate memory and native calling-convention
 probes. Expression slicing and string comparisons are now covered by the later
-[SLICES.md](SLICES.md) tranche and VAL/STR$/ASC in [CONVERSIONS.md](CONVERSIONS.md); further functions and slice assignment remain C003 work;
+[SLICES.md](SLICES.md) tranche and VAL/STR$/ASC in [CONVERSIONS.md](CONVERSIONS.md); INSTR/STRING$ in [SEARCH-REPEAT.md](SEARCH-REPEAT.md). Slice assignment remains C003 work;
 this does not close C003 or establish self-hosting.
 
 ## Source behavior

@@ -287,3 +287,139 @@ str_compare_less:
 str_compare_greater:
     ld a,1
     ret
+
+; Search/repetition adapt baseline EVAL.Z80 INSTR/SEARCH/STRING/STRIN1.
+; Richard T. Russell 1981-2025; altered standalone ABI, same license.txt.
+    .global rt_strinstr,rt_strrepeat
+
+; IX=read-only main buffer, IY=read-only needle buffer, A=start low byte.
+; A=result 0..255 (0=not found); IX/IY/SP preserved, other registers/flags
+; volatile. Start 0 and 1 both search from the beginning. Empty needle returns
+; 0: reference SEARCH's remaining<=254 test always rejects its B=0 case.
+rt_strinstr:
+    push af
+    ld a,(ix+0)
+    or a
+    jr z,str_search_empty
+    ld a,(iy+0)
+    or a
+    jr z,str_search_empty
+    ld bc,0
+    ld c,(ix+0)
+    ld b,(iy+0)
+    push ix
+    pop hl
+    inc hl
+    push iy
+    pop de
+    inc de
+    pop af
+    or a
+    jr z,str_search_offset
+    dec a
+str_search_offset:
+    push hl
+    call str_search
+    pop de
+    jr nz,str_search_missing
+    or a
+    sbc hl,de
+    ld a,l
+    ret
+str_search_empty:
+    pop af
+str_search_missing:
+    xor a
+    ret
+
+; Adapted SEARCH byte algorithm. HL=main data, C=length, DE=needle data,
+; B=nonzero length, A=zero-based offset. Z=found at HL-1, NZ=not found.
+str_search:
+    push bc
+    ld bc,0
+    ld c,a
+    add hl,bc
+    pop bc
+    sub c
+    jr nc,str_search_not_found
+    neg
+    ld c,a
+str_search_next:
+    ld a,(de)
+    push bc
+    push af
+    ld a,c
+    ld bc,0
+    ld c,a
+    pop af
+    cpir
+    ld a,c
+    pop bc
+    jr nz,str_search_not_found
+    ld c,a
+    dec b
+    cp b
+    inc b
+    jr c,str_search_not_found
+    push bc
+    push de
+    push hl
+    dec b
+    jr z,str_search_matched
+str_search_compare:
+    inc de
+    ld a,(de)
+    cp (hl)
+    jr nz,str_search_matched
+    inc hl
+    djnz str_search_compare
+str_search_matched:
+    pop hl
+    pop de
+    pop bc
+    jr nz,str_search_next
+    xor a
+    ret
+str_search_not_found:
+    or 0xff
+    ret
+
+; IX=private 256-byte expression buffer, A=repeat count low byte.
+; Success A=0/Z/NC. Overflow A=19/NZ/C, buffer unchanged. IX/IY/SP preserved.
+; Precheck length*count instead of partially filling ACCS then overflowing.
+; On success LDIR repeats the original pattern through its newly copied prefix.
+rt_strrepeat:
+    or a
+    jr z,str_repeat_clear
+    ld bc,0
+    ld b,a
+    ld c,(ix+0)
+    ld a,c
+    or a
+    ret z
+    mlt bc
+    ld a,b
+    or a
+    jp nz,str_too_long
+    ld a,c
+    ld b,(ix+0)
+    ld (ix+0),a
+    sub b
+    jr z,str_repeat_done
+    ld c,b
+    ld b,0
+    push ix
+    pop hl
+    inc hl
+    push hl
+    pop de
+    add hl,bc
+    ex de,hl
+    ld c,a
+    ldir
+str_repeat_done:
+    xor a
+    ret
+str_repeat_clear:
+    ld (ix+0),a
+    ret

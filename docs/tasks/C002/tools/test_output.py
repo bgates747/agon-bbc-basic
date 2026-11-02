@@ -52,7 +52,7 @@ def programs():
                        expected="4\ndone\n", reference=False, status=0))
     result += [dict(source=s, diagnostic=d) for s, d in [
         ('PRINT EVAL("1")\n', "EVAL is deliberately unsupported"),
-        ('PRINT STRING$(2,CHR$(120))\n', "Unsupported string item STRING"),
+        ('PRINT INKEY$(1)\n', "Unsupported string item INKEY"),
         ('PRINT ~65\n', "Expected a numeric item"),
         ('PRINT "x",1\n', "Unexpected text after statement"),
         ('PRINT SQR()\n', "Expected a numeric item"),

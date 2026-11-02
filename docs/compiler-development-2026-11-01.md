@@ -647,3 +647,63 @@ Verified all 516 C003 evidence manifest members and clean whitespace. The
 qualified slicing/comparison and conversion work is accepted for a development
 checkpoint on codex/native-bbc-compiler; main and human/hardware acceptance
 remain separate. The next bounded C003 tranche is INSTR and STRING$.
+
+## Search/repetition tranche started
+
+Committed/pushed the approved slicing/conversion checkpoint as c55c951 to the
+Author's origin on codex/native-bbc-compiler. The worktree was clean before
+starting INSTR and STRING$ under C003. The task brief records scope and
+acceptance before implementation. Auditing EVAL.Z80 INSTR/SEARCH/STRING;
+slice assignment stays in the following tranche. Oryx remains unavailable.
+
+## INSTR/STRING$ qualified and promoted
+
+The full prototype passes 30 programs (19 native/11 rejected) in 264.246s,
+12 string/16 numeric raw records in 69.551s, the native ABI in 1.016s, and the
+39-case/15-execution baseline in 31.901s. Actual BASIC confirms empty-needle
+zero, byte-wrapped starts/counts, left-to-right errors and count-zero string
+evaluation. Native buffers and guards match, with 558/13312 heap bytes used.
+
+Promoted exact compiler SHA-256
+`bb2b91cc644f5d8e73841f73a60e93e13f70bdfeacf7ebbc56a0492f0eb61155`
+and strings.s to the live paths, plus the tested mixed example. The runtime
+adds 164 bytes/two relocations to the unchanged 369-byte prefix. Both DATA
+packers reproduce the source; numeric runtime/vendor/license remain unchanged.
+No maintained compiler fork remains. Updated task/behavior documents and old
+unsupported STRING$ fixtures (now INKEY$). Selected live checks follow; no
+Oryx contact, benchmark, graphical/hardware validation or new commit is claimed.
+
+## Emulator work suspended by the Author
+
+Selected live INSTR/STRING$ checks pass baseline39/15 (31.685s), mixed example
+(38.525s), ABI (1.016s), and 12-string/16-numeric raw storage (69.805s).
+The old string suite had obsolete VAL/STR$ rejection fixtures, now converted to
+positive reference cases; its failed expectation check is retained separately.
+
+The Author then prohibited further emulator work on the Pi5 for the night.
+Stopped the corrected string run with SIGINT (exit 130) and launched no further
+emulator. Remaining live strings/slices/limits/ABI/conversion/expression checks
+are deferred in C003/TODO, not counted as passes. Only source/documentation and
+static verification continue. The checkpoint c55c951 is pushed; new search/
+repetition work remains uncommitted and is not ready for full live acceptance.
+
+## Pi5 emulator work reauthorized; approval stops waived
+
+The Author clarified that Pi5 emulator work is allowed, and authorized proceeding
+to the end of the remaining TODO without earlier approval stops. Resume the
+interrupted string regression and remaining live checks. Continue qualified
+implementation/checkpoints through C003–C006; keep physical/human test evidence
+truthful and separate. Oryx remains unavailable. The earlier interruption
+record is retained as chronology, not the current restriction.
+
+## Search/repetition live qualification completed
+
+After the Author reauthorized Pi5 emulator work, the corrected string suite
+passes 23 programs (16 native/seven rejected) in 123.258s. Selected slices pass
+in 37.507s; string example/limits in 35.799s; core/slice ABI in 1.016s/1.017s;
+conversion smoke in 35.472s; and 12 numeric expressions in 83.182s. Earlier
+baseline/mixed/ABI/raw passes remain valid. Exact source/runtime bytes did not
+change during this repeat. Full prototype and selected live scopes, the stale
+fixture and the temporary interruption remain separately indexed. Checkpoint
+this qualified tranche under the Author's approval waiver, then implement the
+C003 slice-assignment scope already recorded before coding.

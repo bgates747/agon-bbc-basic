@@ -188,3 +188,18 @@ source features remain partial or unsupported in the compatibility matrix.
 
 Numeric extraction, differential qualification and mutable-runtime design
 remain in [TODO.md](../TODO.md).
+
+## Search and repetition adaptation
+
+1. C003 audits EVAL.Z80 INSTR/SEARCH/STRING/STRIN1. Source strings evaluate
+   left to right; numeric starts/counts use SFIX then the low byte. SEARCH's
+   remaining-length guard makes an empty needle fail even at maximum length;
+   the native wrapper returns the same zero directly without reading stale
+   accumulator data. STRING$ still evaluates its string argument for count zero.
+2. The adaptation preserves bytewise/overlapping-candidate search and repeated
+   contents. Private buffers and full pointer differences replace interpreter
+   stacks and page-aligned ACCS. A product precheck preserves error 19 before
+   any native repeat-buffer change. Both entries preserve IX/IY/SP and retain
+   source/license attribution. The old 369-byte prefix and numeric runtime/
+   vendor/license remain unchanged. [Audit and ABI](../docs/tasks/C003/SEARCH-REPEAT.md)
+   include actual-BASIC transcripts, raw storage and native boundary probes.

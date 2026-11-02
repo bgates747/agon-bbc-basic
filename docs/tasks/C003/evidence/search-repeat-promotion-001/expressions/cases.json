@@ -1,0 +1,86 @@
+[
+  {
+    "source": "VDU 65-((1+2*3)=(7)),13,10\n",
+    "expression": "65-((1+2*3)=(7))",
+    "expected": "B\n",
+    "status": 0,
+    "diagnostic": null
+  },
+  {
+    "source": "VDU 65-(((1+2)*3)=(9)),13,10\n",
+    "expression": "65-(((1+2)*3)=(9))",
+    "expected": "B\n",
+    "status": 0,
+    "diagnostic": null
+  },
+  {
+    "source": "VDU 65-((10-3-2)=(5)),13,10\n",
+    "expression": "65-((10-3-2)=(5))",
+    "expected": "B\n",
+    "status": 0,
+    "diagnostic": null
+  },
+  {
+    "source": "VDU 65-((2^3^2)=(64)),13,10\n",
+    "expression": "65-((2^3^2)=(64))",
+    "expected": "B\n",
+    "status": 0,
+    "diagnostic": null
+  },
+  {
+    "source": "VDU 65-((-2^2)=(4)),13,10\n",
+    "expression": "65-((-2^2)=(4))",
+    "expected": "B\n",
+    "status": 0,
+    "diagnostic": null
+  },
+  {
+    "source": "VDU 65-((-(2^2))=(-4)),13,10\n",
+    "expression": "65-((-(2^2))=(-4))",
+    "expected": "B\n",
+    "status": 0,
+    "diagnostic": null
+  },
+  {
+    "source": "VDU 65-((2^-2)=(1/4)),13,10\n",
+    "expression": "65-((2^-2)=(1/4))",
+    "expected": "B\n",
+    "status": 0,
+    "diagnostic": null
+  },
+  {
+    "source": "VDU 65-((--7)=(7)),13,10\n",
+    "expression": "65-((--7)=(7))",
+    "expected": "B\n",
+    "status": 0,
+    "diagnostic": null
+  },
+  {
+    "source": "VDU 65-((+-7)=(-7)),13,10\n",
+    "expression": "65-((+-7)=(-7))",
+    "expected": "B\n",
+    "status": 0,
+    "diagnostic": null
+  },
+  {
+    "source": "VDU 65-((7 DIV 3)=(2)),13,10\n",
+    "expression": "65-((7 DIV 3)=(2))",
+    "expected": "B\n",
+    "status": 0,
+    "diagnostic": null
+  },
+  {
+    "source": "VDU 65-((-7 DIV 3)=(-2)),13,10\n",
+    "expression": "65-((-7 DIV 3)=(-2))",
+    "expected": "B\n",
+    "status": 0,
+    "diagnostic": null
+  },
+  {
+    "source": "VDU 65-((7 DIV -3)=(-2)),13,10\n",
+    "expression": "65-((7 DIV -3)=(-2))",
+    "expected": "B\n",
+    "status": 0,
+    "diagnostic": null
+  }
+]

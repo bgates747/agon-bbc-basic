@@ -65,7 +65,7 @@ def programs():
         ('PRINT "a"<"b"<"c"\n','Chained comparisons'),
         ('PRINT "a"-"b"\n','Only concatenation and comparisons'),
         ('PRINT EVAL("1")\n','EVAL is deliberately unsupported'),
-        ('PRINT STRING$(2,CHR$(120))\n','Unsupported string item STRING'),
+        ('PRINT INKEY$(1)\n','Unsupported string item INKEY'),
     ]]
     result.append(dict(source='\n'.join([
         'PRINT "a"="a"', 'PRINT "b"<"a"', 'PRINT "a"+"b"="ab"',

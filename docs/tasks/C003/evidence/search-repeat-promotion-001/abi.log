@@ -1,0 +1,20 @@
+{
+  "poisoned_upper_bc": true,
+  "checked_index_and_stack_preservation": true,
+  "maximum_and_empty_search": true,
+  "empty_needle_returns_zero": true,
+  "aliased_search_operands": true,
+  "unsigned_and_nul_bytes": true,
+  "search_inputs_read_only": true,
+  "overlapping_candidates": true,
+  "repetition_overflow_unchanged": true,
+  "page_crossing_buffer": true,
+  "zero_counts_do_not_copy": true,
+  "buffer_guards_unchanged": true,
+  "duration_seconds": 1.016,
+  "hashes": {
+    "docs/tasks/C003/search-repeat/abi.s": "36a992287e86c88a7d063114307d0142fed8332dacd612307241ec4f0fc001aa",
+    "docs/tasks/C003/build/search-repeat-abi/probe.bin": "1c63f9627947ec6d269b131cf5acd8fd026dd988c669b6883dfc9d9feec8decb",
+    "compiler/build/string-runtime/runtime-0.bin": "634984cc2afecb04ec27925bd8c1e08f1d083ce520fb195ec914119125517246"
+  }
+}

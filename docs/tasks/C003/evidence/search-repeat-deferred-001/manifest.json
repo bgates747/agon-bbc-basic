@@ -1,0 +1,8 @@
+{
+  "README.md": "dc6813e9d732c6d17825ec55478b66ee7f689d6f8e08ff7dede2f18f972dc7e2",
+  "cases.json": "13b4e32cedf886541b52856c50c149d95f34120c6bec5cac5ab043dd85510d6a",
+  "reference.bas": "885fe1063f751469046f96ca5b609a20f009d51172887cd36e1e6a5fd2f682f9",
+  "driver.bas": "1d2285afe183bb5a374751cbe04107bb3f43fd6ad1ebcd66c31a15a10a5106e8",
+  "reference.log": "f1d30da5f0f15fc917b055bb5c94fe4989653a7cd3fe5ee215d107fe834a4a85",
+  "interrupted-compile.log": "051f1cfe11302cd5d3c156e7bac4b3d3d76c3ab9bde8aed5120fd6f09643b325"
+}

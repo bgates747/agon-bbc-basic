@@ -1,0 +1,125 @@
+[
+  {
+    "source": "a$=\"hello\":PRINT a$:LET b$=a$:PRINT b$\na$=\"x\":PRINT a$;\":\";b$\na$=a$+\"y\":PRINT a$\nb$=b$:PRINT b$\n",
+    "reference": true,
+    "status": 0,
+    "expected": "hello\nhello\nx:hello\nxy\nhello\n"
+  },
+  {
+    "source": "empty$=\"\":PRINT \"[\";empty$;\"]\"\nfresh$=fresh$+\"a\":PRINT fresh$\nPRINT LEN(empty$);\":\";LEN(fresh$)\nPRINT (\"a\"+(\"b\"+\"c\"))\nPRINT \"a\"+CHR$(65+1)+\"c\"\nPRINT LEN(CHR$(0))\n",
+    "reference": true,
+    "status": 0,
+    "expected": "[]\na\n         0:1\nabc\naBc\n         1\n"
+  },
+  {
+    "source": "n%=65:a$=CHR$(n%):PRINT a$;\":\";LEN(a$)\nPRINT CHR$65;CHR$(321);CHR$65.9\nPRINT LEN(\"a\"+\"bc\")+LEN \"d\"\nPRINT CHR$(64+LEN(\"a\"));\":\";CHR$(LEN(CHR$(65))+64)\ntext$=\"a:b\"\"c\":PRINT text$\n",
+    "reference": true,
+    "status": 0,
+    "expected": "A:1\nAAA\n         4\nA:A\na:b\"c\n"
+  },
+  {
+    "source": "a$=\"a\":b$=\"b\":a$=\"longer\":b$=\"longest\":PRINT a$;\":\";b$\na$=\"x\":a$=\"same\":a$=\"\":a$=\"up\":PRINT a$;\":\";b$\ns$=\"a\":s=7:s%=8:s&=9:PRINT s$;s;s%;s&\n",
+    "reference": true,
+    "status": 0,
+    "expected": "longer:longest\nup:longest\na789\n"
+  },
+  {
+    "source": "a$=\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"\nb$=\"yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy\"\nc$=a$+b$:PRINT LEN(c$)\nPRINT LEN(c$+\"\"):d$=c$:c$=\"z\":PRINT LEN(d$);\":\";LEN(c$)\n",
+    "reference": true,
+    "status": 0,
+    "expected": "       255\n       255\n       255:1\n"
+  },
+  {
+    "source": "reused$=\"one\":PRINT reused$\n",
+    "reference": true,
+    "status": 0,
+    "expected": "one\n"
+  },
+  {
+    "source": "reused$=\"two\":PRINT reused$\n",
+    "reference": true,
+    "status": 0,
+    "expected": "two\n"
+  },
+  {
+    "source": "PRINT missing$\n",
+    "reference": true,
+    "reference_error": true,
+    "status": 1,
+    "expected": "No such variable\n"
+  },
+  {
+    "source": "PRINT LEN(missing$)\n",
+    "reference": true,
+    "reference_error": true,
+    "status": 1,
+    "expected": "No such variable\n"
+  },
+  {
+    "source": "PRINT CHR$(2147483648)\n",
+    "reference": true,
+    "reference_error": true,
+    "status": 1,
+    "expected": "Number too big\n"
+  },
+  {
+    "source": "a$=\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"\nb$=\"yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy\"\nc$=a$+b$\n",
+    "reference": true,
+    "reference_error": true,
+    "status": 1,
+    "expected": "String too long\n"
+  },
+  {
+    "source": "a$=\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"\nb$=\"yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy\"\nPRINT a$+(b$+CHR$(1/0))\n",
+    "reference": true,
+    "reference_error": true,
+    "status": 1,
+    "expected": "Division by zero\n"
+  },
+  {
+    "source": "GOTO @ok\na$=\"x\"\n@ok:PRINT a$\n",
+    "expected": "No such variable\n",
+    "status": 1
+  },
+  {
+    "source": "a$=\"a\":GOSUB @sub:PRINT a$:END\n@sub:a$=a$+\"b\":RETURN\n",
+    "expected": "ab\n",
+    "status": 0
+  },
+  {
+    "source": "a$=1\n",
+    "diagnostic": "Expected a string item"
+  },
+  {
+    "source": "a%=s$\n",
+    "diagnostic": "String value used as a numeric item"
+  },
+  {
+    "source": "a$=\"x\"+1\n",
+    "diagnostic": "Numeric/string type mismatch"
+  },
+  {
+    "source": "PRINT INKEY$(1)\n",
+    "diagnostic": "Unsupported string item INKEY"
+  },
+  {
+    "source": "PRINT STR$(1)\n",
+    "diagnostic": "Unsupported string item STR"
+  },
+  {
+    "source": "PRINT VAL(\"1\")\n",
+    "diagnostic": "Unsupported numeric item VAL"
+  },
+  {
+    "source": "a$(0)=\"x\"\n",
+    "diagnostic": "Arrays and function calls"
+  },
+  {
+    "source": "a$+=\"x\"\n",
+    "diagnostic": "Expected ="
+  },
+  {
+    "source": "PRINT \"a\"=\"b\"=\"c\"\n",
+    "diagnostic": "Chained comparisons"
+  }
+]

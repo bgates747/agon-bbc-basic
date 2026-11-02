@@ -40,13 +40,12 @@ def programs():
         ('GOTO @ok\na$="x"\n@ok:PRINT a$\n','No such variable\n',1),
         ('a$="a":GOSUB @sub:PRINT a$:END\n@sub:a$=a$+"b":RETURN\n','ab\n',0),
     ]]
+    result += [dict(source=s,reference=True,status=0) for s in ['PRINT STR$(1)\n','PRINT VAL("1")\n']]
     result += [dict(source=s,diagnostic=d) for s,d in [
         ('a$=1\n','Expected a string item'),
         ('a%=s$\n','String value used as a numeric item'),
         ('a$="x"+1\n','Numeric/string type mismatch'),
-        ('PRINT STRING$(2,"x")\n','Unsupported string item STRING'),
-        ('PRINT STR$(1)\n','Unsupported string item STR'),
-        ('PRINT VAL("1")\n','Unsupported numeric item VAL'),
+        ('PRINT INKEY$(1)\n','Unsupported string item INKEY'),
         ('a$(0)="x"\n','Arrays and function calls'),
         ('a$+="x"\n','Expected ='),
         ('PRINT "a"="b"="c"\n','Chained comparisons'),

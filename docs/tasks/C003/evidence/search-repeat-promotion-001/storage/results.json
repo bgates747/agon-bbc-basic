@@ -1,0 +1,203 @@
+{
+  "bindings": 12,
+  "undefined_bindings": 1,
+  "string_content_mismatches": 0,
+  "descriptor_bounds_checked": true,
+  "independent_ownership": true,
+  "heap_budget": 13312,
+  "heap_used": 558,
+  "heap_guard_bytes": 12786,
+  "unexpected_memory_writes": 0,
+  "records": [
+    {
+      "name": "pattern$",
+      "length": 3,
+      "capacity": 3,
+      "pointer": 272316,
+      "contents": "0080ff"
+    },
+    {
+      "name": "repeated$",
+      "length": 2,
+      "capacity": 9,
+      "pointer": 272319,
+      "contents": "7171"
+    },
+    {
+      "name": "full$",
+      "length": 255,
+      "capacity": 255,
+      "pointer": 272328,
+      "contents": "0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff"
+    },
+    {
+      "name": "empty$",
+      "length": 0,
+      "capacity": 0,
+      "pointer": 0,
+      "contents": ""
+    },
+    {
+      "name": "wrapped$",
+      "length": 2,
+      "capacity": 2,
+      "pointer": 272583,
+      "contents": "6162"
+    },
+    {
+      "name": "negative$",
+      "length": 255,
+      "capacity": 255,
+      "pointer": 272585,
+      "contents": "787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878"
+    },
+    {
+      "name": "fraction$",
+      "length": 4,
+      "capacity": 4,
+      "pointer": 272840,
+      "contents": "61626162"
+    },
+    {
+      "name": "nested$",
+      "length": 12,
+      "capacity": 12,
+      "pointer": 272844,
+      "contents": "787978797879787978797879"
+    },
+    {
+      "name": "copy$",
+      "length": 9,
+      "capacity": 9,
+      "pointer": 272856,
+      "contents": "0080ff0080ff0080ff"
+    },
+    {
+      "name": "created$",
+      "length": 2,
+      "capacity": 2,
+      "pointer": 272865,
+      "contents": "7a7a"
+    },
+    {
+      "name": "text$",
+      "length": 6,
+      "capacity": 6,
+      "pointer": 272867,
+      "contents": "313231323132"
+    },
+    {
+      "name": "converted$",
+      "length": 1,
+      "capacity": 1,
+      "pointer": 272873,
+      "contents": "32"
+    }
+  ],
+  "numeric_records": [
+    {
+      "name": "result0",
+      "size": 5,
+      "expected": "0100000000",
+      "actual": "0100000000"
+    },
+    {
+      "name": "result1",
+      "size": 5,
+      "expected": "0400000000",
+      "actual": "0400000000"
+    },
+    {
+      "name": "result2",
+      "size": 5,
+      "expected": "fd00000000",
+      "actual": "fd00000000"
+    },
+    {
+      "name": "result3",
+      "size": 5,
+      "expected": "0000000000",
+      "actual": "0000000000"
+    },
+    {
+      "name": "result4",
+      "size": 5,
+      "expected": "ff00000000",
+      "actual": "ff00000000"
+    },
+    {
+      "name": "result5",
+      "size": 5,
+      "expected": "0000000000",
+      "actual": "0000000000"
+    },
+    {
+      "name": "result6",
+      "size": 5,
+      "expected": "0000000000",
+      "actual": "0000000000"
+    },
+    {
+      "name": "result7",
+      "size": 5,
+      "expected": "ff00000000",
+      "actual": "ff00000000"
+    },
+    {
+      "name": "result8",
+      "size": 5,
+      "expected": "0100000000",
+      "actual": "0100000000"
+    },
+    {
+      "name": "result9",
+      "size": 5,
+      "expected": "0300000000",
+      "actual": "0300000000"
+    },
+    {
+      "name": "result10",
+      "size": 5,
+      "expected": "0000000000",
+      "actual": "0000000000"
+    },
+    {
+      "name": "result11",
+      "size": 5,
+      "expected": "0300000000",
+      "actual": "0300000000"
+    },
+    {
+      "name": "result12",
+      "size": 5,
+      "expected": "7cd9010000",
+      "actual": "7cd9010000"
+    },
+    {
+      "name": "position%",
+      "size": 4,
+      "expected": "ff000000",
+      "actual": "ff000000"
+    },
+    {
+      "name": "byte&",
+      "size": 1,
+      "expected": "ff",
+      "actual": "ff"
+    },
+    {
+      "name": "length%",
+      "size": 4,
+      "expected": "ff000000",
+      "actual": "ff000000"
+    }
+  ],
+  "duration_seconds": 69.805,
+  "hashes": {
+    "compiler/compiler.bas": "bb2b91cc644f5d8e73841f73a60e93e13f70bdfeacf7ebbc56a0492f0eb61155",
+    "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+    "docs/tasks/C003/build/search-repeat-storage/source.bas": "f50df2005298f22178d1b371e0d2e8e84f7cd50165679ed8670d55e7553f7785",
+    "docs/tasks/C003/build/search-repeat-storage/expected.dat": "faffe684833e0d84cfd3f39eee141bf86e5611ddd41d14a096ff995b57bcf652",
+    "docs/tasks/C003/build/search-repeat-storage/native.dat": "2cba9d8f1bc8088ed7c56dfb0538ed31e6fddef7d4f64c5747af4c2fb14e2dea"
+  }
+}

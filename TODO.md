@@ -7,11 +7,11 @@ directory. See [the task convention](docs/tasks/README.md). Feature status is in
 and retained in their task documents and dated logs. C007's corpus search is
 complete and retained alongside them. C003 scalar numeric bindings are
 promoted alongside the mutable string core, expression slices and string
-comparisons and VAL/STR$/ASC; further string operations remain unfinished.
+comparisons, VAL/STR$/ASC and INSTR/STRING$; further string operations remain unfinished.
 C004–C006 are unstarted scopes.
 
-1. [ ] [C003](docs/tasks/C003.md) — Complete remaining string functions (INSTR/STRING$ and other required
-   functions) and slice assignment with reference behavior; retain qualified numeric bindings,
+1. [ ] [C003](docs/tasks/C003.md) — Implement LEFT$/MID$/RIGHT$ slice assignment and remaining
+   required string operations with reference behavior; retain qualified numeric bindings,
    owned strings, expression slices and comparisons.
 2. [ ] [C004](docs/tasks/C004.md) — Add structured control flow and separate PROC/FN activation
    records, arguments, recursion, and LOCAL save/restore, including strings.

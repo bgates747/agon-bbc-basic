@@ -4,7 +4,7 @@ This is the first small implementation of the self-hosting compiler project.
 The compiler is BBC BASIC and emits native eZ80 ADL code directly. It currently
 compiles literal/numeric output, labelled control flow, numeric byte VDU
 expressions, standard math functions, scalar numeric variables and a mutable
-string core with expression slicing, comparisons, VAL/STR$ and ASC. It cannot compile itself.
+string core with expression slicing, comparisons, VAL/STR$/ASC and INSTR/STRING$. It cannot compile itself.
 The interpreter elsewhere in this repository remains the compatibility
 reference and bootstrap host. The tested implementation was promoted under
 [task C001](../docs/tasks/C001.md) to `compiler/compiler.bas`; sample programs,
@@ -105,10 +105,19 @@ independent copying, concatenation, LEN/CHR$, five-byte descriptors and the
 bounded private heap. [strings.bas](examples/strings.bas) demonstrates it.
 [String slices and comparisons](../docs/tasks/C003/SLICES.md) adds LEFT$/RIGHT$/MID$
 expressions and six relations returning ordinary -1/0 Booleans. The reference
-low-byte index/count behavior is preserved. Slice assignment, further string
+low-byte index/count behavior is preserved. Slice assignment and further string
 functions remain unfinished in TODO.
 
 [String conversions](../docs/tasks/C003/CONVERSIONS.md) adds VAL, G9/hex STR$ and
 ASC with reference types, text and errors. [conversions.bas](examples/conversions.bas)
 is the qualified mixed example. Raw source control bytes inside quotes are
 rejected; construct such string data with CHR$.
+
+[String search and repetition](../docs/tasks/C003/SEARCH-REPEAT.md) adds INSTR
+and STRING$, preserving empty searches, low-byte arguments and error order.
+[search-repeat.bas](examples/search-repeat.bas) is the qualified mixed example.
+
+The INSTR/STRING$ prototype, selected live checks and existing regressions pass
+on the Pi5 CLI under the Author's renewed authorization.
+The Author authorized completing the remaining TODO without prior approval
+stops. See C003 for the exact qualification scope and evidence.

@@ -19,11 +19,12 @@ def main():
     parser.add_argument('--compiler',type=Path,default=ROOT/'compiler/compiler.bas')
     parser.add_argument('--slices',action='store_true',help='also qualify sliced contents and packed relations')
     parser.add_argument('--conversions',action='store_true',help='qualify raw VAL records and STR$/ASC values')
+    parser.add_argument('--search-repeat',action='store_true',help='qualify INSTR records and STRING$ contents')
     parser.add_argument('--numeric-runtime',type=Path,default=ROOT/'compiler/build/numeric-runtime')
     args=parser.parse_args();compiler=args.compiler.resolve(strict=True);original=compiler.read_bytes()
     spec=importlib.util.spec_from_file_location('harness',ROOT/'compiler/tools/test_compiler.py')
     h=importlib.util.module_from_spec(spec);spec.loader.exec_module(h)
-    profile=ROOT/'.emulator';sd=profile/'sdcard';build=TASK/('build/conversion-storage' if args.conversions else 'build/slice-storage' if args.slices else 'build/string-storage');build.mkdir(parents=True,exist_ok=True)
+    profile=ROOT/'.emulator';sd=profile/'sdcard';build=TASK/('build/search-repeat-storage' if args.search_repeat else 'build/conversion-storage' if args.conversions else 'build/slice-storage' if args.slices else 'build/string-storage');build.mkdir(parents=True,exist_ok=True)
     assert (profile/'fab-agon-emulator.bin').resolve()==args.cli.resolve(strict=True)
     started=time.monotonic()
     assignments=['empty$=""','zero$=CHR$(0)+"x"+CHR$(255)','original$="hello"',
@@ -44,6 +45,28 @@ def main():
     names=['empty$','zero$','original$','copy$','tail$','block$','Case$','case$',
            'fresh$','left$','right$','maximum$','independent$','churn$','barrier$']
     numbers=[]
+    assert sum([args.slices,args.conversions,args.search_repeat])<=1
+    if args.search_repeat:
+        assignments=['pattern$=CHR$(0)+CHR$(128)+CHR$(255)',
+                     'repeated$=STRING$(3,pattern$)','full$=STRING$(85,pattern$)',
+                     'empty$=STRING$(0,pattern$)','wrapped$=STRING$(257,"ab")',
+                     'negative$=STRING$(-1,"x")','fraction$=STRING$(2.9,"ab")',
+                     'nested$=STRING$(2,STRING$(3,"xy"))','copy$=repeated$',
+                     'repeated$=STRING$(2,"q")','created$=STRING$(2,created$+"z")',
+                     'text$=STRING$(3,"12")','converted$=STR$ INSTR("abc","b")']
+        names=['pattern$','repeated$','full$','empty$','wrapped$','negative$',
+               'fraction$','nested$','copy$','created$','text$','converted$']
+        expressions=['INSTR(full$,pattern$)','INSTR(full$,pattern$,2)',
+                     'INSTR(full$,pattern$,253)','INSTR(full$,pattern$,254)',
+                     'INSTR(full$,CHR$(255),255)','INSTR(full$,"")','INSTR("",pattern$)',
+                     'INSTR(negative$,"x",-1)','INSTR(negative$,"x",256)',
+                     'INSTR("aaaaab","aaab")','INSTR("abc","z")',
+                     'INSTR(nested$,"xy",INSTR("123","2"))','VAL text$']
+        for i,expression in enumerate(expressions):
+            name=f'result{i}';assignments.append(f'{name}={expression}');numbers.append((name,5))
+        assignments+=['position%=INSTR(full$,CHR$(255),255)',
+                      'byte&=INSTR(full$,CHR$(255),255)','length%=LEN full$']
+        numbers += [('position%',4),('byte&',1),('length%',4)]
     if args.conversions:
         assert not args.slices
         assignments=['empty$=STR$(0)','zero$=STR$ ASC CHR$(0)',
@@ -104,7 +127,7 @@ def main():
 900 DEF PROCmap
 910 FOR mi%=1 TO LEN(map$):BPUT#mh%,ASC(MID$(map$,mi%,1)):NEXT:BPUT#mh%,10:ENDPROC
 '''
-    if args.conversions:
+    if args.conversions or args.search_repeat:
         runtime=json.loads((args.numeric_runtime/'runtime.json').read_text())
         scratch=runtime['scratch']['val_text']
         delta=scratch['offset']-runtime['exports']['rt_numeric']
@@ -151,7 +174,7 @@ def main():
         mutable.update(range(offset,offset+size));mutable.add(flag)
         numeric_records.append(dict(name=name,size=size,expected=wanted.hex(),actual=got.hex()))
     assert cursor==len(expected)
-    if not args.conversions:
+    if not (args.conversions or args.search_repeat):
         width,offset,flag=actual['length%'];assert width==4 and memory[offset:offset+4]==b'\xff\x00\x00\x00' and memory[flag]==1
         mutable.update(range(offset,offset+4));mutable.add(flag)
     if args.slices:

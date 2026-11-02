@@ -1,0 +1,439 @@
+{
+  "scope": "Selected live rechecks; full 30-program suite is in search-repeat-001",
+  "results": {
+    "baseline": {
+      "cases": 39,
+      "native_executions": 15,
+      "deterministic_repeat": true,
+      "assembler_oracle": true,
+      "duration_seconds": 31.685,
+      "basic_sha256": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+      "compiler_sha256": "bb2b91cc644f5d8e73841f73a60e93e13f70bdfeacf7ebbc56a0492f0eb61155",
+      "cli_sha256": "bf5f29b243b8214e54c515dcc26edf47399ce440356af2ebc3ce3d7664ae11eb",
+      "mos_sha256": "d564243283972690933a4554296ad6202ca4ef54572279533a942960846bebae"
+    },
+    "search-repeat-smoke": {
+      "programs": 1,
+      "native_executions": 1,
+      "rejected_sources": 0,
+      "reference_output_programs": 1,
+      "legacy_arithmetic_observations": 0,
+      "deterministic_repeat": true,
+      "independent_link_bases": [
+        263441
+      ],
+      "string_link_bases": [
+        268198
+      ],
+      "duration_seconds": 38.525,
+      "hashes": {
+        "compiler/compiler.bas": "bb2b91cc644f5d8e73841f73a60e93e13f70bdfeacf7ebbc56a0492f0eb61155",
+        "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+        "docs/tasks/C003/build/output-integration/cases.json": "bcf2d53f7634ce8e7adbae286b7eb69f245e828cc2bed6713f93f6a96f695ef6"
+      }
+    },
+    "abi": {
+      "poisoned_upper_bc": true,
+      "checked_index_and_stack_preservation": true,
+      "maximum_and_empty_search": true,
+      "empty_needle_returns_zero": true,
+      "aliased_search_operands": true,
+      "unsigned_and_nul_bytes": true,
+      "search_inputs_read_only": true,
+      "overlapping_candidates": true,
+      "repetition_overflow_unchanged": true,
+      "page_crossing_buffer": true,
+      "zero_counts_do_not_copy": true,
+      "buffer_guards_unchanged": true,
+      "duration_seconds": 1.016,
+      "hashes": {
+        "docs/tasks/C003/search-repeat/abi.s": "36a992287e86c88a7d063114307d0142fed8332dacd612307241ec4f0fc001aa",
+        "docs/tasks/C003/build/search-repeat-abi/probe.bin": "1c63f9627947ec6d269b131cf5acd8fd026dd988c669b6883dfc9d9feec8decb",
+        "compiler/build/string-runtime/runtime-0.bin": "634984cc2afecb04ec27925bd8c1e08f1d083ce520fb195ec914119125517246"
+      }
+    },
+    "storage": {
+      "bindings": 12,
+      "undefined_bindings": 1,
+      "string_content_mismatches": 0,
+      "descriptor_bounds_checked": true,
+      "independent_ownership": true,
+      "heap_budget": 13312,
+      "heap_used": 558,
+      "heap_guard_bytes": 12786,
+      "unexpected_memory_writes": 0,
+      "records": [
+        {
+          "name": "pattern$",
+          "length": 3,
+          "capacity": 3,
+          "pointer": 272316,
+          "contents": "0080ff"
+        },
+        {
+          "name": "repeated$",
+          "length": 2,
+          "capacity": 9,
+          "pointer": 272319,
+          "contents": "7171"
+        },
+        {
+          "name": "full$",
+          "length": 255,
+          "capacity": 255,
+          "pointer": 272328,
+          "contents": "0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff0080ff"
+        },
+        {
+          "name": "empty$",
+          "length": 0,
+          "capacity": 0,
+          "pointer": 0,
+          "contents": ""
+        },
+        {
+          "name": "wrapped$",
+          "length": 2,
+          "capacity": 2,
+          "pointer": 272583,
+          "contents": "6162"
+        },
+        {
+          "name": "negative$",
+          "length": 255,
+          "capacity": 255,
+          "pointer": 272585,
+          "contents": "787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878"
+        },
+        {
+          "name": "fraction$",
+          "length": 4,
+          "capacity": 4,
+          "pointer": 272840,
+          "contents": "61626162"
+        },
+        {
+          "name": "nested$",
+          "length": 12,
+          "capacity": 12,
+          "pointer": 272844,
+          "contents": "787978797879787978797879"
+        },
+        {
+          "name": "copy$",
+          "length": 9,
+          "capacity": 9,
+          "pointer": 272856,
+          "contents": "0080ff0080ff0080ff"
+        },
+        {
+          "name": "created$",
+          "length": 2,
+          "capacity": 2,
+          "pointer": 272865,
+          "contents": "7a7a"
+        },
+        {
+          "name": "text$",
+          "length": 6,
+          "capacity": 6,
+          "pointer": 272867,
+          "contents": "313231323132"
+        },
+        {
+          "name": "converted$",
+          "length": 1,
+          "capacity": 1,
+          "pointer": 272873,
+          "contents": "32"
+        }
+      ],
+      "numeric_records": [
+        {
+          "name": "result0",
+          "size": 5,
+          "expected": "0100000000",
+          "actual": "0100000000"
+        },
+        {
+          "name": "result1",
+          "size": 5,
+          "expected": "0400000000",
+          "actual": "0400000000"
+        },
+        {
+          "name": "result2",
+          "size": 5,
+          "expected": "fd00000000",
+          "actual": "fd00000000"
+        },
+        {
+          "name": "result3",
+          "size": 5,
+          "expected": "0000000000",
+          "actual": "0000000000"
+        },
+        {
+          "name": "result4",
+          "size": 5,
+          "expected": "ff00000000",
+          "actual": "ff00000000"
+        },
+        {
+          "name": "result5",
+          "size": 5,
+          "expected": "0000000000",
+          "actual": "0000000000"
+        },
+        {
+          "name": "result6",
+          "size": 5,
+          "expected": "0000000000",
+          "actual": "0000000000"
+        },
+        {
+          "name": "result7",
+          "size": 5,
+          "expected": "ff00000000",
+          "actual": "ff00000000"
+        },
+        {
+          "name": "result8",
+          "size": 5,
+          "expected": "0100000000",
+          "actual": "0100000000"
+        },
+        {
+          "name": "result9",
+          "size": 5,
+          "expected": "0300000000",
+          "actual": "0300000000"
+        },
+        {
+          "name": "result10",
+          "size": 5,
+          "expected": "0000000000",
+          "actual": "0000000000"
+        },
+        {
+          "name": "result11",
+          "size": 5,
+          "expected": "0300000000",
+          "actual": "0300000000"
+        },
+        {
+          "name": "result12",
+          "size": 5,
+          "expected": "7cd9010000",
+          "actual": "7cd9010000"
+        },
+        {
+          "name": "position%",
+          "size": 4,
+          "expected": "ff000000",
+          "actual": "ff000000"
+        },
+        {
+          "name": "byte&",
+          "size": 1,
+          "expected": "ff",
+          "actual": "ff"
+        },
+        {
+          "name": "length%",
+          "size": 4,
+          "expected": "ff000000",
+          "actual": "ff000000"
+        }
+      ],
+      "duration_seconds": 69.805,
+      "hashes": {
+        "compiler/compiler.bas": "bb2b91cc644f5d8e73841f73a60e93e13f70bdfeacf7ebbc56a0492f0eb61155",
+        "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+        "docs/tasks/C003/build/search-repeat-storage/source.bas": "f50df2005298f22178d1b371e0d2e8e84f7cd50165679ed8670d55e7553f7785",
+        "docs/tasks/C003/build/search-repeat-storage/expected.dat": "faffe684833e0d84cfd3f39eee141bf86e5611ddd41d14a096ff995b57bcf652",
+        "docs/tasks/C003/build/search-repeat-storage/native.dat": "2cba9d8f1bc8088ed7c56dfb0538ed31e6fddef7d4f64c5747af4c2fb14e2dea"
+      }
+    },
+    "strings": {
+      "programs": 23,
+      "native_executions": 16,
+      "rejected_sources": 7,
+      "reference_output_programs": 14,
+      "legacy_arithmetic_observations": 0,
+      "deterministic_repeat": true,
+      "independent_link_bases": [
+        263039,
+        263269,
+        263192,
+        263174,
+        262431,
+        262426,
+        262918,
+        262412,
+        262429
+      ],
+      "string_link_bases": [
+        262910,
+        267796,
+        268031,
+        267963,
+        267938,
+        262483,
+        262483,
+        262442,
+        267177,
+        267133,
+        262838,
+        267675,
+        262485,
+        262577,
+        267119,
+        267136
+      ],
+      "duration_seconds": 123.258,
+      "hashes": {
+        "compiler/compiler.bas": "bb2b91cc644f5d8e73841f73a60e93e13f70bdfeacf7ebbc56a0492f0eb61155",
+        "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+        "docs/tasks/C003/build/output-integration/cases.json": "13b4e32cedf886541b52856c50c149d95f34120c6bec5cac5ab043dd85510d6a"
+      }
+    },
+    "slice-smoke": {
+      "programs": 1,
+      "native_executions": 1,
+      "rejected_sources": 0,
+      "reference_output_programs": 1,
+      "legacy_arithmetic_observations": 0,
+      "deterministic_repeat": true,
+      "independent_link_bases": [
+        263638
+      ],
+      "string_link_bases": [
+        268394
+      ],
+      "duration_seconds": 37.507,
+      "hashes": {
+        "compiler/compiler.bas": "bb2b91cc644f5d8e73841f73a60e93e13f70bdfeacf7ebbc56a0492f0eb61155",
+        "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+        "docs/tasks/C003/build/output-integration/cases.json": "16d19227cf16daf4c193c87c1d73c91235c424cb487d8f78fdecfe0a46b27a3e"
+      }
+    },
+    "string-limits": {
+      "programs": 3,
+      "native_executions": 1,
+      "rejected_sources": 2,
+      "reference_output_programs": 0,
+      "legacy_arithmetic_observations": 0,
+      "deterministic_repeat": true,
+      "independent_link_bases": [
+        263101
+      ],
+      "string_link_bases": [
+        267859
+      ],
+      "duration_seconds": 35.799,
+      "hashes": {
+        "compiler/compiler.bas": "bb2b91cc644f5d8e73841f73a60e93e13f70bdfeacf7ebbc56a0492f0eb61155",
+        "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+        "docs/tasks/C003/build/output-integration/cases.json": "13d4e260f4a38caad9d81582919fb1dd43a628dd0b243dc6a028307a68952d00"
+      }
+    },
+    "core-abi": {
+      "poisoned_upper_bc": true,
+      "checked_index_and_stack_preservation": true,
+      "concat_overflow_unchanged": true,
+      "allocation_failure_unchanged": true,
+      "full_failure_descriptor_and_context_checked": true,
+      "same_buffer_concat": true,
+      "allocation_guard_bytes": 15,
+      "empty_null_descriptor": true,
+      "inline_lengths": [
+        0,
+        255
+      ],
+      "cross_page_descriptor": true,
+      "duration_seconds": 1.016,
+      "hashes": {
+        "docs/tasks/C003/strings/abi.s": "69b384c48e69d5c5d130e970c34ed8c28795fd9cd91747a3dbea526ee7781b15",
+        "docs/tasks/C003/build/string-abi/probe.bin": "0315c937f8782659e2a99b744219f06cb34840dfca45126a6e48655e3f54ada6",
+        "compiler/build/string-runtime/runtime-0.bin": "634984cc2afecb04ec27925bd8c1e08f1d083ce520fb195ec914119125517246"
+      }
+    },
+    "slice-abi": {
+      "poisoned_upper_bc": true,
+      "checked_index_and_stack_preservation": true,
+      "empty_and_maximum_lengths": true,
+      "zero_byte_counts": true,
+      "mid_zero_start": true,
+      "unsigned_byte_ordering": true,
+      "prefix_and_empty_ordering": true,
+      "comparison_operands_read_only": true,
+      "buffer_guards_unchanged": true,
+      "duration_seconds": 1.017,
+      "hashes": {
+        "docs/tasks/C003/slices/abi.s": "c5502d00bcb6f1d4abffff155cecc9df5ea899e07e6d0cbe8c0b505a2da099dc",
+        "docs/tasks/C003/build/slice-abi/probe.bin": "128809a537bdff54df92c2272267d0e9ed8a684fec5ecbf00402a31b7e2ffbe3",
+        "compiler/build/string-runtime/runtime-0.bin": "634984cc2afecb04ec27925bd8c1e08f1d083ce520fb195ec914119125517246"
+      }
+    },
+    "conversion-smoke": {
+      "programs": 1,
+      "native_executions": 1,
+      "rejected_sources": 0,
+      "reference_output_programs": 1,
+      "legacy_arithmetic_observations": 0,
+      "deterministic_repeat": true,
+      "independent_link_bases": [
+        263394
+      ],
+      "string_link_bases": [
+        268157
+      ],
+      "duration_seconds": 35.472,
+      "hashes": {
+        "compiler/compiler.bas": "bb2b91cc644f5d8e73841f73a60e93e13f70bdfeacf7ebbc56a0492f0eb61155",
+        "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+        "docs/tasks/C003/build/output-integration/cases.json": "a3af417fddb7c00035273f6495bc68f2e0ed44e2fbbf204cdcb1de8c96fab248"
+      }
+    },
+    "expressions": {
+      "start": 0,
+      "cases": 12,
+      "reference_expressions": 12,
+      "native_executions": 12,
+      "rejected_sources": 0,
+      "deterministic_repeat": true,
+      "nonnumeric_assembly_golden": false,
+      "independently_linked_image_bases": [
+        262616,
+        262616,
+        262616,
+        262616,
+        262591,
+        262600,
+        262625,
+        262566,
+        262566,
+        262582,
+        262600,
+        262600
+      ],
+      "duration_seconds": 83.182,
+      "host": "raspberrypi/aarch64",
+      "human_validation": false,
+      "hashes": {
+        "compiler/compiler.bas": "bb2b91cc644f5d8e73841f73a60e93e13f70bdfeacf7ebbc56a0492f0eb61155",
+        "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+        "docs/tasks/C002/build/expressions/promotion/batch-000/oracle.dat": "a65d1fca86fcdc5a3aa9ac1ba1f382c600f67a5470ba503d73ad31e8e0c610c5"
+      }
+    }
+  },
+  "compiler_sha256": "bb2b91cc644f5d8e73841f73a60e93e13f70bdfeacf7ebbc56a0492f0eb61155",
+  "runtime_bytes": 533,
+  "runtime_relocations": 2,
+  "numeric_runtime_vendor_license_unchanged": true,
+  "human_or_hardware_validation": false,
+  "benchmark_measured": false,
+  "prior_interruption": "Author briefly prohibited emulator work, then reauthorized it; validation resumed and completed",
+  "approval_stops_waived_by_author": true
+}

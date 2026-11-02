@@ -62,7 +62,7 @@ def programs():
         ('PRINT VAL("1",2)\n', 'Expected )'),
         ('PRINT VAL "1"+"2"\n', 'Numeric/string type mismatch'),
         ('@%=0\n', 'Expected a name'),
-        ('PRINT STRING$(2,"x")\n', 'Unsupported string item STRING'),
+        ('PRINT INKEY$(1)\n', 'Unsupported string item INKEY'),
         ('PRINT EVAL("1")\n', 'EVAL is deliberately unsupported'),
         ('PRINT "raw\ttab"\n', 'Use CHR$ for control bytes'),
     ]]

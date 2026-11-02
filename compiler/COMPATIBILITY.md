@@ -2,12 +2,15 @@
 
 This matrix describes the compiler, not the reference interpreter. A feature
 is implemented only for the stated scope. C001 output/control flow, C002 numeric
-expressions, C003 scalar numeric bindings, the mutable string core, expression slicing, comparisons and VAL/STR$/ASC are
+expressions, C003 scalar numeric bindings, the mutable string core, expression slicing, comparisons, VAL/STR$/ASC and INSTR/STRING$ are
 promoted in the development tree. Broader strings and self-hosting remain unfinished. The Author accepted
 the corrected C002 baseline for a development checkpoint; accepted testing is
 still required before main promotion. Execution speed is the only intended
 observable runtime difference for supported conventional programs. Possible
 [interpreter improvements](INTERPRETER-FINDINGS.md) are research only.
+
+INSTR/STRING$ have full prototype and selected live qualification, including
+existing string/numeric regressions on the reauthorized Pi5 CLI.
 
 | Feature | Status | Current scope or constraint |
 | --- | --- | --- |
@@ -30,7 +33,7 @@ observable runtime difference for supported conventional programs. Possible
 | Numeric formatting | Partial | Fixed G9, matching the reference; @% assignment and other PRINT formats unsupported |
 | Comparison and Boolean expressions | Partial | Numeric and string = <> <= >= < >, numeric NOT/AND/EOR/OR and TRUE/FALSE in expressions, assignments, VDU/PRINT; comparisons return -1/0; no shifts or IF statements |
 | Numeric variables | Implemented subset | Plain/LET assignment and reads; five-byte unsuffixed variants, four-byte %, one-byte &; 128 bindings; runtime creation/undefined-read checks, predefined A%–Z%; global GOSUB mutation |
-| Mutable strings and string variables | Partial | Plain/LET `$` assignment, owned copying/self-assignment, + and parentheses, 0..255 bytes including NUL, LEN/CHR$/ASC, VAL and STR$ (default G9 or ~ hex), string PRINT, runtime existence; bounded private heap; LEFT$/RIGHT$/MID$ expressions with reference low-byte counts/optional arguments and six string relations; slice assignment, INSTR/STRING$ and further string functions unsupported |
+| Mutable strings and string variables | Partial | Plain/LET `$` assignment, owned copying/self-assignment, + and parentheses, 0..255 bytes including NUL, LEN/CHR$/ASC, VAL and STR$ (default G9 or ~ hex), INSTR/STRING$, string PRINT, runtime existence; bounded private heap; LEFT$/RIGHT$/MID$ expressions with reference low-byte counts/optional arguments and six string relations; slice assignment and further string functions unsupported |
 | Variable suffixes and default numeric variables | Partial | Case-sensitive numeric/string names with %/&/$ suffixes; 32-character ASCII body limit; ambiguous keyword prefixes, pseudo variables and other suffixes rejected |
 | IF/CASE/FOR/WHILE/REPEAT | Unsupported | Structured control flow pending |
 | DEF PROC / ENDPROC | Unsupported | Never treated as GOSUB/RETURN |
@@ -50,6 +53,8 @@ The [C003 scalar record](../docs/tasks/C003/SCALARS.md) describes reference
 creation/storage rules, scope and qualification; the [string core record](../docs/tasks/C003/STRINGS.md) adds ownership, allocation and ABI evidence. [Slices and comparisons](../docs/tasks/C003/SLICES.md) records the typed expression extension and reference boundaries.
 
 [String conversions](../docs/tasks/C003/CONVERSIONS.md) records the unchanged VAL/STR package calls, adapted HEXSTR and raw-byte qualification.
+
+[Search and repetition](../docs/tasks/C003/SEARCH-REPEAT.md) records INSTR/STRING$, byte-wrapped arguments, empty-needle behavior, error order and native ABI.
 
 See [the specification](SPECIFICATION.md) for exact limits and
 [TODO.md](../TODO.md) for unfinished work.
