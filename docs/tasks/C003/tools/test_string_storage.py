@@ -20,11 +20,12 @@ def main():
     parser.add_argument('--slices',action='store_true',help='also qualify sliced contents and packed relations')
     parser.add_argument('--conversions',action='store_true',help='qualify raw VAL records and STR$/ASC values')
     parser.add_argument('--search-repeat',action='store_true',help='qualify INSTR records and STRING$ contents')
+    parser.add_argument('--slice-store',action='store_true',help='qualify slice assignment bytes and allocation')
     parser.add_argument('--numeric-runtime',type=Path,default=ROOT/'compiler/build/numeric-runtime')
     args=parser.parse_args();compiler=args.compiler.resolve(strict=True);original=compiler.read_bytes()
     spec=importlib.util.spec_from_file_location('harness',ROOT/'compiler/tools/test_compiler.py')
     h=importlib.util.module_from_spec(spec);spec.loader.exec_module(h)
-    profile=ROOT/'.emulator';sd=profile/'sdcard';build=TASK/('build/search-repeat-storage' if args.search_repeat else 'build/conversion-storage' if args.conversions else 'build/slice-storage' if args.slices else 'build/string-storage');build.mkdir(parents=True,exist_ok=True)
+    profile=ROOT/'.emulator';sd=profile/'sdcard';build=TASK/('build/slice-store-storage' if args.slice_store else 'build/search-repeat-storage' if args.search_repeat else 'build/conversion-storage' if args.conversions else 'build/slice-storage' if args.slices else 'build/string-storage');build.mkdir(parents=True,exist_ok=True)
     assert (profile/'fab-agon-emulator.bin').resolve()==args.cli.resolve(strict=True)
     started=time.monotonic()
     assignments=['empty$=""','zero$=CHR$(0)+"x"+CHR$(255)','original$="hello"',
@@ -45,7 +46,23 @@ def main():
     names=['empty$','zero$','original$','copy$','tail$','block$','Case$','case$',
            'fresh$','left$','right$','maximum$','independent$','churn$','barrier$']
     numbers=[]
-    assert sum([args.slices,args.conversions,args.search_repeat])<=1
+    assert sum([args.slices,args.conversions,args.search_repeat,args.slice_store])<=1
+    if args.slice_store:
+        assignments=['defaultleft$="abcdef":LEFT$(defaultleft$)="XYZ"',
+                     'rightshort$="abcdef":RIGHT$(rightshort$,5)="XY"',
+                     'midzero$="abcdef":MID$(midzero$,0,2)="YZ"',
+                     'lastmarker$=STRING$(255,"x"):MID$(lastmarker$,255,2)="YZ"',
+                     'clamped$=STRING$(255,"x"):MID$(clamped$,255,3)="YZ"',
+                     'allbutlast$=STRING$(255,"x"):MID$(allbutlast$,2,255)=STRING$(255,"z")',
+                     'alias$="abcdef":MID$(alias$,2,3)=alias$',
+                     'bytes$=CHR$(0)+CHR$(128)+CHR$(255):copy$=bytes$',
+                     'MID$(bytes$,2,1)=CHR$(0):LEFT$(bytes$,1)=CHR$(128)',
+                     'empty$="":RIGHT$(empty$,3)=CHR$(255)',
+                     'nop$="abc":LEFT$(nop$,0)=STRING$(1,"Y")',
+                     'length%=LEN allbutlast$:first%=ASC bytes$:last%=ASC RIGHT$(clamped$)']
+        names=['defaultleft$','rightshort$','midzero$','lastmarker$','clamped$',
+               'allbutlast$','alias$','bytes$','copy$','empty$','nop$']
+        numbers=[('length%',4),('first%',4),('last%',4)]
     if args.search_repeat:
         assignments=['pattern$=CHR$(0)+CHR$(128)+CHR$(255)',
                      'repeated$=STRING$(3,pattern$)','full$=STRING$(85,pattern$)',
@@ -174,7 +191,7 @@ def main():
         mutable.update(range(offset,offset+size));mutable.add(flag)
         numeric_records.append(dict(name=name,size=size,expected=wanted.hex(),actual=got.hex()))
     assert cursor==len(expected)
-    if not (args.conversions or args.search_repeat):
+    if not (args.conversions or args.search_repeat or args.slice_store):
         width,offset,flag=actual['length%'];assert width==4 and memory[offset:offset+4]==b'\xff\x00\x00\x00' and memory[flag]==1
         mutable.update(range(offset,offset+4));mutable.add(flag)
     if args.slices:
@@ -187,6 +204,8 @@ def main():
     limit=int.from_bytes(memory[ctx+3:ctx+6],'little')-0x40000
     assert heap<=free<=limit==heap+budget
     assert all(p+c<=free for p,c in allocations)
+    if args.slice_store:
+        assert free-heap==sum(c for p,c in allocations),'slice assignment allocated abandoned storage'
     assert memory[free:]==bytes([0xa5])*(len(memory)-free),'writes beyond allocated heap'
     unexpected=[i for i,(a,b) in enumerate(zip(image,memory)) if i not in mutable and a!=b]
     assert not unexpected,('writes outside descriptors, flags, temporaries, context, saved SP',unexpected)
@@ -194,6 +213,7 @@ def main():
     report=dict(bindings=len(names),undefined_bindings=1,string_content_mismatches=0,
                 descriptor_bounds_checked=True,independent_ownership=True,heap_budget=budget,heap_used=free-heap,
                 heap_guard_bytes=len(memory)-free,unexpected_memory_writes=0,records=records,numeric_records=numeric_records,
+                slice_assignment_without_allocation=True if args.slice_store else None,
                 duration_seconds=round(time.monotonic()-started,3),
                 hashes={str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest()
                         for p in [compiler,ROOT/'bin/basic.bin',build/'source.bas',build/'expected.dat',build/'native.dat']})

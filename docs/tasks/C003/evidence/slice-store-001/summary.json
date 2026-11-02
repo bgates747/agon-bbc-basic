@@ -1,0 +1,212 @@
+{
+  "scope": "Full experimental slice-assignment qualification; live rechecks separate",
+  "transcripts": {
+    "programs": 27,
+    "native_executions": 19,
+    "rejected_sources": 8,
+    "reference_output_programs": 19,
+    "legacy_arithmetic_observations": 0,
+    "deterministic_repeat": true,
+    "independent_link_bases": [
+      263173,
+      265366,
+      265366,
+      265535,
+      265517,
+      266006,
+      268024,
+      263575,
+      263718,
+      263875,
+      262566,
+      262443,
+      262514,
+      262587,
+      262553,
+      262513,
+      262551,
+      262555
+    ],
+    "string_link_bases": [
+      267919,
+      270112,
+      270112,
+      270281,
+      270263,
+      270752,
+      272770,
+      268321,
+      268475,
+      268627,
+      267317,
+      262442,
+      267189,
+      267266,
+      267344,
+      267305,
+      267265,
+      267302,
+      267301
+    ],
+    "duration_seconds": 316.143,
+    "hashes": {
+      "docs/tasks/C003/slice-store/compiler.bas": "928a46a060fa8b72dbbbc40484561c67b6736ba5cf69eaa7ced932e5409a8617",
+      "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+      "docs/tasks/C003/build/output-integration/cases.json": "17ff21675394594b665b5bea939c3e2f3be3b2eee0ffd76a1af9673bb7c9e6aa"
+    }
+  },
+  "abi": {
+    "poisoned_upper_bc_and_hl": true,
+    "checked_index_and_stack_preservation": true,
+    "default_left_right_and_mid": true,
+    "range_marker_boundaries": true,
+    "descriptors_unchanged": true,
+    "rhs_inputs_read_only": true,
+    "empty_null_descriptor": true,
+    "maximum_and_page_crossing": true,
+    "zero_count_paths": true,
+    "buffer_guards_unchanged": true,
+    "duration_seconds": 1.016,
+    "hashes": {
+      "docs/tasks/C003/slice-store/abi.s": "bcf547e3193f25f602a827e70b74dd6dba35df072ed554634bada1f060e9edb2",
+      "docs/tasks/C003/build/slice-store-abi/probe.bin": "546094603f31f4a9e239fdbb9e2e9adde2e7d8869415b9d73141c7e129b21c3d",
+      "docs/tasks/C003/build/slice-store-runtime/runtime-0.bin": "d5b8ede3757a43985bcb56199691e63846bb8ff10c7e0dd119ba493f843fb12d"
+    }
+  },
+  "storage": {
+    "bindings": 11,
+    "undefined_bindings": 1,
+    "string_content_mismatches": 0,
+    "descriptor_bounds_checked": true,
+    "independent_ownership": true,
+    "heap_budget": 12288,
+    "heap_used": 798,
+    "heap_guard_bytes": 11522,
+    "unexpected_memory_writes": 0,
+    "records": [
+      {
+        "name": "defaultleft$",
+        "length": 6,
+        "capacity": 6,
+        "pointer": 271036,
+        "contents": "58595a646566"
+      },
+      {
+        "name": "rightshort$",
+        "length": 6,
+        "capacity": 6,
+        "pointer": 271042,
+        "contents": "616263645859"
+      },
+      {
+        "name": "midzero$",
+        "length": 6,
+        "capacity": 6,
+        "pointer": 271048,
+        "contents": "61626364595a"
+      },
+      {
+        "name": "lastmarker$",
+        "length": 255,
+        "capacity": 255,
+        "pointer": 271054,
+        "contents": "787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878"
+      },
+      {
+        "name": "clamped$",
+        "length": 255,
+        "capacity": 255,
+        "pointer": 271309,
+        "contents": "787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787859"
+      },
+      {
+        "name": "allbutlast$",
+        "length": 255,
+        "capacity": 255,
+        "pointer": 271564,
+        "contents": "787a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a78"
+      },
+      {
+        "name": "alias$",
+        "length": 6,
+        "capacity": 6,
+        "pointer": 271819,
+        "contents": "616162636566"
+      },
+      {
+        "name": "bytes$",
+        "length": 3,
+        "capacity": 3,
+        "pointer": 271825,
+        "contents": "8000ff"
+      },
+      {
+        "name": "copy$",
+        "length": 3,
+        "capacity": 3,
+        "pointer": 271828,
+        "contents": "0080ff"
+      },
+      {
+        "name": "empty$",
+        "length": 0,
+        "capacity": 0,
+        "pointer": 0,
+        "contents": ""
+      },
+      {
+        "name": "nop$",
+        "length": 3,
+        "capacity": 3,
+        "pointer": 271831,
+        "contents": "616263"
+      }
+    ],
+    "numeric_records": [
+      {
+        "name": "length%",
+        "size": 4,
+        "expected": "ff000000",
+        "actual": "ff000000"
+      },
+      {
+        "name": "first%",
+        "size": 4,
+        "expected": "80000000",
+        "actual": "80000000"
+      },
+      {
+        "name": "last%",
+        "size": 4,
+        "expected": "59000000",
+        "actual": "59000000"
+      }
+    ],
+    "slice_assignment_without_allocation": true,
+    "duration_seconds": 41.674,
+    "hashes": {
+      "docs/tasks/C003/slice-store/compiler.bas": "928a46a060fa8b72dbbbc40484561c67b6736ba5cf69eaa7ced932e5409a8617",
+      "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+      "docs/tasks/C003/build/slice-store-storage/source.bas": "ada04b851de12e4ccf166f16223d7aec2584a3ce94525d02fd0ca1a70627c631",
+      "docs/tasks/C003/build/slice-store-storage/expected.dat": "b60119d1a131ac4eb5e2c612b3426b7fd0cfdfa7f20767eb4088c25090391f49",
+      "docs/tasks/C003/build/slice-store-storage/native.dat": "db598e44e8baf5df500414b34abb781c389dbd8d32f4133fdecc6d69cb58c527"
+    }
+  },
+  "baseline": {
+    "cases": 39,
+    "native_executions": 15,
+    "deterministic_repeat": true,
+    "assembler_oracle": true,
+    "duration_seconds": 31.445,
+    "basic_sha256": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+    "compiler_sha256": "928a46a060fa8b72dbbbc40484561c67b6736ba5cf69eaa7ced932e5409a8617",
+    "cli_sha256": "bf5f29b243b8214e54c515dcc26edf47399ce440356af2ebc3ce3d7664ae11eb",
+    "mos_sha256": "d564243283972690933a4554296ad6202ca4ef54572279533a942960846bebae"
+  },
+  "compiler_sha256": "928a46a060fa8b72dbbbc40484561c67b6736ba5cf69eaa7ced932e5409a8617",
+  "runtime_bytes": 623,
+  "runtime_relocations": 2,
+  "old_533_byte_prefix_unchanged": true,
+  "numeric_runtime_vendor_license_unchanged": true,
+  "human_or_hardware_validation": false
+}

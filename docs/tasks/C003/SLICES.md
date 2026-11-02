@@ -3,8 +3,8 @@
 This C003 tranche adds expression slices and the six string relations needed
 by the compiler's own parsing logic. Results and errors are qualified against
 the actual reference interpreter. VAL/STR$/ASC are qualified in the later
-[conversion tranche](CONVERSIONS.md). Other string functions and slice assignment
-remain unfinished; C003 stays open.
+[conversion tranche](CONVERSIONS.md). [Slice assignment](SLICE-STORE.md) is qualified separately. I/O-dependent string
+functions, LOCAL and arrays retain their separate C004/C005 scope.
 
 ## Reference audit and source contract
 

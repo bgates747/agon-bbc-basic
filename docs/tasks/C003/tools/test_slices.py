@@ -54,8 +54,8 @@ def programs():
         'PRINT "a"=CHR$(1/0)\n',
         'a$="'+('x'*128)+'"\nb$="'+('y'*128)+'"\nPRINT a$+b$=""\n',
     ]]
+    result.append(dict(source='LEFT$(a$,1)="x"\n',reference=True,reference_error=True,status=1))
     result += [dict(source=s,diagnostic=d) for s,d in [
-        ('LEFT$(a$,1)="x"\n','Unsupported string item LEFT'),
         ('PRINT LEFT$("x",1,2)\n','Expected )'),
         ('PRINT MID$("x")\n','Expected ,'),
         ('PRINT LEFT$(1,2)\n','Expected a string item'),

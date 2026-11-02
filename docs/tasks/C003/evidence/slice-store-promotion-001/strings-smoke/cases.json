@@ -1,0 +1,14 @@
+[
+  {
+    "source": "a$=\"hello\":b$=a$:a$=\"x\":PRINT a$;\":\";b$:a$=a$+\"y\":PRINT a$\n",
+    "reference": true,
+    "status": 0,
+    "expected": "x:hello\nxy\n"
+  },
+  {
+    "source": "empty$=\"\":PRINT \"[\";empty$;\"]\":fresh$=fresh$+\"a\":PRINT fresh$:PRINT LEN(fresh$)\n",
+    "reference": true,
+    "status": 0,
+    "expected": "[]\na\n         1\n"
+  }
+]

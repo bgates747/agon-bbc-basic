@@ -42,10 +42,10 @@ mutable string core checkpoint `be0f299`, also pushed. Expression slicing and
 string comparisons and VAL/STR$/ASC were accepted in checkpoint `c55c951`,
 committed/pushed at the Author's request. INSTR/STRING$ are now promoted for
 development; selected live checks and earlier regressions pass.
-Slice assignment and remaining required operations stay C003. Read
+Slice assignment is qualified and promoted; C003 initial scalar/string scope is complete. Read
 `docs/tasks/C003/SCALARS.md`, `docs/tasks/C003/STRINGS.md`,
 `docs/tasks/C003/SLICES.md`, `docs/tasks/C003/CONVERSIONS.md`,
-`docs/tasks/C003/SEARCH-REPEAT.md` and the task record. C004–C006 remain unstarted. The compiler is still BBC BASIC; assembly is runtime code, not a
+`docs/tasks/C003/SEARCH-REPEAT.md`, `docs/tasks/C003/SLICE-STORE.md` and the task record. C004 conditionals are next; C005–C006 remain unstarted. The compiler is still BBC BASIC; assembly is runtime code, not a
 replacement compiler implementation.
 
 Use `.venv/bin/python` explicitly. `compiler/README.md` contains build/test

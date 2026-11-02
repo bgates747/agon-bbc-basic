@@ -707,3 +707,25 @@ change during this repeat. Full prototype and selected live scopes, the stale
 fixture and the temporary interruption remain separately indexed. Checkpoint
 this qualified tranche under the Author's approval waiver, then implement the
 C003 slice-assignment scope already recorded before coding.
+
+## Slice-assignment implementation started
+
+Checkpoint 0094ab0 (qualified INSTR/STRING$) is pushed to the Author's development
+branch. The pre-code C003 brief and slice-store/AUDIT.md define exact statement
+range rules. The prototype now emits LEFT$/RIGHT$/MID$ assignment, checking target
+existence before arguments/RHS. A 90-byte native adaptation changes owned bytes
+without resizing or allocating. The original 533-byte runtime prefix and both
+existing relocations are unchanged. The five-statement mixed smoke matches
+BASIC in 31.171s; full differential/native-memory qualification is in progress.
+
+## Slice assignment qualified and promoted
+
+Full prototype qualification passes 27 programs (19 native/eight rejected) in
+316.143s, native ABI in 1.016s, 11-string/three-integer raw storage in 41.674s,
+and baseline39/15 in 31.445s. Descriptor/ownership/bounds and no-allocation
+checks pass; heap use is798/12288 with11522 guard bytes untouched.
+Promoted exact source SHA928a46a060fa8b72dbbbc40484561c67b6736ba5cf69eaa7ced932e5409a8617
+and runtime plus tested mixed example. The runtime adds90 bytes to the exact
+533-byte prefix; both original relocations and numeric runtime/vendor/license
+are unchanged. Both DATA packers reproduce the source. Live rechecks finish
+before closing C003 and moving through C004–C006 under the Author's waiver.

@@ -1,0 +1,17 @@
+{
+  "poisoned_upper_bc": true,
+  "checked_index_and_stack_preservation": true,
+  "empty_and_maximum_lengths": true,
+  "zero_byte_counts": true,
+  "mid_zero_start": true,
+  "unsigned_byte_ordering": true,
+  "prefix_and_empty_ordering": true,
+  "comparison_operands_read_only": true,
+  "buffer_guards_unchanged": true,
+  "duration_seconds": 1.077,
+  "hashes": {
+    "docs/tasks/C003/slices/abi.s": "c5502d00bcb6f1d4abffff155cecc9df5ea899e07e6d0cbe8c0b505a2da099dc",
+    "docs/tasks/C003/build/slice-abi/probe.bin": "14896e3725383ded9fa81920c88a36fac1d3ac30d91ccfc91ee92e9fbf8f3678",
+    "compiler/build/string-runtime/runtime-0.bin": "d5b8ede3757a43985bcb56199691e63846bb8ff10c7e0dd119ba493f843fb12d"
+  }
+}

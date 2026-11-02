@@ -4,8 +4,8 @@ The live BBC compiler now supports owned string variables, copying,
 concatenation, string PRINT, LEN and CHR$. Qualification compares real BASIC
 execution and raw contents, with separate memory and native calling-convention
 probes. Expression slicing and string comparisons are now covered by the later
-[SLICES.md](SLICES.md) tranche and VAL/STR$/ASC in [CONVERSIONS.md](CONVERSIONS.md); INSTR/STRING$ in [SEARCH-REPEAT.md](SEARCH-REPEAT.md). Slice assignment remains C003 work;
-this does not close C003 or establish self-hosting.
+[SLICES.md](SLICES.md) tranche and VAL/STR$/ASC in [CONVERSIONS.md](CONVERSIONS.md); INSTR/STRING$ in [SEARCH-REPEAT.md](SEARCH-REPEAT.md). Slice assignment is covered by [SLICE-STORE.md](SLICE-STORE.md).
+LOCAL/arrays/I/O and self-hosting remain C004–C006.
 
 ## Source behavior
 
@@ -27,7 +27,7 @@ this does not close C003 or establish self-hosting.
    Parentheses admit complete expressions; unparenthesised function binding
    matches the reference. PRINT retains numeric field-width/semicolon behavior
    while string expressions write exact bytes through MOS character output.
-5. Invalid string/numeric mixing, arrays, slice assignment and
+5. Invalid string/numeric mixing, arrays, I/O-dependent
    additional string functions are compile-time errors. Expression slices and
    string relations are documented in SLICES.md; VAL/STR$/ASC in CONVERSIONS.md. No compound assignment
    or alternate numeric representation is introduced.

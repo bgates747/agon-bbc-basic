@@ -423,3 +423,79 @@ str_repeat_done:
 str_repeat_clear:
     ld (ix+0),a
     ret
+
+; Altered EXEC.Z80 SUBSL0..9, same Richard T. Russell/repository license.
+; IX=existing five-byte descriptor, IY=read-only RHS length-prefixed buffer.
+; L=first/H=last byte marker (upper HL ignored). No resize/allocation.
+; IX/IY/SP preserved; success A=0/Z/NC; other registers volatile.
+    .global rt_strwrite
+rt_strwrite:
+    ld bc,0
+    ld b,h
+    ld c,l
+    push bc
+    pop hl            ; Explicitly clear upper offset bits.
+    ld bc,0
+    ld c,(iy+0)
+    ld b,(ix+0)
+    ld de,(ix+2)      ; ADL24 OK: descriptor's exact three-byte pointer.
+    ld a,l
+    inc a
+    jr nz,str_write_normal
+    inc h
+    inc h
+    ld a,c
+    cp h
+    jr nc,str_write_right
+    ld h,a
+str_write_right:
+    ld a,b
+    sub h
+    jr nc,str_write_right_start
+    xor a
+str_write_right_start:
+    ld l,a
+    jr str_write_clamp
+str_write_normal:
+    ld a,h
+    inc a
+    jr nz,str_write_bounds
+    ld a,b
+    sub 2
+    jr c,str_write_done
+    ld h,a
+str_write_bounds:
+    ld a,l
+    cp b
+    jr nc,str_write_done
+    ld a,h
+    cp b
+    jr c,str_write_size
+str_write_clamp:
+    ld a,b
+    dec a
+    ld h,a
+str_write_size:
+    ld a,h
+    sub l
+    jr c,str_write_done
+    inc a
+    cp c
+    jr c,str_write_copy
+    ld a,c
+str_write_copy:
+    ld bc,0
+    ld h,b
+    ld c,a
+    or a
+    jr z,str_write_done
+    ex de,hl
+    add hl,de
+    ex de,hl
+    push iy
+    pop hl
+    inc hl
+    ldir
+str_write_done:
+    xor a
+    ret

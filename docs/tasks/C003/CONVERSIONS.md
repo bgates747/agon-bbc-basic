@@ -91,4 +91,5 @@ including 449 numeric ABI cases and 45 formatter cases. Their scopes are
 separate; the full 29-case run was at the prototype path. Exact hashes and
 promotion destinations are recorded in C003.md and the dated development log.
 The full conversion run took 201.849s; its default compile guard is 360 seconds. Search/repetition are now covered by [SEARCH-REPEAT.md](SEARCH-REPEAT.md);
-slice assignment and remaining facilities stay in the sole TODO.
+slice assignment is covered by [SLICE-STORE.md](SLICE-STORE.md). Remaining
+activation/array/I/O/self-hosting facilities stay in the sole TODO.

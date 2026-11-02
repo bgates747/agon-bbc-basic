@@ -203,3 +203,16 @@ remain in [TODO.md](../TODO.md).
    source/license attribution. The old 369-byte prefix and numeric runtime/
    vendor/license remain unchanged. [Audit and ABI](../docs/tasks/C003/SEARCH-REPEAT.md)
    include actual-BASIC transcripts, raw storage and native boundary probes.
+
+## Slice assignment adaptation
+
+1. C003 audits EXEC.Z80 GETSTR/LEFTSL/RITESL/MIDSL/SUBSL0–9. Missing targets
+   fail before arguments/RHS. Range markers preserve default all-but-last and
+   rightmost behavior, including wrapped MID starts/ends. RHS finishes before
+   current target descriptor fields are loaded; no resize/allocation occurs.
+2. A 90-byte adaptation takes an explicit descriptor/RHS/range, clears upper
+   offset/count bits, supports page crossing and avoids null/zero-count copies.
+   It preserves IX/IY/SP, descriptors and RHS data. The former 533-byte prefix
+   and numeric runtime/vendor/license remain unchanged. Same source attribution
+   and repository license apply. [Qualification](../docs/tasks/C003/SLICE-STORE.md)
+   compares exact reference bytes, metadata, no-allocation and guard behavior.

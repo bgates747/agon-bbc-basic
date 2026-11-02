@@ -1,0 +1,319 @@
+{
+  "scope": "Selected live rechecks; full 27-program suite retained in slice-store-001",
+  "results": {
+    "baseline": {
+      "cases": 39,
+      "native_executions": 15,
+      "deterministic_repeat": true,
+      "assembler_oracle": true,
+      "duration_seconds": 31.456,
+      "basic_sha256": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+      "compiler_sha256": "928a46a060fa8b72dbbbc40484561c67b6736ba5cf69eaa7ced932e5409a8617",
+      "cli_sha256": "bf5f29b243b8214e54c515dcc26edf47399ce440356af2ebc3ce3d7664ae11eb",
+      "mos_sha256": "d564243283972690933a4554296ad6202ca4ef54572279533a942960846bebae"
+    },
+    "strings-smoke": {
+      "programs": 2,
+      "native_executions": 2,
+      "rejected_sources": 0,
+      "reference_output_programs": 2,
+      "legacy_arithmetic_observations": 0,
+      "deterministic_repeat": true,
+      "independent_link_bases": [
+        262641
+      ],
+      "string_link_bases": [
+        262739,
+        267393
+      ],
+      "duration_seconds": 25.561,
+      "hashes": {
+        "compiler/compiler.bas": "928a46a060fa8b72dbbbc40484561c67b6736ba5cf69eaa7ced932e5409a8617",
+        "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+        "docs/tasks/C003/build/output-integration/cases.json": "c2d9d5f6cda4391402b48431ee06e3d8c87ee6a9f09de4e8ad9a33b2df6358bf"
+      }
+    },
+    "slice-abi": {
+      "poisoned_upper_bc": true,
+      "checked_index_and_stack_preservation": true,
+      "empty_and_maximum_lengths": true,
+      "zero_byte_counts": true,
+      "mid_zero_start": true,
+      "unsigned_byte_ordering": true,
+      "prefix_and_empty_ordering": true,
+      "comparison_operands_read_only": true,
+      "buffer_guards_unchanged": true,
+      "duration_seconds": 1.077,
+      "hashes": {
+        "docs/tasks/C003/slices/abi.s": "c5502d00bcb6f1d4abffff155cecc9df5ea899e07e6d0cbe8c0b505a2da099dc",
+        "docs/tasks/C003/build/slice-abi/probe.bin": "14896e3725383ded9fa81920c88a36fac1d3ac30d91ccfc91ee92e9fbf8f3678",
+        "compiler/build/string-runtime/runtime-0.bin": "d5b8ede3757a43985bcb56199691e63846bb8ff10c7e0dd119ba493f843fb12d"
+      }
+    },
+    "slice-smoke": {
+      "programs": 1,
+      "native_executions": 1,
+      "rejected_sources": 0,
+      "reference_output_programs": 1,
+      "legacy_arithmetic_observations": 0,
+      "deterministic_repeat": true,
+      "independent_link_bases": [
+        263638
+      ],
+      "string_link_bases": [
+        268394
+      ],
+      "duration_seconds": 38.289,
+      "hashes": {
+        "compiler/compiler.bas": "928a46a060fa8b72dbbbc40484561c67b6736ba5cf69eaa7ced932e5409a8617",
+        "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+        "docs/tasks/C003/build/output-integration/cases.json": "16d19227cf16daf4c193c87c1d73c91235c424cb487d8f78fdecfe0a46b27a3e"
+      }
+    },
+    "conversion-smoke": {
+      "programs": 1,
+      "native_executions": 1,
+      "rejected_sources": 0,
+      "reference_output_programs": 1,
+      "legacy_arithmetic_observations": 0,
+      "deterministic_repeat": true,
+      "independent_link_bases": [
+        263394
+      ],
+      "string_link_bases": [
+        268157
+      ],
+      "duration_seconds": 64.815,
+      "hashes": {
+        "compiler/compiler.bas": "928a46a060fa8b72dbbbc40484561c67b6736ba5cf69eaa7ced932e5409a8617",
+        "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+        "docs/tasks/C003/build/output-integration/cases.json": "a3af417fddb7c00035273f6495bc68f2e0ed44e2fbbf204cdcb1de8c96fab248"
+      }
+    },
+    "abi": {
+      "poisoned_upper_bc_and_hl": true,
+      "checked_index_and_stack_preservation": true,
+      "default_left_right_and_mid": true,
+      "range_marker_boundaries": true,
+      "descriptors_unchanged": true,
+      "rhs_inputs_read_only": true,
+      "empty_null_descriptor": true,
+      "maximum_and_page_crossing": true,
+      "zero_count_paths": true,
+      "buffer_guards_unchanged": true,
+      "duration_seconds": 1.016,
+      "hashes": {
+        "docs/tasks/C003/slice-store/abi.s": "bcf547e3193f25f602a827e70b74dd6dba35df072ed554634bada1f060e9edb2",
+        "docs/tasks/C003/build/slice-store-abi/probe.bin": "546094603f31f4a9e239fdbb9e2e9adde2e7d8869415b9d73141c7e129b21c3d",
+        "compiler/build/string-runtime/runtime-0.bin": "d5b8ede3757a43985bcb56199691e63846bb8ff10c7e0dd119ba493f843fb12d"
+      }
+    },
+    "core-abi": {
+      "poisoned_upper_bc": true,
+      "checked_index_and_stack_preservation": true,
+      "concat_overflow_unchanged": true,
+      "allocation_failure_unchanged": true,
+      "full_failure_descriptor_and_context_checked": true,
+      "same_buffer_concat": true,
+      "allocation_guard_bytes": 15,
+      "empty_null_descriptor": true,
+      "inline_lengths": [
+        0,
+        255
+      ],
+      "cross_page_descriptor": true,
+      "duration_seconds": 1.032,
+      "hashes": {
+        "docs/tasks/C003/strings/abi.s": "69b384c48e69d5c5d130e970c34ed8c28795fd9cd91747a3dbea526ee7781b15",
+        "docs/tasks/C003/build/string-abi/probe.bin": "6addcadd54ba2a3812ff590e689cf0bc2adcbfc69c9a6e020f439d43662c0f1c",
+        "compiler/build/string-runtime/runtime-0.bin": "d5b8ede3757a43985bcb56199691e63846bb8ff10c7e0dd119ba493f843fb12d"
+      }
+    },
+    "slice-store-smoke": {
+      "programs": 1,
+      "native_executions": 1,
+      "rejected_sources": 0,
+      "reference_output_programs": 1,
+      "legacy_arithmetic_observations": 0,
+      "deterministic_repeat": true,
+      "independent_link_bases": [
+        263173
+      ],
+      "string_link_bases": [
+        267919
+      ],
+      "duration_seconds": 31.166,
+      "hashes": {
+        "compiler/compiler.bas": "928a46a060fa8b72dbbbc40484561c67b6736ba5cf69eaa7ced932e5409a8617",
+        "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+        "docs/tasks/C003/build/output-integration/cases.json": "43ef32211c1f4d2f5a19409e3f90619ad1f42e785b78532bad40ba57c6209c41"
+      }
+    },
+    "storage": {
+      "bindings": 11,
+      "undefined_bindings": 1,
+      "string_content_mismatches": 0,
+      "descriptor_bounds_checked": true,
+      "independent_ownership": true,
+      "heap_budget": 12288,
+      "heap_used": 798,
+      "heap_guard_bytes": 11522,
+      "unexpected_memory_writes": 0,
+      "records": [
+        {
+          "name": "defaultleft$",
+          "length": 6,
+          "capacity": 6,
+          "pointer": 271036,
+          "contents": "58595a646566"
+        },
+        {
+          "name": "rightshort$",
+          "length": 6,
+          "capacity": 6,
+          "pointer": 271042,
+          "contents": "616263645859"
+        },
+        {
+          "name": "midzero$",
+          "length": 6,
+          "capacity": 6,
+          "pointer": 271048,
+          "contents": "61626364595a"
+        },
+        {
+          "name": "lastmarker$",
+          "length": 255,
+          "capacity": 255,
+          "pointer": 271054,
+          "contents": "787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878"
+        },
+        {
+          "name": "clamped$",
+          "length": 255,
+          "capacity": 255,
+          "pointer": 271309,
+          "contents": "787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787859"
+        },
+        {
+          "name": "allbutlast$",
+          "length": 255,
+          "capacity": 255,
+          "pointer": 271564,
+          "contents": "787a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a78"
+        },
+        {
+          "name": "alias$",
+          "length": 6,
+          "capacity": 6,
+          "pointer": 271819,
+          "contents": "616162636566"
+        },
+        {
+          "name": "bytes$",
+          "length": 3,
+          "capacity": 3,
+          "pointer": 271825,
+          "contents": "8000ff"
+        },
+        {
+          "name": "copy$",
+          "length": 3,
+          "capacity": 3,
+          "pointer": 271828,
+          "contents": "0080ff"
+        },
+        {
+          "name": "empty$",
+          "length": 0,
+          "capacity": 0,
+          "pointer": 0,
+          "contents": ""
+        },
+        {
+          "name": "nop$",
+          "length": 3,
+          "capacity": 3,
+          "pointer": 271831,
+          "contents": "616263"
+        }
+      ],
+      "numeric_records": [
+        {
+          "name": "length%",
+          "size": 4,
+          "expected": "ff000000",
+          "actual": "ff000000"
+        },
+        {
+          "name": "first%",
+          "size": 4,
+          "expected": "80000000",
+          "actual": "80000000"
+        },
+        {
+          "name": "last%",
+          "size": 4,
+          "expected": "59000000",
+          "actual": "59000000"
+        }
+      ],
+      "slice_assignment_without_allocation": true,
+      "duration_seconds": 41.772,
+      "hashes": {
+        "compiler/compiler.bas": "928a46a060fa8b72dbbbc40484561c67b6736ba5cf69eaa7ced932e5409a8617",
+        "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+        "docs/tasks/C003/build/slice-store-storage/source.bas": "ada04b851de12e4ccf166f16223d7aec2584a3ce94525d02fd0ca1a70627c631",
+        "docs/tasks/C003/build/slice-store-storage/expected.dat": "b60119d1a131ac4eb5e2c612b3426b7fd0cfdfa7f20767eb4088c25090391f49",
+        "docs/tasks/C003/build/slice-store-storage/native.dat": "db598e44e8baf5df500414b34abb781c389dbd8d32f4133fdecc6d69cb58c527"
+      }
+    },
+    "search-repeat-smoke": {
+      "programs": 1,
+      "native_executions": 1,
+      "rejected_sources": 0,
+      "reference_output_programs": 1,
+      "legacy_arithmetic_observations": 0,
+      "deterministic_repeat": true,
+      "independent_link_bases": [
+        263441
+      ],
+      "string_link_bases": [
+        268198
+      ],
+      "duration_seconds": 38.786,
+      "hashes": {
+        "compiler/compiler.bas": "928a46a060fa8b72dbbbc40484561c67b6736ba5cf69eaa7ced932e5409a8617",
+        "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+        "docs/tasks/C003/build/output-integration/cases.json": "bcf2d53f7634ce8e7adbae286b7eb69f245e828cc2bed6713f93f6a96f695ef6"
+      }
+    },
+    "string-limits": {
+      "programs": 3,
+      "native_executions": 1,
+      "rejected_sources": 2,
+      "reference_output_programs": 0,
+      "legacy_arithmetic_observations": 0,
+      "deterministic_repeat": true,
+      "independent_link_bases": [
+        263101
+      ],
+      "string_link_bases": [
+        267859
+      ],
+      "duration_seconds": 49.105,
+      "hashes": {
+        "compiler/compiler.bas": "928a46a060fa8b72dbbbc40484561c67b6736ba5cf69eaa7ced932e5409a8617",
+        "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+        "docs/tasks/C003/build/output-integration/cases.json": "13d4e260f4a38caad9d81582919fb1dd43a628dd0b243dc6a028307a68952d00"
+      }
+    }
+  },
+  "compiler_sha256": "928a46a060fa8b72dbbbc40484561c67b6736ba5cf69eaa7ced932e5409a8617",
+  "runtime_bytes": 623,
+  "runtime_relocations": 2,
+  "numeric_runtime_vendor_license_unchanged": true,
+  "human_or_hardware_validation": false,
+  "benchmark_measured": false,
+  "approval_stops_waived_by_author": true
+}

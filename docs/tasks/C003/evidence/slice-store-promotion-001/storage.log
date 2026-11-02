@@ -1,0 +1,119 @@
+{
+  "bindings": 11,
+  "undefined_bindings": 1,
+  "string_content_mismatches": 0,
+  "descriptor_bounds_checked": true,
+  "independent_ownership": true,
+  "heap_budget": 12288,
+  "heap_used": 798,
+  "heap_guard_bytes": 11522,
+  "unexpected_memory_writes": 0,
+  "records": [
+    {
+      "name": "defaultleft$",
+      "length": 6,
+      "capacity": 6,
+      "pointer": 271036,
+      "contents": "58595a646566"
+    },
+    {
+      "name": "rightshort$",
+      "length": 6,
+      "capacity": 6,
+      "pointer": 271042,
+      "contents": "616263645859"
+    },
+    {
+      "name": "midzero$",
+      "length": 6,
+      "capacity": 6,
+      "pointer": 271048,
+      "contents": "61626364595a"
+    },
+    {
+      "name": "lastmarker$",
+      "length": 255,
+      "capacity": 255,
+      "pointer": 271054,
+      "contents": "787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878"
+    },
+    {
+      "name": "clamped$",
+      "length": 255,
+      "capacity": 255,
+      "pointer": 271309,
+      "contents": "787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787859"
+    },
+    {
+      "name": "allbutlast$",
+      "length": 255,
+      "capacity": 255,
+      "pointer": 271564,
+      "contents": "787a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a78"
+    },
+    {
+      "name": "alias$",
+      "length": 6,
+      "capacity": 6,
+      "pointer": 271819,
+      "contents": "616162636566"
+    },
+    {
+      "name": "bytes$",
+      "length": 3,
+      "capacity": 3,
+      "pointer": 271825,
+      "contents": "8000ff"
+    },
+    {
+      "name": "copy$",
+      "length": 3,
+      "capacity": 3,
+      "pointer": 271828,
+      "contents": "0080ff"
+    },
+    {
+      "name": "empty$",
+      "length": 0,
+      "capacity": 0,
+      "pointer": 0,
+      "contents": ""
+    },
+    {
+      "name": "nop$",
+      "length": 3,
+      "capacity": 3,
+      "pointer": 271831,
+      "contents": "616263"
+    }
+  ],
+  "numeric_records": [
+    {
+      "name": "length%",
+      "size": 4,
+      "expected": "ff000000",
+      "actual": "ff000000"
+    },
+    {
+      "name": "first%",
+      "size": 4,
+      "expected": "80000000",
+      "actual": "80000000"
+    },
+    {
+      "name": "last%",
+      "size": 4,
+      "expected": "59000000",
+      "actual": "59000000"
+    }
+  ],
+  "slice_assignment_without_allocation": true,
+  "duration_seconds": 41.772,
+  "hashes": {
+    "compiler/compiler.bas": "928a46a060fa8b72dbbbc40484561c67b6736ba5cf69eaa7ced932e5409a8617",
+    "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+    "docs/tasks/C003/build/slice-store-storage/source.bas": "ada04b851de12e4ccf166f16223d7aec2584a3ce94525d02fd0ca1a70627c631",
+    "docs/tasks/C003/build/slice-store-storage/expected.dat": "b60119d1a131ac4eb5e2c612b3426b7fd0cfdfa7f20767eb4088c25090391f49",
+    "docs/tasks/C003/build/slice-store-storage/native.dat": "db598e44e8baf5df500414b34abb781c389dbd8d32f4133fdecc6d69cb58c527"
+  }
+}

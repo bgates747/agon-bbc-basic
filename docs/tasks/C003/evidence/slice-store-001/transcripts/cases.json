@@ -1,0 +1,157 @@
+[
+  {
+    "source": "a$=\"abcdef\":LEFT$(a$)=\"XYZ\":PRINT a$\na$=\"abcdef\":RIGHT$(a$)=\"XYZ\":PRINT a$\na$=\"abcdef\":MID$(a$,2)=\"XYZ\":PRINT a$\na$=\"abcdef\":MID$(a$,0)=\"XYZ\":PRINT a$\na$=\"abcdef\":MID$(a$,0,2)=\"XYZ\":PRINT a$\n",
+    "reference": true,
+    "status": 0,
+    "expected": "XYZdef\nabcdeX\naXYZef\nabcdef\nabcdXY\n"
+  },
+  {
+    "source": "a$=\"abcdef\":LEFT$(a$,0)=\"XYZ\":PRINT a$\na$=\"abcdef\":LEFT$(a$,1)=\"XYZ\":PRINT a$\na$=\"abcdef\":LEFT$(a$,2)=\"XYZ\":PRINT a$\na$=\"abcdef\":LEFT$(a$,5)=\"XYZ\":PRINT a$\na$=\"abcdef\":LEFT$(a$,6)=\"XYZ\":PRINT a$\na$=\"abcdef\":LEFT$(a$,7)=\"XYZ\":PRINT a$\na$=\"abcdef\":LEFT$(a$,-1)=\"XYZ\":PRINT a$\na$=\"abcdef\":LEFT$(a$,-256)=\"XYZ\":PRINT a$\na$=\"abcdef\":LEFT$(a$,255)=\"XYZ\":PRINT a$\na$=\"abcdef\":LEFT$(a$,256)=\"XYZ\":PRINT a$\na$=\"abcdef\":LEFT$(a$,257)=\"XYZ\":PRINT a$\na$=\"abcdef\":LEFT$(a$,511)=\"XYZ\":PRINT a$\na$=\"abcdef\":LEFT$(a$,65536)=\"XYZ\":PRINT a$\na$=\"abcdef\":LEFT$(a$,16777217)=\"XYZ\":PRINT a$\na$=\"abcdef\":LEFT$(a$,1.9)=\"XYZ\":PRINT a$\na$=\"abcdef\":LEFT$(a$,-1.9)=\"XYZ\":PRINT a$\n",
+    "reference": true,
+    "status": 0,
+    "expected": "abcdef\nXbcdef\nXYcdef\nXYZdef\nXYZdef\nXYZdef\nXYZdef\nabcdef\nXYZdef\nabcdef\nXbcdef\nXYZdef\nabcdef\nXbcdef\nXbcdef\nXYZdef\n"
+  },
+  {
+    "source": "a$=\"abcdef\":RIGHT$(a$,0)=\"XYZ\":PRINT a$\na$=\"abcdef\":RIGHT$(a$,1)=\"XYZ\":PRINT a$\na$=\"abcdef\":RIGHT$(a$,2)=\"XYZ\":PRINT a$\na$=\"abcdef\":RIGHT$(a$,5)=\"XYZ\":PRINT a$\na$=\"abcdef\":RIGHT$(a$,6)=\"XYZ\":PRINT a$\na$=\"abcdef\":RIGHT$(a$,7)=\"XYZ\":PRINT a$\na$=\"abcdef\":RIGHT$(a$,-1)=\"XYZ\":PRINT a$\na$=\"abcdef\":RIGHT$(a$,-256)=\"XYZ\":PRINT a$\na$=\"abcdef\":RIGHT$(a$,255)=\"XYZ\":PRINT a$\na$=\"abcdef\":RIGHT$(a$,256)=\"XYZ\":PRINT a$\na$=\"abcdef\":RIGHT$(a$,257)=\"XYZ\":PRINT a$\na$=\"abcdef\":RIGHT$(a$,511)=\"XYZ\":PRINT a$\na$=\"abcdef\":RIGHT$(a$,65536)=\"XYZ\":PRINT a$\na$=\"abcdef\":RIGHT$(a$,16777217)=\"XYZ\":PRINT a$\na$=\"abcdef\":RIGHT$(a$,1.9)=\"XYZ\":PRINT a$\na$=\"abcdef\":RIGHT$(a$,-1.9)=\"XYZ\":PRINT a$\n",
+    "reference": true,
+    "status": 0,
+    "expected": "abcdef\nabcdeX\nabcdXY\nabcXYZ\nabcXYZ\nabcXYZ\nabcXYZ\nabcdef\nabcXYZ\nabcdef\nabcdeX\nabcXYZ\nabcdef\nabcdeX\nabcdeX\nabcXYZ\n"
+  },
+  {
+    "source": "a$=\"abcdef\":MID$(a$,0)=\"XYZ\":PRINT a$\na$=\"abcdef\":MID$(a$,1)=\"XYZ\":PRINT a$\na$=\"abcdef\":MID$(a$,2)=\"XYZ\":PRINT a$\na$=\"abcdef\":MID$(a$,5)=\"XYZ\":PRINT a$\na$=\"abcdef\":MID$(a$,6)=\"XYZ\":PRINT a$\na$=\"abcdef\":MID$(a$,7)=\"XYZ\":PRINT a$\na$=\"abcdef\":MID$(a$,-1)=\"XYZ\":PRINT a$\na$=\"abcdef\":MID$(a$,-256)=\"XYZ\":PRINT a$\na$=\"abcdef\":MID$(a$,0,2)=\"XYZ\":PRINT a$\na$=\"abcdef\":MID$(a$,1,2)=\"XYZ\":PRINT a$\na$=\"abcdef\":MID$(a$,2,2)=\"XYZ\":PRINT a$\na$=\"abcdef\":MID$(a$,5,2)=\"XYZ\":PRINT a$\na$=\"abcdef\":MID$(a$,6,2)=\"XYZ\":PRINT a$\na$=\"abcdef\":MID$(a$,7,2)=\"XYZ\":PRINT a$\na$=\"abcdef\":MID$(a$,-1,2)=\"XYZ\":PRINT a$\na$=\"abcdef\":MID$(a$,-256,2)=\"XYZ\":PRINT a$\n",
+    "reference": true,
+    "status": 0,
+    "expected": "abcdef\nXYZdef\naXYZef\nabcdXY\nabcdeX\nabcdef\nabcdef\nabcdef\nabcdXY\nXYcdef\naXYdef\nabcdXY\nabcdeX\nabcdef\nabcdef\nabcdXY\n"
+  },
+  {
+    "source": "a$=\"abcdef\":MID$(a$,255)=\"XYZ\":PRINT a$\na$=\"abcdef\":MID$(a$,256)=\"XYZ\":PRINT a$\na$=\"abcdef\":MID$(a$,257)=\"XYZ\":PRINT a$\na$=\"abcdef\":MID$(a$,511)=\"XYZ\":PRINT a$\na$=\"abcdef\":MID$(a$,65536)=\"XYZ\":PRINT a$\na$=\"abcdef\":MID$(a$,16777217)=\"XYZ\":PRINT a$\na$=\"abcdef\":MID$(a$,1.9)=\"XYZ\":PRINT a$\na$=\"abcdef\":MID$(a$,-1.9)=\"XYZ\":PRINT a$\na$=\"abcdef\":MID$(a$,255,2)=\"XYZ\":PRINT a$\na$=\"abcdef\":MID$(a$,256,2)=\"XYZ\":PRINT a$\na$=\"abcdef\":MID$(a$,257,2)=\"XYZ\":PRINT a$\na$=\"abcdef\":MID$(a$,511,2)=\"XYZ\":PRINT a$\na$=\"abcdef\":MID$(a$,65536,2)=\"XYZ\":PRINT a$\na$=\"abcdef\":MID$(a$,16777217,2)=\"XYZ\":PRINT a$\na$=\"abcdef\":MID$(a$,1.9,2)=\"XYZ\":PRINT a$\na$=\"abcdef\":MID$(a$,-1.9,2)=\"XYZ\":PRINT a$\n",
+    "reference": true,
+    "status": 0,
+    "expected": "abcdef\nabcdef\nXYZdef\nabcdef\nabcdef\nXYZdef\nXYZdef\nabcdef\nabcdef\nabcdXY\nXYcdef\nabcdef\nabcdXY\nXYcdef\nXYcdef\nabcdef\n"
+  },
+  {
+    "source": "a$=\"abcdef\":MID$(a$,2,0)=\"XYZ\":PRINT a$\na$=\"abcdef\":MID$(a$,2,1)=\"XYZ\":PRINT a$\na$=\"abcdef\":MID$(a$,2,2)=\"XYZ\":PRINT a$\na$=\"abcdef\":MID$(a$,2,5)=\"XYZ\":PRINT a$\na$=\"abcdef\":MID$(a$,2,6)=\"XYZ\":PRINT a$\na$=\"abcdef\":MID$(a$,2,7)=\"XYZ\":PRINT a$\na$=\"abcdef\":MID$(a$,2,-1)=\"XYZ\":PRINT a$\na$=\"abcdef\":MID$(a$,2,-256)=\"XYZ\":PRINT a$\na$=\"abcdef\":MID$(a$,2,255)=\"XYZ\":PRINT a$\na$=\"abcdef\":MID$(a$,2,256)=\"XYZ\":PRINT a$\na$=\"abcdef\":MID$(a$,2,257)=\"XYZ\":PRINT a$\na$=\"abcdef\":MID$(a$,2,511)=\"XYZ\":PRINT a$\na$=\"abcdef\":MID$(a$,2,65536)=\"XYZ\":PRINT a$\na$=\"abcdef\":MID$(a$,2,16777217)=\"XYZ\":PRINT a$\na$=\"abcdef\":MID$(a$,2,1.9)=\"XYZ\":PRINT a$\na$=\"abcdef\":MID$(a$,2,-1.9)=\"XYZ\":PRINT a$\n",
+    "reference": true,
+    "status": 0,
+    "expected": "abcdef\naXcdef\naXYdef\naXYZef\naXYZef\naXYZef\naXYZef\nabcdef\naXYZef\nabcdef\naXcdef\naXYZef\nabcdef\naXcdef\naXcdef\naXYZef\n"
+  },
+  {
+    "source": "a$=STRING$(255,\"x\"):MID$(a$,2,255)=\"YZ\":PRINT ;LEN a$;\":\";LEFT$(a$,4);\":\";RIGHT$(a$,4)\na$=STRING$(255,\"x\"):MID$(a$,3,254)=\"YZ\":PRINT ;LEN a$;\":\";LEFT$(a$,4);\":\";RIGHT$(a$,4)\na$=STRING$(255,\"x\"):MID$(a$,255,2)=\"YZ\":PRINT ;LEN a$;\":\";LEFT$(a$,4);\":\";RIGHT$(a$,4)\na$=STRING$(255,\"x\"):MID$(a$,255,3)=\"YZ\":PRINT ;LEN a$;\":\";LEFT$(a$,4);\":\";RIGHT$(a$,4)\na$=STRING$(255,\"x\"):MID$(a$,0,255)=\"YZ\":PRINT ;LEN a$;\":\";LEFT$(a$,4);\":\";RIGHT$(a$,4)\na$=STRING$(255,\"x\"):MID$(a$,0,0)=\"YZ\":PRINT ;LEN a$;\":\";LEFT$(a$,4);\":\";RIGHT$(a$,4)\na$=STRING$(255,\"x\"):MID$(a$,0,1)=\"YZ\":PRINT ;LEN a$;\":\";LEFT$(a$,4);\":\";RIGHT$(a$,4)\na$=STRING$(255,\"x\"):MID$(a$,256,2)=\"YZ\":PRINT ;LEN a$;\":\";LEFT$(a$,4);\":\";RIGHT$(a$,4)\na$=STRING$(255,\"x\"):MID$(a$,1,255)=\"YZ\":PRINT ;LEN a$;\":\";LEFT$(a$,4);\":\";RIGHT$(a$,4)\na$=STRING$(255,\"x\"):MID$(a$,2,256)=\"YZ\":PRINT ;LEN a$;\":\";LEFT$(a$,4);\":\";RIGHT$(a$,4)\na$=STRING$(255,\"x\"):MID$(a$,257,255)=\"YZ\":PRINT ;LEN a$;\":\";LEFT$(a$,4);\":\";RIGHT$(a$,4)\na$=STRING$(255,\"x\"):MID$(a$,-1,2)=\"YZ\":PRINT ;LEN a$;\":\";LEFT$(a$,4);\":\";RIGHT$(a$,4)\n",
+    "reference": true,
+    "status": 0,
+    "expected": "255:xYZx:xxxx\n255:xxYZ:xxxx\n255:xxxx:xxxx\n255:xxxx:xxxY\n255:xxxx:xxYZ\n255:xxxx:xxxx\n255:xxxx:xxxY\n255:xxxx:xxYZ\n255:YZxx:xxxx\n255:xxxx:xxxx\n255:YZxx:xxxx\n255:xxxx:xxxx\n"
+  },
+  {
+    "source": "a$=\"\":LEFT$(a$)=\"x\":RIGHT$(a$)=\"x\":MID$(a$,0,2)=\"x\":PRINT \"[\";a$;\"]\"\na$=\"x\":LEFT$(a$)=\"y\":PRINT a$:LEFT$(a$,1)=\"\":PRINT a$\na$=\"xy\":RIGHT$(a$,255)=\"A\":PRINT a$:MID$(a$,1,0)=\"B\":PRINT a$\nRIGHT$(a$,255)=\"\":PRINT a$:LEFT$(a$,255)=\"ABCDEF\":PRINT a$\n",
+    "reference": true,
+    "status": 0,
+    "expected": "[]\nx\nx\nxA\nxA\nxA\nAB\n"
+  },
+  {
+    "source": "a$=\"abcdef\":LEFT$(a$,3)=RIGHT$(a$,3):PRINT a$\na$=\"abcdef\":RIGHT$(a$,4)=LEFT$(a$,2):PRINT a$\na$=\"abcdef\":MID$(a$,2,3)=a$:PRINT a$\nb$=a$:MID$(a$,2,LEN(a$)-2)=STRING$(2,\"Z\"):PRINT a$;\":\";b$\nLEFT$(a$,LEN(a$))=STR$ INSTR(a$,\"a\"):PRINT a$\n",
+    "reference": true,
+    "status": 0,
+    "expected": "defdef\nabcdab\naabcef\naZZcef:aabcef\n1ZZcef\n"
+  },
+  {
+    "source": "a$=CHR$(0)+CHR$(128)+CHR$(255):b$=a$\nMID$(a$,2,1)=CHR$(0):PRINT ;LEN a$;\":\";ASC MID$(a$,2);\":\";ASC RIGHT$(a$)\nRIGHT$(a$,2)=CHR$(255):PRINT ;ASC RIGHT$(a$);\":\";(b$=CHR$(0)+CHR$(128)+CHR$(255))\nLEFT$(a$,1)=CHR$(128):PRINT ;ASC a$;\":\";LEN a$\n",
+    "reference": true,
+    "status": 0,
+    "expected": "3:0:255\n255:-1\n128:3\n"
+  },
+  {
+    "source": "LEFT$(missing$,1/0)=CHR$(1/0)\n",
+    "reference": true,
+    "reference_error": true,
+    "status": 1,
+    "expected": "No such variable\n"
+  },
+  {
+    "source": "RIGHT$(missing$)=\"x\"\n",
+    "reference": true,
+    "reference_error": true,
+    "status": 1,
+    "expected": "No such variable\n"
+  },
+  {
+    "source": "MID$(missing$,2147483648)=\"x\"\n",
+    "reference": true,
+    "reference_error": true,
+    "status": 1,
+    "expected": "No such variable\n"
+  },
+  {
+    "source": "a$=\"x\":LEFT$(a$,2147483648)=missing$\n",
+    "reference": true,
+    "reference_error": true,
+    "status": 1,
+    "expected": "Number too big\n"
+  },
+  {
+    "source": "a$=\"\":MID$(a$,1/0,2147483648)=missing$\n",
+    "reference": true,
+    "reference_error": true,
+    "status": 1,
+    "expected": "Division by zero\n"
+  },
+  {
+    "source": "a$=\"\":MID$(a$,1,2147483648)=missing$\n",
+    "reference": true,
+    "reference_error": true,
+    "status": 1,
+    "expected": "Number too big\n"
+  },
+  {
+    "source": "a$=\"\":LEFT$(a$,0)=missing$\n",
+    "reference": true,
+    "reference_error": true,
+    "status": 1,
+    "expected": "No such variable\n"
+  },
+  {
+    "source": "a$=\"x\":MID$(a$,0)=CHR$(1/0)\n",
+    "reference": true,
+    "reference_error": true,
+    "status": 1,
+    "expected": "Division by zero\n"
+  },
+  {
+    "source": "a$=\"\":RIGHT$(a$,0)=STRING$(128,\"ab\")\n",
+    "reference": true,
+    "reference_error": true,
+    "status": 1,
+    "expected": "String too long\n"
+  },
+  {
+    "source": "LEFT$(a%,1)=\"x\"\n",
+    "diagnostic": "Expected a string variable"
+  },
+  {
+    "source": "MID$(\"abc\",1)=\"x\"\n",
+    "diagnostic": "Expected a name"
+  },
+  {
+    "source": "RIGHT$(a$(0),1)=\"x\"\n",
+    "diagnostic": "Arrays and function calls"
+  },
+  {
+    "source": "MID$(a$)=\"x\"\n",
+    "diagnostic": "Expected ,"
+  },
+  {
+    "source": "LEFT$(a$,1,2)=\"x\"\n",
+    "diagnostic": "Expected )"
+  },
+  {
+    "source": "LEFT$(a$,\"x\")=\"x\"\n",
+    "diagnostic": "String value used as a numeric item"
+  },
+  {
+    "source": "LEFT$(a$,1)=1\n",
+    "diagnostic": "Expected a string item"
+  },
+  {
+    "source": "RIGHT$(a$,1)\n",
+    "diagnostic": "Expected ="
+  }
+]

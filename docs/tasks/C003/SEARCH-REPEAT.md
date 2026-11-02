@@ -82,5 +82,5 @@ review, commit approval and main acceptance.
 ```
 
 Exact sources, measured durations, evidence and promotion are recorded in
-C003.md and the dated development log after qualification. Slice assignment
-and remaining facilities stay in the sole TODO; C003 is not complete yet.
+C003.md and the dated development log after qualification. [Slice assignment](SLICE-STORE.md) is qualified separately. Remaining activation,
+array, I/O and self-hosting work stays in C004–C006 in the sole TODO.

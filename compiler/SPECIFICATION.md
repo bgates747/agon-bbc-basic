@@ -92,8 +92,8 @@ The Author accepted the corrected C002 baseline for a development checkpoint.
     starts use the low byte after reference signed SFIX. LEFT$(s$) removes the
     final byte, RIGHT$(s$) returns the final byte, MID$(s$,0) retains the full
     string, and an optional MID$ count applies LEFT$ to that result. Empty
-    results still evaluate explicit count expressions. Slice assignment,
-    further string functions remain rejected.
+    results still evaluate explicit count expressions. Further I/O-dependent
+    string functions remain unsupported.
 14. String =, <>, <, <=, > and >= compare unsigned bytes then prefix lengths,
     including NUL/high bytes. Results are ordinary integer -1/0 and work in
     numeric assignments, arithmetic, Boolean expressions, parentheses, functions,
@@ -116,6 +116,12 @@ The Author accepted the corrected C002 baseline for a development checkpoint.
     string, including when count becomes zero. Low-byte repetition is bounded
     at 255 bytes and overflows report String too long. See the
     [search/repetition contract](../docs/tasks/C003/SEARCH-REPEAT.md).
+
+17. LEFT$/RIGHT$/MID$ assignment modifies existing scalar strings without
+    resizing, allocation or implicit target creation. Target existence is
+    checked before starts/counts and RHS. Counts use SFIX/low bytes; RHS is
+    always evaluated. Reference range markers, short-RHS right alignment and
+    self-reference are preserved. See [slice assignment](../docs/tasks/C003/SLICE-STORE.md).
 
 ## Current backend and runtime contract
 
@@ -162,9 +168,9 @@ The Author accepted the corrected C002 baseline for a development checkpoint.
 10. Strings use five-byte length/capacity/u24-pointer descriptors and separate
     existence flags. Private 256-byte expression buffers are limited to 16
     simultaneous values; parser nesting shares the numeric 32-entry bound.
-    Assignment copies into independently owned contents. A separate 533-byte
-    runtime retains the former 369-byte core/slices/comparison prefix and adds
-    164 bytes for search/repetition, with two rebased 24-bit relocations.
+    Assignment copies into independently owned contents. A separate 623-byte
+    runtime retains the former 533-byte core/slices/comparison/search prefix
+    and adds 90 bytes for slice assignment, with two rebased relocations.
     It adapts reference descriptor/storage conventions with an explicit
     FREE/limit context, capacity reuse, tail growth and geometric non-tail
     growth. Allocation checks precede descriptor/context changes. No interpreter
