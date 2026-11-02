@@ -74,3 +74,15 @@ independent link bases. The entry trampoline resets the next-free pointer on
 every native entry;256 records have explicit type/body/variable/limit/step fields.
 [Control contract](../../docs/tasks/C004/loops/CONTROL.md) and C004 evidence own
 ABI/status/qualification. No interpreter globals or entry addresses are linked.
+
+## Scalar procedure/local helpers
+
+`procedures.s` is502 bytes with27 internal ADL24 relocations. Four compiler
+patches connect control push/check/pop and numeric conversion. IX/IY/SP are
+preserved on ordinary calls; HL returns a saved-local record where documented.
+A distinct PROC marker and LOCAL records own a bounded32768-byte private arena;
+numeric records occupy14 bytes, string records269 including255 owned bytes.
+The arena is reserved after emitted runtime/string workspace and is not emitted
+as zero padding. Entry initialises it while preserving MOS DE.
+`build_procedure_runtime.py` packages DATA50000 and independent link checks.
+[Contract](../../docs/tasks/C004/activations/PROCEDURES.md) owns admission/ABI.

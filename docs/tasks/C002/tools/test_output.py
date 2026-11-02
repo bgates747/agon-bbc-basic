@@ -105,7 +105,9 @@ def main():
         if case.get("reference"):
             if args.isolate_reference:
                 reference += ['CLEAR', ':'.join(f'{letter}%=0' for letter in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ')]
-            body = case["source"].splitlines()
+            body = case.get("reference_source", case["source"]).splitlines()
+            if case.get("reference_definitions"):
+                error_definitions += [f'{40000+i*100+j} {line}' for j,line in enumerate(case["reference_definitions"])]
             if case.get("reference_error"):
                 n = 10000+i*100
                 error_definitions += [f'{n} DEF PROCerror{i}:LOCAL ERROR',

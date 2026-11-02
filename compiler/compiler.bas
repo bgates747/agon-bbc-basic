@@ -10,7 +10,9 @@
 1000 DEF PROCinit
 1010 DIM ccode% 65535,csname$(1023),csaddr%(1023)
 1020 DIM crname$(2047),craddr%(2047),crline%(2047),crcol%(2047)
+1021 DIM cpname$(127),cpline%(127),cparcnt%(127),cpar%(127,15),cargkind%(15),cargindex%(15)
 1022 PROCloadnumbers
+1023 PROCloadacts
 1024 DIM cvname$(127),cvsize%(127),cvstatic%(127),cvtype%(127),ckwords$(4)
 1026 PROCkeywords
 1027 PROCloadcontrol
@@ -23,9 +25,11 @@
 1062 cnumeric%=FALSE:cnslots%=0:cnparse%=0:cndepth%=0:cvnum%=0:cstrings%=FALSE:csdepth%=0:csslots%=0:csvars%=0:cvaluekind%=0
 1064 cflow%=0:cbnum%=0
 1066 cloops%=FALSE:cltop%=0:cstructure$=""
+1068 cacts%=FALSE:cpnum%=0:cscope%=0
 1070 IF csource$=ctarget$ PROCbad("Source and output must differ")
 1080 cfh%=OPENIN(csource$)
 1090 IF cfh%=0 PROCbad("Cannot open source")
+1092 PROCprocscan(cfh%):CLOSE#cfh%:cfh%=OPENIN(csource$):clnum%=0:cpos%=1:ccr%=FALSE
 1100 PROCaddr("C3","$start")
 1110 REPEAT:PROCbyte(0):UNTIL cpc%=64
 1120 PROCbytes("4D4F530001")
@@ -70,8 +74,8 @@
 1490 cline$=cline$+CHR$(cb%)
 1500 ENDPROC
 1510 DEF PROCline
-1520 LOCAL cn%,cw$,ct%,cinum%,cleid$,ccont%,cfirst%,cinseen%
-1522 cinum%=0:cleid$="":cfirst%=TRUE:cinseen%=FALSE
+1520 LOCAL cn%,cw$,ct%,cinum%,cleid$,ccont%,cfirst%,cinseen%,cdeclskip$
+1522 cinum%=0:cleid$="":cfirst%=TRUE:cinseen%=FALSE:cdeclskip$="":PROCprocscope
 1530 PROCspace
 1540 IF FNdigit(FNpeek) PROCnumberlabel
 1570 PROCspace
@@ -83,15 +87,17 @@
 1610 IF FNpeek<>"" AND FNpeek<>":" AND NOT ccont% AND NOT FNword("ELSE") PROCbad("Unexpected text after statement")
 1615 ENDWHILE
 1618 PROCiffalse:IF cleid$<>"" PROClabel(cleid$)
+1619 IF cdeclskip$<>"" PROClabel(cdeclskip$)
 1620 ENDPROC
 1622 DEF PROCnumberlabel
 1624 LOCAL cn%
 1626 cn%=FNnumber(65279):IF cn%<=clast% PROCbad("Line numbers must increase")
-1628 clast%=cn%:PROClabel("#"+STR$(cn%))
+1628 clast%=cn%:PROClabel(FNtarget("#"+STR$(cn%)))
 1630 ENDPROC
 1632 DEF PROCstatement
 1640 LOCAL cw$,ct%,cn$,csuppress%
-1650 IF FNpeek="@" THEN cpos%=cpos%+1:cn$=FNname:PROCexpect(":"):PROClabel("@"+cn$):cpos%=cpos%-1:ENDPROC
+1650 IF FNpeek="@" THEN cpos%=cpos%+1:cn$=FNname:PROCexpect(":"):PROClabel(FNtarget("@"+cn$)):cpos%=cpos%-1:ENDPROC
+1655 IF MID$(cline$,cpos%,4)="PROC" THEN cpos%=cpos%+4:PROCproccall:ENDPROC
 1660 cw$=FNname
 1662 IF (cw$="LEFT" OR cw$="RIGHT" OR cw$="MID") AND FNpeek="$" THEN cpos%=cpos%+1:PROCstrsliceassign(cw$):ENDPROC
 1664 IF cw$="IF" THEN PROCif:ENDPROC
@@ -100,6 +106,9 @@
 1669 IF cw$="REPEAT" OR cw$="WHILE" OR cw$="FOR" THEN PROCloop(cw$):ENDPROC
 1670 IF cw$="REM" THEN cpos%=LEN(cline$)+1:ENDPROC
 1672 IF cw$="UNTIL" OR cw$="ENDWHILE" OR cw$="NEXT" THEN PROCloopend(cw$):ENDPROC
+1674 IF cw$="DEF" THEN PROCdefinition:ENDPROC
+1676 IF cw$="LOCAL" THEN PROClocal:ENDPROC
+1678 IF cw$="ENDPROC" THEN PROCuseacts:PROCaddr("CD","$actleave"):PROCaddr("DA","$acterror"):PROCbyte(&C9):ENDPROC
 1680 IF cw$="PRINT" THEN PROCprint:ENDPROC
 1690 IF cw$="VDU" THEN PROCvdu:ENDPROC
 1700 IF cw$="CLS" THEN PROCcharacter(12):ENDPROC
@@ -115,6 +124,7 @@
 1780 LOCAL cn$
 1790 PROCspace
 1800 IF FNpeek="@" THEN cpos%=cpos%+1:cn$="@"+FNname ELSE cn$="#"+STR$(FNnumber(65279))
+1805 cn$=FNtarget(cn$)
 1810 IF cw$="GOTO" THEN PROCaddr("C3",cn$) ELSE PROCaddr("21",cn$):PROCaddr("CD","$gosub")
 1820 ENDPROC
 1830 DEF PROCprint
@@ -278,7 +288,9 @@
 3222 IF cnumeric% PROCnumruntime
 3224 IF cvnum%>0 PROCvarruntime
 3225 IF cloops% PROCflowruntime
-3226 IF cstrings% PROCstrruntime
+3226 IF cacts% PROCactruntime
+3227 IF cstrings% PROCstrruntime
+3228 IF cacts% PROCactworkspace
 3230 ENDPROC
 3240 DEF PROCbad(cm$)
 3250 ERROR 100,LEFT$(csource$,80)+":"+STR$(clnum%)+":"+STR$(cpos%)+": "+LEFT$(cm$,130)
@@ -865,7 +877,9 @@
 11820 PROCbytes("FE2B"):PROCaddr("CA","$flowerr1"):PROCbytes("FE2E"):PROCaddr("CA","$flowerr2")
 11830 PROCbytes("FE20"):PROCaddr("CA","$flowerr3"):PROCbytes("FE21"):PROCaddr("CA","$flowerr4"):PROCbytes("FE26"):PROCaddr("CA","$flowerr5")
 11840 PROCaddr("C3","$numerror")
-11850 ci%=FNsymbol("$start"):cp%=csaddr%(ci%):csaddr%(ci%)=&40000+cpc%:PROCaddr("CD","$ctlinit"):PROCbyte(&C3)
+11850 ci%=FNsymbol("$start"):cp%=csaddr%(ci%):csaddr%(ci%)=&40000+cpc%:PROCaddr("CD","$ctlinit")
+11852 IF cacts% THEN PROCbyte(&D5):PROCaddr("21","$actbase"):PROCaddr("11","$actlimit"):PROCaddr("CD","$actinit"):PROCbyte(&D1)
+11855 PROCbyte(&C3)
 11860 PROCbyte(cp% MOD 256):PROCbyte((cp% DIV 256) MOD 256):PROCbyte(cp% DIV 65536)
 11870 ENDPROC
 11880 DEF PROCctlexport(cn$,cp%)
@@ -873,6 +887,126 @@
 11900 DEF FNtrim(cs$)
 11910 WHILE RIGHT$(cs$,1)=" ":cs$=LEFT$(cs$,LEN(cs$)-1):ENDWHILE
 11920 =cs$
+13000 DEF PROCloadacts
+13010 LOCAL ci%,cj%,cs$
+13020 RESTORE 50000:READ casize%,carelocs%,cainit%,cabegin%,casave%,cainstall%,cabind%,caleave%,capushslot%,cacheckslot%,capopslot%,canumslot%,catop%
+13030 DIM caimage% casize%-1,careloc%(carelocs%-1)
+13040 FOR ci%=0 TO casize%-1 STEP 40:READ cs$
+13050 FOR cj%=1 TO LEN(cs$) STEP 2:caimage%?(ci%+(cj%-1) DIV 2)=FNhexbyte(MID$(cs$,cj%,2)):NEXT:NEXT
+13060 IF carelocs%>0 THEN FOR ci%=0 TO carelocs%-1:READ careloc%(ci%):NEXT
+13070 ENDPROC
+13080 DEF PROCuseacts
+13090 cacts%=TRUE:cloops%=TRUE:cnumeric%=TRUE:IF cnslots%=0 cnslots%=1
+13100 ENDPROC
+13110 DEF FNprocfind(cn$)
+13120 LOCAL ci%,cf%:ci%=0:cf%=-1
+13130 WHILE ci%<cpnum%:IF cpname$(ci%)=cn$ cf%=ci%
+13140 ci%=ci%+1:ENDWHILE
+13150 =cf%
+13160 DEF PROCprocscan(ch%)
+13170 LOCAL ci%,cn$
+13180 WHILE NOT EOF#ch%
+13190 clnum%=clnum%+1:cpos%=1:PROCreadline(ch%):PROCspace
+13200 IF FNdigit(FNpeek) ci%=FNnumber(65279)
+13210 PROCspace:IF FNword("DEF") PROCscandef
+13220 ENDWHILE
+13230 ENDPROC
+13240 DEF PROCscandef
+13250 LOCAL cn$,ci%
+13260 cpos%=cpos%+3:PROCspace
+13270 IF MID$(cline$,cpos%,4)<>"PROC" PROCbad("Only DEF PROC is supported in this tranche")
+13280 cpos%=cpos%+4:cn$=FNname:IF FNprocfind(cn$)>=0 PROCbad("Duplicate PROC "+cn$)
+13290 IF cpnum%=128 PROCbad("Procedure limit exceeds 128")
+13300 ci%=cpnum%:cpnum%=cpnum%+1:cpname$(ci%)=cn$:cpline%(ci%)=clnum%:PROCprocparams(ci%,TRUE)
+13310 ENDPROC
+13320 DEF PROCprocparams(ci%,csave%)
+13330 LOCAL cn$,cj%,ck%,cv%,cmore%
+13340 cj%=0:PROCspace:IF FNpeek<>"(" THEN IF csave% cparcnt%(ci%)=0
+13342 IF FNpeek<>"(" ENDPROC
+13350 cpos%=cpos%+1:PROCspace:IF FNpeek=")" PROCbad("Empty formal parameter lists are unsupported")
+13360 REPEAT
+13370 IF cj%=16 PROCbad("Procedure argument limit exceeds 16")
+13380 cn$=FNname:IF FNreserved(cn$) PROCbad("Unsupported formal parameter "+cn$)
+13390 cv%=FNvariable(cn$):ck%=0
+13400 WHILE ck%<cj%:IF cpar%(ci%,ck%)=cv% PROCbad("Duplicate formal parameter")
+13410 ck%=ck%+1:ENDWHILE
+13420 IF csave% THEN cpar%(ci%,cj%)=cv% ELSE IF cpar%(ci%,cj%)<>cv% PROCbad("Procedure signature changed")
+13430 cj%=cj%+1:PROCspace:cmore%=(FNpeek=","):IF cmore% cpos%=cpos%+1
+13440 UNTIL NOT cmore%
+13450 PROCexpect(")"):IF csave% THEN cparcnt%(ci%)=cj% ELSE IF cparcnt%(ci%)<>cj% PROCbad("Procedure signature changed")
+13460 ENDPROC
+13470 DEF PROCprocscope
+13480 LOCAL ci%:ci%=0
+13490 WHILE ci%<cpnum%
+13500 IF cpline%(ci%)=clnum% THEN IF cstructure$<>"" PROCbad("Definition crosses an open block")
+13510 IF cpline%(ci%)=clnum% cscope%=ci%+1
+13520 ci%=ci%+1:ENDWHILE
+13530 ENDPROC
+13540 DEF FNtarget(cn$)
+13550 IF cscope%=0 THEN =cn$
+13560 ="$p"+STR$(cscope%)+cn$
+13570 DEF PROCdefinition
+13580 LOCAL cn$,ci%
+13590 PROCspace:IF MID$(cline$,cpos%,4)<>"PROC" PROCbad("Only DEF PROC is supported in this tranche")
+13600 cpos%=cpos%+4:cn$=FNname:ci%=FNprocfind(cn$)
+13610 IF ci%<0 PROCbad("DEF PROC must begin its physical statement line")
+13620 IF cpline%(ci%)<>clnum% PROCbad("DEF PROC must begin its physical statement line")
+13630 PROCprocparams(ci%,FALSE):cdeclskip$=FNflow:PROCaddr("C3",cdeclskip$):PROClabel("$proc"+STR$(ci%))
+13640 ENDPROC
+13650 DEF PROCproccall
+13660 LOCAL cn$,ci%,cj%,cv%,ccount%,ck%
+13670 cn$=FNname:ci%=FNprocfind(cn$):IF ci%<0 PROCbad("Undefined PROC "+cn$)
+13680 PROCuseacts:PROCaddr("CD","$actbegin"):PROCaddr("DA","$acterror"):ccount%=cparcnt%(ci%)
+13690 IF ccount%>0 THEN FOR cj%=0 TO ccount%-1:PROCsavebinding(cpar%(ci%,cj%)):NEXT
+13700 cndepth%=0:csdepth%=0:PROCspace
+13710 IF ccount%=0 AND FNpeek="(" PROCbad("Empty call argument lists are unsupported")
+13720 IF ccount%>0 THEN PROCexpect("("):FOR cj%=0 TO ccount%-1:PROCprocarg(ci%,cj%):NEXT:PROCexpect(")")
+13730 IF ccount%>0 THEN FOR cj%=ccount%-1 TO 0 STEP -1:PROCprocbind(cj%,ccount%-1-cj%):NEXT
+13740 PROCaddr("CD","$proc"+STR$(ci%)):cndepth%=0:csdepth%=0
+13750 ENDPROC
+13760 DEF PROCprocarg(ci%,cj%)
+13770 LOCAL cv%,ck%
+13780 IF cj%>0 PROCexpect(",")
+13790 PROCexpr(1):cv%=cpar%(ci%,cj%):ck%=ABS(cvtype%(cv%)=129)
+13800 IF cvaluekind%<>ck% PROCbad("Procedure argument type mismatch")
+13810 cargkind%(cj%)=ck%:IF ck%=0 THEN cargindex%(cj%)=cndepth%-1 ELSE cargindex%(cj%)=csdepth%-1
+13820 ENDPROC
+13830 DEF PROCprocbind(ci%,co%)
+13840 LOCAL cn$:cn$="$v":IF cargkind%(ci%)=1 cn$="$s"
+13850 PROCbyte(&3E):PROCbyte(co%):PROCaddr("FD21",cn$+STR$(cargindex%(ci%))):PROCaddr("CD","$actbind"):PROCaddr("DA","$acterror")
+13860 ENDPROC
+13870 DEF PROCsavebinding(ci%)
+13880 PROCaddr("DD21","$bind"+STR$(ci%)):PROCbyte(&3E):PROCbyte(cvtype%(ci%)):PROCaddr("CD","$actsave"):PROCaddr("DA","$acterror")
+13890 ENDPROC
+13900 DEF PROClocal
+13910 LOCAL cn$,ci%,cmore%
+13920 PROCuseacts
+13930 REPEAT
+13940 cn$=FNname:IF FNreserved(cn$) PROCbad("Unsupported LOCAL form "+cn$)
+13950 ci%=FNvariable(cn$):PROCsavebinding(ci%):PROCaddr("CD","$actinstall")
+13960 PROCspace:cmore%=(FNpeek=","):IF cmore% cpos%=cpos%+1
+13970 UNTIL NOT cmore%
+13980 ENDPROC
+14000 DEF PROCactruntime
+14010 LOCAL cb%,ci%,cp%,cv%,csave%
+14020 cb%=cpc%:IF cpc%+casize%>65536 PROCbad("Executable exceeds 65536 bytes")
+14030 FOR ci%=0 TO casize%-1:ccode%?(cb%+ci%)=caimage%?ci%:NEXT:cpc%=cpc%+casize%
+14040 IF carelocs%>0 THEN FOR ci%=0 TO carelocs%-1:cp%=cb%+careloc%(ci%):cv%=ccode%?cp%+256*ccode%?(cp%+1)+65536*ccode%?(cp%+2):PROCpatch(cp%,cv%+&40000+cb%):NEXT
+14050 PROCctlexport("$actinit",cb%+cainit%):PROCctlexport("$actbegin",cb%+cabegin%):PROCctlexport("$actsave",cb%+casave%)
+14060 PROCctlexport("$actinstall",cb%+cainstall%):PROCctlexport("$actbind",cb%+cabind%):PROCctlexport("$actleave",cb%+caleave%)
+14070 csave%=cpc%:cpc%=cb%+capushslot%:PROCaddr("","$ctlpush"):cpc%=cb%+cacheckslot%:PROCaddr("","$ctlcheck")
+14080 cpc%=cb%+capopslot%:PROCaddr("","$ctlpop"):cpc%=cb%+canumslot%:PROCaddr("","$numop"):cpc%=csave%
+14090 PROClabel("$acterror"):PROCbytes("B7"):PROCaddr("CA","$flowerr0")
+14100 PROCbytes("FE0C"):PROCaddr("CA","$notlocal"):PROCbytes("FE0D"):PROCaddr("CA","$notproc"):PROCaddr("C3","$numerror")
+14110 PROClabel("$notlocal"):PROCtext("Not in a FN or PROC"):PROCnewline:PROCaddr("C3","$error")
+14120 PROClabel("$notproc"):PROCtext("Not in a PROC"):PROCnewline:PROCaddr("C3","$error")
+14130 ENDPROC
+14140 DEF PROCactworkspace
+14150 LOCAL cp%,ci%
+14160 cp%=&40000+cpc%:IF cstrings% cp%=csaddr%(FNsymbol("$sheapend"))
+14170 PROClabel("$actbase"):csaddr%(csnum%-1)=cp%:PROClabel("$actlimit"):csaddr%(csnum%-1)=cp%+32768
+14180 IF cp%+32768>&B0000 PROCbad("Activation workspace exceeds user RAM")
+14190 ENDPROC
 20000 DATA 4460,387,644,0,12,113,212,267,283
 20010 DATA "E1DDE5D101050000EDB0E5C9DD7E04B72809DD7E03EE80DD7703C9DDE5E10604377E2FCE00772310"
 20020 DATA "F8C9DDE5FDE50100000021000000DD6E02DD6603DD4E04D921000000DD6E00DD6601D9FDE5D1DD21"
@@ -1244,3 +1378,19 @@
 42170 DATA "0000000000000000000000000000000000"
 42180 DATA 1,5,17,21,56,74,78,87,130,141,150,158,170,183,196,251,256,281,287,297
 42190 DATA 305,309,316,330,349,372,380,421,429,436
+50000 DATA 502,27,0,10,20,207,260,389,478,482,486,490,493
+50010 DATA "22ED0100ED53F00100C92AED01003E05C3DD0100DDE5FDE5F53E06CDE10100300A3E05CDE10100DA"
+50020 DATA "C90000F14F47FE8120020605DD7E00B7200DDD360001DDE5E123AF772310FC79F5110E0000FE8120"
+50030 DATA "04110D01002AED010019ED5BF00100B7ED5238092807F1AF37C3C400002AED0100F1110E0000FE81"
+50040 DATA "2004110D01001922F30100FD2AED0100DDE5E1FD2F0023FD2F03FD7706010000004FFE8120020E05"
+50050 DATA "FDE5D113131313131313EDB02AED01003E06CDDD0100380C2AF3010022ED0100FDE5E1AFFDE1DDE1"
+50060 DATA "C9F13E0C3718F5DDE5FDE5E5DDE1DD3103DD7E06FE81280B47FDE5E1AF772310FC1813FD360000FD"
+50070 DATA "3601FFDDE5E1110E000019FD2F02FDE1DDE1AFC9DDE5FDE5F53E06CDE10100C1DA800100E5210000"
+50080 DATA "00682929292929EBE1B7ED522323ED27E5DDE1CDCF0000DD7E06FE812826FE052810DDE5FDE5DDE1"
+50090 DATA "3E26CDE90100DDE1383101000000DD4E06DD1703FDE5E1EDB0AF181FFD7E00DD170312B728150100"
+50100 DATA "00004FDDE5E1110E000019EBFDE5E123EDB0AFFDE1DDE1C93E0C3718F6DDE5FDE53E06CDE1010038"
+50110 DATA "2E2323ED27E5DDE122ED0100DD170301000000DD4E0679FE8120020E05DDE5E123232323232323ED"
+50120 DATA "B0CDE5010018CA3E05CDE10100380E2323ED2722ED0100CDE5010018033E0D37FDE1DDE1C9C30000"
+50130 DATA "00C3000000C3000000C3000000000000000000000000"
+50140 DATA 1,6,11,17,28,36,40,86,92,106,110,128,133,173,179,185,189,268,273,300
+50150 DATA 323,396,409,442,450,460,464

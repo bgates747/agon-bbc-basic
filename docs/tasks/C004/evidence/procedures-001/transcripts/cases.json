@@ -1,0 +1,202 @@
+[
+  {
+    "source": "A%=7:B%=8:PROCswap(A%,B%):PRINT ;A%;\":\";B%\nx%=7:y%=8:PROCstaged(3,x%):PRINT ;x%;\":\";y%\nPROCnew:PRINT ;fresh%;\":\";LEN fresh$\nv%=7:PROCtwice:PRINT ;v%\nEND\nDEF PROCswap(B%,A%):PRINT ;A%;\":\";B%:ENDPROC\nDEF PROCstaged(x%,y%):PRINT ;x%;\":\";y%:ENDPROC\nDEF PROCnew:LOCAL fresh%,fresh$:fresh%=4:fresh$=\"x\":ENDPROC\nDEF PROCtwice:LOCAL v%:v%=3:LOCAL v%:PRINT ;v%:v%=4:ENDPROC\n",
+    "reference_source": "A%=7:B%=8:PROCswap(A%,B%):PRINT ;A%;\":\";B%\nx%=7:y%=8:PROCstaged(3,x%):PRINT ;x%;\":\";y%\nPROCnew:PRINT ;fresh%;\":\";LEN fresh$\nv%=7:PROCtwice:PRINT ;v%\n",
+    "reference_definitions": [
+      "DEF PROCswap(B%,A%):PRINT ;A%;\":\";B%:ENDPROC",
+      "DEF PROCstaged(x%,y%):PRINT ;x%;\":\";y%:ENDPROC",
+      "DEF PROCnew:LOCAL fresh%,fresh$:fresh%=4:fresh$=\"x\":ENDPROC",
+      "DEF PROCtwice:LOCAL v%:v%=3:LOCAL v%:PRINT ;v%:v%=4:ENDPROC"
+    ],
+    "reference": true,
+    "status": 0,
+    "procedure_observations": 4,
+    "expected": "8:7\n7:8\n3:7\n7:8\n0:0\n0\n7\n"
+  },
+  {
+    "source": "text$=\"outer\":PROCouter:PRINT text$\nvalue=1.5:whole%=-7:byte&=255:s$=\"old\":PROCtypes(2.5,9.9,257,\"new\"):PRINT ;value;\":\";whole%;\":\";byte&;\":\";s$\ncopy$=\"original\":PROCslice(copy$):PRINT copy$\nPROCrecursive(4):PRINT ;n%\nEND\nDEF PROCouter:LOCAL text$:text$=\"inner\":PROCsee:ENDPROC\nDEF PROCsee:PRINT text$:ENDPROC\nDEF PROCtypes(value,whole%,byte&,s$):PRINT ;value;\":\";whole%;\":\";byte&;\":\";s$:ENDPROC\nDEF PROCslice(s$):MID$(s$,2,2)=\"XY\":PRINT s$:ENDPROC\nDEF PROCrecursive(n%):PRINT ;n%:IF n%>0 THEN PROCrecursive(n%-1)\nENDPROC\n",
+    "reference_source": "text$=\"outer\":PROCouter:PRINT text$\nvalue=1.5:whole%=-7:byte&=255:s$=\"old\":PROCtypes(2.5,9.9,257,\"new\"):PRINT ;value;\":\";whole%;\":\";byte&;\":\";s$\ncopy$=\"original\":PROCslice(copy$):PRINT copy$\nPROCrecursive(4):PRINT ;n%\n",
+    "reference_definitions": [
+      "DEF PROCouter:LOCAL text$:text$=\"inner\":PROCsee:ENDPROC",
+      "DEF PROCsee:PRINT text$:ENDPROC",
+      "DEF PROCtypes(value,whole%,byte&,s$):PRINT ;value;\":\";whole%;\":\";byte&;\":\";s$:ENDPROC",
+      "DEF PROCslice(s$):MID$(s$,2,2)=\"XY\":PRINT s$:ENDPROC",
+      "DEF PROCrecursive(n%):PRINT ;n%:IF n%>0 THEN PROCrecursive(n%-1)",
+      "ENDPROC"
+    ],
+    "reference": true,
+    "status": 0,
+    "procedure_observations": 4,
+    "expected": "inner\nouter\n2.5:9:1:new\n1.5:-7:255:old\noXYginal\noriginal\n4\n3\n2\n1\n0\n0\n"
+  },
+  {
+    "source": "n%=9:s$=\"outer\":PROCnest(3):PRINT ;n%;\":\";s$\nFOR i%=1 TO 3:PROCloop(i%):NEXT:PRINT ;i%\nPROCearly(0):PROCearly(1):PRINT \"done\"\na$=\"saved\":PROCfull(STRING$(255,\"x\")):PRINT a$\nEND\nDEF PROCnest(n%):LOCAL s$:s$=STR$ n%:IF n%>0 THEN PROCnest(n%-1)\nPRINT ;n%;\":\";s$:ENDPROC\nDEF PROCloop(i%):LOCAL j%:FOR j%=1 TO 2:PRINT ;i%;\":\";j%:NEXT:ENDPROC\nDEF PROCearly(n%):LOCAL x%:x%=7:IF n%=0 THEN PRINT \"early\":ENDPROC\nPRINT \"normal\":ENDPROC\nDEF PROCfull(a$):PRINT ;LEN a$;\":\";ASC a$:a$=STRING$(255,\"y\"):PRINT ;LEN a$;\":\";ASC a$:ENDPROC\n",
+    "reference_source": "n%=9:s$=\"outer\":PROCnest(3):PRINT ;n%;\":\";s$\nFOR i%=1 TO 3:PROCloop(i%):NEXT:PRINT ;i%\nPROCearly(0):PROCearly(1):PRINT \"done\"\na$=\"saved\":PROCfull(STRING$(255,\"x\")):PRINT a$\n",
+    "reference_definitions": [
+      "DEF PROCnest(n%):LOCAL s$:s$=STR$ n%:IF n%>0 THEN PROCnest(n%-1)",
+      "PRINT ;n%;\":\";s$:ENDPROC",
+      "DEF PROCloop(i%):LOCAL j%:FOR j%=1 TO 2:PRINT ;i%;\":\";j%:NEXT:ENDPROC",
+      "DEF PROCearly(n%):LOCAL x%:x%=7:IF n%=0 THEN PRINT \"early\":ENDPROC",
+      "PRINT \"normal\":ENDPROC",
+      "DEF PROCfull(a$):PRINT ;LEN a$;\":\";ASC a$:a$=STRING$(255,\"y\"):PRINT ;LEN a$;\":\";ASC a$:ENDPROC"
+    ],
+    "reference": true,
+    "status": 0,
+    "procedure_observations": 4,
+    "expected": "0:0\n1:1\n2:2\n3:3\n9:outer\n1:1\n1:2\n2:1\n2:2\n3:1\n3:2\n4\nearly\nnormal\ndone\n255:120\n255:121\nsaved\n"
+  },
+  {
+    "source": "PROCrepeated:PRINT ;x%;\":\";y%\nEND\nDEF PROCrepeated:LOCAL x%,y%:x%=2:y%=3:ENDPROC\n",
+    "reference_source": "PROCrepeated:PRINT ;x%;\":\";y%\n",
+    "reference_definitions": [
+      "DEF PROCrepeated:LOCAL x%,y%:x%=2:y%=3:ENDPROC"
+    ],
+    "reference": true,
+    "status": 0,
+    "procedure_observations": 1,
+    "expected": "0:0\n"
+  },
+  {
+    "source": "PROCbadloop\nEND\nDEF PROCbadloop:FOR i%=1 TO 1:LOCAL x%:NEXT:ENDPROC\n",
+    "reference_source": "PROCbadloop\n",
+    "reference_definitions": [
+      "DEF PROCbadloop:FOR i%=1 TO 1:LOCAL x%:NEXT:ENDPROC"
+    ],
+    "reference": true,
+    "status": 1,
+    "reference_error": true,
+    "expected": "Not in a FN or PROC\n"
+  },
+  {
+    "source": "PROCbadexit\nEND\nDEF PROCbadexit:FOR i%=1 TO 1:ENDPROC:NEXT\n",
+    "reference_source": "PROCbadexit\n",
+    "reference_definitions": [
+      "DEF PROCbadexit:FOR i%=1 TO 1:ENDPROC:NEXT"
+    ],
+    "reference": true,
+    "status": 1,
+    "reference_error": true,
+    "expected": "Not in a PROC\n"
+  },
+  {
+    "source": "PROCbadreturn\nEND\nDEF PROCbadreturn:RETURN:ENDPROC\n",
+    "reference_source": "PROCbadreturn\n",
+    "reference_definitions": [
+      "DEF PROCbadreturn:RETURN:ENDPROC"
+    ],
+    "reference": true,
+    "status": 1,
+    "reference_error": true,
+    "expected": "No GOSUB\n"
+  },
+  {
+    "source": "PROCundefined\nEND\nDEF PROCundefined:PRINT missing:ENDPROC\n",
+    "reference_source": "PROCundefined\n",
+    "reference_definitions": [
+      "DEF PROCundefined:PRINT missing:ENDPROC"
+    ],
+    "reference": true,
+    "status": 1,
+    "reference_error": true,
+    "expected": "No such variable\n"
+  },
+  {
+    "source": "PROCbadarg(2147483648)\nEND\nDEF PROCbadarg(n%):PRINT n%:ENDPROC\n",
+    "reference_source": "PROCbadarg(2147483648)\n",
+    "reference_definitions": [
+      "DEF PROCbadarg(n%):PRINT n%:ENDPROC"
+    ],
+    "reference": true,
+    "status": 1,
+    "reference_error": true,
+    "expected": "Number too big\n"
+  },
+  {
+    "source": "PROCbadstr(STRING$(128,\"ab\"))\nEND\nDEF PROCbadstr(s$):ENDPROC\n",
+    "reference_source": "PROCbadstr(STRING$(128,\"ab\"))\n",
+    "reference_definitions": [
+      "DEF PROCbadstr(s$):ENDPROC"
+    ],
+    "reference": true,
+    "status": 1,
+    "reference_error": true,
+    "expected": "String too long\n"
+  },
+  {
+    "source": "LOCAL x%\n",
+    "expected": "Not in a FN or PROC\n",
+    "status": 1
+  },
+  {
+    "source": "ENDPROC\n",
+    "expected": "Not in a PROC\n",
+    "status": 1
+  },
+  {
+    "source": "DEF PROCunused:PRINT \"bad\":ENDPROC\nPRINT \"after\"\n",
+    "expected": "after\n",
+    "status": 0
+  },
+  {
+    "source": "DEF PROCfall\nPRINT \"body\"\nENDPROC\n",
+    "expected": "body\nNot in a PROC\n",
+    "status": 1
+  },
+  {
+    "source": "PROCsub:PRINT \"done\":END\nDEF PROCsub\nGOSUB @sub\nENDPROC\n@sub:PRINT \"gosub\":RETURN\n",
+    "expected": "gosub\ndone\n",
+    "status": 0
+  },
+  {
+    "source": "PROCmissing\n",
+    "diagnostic": "Undefined PROC missing"
+  },
+  {
+    "source": "DEF PROCp\nDEF PROCp\n",
+    "diagnostic": "Duplicate PROC p"
+  },
+  {
+    "source": "DEF PROCp(a%,a%)\n",
+    "diagnostic": "Duplicate formal parameter"
+  },
+  {
+    "source": "DEF PROCp(RETURN a%)\n",
+    "diagnostic": "Unsupported formal parameter RETURN"
+  },
+  {
+    "source": "DEF FNx=1\n",
+    "diagnostic": "Only DEF PROC is supported"
+  },
+  {
+    "source": "LOCAL ERROR\n",
+    "diagnostic": "Unsupported LOCAL form ERROR"
+  },
+  {
+    "source": "PROCp(1)\nEND\nDEF PROCp(s$):ENDPROC\n",
+    "diagnostic": "Procedure argument type mismatch"
+  },
+  {
+    "source": "PROCp(1,2)\nEND\nDEF PROCp(a%):ENDPROC\n",
+    "diagnostic": "Expected )"
+  },
+  {
+    "source": "PROCp\nEND\nDEF PROCp(a%):ENDPROC\n",
+    "diagnostic": "Expected ("
+  },
+  {
+    "source": "DEF PROCp()\n",
+    "diagnostic": "Empty formal parameter lists are unsupported"
+  },
+  {
+    "source": "GOTO @finish\nDEF PROCp:ENDPROC\n@finish:END\n",
+    "diagnostic": "Undefined target @finish"
+  },
+  {
+    "source": "@outside:END\nDEF PROCp:GOTO @outside:ENDPROC\n",
+    "diagnostic": "Undefined target $p1@outside"
+  },
+  {
+    "source": "IF 1 THEN\nDEF PROCp:ENDPROC\nENDIF\n",
+    "diagnostic": "Definition crosses an open block"
+  }
+]

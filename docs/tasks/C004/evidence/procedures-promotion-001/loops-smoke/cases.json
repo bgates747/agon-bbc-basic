@@ -1,0 +1,8 @@
+[
+  {
+    "source": "i%=0:REPEAT:i%=i%+1:PRINT ;i%:UNTIL i%=3\nWHILE i%>0:i%=i%-1:PRINT ;i%:ENDWHILE\nFOR i%=1 TO 3:PRINT ;i%:NEXT:PRINT \"done\"\n",
+    "reference": true,
+    "status": 0,
+    "expected": "1\n2\n3\n2\n1\n0\n1\n2\n3\ndone\n"
+  }
+]

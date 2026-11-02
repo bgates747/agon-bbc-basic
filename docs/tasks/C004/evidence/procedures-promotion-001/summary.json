@@ -1,0 +1,9 @@
+{
+  "scope": "Selected live scalar PROC/LOCAL rechecks",
+  "compiler_sha256": "7d6d6abcede0e294c5ea0017cd49fbc59674e51c992b53b42c47d520ba169c96",
+  "byte_identical_promotion": true,
+  "all_four_packers_reproduce_source": true,
+  "procedure_runtime_bytes": 502,
+  "procedure_runtime_relocations": 27,
+  "human_hardware_validation": false
+}

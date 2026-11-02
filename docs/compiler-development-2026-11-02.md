@@ -63,3 +63,32 @@ entry reset pass. Exact promotion and three packers reproduce1245 loader-safe
 BBC lines; numeric/string/vendor/license remain unchanged. Full and selected
 scopes remain separate. Checkpoint this tranche, then continue PROC/LOCAL/FN
 under C004 without an approval stop; C005/C006 remain in the sole TODO.
+
+## Scalar PROC/LOCAL prototype started
+
+Checkpoint786909e is committed/pushed. Preparatory actual-BASIC probes guide a
+502-byte/27-relocation standalone helper with explicit PROC/LOCAL markers and a
+bounded32768-byte private arena after emitted code/string workspace. Native ABI
+passes in1.015s: staged binding, nested restoration, new bindings remaining
+created, full strings, exact arena bound and IX/IY/SP. The BBC prototype prescans
+forward signatures/scopes and compiles argument staging/LOCAL/ENDPROC. A swapped-
+argument smoke matches BASIC in125.828s. Full tests run next; no promotion yet.
+
+The first smoke fixture incorrectly crossed a procedure label boundary and was
+corrected; its rejected attempt is retained. The reference harness now permits
+separate fixture main/declarations so native END does not terminate the complete
+reference batch. Statements and declarations are unchanged, only reference
+fixture packaging differs. Old baseline LOCAL/DEF rejection fixtures are replaced
+with still-unsupported CALL/SYS; dedicated positive/error PROC/LOCAL cases now own
+those features. FN remains unsupported in this initial activation tranche.
+
+## Scalar PROC/LOCAL accepted for development
+
+Full28 programs pass in442.674s, supplemental8 in154.299s, baseline39/15 in55.857s
+and native ABI in1.015s. All15 full native controller/procedure images match GNU
+links and bridge/entry/arena checks. Promoted exact SHA7d6d6abcede0e294c5ea0017cd49fbc59674e51c992b53b42c47d520ba169c96
+and502-byte/27-relocation helper. Four DATA packers reproduce source. Live passes
+baseline55.860s, PROC109.848s, ABI1.015s, loops60.113s, conditionals37.000s and
+slice-write52.537s. Exact evidence remains distinct from full prototype scope.
+Checkpoint qualified work, then continue FN under C004. FN783-byte prefix-save
+runtime experiments have direct ABI results but no compiler promotion yet.

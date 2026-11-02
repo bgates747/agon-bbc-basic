@@ -1,0 +1,60 @@
+[
+  {
+    "source": "PROCcreated(newformal%):PRINT ;newformal%\nEND\nDEF PROCcreated(newformal%):PRINT ;newformal%:ENDPROC\n",
+    "reference_source": "PROCcreated(newformal%):PRINT ;newformal%\n",
+    "reference_definitions": [
+      "DEF PROCcreated(newformal%):PRINT ;newformal%:ENDPROC"
+    ],
+    "reference": true,
+    "status": 0,
+    "expected": "0\n0\n"
+  },
+  {
+    "source": "a$=\"A\":b$=\"B\":PROCexchange(a$,b$):PRINT a$;\":\";b$;\":\";saved$\nEND\nDEF PROCexchange(b$,a$):LOCAL scratch$:scratch$=a$+b$:saved$=scratch$:PRINT scratch$:ENDPROC\n",
+    "reference_source": "a$=\"A\":b$=\"B\":PROCexchange(a$,b$):PRINT a$;\":\";b$;\":\";saved$\n",
+    "reference_definitions": [
+      "DEF PROCexchange(b$,a$):LOCAL scratch$:scratch$=a$+b$:saved$=scratch$:PRINT scratch$:ENDPROC"
+    ],
+    "reference": true,
+    "status": 0,
+    "expected": "BA\nA:B:BA\n"
+  },
+  {
+    "source": "s$=\"old\":PROCappend(s$+\"new\"):PRINT s$\nEND\nDEF PROCappend(s$):PRINT s$:ENDPROC\n",
+    "reference_source": "s$=\"old\":PROCappend(s$+\"new\"):PRINT s$\n",
+    "reference_definitions": [
+      "DEF PROCappend(s$):PRINT s$:ENDPROC"
+    ],
+    "reference": true,
+    "status": 0,
+    "expected": "oldnew\nold\n"
+  },
+  {
+    "source": "PROCstageerror(2147483648,STRING$(128,\"ab\"))\nEND\nDEF PROCstageerror(n%,s$):ENDPROC\n",
+    "reference_source": "PROCstageerror(2147483648,STRING$(128,\"ab\"))\n",
+    "reference_definitions": [
+      "DEF PROCstageerror(n%,s$):ENDPROC"
+    ],
+    "reference": true,
+    "status": 1,
+    "reference_error": true,
+    "expected": "String too long\n"
+  },
+  {
+    "source": "PROCexhaust:END\nDEF PROCexhaust:LOCAL s$:s$=STRING$(255,\"x\"):PROCexhaust:ENDPROC\n",
+    "expected": "No room\n",
+    "status": 1
+  },
+  {
+    "source": "DEF PROCp0\nDEF PROCp1\nDEF PROCp2\nDEF PROCp3\nDEF PROCp4\nDEF PROCp5\nDEF PROCp6\nDEF PROCp7\nDEF PROCp8\nDEF PROCp9\nDEF PROCp10\nDEF PROCp11\nDEF PROCp12\nDEF PROCp13\nDEF PROCp14\nDEF PROCp15\nDEF PROCp16\nDEF PROCp17\nDEF PROCp18\nDEF PROCp19\nDEF PROCp20\nDEF PROCp21\nDEF PROCp22\nDEF PROCp23\nDEF PROCp24\nDEF PROCp25\nDEF PROCp26\nDEF PROCp27\nDEF PROCp28\nDEF PROCp29\nDEF PROCp30\nDEF PROCp31\nDEF PROCp32\nDEF PROCp33\nDEF PROCp34\nDEF PROCp35\nDEF PROCp36\nDEF PROCp37\nDEF PROCp38\nDEF PROCp39\nDEF PROCp40\nDEF PROCp41\nDEF PROCp42\nDEF PROCp43\nDEF PROCp44\nDEF PROCp45\nDEF PROCp46\nDEF PROCp47\nDEF PROCp48\nDEF PROCp49\nDEF PROCp50\nDEF PROCp51\nDEF PROCp52\nDEF PROCp53\nDEF PROCp54\nDEF PROCp55\nDEF PROCp56\nDEF PROCp57\nDEF PROCp58\nDEF PROCp59\nDEF PROCp60\nDEF PROCp61\nDEF PROCp62\nDEF PROCp63\nDEF PROCp64\nDEF PROCp65\nDEF PROCp66\nDEF PROCp67\nDEF PROCp68\nDEF PROCp69\nDEF PROCp70\nDEF PROCp71\nDEF PROCp72\nDEF PROCp73\nDEF PROCp74\nDEF PROCp75\nDEF PROCp76\nDEF PROCp77\nDEF PROCp78\nDEF PROCp79\nDEF PROCp80\nDEF PROCp81\nDEF PROCp82\nDEF PROCp83\nDEF PROCp84\nDEF PROCp85\nDEF PROCp86\nDEF PROCp87\nDEF PROCp88\nDEF PROCp89\nDEF PROCp90\nDEF PROCp91\nDEF PROCp92\nDEF PROCp93\nDEF PROCp94\nDEF PROCp95\nDEF PROCp96\nDEF PROCp97\nDEF PROCp98\nDEF PROCp99\nDEF PROCp100\nDEF PROCp101\nDEF PROCp102\nDEF PROCp103\nDEF PROCp104\nDEF PROCp105\nDEF PROCp106\nDEF PROCp107\nDEF PROCp108\nDEF PROCp109\nDEF PROCp110\nDEF PROCp111\nDEF PROCp112\nDEF PROCp113\nDEF PROCp114\nDEF PROCp115\nDEF PROCp116\nDEF PROCp117\nDEF PROCp118\nDEF PROCp119\nDEF PROCp120\nDEF PROCp121\nDEF PROCp122\nDEF PROCp123\nDEF PROCp124\nDEF PROCp125\nDEF PROCp126\nDEF PROCp127\nDEF PROCp128\n",
+    "diagnostic": "Procedure limit exceeds 128"
+  },
+  {
+    "source": "DEF PROCp(a0%,a1%,a2%,a3%,a4%,a5%,a6%,a7%,a8%,a9%,a10%,a11%,a12%,a13%,a14%,a15%,a16%)\n",
+    "diagnostic": "Procedure argument limit exceeds 16"
+  },
+  {
+    "source": "PROCp()\nEND\nDEF PROCp:ENDPROC\n",
+    "diagnostic": "Empty call argument lists are unsupported"
+  }
+]

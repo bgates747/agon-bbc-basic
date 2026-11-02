@@ -1,0 +1,15 @@
+{
+  "checked_index_and_stack_preservation": true,
+  "distinct_marker_errors": true,
+  "numeric_and_string_restoration": true,
+  "new_bindings_remain_defined": true,
+  "nested_local_restoration": true,
+  "maximum_string_copy": true,
+  "exact_arena_capacity_checked": true,
+  "duration_seconds": 1.015,
+  "hashes": {
+    "docs/tasks/C004/activations/abi.s": "7437d241115ccae6068b920db8564bcd26ee359f012d8327a4b274be842bdf56",
+    "docs/tasks/C004/build/procedure-abi/probe.bin": "5f61f084cb14062d27df31b4b5b85c69b5570c785c76dcd37000762111e4bb56",
+    "compiler/build/procedure-runtime/runtime-0.bin": "0ed00cec83d658ee5493cb5ba69d029a80119f1b8670b4f80ae78fc3fc31ca5b"
+  }
+}

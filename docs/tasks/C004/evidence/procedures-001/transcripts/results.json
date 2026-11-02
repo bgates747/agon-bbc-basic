@@ -1,0 +1,37 @@
+{
+  "programs": 28,
+  "native_executions": 15,
+  "rejected_sources": 13,
+  "reference_output_programs": 10,
+  "legacy_arithmetic_observations": 0,
+  "deterministic_repeat": true,
+  "independent_link_bases": [
+    263853,
+    264102,
+    264470,
+    262664,
+    262563,
+    262544,
+    262426,
+    262468,
+    262515,
+    262517,
+    262412,
+    262402,
+    262440,
+    262423,
+    262469
+  ],
+  "string_link_bases": [
+    278129,
+    278383,
+    278742,
+    276758
+  ],
+  "duration_seconds": 442.674,
+  "hashes": {
+    "docs/tasks/C004/activations/compiler.bas": "7d6d6abcede0e294c5ea0017cd49fbc59674e51c992b53b42c47d520ba169c96",
+    "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+    "docs/tasks/C004/build/output-integration/cases.json": "05af4d60543f0c3769cc0d5fe111eadecee050c8687bc3e34081e4f8760962af"
+  }
+}

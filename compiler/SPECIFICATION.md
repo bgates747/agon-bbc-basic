@@ -149,6 +149,28 @@ The Author accepted the corrected C002 baseline for a development checkpoint.
     NEXT names are rejected. Native jumps use recorded body/test addresses, not
     static shared per-loop limit storage. Arrays/indirect FOR variables remain C005.
 
+20. Line-leading DEF PROC signatures support forward/recursive scalar by-value
+    calls,128 definitions and16 arguments. No-argument forms omit parentheses;
+    empty lists, RETURN/array parameters and other declaration placements are
+    rejected. Formal prior values are saved before actual evaluation; all actuals
+    finish before reverse-order binding/conversion. ENDPROC restores recognised
+    LOCAL records then requires a distinct PROC marker; RETURN still requires
+    GOSUB. Unfinished loop/call markers preserve reference errors.
+21. Scalar LOCAL creates zero/empty dynamic bindings and restores prior numeric
+    payloads/string descriptors in reverse order. Newly introduced bindings remain
+    defined as zero/empty after exit, matching reference VAR creation. Each string
+    local owns a fresh255-byte buffer; restoring one never resets the global heap
+    or discards non-local assignments. Private records occupy14 numeric or269
+    string bytes in a32768-byte bounded LIFO arena beyond emitted code/string
+    workspace. PROC/LOCAL/loops/GOSUB share256 typed control records. Pointer reset
+    preserves MOS registers; no arena bytes are emitted in the executable.
+22. Each DEF PROC starts a branch-label scope extending until the next definition;
+    global code before definitions has its own scope. Named and numeric GOTO/GOSUB
+    targets must belong to the current scope. Declaration execution skips the
+    physical line, preserving inline skipping and multiline body fall-through.
+    Function results, LOCAL ERROR/DATA and arrays remain clearly unsupported in
+    this initial activation scope.
+
 ## Current backend and runtime contract
 
 1. The compiler owns a 65536-byte output buffer. Code loads at `&040000`, with

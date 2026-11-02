@@ -1,0 +1,27 @@
+{
+  "bytes": 502,
+  "relocations": 27,
+  "exports": {
+    "act_init": 0,
+    "act_begin": 10,
+    "act_save": 20,
+    "act_install": 207,
+    "act_bind": 260,
+    "act_leave": 389,
+    "act_pushslot": 478,
+    "act_checkslot": 482,
+    "act_popslot": 486,
+    "act_numslot": 490,
+    "act_top": 493
+  },
+  "independent_link_bases": [
+    270336,
+    294912
+  ],
+  "unresolved_symbols": 0,
+  "hashes": {
+    "compiler/runtime/procedures.s": "6fd40282842ddc307bad0a0cbf284a1076b86315376743700e10df35142885c7",
+    "compiler/build/procedure-runtime/runtime_data.bas": "b0572cc5d946aee3fd0e04b6f531a0fb88a84cfaf9f4bd6cc4e36eb0ab32dd52",
+    "compiler/build/procedure-runtime/runtime-0.bin": "0ed00cec83d658ee5493cb5ba69d029a80119f1b8670b4f80ae78fc3fc31ca5b"
+  }
+}

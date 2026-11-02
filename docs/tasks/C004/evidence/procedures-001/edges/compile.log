@@ -1,0 +1,22 @@
+Warning: unused arguments left: ["--firmware", "platform"].
+Tom's Fake VDP Version 1.03
+unknown packet VDU 0x17, 0, 0xf8
+unknown packet VDU 0x17, 0, 0x99
+uunknown packet VDU 0x17, 0, 0x94
+
+Agon Platform MOS Version 3.0.2 Arthur
+
+OK:p0.bas
+OK:p1.bas
+OK:p2.bas
+OK:p3.bas
+OK:p4.bas
+ERR:p5.bas
+p5.bas:129:13: Procedure limit exceeds 128 at 3250
+ERR:p6.bas
+p6.bas:1:81: Procedure argument limit exceeds 16 at 3250
+ERR:p7.bas
+p7.bas:1:6: Empty call argument lists are unsupported at 3250
+OK:p0.bas
+OUTPUT_COMPILE_DONE
+/ *

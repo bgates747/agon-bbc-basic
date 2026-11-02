@@ -238,3 +238,15 @@ are replaced with explicit native state/status. [Contract](../docs/tasks/C004/lo
 and C004 evidence include actual-BASIC transcripts, recursive same-site FOR,
 register/stack/capacity probes and independent links. New control code is marked
 as a standalone implementation guided by these sources.
+
+## Procedure and LOCAL adaptation
+
+EXEC.Z80 PROC1/SAVLOC/ARGUE/UNSTAK/LOCAL/RESLOC/ENDPRO defines prior snapshots,
+staged actuals, reverse installation and restoration. New standalone helpers use
+explicit PROC/LOCAL markers and a private arena, replacing interpreter parser,
+variable-chain, heap and stack globals. FN and GOSUB exits remain distinct.
+Actual probes confirm newly created locals remain defined and early exits under
+loop markers fail. [Audit](../docs/tasks/C004/activations/AUDIT.md) and
+[contract](../docs/tasks/C004/activations/PROCEDURES.md) record ownership, calling
+conventions and full/selected live qualification. Repository/vendor license and
+numeric/string implementations remain unchanged; new sources identify their origin.

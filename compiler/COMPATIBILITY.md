@@ -38,9 +38,9 @@ existing string/numeric regressions on the reauthorized Pi5 CLI.
 | IF/THEN/ELSE/ENDIF | Partial | Inline colon lists, omitted THEN, constant THEN/ELSE line targets and multiline blocks; SFIX truth and reference first-ELSE association; 32 nesting entries; block ELSE/ENDIF begin their line; multiline IF inside inline IF rejected |
 | FOR/WHILE/REPEAT | Partial | Numeric FOR/TO/STEP/NEXT (including named lists), WHILE/ENDWHILE, REPEAT/UNTIL;32 lexical block levels;256 typed loop/GOSUB records; limit/step captured once; FOR enters body once even past limit; mismatched structures rejected |
 | CASE | Unsupported | Pending |
-| DEF PROC / ENDPROC | Unsupported | Never treated as GOSUB/RETURN |
+| DEF PROC / ENDPROC | Partial | Forward/recursive scalar by-value calls; staged arguments and reverse binding;128 line-leading definitions,16 arguments; no empty parentheses, RETURN/array parameters; ENDPROC requires PROC marker after restoring locals |
 | DEF FN / function return | Unsupported | Separate activation semantics pending |
-| LOCAL, recursion with locals | Unsupported | Save/restore semantics required |
+| LOCAL, recursion with locals | Partial | Scalar numeric/string LOCAL and implicit parameter locals; dynamically visible, reverse restoration; newly created bindings remain defined;32768-byte arena and shared256 control records; LOCAL DATA/ERROR/arrays unsupported |
 | Arrays and DIM | Unsupported | Including local arrays |
 | DATA/READ/RESTORE | Unsupported | Input to compiler may not use these yet |
 | File I/O and INPUT in compiled programs | Unsupported | Compiler itself uses host BASIC file I/O |
@@ -64,3 +64,5 @@ See [the specification](SPECIFICATION.md) for exact limits and
 [TODO.md](../TODO.md) for unfinished work.
 
 [Typed loops](../docs/tasks/C004/loops/CONTROL.md) records native marker, numeric-bound and call-stack behavior; C004 owns full/selected live qualification.
+
+[Scalar procedures and LOCAL](../docs/tasks/C004/activations/PROCEDURES.md) records argument snapshots, owned locals, activation-scoped branch labels and resource/error behavior. FN remains unsupported in the promoted compiler.
