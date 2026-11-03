@@ -47,6 +47,25 @@ and current firmware identities remain in Extender's machine-local records.
    installed components. Retain a fresh physical clean-state observation and
    release the lease before offline analysis; notify Extender immediately.
 
+## Compiler memory evidence
+
+For source6597a0df, the checked324275-byte seed occupies&40000..&8F2B2.
+Its explicit private heap is&8F2B3..&A7EFF (101453 bytes), activation arena
+&A7F00..&AFEFF (32768 bytes), and guarded user-memory end&B0000 retains the
+256-byte gap at&AFF00. Control records, scalar payloads and expression pools
+already occur inside the static image. Private DIM/string contents use the
+explicit heap; LOCAL snapshots use the arena. Native self-source execution
+has passed on the pinned CLI, not yet on this hardware.
+
+Native calls additionally use the MOS-provided ADL stack and preserve/restore
+entry SP. Read-only EMOS source inspection finds exec24 calling the ADL entry
+without installing a separate program stack; defines.h reserves2048 stack bytes,
+and the startup source initializes SP from the linked stack symbol. These source
+observations do not establish installed firmware memory or maximum stack usage.
+During entry qualification retain the actual installed MEM report through the
+verified console channel, and record stack/component boundaries before invoking
+the compiler. Do not allocate compiler memory above&B0000 or change MOS/EMOS.
+
 ## Coordination evidence
 
 1. Initial direct request: Extender2026-10-13Sol, task

@@ -78,6 +78,12 @@ representative native-execution cases and39 fresh source-error programs. The
 new comparator and full-source baseline freezer are prepared, syntax checked,
 and await their first fresh live-baseline inputs.
 
+For the full chain, `--expected-image` can pin the independently checked resource
+image. The controller retains that exact file and stops on any differing complete
+generation before executing a successor. This adds a byte-identity gate without
+changing the BBC main, source or generation stages. The first full-chain run will
+use the qualified resource seed; this new controller path is prepared only.
+
 C006 packed-native-preflight-001 completes native self-source compilation through
 normal prompts in1983.653 controller seconds, MOS status0. Its entire324275-byte
 G1 equals the interpreted resource seed SHA299a31190c380541a73ed9eb144a303fa37abccc4f3c3e0ad47f99f1538122c0.

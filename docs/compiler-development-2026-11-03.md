@@ -226,3 +226,14 @@ output on rejection. That comparison supplements representative12-case native
 execution and fresh39-case error tests, without claiming another program
 execution merely from byte equality. Syntax checks pass; live baseline inputs
 and actual native comparison are still pending.
+
+Prepare bootstrap.py --expected-image to retain the already qualified resource
+seed and compare each complete normal-main/native generation before successor
+execution. The BBC source and full four-stage contract are unchanged. Syntax
+checks pass; the new guard awaits the full-chain run.
+
+C006/OLIMEX.md now records exact compiler image/heap/arena/user guard boundaries
+and the additional MOS-provided ADL stack. Read-only EMOS exec24/defines/startup
+inspection is distinct from installed firmware evidence; retain an actual MEM
+report after future checkout before running compiler fixtures. No hardware
+access, reset, flash, mode change or memory-policy change occurs here.
