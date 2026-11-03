@@ -610,3 +610,14 @@ preservation readbacks, restored CLI/text/cursor/mirror receipts and both closed
 readers before fresh neutral/offline/idle/display/ownerlessUSB checks and central
 release. Syntax checks pass; it has not yet run and may execute only after the
 repeat's known complete success and explicit cleanup.
+
+Review the existing exact root/vendor notice and provenance for eventual native
+artifact distribution; both retain the zlib-style notice, original authorship
+and marked adaptations. Prepare promote_native.py as a copy-only guarded step
+for C006's live build/run workflow. It requires all completed manifests/native
+suites, actual four-generation equality, both physical images and clean release
+before copying the actual repeat to compiler/bin/compiler.bin with unchanged
+notice and provenance metadata. Syntax checks only; no live native artifact is
+created while repeat remains pending. Main is outside this development promotion.
+Correct two stale REFERENCE.md statements that still treated completed C003/C004
+LOCAL/runtime work as unfinished; no source/runtime behavior changes.

@@ -118,7 +118,8 @@ source features remain partial or unsupported in the compatibility matrix.
    RHS; STORE5 preserves the numeric variant. `%`/`&` stores reuse qualified
    SFIX. No interpreter variable lookup, heap globals or fixed entry addresses
    are linked. [Scalar qualification](../docs/tasks/C003/SCALARS.md) includes
-   physical-memory comparison and keeps LOCAL explicitly unimplemented.
+   physical-memory comparison. LOCAL was outside that initial C003 scope;
+   its subsequent C004 qualification is recorded below.
 
 6. C003's mutable string core adapts the local baseline EXEC.Z80 STORES/
    STORE4STR and EVAL.Z80 LOADS/CHRS/LEN/string addition. The new standalone
@@ -186,8 +187,9 @@ source features remain partial or unsupported in the compatibility matrix.
    notice and source attribution and record the adaptation. No upstream
    copyright notice has been replaced by the new compiler's files.
 
-Numeric extraction, differential qualification and mutable-runtime design
-remain in [TODO.md](../TODO.md).
+Completed extraction, differential qualification and mutable-runtime work are
+indexed by C002–C005 and the contracts below. [TODO.md](../TODO.md) is the sole
+unfinished-work list; the compatibility matrix owns current feature status.
 
 ## Search and repetition adaptation
 
