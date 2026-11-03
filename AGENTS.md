@@ -125,6 +125,15 @@ environment, ownership, assembly, emulator, hardware and coordination rules.
    handbacks were delivered through durable mail and immediate steering; latest
    is2026-11-03_11-55-11_bbc-basic_bbc-c006-r02-clean-release-one.
 
+Extender's2026-11-03_14-49-11 retained-bench notice records a later generation9
+checkout for BENCH-013. Extender retains custody until the Author and Extender
+select another project's slot; completion of an Extender subtask is not automatic
+release. Future requests still use the canonical FIFO and finite ready plan,
+followed by an explicit grant before any target access. Re-read current central
+instructions and the notice before requesting hardware; do not infer availability
+from an empty queue or an old completed run. Console8 remains separately
+coordinated by the Author. This project has no new reservation or bench operation.
+
 ## Manual Console8 package
 
 C008 is staged at the Author-selected Oryx path

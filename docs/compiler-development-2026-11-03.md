@@ -718,3 +718,11 @@ deployment helper deliberately refuses this now-nonempty directory. Future
 updates must preserve user programs/results. C008 is staged and remains on TODO
 pending the Author's actual manual results; main and compiler/runtime sources
 remain unchanged. No emulator/bench reservation or new CPU-heavy work is selected.
+
+Extender's14:49:11 retained-bench policy notice is read after staging: it records
+generation9/BENCH-013 custody retained until the Author and Extender select another
+project's slot. Existing FIFO requests remain possible, but finishing a subtask
+does not automatically release the bench or grant access. Record the restriction
+in the handoff; do not create a second queue or request/access hardware. Console8
+manual qualification remains separately under the Author's coordination. No
+acknowledgement-only reply is sent and no test or implementation change follows.
