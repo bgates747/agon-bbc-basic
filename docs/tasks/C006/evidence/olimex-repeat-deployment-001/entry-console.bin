@@ -1,0 +1,21 @@
+/mystuff/fsim/p066-2a7f76a18f-q1 *W3DDBG MODE_PACKET_BEGIN ms=15055867 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=15055867 mode=0
+ECHO BBC_C006_ENTRY_R02
+BBC_C006_ENTRY_R02
+/mystuff/fsim/p066-2a7f76a18f-q1 *W3DDBG MODE_PACKET_BEGIN ms=15065916 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=15065916 mode=0
+MEM
+ROM      &000000-&01ffff     99% used
+USER:LO  &040000-&0bbfff 507904 bytes
+MOS:DATA &0bc000-&0bd05c   4189 bytes
+MOS:HEAP &0bd05d-&0bf7ff  10147 bytes
+STACK24  &0bf800-&0bffff   2048 bytes
+USER:HI  &b7e000-&b7ffff   8192 bytes
+
+MOS:HEAP used: 1392 bytes, free: 8752 bytes
+Largest free MOS:HEAP fragment: 8500 bytes
+Sysvars at &0bc2f6
+
+/mystuff/fsim/p066-2a7f76a18f-q1 *W3DDBG MODE_PACKET_BEGIN ms=15073982 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=15073982 mode=0
+

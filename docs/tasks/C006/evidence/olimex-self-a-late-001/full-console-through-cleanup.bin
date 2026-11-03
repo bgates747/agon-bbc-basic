@@ -1,0 +1,41 @@
+/agents/extender/results/bbc-basic/c006-r01 *W3DDBG MODE_PACKET_BEGIN ms=7397625 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=7397625 mode=0
+ECHO BBC_C006_SELF_A_CAPTURE_R01
+BBC_C006_SELF_A_CAPTURE_R01
+/agents/extender/results/bbc-basic/c006-r01 *W3DDBG MODE_PACKET_BEGIN ms=7414945 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=7414945 mode=0
+EMOS sdserve --fast /
+Fast transfer: no CRCs or whole-file verification.
+sdserve-v0.3.0-b2026-10-25-05-14-41Z (draft), root /
+Escape returns to MOS.
+SD service stopped.
+/agents/extender/results/bbc-basic/c006-r01 *W3DDBG MODE_PACKET_BEGIN ms=7442989 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=7442989 mode=0
+EXEC /extender/diagnostics/bbc-basic/c006-r01/self-a.txt
+BBC_BEGIN_SELF_A
+Source file: W3DDBG MODE_PACKET_BEGIN ms=7457196 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=7457196 mode=0
+/extender/diagnostics/bbc-basic/c006-r01/compiler.bas
+Output file: W3DDBG MODE_PACKET_BEGIN ms=7459858 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=7459859 mode=0
+/agents/extender/results/bbc-basic/c006-r01/self-a.bin
+Wrote /agents/extender/results/bbc-basic/c006-r01/self-a.bin
+BBC_END_SELF_A
+Fast transfer: no CRCs or whole-file verification.
+sdserve-v0.3.0-b2026-10-25-05-14-41Z (draft), root /
+Escape returns to MOS.
+SD service stopped.
+/agents/extender/results/bbc-basic/c006-r01 *W3DDBG MODE_PACKET_BEGIN ms=14071366 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=14071367 mode=0
+CD /mystuff/fsim/p066-2a7f76a18f-q1
+/mystuff/fsim/p066-2a7f76a18f-q1 *W3DDBG MODE_PACKET_BEGIN ms=14081962 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=14081962 mode=0
+VDU 4 23 1 1 23 1 3
+W3DDBG MODE_PACKET_BEGIN ms=14092960 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=14092961 mode=0
+/mystuff/fsim/p066-2a7f76a18f-q1 *W3DDBG MODE_PACKET_BEGIN ms=14092973 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=14092974 mode=0
+VDU 3
+W3DDBG MODE_PACKET_BEGIN ms=14132867 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=14132867 mode=0
+

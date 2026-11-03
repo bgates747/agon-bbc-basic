@@ -1,0 +1,31 @@
+{
+  "scope": "Host file-copy/provenance verification; no additional compiler or target execution",
+  "passed": true,
+  "source_sha256": "6597a0df3f99b4f43c42bff1cdbc59f5fdf730c57837f3d4112a598fbfbe5fb8",
+  "image_sha256": "299a31190c380541a73ed9eb144a303fa37abccc4f3c3e0ad47f99f1538122c0",
+  "image_bytes": 324275,
+  "live_files": {
+    "LICENSE.txt": "cc8e92d92cf12fb1d04ddae0b573367f14188df5fcd6c7909d36486ff53a108a",
+    "README.md": "dc200ecf04a8adbb224987a22b02c95659996a8f80b0239091b822a27c442769",
+    "compiler.bin": "299a31190c380541a73ed9eb144a303fa37abccc4f3c3e0ad47f99f1538122c0",
+    "manifest.json": "459765db4ebb9ea40aab58c650ad7045d966991013d8baa976b9020868706e9f"
+  },
+  "prerequisite_manifests_verified": [
+    "docs/tasks/C006/evidence/live-bootstrap-resume-001",
+    "docs/tasks/C006/evidence/live-native-baseline-001",
+    "docs/tasks/C006/evidence/live-regressions-001",
+    "docs/tasks/C006/evidence/live-native-errors-001",
+    "docs/tasks/C006/evidence/olimex-small-001",
+    "docs/tasks/C006/evidence/olimex-self-a-late-001",
+    "docs/tasks/C006/evidence/olimex-repeat-001"
+  ],
+  "all_six_completed_images_equal": true,
+  "original_hardware_output_copied_unchanged": true,
+  "exact_root_and_vendor_notice_preserved": true,
+  "second_hardware_clean_release": "2026-11-03T16:54:23.807673+00:00",
+  "new_compiler_execution": false,
+  "new_hardware_execution": false,
+  "main_promoted": false,
+  "human_optical_validation": false,
+  "performance_benchmark": false
+}

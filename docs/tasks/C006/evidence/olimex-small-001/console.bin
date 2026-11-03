@@ -1,0 +1,326 @@
+/mystuff/fsim/p066-2a7f76a18f-q1 *W3DDBG MODE_PACKET_BEGIN ms=6096701 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=6096702 mode=0
+ECHO BBC_C006_ENTRY_R01
+BBC_C006_ENTRY_R01
+/mystuff/fsim/p066-2a7f76a18f-q1 *W3DDBG MODE_PACKET_BEGIN ms=6108159 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=6108159 mode=0
+MEM
+ROM      &000000-&01ffff     99% used
+USER:LO  &040000-&0bbfff 507904 bytes
+MOS:DATA &0bc000-&0bd05c   4189 bytes
+MOS:HEAP &0bd05d-&0bf7ff  10147 bytes
+STACK24  &0bf800-&0bffff   2048 bytes
+USER:HI  &b7e000-&b7ffff   8192 bytes
+
+MOS:HEAP used: 1392 bytes, free: 8752 bytes
+Largest free MOS:HEAP fragment: 8492 bytes
+Sysvars at &0bc2f6
+
+/mystuff/fsim/p066-2a7f76a18f-q1 *W3DDBG MODE_PACKET_BEGIN ms=6117600 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=6117600 mode=0
+EMOS sdserve --fast /
+Fast transfer: no CRCs or whole-file verification.
+sdserve-v0.3.0-b2026-10-25-05-14-41Z (draft), root /
+Escape returns to MOS.
+SD service stopped.
+/mystuff/fsim/p066-2a7f76a18f-q1 *W3DDBG MODE_PACKET_BEGIN ms=6466475 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=6466476 mode=0
+EXEC /extender/diagnostics/bbc-basic/c006-r01/compile-0.txt
+BBC_BEGIN_COMPILE_0
+Source file: W3DDBG MODE_PACKET_BEGIN ms=6489225 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=6489226 mode=0
+/extender/diagnostics/bbc-basic/c006-r01/case-0.bas
+Output file: W3DDBG MODE_PACKET_BEGIN ms=6516850 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=6516851 mode=0
+/agents/extender/results/bbc-basic/c006-r01/case-0.bin
+Wrote /agents/extender/results/bbc-basic/c006-r01/case-0.bin
+BBC_END_COMPILE_0
+Fast transfer: no CRCs or whole-file verification.
+sdserve-v0.3.0-b2026-10-25-05-14-41Z (draft), root /
+Escape returns to MOS.
+SD service stopped.
+/agents/extender/results/bbc-basic/c006-r01 *W3DDBG MODE_PACKET_BEGIN ms=6552213 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=6552213 mode=0
+EXEC /extender/diagnostics/bbc-basic/c006-r01/run-0.txt
+BBC_BEGIN_NATIVE_0
+native compiler
+BBC_END_NATIVE_0
+Fast transfer: no CRCs or whole-file verification.
+sdserve-v0.3.0-b2026-10-25-05-14-41Z (draft), root /
+Escape returns to MOS.
+SD service stopped.
+/agents/extender/results/bbc-basic/c006-r01 *W3DDBG MODE_PACKET_BEGIN ms=6713345 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=6713345 mode=0
+EXEC /extender/diagnostics/bbc-basic/c006-r01/compile-1.txt
+BBC_BEGIN_COMPILE_1
+Source file: W3DDBG MODE_PACKET_BEGIN ms=6727655 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=6727655 mode=0
+/extender/diagnostics/bbc-basic/c006-r01/case-1.bas
+Output file: W3DDBG MODE_PACKET_BEGIN ms=6730116 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=6730117 mode=0
+/agents/extender/results/bbc-basic/c006-r01/case-1.bin
+Wrote /agents/extender/results/bbc-basic/c006-r01/case-1.bin
+BBC_END_COMPILE_1
+Fast transfer: no CRCs or whole-file verification.
+sdserve-v0.3.0-b2026-10-25-05-14-41Z (draft), root /
+Escape returns to MOS.
+SD service stopped.
+/agents/extender/results/bbc-basic/c006-r01 *W3DDBG MODE_PACKET_BEGIN ms=6828295 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=6828295 mode=0
+EXEC /extender/diagnostics/bbc-basic/c006-r01/compile-2.txt
+BBC_BEGIN_COMPILE_2
+Source file: W3DDBG MODE_PACKET_BEGIN ms=6842599 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=6842599 mode=0
+/extender/diagnostics/bbc-basic/c006-r01/case-2.bas
+Output file: W3DDBG MODE_PACKET_BEGIN ms=6845156 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=6845156 mode=0
+/agents/extender/results/bbc-basic/c006-r01/case-2.bin
+Wrote /agents/extender/results/bbc-basic/c006-r01/case-2.bin
+BBC_END_COMPILE_2
+Fast transfer: no CRCs or whole-file verification.
+sdserve-v0.3.0-b2026-10-25-05-14-41Z (draft), root /
+Escape returns to MOS.
+SD service stopped.
+/agents/extender/results/bbc-basic/c006-r01 *W3DDBG MODE_PACKET_BEGIN ms=6880163 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=6880164 mode=0
+EXEC /extender/diagnostics/bbc-basic/c006-r01/compile-3.txt
+BBC_BEGIN_COMPILE_3
+Source file: W3DDBG MODE_PACKET_BEGIN ms=6894497 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=6894497 mode=0
+/extender/diagnostics/bbc-basic/c006-r01/case-3.bas
+Output file: W3DDBG MODE_PACKET_BEGIN ms=6897028 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=6897028 mode=0
+/agents/extender/results/bbc-basic/c006-r01/case-3.bin
+Wrote /agents/extender/results/bbc-basic/c006-r01/case-3.bin
+BBC_END_COMPILE_3
+Fast transfer: no CRCs or whole-file verification.
+sdserve-v0.3.0-b2026-10-25-05-14-41Z (draft), root /
+Escape returns to MOS.
+SD service stopped.
+/agents/extender/results/bbc-basic/c006-r01 *W3DDBG MODE_PACKET_BEGIN ms=6934933 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=6934934 mode=0
+EXEC /extender/diagnostics/bbc-basic/c006-r01/compile-4.txt
+BBC_BEGIN_COMPILE_4
+Source file: W3DDBG MODE_PACKET_BEGIN ms=6949261 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=6949261 mode=0
+/extender/diagnostics/bbc-basic/c006-r01/case-4.bas
+Output file: W3DDBG MODE_PACKET_BEGIN ms=6951780 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=6951780 mode=0
+/agents/extender/results/bbc-basic/c006-r01/case-4.bin
+Wrote /agents/extender/results/bbc-basic/c006-r01/case-4.bin
+BBC_END_COMPILE_4
+Fast transfer: no CRCs or whole-file verification.
+sdserve-v0.3.0-b2026-10-25-05-14-41Z (draft), root /
+Escape returns to MOS.
+SD service stopped.
+/agents/extender/results/bbc-basic/c006-r01 *W3DDBG MODE_PACKET_BEGIN ms=6987967 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=6987967 mode=0
+EXEC /extender/diagnostics/bbc-basic/c006-r01/compile-5.txt
+BBC_BEGIN_COMPILE_5
+Source file: W3DDBG MODE_PACKET_BEGIN ms=7002293 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=7002293 mode=0
+/extender/diagnostics/bbc-basic/c006-r01/case-5.bas
+Output file: W3DDBG MODE_PACKET_BEGIN ms=7004933 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=7004934 mode=0
+/agents/extender/results/bbc-basic/c006-r01/case-5.bin
+Wrote /agents/extender/results/bbc-basic/c006-r01/case-5.bin
+BBC_END_COMPILE_5
+Fast transfer: no CRCs or whole-file verification.
+sdserve-v0.3.0-b2026-10-25-05-14-41Z (draft), root /
+Escape returns to MOS.
+SD service stopped.
+/agents/extender/results/bbc-basic/c006-r01 *W3DDBG MODE_PACKET_BEGIN ms=7035224 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=7035224 mode=0
+EXEC /extender/diagnostics/bbc-basic/c006-r01/compile-6.txt
+BBC_BEGIN_COMPILE_6
+Source file: W3DDBG MODE_PACKET_BEGIN ms=7049556 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=7049557 mode=0
+/extender/diagnostics/bbc-basic/c006-r01/case-6.bas
+Output file: W3DDBG MODE_PACKET_BEGIN ms=7052187 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=7052188 mode=0
+/agents/extender/results/bbc-basic/c006-r01/case-6.bin
+Wrote /agents/extender/results/bbc-basic/c006-r01/case-6.bin
+BBC_END_COMPILE_6
+Fast transfer: no CRCs or whole-file verification.
+sdserve-v0.3.0-b2026-10-25-05-14-41Z (draft), root /
+Escape returns to MOS.
+SD service stopped.
+/agents/extender/results/bbc-basic/c006-r01 *W3DDBG MODE_PACKET_BEGIN ms=7076502 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=7076503 mode=0
+EXEC /extender/diagnostics/bbc-basic/c006-r01/compile-7.txt
+BBC_BEGIN_COMPILE_7
+Source file: W3DDBG MODE_PACKET_BEGIN ms=7090817 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=7090817 mode=0
+/extender/diagnostics/bbc-basic/c006-r01/case-7.bas
+Output file: W3DDBG MODE_PACKET_BEGIN ms=7093217 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=7093217 mode=0
+/agents/extender/results/bbc-basic/c006-r01/case-7.bin
+Wrote /agents/extender/results/bbc-basic/c006-r01/case-7.bin
+BBC_END_COMPILE_7
+Fast transfer: no CRCs or whole-file verification.
+sdserve-v0.3.0-b2026-10-25-05-14-41Z (draft), root /
+Escape returns to MOS.
+SD service stopped.
+/agents/extender/results/bbc-basic/c006-r01 *W3DDBG MODE_PACKET_BEGIN ms=7119542 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=7119542 mode=0
+EXEC /extender/diagnostics/bbc-basic/c006-r01/compile-8.txt
+BBC_BEGIN_COMPILE_8
+Source file: W3DDBG MODE_PACKET_BEGIN ms=7133871 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=7133871 mode=0
+/extender/diagnostics/bbc-basic/c006-r01/case-8.bas
+Output file: W3DDBG MODE_PACKET_BEGIN ms=7136497 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=7136497 mode=0
+/agents/extender/results/bbc-basic/c006-r01/case-8.bin
+Wrote /agents/extender/results/bbc-basic/c006-r01/case-8.bin
+BBC_END_COMPILE_8
+Fast transfer: no CRCs or whole-file verification.
+sdserve-v0.3.0-b2026-10-25-05-14-41Z (draft), root /
+Escape returns to MOS.
+SD service stopped.
+/agents/extender/results/bbc-basic/c006-r01 *W3DDBG MODE_PACKET_BEGIN ms=7162817 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=7162817 mode=0
+EXEC /extender/diagnostics/bbc-basic/c006-r01/compile-9.txt
+BBC_BEGIN_COMPILE_9
+Source file: W3DDBG MODE_PACKET_BEGIN ms=7177225 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=7177226 mode=0
+/extender/diagnostics/bbc-basic/c006-r01/case-9.bas
+Output file: W3DDBG MODE_PACKET_BEGIN ms=7179842 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=7179842 mode=0
+/agents/extender/results/bbc-basic/c006-r01/case-9.bin
+Wrote /agents/extender/results/bbc-basic/c006-r01/case-9.bin
+BBC_END_COMPILE_9
+Fast transfer: no CRCs or whole-file verification.
+sdserve-v0.3.0-b2026-10-25-05-14-41Z (draft), root /
+Escape returns to MOS.
+SD service stopped.
+/agents/extender/results/bbc-basic/c006-r01 *W3DDBG MODE_PACKET_BEGIN ms=7226322 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=7226322 mode=0
+EXEC /extender/diagnostics/bbc-basic/c006-r01/compile-10.txt
+BBC_BEGIN_COMPILE_10
+Source file: W3DDBG MODE_PACKET_BEGIN ms=7241150 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=7241151 mode=0
+/extender/diagnostics/bbc-basic/c006-r01/case-10.bas
+Output file: W3DDBG MODE_PACKET_BEGIN ms=7243754 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=7243754 mode=0
+/agents/extender/results/bbc-basic/c006-r01/case-10.bin
+/extender/diagnostics/bbc-basic/c006-r01/case-10.bas:1:14: Undefined target @missing
+BBC_END_COMPILE_10
+Fast transfer: no CRCs or whole-file verification.
+sdserve-v0.3.0-b2026-10-25-05-14-41Z (draft), root /
+Escape returns to MOS.
+SD service stopped.
+/agents/extender/results/bbc-basic/c006-r01 *W3DDBG MODE_PACKET_BEGIN ms=7251054 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=7251054 mode=0
+EXEC /extender/diagnostics/bbc-basic/c006-r01/compile-11.txt
+BBC_BEGIN_COMPILE_11
+Source file: W3DDBG MODE_PACKET_BEGIN ms=7265550 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=7265551 mode=0
+/extender/diagnostics/bbc-basic/c006-r01/case-11.bas
+Output file: W3DDBG MODE_PACKET_BEGIN ms=7268227 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=7268228 mode=0
+/agents/extender/results/bbc-basic/c006-r01/case-11.bin
+/extender/diagnostics/bbc-basic/c006-r01/case-11.bas:1:11: EVAL is deliberately unsupported
+BBC_END_COMPILE_11
+Fast transfer: no CRCs or whole-file verification.
+sdserve-v0.3.0-b2026-10-25-05-14-41Z (draft), root /
+Escape returns to MOS.
+SD service stopped.
+/agents/extender/results/bbc-basic/c006-r01 *W3DDBG MODE_PACKET_BEGIN ms=7274805 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=7274805 mode=0
+EXEC /extender/diagnostics/bbc-basic/c006-r01/run-1.txt
+BBC_BEGIN_NATIVE_1
+0.1:FFFFFFFF:-2
+BBC_END_NATIVE_1
+Fast transfer: no CRCs or whole-file verification.
+sdserve-v0.3.0-b2026-10-25-05-14-41Z (draft), root /
+Escape returns to MOS.
+SD service stopped.
+/agents/extender/results/bbc-basic/c006-r01 *W3DDBG MODE_PACKET_BEGIN ms=7281266 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=7281266 mode=0
+EXEC /extender/diagnostics/bbc-basic/c006-r01/run-2.txt
+BBC_BEGIN_NATIVE_2
+25
+BBC_END_NATIVE_2
+Fast transfer: no CRCs or whole-file verification.
+sdserve-v0.3.0-b2026-10-25-05-14-41Z (draft), root /
+Escape returns to MOS.
+SD service stopped.
+/agents/extender/results/bbc-basic/c006-r01 *W3DDBG MODE_PACKET_BEGIN ms=7287713 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=7287714 mode=0
+EXEC /extender/diagnostics/bbc-basic/c006-r01/run-3.txt
+BBC_BEGIN_NATIVE_3
+15:7
+BBC_END_NATIVE_3
+Fast transfer: no CRCs or whole-file verification.
+sdserve-v0.3.0-b2026-10-25-05-14-41Z (draft), root /
+Escape returns to MOS.
+SD service stopped.
+/agents/extender/results/bbc-basic/c006-r01 *W3DDBG MODE_PACKET_BEGIN ms=7294266 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=7294267 mode=0
+EXEC /extender/diagnostics/bbc-basic/c006-r01/run-4.txt
+BBC_BEGIN_NATIVE_4
+inside
+outer
+BBC_END_NATIVE_4
+Fast transfer: no CRCs or whole-file verification.
+sdserve-v0.3.0-b2026-10-25-05-14-41Z (draft), root /
+Escape returns to MOS.
+SD service stopped.
+/agents/extender/results/bbc-basic/c006-r01 *W3DDBG MODE_PACKET_BEGIN ms=7300807 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=7300808 mode=0
+EXEC /extender/diagnostics/bbc-basic/c006-r01/run-5.txt
+BBC_BEGIN_NATIVE_5
+2.14748365E9:array
+BBC_END_NATIVE_5
+Fast transfer: no CRCs or whole-file verification.
+sdserve-v0.3.0-b2026-10-25-05-14-41Z (draft), root /
+Escape returns to MOS.
+SD service stopped.
+/agents/extender/results/bbc-basic/c006-r01 *W3DDBG MODE_PACKET_BEGIN ms=7307266 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=7307266 mode=0
+EXEC /extender/diagnostics/bbc-basic/c006-r01/run-6.txt
+BBC_BEGIN_NATIVE_6
+255:-2.14748365E9
+BBC_END_NATIVE_6
+Fast transfer: no CRCs or whole-file verification.
+sdserve-v0.3.0-b2026-10-25-05-14-41Z (draft), root /
+Escape returns to MOS.
+SD service stopped.
+/agents/extender/results/bbc-basic/c006-r01 *W3DDBG MODE_PACKET_BEGIN ms=7313815 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=7313815 mode=0
+EXEC /extender/diagnostics/bbc-basic/c006-r01/run-7.txt
+BBC_BEGIN_NATIVE_7
+0.1:record
+0.1
+BBC_END_NATIVE_7
+Fast transfer: no CRCs or whole-file verification.
+sdserve-v0.3.0-b2026-10-25-05-14-41Z (draft), root /
+Escape returns to MOS.
+SD service stopped.
+/agents/extender/results/bbc-basic/c006-r01 *W3DDBG MODE_PACKET_BEGIN ms=7320235 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=7320238 mode=0
+EXEC /extender/diagnostics/bbc-basic/c006-r01/run-8.txt
+BBC_BEGIN_NATIVE_8
+255:116:0
+BBC_END_NATIVE_8
+Fast transfer: no CRCs or whole-file verification.
+sdserve-v0.3.0-b2026-10-25-05-14-41Z (draft), root /
+Escape returns to MOS.
+SD service stopped.
+/agents/extender/results/bbc-basic/c006-r01 *W3DDBG MODE_PACKET_BEGIN ms=7327950 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=7327951 mode=0
+EXEC /extender/diagnostics/bbc-basic/c006-r01/run-9.txt
+BBC_BEGIN_NATIVE_9
+100:100:99
+recovery
+BBC_END_NATIVE_9
+Fast transfer: no CRCs or whole-file verification.
+sdserve-v0.3.0-b2026-10-25-05-14-41Z (draft), root /
+Escape returns to MOS.
+SD service stopped.
+/agents/extender/results/bbc-basic/c006-r01 *W3DDBG MODE_PACKET_BEGIN ms=7355134 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=7355134 mode=0
+VDU 3
+W3DDBG MODE_PACKET_BEGIN ms=7363222 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=7363222 mode=0
+

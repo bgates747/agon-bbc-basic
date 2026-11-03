@@ -31,3 +31,10 @@ __pycache__/
 
 # All task-local disposable build outputs
 /docs/tasks/*/build/
+
+# C006 qualified development executable and accompanying provenance
+!/compiler/bin/
+!/compiler/bin/compiler.bin
+
+# Exact physical payloads and raw captures referenced by C006 evidence manifests
+!/docs/tasks/C006/evidence/**/*.bin

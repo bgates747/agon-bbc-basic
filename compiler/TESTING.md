@@ -8,9 +8,9 @@ has been measured.
 
 The catalogue's original eligibility assessments describe the November 1 search
 checkpoint. Since then C002–C005 have promoted the features in the compatibility
-matrix, and workload W01 (the compiler itself) has passed its first native
-self-source preflight with a byte-identical 324275-byte image. C006 owns the full
-generation/native/physical qualification. Recorded test-controller durations
+matrix, and workload W01 (the compiler itself) has completed C006 qualification:
+four identical324275-byte emulator images, native regression suites and two
+physical self-source generations. This is correctness evidence. Recorded test-controller durations
 are not paired benchmark results; no physical speedup is claimed.
 
 1. [Curated catalogue and source assessments](../docs/tasks/C007/CATALOG.md)

@@ -1,0 +1,21 @@
+/mystuff/fsim/p066-2a7f76a18f-q1 *W3DDBG MODE_PACKET_BEGIN ms=15390726 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=15390727 mode=0
+ECHO BBC_C006_SELF_B_CAPTURE_R02
+BBC_C006_SELF_B_CAPTURE_R02
+/mystuff/fsim/p066-2a7f76a18f-q1 *W3DDBG MODE_PACKET_BEGIN ms=15401197 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=15401198 mode=0
+EMOS sdserve --fast /
+Fast transfer: no CRCs or whole-file verification.
+sdserve-v0.3.0-b2026-10-25-05-14-41Z (draft), root /
+Escape returns to MOS.
+SD service stopped.
+/mystuff/fsim/p066-2a7f76a18f-q1 *W3DDBG MODE_PACKET_BEGIN ms=15460263 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=15460263 mode=0
+EXEC /extender/diagnostics/bbc-basic/c006-r02/self-b.txt
+BBC_BEGIN_SELF_B
+Source file: W3DDBG MODE_PACKET_BEGIN ms=15474358 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=15474358 mode=0
+/extender/diagnostics/bbc-basic/c006-r02/compiler.bas
+Output file: W3DDBG MODE_PACKET_BEGIN ms=15477013 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=15477013 mode=0
+/agents/extender/results/bbc-basic/c006-r02/self-b.bin

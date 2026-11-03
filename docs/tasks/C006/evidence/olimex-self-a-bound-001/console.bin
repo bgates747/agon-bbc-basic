@@ -1,0 +1,11 @@
+SD service stopped.
+/agents/extender/results/bbc-basic/c006-r01 *W3DDBG MODE_PACKET_BEGIN ms=7442989 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=7442989 mode=0
+EXEC /extender/diagnostics/bbc-basic/c006-r01/self-a.txt
+BBC_BEGIN_SELF_A
+Source file: W3DDBG MODE_PACKET_BEGIN ms=7457196 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=7457196 mode=0
+/extender/diagnostics/bbc-basic/c006-r01/compiler.bas
+Output file: W3DDBG MODE_PACKET_BEGIN ms=7459858 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=7459859 mode=0
+/agents/extender/results/bbc-basic/c006-r01/self-a.bin

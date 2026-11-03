@@ -1,0 +1,13 @@
+{
+  "full-console-through-cleanup.bin": "482f6025f256dd6ba88951dbc56e697f93dcb26f22ba1ddadd40e1511ab418bd",
+  "full-comparison.json": "e68548a5c56eb29de982e7030dac26a989de55c83cc8a781fead5d148d22d5a6",
+  "output.dat": "299a31190c380541a73ed9eb144a303fa37abccc4f3c3e0ad47f99f1538122c0",
+  "cleanup-release-summary.json": "224f3469038c5bdd5768a297eb47974cc1b72ad1e91370f599356d839b21112d",
+  "cleanup-cli-observation.json": "219b7e09ea43672c1f24d97899a1c3b2e4f62a141978fa725cbaa243316c43f9",
+  "stage-results.json": "7e8e007d7b0d1e860edf2c8942027c411a404685ccd98f8c95d96dde62c08477",
+  "stage-console.bin": "129318789d60a422e1a748c825064e1df675c08b04ccd2a67c779b48fe18d590",
+  "run_olimex_stage.py": "564b47208274aa45e84cc3ff5fc01ba675f26f577f49891bd587da6ce8d5601c",
+  "release_olimex_repeat.py": "3c283026c709b8303cfc4fd10f70581a86c86f5a68727249d4ef430bdb2497be",
+  "preservation-results.json": "fb1faa71da0c46e759789cc75c98beb01d48fd695a88b991fee3342dd496ce7f",
+  "results.json": "0fb64756320a5aa766a7c351f63837b3d94f3e1cc2f3e8e9e793cfba9432c6d3"
+}

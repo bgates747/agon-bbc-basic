@@ -1,0 +1,38 @@
+{
+  "scope": "Qualified development executable; no main/production promotion",
+  "target": "Agon MOS, eZ80 ADL24, load040000",
+  "image_bytes": 324275,
+  "image_sha256": "299a31190c380541a73ed9eb144a303fa37abccc4f3c3e0ad47f99f1538122c0",
+  "source": "compiler/compiler.bas",
+  "source_sha256": "6597a0df3f99b4f43c42bff1cdbc59f5fdf730c57837f3d4112a598fbfbe5fb8",
+  "binary_copied_unchanged_from": "docs/tasks/C006/evidence/olimex-repeat-001/output.dat",
+  "license_sha256": "cc8e92d92cf12fb1d04ddae0b573367f14188df5fcd6c7909d36486ff53a108a",
+  "emulator_generations": [
+    "g0",
+    "g1",
+    "g2",
+    "repeat"
+  ],
+  "native_regressions": {
+    "baseline": 39,
+    "representative": 12,
+    "errors": 39
+  },
+  "physical_qualification": {
+    "source_compiles": 12,
+    "generated_programs": 10,
+    "self_source_generations": 2
+  },
+  "evidence": [
+    "docs/tasks/C006/evidence/live-bootstrap-resume-001",
+    "docs/tasks/C006/evidence/live-native-baseline-001",
+    "docs/tasks/C006/evidence/live-regressions-001",
+    "docs/tasks/C006/evidence/live-native-errors-001",
+    "docs/tasks/C006/evidence/olimex-small-001",
+    "docs/tasks/C006/evidence/olimex-self-a-late-001",
+    "docs/tasks/C006/evidence/olimex-repeat-001"
+  ],
+  "original_interruption_and_timeout_records_preserved": true,
+  "human_optical_validation": false,
+  "performance_benchmark": false
+}

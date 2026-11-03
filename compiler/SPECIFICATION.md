@@ -4,8 +4,11 @@ The current implementation proves the path from BBC BASIC source to a MOS
 native executable. Later stages must preserve BBC BASIC values and activation
 semantics before broadening the accepted language. This draft describes the
 promoted C001 bootstrap, C002 numeric expression/output and C003 scalar/string operations, C004 control/activations and C005 memory, I/O, DATA and source-error facilities in
-`compiler/compiler.bas`. These remain on the development branch pending
-accepted testing before promotion to main.
+`compiler/compiler.bas`. C006 qualifies self-compilation in the emulator and
+two physical Olimex generations with complete identical images. The qualified
+development executable is `compiler/bin/compiler.bin`, copied unchanged from
+the second hardware output. These remain on the development branch; promotion
+to main is separate. No human optical or performance acceptance is claimed.
 Task documents and experimental silos follow
 [the accepted task convention](../docs/tasks/README.md).
 
@@ -398,5 +401,9 @@ The Author accepted the corrected C002 baseline for a development checkpoint.
    produce a native compiler, running that compiler on its own source, then
    repeating and comparing deterministic output. Running a Python translation
    or linking the interpreter as an execution engine does not satisfy this.
+   [C006](../docs/tasks/C006.md) completes this initial scope with four emulator
+   images, native regressions and two physical generations. The original host
+   interruption/resumed lineage and first physical observation timeout/actual
+   late completion remain explicit in the retained evidence.
 
 Unfinished implementation is tracked only in [TODO.md](../TODO.md).

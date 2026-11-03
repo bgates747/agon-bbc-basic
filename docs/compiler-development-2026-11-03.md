@@ -628,3 +628,58 @@ Freeze actual-prompt-only olimex-self-b-prompts-001 with no completion/liveness
 claim. Durable11-08-53_bbc-basic_bbc-c006-r02-observation-status-one and steering
 give Extender scheduling status only; existing6600s observer/7200s reader remain
 active, no parallel access/extra workload or acknowledgement requested.
+
+## Physical repeat succeeds; C006 completes and native executable is promoted
+
+The sole generation8 self-source invocation returns exact clean Wrote/end/
+canonical-listener sequence at epoch1793724490.4255953,5950.803 host seconds
+after final filename emission return. This is within its admitted6600s bound.
+The original-result GET completes245.017s; all324275 bytes equal both the actual
+first hardware-produced input and normal-main bootstrap G0, SHA256
+299a31190c380541a73ed9eb144a303fa37abccc4f3c3e0ad47f99f1538122c0.
+Freeze actual stage/full-cleanup console, full comparison, output, preservation
+and release summaries in olimex-repeat-001. No RUN replay or reset occurs.
+The original first-run timeout/late result and emulator interruption/resumed
+lineage remain unchanged and explicit. These intervals include host/serial/
+listener timing and are not CPU times or paired performance benchmarks.
+
+Fresh complete startup108B9e97/listener22968B04e7 readbacks remain exact. EXIT
+returns actual CLI; restore the exact incoming directory, observe native0 and
+returned text/visible/flashing-cursor controls, VDU3 mirroroff and both capture
+closures. The actual release_olimex_repeat.py run checks completed stage/full
+image, preservation, CLI/input/display/reader receipts and fresh neutral/offline/
+idle/ownerlessUSB state. Central generation8 clean release is
+2026-11-03T16:54:23.807673Z, next_request=null. Immediate durable handback
+2026-11-03_11-55-11_bbc-basic_bbc-c006-r02-clean-release-one and steering inform
+Extender. No BBC custody, workload, transfer or observer remains. Firmware
+identities retain verified provenance, without claiming fresh flash reads;
+no firmware/startup/mode/wiring change, optical pass or SD unmount/eject occurs.
+
+Run promote_native.py against the completed repeat after all prerequisite
+manifest/source/license/release gates. It copies that actual second hardware
+output unchanged to compiler/bin/compiler.bin, exact root/vendor notice to
+compiler/bin/LICENSE.txt, and writes usage/provenance metadata. It neither
+compiles BASIC nor patches instructions. The live source remains SHA256
+6597a0df3f99b4f43c42bff1cdbc59f5fdf730c57837f3d4112a598fbfbe5fb8;
+runtime sources remain unchanged. verify_native_promotion.py passes, retaining
+native-promotion-001 with all six completed image comparisons, seven verified
+prerequisite manifests, exact notices and promoted file hashes. No additional
+compiler/emulator/hardware run is required for this file copy.
+
+The final Git evidence audit finds34 physical payload/capture `.bin` files
+(688109 bytes) referenced by existing C006 manifests but hidden by the global
+binary ignore. Verify every byte against its frozen hash and include them with
+a narrow C006 evidence ignore exception, without editing old manifests. This
+corrects repository completeness; it does not create a new execution result.
+Mark these raw `.bin` files as binary in .gitattributes to preserve their exact
+control bytes/CRLF and prevent text line-ending normalization on checkout.
+
+Accept C006's initial scope as complete under the Author's explicit authorization
+to finish the TODO and skip prior approval stops: actual normal-main/four-image
+emulator equality, native39/12/39 suites, physical12 compiles/10 generated programs,
+two physical self-source generations and clean releases all pass. Update the
+task record, README, specification, compatibility status and handoff; remove
+C006 from the sole TODO. C000–C007 initial scopes are closed. Keep the qualified
+development branch separate from main, which is not merged or promoted. Full
+BBC language coverage, human optical validation and formal speedup benchmarks
+are not asserted by this milestone.

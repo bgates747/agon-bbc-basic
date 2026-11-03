@@ -1,0 +1,19 @@
+{
+  "scope": "Actual second physical generation using unchanged output of first physical self-compilation; no execution replay",
+  "passed": true,
+  "hardware_validation": true,
+  "whole_image_matches_input_and_bootstrap": true,
+  "source_sha256": "6597a0df3f99b4f43c42bff1cdbc59f5fdf730c57837f3d4112a598fbfbe5fb8",
+  "input_hardware_image_sha256": "299a31190c380541a73ed9eb144a303fa37abccc4f3c3e0ad47f99f1538122c0",
+  "image_bytes": 324275,
+  "image_sha256": "299a31190c380541a73ed9eb144a303fa37abccc4f3c3e0ad47f99f1538122c0",
+  "first_hardware_evidence": "docs/tasks/C006/evidence/olimex-self-a-late-001",
+  "execution_count": 1,
+  "observation_bound_seconds": 6600,
+  "compile_host_observation_seconds": 5950.803,
+  "observation_bound_satisfied": true,
+  "time_scope": "Final filename emission return to host-observed END; not CPU/benchmark time",
+  "cleanly_released": true,
+  "human_optical_validation": false,
+  "performance_benchmark": false
+}

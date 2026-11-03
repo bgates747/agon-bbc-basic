@@ -67,93 +67,61 @@ environment, ownership, assembly, emulator, hardware and coordination rules.
    The compatibility matrix remains authoritative; no full BBC implementation
    or unsupported feature admission follows from self-compilation.
 
-## Active qualification and authorization
+## Completed qualification and authorization
 
-1. Only C006 remains unfinished: physical Olimex qualification.
-   Read C006.md, C006/BOOTSTRAP.md and C006/OLIMEX.md. Full normal-main G0,
-   native G1/G2 and actual repeat now produce all four identical324275-byte
-   images299a3119. Durations3951.738/1983.142/1997.471/1996.877 seconds are
-   controller observations, not physical benchmarks. Original live-bootstrap-001
-   was interrupted during unfinished repeat (host exit143/unknown origin).
-   live-bootstrap-resume-001 verifies/carries the real completed three stages
-   and executes a fresh repeat, explicitly recording that lineage; all four
-   bytestrings match. The cohort is complete. live-native-baseline-001 passes
-   all39 cases (15 full images/24 diagnostics) in245.15 controller seconds.
-   live-regressions-001 passes all12 cases, including exact file bytes, in131.049s.
-   live-native-errors-001 passes all39 fresh ERR/ERL/native programs, complete
-   runtime/entry links and deterministic repeat in612.766s. All native suites
-   are finished and frozen. No physical compiler result exists yet.
-2. C006 native_baseline.py compares39 actual standard sources against15 complete
-   baseline images/24 diagnostics. regressions.py runs12 representative cases;
-   native_errors.py runs39 fresh reference ERR/ERL programs. Prepared workflows
-   are now retained results; preserve exact input/runtime hashes and interrupted state.
-3. Use `.venv/bin/python` explicitly. compiler/README.md owns commands. The
-   ignored `.emulator/` is automated CLI only; launch through its generated
-   `./fab-agon-emulator` wrapper from the profile directory. One active run owns
-   that SD; freeze output before the next run. No project graphical/human
-   validation has occurred; actual physical functional evidence is recorded above.
-   Never contact Oryx until the
-   Author says it is available; Pi5 automated emulator work is authorized.
-4. The Author explicitly authorized continuing through the remaining TODO and
-   skipping previous approval stops, qualifying and checkpointing this branch
-   without asking again. Commit/push authority persists for the configured
-   origin. A waiver is not a test result; report real limitations truthfully.
-5. C007's completed source search/measurement contract is compiler/TESTING.md.
-   No new benchmark performance is measured by the controller durations above.
-6. The Author specifically authorizes coordination with Extender for Olimex
-   time, file transfer and remote CLI. Our mailbox is bbc-basic; use Extender's
-   maintained scripts/agentcoms.py with structured JSON stdin, never handwritten
-   mailbox files. It owns routing/quoted metadata/idempotency. The initial
-   malformed request was preserved/repaired; C006/OLIMEX.md owns the record.
-7. Physical custody is solely agon-dev-env/cross-agent/olimex-bench. Prepare an
-   exact finite fixture, reserve, receive Extender's grant and assert its token
-   before target operations. Physical bundle olimex-fixture-001 and finite plan
-   C006/OLIMEX-R01.md are prepared. Reservation ee0ad664f72a is submitted;
-   Extender granted generation7. Exact lease/config/receipts are local under
-   C006/build/physical-c006-r01/{grant,config}.json; assert current ownership
-   before every target operation. Maintained passive capture-small is active
-   was closed normally after the small cohort. All40 deployment readbacks pass (242.466s); retained as
-   olimex-deployment-001 with actual entry/MEM and manual compile/run0 proof.
-   Actual sentinel/CLI/MEM pass: userLO040000..0BBFFF, stack0BF800..0BFFFF.
-   All12 physical compiles/10 native programs now pass, including exact file
-   bytes and two preserved-output rejections, frozen as olimex-small-001.
-   First physical self-source returns cleanly after the5400s observation timeout.
-   The whole324275B image matches299a3119, frozen in olimex-self-a-late-001.
-   Original olimex-self-a-bound-001 failure stays immutable; no replay occurred.
-   Host final capture append follows last filename return by5951.332s, about99.2
-   minutes; this includes serial/listener timing and is not CPU/benchmark time.
-   Original GET takes251.948 host seconds. All owned processes/readers are closed.
-   Generation7 is CLEANLY RELEASED at2026-11-03T14:48:42.976464Z, next=null;
-   raw cleanup/release files remain local under C006/build/physical-c006-r01.
-   Startup/listener exact readbacks, original directory/mode/text/cursor/mirror
-   and neutral idle services/ownerlessUSB are verified; no reset/firmware change.
-   Extender handback09-50-32_bbc-basic_bbc-c006-r01-clean-release-one delivered.
-   No generation7 lease/target access remains. Physical self-b needs a NEW
-   finite plan/fixture and reserve/freshly receive a grant before continuing.
-   OLIMEX-R02.md/olimex-repeat-fixture-001 are now prepared:3 payloads436261B,
-   unchanged actual HW-produced image/source and one batch. Manifestb5d0761f.
-   New reservation9339623b747d is granted as generation8. Exact new token/config
-   are local C006/build/physical-c006-r02/{grant,config}.json; old gen7 is invalid.
-   Extender has stopped all target access. Actual new entry/sentinel/CLI/MEM pass
-   with same map and mode0. All3 readbacks pass137.291s, retained as
-   olimex-repeat-deployment-001. Setup capture17355 closed normally at known CLI.
-   Fresh execution capture-self-b session80456 is active (7200s); exact new
-   VDU2/sentinel/CLI proof precedes the sole invocation. Host stage82215 is active,
-   with actual two prompts and final input return epoch1793718539.6227434.
-   Read local stages/self-b/results.json and capture for exact progress; no new
-   target operation alongside it. It has6600s completion bound and automatic
-   original-result GET/comparison only after exact clean end/listener return.
-   No result is proved yet. Deployment explicitly uses
-   --expected-files3, stage uses --self-timeout6600 and --entry-directory matching
-   the new grant's observed incoming directory; defaults40/5400 remain unchanged.
-   SELF-SOURCE-WORK.md/evidence/self-source-work-001 contain offline counts,
-   not a CPU-time estimate or progress proof; no extra experiment was run.
-   Extender has stopped all target access.
-   Keep custody through restoration/release; consult actual local receipts.
-   Use pinned new staged
-   transfers, admitted keyboard/CLI and maintained passive serial/printer mirror
-   per Extender. Preserve installed firmware/startup/wiring; no unmount/eject.
-   Do not treat old hardware headers or an empty queue as current readiness.
+1. C006 completes the initial self-hosting/physical scope; TODO.md has no
+   unfinished promoted tasks. Read C006.md, C006/BOOTSTRAP.md and C006/OLIMEX.md.
+   Actual normal-main G0, native G1/G2 and repeat produce identical324275-byte
+   images299a3119. live-bootstrap-001 was interrupted during unfinished repeat
+   (host exit143/unknown origin). live-bootstrap-resume-001 verifies/carries the
+   actual three complete stages and executes a fresh repeat, explicitly retaining
+   that lineage. Native baseline39, representative12 and fresh ERR/ERL39 suites
+   all pass. Preserve complete frozen manifests and original failure records.
+2. Physical Olimex evidence: olimex-small-001 passes12 compiler invocations and
+   ten generated programs, including exact full images, file bytes FF74657874
+   and two preserved-output rejections. Actual first hardware self-source matches
+   all324275 bytes; olimex-self-a-late-001 records the late completion separately
+   from immutable olimex-self-a-bound-001. No replay/reset occurred. Generation7
+   was cleanly released2026-11-03T14:48:42.976464Z.
+3. Separately granted R02 uses that actual first hardware output unchanged and
+   the same source. Fresh entry/MEM and3 readbacks pass. Its sole self-source
+   invocation completes within6600s; original result is byte-identical to both
+   the hardware input and bootstrap. Evidence: olimex-repeat-deployment-001 and
+   olimex-repeat-001. Host observed interval5950.803s and GET245.017s are not
+   CPU/benchmark times. Generation8 was cleanly released2026-11-03T16:54:23.807673Z,
+   next_request=null. Both generations restore incoming directory/native0/text/
+   cursor/mirror, preserve complete startup/listener bytes and close readers;
+   fresh neutral/offline/idle/ownerlessUSB checks pass. Verified firmware
+   provenance is retained without claiming fresh flash reads.
+4. No hardware custody, owned workload or observer remains. All old lease tokens
+   are invalid. Private receipts remain ignored under C006/build/physical-c006-r01
+   and physical-c006-r02; no target operation follows from historical records.
+   Any future physical run needs a new finite scope/reservation/fresh grant.
+5. The qualified development executable is compiler/bin/compiler.bin, copied
+   unchanged from actual second hardware output by promote_native.py after full
+   evidence/source/license/release gates. compiler/bin/manifest.json and
+   C006/evidence/native-promotion-001 retain provenance; the exact root/vendor
+   notice is alongside it. MOS LOAD then RUN . starts normal filename prompts.
+   It includes its runtime; no installed interpreter or assembler is required.
+   Source and numeric/runtime behavior remain unchanged. No main merge occurs.
+6. Use .venv/bin/python explicitly; compiler/README.md owns commands. Ignored
+   .emulator/ is automated CLI only, launched through its generated profile-local
+   ./fab-agon-emulator wrapper. Freeze owned results before subsequent work.
+   No graphical/human optical validation has occurred. Never contact Oryx until
+   the Author says it is available; Pi5 automated emulator work is authorized.
+7. The Author authorized completing the remaining TODO and skipping earlier
+   approval stops, qualifying/checkpointing this development branch without
+   asking again. Commit/push authority persists for the configured origin.
+   This does not grant main promotion or establish human/performance evidence.
+8. C007's completed source search and measurement contract are compiler/TESTING.md.
+   No paired performance benchmark or speedup has been measured. Feature limits
+   remain explicit in the compatibility matrix despite self-hosting completion.
+9. The Author authorizes consultation with Extender for Olimex scheduling,
+   transfer and CLI. Our mailbox is bbc-basic. Use Extender's maintained
+   scripts/agentcoms.py and structured JSON stdin; never handwrite mailbox files.
+   Canonical physical custody is agon-dev-env/cross-agent/olimex-bench. Both clean
+   handbacks were delivered through durable mail and immediate steering; latest
+   is2026-11-03_11-55-11_bbc-basic_bbc-c006-r02-clean-release-one.
 
 Shared /tmp tmpfs filled during G2 handoff; only our inactive Cargo build cache
 was moved to C006/build/relocated-cli-cache-001, preserving the active CLI at its

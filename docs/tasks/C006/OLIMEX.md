@@ -2,10 +2,12 @@
 
 The Author selects the shared Olimex bench and authorizes consultation with
 Extender on scheduling, file transfer and remote CLI access. Original deployment,
-12 compiler/10 generated-program cases and one complete physical self-source
-image now pass. Generation7 is cleanly released; the outstanding repeat has a
-separate prepared [R02 plan](OLIMEX-R02.md). Exact target access and current
-firmware identities remain in Extender's machine-local records.
+12 compiler/10 generated-program cases and two complete physical self-source
+generations now pass with whole-image equality. Generations7 and8 are cleanly
+released; no BBC hardware custody or owned observer remains. The separately
+granted repeat follows [R02](OLIMEX-R02.md); olimex-repeat-001 retains its actual
+result and release. Exact access details remain in Extender's machine-local
+records. Any future target work requires a new finite scope and fresh grant.
 
 ## Scope and custody
 
@@ -57,7 +59,10 @@ Its explicit private heap is&8F2B3..&A7EFF (101453 bytes), activation arena
 256-byte gap at&AFF00. Control records, scalar payloads and expression pools
 already occur inside the static image. Private DIM/string contents use the
 explicit heap; LOCAL snapshots use the arena. Native self-source execution
-has passed on the pinned CLI, not yet on this hardware.
+has passed on the pinned CLI and twice on this hardware. Fresh MEM in both
+grants places user memory at&040000..&0BBFFF and MOS stack at&0BF800..&0BFFFF.
+These actual workloads fit; stack high-water and arbitrary recursion are not
+qualified by that result.
 
 Native calls additionally use the MOS-provided ADL stack and preserve/restore
 entry SP. Read-only EMOS source inspection finds exec24 calling the ADL entry
@@ -137,8 +142,8 @@ owner, relative paths become absolute for delegated tools, upload/traversal
 guards reject wrong paths and wrong protocol prevents transfer submission.
 Earlier001/002 cohorts retain their narrower checks. No network/serial access
 or hardware result follows from these host tests. Subsequent actual results are
-retained separately in olimex-deployment-001, olimex-small-001 and
-olimex-self-a-late-001. Any new physical run requires its own prepared scope
+retained separately in olimex-deployment-001, olimex-small-001,
+olimex-self-a-late-001 and olimex-repeat-001. Any new physical run requires its own prepared scope
 and fresh Extender grant.
 
 Extender's source-only review

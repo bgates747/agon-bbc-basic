@@ -127,7 +127,18 @@ the exact deployment; olimex-small-001 retains all12 actual physical compiler
 invocations and10 generated program invocations, with exact image/output/file
 comparisons. olimex-self-a-late-001 also verifies the first complete physical
 self-source image after its original observation timeout, retaining that timeout
-separately and recording clean release. The second physical generation remains
-pending under a new finite reservation.
-The finite physical plan and actual custody/observation rules are in
-[OLIMEX-R01.md](OLIMEX-R01.md); task/log records own subsequent results.
+separately and recording clean release. Under a separate fresh grant, R02 uses
+that actual hardware-produced image unchanged to compile the same source once.
+olimex-repeat-001 retains the second actual324275-byte result, equal to both its
+input and normal-main G0, and the clean release. The observed5950.803s interval
+is within its6600s bound; it includes host/serial timing and is not a benchmark.
+The finite plans and actual custody/observation rules are in
+[OLIMEX-R01.md](OLIMEX-R01.md) and [OLIMEX-R02.md](OLIMEX-R02.md).
+
+After complete qualification and both clean releases, promote_native.py verifies
+all prerequisite evidence, current source and exact license, then copies the
+second hardware output unchanged to compiler/bin/compiler.bin with usage and
+provenance metadata. native-promotion-001 records this actual development
+promotion. It does not change the source/runtime or merge main. C006 completes
+the initial scope under the Author's approval-stage waiver; no human optical
+or performance acceptance is claimed.

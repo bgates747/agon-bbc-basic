@@ -1,0 +1,16 @@
+SD service stopped.
+/agents/extender/results/bbc-basic/c006-r01 *W3DDBG MODE_PACKET_BEGIN ms=6828295 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=6828295 mode=0
+EXEC /extender/diagnostics/bbc-basic/c006-r01/compile-2.txt
+BBC_BEGIN_COMPILE_2
+Source file: W3DDBG MODE_PACKET_BEGIN ms=6842599 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=6842599 mode=0
+/extender/diagnostics/bbc-basic/c006-r01/case-2.bas
+Output file: W3DDBG MODE_PACKET_BEGIN ms=6845156 mode=0 suppress=0
+W3DDBG MODE_PACKET_END ms=6845156 mode=0
+/agents/extender/results/bbc-basic/c006-r01/case-2.bin
+Wrote /agents/extender/results/bbc-basic/c006-r01/case-2.bin
+BBC_END_COMPILE_2
+Fast transfer: no CRCs or whole-file verification.
+sdserve-v0.3.0-b2026-10-25-05-14-41Z (draft), root /
+Escape returns to MOS.

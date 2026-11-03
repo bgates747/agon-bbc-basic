@@ -3,7 +3,8 @@
 This matrix describes the compiler, not the reference interpreter. A feature
 is implemented only for the stated scope. C001 output/control flow, C002 numeric
 expressions, C003 scalar numeric bindings, the mutable string core, expression slicing, comparisons, VAL/STR$/ASC and INSTR/STRING$ are
-promoted in the development tree. C003 initial scalar/string scope is complete; broader facilities and self-hosting remain unfinished. The Author accepted
+promoted in the development tree. C003's initial scope and C006 self-hosting are
+complete; broader language facilities retain their explicit admissions below. The Author accepted
 the corrected C002 baseline for a development checkpoint; accepted testing is
 still required before main promotion. Execution speed is the only intended
 observable runtime difference for supported conventional programs. Possible
@@ -51,7 +52,7 @@ existing string/numeric regressions on the reauthorized Pi5 CLI.
 | EVAL | Deliberately unsupported | Compile-time rejection; absent from initial language |
 | STOP, RUN, CHAIN, OSCLI | Unsupported | STOP is not silently compiled as END |
 | Tokenised source, abbreviations, lowercase keywords | Unsupported | No silent tokenisation assumptions |
-| Self-compilation | Partial | Exact source6597a0df produces identical324275-byte G0/G1/G2/repeat images, including actual normal interpreted main. Explicit resumed lineage is retained; native baseline39, representative12 and error39 suites pass. Physical12 source compiles/10 generated programs and one complete self-source generation pass; physical repeat pending |
+| Self-compilation | Implemented for qualified source | Exact source6597a0df produces identical324275-byte G0/G1/G2/repeat images, including actual normal interpreted main. Explicit resumed lineage is retained; native baseline39, representative12 and error39 suites pass. Physical12 source compiles/10 generated programs and two self-source generations pass with whole-image equality. Second hardware output is promoted unchanged to compiler/bin/compiler.bin; no human optical or performance claim |
 
 The [C003 scalar record](../docs/tasks/C003/SCALARS.md) describes reference
 creation/storage rules, scope and qualification; the [string core record](../docs/tasks/C003/STRINGS.md) adds ownership, allocation and ABI evidence. [Slices and comparisons](../docs/tasks/C003/SLICES.md) records the typed expression extension and reference boundaries.

@@ -1,0 +1,8 @@
+{
+  "promote_native.py": "131eeba39ded8079099e2994477606880f399c2f5d9ccd2e14e213713bde0882",
+  "promoted-LICENSE.txt": "cc8e92d92cf12fb1d04ddae0b573367f14188df5fcd6c7909d36486ff53a108a",
+  "promoted-README.md": "dc200ecf04a8adbb224987a22b02c95659996a8f80b0239091b822a27c442769",
+  "promoted-manifest.json": "459765db4ebb9ea40aab58c650ad7045d966991013d8baa976b9020868706e9f",
+  "results.json": "82a3d92fbc2e21d5d73c59a67d58dfb57d85c3d598e68481b3fb3bedf7c8ecc1",
+  "verify_native_promotion.py": "d5996134cf1aa3de2a951c1af6be62834ad274a8d14b2f29a5263bed806110a9"
+}

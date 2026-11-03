@@ -4,8 +4,9 @@ The compiler is written in BBC BASIC and emits standalone native eZ80 ADL code.
 It compiles its own source: the reference-hosted build, two native generations
 and a repeat produce identical complete324275-byte images. Native baseline39,
 representative12 and fresh error39 regressions pass. All12 physical source
-compiles and10 generated programs pass. The first physical self-compile also
-produces the identical image; the second physical generation remains pending.
+compiles and10 generated programs pass. Two physical self-compilation generations
+produce the identical image. The qualified executable is at
+[`bin/compiler.bin`](bin/compiler.bin), with its license and provenance.
 It currently
 compiles literal/numeric output, labelled control flow, numeric byte VDU
 expressions, standard math functions, scalar numeric variables and a mutable
@@ -31,7 +32,7 @@ prompts. For example, compile `examples/hello.bas` into `hello.bin`. Exit BASIC
 with `*BYE`, then run `hello.bin` from MOS. Loading the generated program
 replaces the interpreter at `&40000`; reload BASIC for another compilation.
 
-The [qualified development executable](../docs/tasks/C006/evidence/live-bootstrap-resume-001/g1.dat)
+The [qualified development executable](bin/compiler.bin)
 can be copied to the card as `compiler.bin`. At MOS, use `LOAD compiler.bin`
 followed by `RUN .`, then enter the input/output filenames at its prompts.
 This executable contains its runtime; BASIC serves as the source-bootstrap host.
@@ -189,6 +190,10 @@ successful normal-main G0/G1/G2 stages from the first attempt and records a fres
 repeat after host interruption; all four actual images match. This is automated
 self-hosting proof. The native baseline39, representative12 and error39 suites
 also pass. Physical olimex-small-001 qualifies all12 source compiles/10 generated
-programs. Physical olimex-self-a-late-001 also verifies one complete self-source
-image. Its original observation timeout is retained separately from the clean
-late return; the slot is cleanly released and the physical repeat remains pending.
+programs. Physical olimex-self-a-late-001 verifies the first complete self-source
+image, retaining its original observation timeout separately from the clean
+late return. A separately granted repeat uses that actual hardware-produced
+compiler unchanged; olimex-repeat-001 verifies the second identical full image.
+Both hardware slots are cleanly released. The unchanged second output is the
+qualified development executable at bin/compiler.bin, with its exact notice
+and provenance; the initial C006 scope is complete.
