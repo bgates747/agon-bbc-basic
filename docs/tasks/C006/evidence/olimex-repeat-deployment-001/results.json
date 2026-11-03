@@ -1,0 +1,26 @@
+{
+  "started_epoch": 1793718190.634928,
+  "completed_files": [
+    {
+      "name": "payload/compiler.bas",
+      "remote": "/extender/diagnostics/bbc-basic/c006-r02/compiler.bas",
+      "bytes": 111810,
+      "sha256": "6597a0df3f99b4f43c42bff1cdbc59f5fdf730c57837f3d4112a598fbfbe5fb8"
+    },
+    {
+      "name": "payload/compiler.bin",
+      "remote": "/extender/diagnostics/bbc-basic/c006-r02/compiler.bin",
+      "bytes": 324275,
+      "sha256": "299a31190c380541a73ed9eb144a303fa37abccc4f3c3e0ad47f99f1538122c0"
+    },
+    {
+      "name": "payload/self-b.txt",
+      "remote": "/extender/diagnostics/bbc-basic/c006-r02/self-b.txt",
+      "bytes": 176,
+      "sha256": "06ea33a6a3c53d6d392cb5451b54ca70733e3c2c9005980b965a11dfe58b72bc"
+    }
+  ],
+  "all_bytes_equal": true,
+  "fixture_manifest_sha256": "b5d0761fc88e512f32d14217a8ee2de997e05e412edafc3c8236bd2101128e24",
+  "finished_epoch": 1793718327.9262366
+}

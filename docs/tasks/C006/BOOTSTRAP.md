@@ -125,6 +125,9 @@ full runtime/entry linkage and deterministic repeat) all pass. Their completed
 manifests are prerequisites for the physical bundle. olimex-fixture-001 freezes
 the exact deployment; olimex-small-001 retains all12 actual physical compiler
 invocations and10 generated program invocations, with exact image/output/file
-comparisons. Both physical self-source passes remain separate and unfinished.
+comparisons. olimex-self-a-late-001 also verifies the first complete physical
+self-source image after its original observation timeout, retaining that timeout
+separately and recording clean release. The second physical generation remains
+pending under a new finite reservation.
 The finite physical plan and actual custody/observation rules are in
 [OLIMEX-R01.md](OLIMEX-R01.md); task/log records own subsequent results.

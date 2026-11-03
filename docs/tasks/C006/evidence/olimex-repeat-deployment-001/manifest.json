@@ -1,0 +1,11 @@
+{
+  "entry-memory.json": "6ad52b4fbf40866ff821da36d05ddfb99386eac99c149fd63fbb933c920aaa16",
+  "scope.json": "e31f9d690cb37150fba956da656160cb8e0eba36ed1ca5efc30a35ee7a46d4bf",
+  "readback-01.dat": "299a31190c380541a73ed9eb144a303fa37abccc4f3c3e0ad47f99f1538122c0",
+  "setup-console.bin": "9e8971159df895e78f02ffbe844f5726bbdfc102dedadb08bef5a80680eee9f1",
+  "entry-console.bin": "99dce0d9d2650f3ecd3242a76328b89793e7c12d41a27ea014f0f57dd7967ef7",
+  "deploy_olimex.py": "a5b187db1aa4320a209081767b2dc47e3f02ccb468a200598d1244c0040d89b7",
+  "readback-00.dat": "6597a0df3f99b4f43c42bff1cdbc59f5fdf730c57837f3d4112a598fbfbe5fb8",
+  "readback-02.dat": "06ea33a6a3c53d6d392cb5451b54ca70733e3c2c9005980b965a11dfe58b72bc",
+  "results.json": "1ba598bea942d6071d6ad9f5b51ef47864eefacb1403c07663b46e852e917eb4"
+}

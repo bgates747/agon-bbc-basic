@@ -1,9 +1,11 @@
 # C006 physical Olimex qualification
 
 The Author selects the shared Olimex bench and authorizes consultation with
-Extender on scheduling, file transfer and remote CLI access. This is a prepared
-scope; no physical lease, deployment or result exists yet. Exact target access
-and current firmware identities remain in Extender's machine-local records.
+Extender on scheduling, file transfer and remote CLI access. Original deployment,
+12 compiler/10 generated-program cases and one complete physical self-source
+image now pass. Generation7 is cleanly released; the outstanding repeat has a
+separate prepared [R02 plan](OLIMEX-R02.md). Exact target access and current
+firmware identities remain in Extender's machine-local records.
 
 ## Scope and custody
 
@@ -134,8 +136,10 @@ mocked: lease failure prevents target dispatch, every status query checks its
 owner, relative paths become absolute for delegated tools, upload/traversal
 guards reject wrong paths and wrong protocol prevents transfer submission.
 Earlier001/002 cohorts retain their narrower checks. No network/serial access
-or hardware result follows from these tests. Actual operation remains pending
-the full compiler qualification, exact prepared plan and Extender grant.
+or hardware result follows from these host tests. Subsequent actual results are
+retained separately in olimex-deployment-001, olimex-small-001 and
+olimex-self-a-late-001. Any new physical run requires its own prepared scope
+and fresh Extender grant.
 
 Extender's source-only review
 2026-11-03_04-24-44_linux-extender_extender-bbc-operation-helper-review-r01

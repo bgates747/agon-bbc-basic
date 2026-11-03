@@ -1,0 +1,8 @@
+{
+  "scope": "Actual fresh generation8 entry/MEM and3 complete independent payload readbacks; no repeat completion claim",
+  "hardware_validation": true,
+  "source_unchanged": true,
+  "actual_hardware_produced_image_transferred_unchanged": true,
+  "repeat_completed": false,
+  "deployment_host_seconds": 137.291
+}

@@ -90,8 +90,9 @@ environment, ownership, assembly, emulator, hardware and coordination rules.
 3. Use `.venv/bin/python` explicitly. compiler/README.md owns commands. The
    ignored `.emulator/` is automated CLI only; launch through its generated
    `./fab-agon-emulator` wrapper from the profile directory. One active run owns
-   that SD; freeze output before the next run. No project graphical/human or
-   physical compiler validation has occurred. Never contact Oryx until the
+   that SD; freeze output before the next run. No project graphical/human
+   validation has occurred; actual physical functional evidence is recorded above.
+   Never contact Oryx until the
    Author says it is available; Pi5 automated emulator work is authorized.
 4. The Author explicitly authorized continuing through the remaining TODO and
    skipping previous approval stops, qualifying and checkpointing this branch
@@ -127,12 +128,22 @@ environment, ownership, assembly, emulator, hardware and coordination rules.
    Startup/listener exact readbacks, original directory/mode/text/cursor/mirror
    and neutral idle services/ownerlessUSB are verified; no reset/firmware change.
    Extender handback09-50-32_bbc-basic_bbc-c006-r01-clean-release-one delivered.
-   No lease/target access remains. Physical self-b is unstarted; prepare a NEW
+   No generation7 lease/target access remains. Physical self-b needs a NEW
    finite plan/fixture and reserve/freshly receive a grant before continuing.
    OLIMEX-R02.md/olimex-repeat-fixture-001 are now prepared:3 payloads436261B,
    unchanged actual HW-produced image/source and one batch. Manifestb5d0761f.
-   New reservation9339623b747d is submitted, no grant/target access yet. Extender
-   is notified via bbc-c006-r02-ready-reservation-one. Deployment explicitly uses
+   New reservation9339623b747d is granted as generation8. Exact new token/config
+   are local C006/build/physical-c006-r02/{grant,config}.json; old gen7 is invalid.
+   Extender has stopped all target access. Actual new entry/sentinel/CLI/MEM pass
+   with same map and mode0. All3 readbacks pass137.291s, retained as
+   olimex-repeat-deployment-001. Setup capture17355 closed normally at known CLI.
+   Fresh execution capture-self-b session80456 is active (7200s); exact new
+   VDU2/sentinel/CLI proof precedes the sole invocation. Host stage82215 is active,
+   with actual two prompts and final input return epoch1793718539.6227434.
+   Read local stages/self-b/results.json and capture for exact progress; no new
+   target operation alongside it. It has6600s completion bound and automatic
+   original-result GET/comparison only after exact clean end/listener return.
+   No result is proved yet. Deployment explicitly uses
    --expected-files3, stage uses --self-timeout6600 and --entry-directory matching
    the new grant's observed incoming directory; defaults40/5400 remain unchanged.
    SELF-SOURCE-WORK.md/evidence/self-source-work-001 contain offline counts,

@@ -586,3 +586,27 @@ Canonical new reservation9339623b747d is submitted14:57:47.823211Z, after actual
 release. Durable bbc-c006-r02-ready-reservation-one and immediate steering provide
 the exact frozen input provenance, scope and timing/stop/cleanup plan to Extender.
 No new lease or target operation is inferred from preparation/reservation.
+
+Extender09-59-45 explicitly grants generation8 for the single outstanding repeat,
+after fresh canonical readiness/preservation checks, then stops all target access.
+Save the new grant/config locally; old generation7 token remains invalid. Actual
+new neutral/offline/worker0 checks, joined-control setup capture, VDU2/sentinel,
+CLI and fresh MEM pass with identical user/stack map. Start only canonical
+major2 listener, sequential fresh directory metadata and three-file deployment/
+independent readbacks. No repeat invocation is claimed before they pass.
+
+All3 complete readbacks pass137.291 host seconds and are frozen with actual
+fresh CLI/MEM/setup capture as olimex-repeat-deployment-001. Fresh setup EXIT
+returns actual original-directory CLI; VDU3/owned reader close normally. Open
+fresh7200s execution capture, VDU2 and BBC_C006_SELF_B_CAPTURE_R02 sentinel prove
+the new channel/CLI, then start canonical listener for the stage driver's
+explicit entry/EXIT. Invoke self-b.txt once with --self-timeout6600 and actual
+incoming-directory guard. Both real prompts are observed; final filename return
+is epoch1793718539.6227434. Repeat is active, with no completion inferred.
+
+release_olimex_repeat.py records the previously executed R01 cleanup/release
+procedure as a guarded repeat helper: require actual passed stage/full image,
+preservation readbacks, restored CLI/text/cursor/mirror receipts and both closed
+readers before fresh neutral/offline/idle/display/ownerlessUSB checks and central
+release. Syntax checks pass; it has not yet run and may execute only after the
+repeat's known complete success and explicit cleanup.
