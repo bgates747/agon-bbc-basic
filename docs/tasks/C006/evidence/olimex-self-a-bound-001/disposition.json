@@ -1,0 +1,11 @@
+{
+  "observed_epoch": 1793715966.0925984,
+  "scope": "Observation bound expired; not a compiler diagnostic or hang diagnosis",
+  "actual_foreground_state": "unknown; no observed return",
+  "physical_self_source_completed": false,
+  "reset_or_retry": false,
+  "later_stage_invoked": false,
+  "existing_passive_capture_remains_active": true,
+  "lease_retained": true,
+  "subsequent_target_dispatch_stopped": true
+}

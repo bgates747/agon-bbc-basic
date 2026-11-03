@@ -499,3 +499,22 @@ The5400s observer remains active and no target operations are sent alongside it.
 Durable08-55-23_bbc-basic_bbc-c006-small-pass-self-a-observation-one and steering
 give Extender the completed small-suite results and this scheduling status;
 no repair, retry, parallel access or new grant is requested. Self-b is unstarted.
+
+## First physical self-source observation bound expired
+
+At epoch1793715922.4746075 the5400s completion observer raises TimeoutError and
+its host process exits1. Raw capture remains1070 bytes, ending at the exact
+output-filename echo, without Wrote, BBC_END_SELF_A, diagnostic or actual CLI.
+This is an observation failure/unknown foreground, not compiler status1, a hang
+diagnosis or an Extender defect. No target dispatch followed filename submission.
+Freeze unchanged original stage report/source/window and full capture snapshot
+in olimex-self-a-bound-001; no incomplete stage is counted as successful.
+
+Retain generation7 custody and existing maintained passive capture (7200s total,
+approximately28 minutes remaining at09:26EST). No retry/reset/self-b or further
+target queries/keys/transfer occur. Durable09-26-09_bbc-basic_bbc-c006-self-a-observation-bound-one
+and immediate steering request Extender's admitted reconciliation/continued
+bounded observation guidance, explicitly without parallel target access or new
+workload. Any actual later completion will receive separate evidence rather
+than rewriting the original timeout. All completed native/small hardware results
+remain qualified; C006 self-source/clean handback are unfinished.

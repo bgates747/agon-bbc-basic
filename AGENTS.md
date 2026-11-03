@@ -116,10 +116,15 @@ environment, ownership, assembly, emulator, hardware and coordination rules.
    Actual sentinel/CLI/MEM pass: userLO040000..0BBFFF, stack0BF800..0BFFFF.
    All12 physical compiles/10 native programs now pass, including exact file
    bytes and two preserved-output rejections, frozen as olimex-small-001.
-   First physical self-source is active in session94215; fresh maintained
-   capture-self-a is session25803 (7200s). Read local stages/self-a/results.json
-   for actual prompt/completion progress; do not issue other target operations
-   alongside it. No physical self-source result exists yet; self-b is unstarted.
+   First physical self-source has no observed return at5400s. Host stage94215
+   exited1 with observation TimeoutError; this is not a compiler exit status or
+   hang diagnosis. Frozen olimex-self-a-bound-001 retains exact partial evidence.
+   Existing maintained capture-self-a remains session25803 (7200s), about28min
+   remaining at09:26EST. Do not issue ANY new target operations, retries or reset:
+   preserve custody/reader while awaiting Extender's reconciliation reply to
+   mail09-26-09_bbc-basic_bbc-c006-self-a-observation-bound-one. Read local
+   stages/self-a/results.json and raw capture for actual late observations.
+   No physical self-source completion is proved; self-b is unstarted.
    Extender has stopped all target access.
    Keep custody through restoration/release; consult actual local receipts.
    Use pinned new staged
