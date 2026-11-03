@@ -1,0 +1,23 @@
+warning: unused variable: `last_hblank`
+   --> agon-ez80-emulator/src/gpio_video.rs:187:21
+    |
+187 |                 let last_hblank = self.last_hblank_cycle;
+    |                     ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_last_hblank`
+    |
+    = note: `#[warn(unused_variables)]` on by default
+
+warning: field `cycles_hblank_to_picture` is never read
+ --> agon-ez80-emulator/src/gpio_video.rs:8:9
+  |
+4 | pub struct GpioVga {
+  |            ------- field in this struct
+...
+8 |     pub cycles_hblank_to_picture: u64,
+  |         ^^^^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(dead_code)]` on by default
+
+warning: `agon-ez80-emulator` (lib) generated 2 warnings
+   Compiling agon-light-emulator-debugger v1.2.5 (/Agon/mystuff/bbc-basic-v-adl/docs/tasks/C010/build/observer-source/agon-light-emulator-debugger)
+   Compiling agon-cli-emulator v1.2.5 (/Agon/mystuff/bbc-basic-v-adl/docs/tasks/C010/build/observer-source/agon-cli-emulator)
+    Finished `release` profile [optimized] target(s) in 7.26s

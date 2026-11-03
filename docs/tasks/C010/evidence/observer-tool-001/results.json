@@ -1,0 +1,14 @@
+{
+  "upstream_commit": "c22876d1f7ad903537c308cf65afd6553b37cdb8",
+  "upstream_main_sha256": "35a8172d686d6f54df326f31ac628ed4997df09c93d4a8220d722d0c895101ba",
+  "observer_main_sha256": "58e7e8a529f9e023b75627b15eee8e4d5964eab16f2d2af501184a3fd86457fa",
+  "scope": "Host CLI protocol observer only; not rendered graphics validation",
+  "observer_executable_sha256": "63d22f604af13317cf6532911b9206ac03e7b4f9ed257f93924a65d551646d8e",
+  "fixture_repair": {
+    "prior_link": "../../../../tmp/bbc-compiler-cli-target/release/agon-cli-emulator",
+    "prior_target_missing": true,
+    "replacement": "docs/tasks/C010/build/observer-target/release/agon-cli-emulator",
+    "replacement_sha256": "63d22f604af13317cf6532911b9206ac03e7b4f9ed257f93924a65d551646d8e",
+    "scope": "Project-local CLI protocol observer; CPU core unmodified; historical proofs retain their original identities"
+  }
+}

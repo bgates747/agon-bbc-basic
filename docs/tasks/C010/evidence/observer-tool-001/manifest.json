@@ -1,0 +1,8 @@
+{
+  "LICENSE": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+  "build.log": "1ba3e8e8f099060eeb22a6bb5efb02feed351902d63c53b8019ff6670c865998",
+  "main.rs": "58e7e8a529f9e023b75627b15eee8e4d5964eab16f2d2af501184a3fd86457fa",
+  "prepare_observer.py": "65d284aa3a9bd5eb85cd0149867ea2015f766c6db561e4ffadcc1baab9c59e34",
+  "results.json": "c0bf4909844aab2c3ffff1ae007d524410010ec27f0b3c328483d78504b696f4",
+  "wire-observer.patch": "1f70ee2b8497686e697e6fcd16b0eea9362272c977c0dd9826ebc70fdef76c02"
+}

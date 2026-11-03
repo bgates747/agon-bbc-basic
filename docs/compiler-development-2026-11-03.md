@@ -786,3 +786,32 @@ constructs. Promote C010 as current task with unchanged-source and differential
 compatibility acceptance; do not substitute a rewritten numerical algorithm.
 The working tree was clean. Record a planning checkpoint before implementation;
 reference visual acceptance does not qualify a new compiled image.
+
+C010 experiment checkpoint: freeze the Author's exact1038-byte source in
+source-001. It contains46 numbered lines (390 is followed by430); the earlier
+49-line description was a counting mistake, not a source change. Audit actual
+MODE/GCOL/PLOT, EXPRI/SFIX, OSRDCH/GET and MOS flag/key interfaces. The candidate
+13c2a488 adds BBC-written native emission only; live source6597a0df and qualified
+binary299a3119 remain unchanged. Bare GET and numeric graphics variants are the
+selected scope; unrelated graphics statements/GET variants remain unsupported.
+The Author confirms retaining @ on both label definitions and references.
+
+The stock CLI cannot acknowledge MODE or consume graphics packets. Prepare an
+isolated task-local host protocol peer/raw CPU-UART observer from Fab c22876d1,
+without editing upstream or changing the CPU/MOS/numeric implementations.
+Record its exact GPL source/patch and executable63d22f6 in observer-tool-001.
+The original root fixture's CLI target in /tmp is missing; native-build-001
+retains the failed pre-launch attempt. Select the project-local observer through
+the canonical generated wrapper and record that distinct identity. The cause
+of the missing old target is unknown; old qualification remains unchanged.
+
+compile-001 preserves an actual18329-byte Mandelbrot output and original log,
+but its controller omitted *BYE and did not verify a normal MOS return. It is
+partial evidence, not a completed run. Fresh wire-probes-001 completes all five
+reference/native pairs: MODE/GCOL/PLOT bytes, byte/word/fraction conversions,
+argument side-effect order, GET consumption and GET inside expressions match
+exactly. wire-bounded-001 also completes exact stream parity for an explicitly
+reduced Mandelbrot fixture (ITERS8/SCALE64, with a key-input marker). This is
+not acceptance of the unchanged full source. Native rebuilding, error probes
+and unchanged full-program runs remain active. No rendered/human validation,
+paired performance measurement, live promotion or main merge is claimed.

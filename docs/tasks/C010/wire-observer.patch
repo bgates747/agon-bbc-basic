@@ -1,0 +1,48 @@
+--- a/agon-cli-emulator/src/main.rs
++++ b/agon-cli-emulator/src/main.rs
+@@ -38,6 +38,19 @@
+         tx.send(0).unwrap();
+         tx.send(0).unwrap();
+         std::thread::sleep(std::time::Duration::from_millis(10));
++    }
++}
++
++
++// C010 test-only observer. CPU output is recorded before the fake VDP sees it.
++// This does not implement a renderer or alter the eZ80/MOS/BASIC execution.
++fn c010_record(byte: u8) {
++    use std::sync::{Mutex, OnceLock};
++    static OUTPUT: OnceLock<Mutex<Option<std::fs::File>>> = OnceLock::new();
++    let output = OUTPUT.get_or_init(|| Mutex::new(
++        std::env::var_os("BBC_C010_WIRE").map(|p| std::fs::File::create(p).unwrap())));
++    if let Some(ref mut file) = *output.lock().unwrap() {
++        file.write_all(&[byte]).unwrap();
+     }
+ }
+ 
+@@ -64,6 +77,17 @@
+                     //print!("\x1b[0m{}\x1b[90m", char::from_u32(data as u32).unwrap());
+                     print!("{}", char::from_u32(data as u32).unwrap());
+                 }
++                // C010 protocol-only peer: consume whole graphics commands.
++                0x12 => { for _ in 0..2 { rx_from_ez80.recv().unwrap(); } }
++                0x19 => { for _ in 0..5 { rx_from_ez80.recv().unwrap(); } }
++                0x16 => {
++                    let mode = rx_from_ez80.recv().unwrap();
++                    // Deterministic mode-info acknowledgement. No pixel rendering.
++                    let (w, h, cols, rows, colors): (u16,u16,u8,u8,u8) =
++                        if mode == 8 { (320,240,40,30,64) } else if mode == 1 { (640,480,80,60,4) } else { (640,480,80,60,16) };
++                    send_bytes(tx_to_ez80, &vec![0x86,7,w as u8,(w>>8) as u8,
++                        h as u8,(h>>8) as u8,cols,rows,colors]);
++                }
+                 // VDP system control
+                 0x17 => {
+                     match rx_from_ez80.recv().unwrap() {
+@@ -214,6 +238,7 @@
+ }
+ impl SerialLink for ChannelSerialLink {
+     fn send(&mut self, byte: u8) {
++        c010_record(byte);
+         self.sender.send(byte).unwrap();
+     }
+     fn recv(&mut self) -> Option<u8> {

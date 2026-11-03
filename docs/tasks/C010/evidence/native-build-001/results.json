@@ -1,0 +1,7 @@
+{
+  "scope": "Actual previous qualified native compiler compiles the new BBC source",
+  "compiler_source_sha256": "13c2a48802718040b1056921b1aedea3e5da9f6f36e946d990ccf36be92396b9",
+  "seed_sha256": "299a31190c380541a73ed9eb144a303fa37abccc4f3c3e0ad47f99f1538122c0",
+  "completed": false,
+  "controller_seconds": 0.103
+}

@@ -1,0 +1,10 @@
+{
+  "compiler_source_sha256": "13c2a48802718040b1056921b1aedea3e5da9f6f36e946d990ccf36be92396b9",
+  "source_sha256": "1eb897c8ef3aecc99910e0352eba6d32064ebc4aef9e7bd32e9952b0878b43de",
+  "image_sha256": "bad741db6adfc250c7c2f48c37687aec93e8271f77c48bd760f309548dada196",
+  "image_bytes": 18329,
+  "compilation_wrote_image": true,
+  "controller_completed": false,
+  "normal_mos_return_verified": false,
+  "reason": "Controller omitted *BYE after BASIC END; retained partial observation, not a completed qualification."
+}
