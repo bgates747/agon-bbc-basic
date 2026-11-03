@@ -2,280 +2,274 @@
 20 REM Compiler implementation is BBC BASIC; input is plain text.
 30 ON ERROR REPORT:PRINT:CLOSE#0:END
 40 PROCinit
-50 INPUT LINE "Source file: "cinput$
-60 INPUT LINE "Output file: "coutput$
-70 PROCcompile(cinput$,coutput$)
-80 PRINT "Wrote ";coutput$
+50 INPUT LINE "Source file: "input$
+60 INPUT LINE "Output file: "output$
+70 PROCcompile(input$,output$)
+80 PRINT "Wrote ";output$
 90 END
 1000 DEF PROCinit
-1010 DIM ccode% 65535,csname$(1023),csaddr%(1023),csort%(1023)
-1020 DIM crname$(4095),craddr%(4095),crline%(4095),crcol%(4095)
-1021 DIM cpname$(255),cpline%(255),cparcnt%(255),cpar%(255,15),cargkind%(31,15),cargindex%(31,15),cpkind%(255),cpret%(255),creturn$(511),cretdef%(511),cretline%(511),cretcol%(511)
+1010 DIM sname$(4095),saddr% 12287,sort% 8191,lrefs%(63)
+1020 REM Output streams after layout and validation; no code/fixup buffers.
+1021 DIM pname$(255),pline%(255),parcnt&(255),par&(255,15),argkind&(31,15),argindex&(31,15),pkind&(255),pret%(255),return$(511),retdef&(511),retline%(511),retcol%(511)
 1022 PROCloadnumbers
 1023 PROCloadacts
-1024 DIM cvname$(255),cvsize%(255),cvstatic%(255),cvtype%(255),cvdim%(255),ckwords$(4)
-1025 DIM csunsafe%(15)
+1024 DIM vname$(255),vsize&(255),vstatic%(255),vtype%(255),vdim&(255),kwords$(4)
+1025 DIM sunsafe%(15)
 1026 PROCkeywords
 1027 PROCloadcontrol
-1028 PROCloadstrings:PROCloadmemory:PROCloadio:PROCloaddata:PROCloaderrors
-1029 DIM cifid$(31),cbid$(31),cbelse%(31),clkind%(31),clname$(31),clvar%(31)
+1028 PROCloadstrings:PROCloadmemory:PROCloadio:PROCloaddata:PROCloaderrors:PROCloadcompact
+1029 DIM ifid$(31),bid$(31),belse%(31),lkind%(31),lname$(31),lvar%(31)
 1030 ENDPROC
-1040 DEF PROCcompile(csource$,ctarget$)
-1050 LOCAL ci%,cj%,cn%,cfh%,coh%
-1060 cpc%=0:csnum%=0:crnum%=0:clnum%=0:cpos%=1:clast%=-1:ccr%=FALSE
-1062 cnumeric%=FALSE:cnslots%=0:cnparse%=0:cndepth%=0:cvnum%=0:cstrings%=FALSE:csdepth%=0:csslots%=0:csvars%=0:cvaluekind%=0
-1063 cmemory%=FALSE:cdimparse%=0:cio%=FALSE:cfileio%=FALSE
-1064 cflow%=0:cbnum%=0
-1065 cdataused%=FALSE:cdnumeric%=FALSE:cdcapture%=FALSE:cerrors%=FALSE
-1066 cloops%=FALSE:cltop%=0:cstructure$=""
-1068 cacts%=FALSE:cfunctions%=FALSE:cpnum%=0:cscope%=0:cretnum%=0:ccalldepth%=0:ckinddepth%=0
-1070 IF csource$=ctarget$ PROCbad("Source and output must differ")
-1080 cfh%=OPENIN(csource$)
-1090 IF cfh%=0 PROCbad("Cannot open source")
-1092 PROCprocscan(cfh%):CLOSE#cfh%:cfh%=OPENIN(csource$):clnum%=0:cpos%=1:ccr%=FALSE
-1094 IF cerrors% PROCuseerrors
-1100 PROCaddr("C3","$start")
-1110 REPEAT:PROCbyte(0):UNTIL cpc%=64
+1040 DEF PROCcompile(source$,target$)
+1050 LOCAL i%,j%,n%,fh%,oh%
+1060 pc%=0:snum%=0:lnum%=0:pos%=1:last%=-1:cr%=FALSE:phase%=1
+1061 PROCclearrefs
+1062 numeric%=FALSE:nslots%=0:nparse%=0:ndepth%=0:vnum%=0:strings%=FALSE:sdepth%=0:sslots%=0:svars%=0:valuekind%=0
+1063 memory%=FALSE:dimparse%=0:io%=FALSE:fileio%=FALSE:compact%=FALSE
+1064 flow%=0:bnum%=0
+1065 dataused%=FALSE:dnumeric%=FALSE:dcapture%=FALSE:errors%=FALSE
+1066 loops%=FALSE:ltop%=0:structure$=""
+1068 acts%=FALSE:functions%=FALSE:pnum%=0:scope%=0:retnum%=0:calldepth%=0:kinddepth%=0
+1070 IF source$=target$ PROCbad("Source and output must differ")
+1080 fh%=OPENIN(source$)
+1090 IF fh%=0 PROCbad("Cannot open source")
+1092 PROCprocscan(fh%):CLOSE#fh%
+1094 IF errors% PROCuseerrors
+1095 FOR phase%=1 TO 3
+1096 IF phase%=3 THEN oh%=OPENOUT(target$):IF oh%=0 PROCbad("Cannot open output")
+1097 PROCpass
+1098 NEXT:CLOSE#oh%:ENDPROC
+1099 DEF PROCpass
+1100 fh%=OPENIN(source$):IF fh%=0 PROCbad("Cannot reopen source")
+1101 pc%=0:lnum%=0:pos%=1:last%=-1:cr%=FALSE:flow%=0:bnum%=0:ltop%=0:structure$="":scope%=0:ndepth%=0:sdepth%=0:calldepth%=0:kinddepth%=0
+1102 PROCaddr("C3","$start")
+1110 REPEAT:PROCbyte(0):UNTIL pc%=64
 1120 PROCbytes("4D4F530001")
-1130 PROClabel("$start")
+1130 start%=&40000+pc%
 1140 REM Preserve MOS registers; saved SP occupies exactly three bytes.
 1150 PROCbytes("F5C5D5DDE5FDE5")
 1160 PROCaddr("ED73","$savedsp")
 1170 PROCbytes("AF"):PROCaddr("32","$depth")
-1180 WHILE NOT EOF#cfh%
-1190 clnum%=clnum%+1:cpos%=1
-1200 PROCreadline(cfh%)
+1180 WHILE NOT EOF#fh%
+1190 lnum%=lnum%+1:pos%=1
+1200 PROCreadline(fh%)
 1210 PROCline
 1220 ENDWHILE
-1230 CLOSE#cfh%:cfh%=0
-1232 IF cbnum%<>0 PROCbad("Missing ENDIF")
-1234 IF cltop%<>0 PROCbad("Missing loop terminator")
+1230 CLOSE#fh%:fh%=0
+1232 IF bnum%<>0 PROCbad("Missing ENDIF")
+1234 IF ltop%<>0 PROCbad("Missing loop terminator")
 1240 PROCaddr("C3","$end")
 1250 PROCruntime
-1260 FOR ci%=0 TO crnum%-1
-1270 cj%=FNsymbol(crname$(ci%))
-1280 IF cj%<0 THEN clnum%=crline%(ci%):cpos%=crcol%(ci%):PROCbad("Undefined target "+crname$(ci%))
-1290 cn%=csaddr%(cj%):PROCpatch(craddr%(ci%),cn%)
-1300 NEXT
-1310 REM No output is opened until the entire source and relocations validate.
-1320 coh%=OPENOUT(ctarget$)
-1330 IF coh%=0 PROCbad("Cannot open output")
-1340 FOR ci%=0 TO cpc%-1:BPUT#coh%,ccode%?ci%:NEXT
-1350 CLOSE#coh%
-1360 ENDPROC
-1370 DEF PROCreadline(ch%)
-1380 LOCAL cb%,cdone%
-1390 cline$="":cdone%=FALSE
-1400 WHILE NOT EOF#ch% AND NOT cdone%
-1410 cb%=BGET#ch%
-1420 IF ccr% AND cb%=10 THEN ccr%=FALSE ELSE PROCreadchar(cb%):ccr%=(cb%=13)
-1430 ENDWHILE
-1440 ENDPROC
-1450 DEF PROCreadchar(cb%)
-1460 IF cb%=10 OR cb%=13 THEN cdone%=TRUE:ENDPROC
-1470 IF cb%=0 PROCbad("NUL byte in source")
-1480 IF LEN(cline$)=255 THEN cpos%=256:PROCbad("Source line exceeds 255 bytes")
-1490 cline$=cline$+CHR$(cb%)
-1500 ENDPROC
+1260 PROCdefine("$start",start%)
+1270 ENDPROC
+1370 DEF PROCreadline(h%)
+1380 LOCAL b%,done%
+1390 line$="":done%=FALSE
+1400 WHILE NOT EOF#h% AND NOT done%
+1410 b%=BGET#h%
+1420 IF cr% AND b%=10 THEN
+1422 cr%=FALSE
+1424 ELSE
+1426 IF b%=10 OR b%=13 THEN
+1428 done%=TRUE
+1430 ELSE
+1432 IF b%=0 PROCbad("NUL byte in source")
+1434 IF LEN(line$)=255 THEN pos%=256:PROCbad("Source line exceeds 255 bytes")
+1436 line$=line$+CHR$(b%)
+1438 ENDIF
+1440 cr%=(b%=13)
+1442 ENDIF
+1444 ENDWHILE
+1446 ENDPROC
 1510 DEF PROCline
-1520 LOCAL cn%,cw$,ct%,cinum%,cleid$,ccont%,cfirst%,cinseen%,cdeclskip$,chskip$
-1522 cinum%=0:cleid$="":cfirst%=TRUE:cinseen%=FALSE:cdeclskip$="":chskip$="":cbasicline%=0:PROCprocscope
+1520 LOCAL n%,w$,t%,inum%,leid$,cont%,first%,inseen%,declskip$,hskip$
+1522 inum%=0:leid$="":first%=TRUE:inseen%=FALSE:declskip$="":hskip$="":basicline%=0:PROCprocscope
 1530 PROCspace
 1540 IF FNdigit(FNpeek) PROCnumberlabel
 1570 PROCspace
 1580 WHILE FNpeek<>""
-1590 WHILE FNpeek=":":cpos%=cpos%+1:PROCspace:ENDWHILE
-1595 ccont%=FALSE:IF FNpeek<>"" PROCstatement
+1590 WHILE FNpeek=":":pos%=pos%+1:PROCspace:ENDWHILE
+1595 cont%=FALSE:IF FNpeek<>"" PROCstatement
 1600 PROCspace
-1605 cfirst%=FALSE
-1610 IF FNpeek<>"" AND FNpeek<>":" AND NOT ccont% AND NOT FNword("ELSE") PROCbad("Unexpected text after statement")
+1605 first%=FALSE
+1610 IF FNpeek<>"" AND FNpeek<>":" AND NOT cont% AND NOT FNword("ELSE") PROCbad("Unexpected text after statement")
 1615 ENDWHILE
-1618 PROCiffalse:IF cleid$<>"" PROClabel(cleid$)
-1619 IF cdeclskip$<>"" PROClabel(cdeclskip$)
-1620 IF chskip$<>"" PROClabel(chskip$)
+1618 PROCiffalse:IF leid$<>"" PROClabel(leid$)
+1619 IF declskip$<>"" PROClabel(declskip$)
+1620 IF hskip$<>"" PROClabel(hskip$)
 1621 ENDPROC
 1622 DEF PROCnumberlabel
-1624 LOCAL cn%
-1626 cn%=FNnumber(65279):IF cn%<=clast% PROCbad("Line numbers must increase")
-1628 clast%=cn%:cbasicline%=cn%:PROClabel(FNtarget("#"+STR$(cn%)))
+1624 LOCAL n%
+1626 n%=FNnumber(65279):IF n%<=last% PROCbad("Line numbers must increase")
+1628 last%=n%:basicline%=n%:IF FNlineref(n%,0,FALSE) PROClabel(FNtarget("#"+STR$(n%)))
 1630 ENDPROC
 1632 DEF PROCstatement
-1640 LOCAL cw$,ct%,cn$,csuppress%
+1640 LOCAL w$,t%,n$,suppress%
 1641 PROCerrmark
 1642 IF FNpeek="?" OR FNpeek="!" OR FNpeek="|" THEN PROCmemassign(FNpeek):ENDPROC
-1645 IF FNpeek="=" THEN cpos%=cpos%+1:PROCfnreturn:ENDPROC
-1650 IF FNpeek="@" THEN cpos%=cpos%+1:cn$=FNname:PROCexpect(":"):PROClabel(FNtarget("@"+cn$)):PROCerrmark:cpos%=cpos%-1:ENDPROC
-1655 IF MID$(cline$,cpos%,4)="PROC" THEN cpos%=cpos%+4:PROCproccall:ENDPROC
-1660 cw$=FNname
-1662 IF (cw$="LEFT" OR cw$="RIGHT" OR cw$="MID") AND FNpeek="$" THEN cpos%=cpos%+1:PROCstrsliceassign(cw$):ENDPROC
-1663 IF cw$="ON" THEN PROCerrorinstall:ENDPROC
-1664 IF cw$="IF" THEN PROCif:ENDPROC
-1666 IF cw$="ELSE" THEN PROCelse:ENDPROC
-1668 IF cw$="ENDIF" THEN PROCendif:ENDPROC
-1669 IF cw$="REPEAT" OR cw$="WHILE" OR cw$="FOR" THEN PROCloop(cw$):ENDPROC
-1670 IF cw$="REM" THEN cpos%=LEN(cline$)+1:ENDPROC
-1672 IF cw$="UNTIL" OR cw$="ENDWHILE" OR cw$="NEXT" THEN PROCloopend(cw$):ENDPROC
-1673 IF cw$="DIM" THEN PROCdim:ENDPROC
-1674 IF cw$="DEF" THEN PROCdefinition:ENDPROC
-1676 IF cw$="LOCAL" THEN PROClocal:ENDPROC
-1678 IF cw$="ENDPROC" THEN PROCuseacts:PROCaddr("CD","$actleave"):PROCaddr("DA","$acterror"):PROCbyte(&C9):ENDPROC
-1679 IF cw$="INPUT" THEN PROCinputline:ENDPROC
-1680 IF cw$="PRINT" THEN PROCprint:ENDPROC
-1682 IF cw$="CLOSE" THEN PROCclosestatement:ENDPROC
-1684 IF cw$="BPUT" THEN PROCbput:ENDPROC
-1686 IF cw$="DATA" THEN PROCdatastatement:ENDPROC
-1687 IF cw$="READ" THEN PROCreadstatement:ENDPROC
-1688 IF cw$="RESTORE" THEN PROCrestoredata:ENDPROC
-1689 IF cw$="ERROR" THEN PROCerrorstatement:ENDPROC
-1690 IF cw$="VDU" THEN PROCvdu:ENDPROC
-1692 IF cw$="REPORT" THEN PROCaddr("CD","$errreport"):ENDPROC
-1700 IF cw$="CLS" THEN PROCcharacter(12):ENDPROC
-1710 IF cw$="END" THEN PROCaddr("C3","$end"):ENDPROC
-1720 IF cw$="RETURN" THEN PROCaddr("C3","$return"):ENDPROC
-1730 IF cw$="GOTO" OR cw$="GOSUB" THEN PROCbranch(cw$):ENDPROC
-1740 IF cw$="EVAL" PROCbad("EVAL is deliberately unsupported")
-1742 IF cw$="LET" THEN cw$=FNname:PROCassign(cw$):ENDPROC
-1744 IF FNreserved(cw$) PROCbad("Unsupported statement "+cw$)
-1750 PROCassign(cw$)
+1645 IF FNpeek="=" THEN pos%=pos%+1:PROCfnreturn:ENDPROC
+1650 IF FNpeek="@" THEN pos%=pos%+1:n$=FNname:PROCexpect(":"):PROClabel(FNtarget("@"+n$)):PROCerrmark:pos%=pos%-1:ENDPROC
+1655 IF MID$(line$,pos%,4)="PROC" THEN pos%=pos%+4:PROCproccall:ENDPROC
+1660 w$=FNname
+1662 IF (w$="LEFT" OR w$="RIGHT" OR w$="MID") AND FNpeek="$" THEN pos%=pos%+1:PROCstrsliceassign(w$):ENDPROC
+1663 IF w$="ON" THEN PROCerrorinstall:ENDPROC
+1664 IF w$="IF" THEN PROCif:ENDPROC
+1666 IF w$="ELSE" THEN PROCelse:ENDPROC
+1668 IF w$="ENDIF" THEN PROCendif:ENDPROC
+1669 IF w$="REPEAT" OR w$="WHILE" OR w$="FOR" THEN PROCloop(w$):ENDPROC
+1670 IF w$="REM" THEN pos%=LEN(line$)+1:ENDPROC
+1672 IF w$="UNTIL" OR w$="ENDWHILE" OR w$="NEXT" THEN PROCloopend(w$):ENDPROC
+1673 IF w$="DIM" THEN PROCdim:ENDPROC
+1674 IF w$="DEF" THEN PROCdefinition:ENDPROC
+1676 IF w$="LOCAL" THEN PROClocal:ENDPROC
+1678 IF w$="ENDPROC" THEN PROCuseacts:PROCaddr("CD","$actleave"):PROCaddr("DA","$acterror"):PROCbyte(&C9):ENDPROC
+1679 IF w$="INPUT" THEN PROCinputline:ENDPROC
+1680 IF w$="PRINT" THEN PROCprint:ENDPROC
+1682 IF w$="CLOSE" THEN PROCclosestatement:ENDPROC
+1684 IF w$="BPUT" THEN PROCbput:ENDPROC
+1686 IF w$="DATA" THEN PROCdatastatement:ENDPROC
+1687 IF w$="READ" THEN PROCreadstatement:ENDPROC
+1688 IF w$="RESTORE" THEN PROCrestoredata:ENDPROC
+1689 IF w$="ERROR" THEN PROCerrorstatement:ENDPROC
+1690 IF w$="VDU" THEN PROCvdu:ENDPROC
+1692 IF w$="REPORT" THEN PROCaddr("CD","$errreport"):ENDPROC
+1700 IF w$="CLS" THEN PROCcharacter(12):ENDPROC
+1710 IF w$="END" THEN PROCaddr("C3","$end"):ENDPROC
+1720 IF w$="RETURN" THEN PROCaddr("C3","$return"):ENDPROC
+1730 IF w$="GOTO" OR w$="GOSUB" THEN PROCbranch(w$):ENDPROC
+1740 IF w$="EVAL" PROCbad("EVAL is deliberately unsupported")
+1742 IF w$="LET" THEN w$=FNname:PROCassign(w$):ENDPROC
+1744 IF FNreserved(w$) PROCbad("Unsupported statement "+w$)
+1750 PROCassign(w$)
 1760 ENDPROC
-1770 DEF PROCbranch(cw$)
-1780 LOCAL cn$
+1770 DEF PROCbranch(w$)
+1780 LOCAL n$
 1790 PROCspace
-1800 IF FNpeek="@" THEN cpos%=cpos%+1:cn$="@"+FNname ELSE cn$="#"+STR$(FNnumber(65279))
-1805 cn$=FNtarget(cn$)
-1810 IF cw$="GOTO" THEN PROCaddr("C3",cn$) ELSE PROCaddr("21",cn$):PROCaddr("CD","$gosub"):PROCerrmark
+1800 IF FNpeek="@" THEN pos%=pos%+1:n$="@"+FNname ELSE n$="#"+STR$(FNnumber(65279))
+1805 n$=FNtarget(n$)
+1810 IF w$="GOTO" THEN PROCaddr("C3",n$) ELSE PROCaddr("21",n$):PROCaddr("CD","$gosub"):PROCerrmark
 1820 ENDPROC
 1830 DEF PROCprint
-1840 LOCAL cs$,cmore%,csuppress%,cwidth%
-1850 PROCspace:csuppress%=FALSE:cwidth%=10
+1840 LOCAL s$,more%,suppress%,width%
+1850 PROCspace:suppress%=FALSE:width%=10
 1860 IF FNstmtend THEN PROCnewline:ENDPROC
 1870 REPEAT
-1872 WHILE FNpeek=";":cpos%=cpos%+1:PROCspace:csuppress%=TRUE:cwidth%=0:ENDWHILE
-1874 cmore%=FALSE
-1880 IF NOT FNstmtend THEN csuppress%=FALSE:PROCprintitem
-1920 UNTIL NOT cmore%
-1930 IF NOT csuppress% PROCnewline
+1872 WHILE FNpeek=";":pos%=pos%+1:PROCspace:suppress%=TRUE:width%=0:ENDWHILE
+1874 more%=FALSE
+1880 IF NOT FNstmtend THEN suppress%=FALSE:PROCprintitem
+1920 UNTIL NOT more%
+1930 IF NOT suppress% PROCnewline
 1940 ENDPROC
 1941 DEF PROCprintitem
 1942 IF FNpeek=CHR$(34) THEN PROCprintstring ELSE PROCprintnumber
-1943 PROCspace:cmore%=(FNpeek=";")
+1943 PROCspace:more%=(FNpeek=";")
 1944 ENDPROC
 1945 DEF PROCprintnumber
-1946 cndepth%=0:csdepth%=0:PROCexpr(1)
-1947 IF cvaluekind%=1 THEN PROCprintstrvalue:ENDPROC
-1948 PROCaddr("DD21","$v0"):PROCbyte(&3E):PROCbyte(cwidth%):PROCaddr("CD","$numprint")
-1949 PROCaddr("DA","$numerror"):cndepth%=0:ENDPROC
+1946 ndepth%=0:sdepth%=0:PROCexpr(1)
+1947 IF valuekind%=1 THEN PROCprintstrvalue:ENDPROC
+1948 PROCaddr("DD21","$v0"):PROCbyte(&3E):PROCbyte(width%):PROCaddr("CD","$numprint")
+1949 PROCaddr("DA","$numerror"):ndepth%=0:ENDPROC
 1950 DEF PROCvdu
-1960 LOCAL cv%,cmore%
+1960 LOCAL v%,more%
 1970 REPEAT
-1980 PROCspace:cndepth%=0:PROCexpr(1):IF cvaluekind%<>0 PROCbad("Expected a numeric item")
+1980 PROCspace:ndepth%=0:PROCexpr(1):IF valuekind%<>0 PROCbad("Expected a numeric item")
 1981 PROCnumindices(0,0)
-1982 PROCnumcall(38):PROCbytes("DD7E0049D7"):cndepth%=0:PROCspace
-1990 cmore%=(FNpeek=",")
-2000 IF cmore% cpos%=cpos%+1
-2010 UNTIL NOT cmore%
+1982 PROCnumcall(38):PROCbytes("DD7E0049D7"):ndepth%=0:PROCspace
+1990 more%=(FNpeek=",")
+2000 IF more% pos%=pos%+1
+2010 UNTIL NOT more%
 2020 ENDPROC
 2030 DEF FNstring
-2040 LOCAL cs$,cc$,cdone%,cquote%
-2050 PROCexpect(CHR$(34)):cs$="":cdone%=FALSE
+2040 LOCAL s$,c$,done%,quote%
+2050 PROCexpect(CHR$(34)):s$="":done%=FALSE
 2060 REPEAT
-2070 cc$=FNpeek
-2080 IF cc$="" PROCbad("Unterminated string")
-2090 cpos%=cpos%+1
-2092 IF ASC(cc$)<32 PROCbad("Use CHR$ for control bytes in strings")
-2100 cquote%=(cc$=CHR$(34))
-2105 IF cquote% cdone%=(FNpeek<>CHR$(34))
-2107 IF cquote% AND NOT cdone% cpos%=cpos%+1
-2110 IF NOT cdone% cs$=cs$+cc$
-2120 UNTIL cdone%
-2130 =cs$
+2070 c$=FNpeek
+2080 IF c$="" PROCbad("Unterminated string")
+2090 pos%=pos%+1
+2092 IF ASC(c$)<32 PROCbad("Use CHR$ for control bytes in strings")
+2100 quote%=(c$=CHR$(34))
+2105 IF quote% done%=(FNpeek<>CHR$(34))
+2107 IF quote% AND NOT done% pos%=pos%+1
+2110 IF NOT done% s$=s$+c$
+2120 UNTIL done%
+2130 =s$
 2140 DEF FNname
-2150 LOCAL cn$
-2160 PROCspace:cn$=""
+2150 LOCAL n$
+2160 PROCspace:n$=""
 2170 IF NOT FNalpha(FNpeek) PROCbad("Expected a name")
 2180 WHILE FNalpha(FNpeek) OR FNdigit(FNpeek)
-2190 cn$=cn$+FNpeek:cpos%=cpos%+1
+2190 n$=n$+FNpeek:pos%=pos%+1
 2200 ENDWHILE
-2210 IF LEN(cn$)>32 PROCbad("Name exceeds 32 characters")
-2220 =cn$
-2230 DEF FNnumber(cmax%)
-2240 LOCAL cn%,cbase%,cd%,cc$,cnread%
-2250 PROCspace:cn%=0:cbase%=10:cnread%=0
-2260 IF FNpeek="&" THEN cbase%=16:cpos%=cpos%+1
+2210 IF LEN(n$)>32 PROCbad("Name exceeds 32 characters")
+2220 =n$
+2230 DEF FNnumber(max%)
+2240 LOCAL n%,base%,d%,c$,nread%
+2250 PROCspace:n%=0:base%=10:nread%=0
+2260 IF FNpeek="&" THEN base%=16:pos%=pos%+1
 2270 REPEAT
-2280 cc$=FNpeek:cd%=-1
-2290 IF cc$<>"" cd%=INSTR("0123456789ABCDEF",cc$)-1
-2300 IF cd%>=cbase% cd%=-1
-2310 IF cd%>=0 THEN cn%=cn%*cbase%+cd%:cpos%=cpos%+1:cnread%=cnread%+1
-2320 IF cn%>cmax% PROCbad("Number outside supported range")
-2330 UNTIL cd%<0
-2340 IF cnread%=0 PROCbad("Expected an unsigned integer constant")
-2350 =cn%
-2360 DEF FNalpha(cc$)
-2370 =(LEN(cc$)=1 AND INSTR("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_",cc$)>0)
-2380 DEF FNdigit(cc$)
-2390 =(LEN(cc$)=1 AND INSTR("0123456789",cc$)>0)
+2280 c$=FNpeek:d%=-1
+2290 IF c$<>"" d%=INSTR("0123456789ABCDEF",c$)-1
+2300 IF d%>=base% d%=-1
+2310 IF d%>=0 THEN n%=n%*base%+d%:pos%=pos%+1:nread%=nread%+1
+2320 IF n%>max% PROCbad("Number outside supported range")
+2330 UNTIL d%<0
+2340 IF nread%=0 PROCbad("Expected an unsigned integer constant")
+2350 =n%
+2360 DEF FNalpha(c$)
+2370 =(LEN(c$)=1 AND INSTR("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_",c$)>0)
+2380 DEF FNdigit(c$)
+2390 =(LEN(c$)=1 AND INSTR("0123456789",c$)>0)
 2400 DEF FNpeek
-2410 =MID$(cline$,cpos%,1)
+2410 =MID$(line$,pos%,1)
 2420 DEF PROCspace
-2430 WHILE FNpeek=" " OR FNpeek=CHR$(9):cpos%=cpos%+1:ENDWHILE
+2430 WHILE FNpeek=" " OR FNpeek=CHR$(9):pos%=pos%+1:ENDWHILE
 2440 ENDPROC
-2450 DEF PROCexpect(cc$)
+2450 DEF PROCexpect(c$)
 2460 PROCspace
-2470 IF FNpeek<>cc$ PROCbad("Expected "+cc$)
-2480 cpos%=cpos%+1
+2470 IF FNpeek<>c$ PROCbad("Expected "+c$)
+2480 pos%=pos%+1
 2490 ENDPROC
-2500 DEF FNsymbol(cn$)
-2502 LOCAL clo%,chi%,cmid%,ci%,cfound%
-2510 clo%=0:chi%=csnum%-1:cfound%=-1
-2520 WHILE clo%<=chi% AND cfound%<0
-2522 cmid%=(clo%+chi%) DIV 2:ci%=csort%(cmid%)
-2530 IF csname$(ci%)=cn$ THEN cfound%=ci% ELSE IF csname$(ci%)<cn$ THEN clo%=cmid%+1 ELSE chi%=cmid%-1
+2500 DEF FNsymbol(n$)
+2502 LOCAL lo%,hi%,mid%,i%,found%
+2510 lo%=0:hi%=snum%-1:found%=-1
+2520 WHILE lo%<=hi% AND found%<0
+2522 mid%=(lo%+hi%) DIV 2:i%=FNsortindex(mid%)
+2530 IF sname$(i%)=n$ THEN found%=i% ELSE IF sname$(i%)<n$ THEN lo%=mid%+1 ELSE hi%=mid%-1
 2540 ENDWHILE
-2542 csinsert%=clo%
-2550 =cfound%
-2560 DEF PROClabel(cn$)
-2562 LOCAL ci%
-2570 IF FNsymbol(cn$)>=0 PROCbad("Duplicate target "+cn$)
-2580 IF csnum%=1024 PROCbad("Too many labels")
-2582 IF csnum%>csinsert% THEN FOR ci%=csnum%-1 TO csinsert% STEP -1:csort%(ci%+1)=csort%(ci%):NEXT
-2584 csort%(csinsert%)=csnum%
-2590 csname$(csnum%)=cn$:csaddr%(csnum%)=&40000+cpc%:csnum%=csnum%+1
-2600 ENDPROC
-2610 DEF PROCaddr(ch$,cn$)
-2620 IF ch$<>"" PROCbytes(ch$)
-2630 IF crnum%=4096 PROCbad("Too many address fixups")
-2640 crname$(crnum%)=cn$:craddr%(crnum%)=cpc%
-2650 crline%(crnum%)=clnum%:crcol%(crnum%)=cpos%:crnum%=crnum%+1
-2660 PROCbyte(0):PROCbyte(0):PROCbyte(0)
-2670 ENDPROC
-2680 DEF PROCpatch(cp%,cv%)
-2690 LOCAL ci%
-2700 FOR ci%=0 TO 2:ccode%?(cp%+ci%)=cv% MOD 256:cv%=cv% DIV 256:NEXT
-2710 ENDPROC
-2720 DEF PROCbyte(cv%)
-2730 IF cpc%=65536 PROCbad("Executable exceeds 65536 bytes")
-2740 ccode%?cpc%=cv%:cpc%=cpc%+1
-2750 ENDPROC
-2760 DEF PROCbytes(ch$)
-2770 LOCAL ci%,ca%,cb%
-2780 FOR ci%=1 TO LEN(ch$) STEP 2
-2790 ca%=INSTR("0123456789ABCDEF",MID$(ch$,ci%,1))-1
-2800 cb%=INSTR("0123456789ABCDEF",MID$(ch$,ci%+1,1))-1
-2810 PROCbyte(ca%*16+cb%)
+2542 sinsert%=lo%
+2550 =found%
+2560 DEF PROClabel(n$)
+2570 PROCdefine(n$,&40000+pc%):ENDPROC
+2610 DEF PROCaddr(h$,n$)
+2620 LOCAL i%,v%:IF h$<>"" PROCbytes(h$)
+2630 v%=0:IF phase%>1 THEN i%=FNsymbol(n$):IF i%<0 PROCbad("Undefined target "+n$)
+2640 IF phase%>1 v%=FNsymboladdr(i%)
+2650 PROCword24(v%):ENDPROC
+2720 DEF PROCbyte(v%)
+2730 IF &40000+pc%>=&B0000 PROCbad("Executable exceeds user RAM")
+2740 IF phase%=3 BPUT#oh%,v%
+2750 pc%=pc%+1:ENDPROC
+2760 DEF PROCbytes(h$)
+2770 LOCAL i%,a%,b%
+2772 IF h$="" ENDPROC
+2774 PROCcodecount(LEN(h$) DIV 2):IF phase%<>3 ENDPROC
+2780 FOR i%=1 TO LEN(h$) STEP 2
+2790 a%=INSTR("0123456789ABCDEF",MID$(h$,i%,1))-1
+2800 b%=INSTR("0123456789ABCDEF",MID$(h$,i%+1,1))-1
+2810 BPUT#oh%,a%*16+b%
 2820 NEXT
 2830 ENDPROC
-2840 DEF PROCcharacter(cv%)
-2850 PROCbyte(&3E):PROCbyte(cv%):PROCbytes("49D7")
+2840 DEF PROCcharacter(v%)
+2850 PROCbyte(&3E):PROCbyte(v%):PROCbytes("49D7")
 2860 ENDPROC
 2870 DEF PROCnewline
 2880 PROCcharacter(13):PROCcharacter(10)
 2890 ENDPROC
-2900 DEF PROCtext(cs$)
-2910 LOCAL ci%
-2915 IF cs$="" ENDPROC
-2920 PROCaddr("CD","$print"):PROCbyte(LEN(cs$))
-2930 FOR ci%=1 TO LEN(cs$):PROCbyte(ASC(MID$(cs$,ci%,1))):NEXT
+2900 DEF PROCtext(s$)
+2910 LOCAL i%
+2915 IF s$="" ENDPROC
+2920 PROCaddr("CD","$print"):PROCbyte(LEN(s$))
+2930 PROCstringbytes(s$)
 2940 ENDPROC
 2950 DEF PROCruntime
 2960 PROClabel("$print")
@@ -285,1312 +279,1466 @@
 3000 PROClabel("$gosub")
 3010 PROCaddr("3A","$depth"):PROCbytes("FEFF")
 3020 PROCaddr("CA","$full"):PROCbytes("3C")
-3025 IF cloops% THEN PROCbytes("F5E53E04"):PROCaddr("CD","$ctlpush"):PROCbyte(&E1):PROCaddr("DA","$flowerror"):PROCbyte(&F1)
+3025 IF loops% THEN PROCbytes("F5E53E04"):PROCaddr("CD","$ctlpush"):PROCbyte(&E1):PROCaddr("DA","$flowerror"):PROCbyte(&F1)
 3030 PROCaddr("32","$depth"):PROCbytes("E9")
 3040 PROClabel("$return")
 3050 PROCaddr("3A","$depth"):PROCbytes("B7")
 3060 PROCaddr("CA","$badreturn"):PROCbytes("3D")
-3065 IF cloops% THEN PROCbyte(&F5):PROCflowcheck(4):PROCaddr("CD","$ctlpop"):PROCbyte(&F1)
+3065 IF loops% THEN PROCbyte(&F5):PROCflowcheck(4):PROCaddr("CD","$ctlpop"):PROCbyte(&F1)
 3070 PROCaddr("32","$depth"):PROCbytes("C9")
 3080 PROClabel("$badreturn")
 3090 PROCerrorconstant(38,"No GOSUB")
 3110 PROClabel("$full")
-3120 IF cerrors% THEN PROCerrorconstant(0,"Too many GOSUBs") ELSE PROCtext("Too many GOSUBs"):PROCnewline
+3120 IF errors% THEN PROCerrorconstant(0,"Too many GOSUBs") ELSE PROCtext("Too many GOSUBs"):PROCnewline
 3130 PROClabel("$error")
 3140 PROCbytes("21010000"):PROCaddr("C3","$exit")
 3150 PROClabel("$end")
 3160 PROCbytes("21000000")
 3170 PROClabel("$exit")
 3180 REM ADL24 OK: saved SP is a three-byte address, not a BASIC integer.
-3185 IF cfileio% THEN PROCbytes("E5AF"):PROCaddr("CD","$ioclose"):PROCbyte(&E1)
+3185 IF fileio% THEN PROCbytes("E5AF"):PROCaddr("CD","$ioclose"):PROCbyte(&E1)
 3190 PROCaddr("ED7B","$savedsp")
 3200 PROCbytes("FDE1DDE1D1C1F1C9")
 3210 PROClabel("$savedsp"):PROCbytes("000000")
 3220 PROClabel("$depth"):PROCbyte(0)
-3221 IF cnumeric% PROCnumruntime
-3222 IF cio% PROCIOruntime
-3223 IF cdataused% PROCdataruntime
-3224 IF cvnum%>0 PROCvarruntime
-3225 IF cloops% PROCflowruntime
-3226 IF cacts% PROCactruntime
-3227 IF cerrors% PROCerrorruntime
-3228 IF cdataused% PROCdatatable
-3229 IF cstrings% PROCstrruntime
-3230 IF cmemory% PROCmemoryruntime
-3231 IF cmemory% PROCmemoryworkspace
-3232 IF cacts% PROCactworkspace
-3233 ENDPROC
-3240 DEF PROCbad(cm$)
-3250 ERROR 100,LEFT$(csource$,80)+":"+STR$(clnum%)+":"+STR$(cpos%)+": "+LEFT$(cm$,130)
+3221 IF numeric% PROCnumruntime
+3222 IF io% PROCIOruntime
+3223 IF dataused% PROCdataruntime
+3224 IF vnum%>0 PROCvarruntime
+3225 IF loops% PROCflowruntime
+3226 IF acts% PROCactruntime
+3227 IF errors% PROCerrorruntime
+3228 IF dataused% PROCdatatable
+3229 IF compact% PROCcompactruntime
+3230 IF strings% PROCstrruntime
+3231 IF memory% PROCmemoryruntime
+3232 IF memory% PROCmemoryworkspace
+3233 IF acts% PROCactworkspace
+3234 ENDPROC
+3240 DEF PROCbad(m$)
+3250 ERROR 100,LEFT$(source$,80)+":"+STR$(lnum%)+":"+STR$(pos%)+": "+LEFT$(m$,130)
 3260 ENDPROC
 4000 DEF PROCloadnumbers
-4010 LOCAL ci%,cj%,cs$,ca%,cb%
-4020 RESTORE 20000:READ cnsize%,cnrelocs%,cnentry%,cnliteral%,cnnegate%,cnprintnum%,cnval%,cnstrnum%,cnstrhex%
-4030 DIM cnimage% cnsize%-1,cnreloc%(cnrelocs%-1)
-4040 FOR ci%=0 TO cnsize%-1 STEP 40
-4050 READ cs$
-4060 FOR cj%=1 TO LEN(cs$) STEP 2
-4062 ca%=INSTR("0123456789ABCDEF",MID$(cs$,cj%,1))-1
-4064 cb%=INSTR("0123456789ABCDEF",MID$(cs$,cj%+1,1))-1
-4070 cnimage%?(ci%+(cj%-1) DIV 2)=ca%*16+cb%
+4010 LOCAL i%,j%,s$,a%,b%
+4020 RESTORE 20000:READ nsize%,nrelocs%,nentry%,nliteral%,nnegate%,nprintnum%,nval%,nstrnum%,nstrhex%
+4030 DIM nimage% nsize%-1,nreloc%(nrelocs%-1)
+4040 FOR i%=0 TO nsize%-1 STEP 40
+4050 READ s$
+4060 FOR j%=1 TO LEN(s$) STEP 2
+4062 a%=INSTR("0123456789ABCDEF",MID$(s$,j%,1))-1
+4064 b%=INSTR("0123456789ABCDEF",MID$(s$,j%+1,1))-1
+4070 nimage%?(i%+(j%-1) DIV 2)=a%*16+b%
 4080 NEXT:NEXT
-4090 FOR ci%=0 TO cnrelocs%-1:READ cnreloc%(ci%):NEXT
+4090 FOR i%=0 TO nrelocs%-1:READ nreloc%(i%):NEXT
 4100 ENDPROC
 4110 DEF PROCnumslot
-4120 IF cndepth%=32 PROCbad("Expression value stack exceeds 32")
-4130 cndepth%=cndepth%+1:cnumeric%=TRUE
-4140 IF cndepth%>cnslots% cnslots%=cndepth%
+4120 IF ndepth%=32 PROCbad("Expression value stack exceeds 32")
+4130 ndepth%=ndepth%+1:numeric%=TRUE
+4140 IF ndepth%>nslots% nslots%=ndepth%
 4150 ENDPROC
-4160 DEF PROCvalue(cv)
-4170 LOCAL ci%,cp%
-4172 IF cdcapture% THEN PROCcapturenumber(cv):ENDPROC
-4180 PROCnumslot:cvaluekind%=0:PROCaddr("DD21","$v"+STR$(cndepth%-1))
-4190 PROCaddr("CD","$numlit"):cp%=^cv
-4200 FOR ci%=0 TO 4:PROCbyte(cp%?ci%):NEXT
+4160 DEF PROCvalue(v)
+4170 LOCAL i%,p%
+4172 IF dcapture% THEN PROCcapturenumber(v):ENDPROC
+4180 PROCnumslot:valuekind%=0:PROCusecompact:PROCaddr("CD","$cplit"):PROCbyte(ndepth%-1)
+4190 p%=^v
+4200 PROCblob(p%,5)
 4210 ENDPROC
-4220 DEF PROCnumindices(cl%,cr%)
-4230 PROCaddr("DD21","$v"+STR$(cl%)):PROCaddr("FD21","$v"+STR$(cr%))
+4220 DEF PROCnumindices(l%,r%)
+4230 PROCaddr("DD21","$v"+STR$(l%)):PROCaddr("FD21","$v"+STR$(r%))
 4240 ENDPROC
-4250 DEF PROCnumcall(co%)
-4260 PROCbyte(&3E):PROCbyte(co%):PROCaddr("CD","$numop")
+4250 DEF PROCnumcall(o%)
+4260 PROCbyte(&3E):PROCbyte(o%):PROCaddr("CD","$numop")
 4270 PROCaddr("DA","$numerror")
 4280 ENDPROC
-4290 DEF PROCbinary(co%)
-4300 PROCnumindices(cndepth%-2,cndepth%-1):PROCnumcall(co%)
-4310 cndepth%=cndepth%-1
+4290 DEF PROCbinary(o%)
+4300 PROCnumoperation(ndepth%-2,ndepth%-1,o%)
+4310 ndepth%=ndepth%-1
 4320 ENDPROC
-4330 DEF PROCexpr(cmin%)
-4340 LOCAL cp%,co%,cw%,cdone%,crel%,ctype%,cframe%
-4350 cframe%=1:IF FNstringstart cframe%=0
-4352 cnparse%=cnparse%+cframe%:IF cnparse%>32 PROCbad("Expression nesting exceeds 32")
-4360 PROCitem:ctype%=cvaluekind%:cdone%=FALSE:crel%=FALSE
+4330 DEF PROCexpr(min%)
+4340 LOCAL p%,o%,w%,done%,rel%,type%,frame%
+4350 frame%=1:IF FNstringstart frame%=0
+4352 nparse%=nparse%+frame%:IF nparse%>32 PROCbad("Expression nesting exceeds 32")
+4360 PROCitem:type%=valuekind%:done%=FALSE:rel%=FALSE
 4370 REPEAT
-4380 co%=FNoperator:cp%=cnprec%:cw%=cnwidth%
-4390 IF co%<0 OR cp%<cmin% THEN cdone%=TRUE ELSE PROCexprtail
-4400 UNTIL cdone%
-4410 cnparse%=cnparse%-cframe%
+4380 o%=FNoperator:p%=nprec%:w%=nwidth%
+4390 IF o%<0 OR p%<min% THEN done%=TRUE ELSE PROCexprtail
+4400 UNTIL done%
+4410 nparse%=nparse%-frame%
 4420 ENDPROC
 4430 DEF PROCexprtail
-4440 IF cp%=3 AND crel% PROCbad("Chained comparisons require parentheses")
-4450 IF cp%=3 crel%=TRUE
-4460 cpos%=cpos%+cw%:PROCexpr(cp%+1):PROCtypedbinary:ctype%=cvaluekind%
+4440 IF p%=3 AND rel% PROCbad("Chained comparisons require parentheses")
+4450 IF p%=3 rel%=TRUE
+4460 pos%=pos%+w%:PROCexpr(p%+1):PROCtypedbinary:type%=valuekind%
 4470 ENDPROC
 4480 DEF FNoperator
-4490 LOCAL cs$,co%
-4500 PROCspace:cnprec%=0:cnwidth%=0:cs$=MID$(cline$,cpos%,3)
-4510 IF LEFT$(cs$,2)="<<" OR LEFT$(cs$,2)=">>" PROCbad("Shift operators are unsupported")
-4520 co%=-1
-4530 IF LEFT$(cs$,3)="EOR" THEN co%=2:cnprec%=1:cnwidth%=3
-4540 IF LEFT$(cs$,2)="OR" THEN co%=4:cnprec%=1:cnwidth%=2
-4550 IF LEFT$(cs$,3)="AND" THEN co%=0:cnprec%=2:cnwidth%=3
-4560 IF LEFT$(cs$,2)="<=" THEN co%=5:cnprec%=3:cnwidth%=2
-4570 IF LEFT$(cs$,2)="<>" THEN co%=6:cnprec%=3:cnwidth%=2
-4580 IF LEFT$(cs$,2)=">=" THEN co%=7:cnprec%=3:cnwidth%=2
-4590 IF co%>=0 THEN =co%
-4600 IF LEFT$(cs$,1)="<" THEN co%=8:cnprec%=3:cnwidth%=1
-4610 IF LEFT$(cs$,1)="=" THEN co%=9:cnprec%=3:cnwidth%=1
-4620 IF LEFT$(cs$,1)=">" THEN co%=12:cnprec%=3:cnwidth%=1
-4630 IF LEFT$(cs$,1)="+" THEN co%=11:cnprec%=4:cnwidth%=1
-4640 IF LEFT$(cs$,1)="-" THEN co%=13:cnprec%=4:cnwidth%=1
-4650 IF LEFT$(cs$,1)="*" THEN co%=10:cnprec%=5:cnwidth%=1
-4660 IF LEFT$(cs$,1)="/" THEN co%=15:cnprec%=5:cnwidth%=1
-4670 IF LEFT$(cs$,3)="DIV" THEN co%=1:cnprec%=5:cnwidth%=3
-4680 IF LEFT$(cs$,3)="MOD" THEN co%=3:cnprec%=5:cnwidth%=3
-4690 IF LEFT$(cs$,1)="^" THEN co%=14:cnprec%=6:cnwidth%=1
-4700 =co%
+4490 LOCAL s$,o%
+4500 PROCspace:nprec%=0:nwidth%=0:s$=MID$(line$,pos%,3)
+4510 IF LEFT$(s$,2)="<<" OR LEFT$(s$,2)=">>" PROCbad("Shift operators are unsupported")
+4520 o%=-1
+4530 IF LEFT$(s$,3)="EOR" THEN o%=2:nprec%=1:nwidth%=3
+4540 IF LEFT$(s$,2)="OR" THEN o%=4:nprec%=1:nwidth%=2
+4550 IF LEFT$(s$,3)="AND" THEN o%=0:nprec%=2:nwidth%=3
+4560 IF LEFT$(s$,2)="<=" THEN o%=5:nprec%=3:nwidth%=2
+4570 IF LEFT$(s$,2)="<>" THEN o%=6:nprec%=3:nwidth%=2
+4580 IF LEFT$(s$,2)=">=" THEN o%=7:nprec%=3:nwidth%=2
+4590 IF o%>=0 THEN =o%
+4600 IF LEFT$(s$,1)="<" THEN o%=8:nprec%=3:nwidth%=1
+4610 IF LEFT$(s$,1)="=" THEN o%=9:nprec%=3:nwidth%=1
+4620 IF LEFT$(s$,1)=">" THEN o%=12:nprec%=3:nwidth%=1
+4630 IF LEFT$(s$,1)="+" THEN o%=11:nprec%=4:nwidth%=1
+4640 IF LEFT$(s$,1)="-" THEN o%=13:nprec%=4:nwidth%=1
+4650 IF LEFT$(s$,1)="*" THEN o%=10:nprec%=5:nwidth%=1
+4660 IF LEFT$(s$,1)="/" THEN o%=15:nprec%=5:nwidth%=1
+4670 IF LEFT$(s$,3)="DIV" THEN o%=1:nprec%=5:nwidth%=3
+4680 IF LEFT$(s$,3)="MOD" THEN o%=3:nprec%=5:nwidth%=3
+4690 IF LEFT$(s$,1)="^" THEN o%=14:nprec%=6:nwidth%=1
+4700 =o%
 4710 DEF PROCitem
-4720 LOCAL cc$,cdone%
-4730 cnparse%=cnparse%+1:IF cnparse%>32 PROCbad("Expression nesting exceeds 32")
-4740 PROCspace:cc$=FNpeek:cdone%=FALSE:cvaluekind%=0
-4750 IF cc$="+" OR cc$="-" THEN cpos%=cpos%+1:PROCitem:PROCneednumber:cdone%=TRUE
-4760 IF cc$="-" THEN PROCaddr("DD21","$v"+STR$(cndepth%-1)):PROCaddr("CD","$numneg")
-4770 IF cc$="(" THEN cpos%=cpos%+1:PROCexpr(1):PROCexpect(")"):cdone%=TRUE
-4780 IF cc$="&" OR cc$="." OR FNdigit(cc$) THEN PROCconstant:cdone%=TRUE
-4782 IF NOT cdone% THEN IF cc$="^" OR cc$="?" OR cc$="!" OR cc$="|" THEN PROCmemitem(cc$):cdone%=TRUE
-4785 IF NOT cdone% AND MID$(cline$,cpos%,2)="FN" THEN cpos%=cpos%+2:PROCfncall:cdone%=TRUE
-4790 IF NOT cdone% PROCtypeditem
-4800 cnparse%=cnparse%-1
+4720 LOCAL c$,done%
+4730 nparse%=nparse%+1:IF nparse%>32 PROCbad("Expression nesting exceeds 32")
+4740 PROCspace:c$=FNpeek:done%=FALSE:valuekind%=0
+4750 IF c$="+" OR c$="-" THEN pos%=pos%+1:PROCitem:PROCneednumber:done%=TRUE
+4760 IF c$="-" THEN PROCaddr("DD21","$v"+STR$(ndepth%-1)):PROCaddr("CD","$numneg")
+4770 IF c$="(" THEN pos%=pos%+1:PROCexpr(1):PROCexpect(")"):done%=TRUE
+4780 IF c$="&" OR c$="." OR FNdigit(c$) THEN PROCconstant:done%=TRUE
+4782 IF NOT done% THEN IF c$="^" OR c$="?" OR c$="!" OR c$="|" THEN PROCmemitem(c$):done%=TRUE
+4785 IF NOT done% AND MID$(line$,pos%,2)="FN" THEN pos%=pos%+2:PROCfncall:done%=TRUE
+4790 IF NOT done% PROCtypeditem
+4800 nparse%=nparse%-1
 4810 ENDPROC
 4820 DEF PROCworditem
-4830 LOCAL cw$,ci%,cf%,cl%
-4832 cf%=-1
-4833 FOR ci%=0 TO 15
-4834 cw$=MID$("ABSACSASNATNCOSDEGEXPINTLN LOGNOTRADSGNSINSQRTAN",ci%*3+1,3)
-4835 IF RIGHT$(cw$,1)=" " cw$=LEFT$(cw$,2)
-4836 cl%=LEN(cw$)
-4837 IF MID$(cline$,cpos%,cl%)=cw$ AND NOT FNalpha(MID$(cline$,cpos%+cl%,1)) cf%=ci%+16
-4838 IF cf%>=0 ci%=15
+4830 LOCAL w$,i%,f%,l%
+4832 f%=-1
+4833 FOR i%=0 TO 15
+4834 w$=MID$("ABSACSASNATNCOSDEGEXPINTLN LOGNOTRADSGNSINSQRTAN",i%*3+1,3)
+4835 IF RIGHT$(w$,1)=" " w$=LEFT$(w$,2)
+4836 l%=LEN(w$)
+4837 IF MID$(line$,pos%,l%)=w$ AND NOT FNalpha(MID$(line$,pos%+l%,1)) f%=i%+16
+4838 IF f%>=0 i%=15
 4839 NEXT
-4840 IF cf%>=0 THEN cpos%=cpos%+cl%:PROCitem:PROCneednumber:PROCnumindices(cndepth%-1,cndepth%-1):PROCnumcall(cf%):ENDPROC
+4840 IF f%>=0 THEN pos%=pos%+l%:PROCitem:PROCneednumber:PROCnumoperation(ndepth%-1,ndepth%-1,f%):ENDPROC
 4842 IF NOT FNalpha(FNpeek) PROCbad("Expected a numeric item")
-4850 cw$=FNname
-4860 IF cw$="TRUE" THEN PROCvalue(-1):ENDPROC
-4870 IF cw$="FALSE" THEN PROCvalue(0):ENDPROC
-4872 IF cw$="LEN" THEN PROCstrlen:ENDPROC
-4874 IF cw$="VAL" THEN PROCstrval:ENDPROC
-4876 IF cw$="ASC" THEN PROCstrasc:ENDPROC
-4878 IF cw$="INSTR" THEN PROCstrinstr:ENDPROC
-4880 IF cw$="PI" THEN PROCvalue(0):PROCnumindices(cndepth%-1,cndepth%-1):PROCnumcall(35):ENDPROC
-4882 IF cw$="OPENIN" OR cw$="OPENOUT" OR cw$="OPENUP" OR cw$="BGET" OR cw$="EOF" THEN PROCioitem(cw$):ENDPROC
-4884 IF cw$="ERR" OR cw$="ERL" THEN PROCerritem(cw$):ENDPROC
-4890 IF cw$="EVAL" PROCbad("EVAL is deliberately unsupported")
-4892 IF FNreserved(cw$) PROCbad("Unsupported numeric item "+cw$)
-4900 PROCvariable(cw$)
+4850 w$=FNname
+4860 IF w$="TRUE" THEN PROCvalue(-1):ENDPROC
+4870 IF w$="FALSE" THEN PROCvalue(0):ENDPROC
+4872 IF w$="LEN" THEN PROCstrlen:ENDPROC
+4874 IF w$="VAL" THEN PROCstrval:ENDPROC
+4876 IF w$="ASC" THEN PROCstrasc:ENDPROC
+4878 IF w$="INSTR" THEN PROCstrinstr:ENDPROC
+4880 IF w$="PI" THEN PROCvalue(0):PROCnumoperation(ndepth%-1,ndepth%-1,35):ENDPROC
+4882 IF w$="OPENIN" OR w$="OPENOUT" OR w$="OPENUP" OR w$="BGET" OR w$="EOF" THEN PROCioitem(w$):ENDPROC
+4884 IF w$="ERR" OR w$="ERL" THEN PROCerritem(w$):ENDPROC
+4890 IF w$="EVAL" PROCbad("EVAL is deliberately unsupported")
+4892 IF FNreserved(w$) PROCbad("Unsupported numeric item "+w$)
+4900 PROCvariable(w$)
 4910 ENDPROC
 4920 DEF PROCconstant
 4930 IF FNpeek<>"&" THEN PROCdecimal:ENDPROC
-4940 LOCAL cv,cd%,cc$,cn%
-4950 cv=0:cn%=0:cpos%=cpos%+1
+4940 LOCAL v,d%,c$,n%
+4950 v=0:n%=0:pos%=pos%+1
 4960 REPEAT
-4970 cc$=FNpeek:cd%=-1
-4980 IF cc$<>"" cd%=INSTR("0123456789ABCDEF",cc$)-1
-4990 IF cd%>=0 THEN cv=cv*16+cd%:cn%=cn%+1:cpos%=cpos%+1
-5000 IF cn%>8 PROCbad("Hex literal exceeds eight digits")
-5020 UNTIL cd%<0
-5030 IF cn%=0 PROCbad("Expected digits in numeric literal")
-5050 PROCpacked(cv,0)
+4970 c$=FNpeek:d%=-1
+4980 IF c$<>"" d%=INSTR("0123456789ABCDEF",c$)-1
+4990 IF d%>=0 THEN v=v*16+d%:n%=n%+1:pos%=pos%+1
+5000 IF n%>8 PROCbad("Hex literal exceeds eight digits")
+5020 UNTIL d%<0
+5030 IF n%=0 PROCbad("Expected digits in numeric literal")
+5050 PROCpacked(v,0)
 5100 ENDPROC
 5101 DEF PROCdecimal
-5102 LOCAL cs%,cv
-5103 cs%=cpos%
-5104 WHILE FNdigit(FNpeek):cpos%=cpos%+1:ENDWHILE
-5105 IF FNpeek="." THEN cpos%=cpos%+1:WHILE FNdigit(FNpeek):cpos%=cpos%+1:ENDWHILE
-5106 IF FNpeek="E" AND MID$(cline$,cpos%,3)<>"EOR" PROCdecexponent
-5107 cnumerr%=0:cv=FNreaddecimal(MID$(cline$,cs%,cpos%-cs%)):PROCvalue(cv)
-5108 IF cnumerr%<>0 AND NOT cdcapture% THEN PROCbyte(&3E):PROCbyte(cnumerr%):PROCaddr("C3","$numerror")
+5102 LOCAL s%,v
+5103 s%=pos%
+5104 WHILE FNdigit(FNpeek):pos%=pos%+1:ENDWHILE
+5105 IF FNpeek="." THEN pos%=pos%+1:WHILE FNdigit(FNpeek):pos%=pos%+1:ENDWHILE
+5106 IF FNpeek="E" AND MID$(line$,pos%,3)<>"EOR" PROCdecexponent
+5107 numerr%=0:v=FNreaddecimal(MID$(line$,s%,pos%-s%)):PROCvalue(v)
+5108 IF numerr%<>0 AND NOT dcapture% THEN PROCbyte(&3E):PROCbyte(numerr%):PROCaddr("C3","$numerror")
 5109 ENDPROC
 5110 DEF PROCdecexponent
-5111 cpos%=cpos%+1
-5112 WHILE FNpeek=" ":cpos%=cpos%+1:ENDWHILE
-5113 IF FNpeek="+" OR FNpeek="-" cpos%=cpos%+1
-5114 WHILE FNdigit(FNpeek):cpos%=cpos%+1:ENDWHILE
+5111 pos%=pos%+1
+5112 WHILE FNpeek=" ":pos%=pos%+1:ENDWHILE
+5113 IF FNpeek="+" OR FNpeek="-" pos%=pos%+1
+5114 WHILE FNdigit(FNpeek):pos%=pos%+1:ENDWHILE
 5115 IF FNalpha(FNpeek) PROCbad("Unsupported crunched text after exponent")
 5116 ENDPROC
-5120 DEF FNreaddecimal(cs$)
+5120 DEF FNreaddecimal(s$)
 5121 LOCAL ERROR
-5122 ON ERROR LOCAL cnumerr%=ERR:=0
-5123 =VAL(cs$)
-5184 DEF PROCpacked(cv,ce%)
-5185 LOCAL ci%,cq
-5186 IF cdcapture% THEN PROCcapturepacked(cv,ce%):ENDPROC
-5187 PROCnumslot:PROCaddr("DD21","$v"+STR$(cndepth%-1)):PROCaddr("CD","$numlit")
-5188 FOR ci%=0 TO 3
-5189 cq=INT(cv/256):PROCbyte(cv-cq*256):cv=cq
-5190 NEXT:PROCbyte(ce%)
+5122 ON ERROR LOCAL numerr%=ERR:=0
+5123 =VAL(s$)
+5184 DEF PROCpacked(v,e%)
+5185 LOCAL i%,q
+5186 IF dcapture% THEN PROCcapturepacked(v,e%):ENDPROC
+5187 PROCnumslot:PROCusecompact:PROCaddr("CD","$cplit"):PROCbyte(ndepth%-1)
+5188 PROCcodecount(5):IF phase%<>3 ENDPROC
+5189 FOR i%=0 TO 3:q=INT(v/256):BPUT#oh%,v-q*256:v=q:NEXT
+5190 BPUT#oh%,e%
 5191 ENDPROC
 5193 DEF PROCnumruntime
-5194 LOCAL ci%,cp%,cv%,cbase%,cn$,cm$
-5200 cbase%=cpc%
-5202 IF cpc%+cnsize%>65536 PROCbad("Executable exceeds 65536 bytes")
-5210 FOR ci%=0 TO cnsize%-1:ccode%?(cbase%+ci%)=cnimage%?ci%:NEXT:cpc%=cpc%+cnsize%
-5220 FOR ci%=0 TO cnrelocs%-1
-5230 cp%=cbase%+cnreloc%(ci%)
-5240 cv%=ccode%?cp%+256*ccode%?(cp%+1)+65536*ccode%?(cp%+2)
-5250 PROCpatch(cp%,cv%+&40000+cbase%)
-5260 NEXT
-5270 PROClabel("$numop"):csaddr%(csnum%-1)=&40000+cbase%+cnentry%
-5280 PROClabel("$numlit"):csaddr%(csnum%-1)=&40000+cbase%+cnliteral%
-5290 PROClabel("$numneg"):csaddr%(csnum%-1)=&40000+cbase%+cnnegate%
-5292 PROClabel("$numprint"):csaddr%(csnum%-1)=&40000+cbase%+cnprintnum%
-5294 PROClabel("$numval"):csaddr%(csnum%-1)=&40000+cbase%+cnval%
-5296 PROClabel("$numstr"):csaddr%(csnum%-1)=&40000+cbase%+cnstrnum%
-5298 PROClabel("$numhex"):csaddr%(csnum%-1)=&40000+cbase%+cnstrhex%
-5300 FOR ci%=0 TO cnslots%-1
-5310 PROClabel("$v"+STR$(ci%)):PROCbytes("0000000000")
+5194 LOCAL i%,p%,v%,base%,n$,m$
+5200 base%=pc%:PROCtemplate(nimage%,nsize%,nrelocs%,0)
+5270 PROCdefine("$numop",&40000+base%+nentry%)
+5280 PROCdefine("$numlit",&40000+base%+nliteral%)
+5290 PROCdefine("$numneg",&40000+base%+nnegate%)
+5292 PROCdefine("$numprint",&40000+base%+nprintnum%)
+5294 PROCdefine("$numval",&40000+base%+nval%)
+5296 PROCdefine("$numstr",&40000+base%+nstrnum%)
+5298 PROCdefine("$numhex",&40000+base%+nstrhex%)
+5300 FOR i%=0 TO nslots%-1
+5310 PROClabel("$v"+STR$(i%)):PROCbytes("0000000000")
 5320 NEXT
 5330 PROClabel("$numerror")
-5340 FOR ci%=0 TO 5
-5350 PROCbytes("FE"):PROCbyte(18+ci%+ABS(ci%>0))
-5360 PROCaddr("CA","$ne"+STR$(ci%))
+5340 FOR i%=0 TO 5
+5350 PROCbytes("FE"):PROCbyte(18+i%+ABS(i%>0))
+5360 PROCaddr("CA","$ne"+STR$(i%))
 5370 NEXT
 5380 PROCerrorconstant(-1,"Numeric error")
-5390 FOR ci%=0 TO 5
-5400 PROClabel("$ne"+STR$(ci%))
-5410 cm$=MID$("Division by zero Number too big   -ve root         Log range        Accuracy lost    Exponent range   ",ci%*17+1,17)
-5420 WHILE RIGHT$(cm$,1)=" ":cm$=LEFT$(cm$,LEN(cm$)-1):ENDWHILE
-5430 PROCerrorconstant(18+ci%+ABS(ci%>0),cm$)
+5390 FOR i%=0 TO 5
+5400 PROClabel("$ne"+STR$(i%))
+5410 m$=MID$("Division by zero Number too big   -ve root         Log range        Accuracy lost    Exponent range   ",i%*17+1,17)
+5420 WHILE RIGHT$(m$,1)=" ":m$=LEFT$(m$,LEN(m$)-1):ENDWHILE
+5430 PROCerrorconstant(18+i%+ABS(i%>0),m$)
 5440 NEXT
 5450 ENDPROC
-6000 DEF FNvariable(cn$)
-6010 LOCAL ci%,cf%,ct%,cs%,cw%
-6020 ct%=5:cs%=FALSE
-6030 IF FNpeek="%" THEN ct%=4:cs%=(LEN(cn$)=1 AND INSTR("ABCDEFGHIJKLMNOPQRSTUVWXYZ",cn$)>0)
-6040 IF FNpeek="&" ct%=1
-6042 IF FNpeek="$" ct%=129
-6044 IF ct%=129 AND FNstrreserved(cn$) PROCbad("Unsupported string item "+cn$)
-6050 IF ct%<>5 THEN cn$=cn$+FNpeek:cpos%=cpos%+1
+6000 DEF FNvariable(n$)
+6010 LOCAL i%,f%,t%,s%,w%
+6020 t%=5:s%=FALSE
+6030 IF FNpeek="%" THEN t%=4:s%=(LEN(n$)=1 AND INSTR("ABCDEFGHIJKLMNOPQRSTUVWXYZ",n$)>0)
+6040 IF FNpeek="&" t%=1
+6042 IF FNpeek="$" t%=129
+6044 IF t%=129 AND FNstrreserved(n$) PROCbad("Unsupported string item "+n$)
+6050 IF t%<>5 THEN n$=n$+FNpeek:pos%=pos%+1
 6060 IF FNpeek="$" PROCbad("Unsupported string suffix")
-6070 IF FNpeek="(" THEN cn$=cn$+"(":ct%=ct%+256:cs%=FALSE
+6070 IF FNpeek="(" THEN n$=n$+"(":t%=t%+256:s%=FALSE
 6080 IF FNpeek="%" OR FNpeek="&" OR FNpeek="#" PROCbad("Unsupported numeric suffix")
 6090 IF FNpeek="|" PROCbad("Binary variant indirection is unsupported")
-6100 cf%=-1:ci%=0
-6102 WHILE ci%<cvnum%
-6104 IF cvname$(ci%)=cn$ cf%=ci%
-6106 ci%=ci%+1
+6100 f%=-1:i%=0
+6102 WHILE i%<vnum%
+6104 IF vname$(i%)=n$ f%=i%
+6106 i%=i%+1
 6110 ENDWHILE
-6120 IF cf%>=0 THEN =cf%
-6130 IF cvnum%=256 PROCbad("Variable limit exceeds 256")
-6140 cw%=ct% AND 255:IF cw%=129 THEN cw%=5:cstrings%=TRUE:csvars%=csvars%+1
-6141 IF ct%>255 cw%=3
-6142 cf%=cvnum%:cvname$(cf%)=cn$:cvsize%(cf%)=cw%:cvtype%(cf%)=ct%:cvstatic%(cf%)=cs%:cvdim%(cf%)=0:cvnum%=cvnum%+1
-6150 =cf%
-6160 DEF PROCassign(cn$)
-6170 LOCAL ci%,ct%
-6180 IF FNreserved(cn$) PROCbad("Unsupported variable name "+cn$)
-6190 ci%=FNvariable(cn$):ct%=cvtype%(ci%)
-6191 IF ct%>255 THEN PROCarrayassign(ci%):ENDPROC
-6192 IF FNpeek="?" OR FNpeek="!" THEN PROCindirectassign(ci%):ENDPROC
+6120 IF f%>=0 THEN =f%
+6130 IF vnum%=256 PROCbad("Variable limit exceeds 256")
+6140 w%=t% AND 255:IF w%=129 THEN w%=5:strings%=TRUE:svars%=svars%+1
+6141 IF t%>255 w%=3
+6142 f%=vnum%:vname$(f%)=n$:vsize&(f%)=w%:vtype%(f%)=t%:vstatic%(f%)=s%:vdim&(f%)=0:vnum%=vnum%+1
+6150 =f%
+6160 DEF PROCassign(n$)
+6170 LOCAL i%,t%
+6180 IF FNreserved(n$) PROCbad("Unsupported variable name "+n$)
+6190 i%=FNvariable(n$):t%=vtype%(i%)
+6191 IF t%>255 THEN PROCarrayassign(i%):ENDPROC
+6192 IF FNpeek="?" OR FNpeek="!" THEN PROCindirectassign(i%):ENDPROC
 6193 PROCexpect("=")
-6194 IF ct%=129 THEN PROCstrassign(ci%):ENDPROC
+6194 IF t%=129 THEN PROCstrassign(i%):ENDPROC
 6200 REM ASSIGN creates a missing destination before the RHS is evaluated.
-6210 PROCbytes("3E01"):PROCaddr("32","$bind"+STR$(ci%))
-6220 cndepth%=0:PROCexpr(1):PROCneednumber
-6230 IF ct%<>5 THEN PROCnumindices(0,0):PROCnumcall(38)
-6240 PROCvarcopy("$v0","$var"+STR$(ci%),ct%):cndepth%=0
+6210 PROCbytes("3E01"):PROCaddr("32","$bind"+STR$(i%))
+6220 ndepth%=0:PROCexpr(1):PROCneednumber
+6230 PROCusecompact:PROCaddr("CD","$cpstore"+STR$(t%))
+6240 PROCaddr("","$var"+STR$(i%)):ndepth%=0
 6250 ENDPROC
-6260 DEF PROCvariable(cn$)
-6270 LOCAL ci%:ci%=FNvariable(cn$)
-6280 IF cvtype%(ci%)>255 THEN PROCarrayread(ci%):ENDPROC
-6290 PROCreadscalar(ci%):PROCmemtail
+6260 DEF PROCvariable(n$)
+6270 LOCAL i%:i%=FNvariable(n$)
+6280 IF vtype%(i%)>255 THEN PROCarrayread(i%):ENDPROC
+6290 PROCreadscalar(i%):PROCmemtail
 6330 ENDPROC
-6340 DEF PROCvarcopy(cf$,ct$,cn%)
-6350 PROCaddr("21",cf$):PROCaddr("11",ct$)
-6360 PROCbyte(&01):PROCbyte(cn%):PROCbytes("0000EDB0")
+6340 DEF PROCvarcopy(f$,t$,n%)
+6350 PROCaddr("21",f$):PROCaddr("11",t$)
+6360 PROCbyte(&01):PROCbyte(n%):PROCbytes("0000EDB0")
 6370 ENDPROC
 6380 DEF PROCvarruntime
-6390 LOCAL ci%,cj%
+6390 LOCAL i%,j%
 6400 PROClabel("$novar"):PROCerrorconstant(26,"No such variable")
-6410 FOR ci%=0 TO cvnum%-1
-6420 PROClabel("$bind"+STR$(ci%)):PROCbyte(ABS(cvstatic%(ci%)))
-6430 PROClabel("$var"+STR$(ci%)):FOR cj%=1 TO cvsize%(ci%):PROCbyte(0):NEXT
+6410 FOR i%=0 TO vnum%-1
+6420 PROClabel("$bind"+STR$(i%)):PROCbyte(ABS(vstatic%(i%)))
+6430 PROClabel("$var"+STR$(i%)):PROCzeros(vsize&(i%))
 6440 NEXT
 6450 ENDPROC
-6460 DEF PROCkeywords:LOCAL ci%
-6461 FOR ci%=0 TO 4:ckwords$(ci%)="~|":NEXT
-6462 ckwords$(0)="AND|ABS|ACS|ADVAL|ASC|ASN|ATN|BGET!|BPUT!|BY!|COLOUR|COLOR|CALL|CASE|CHAIN|CLEAR!|CLOSE!|CLG!|CLS!|COS|COUNT!|CIRCLE|DATA|DEG|DEF|DIV|DIM|DRAW|ENDPROC!|ENDWHILE!|ENDCASE!|ENDIF!|END!|ENVELOPE|ELSE|EVAL|ERL!|"
-6464 ckwords$(1)="ERROR|EOF!|EOR|ERR!|EXIT!|EXP|EXT!|ELLIPSE|FOR|FALSE!|FILL|FN|GOTO|GET|GOSUB|GCOL|HIMEM|INPUT|INSTR|IF|INKEY|INT|INSTALL|LINE|LOMEM|LOCAL|LEN|LET|LOG|LN|MODE|MOD|MOVE|MOUSE|NEXT|NOT|ON|OFF!|OF!|ORIGIN|OR|OPENIN|"
-6466 ckwords$(2)="OPENOUT|OPENUP|OSCLI|OTHERWISE|PRINT|PAGE|PTR|PI!|PLOT|POINT!|PROC|POS!|PUT|QUIT!|RETURN!|REPEAT|REPORT!|READ|REM|RUN!|RAD|RESTORE|RND!|RECTANGLE|STEP|SGN|SIN|SQR|SPC|SOUND|STOP!|SUM|SWAP|SYS|TAN|THEN|TIME|"
-6468 ckwords$(3)="TO|TRACE|TRUE!|UNTIL|USR|VDU|VAL|VPOS!|WHILE|WHEN|WAIT!|WIDTH|"
+6460 DEF PROCkeywords:LOCAL i%
+6461 FOR i%=0 TO 4:kwords$(i%)="~|":NEXT
+6462 kwords$(0)="AND|ABS|ACS|ADVAL|ASC|ASN|ATN|BGET!|BPUT!|BY!|COLOUR|COLOR|CALL|CASE|CHAIN|CLEAR!|CLOSE!|CLG!|CLS!|COS|COUNT!|CIRCLE|DATA|DEG|DEF|DIV|DIM|DRAW|ENDPROC!|ENDWHILE!|ENDCASE!|ENDIF!|END!|ENVELOPE|ELSE|EVAL|ERL!|"
+6464 kwords$(1)="ERROR|EOF!|EOR|ERR!|EXIT!|EXP|EXT!|ELLIPSE|FOR|FALSE!|FILL|FN|GOTO|GET|GOSUB|GCOL|HIMEM|INPUT|INSTR|IF|INKEY|INT|INSTALL|LINE|LOMEM|LOCAL|LEN|LET|LOG|LN|MODE|MOD|MOVE|MOUSE|NEXT|NOT|ON|OFF!|OF!|ORIGIN|OR|OPENIN|"
+6466 kwords$(2)="OPENOUT|OPENUP|OSCLI|OTHERWISE|PRINT|PAGE|PTR|PI!|PLOT|POINT!|PROC|POS!|PUT|QUIT!|RETURN!|REPEAT|REPORT!|READ|REM|RUN!|RAD|RESTORE|RND!|RECTANGLE|STEP|SGN|SIN|SQR|SPC|SOUND|STOP!|SUM|SWAP|SYS|TAN|THEN|TIME|"
+6468 kwords$(3)="TO|TRACE|TRUE!|UNTIL|USR|VDU|VAL|VPOS!|WHILE|WHEN|WAIT!|WIDTH|"
 6480 ENDPROC
-6500 DEF FNreserved(cn$)
-6510 LOCAL ck$,ci%,cj%,cw$,cb%,ck%,cf%
-6512 IF ASC(cn$)<65 OR ASC(cn$)>90 THEN =FALSE
-6514 cf%=FALSE
-6520 FOR ck%=0 TO 4
-6530 ck$=ckwords$(ck%):ci%=1
+6500 DEF FNreserved(n$)
+6510 LOCAL k$,i%,j%,w$,b%,k%,f%
+6512 IF ASC(n$)<65 OR ASC(n$)>90 THEN =FALSE
+6514 f%=FALSE
+6520 FOR k%=0 TO 4
+6530 k$=kwords$(k%):i%=1
 6540 REPEAT
-6550 cj%=INSTR(ck$,"|",ci%):cw$=MID$(ck$,ci%,cj%-ci%):cb%=(RIGHT$(cw$,1)="!")
-6560 IF cb% cw$=LEFT$(cw$,LEN(cw$)-1)
-6570 IF LEFT$(cn$,LEN(cw$))=cw$ AND (NOT cb% OR LEN(cn$)=LEN(cw$)) cf%=TRUE
-6580 ci%=cj%+1
-6590 UNTIL ci%>LEN(ck$)
+6550 j%=INSTR(k$,"|",i%):w$=MID$(k$,i%,j%-i%):b%=(RIGHT$(w$,1)="!")
+6560 IF b% w$=LEFT$(w$,LEN(w$)-1)
+6570 IF LEFT$(n$,LEN(w$))=w$ AND (NOT b% OR LEN(n$)=LEN(w$)) f%=TRUE
+6580 i%=j%+1
+6590 UNTIL i%>LEN(k$)
 6600 NEXT
-6610 =cf%
+6610 =f%
 7000 DEF PROCloadstrings
-7010 LOCAL ci%,cj%,cs$,ca%,cb%
-7020 RESTORE 30000:READ cssize%,csrelocs%,csliteral%,csload%,cscat%,csstore%,csprint%,csleft%,csright%,csmid%,cscmp%,csinstr%,csrepeat%,cswrite%,cscopy%
-7030 DIM csimage% cssize%-1,csreloc%(csrelocs%)
-7040 FOR ci%=0 TO cssize%-1 STEP 40
-7050 READ cs$
-7060 FOR cj%=1 TO LEN(cs$) STEP 2
-7070 ca%=INSTR("0123456789ABCDEF",MID$(cs$,cj%,1))-1:cb%=INSTR("0123456789ABCDEF",MID$(cs$,cj%+1,1))-1
-7080 csimage%?(ci%+(cj%-1) DIV 2)=ca%*16+cb%:NEXT:NEXT
-7090 IF csrelocs%>0 THEN FOR ci%=0 TO csrelocs%-1:READ csreloc%(ci%):NEXT
+7010 LOCAL i%,j%,s$,a%,b%
+7020 RESTORE 30000:READ ssize%,srelocs%,sliteral%,sload%,scat%,sstore%,sprint%,sleft%,sright%,smid%,scmp%,sinstr%,srepeat%,swrite%,scopy%
+7030 DIM simage% ssize%-1,sreloc%(srelocs%)
+7040 FOR i%=0 TO ssize%-1 STEP 40
+7050 READ s$
+7060 FOR j%=1 TO LEN(s$) STEP 2
+7070 a%=INSTR("0123456789ABCDEF",MID$(s$,j%,1))-1:b%=INSTR("0123456789ABCDEF",MID$(s$,j%+1,1))-1
+7080 simage%?(i%+(j%-1) DIV 2)=a%*16+b%:NEXT:NEXT
+7090 IF srelocs%>0 THEN FOR i%=0 TO srelocs%-1:READ sreloc%(i%):NEXT
 7100 ENDPROC
 7110 DEF FNstringstart
-7120 LOCAL cp%,cc$
-7130 cp%=cpos%
-7140 WHILE MID$(cline$,cp%,1)=" " OR MID$(cline$,cp%,1)=CHR$(9) OR MID$(cline$,cp%,1)="(":cp%=cp%+1:ENDWHILE
-7150 cc$=MID$(cline$,cp%,1)
-7155 IF MID$(cline$,cp%,2)="FN" THEN =FNfnstring(cp%)
-7160 IF cc$=CHR$(34) OR MID$(cline$,cp%,4)="CHR$" THEN =TRUE
-7170 WHILE FNalpha(MID$(cline$,cp%,1)) OR FNdigit(MID$(cline$,cp%,1)):cp%=cp%+1:ENDWHILE
-7180 =(MID$(cline$,cp%,1)="$")
+7120 LOCAL p%,c$
+7130 p%=pos%
+7140 WHILE MID$(line$,p%,1)=" " OR MID$(line$,p%,1)=CHR$(9) OR MID$(line$,p%,1)="(":p%=p%+1:ENDWHILE
+7150 c$=MID$(line$,p%,1)
+7155 IF MID$(line$,p%,2)="FN" THEN =FNfnstring(p%)
+7160 IF c$=CHR$(34) OR MID$(line$,p%,4)="CHR$" THEN =TRUE
+7170 WHILE FNalpha(MID$(line$,p%,1)) OR FNdigit(MID$(line$,p%,1)):p%=p%+1:ENDWHILE
+7180 =(MID$(line$,p%,1)="$")
 7190 DEF PROCprintstring
-7200 LOCAL cp%,cs$
-7210 cp%=cpos%
+7200 LOCAL p%,s$
+7210 p%=pos%
 7220 IF FNpeek<>CHR$(34) THEN PROCprintnumber:ENDPROC
-7230 cs$=FNstring:PROCspace
-7240 IF FNstmtend OR FNpeek=";" THEN PROCtext(cs$):ENDPROC
-7250 cpos%=cp%:PROCprintnumber
+7230 s$=FNstring:PROCspace
+7240 IF FNstmtend OR FNpeek=";" THEN PROCtext(s$):ENDPROC
+7250 pos%=p%:PROCprintnumber
 7260 ENDPROC
 7270 DEF PROCprintstrvalue
-7280 PROCaddr("DD21","$s"+STR$(csdepth%-1)):PROCaddr("CD","$strprint"):csdepth%=csdepth%-1
+7280 PROCaddr("DD21","$s"+STR$(sdepth%-1)):PROCaddr("CD","$strprint"):sdepth%=sdepth%-1
 7290 ENDPROC
 7300 DEF PROCstrslot
-7310 IF csdepth%=16 PROCbad("String temporary limit exceeds 16")
-7320 csdepth%=csdepth%+1:cstrings%=TRUE
-7322 IF csdepth%>csslots% csslots%=csdepth%
-7324 csunsafe%(csdepth%-1)=FALSE
+7310 IF sdepth%=16 PROCbad("String temporary limit exceeds 16")
+7320 sdepth%=sdepth%+1:strings%=TRUE
+7322 IF sdepth%>sslots% sslots%=sdepth%
+7324 sunsafe%(sdepth%-1)=FALSE
 7330 ENDPROC
 7340 DEF PROCstrexpr
-7350 PROCexpr(1):IF cvaluekind%<>1 PROCbad("Expected a string item")
+7350 PROCexpr(1):IF valuekind%<>1 PROCbad("Expected a string item")
 7410 ENDPROC
 7420 DEF PROCstritem
-7430 PROCitem:IF cvaluekind%<>1 PROCbad("Expected a string item")
+7430 PROCitem:IF valuekind%<>1 PROCbad("Expected a string item")
 7440 ENDPROC
 7460 DEF PROCstratom
-7470 LOCAL cs$,ci%,cj%
-7480 IF FNpeek="(" THEN cpos%=cpos%+1:PROCstrexpr:PROCexpect(")"):ENDPROC
-7490 IF MID$(cline$,cpos%,4)="CHR$" THEN cpos%=cpos%+4:PROCstrchr:ENDPROC
-7491 IF MID$(cline$,cpos%,4)="STR$" THEN cpos%=cpos%+4:PROCstrnum:ENDPROC
-7492 IF MID$(cline$,cpos%,5)="LEFT$" THEN cpos%=cpos%+5:PROCslice(0):ENDPROC
-7494 IF MID$(cline$,cpos%,6)="RIGHT$" THEN cpos%=cpos%+6:PROCslice(1):ENDPROC
-7496 IF MID$(cline$,cpos%,4)="MID$" THEN cpos%=cpos%+4:PROCslice(2):ENDPROC
-7498 IF MID$(cline$,cpos%,7)="STRING$" THEN cpos%=cpos%+7:PROCstrrepeat:ENDPROC
+7470 LOCAL s$,i%,j%
+7480 IF FNpeek="(" THEN pos%=pos%+1:PROCstrexpr:PROCexpect(")"):ENDPROC
+7490 IF MID$(line$,pos%,4)="CHR$" THEN pos%=pos%+4:PROCstrchr:ENDPROC
+7491 IF MID$(line$,pos%,4)="STR$" THEN pos%=pos%+4:PROCstrnum:ENDPROC
+7492 IF MID$(line$,pos%,5)="LEFT$" THEN pos%=pos%+5:PROCslice(0):ENDPROC
+7494 IF MID$(line$,pos%,6)="RIGHT$" THEN pos%=pos%+6:PROCslice(1):ENDPROC
+7496 IF MID$(line$,pos%,4)="MID$" THEN pos%=pos%+4:PROCslice(2):ENDPROC
+7498 IF MID$(line$,pos%,7)="STRING$" THEN pos%=pos%+7:PROCstrrepeat:ENDPROC
 7500 IF FNpeek=CHR$(34) THEN PROCstrliteral:ENDPROC
 7510 IF NOT FNalpha(FNpeek) PROCbad("Expected a string item")
-7520 cs$=FNname:IF FNreserved(cs$) PROCbad("Unsupported string item "+cs$)
-7530 ci%=FNvariable(cs$)
-7532 IF cvtype%(ci%)>255 THEN PROCarrayread(ci%):ENDPROC
-7534 IF cvtype%(ci%)<>129 PROCbad("Expected a string variable")
-7540 PROCaddr("3A","$bind"+STR$(ci%)):PROCbyte(&B7):PROCaddr("CA","$novar")
-7550 PROCstrslot:PROCaddr("DD21","$s"+STR$(csdepth%-1)):PROCaddr("FD21","$var"+STR$(ci%)):PROCaddr("CD","$strload")
+7520 s$=FNname:IF FNreserved(s$) PROCbad("Unsupported string item "+s$)
+7530 i%=FNvariable(s$)
+7532 IF vtype%(i%)>255 THEN PROCarrayread(i%):ENDPROC
+7534 IF vtype%(i%)<>129 PROCbad("Expected a string variable")
+7540 PROCaddr("3A","$bind"+STR$(i%)):PROCbyte(&B7):PROCaddr("CA","$novar")
+7550 PROCstrslot:PROCaddr("DD21","$s"+STR$(sdepth%-1)):PROCaddr("FD21","$var"+STR$(i%)):PROCaddr("CD","$strload")
 7560 ENDPROC
 7570 DEF PROCstrliteral
-7580 LOCAL cs$,ci%
-7590 cs$=FNstring:PROCstrslot:PROCaddr("DD21","$s"+STR$(csdepth%-1)):PROCaddr("CD","$strlit")
-7600 PROCbyte(LEN(cs$)):IF cs$<>"" THEN FOR ci%=1 TO LEN(cs$):PROCbyte(ASC(MID$(cs$,ci%,1))):NEXT
+7580 LOCAL s$,i%
+7590 s$=FNstring:PROCstrslot:PROCaddr("DD21","$s"+STR$(sdepth%-1)):PROCaddr("CD","$strlit")
+7600 PROCbyte(LEN(s$)):PROCstringbytes(s$)
 7610 ENDPROC
 7620 DEF PROCstrchr
-7630 PROCitem:PROCneednumber:PROCnumindices(cndepth%-1,cndepth%-1):PROCnumcall(38):PROCstrslot
-7640 PROCaddr("21","$s"+STR$(csdepth%-1)):PROCbytes("360123")
-7650 PROCaddr("3A","$v"+STR$(cndepth%-1)):PROCbyte(&77):cndepth%=cndepth%-1
+7630 PROCitem:PROCneednumber:PROCnumoperation(ndepth%-1,ndepth%-1,38):PROCstrslot
+7640 PROCaddr("21","$s"+STR$(sdepth%-1)):PROCbytes("360123")
+7650 PROCaddr("3A","$v"+STR$(ndepth%-1)):PROCbyte(&77):ndepth%=ndepth%-1
 7660 ENDPROC
 7670 DEF PROCstrlen
 7680 PROCstritem:PROCvalue(0)
-7690 PROCaddr("3A","$s"+STR$(csdepth%-1)):PROCaddr("32","$v"+STR$(cndepth%-1)):csdepth%=csdepth%-1
+7690 PROCaddr("3A","$s"+STR$(sdepth%-1)):PROCaddr("32","$v"+STR$(ndepth%-1)):sdepth%=sdepth%-1
 7700 ENDPROC
-7710 DEF PROCstrassign(ci%)
-7720 PROCbytes("3E01"):PROCaddr("32","$bind"+STR$(ci%)):PROCstrexpr
-7730 PROCaddr("DD21","$var"+STR$(ci%)):PROCaddr("FD21","$s"+STR$(csdepth%-1)):PROCaddr("21","$sheapctx")
-7740 PROCaddr("CD","$strstore"):PROCaddr("DA","$strerror"):csdepth%=csdepth%-1
+7710 DEF PROCstrassign(i%)
+7720 PROCbytes("3E01"):PROCaddr("32","$bind"+STR$(i%)):PROCstrexpr
+7730 PROCaddr("DD21","$var"+STR$(i%)):PROCaddr("FD21","$s"+STR$(sdepth%-1)):PROCaddr("21","$sheapctx")
+7740 PROCaddr("CD","$strstore"):PROCaddr("DA","$strerror"):sdepth%=sdepth%-1
 7750 ENDPROC
 7760 DEF PROCstrruntime
-7770 LOCAL ci%,cj%,cp%,cv%,cbase%
-7780 cbase%=cpc%
-7790 FOR ci%=0 TO cssize%-1:PROCbyte(csimage%?ci%):NEXT
-7800 IF csrelocs%>0 THEN FOR ci%=0 TO csrelocs%-1:PROCstrrelocate(cbase%,ci%):NEXT
-7810 PROClabel("$strlit"):csaddr%(csnum%-1)=&40000+cbase%+csliteral%
-7820 PROClabel("$strload"):csaddr%(csnum%-1)=&40000+cbase%+csload%
-7830 PROClabel("$strcat"):csaddr%(csnum%-1)=&40000+cbase%+cscat%
-7840 PROClabel("$strstore"):csaddr%(csnum%-1)=&40000+cbase%+csstore%
-7850 PROClabel("$strprint"):csaddr%(csnum%-1)=&40000+cbase%+csprint%
-7852 PROClabel("$strleft"):csaddr%(csnum%-1)=&40000+cbase%+csleft%
-7854 PROClabel("$strright"):csaddr%(csnum%-1)=&40000+cbase%+csright%
-7856 PROClabel("$strmid"):csaddr%(csnum%-1)=&40000+cbase%+csmid%
-7858 PROClabel("$strcmp"):csaddr%(csnum%-1)=&40000+cbase%+cscmp%
-7859 PROClabel("$strinstr"):csaddr%(csnum%-1)=&40000+cbase%+csinstr%
-7860 PROClabel("$strrepeat"):csaddr%(csnum%-1)=&40000+cbase%+csrepeat%
-7861 PROClabel("$strwrite"):csaddr%(csnum%-1)=&40000+cbase%+cswrite%
+7770 LOCAL i%,j%,p%,v%,base%
+7780 base%=pc%:PROCtemplate(simage%,ssize%,srelocs%,1)
+7810 PROCdefine("$strlit",&40000+base%+sliteral%)
+7820 PROCdefine("$strload",&40000+base%+sload%)
+7830 PROCdefine("$strcat",&40000+base%+scat%)
+7840 PROCdefine("$strstore",&40000+base%+sstore%)
+7850 PROCdefine("$strprint",&40000+base%+sprint%)
+7852 PROCdefine("$strleft",&40000+base%+sleft%)
+7854 PROCdefine("$strright",&40000+base%+sright%)
+7856 PROCdefine("$strmid",&40000+base%+smid%)
+7858 PROCdefine("$strcmp",&40000+base%+scmp%)
+7859 PROCdefine("$strinstr",&40000+base%+sinstr%)
+7860 PROCdefine("$strrepeat",&40000+base%+srepeat%)
+7861 PROCdefine("$strwrite",&40000+base%+swrite%)
 7862 PROClabel("$strerror"):PROCbytes("FE13"):PROCaddr("CA","$strlong")
-7863 PROClabel("$strcopy"):csaddr%(csnum%-1)=&40000+cbase%+cscopy%
+7863 PROCdefine("$strcopy",&40000+base%+scopy%)
 7870 PROCerrorconstant(0,"No room")
 7880 PROClabel("$strlong"):PROCerrorconstant(19,"String too long")
-7890 FOR ci%=0 TO csslots%-1
-7900 PROClabel("$s"+STR$(ci%)):FOR cj%=0 TO 255:PROCbyte(0):NEXT
+7890 FOR i%=0 TO sslots%-1
+7900 PROClabel("$s"+STR$(i%)):PROCzeros(256)
 7910 NEXT
-7920 IF NOT cmemory% THEN PROClabel("$sheapctx"):PROCaddr("","$sheap"):PROCaddr("","$sheapend")
-7930 IF NOT cmemory% THEN PROClabel("$sheap"):PROClabel("$sheapend"):csaddr%(csnum%-1)=csaddr%(csnum%-1)+1024*csvars%
-7940 IF NOT cmemory% AND csaddr%(csnum%-1)>&B0000 PROCbad("String workspace exceeds user RAM")
+7920 IF NOT memory% THEN PROClabel("$sheapctx"):PROCaddr("","$sheap"):PROCaddr("","$sheapend")
+7930 IF NOT memory% THEN PROClabel("$sheap"):PROCdefine("$sheapend",&40000+pc%+1024*svars%)
+7940 IF NOT memory% AND &40000+pc%+1024*svars%>&B0000 PROCbad("String workspace exceeds user RAM")
 7950 ENDPROC
-7960 DEF PROCstrrelocate(cb%,ci%)
-7970 LOCAL cp%,cv%
-7980 cp%=cb%+csreloc%(ci%):cv%=ccode%?cp%+256*ccode%?(cp%+1)+65536*ccode%?(cp%+2)
-7990 PROCpatch(cp%,cv%+&40000+cb%)
-8000 ENDPROC
-8010 DEF FNstrreserved(cn$)
-8020 =(INSTR("|CHR|STR|STRING|LEFT|RIGHT|MID|GET|INKEY|","|"+cn$+"|")>0)
+8010 DEF FNstrreserved(n$)
+8020 =(INSTR("|CHR|STR|STRING|LEFT|RIGHT|MID|GET|INKEY|","|"+n$+"|")>0)
 8100 DEF PROCneednumber
-8110 IF cvaluekind%<>0 PROCbad("String value used as a numeric item")
+8110 IF valuekind%<>0 PROCbad("String value used as a numeric item")
 8120 ENDPROC
 8130 DEF PROCtypedbinary
-8140 IF ctype%<>cvaluekind% PROCbad("Numeric/string type mismatch")
-8150 IF ctype%=0 THEN PROCbinary(co%):ENDPROC
-8160 IF cp%=3 THEN PROCstrcompare(co%):ENDPROC
-8170 IF co%<>11 PROCbad("Only concatenation and comparisons support strings")
-8180 PROCaddr("DD21","$s"+STR$(csdepth%-2)):PROCaddr("FD21","$s"+STR$(csdepth%-1))
-8190 PROCaddr("CD","$strcat"):PROCaddr("DA","$strerror"):csdepth%=csdepth%-1:cvaluekind%=1
-8195 csunsafe%(csdepth%-1)=FALSE
+8140 IF type%<>valuekind% PROCbad("Numeric/string type mismatch")
+8150 IF type%=0 THEN PROCbinary(o%):ENDPROC
+8160 IF p%=3 THEN PROCstrcompare(o%):ENDPROC
+8170 IF o%<>11 PROCbad("Only concatenation and comparisons support strings")
+8180 PROCaddr("DD21","$s"+STR$(sdepth%-2)):PROCaddr("FD21","$s"+STR$(sdepth%-1))
+8190 PROCaddr("CD","$strcat"):PROCaddr("DA","$strerror"):sdepth%=sdepth%-1:valuekind%=1
+8195 sunsafe%(sdepth%-1)=FALSE
 8200 ENDPROC
-8210 DEF PROCstrcompare(co%)
-8220 LOCAL cc%,cj%
-8230 PROCvalue(0):PROCaddr("DD21","$s"+STR$(csdepth%-2)):PROCaddr("FD21","$s"+STR$(csdepth%-1))
-8240 PROCaddr("CD","$strcmp"):cc%=0:cj%=&28
-8250 IF co%=6 cj%=&20
-8260 IF co%=8 OR co%=7 cc%=255
-8270 IF co%=12 OR co%=5 cc%=1
-8280 IF co%=5 OR co%=7 cj%=&20
-8290 PROCbyte(&FE):PROCbyte(cc%):PROCbyte(cj%):PROCbytes("03AF18023EFF")
-8300 PROCaddr("21","$v"+STR$(cndepth%-1)):PROCbytes("77237723772377")
-8310 csdepth%=csdepth%-2:cvaluekind%=0:ENDPROC
-8320 DEF PROCslice(ct%)
-8330 LOCAL ci%,cr$
-8340 PROCexpect("("):PROCstrexpr:ci%=csdepth%-1:PROCspace
-8350 IF ct%=2 THEN PROCexpect(","):PROCcount:PROCaddr("DD21","$s"+STR$(ci%)):PROCaddr("CD","$strmid"):PROCspace:csunsafe%(ci%)=FALSE
-8360 IF FNpeek="," THEN cpos%=cpos%+1:PROCcount:PROCslicecount(ct%,ci%):PROCexpect(")"):csunsafe%(ci%)=FALSE:ENDPROC
-8370 PROCexpect(")"):PROCaddr("DD21","$s"+STR$(ci%))
-8375 IF ct%=1 AND csunsafe%(ci%) PROCbad("Omitted RIGHT$ on a FN string result is unqualified; use an explicit count")
-8380 IF ct%=0 PROCbytes("DD7E00B728043DDD7700")
-8390 IF ct%=1 THEN PROCbytes("3E01"):PROCaddr("CD","$strright")
+8210 DEF PROCstrcompare(o%)
+8220 LOCAL c%,j%
+8230 PROCvalue(0):PROCaddr("DD21","$s"+STR$(sdepth%-2)):PROCaddr("FD21","$s"+STR$(sdepth%-1))
+8240 PROCaddr("CD","$strcmp"):c%=0:j%=&28
+8250 IF o%=6 j%=&20
+8260 IF o%=8 OR o%=7 c%=255
+8270 IF o%=12 OR o%=5 c%=1
+8280 IF o%=5 OR o%=7 j%=&20
+8290 PROCbyte(&FE):PROCbyte(c%):PROCbyte(j%):PROCbytes("03AF18023EFF")
+8300 PROCaddr("21","$v"+STR$(ndepth%-1)):PROCbytes("77237723772377")
+8310 sdepth%=sdepth%-2:valuekind%=0:ENDPROC
+8320 DEF PROCslice(t%)
+8330 LOCAL i%,r$
+8340 PROCexpect("("):PROCstrexpr:i%=sdepth%-1:PROCspace
+8350 IF t%=2 THEN PROCexpect(","):PROCcount:PROCaddr("DD21","$s"+STR$(i%)):PROCaddr("CD","$strmid"):PROCspace:sunsafe%(i%)=FALSE
+8360 IF FNpeek="," THEN pos%=pos%+1:PROCcount:PROCslicecount(t%,i%):PROCexpect(")"):sunsafe%(i%)=FALSE:ENDPROC
+8370 PROCexpect(")"):PROCaddr("DD21","$s"+STR$(i%))
+8375 IF t%=1 AND sunsafe%(i%) PROCbad("Omitted RIGHT$ on a FN string result is unqualified; use an explicit count")
+8380 IF t%=0 PROCbytes("DD7E00B728043DDD7700")
+8390 IF t%=1 THEN PROCbytes("3E01"):PROCaddr("CD","$strright")
 8400 ENDPROC
 8410 DEF PROCcount
-8420 PROCexpr(1):PROCneednumber:PROCnumindices(cndepth%-1,cndepth%-1):PROCnumcall(38)
-8430 PROCaddr("3A","$v"+STR$(cndepth%-1)):cndepth%=cndepth%-1:ENDPROC
-8440 DEF PROCslicecount(ct%,ci%)
-8450 LOCAL cr$:cr$="$strleft":IF ct%=1 cr$="$strright"
-8460 PROCaddr("DD21","$s"+STR$(ci%)):PROCaddr("CD",cr$):ENDPROC
+8420 PROCexpr(1):PROCneednumber:PROCnumoperation(ndepth%-1,ndepth%-1,38)
+8430 PROCaddr("3A","$v"+STR$(ndepth%-1)):ndepth%=ndepth%-1:ENDPROC
+8440 DEF PROCslicecount(t%,i%)
+8450 LOCAL r$:r$="$strleft":IF t%=1 r$="$strright"
+8460 PROCaddr("DD21","$s"+STR$(i%)):PROCaddr("CD",r$):ENDPROC
 8470 DEF PROCtypeditem
-8480 IF FNstringstart THEN PROCstratom:cvaluekind%=1:ENDPROC
+8480 IF FNstringstart THEN PROCstratom:valuekind%=1:ENDPROC
 8490 PROCworditem:ENDPROC
 8500 DEF PROCstrval
 8510 PROCstritem:PROCvalue(0)
-8520 PROCaddr("DD21","$v"+STR$(cndepth%-1)):PROCaddr("FD21","$s"+STR$(csdepth%-1))
-8530 PROCaddr("CD","$numval"):PROCaddr("DA","$numerror"):csdepth%=csdepth%-1:cvaluekind%=0:ENDPROC
+8520 PROCaddr("DD21","$v"+STR$(ndepth%-1)):PROCaddr("FD21","$s"+STR$(sdepth%-1))
+8530 PROCaddr("CD","$numval"):PROCaddr("DA","$numerror"):sdepth%=sdepth%-1:valuekind%=0:ENDPROC
 8540 DEF PROCstrnum
-8550 LOCAL cr$:cr$="$numstr":PROCspace
-8560 IF FNpeek="~" THEN cpos%=cpos%+1:cr$="$numhex"
+8550 LOCAL r$:r$="$numstr":PROCspace
+8560 IF FNpeek="~" THEN pos%=pos%+1:r$="$numhex"
 8570 PROCitem:PROCneednumber:PROCstrslot
-8580 PROCaddr("DD21","$v"+STR$(cndepth%-1)):PROCaddr("FD21","$s"+STR$(csdepth%-1))
-8590 PROCaddr("CD",cr$):PROCaddr("DA","$numerror"):cndepth%=cndepth%-1:ENDPROC
+8580 PROCaddr("DD21","$v"+STR$(ndepth%-1)):PROCaddr("FD21","$s"+STR$(sdepth%-1))
+8590 PROCaddr("CD",r$):PROCaddr("DA","$numerror"):ndepth%=ndepth%-1:ENDPROC
 8600 DEF PROCstrasc
 8610 PROCstritem:PROCvalue(-1)
-8620 PROCaddr("DD21","$s"+STR$(csdepth%-1)):PROCbytes("DD7E00B7280FDD7E01")
-8630 PROCaddr("21","$v"+STR$(cndepth%-1)):PROCbytes("7723AF7723772377")
-8640 csdepth%=csdepth%-1:cvaluekind%=0:ENDPROC
+8620 PROCaddr("DD21","$s"+STR$(sdepth%-1)):PROCbytes("DD7E00B7280FDD7E01")
+8630 PROCaddr("21","$v"+STR$(ndepth%-1)):PROCbytes("7723AF7723772377")
+8640 sdepth%=sdepth%-1:valuekind%=0:ENDPROC
 8700 DEF PROCstrinstr
-8710 LOCAL cm%,cn%,cv%
-8720 PROCexpect("("):PROCstrexpr:cm%=csdepth%-1:PROCexpect(","):PROCstrexpr:cn%=csdepth%-1
-8730 PROCvalue(0):cv%=cndepth%-1:PROCsearchstart:PROCexpect(")")
-8740 PROCaddr("DD21","$s"+STR$(cm%)):PROCaddr("FD21","$s"+STR$(cn%)):PROCaddr("CD","$strinstr")
-8750 PROCaddr("32","$v"+STR$(cv%)):csdepth%=csdepth%-2:cvaluekind%=0:ENDPROC
+8710 LOCAL m%,n%,v%
+8720 PROCexpect("("):PROCstrexpr:m%=sdepth%-1:PROCexpect(","):PROCstrexpr:n%=sdepth%-1
+8730 PROCvalue(0):v%=ndepth%-1:PROCsearchstart:PROCexpect(")")
+8740 PROCaddr("DD21","$s"+STR$(m%)):PROCaddr("FD21","$s"+STR$(n%)):PROCaddr("CD","$strinstr")
+8750 PROCaddr("32","$v"+STR$(v%)):sdepth%=sdepth%-2:valuekind%=0:ENDPROC
 8760 DEF PROCsearchstart
 8770 PROCspace:IF FNpeek<>"," THEN PROCbytes("3E01"):ENDPROC
-8780 cpos%=cpos%+1:PROCcount:ENDPROC
+8780 pos%=pos%+1:PROCcount:ENDPROC
 8790 DEF PROCstrrepeat
 8800 PROCexpect("("):PROCcount:PROCbyte(&F5):PROCexpect(","):PROCstrexpr:PROCexpect(")")
-8805 IF csunsafe%(csdepth%-1) PROCbad("STRING$ on a FN string result is unqualified; establish a string value first")
-8810 PROCbyte(&F1):PROCaddr("DD21","$s"+STR$(csdepth%-1)):PROCaddr("CD","$strrepeat"):PROCaddr("DA","$strerror"):ENDPROC
-8900 DEF PROCstrsliceassign(ct$)
-8910 LOCAL cn$,ci%
-8920 PROCexpect("("):cn$=FNname:ci%=FNvariable(cn$)
-8922 IF cvtype%(ci%)>255 PROCbad("Array slice assignment is unsupported")
-8930 IF cvtype%(ci%)<>129 PROCbad("Expected a string variable")
-8940 PROCaddr("3A","$bind"+STR$(ci%)):PROCbyte(&B7):PROCaddr("CA","$novar")
-8950 cndepth%=0:csdepth%=0
-8960 IF ct$="MID" THEN PROCexpect(","):PROCcount:PROCbytes("3D2100FE006F")
-8970 IF ct$="LEFT" PROCbytes("2100FF00")
-8980 IF ct$="RIGHT" PROCbytes("21FFFF00")
+8805 IF sunsafe%(sdepth%-1) PROCbad("STRING$ on a FN string result is unqualified; establish a string value first")
+8810 PROCbyte(&F1):PROCaddr("DD21","$s"+STR$(sdepth%-1)):PROCaddr("CD","$strrepeat"):PROCaddr("DA","$strerror"):ENDPROC
+8900 DEF PROCstrsliceassign(t$)
+8910 LOCAL n$,i%
+8920 PROCexpect("("):n$=FNname:i%=FNvariable(n$)
+8922 IF vtype%(i%)>255 PROCbad("Array slice assignment is unsupported")
+8930 IF vtype%(i%)<>129 PROCbad("Expected a string variable")
+8940 PROCaddr("3A","$bind"+STR$(i%)):PROCbyte(&B7):PROCaddr("CA","$novar")
+8950 ndepth%=0:sdepth%=0
+8960 IF t$="MID" THEN PROCexpect(","):PROCcount:PROCbytes("3D2100FE006F")
+8970 IF t$="LEFT" PROCbytes("2100FF00")
+8980 IF t$="RIGHT" PROCbytes("21FFFF00")
 8990 PROCspace:IF FNpeek="," PROCwriterange
 9000 PROCexpect(")"):PROCexpect("="):PROCbyte(&E5):PROCstrexpr:PROCbyte(&E1)
-9010 PROCaddr("DD21","$var"+STR$(ci%)):PROCaddr("FD21","$s"+STR$(csdepth%-1)):PROCaddr("CD","$strwrite")
-9020 csdepth%=csdepth%-1:ENDPROC
+9010 PROCaddr("DD21","$var"+STR$(i%)):PROCaddr("FD21","$s"+STR$(sdepth%-1)):PROCaddr("CD","$strwrite")
+9020 sdepth%=sdepth%-1:ENDPROC
 9030 DEF PROCwriterange
-9040 cpos%=cpos%+1:PROCbyte(&E5):PROCcount:PROCbyte(&E1)
+9040 pos%=pos%+1:PROCbyte(&E5):PROCcount:PROCbyte(&E1)
 9050 PROCbytes("B7280D3D8567300C7D3C280826FE180421010000"):ENDPROC
-9100 DEF FNword(cw$)
-9110 =MID$(cline$,cpos%,LEN(cw$))=cw$ AND NOT FNalpha(MID$(cline$,cpos%+LEN(cw$),1)) AND NOT FNdigit(MID$(cline$,cpos%+LEN(cw$),1))
+9100 DEF FNword(w$)
+9110 =MID$(line$,pos%,LEN(w$))=w$ AND NOT FNalpha(MID$(line$,pos%+LEN(w$),1)) AND NOT FNdigit(MID$(line$,pos%+LEN(w$),1))
 9120 DEF FNstmtend
 9130 =(FNpeek="" OR FNpeek=":" OR FNword("ELSE"))
 9140 DEF FNflow
-9150 cflow%=cflow%+1:="$if"+STR$(cflow%)
+9150 flow%=flow%+1:="$if"+STR$(flow%)
 9160 DEF PROCcondition
-9170 cndepth%=0:csdepth%=0:PROCexpr(1):PROCneednumber:PROCnumindices(0,0):PROCnumcall(38)
-9180 PROCbytes("DD7E00DDB601DDB602DDB603"):cndepth%=0
+9170 ndepth%=0:sdepth%=0:PROCexpr(1):PROCneednumber:PROCnumoperation(0,0,38)
+9180 PROCbytes("DD7E00DDB601DDB602DDB603"):ndepth%=0
 9190 ENDPROC
 9200 DEF PROCif
-9210 LOCAL cid$,cthen%
-9220 PROCcondition:cid$=FNflow:PROCspace:cthen%=FNword("THEN")
-9230 IF cthen% THEN cpos%=cpos%+4:PROCspace
-9240 IF cthen% AND FNpeek="" THEN PROCifblock(cid$):ENDPROC
-9250 IF cinum%=32 PROCbad("Inline IF nesting exceeds 32")
-9260 cifid$(cinum%)=cid$:cinum%=cinum%+1:cinseen%=TRUE
-9270 PROCaddr("CA",cid$):ccont%=TRUE
-9280 IF cthen% AND FNdigit(FNpeek) PROCbranch("GOTO"):ccont%=FALSE
+9210 LOCAL id$,then%
+9220 PROCcondition:id$=FNflow:PROCspace:then%=FNword("THEN")
+9230 IF then% THEN pos%=pos%+4:PROCspace
+9240 IF then% AND FNpeek="" THEN PROCifblock(id$):ENDPROC
+9250 IF inum%=32 PROCbad("Inline IF nesting exceeds 32")
+9260 ifid$(inum%)=id$:inum%=inum%+1:inseen%=TRUE
+9270 PROCaddr("CA",id$):cont%=TRUE
+9280 IF then% AND FNdigit(FNpeek) PROCbranch("GOTO"):cont%=FALSE
 9290 ENDPROC
-9300 DEF PROCifblock(cid$)
-9310 IF cinum%<>0 PROCbad("Multiline IF inside inline IF is unsupported")
-9320 IF LEN(cstructure$)=32 PROCbad("Block nesting exceeds 32")
-9325 cstructure$=cstructure$+"I"
-9330 cbid$(cbnum%)=cid$:cbelse%(cbnum%)=FALSE:cbnum%=cbnum%+1:PROCaddr("CA",cid$)
+9300 DEF PROCifblock(id$)
+9310 IF inum%<>0 PROCbad("Multiline IF inside inline IF is unsupported")
+9320 IF LEN(structure$)=32 PROCbad("Block nesting exceeds 32")
+9325 structure$=structure$+"I"
+9330 bid$(bnum%)=id$:belse%(bnum%)=FALSE:bnum%=bnum%+1:PROCaddr("CA",id$)
 9340 ENDPROC
 9350 DEF PROCiffalse
-9360 WHILE cinum%>0:cinum%=cinum%-1:PROClabel(cifid$(cinum%)):ENDWHILE
+9360 WHILE inum%>0:inum%=inum%-1:PROClabel(ifid$(inum%)):ENDWHILE
 9370 ENDPROC
 9380 DEF PROCelse
-9390 IF NOT cfirst% THEN PROCinlineelse:ENDPROC
-9400 IF cbnum%=0 PROCbad("ELSE without multiline IF")
-9405 IF RIGHT$(cstructure$,1)<>"I" PROCbad("ELSE crosses a loop boundary")
-9410 IF cbelse%(cbnum%-1) PROCbad("Duplicate multiline ELSE")
-9420 PROCaddr("C3",cbid$(cbnum%-1)+"e"):PROClabel(cbid$(cbnum%-1)):cbelse%(cbnum%-1)=TRUE:ccont%=TRUE
+9390 IF NOT first% THEN PROCinlineelse:ENDPROC
+9400 IF bnum%=0 PROCbad("ELSE without multiline IF")
+9405 IF RIGHT$(structure$,1)<>"I" PROCbad("ELSE crosses a loop boundary")
+9410 IF belse%(bnum%-1) PROCbad("Duplicate multiline ELSE")
+9420 PROCaddr("C3",bid$(bnum%-1)+"e"):PROClabel(bid$(bnum%-1)):belse%(bnum%-1)=TRUE:cont%=TRUE
 9430 ENDPROC
 9440 DEF PROCinlineelse
-9450 IF NOT cinseen% PROCbad("ELSE without inline IF")
-9460 IF cleid$="" cleid$=FNflow
-9470 PROCaddr("C3",cleid$):PROCiffalse:ccont%=TRUE:PROCspace
-9475 IF FNdigit(FNpeek) PROCbranch("GOTO"):ccont%=FALSE
+9450 IF NOT inseen% PROCbad("ELSE without inline IF")
+9460 IF leid$="" leid$=FNflow
+9470 PROCaddr("C3",leid$):PROCiffalse:cont%=TRUE:PROCspace
+9475 IF FNdigit(FNpeek) PROCbranch("GOTO"):cont%=FALSE
 9480 ENDPROC
 9490 DEF PROCendif
-9500 IF NOT cfirst% PROCbad("ENDIF must begin a statement line")
-9510 IF cbnum%=0 PROCbad("ENDIF without multiline IF")
-9515 IF RIGHT$(cstructure$,1)<>"I" PROCbad("ENDIF crosses a loop boundary")
-9520 cbnum%=cbnum%-1:IF cbelse%(cbnum%) THEN PROClabel(cbid$(cbnum%)+"e") ELSE PROClabel(cbid$(cbnum%))
-9525 cstructure$=LEFT$(cstructure$,LEN(cstructure$)-1)
+9500 IF NOT first% PROCbad("ENDIF must begin a statement line")
+9510 IF bnum%=0 PROCbad("ENDIF without multiline IF")
+9515 IF RIGHT$(structure$,1)<>"I" PROCbad("ENDIF crosses a loop boundary")
+9520 bnum%=bnum%-1:IF belse%(bnum%) THEN PROClabel(bid$(bnum%)+"e") ELSE PROClabel(bid$(bnum%))
+9525 structure$=LEFT$(structure$,LEN(structure$)-1)
 9530 ENDPROC
 11000 DEF PROCloadcontrol
-11010 LOCAL ci%,cj%,cs$
-11020 RESTORE 40000:READ ctsize%,ctrelocs%,ctinit%,ctpush%,ctcheck%,ctpop%,ctuntil%,ctagain%,ctfor%,ctnext%,ctnumslot%,cttop%,ctframes%,ctend%
-11030 DIM ctimage% ctsize%-1,ctreloc%(ctrelocs%-1)
-11040 FOR ci%=0 TO ctsize%-1 STEP 40:READ cs$
-11050 FOR cj%=1 TO LEN(cs$) STEP 2:ctimage%?(ci%+(cj%-1) DIV 2)=FNhexbyte(MID$(cs$,cj%,2)):NEXT:NEXT
-11060 IF ctrelocs%>0 THEN FOR ci%=0 TO ctrelocs%-1:READ ctreloc%(ci%):NEXT
+11010 LOCAL i%,j%,s$
+11020 RESTORE 40000:READ tsize%,trelocs%,tinit%,tpush%,tcheck%,tpop%,tuntil%,tagain%,tfor%,tnext%,tnumslot%,ttop%,tframes%,tend%
+11030 DIM timage% tframes%-1,treloc%(trelocs%-1)
+11040 FOR i%=0 TO tframes%-1 STEP 40:READ s$
+11050 FOR j%=1 TO LEN(s$) STEP 2:timage%?(i%+(j%-1) DIV 2)=FNhexbyte(MID$(s$,j%,2)):NEXT:NEXT
+11060 IF trelocs%>0 THEN FOR i%=0 TO trelocs%-1:READ treloc%(i%):NEXT
 11070 ENDPROC
-11080 DEF FNhexbyte(cs$)
-11090 =(INSTR("0123456789ABCDEF",LEFT$(cs$,1))-1)*16+INSTR("0123456789ABCDEF",RIGHT$(cs$,1))-1
-11100 DEF PROCflowcheck(ct%)
-11110 PROCbyte(&3E):PROCbyte(ct%):PROCaddr("CD","$ctlcheck"):PROCaddr("DA","$flowerror")
+11080 DEF FNhexbyte(s$)
+11090 =(INSTR("0123456789ABCDEF",LEFT$(s$,1))-1)*16+INSTR("0123456789ABCDEF",RIGHT$(s$,1))-1
+11100 DEF PROCflowcheck(t%)
+11110 PROCbyte(&3E):PROCbyte(t%):PROCaddr("CD","$ctlcheck"):PROCaddr("DA","$flowerror")
 11120 ENDPROC
-11130 DEF PROCloop(cw$)
-11140 LOCAL ck%,ci%,cn$,cid$,cp%
-11150 IF LEN(cstructure$)=32 PROCbad("Block nesting exceeds 32")
-11160 ck%=1:IF cw$="WHILE" ck%=2
-11170 IF cw$="FOR" ck%=3
-11180 cid$=FNflow:clkind%(cltop%)=ck%:clname$(cltop%)=cid$:cltop%=cltop%+1:cloops%=TRUE
-11190 cstructure$=cstructure$+MID$("RWF",ck%,1)
-11200 IF ck%=3 THEN PROCfor(cid$):ENDPROC
-11210 PROCaddr("21",cid$+"b"):PROCbyte(&3E):PROCbyte(ck%):PROCaddr("CD","$ctlpush"):PROCaddr("DA","$flowerror")
-11220 PROClabel(cid$+"b"):IF ck%<>2 PROCerrmark
-11230 IF ck%=2 THEN PROCcondition:PROCaddr("C2",cid$+"t"):PROCaddr("CD","$ctlpop"):PROCaddr("C3",cid$+"e"):PROClabel(cid$+"t")
+11130 DEF PROCloop(w$)
+11140 LOCAL k%,i%,n$,id$,p%
+11150 IF LEN(structure$)=32 PROCbad("Block nesting exceeds 32")
+11160 k%=1:IF w$="WHILE" k%=2
+11170 IF w$="FOR" k%=3
+11180 id$=FNflow:lkind%(ltop%)=k%:lname$(ltop%)=id$:ltop%=ltop%+1:loops%=TRUE
+11190 structure$=structure$+MID$("RWF",k%,1)
+11200 IF k%=3 THEN PROCfor(id$):ENDPROC
+11210 PROCaddr("21",id$+"b"):PROCbyte(&3E):PROCbyte(k%):PROCaddr("CD","$ctlpush"):PROCaddr("DA","$flowerror")
+11220 PROClabel(id$+"b"):IF k%<>2 PROCerrmark
+11230 IF k%=2 THEN PROCcondition:PROCaddr("C2",id$+"t"):PROCaddr("CD","$ctlpop"):PROCaddr("C3",id$+"e"):PROClabel(id$+"t")
 11240 ENDPROC
-11250 DEF PROCfor(cid$)
-11260 LOCAL cn$,ci%,cp%
-11270 cn$=FNname:cp%=cpos%:ci%=FNvariable(cn$):IF cvtype%(ci%)=129 PROCbad("FOR needs a numeric variable")
-11272 IF cvtype%(ci%)>255 PROCbad("Array FOR variables are unsupported")
-11280 clvar%(cltop%-1)=ci%:cpos%=cp%:PROCassign(cn$):PROCexpectword("TO")
-11290 cndepth%=0:PROCexpr(1):PROCneednumber:PROCspace
-11300 IF FNword("STEP") THEN cpos%=cpos%+4:PROCexpr(1):PROCneednumber ELSE PROCvalue(1)
-11310 PROCnumindices(0,1):PROCaddr("21",cid$+"b"):PROCaddr("11","$var"+STR$(ci%)):PROCbyte(&06):PROCbyte(cvsize%(ci%))
-11320 PROCaddr("CD","$ctlfor"):PROCaddr("DA","$flowerror"):cndepth%=0:PROClabel(cid$+"b")
+11250 DEF PROCfor(id$)
+11260 LOCAL n$,i%,p%
+11270 n$=FNname:p%=pos%:i%=FNvariable(n$):IF vtype%(i%)=129 PROCbad("FOR needs a numeric variable")
+11272 IF vtype%(i%)>255 PROCbad("Array FOR variables are unsupported")
+11280 lvar%(ltop%-1)=i%:pos%=p%:PROCassign(n$):PROCexpectword("TO")
+11290 ndepth%=0:PROCexpr(1):PROCneednumber:PROCspace
+11300 IF FNword("STEP") THEN pos%=pos%+4:PROCexpr(1):PROCneednumber ELSE PROCvalue(1)
+11310 PROCnumindices(0,1):PROCaddr("21",id$+"b"):PROCaddr("11","$var"+STR$(i%)):PROCbyte(&06):PROCbyte(vsize&(i%))
+11320 PROCaddr("CD","$ctlfor"):PROCaddr("DA","$flowerror"):ndepth%=0:PROClabel(id$+"b")
 11330 ENDPROC
-11340 DEF PROCexpectword(cw$)
-11350 PROCspace:IF NOT FNword(cw$) PROCbad("Expected "+cw$)
-11360 cpos%=cpos%+LEN(cw$):ENDPROC
-11370 DEF PROCloopend(cw$)
-11380 LOCAL ck%,cid$
-11390 ck%=1:IF cw$="ENDWHILE" ck%=2
-11400 IF cw$="NEXT" THEN PROCnext:ENDPROC
-11410 IF cltop%=0 PROCbad("Loop terminator without loop")
-11420 IF clkind%(cltop%-1)<>ck% OR RIGHT$(cstructure$,1)<>MID$("RW",ck%,1) PROCbad("Mismatched loop terminator")
-11430 cid$=clname$(cltop%-1):PROCflowcheck(ck%)
-11440 IF ck%=1 THEN PROCcondition:PROCaddr("CD","$ctluntil") ELSE PROCaddr("CD","$ctlagain")
-11450 PROCaddr("DA","$flowerror"):IF ck%=2 PROClabel(cid$+"e")
-11460 cltop%=cltop%-1:cstructure$=LEFT$(cstructure$,LEN(cstructure$)-1)
+11340 DEF PROCexpectword(w$)
+11350 PROCspace:IF NOT FNword(w$) PROCbad("Expected "+w$)
+11360 pos%=pos%+LEN(w$):ENDPROC
+11370 DEF PROCloopend(w$)
+11380 LOCAL k%,id$
+11390 k%=1:IF w$="ENDWHILE" k%=2
+11400 IF w$="NEXT" THEN PROCnext:ENDPROC
+11410 IF ltop%=0 PROCbad("Loop terminator without loop")
+11420 IF lkind%(ltop%-1)<>k% OR RIGHT$(structure$,1)<>MID$("RW",k%,1) PROCbad("Mismatched loop terminator")
+11430 id$=lname$(ltop%-1):PROCflowcheck(k%)
+11440 IF k%=1 THEN PROCcondition:PROCaddr("CD","$ctluntil") ELSE PROCaddr("CD","$ctlagain")
+11450 PROCaddr("DA","$flowerror"):IF k%=2 PROClabel(id$+"e")
+11460 ltop%=ltop%-1:structure$=LEFT$(structure$,LEN(structure$)-1)
 11470 ENDPROC
 11480 DEF PROCnext
-11490 LOCAL ci%,cn$,cmore%,cfound%,cj%
+11490 LOCAL i%,n$,more%,found%,j%
 11500 REPEAT
-11510 IF cltop%=0 PROCbad("NEXT without FOR")
-11520 IF RIGHT$(cstructure$,1)<>"F" PROCbad("NEXT crosses another block")
-11530 PROCspace:ci%=-1
-11540 IF FNalpha(FNpeek) AND NOT FNword("ELSE") THEN cn$=FNname:ci%=FNvariable(cn$)
-11550 cj%=cltop%-1:IF ci%<0 ci%=clvar%(cj%)
-11560 cfound%=FALSE:WHILE cj%>=0 AND NOT cfound%
-11562 IF clkind%(cj%)<>3 PROCbad("NEXT crosses another loop")
-11564 IF clvar%(cj%)=ci% THEN cfound%=TRUE ELSE cj%=cj%-1
+11510 IF ltop%=0 PROCbad("NEXT without FOR")
+11520 IF RIGHT$(structure$,1)<>"F" PROCbad("NEXT crosses another block")
+11530 PROCspace:i%=-1
+11540 IF FNalpha(FNpeek) AND NOT FNword("ELSE") THEN n$=FNname:i%=FNvariable(n$)
+11550 j%=ltop%-1:IF i%<0 i%=lvar%(j%)
+11560 found%=FALSE:WHILE j%>=0 AND NOT found%
+11562 IF lkind%(j%)<>3 PROCbad("NEXT crosses another loop")
+11564 IF lvar%(j%)=i% THEN found%=TRUE ELSE j%=j%-1
 11566 ENDWHILE
-11570 IF cj%<0 PROCbad("NEXT variable has no matching FOR")
-11580 IF clkind%(cj%)<>3 PROCbad("NEXT crosses another loop")
-11590 PROCaddr("11","$var"+STR$(ci%)):PROCaddr("CD","$ctlnext"):PROCaddr("DA","$flowerror")
-11600 cstructure$=LEFT$(cstructure$,LEN(cstructure$)-(cltop%-cj%)):cltop%=cj%:PROCspace:cmore%=(FNpeek=",")
-11610 IF cmore% cpos%=cpos%+1
-11620 UNTIL NOT cmore%
+11570 IF j%<0 PROCbad("NEXT variable has no matching FOR")
+11580 IF lkind%(j%)<>3 PROCbad("NEXT crosses another loop")
+11590 PROCaddr("11","$var"+STR$(i%)):PROCaddr("CD","$ctlnext"):PROCaddr("DA","$flowerror")
+11600 structure$=LEFT$(structure$,LEN(structure$)-(ltop%-j%)):ltop%=j%:PROCspace:more%=(FNpeek=",")
+11610 IF more% pos%=pos%+1
+11620 UNTIL NOT more%
 11630 ENDPROC
 11700 DEF PROCflowruntime
-11710 LOCAL cb%,ci%,cp%,cv%,cn$,ce%,csave%
-11720 cb%=cpc%:IF cpc%+ctsize%>65536 PROCbad("Executable exceeds 65536 bytes")
-11725 FOR ci%=0 TO ctsize%-1:ccode%?(cb%+ci%)=ctimage%?ci%:NEXT:cpc%=cpc%+ctsize%
-11730 IF ctrelocs%>0 THEN FOR ci%=0 TO ctrelocs%-1:cp%=cb%+ctreloc%(ci%):cv%=ccode%?cp%+256*ccode%?(cp%+1)+65536*ccode%?(cp%+2):PROCpatch(cp%,cv%+&40000+cb%):NEXT
-11740 PROCctlexport("$ctlinit",cb%+ctinit%):PROCctlexport("$ctlpush",cb%+ctpush%):PROCctlexport("$ctlcheck",cb%+ctcheck%):PROCctlexport("$ctlpop",cb%+ctpop%)
-11750 PROCctlexport("$ctluntil",cb%+ctuntil%):PROCctlexport("$ctlagain",cb%+ctagain%):PROCctlexport("$ctlfor",cb%+ctfor%):PROCctlexport("$ctlnext",cb%+ctnext%)
-11755 IF cerrors% THEN PROCctlexport("$ctltop",cb%+cttop%):PROCctlexport("$ctlframes",cb%+ctframes%)
-11760 csave%=cpc%:cpc%=cb%+ctnumslot%:PROCaddr("","$numop"):cpc%=csave%
-11770 FOR ci%=0 TO 5
-11780 ce%=VAL(MID$("004346323338",ci%*2+1,2)):cn$=MID$("No room                 Not in a REPEAT loop    Not in a WHILE loop     Not in a FOR loop       Can't match FOR         No GOSUB                ",ci%*24+1,24)
-11790 PROClabel("$flowerr"+STR$(ci%)):PROCerrorconstant(ce%,FNtrim(cn$))
+11710 LOCAL b%,i%,p%,v%,n$,e%,save%
+11720 b%=pc%:PROCtemplate(timage%,tsize%,trelocs%,2)
+11740 PROCctlexport("$ctlinit",b%+tinit%):PROCctlexport("$ctlpush",b%+tpush%):PROCctlexport("$ctlcheck",b%+tcheck%):PROCctlexport("$ctlpop",b%+tpop%)
+11750 PROCctlexport("$ctluntil",b%+tuntil%):PROCctlexport("$ctlagain",b%+tagain%):PROCctlexport("$ctlfor",b%+tfor%):PROCctlexport("$ctlnext",b%+tnext%)
+11755 IF errors% THEN PROCctlexport("$ctltop",b%+ttop%):PROCctlexport("$ctlframes",b%+tframes%)
+11760 REM Numeric bridge emitted with control template.
+11770 FOR i%=0 TO 5
+11780 e%=VAL(MID$("004346323338",i%*2+1,2)):n$=MID$("No room                 Not in a REPEAT loop    Not in a WHILE loop     Not in a FOR loop       Can't match FOR         No GOSUB                ",i%*24+1,24)
+11790 PROClabel("$flowerr"+STR$(i%)):PROCerrorconstant(e%,FNtrim(n$))
 11800 NEXT
 11810 PROClabel("$flowerror"):PROCbytes("B7"):PROCaddr("CA","$flowerr0")
 11820 PROCbytes("FE2B"):PROCaddr("CA","$flowerr1"):PROCbytes("FE2E"):PROCaddr("CA","$flowerr2")
 11830 PROCbytes("FE20"):PROCaddr("CA","$flowerr3"):PROCbytes("FE21"):PROCaddr("CA","$flowerr4"):PROCbytes("FE26"):PROCaddr("CA","$flowerr5")
 11840 PROCaddr("C3","$numerror")
-11850 ci%=FNsymbol("$start"):cp%=csaddr%(ci%):csaddr%(ci%)=&40000+cpc%:PROCaddr("CD","$ctlinit")
-11852 IF cacts% THEN PROCbyte(&D5):PROCaddr("21","$actbase"):PROCaddr("11","$actlimit"):PROCaddr("CD","$actinit"):PROCbyte(&D1)
-11853 IF cerrors% PROCaddr("CD","$errinit")
+11850 p%=start%:start%=&40000+pc%:PROCaddr("CD","$ctlinit")
+11852 IF acts% THEN PROCbyte(&D5):PROCaddr("21","$actbase"):PROCaddr("11","$actlimit"):PROCaddr("CD","$actinit"):PROCbyte(&D1)
+11853 IF errors% PROCaddr("CD","$errinit")
 11855 PROCbyte(&C3)
-11860 PROCbyte(cp% MOD 256):PROCbyte((cp% DIV 256) MOD 256):PROCbyte(cp% DIV 65536)
+11860 PROCbyte(p% MOD 256):PROCbyte((p% DIV 256) MOD 256):PROCbyte(p% DIV 65536)
 11870 ENDPROC
-11880 DEF PROCctlexport(cn$,cp%)
-11890 PROClabel(cn$):csaddr%(csnum%-1)=&40000+cp%:ENDPROC
-11900 DEF FNtrim(cs$)
-11910 WHILE RIGHT$(cs$,1)=" ":cs$=LEFT$(cs$,LEN(cs$)-1):ENDWHILE
-11920 =cs$
+11880 DEF PROCctlexport(n$,p%)
+11890 PROCdefine(n$,&40000+p%):ENDPROC
+11900 DEF FNtrim(s$)
+11910 WHILE RIGHT$(s$,1)=" ":s$=LEFT$(s$,LEN(s$)-1):ENDWHILE
+11920 =s$
 13000 DEF PROCloadacts
-13010 LOCAL ci%,cj%,cs$
-13020 RESTORE 50000:READ casize%,carelocs%,cainit%,cabegin%,casave%,cainstall%,cabind%,caleave%,capushslot%,cacheckslot%,capopslot%,canumslot%,catop%,cafnbegin%,cafnleave%
-13030 DIM caimage% casize%-1,careloc%(carelocs%-1)
-13040 FOR ci%=0 TO casize%-1 STEP 40:READ cs$
-13050 FOR cj%=1 TO LEN(cs$) STEP 2:caimage%?(ci%+(cj%-1) DIV 2)=FNhexbyte(MID$(cs$,cj%,2)):NEXT:NEXT
-13060 IF carelocs%>0 THEN FOR ci%=0 TO carelocs%-1:READ careloc%(ci%):NEXT
+13010 LOCAL i%,j%,s$
+13020 RESTORE 50000:READ asize%,arelocs%,ainit%,abegin%,asave%,ainstall%,abind%,aleave%,apushslot%,acheckslot%,apopslot%,anumslot%,atop%,afnbegin%,afnleave%
+13030 DIM aimage% asize%-1,areloc%(arelocs%-1)
+13040 FOR i%=0 TO asize%-1 STEP 40:READ s$
+13050 FOR j%=1 TO LEN(s$) STEP 2:aimage%?(i%+(j%-1) DIV 2)=FNhexbyte(MID$(s$,j%,2)):NEXT:NEXT
+13060 IF arelocs%>0 THEN FOR i%=0 TO arelocs%-1:READ areloc%(i%):NEXT
 13070 ENDPROC
 13080 DEF PROCuseacts
-13090 cacts%=TRUE:cloops%=TRUE:cnumeric%=TRUE:IF cnslots%=0 cnslots%=1
+13090 acts%=TRUE:loops%=TRUE:numeric%=TRUE:IF nslots%=0 nslots%=1
 13100 ENDPROC
-13110 DEF FNprocfind(cn$)
-13120 LOCAL ci%,cf%:ci%=0:cf%=-1
-13130 WHILE ci%<cpnum%:IF cpname$(ci%)=cn$ cf%=ci%
-13140 ci%=ci%+1:ENDWHILE
-13150 =cf%
-13160 DEF PROCprocscan(ch%)
-13170 LOCAL ci%,cn$,cfunction%:cfunction%=-1
-13180 WHILE NOT EOF#ch%
-13190 clnum%=clnum%+1:cpos%=1:PROCreadline(ch%):PROCspace
-13200 IF FNdigit(FNpeek) ci%=FNnumber(65279)
-13210 PROCspace:PROCerrorscan:IF FNword("DEF") PROCscandef
-13214 IF FNword("DATA") OR FNword("REM") cpos%=LEN(cline$)+1
-13215 IF cfunction%>=0 PROCcollectreturns(cfunction%,cpos%)
+13110 DEF FNprocfind(n$)
+13120 LOCAL i%,f%:i%=0:f%=-1
+13130 WHILE i%<pnum%:IF pname$(i%)=n$ f%=i%
+13140 i%=i%+1:ENDWHILE
+13150 =f%
+13160 DEF PROCprocscan(h%)
+13170 LOCAL i%,n$,function%:function%=-1
+13180 WHILE NOT EOF#h%
+13190 lnum%=lnum%+1:pos%=1:PROCreadline(h%):PROCspace
+13200 IF FNdigit(FNpeek) i%=FNnumber(65279)
+13210 PROCspace:PROCtargetscan:PROCerrorscan:IF FNword("DEF") PROCscandef
+13214 IF FNword("DATA") OR FNword("REM") pos%=LEN(line$)+1
+13215 IF function%>=0 PROCcollectreturns(function%,pos%)
 13220 ENDWHILE
 13225 PROCinferreturns
 13230 ENDPROC
 13240 DEF PROCscandef
-13250 LOCAL cn$,ci%,ck%
-13260 cpos%=cpos%+3:PROCspace
-13270 ck%=0:IF MID$(cline$,cpos%,2)="FN" ck%=1
-13272 IF ck%=0 AND MID$(cline$,cpos%,4)<>"PROC" PROCbad("Expected PROC or FN after DEF")
-13280 cpos%=cpos%+4-2*ck%:cn$=FNcallname(ck%):IF FNprocfind(MID$("PF",ck%+1,1)+cn$)>=0 PROCbad("Duplicate definition "+cn$)
-13290 IF cpnum%=256 PROCbad("Procedure limit exceeds 256")
-13300 ci%=cpnum%:cpnum%=cpnum%+1:cpname$(ci%)=MID$("PF",ck%+1,1)+cn$:cpline%(ci%)=clnum%:cpkind%(ci%)=ck%:cpret%(ci%)=-1:PROCprocparams(ci%,TRUE)
-13305 cfunction%=-1:IF ck%=1 cfunction%=ci%
+13250 LOCAL n$,i%,k%
+13260 pos%=pos%+3:PROCspace
+13270 k%=0:IF MID$(line$,pos%,2)="FN" k%=1
+13272 IF k%=0 AND MID$(line$,pos%,4)<>"PROC" PROCbad("Expected PROC or FN after DEF")
+13280 pos%=pos%+4-2*k%:n$=FNcallname(k%):IF FNprocfind(MID$("PF",k%+1,1)+n$)>=0 PROCbad("Duplicate definition "+n$)
+13290 IF pnum%=256 PROCbad("Procedure limit exceeds 256")
+13300 i%=pnum%:pnum%=pnum%+1:pname$(i%)=MID$("PF",k%+1,1)+n$:pline%(i%)=lnum%:pkind&(i%)=k%:pret%(i%)=-1:PROCprocparams(i%,TRUE)
+13305 function%=-1:IF k%=1 function%=i%
 13310 ENDPROC
-13320 DEF PROCprocparams(ci%,csave%)
-13330 LOCAL cn$,cj%,ck%,cv%,cmore%
-13340 cj%=0:PROCspace:IF FNpeek<>"(" THEN IF csave% cparcnt%(ci%)=0
+13320 DEF PROCprocparams(i%,save%)
+13330 LOCAL n$,j%,k%,v%,more%
+13340 j%=0:PROCspace:IF FNpeek<>"(" THEN IF save% parcnt&(i%)=0
 13342 IF FNpeek<>"(" ENDPROC
-13350 cpos%=cpos%+1:PROCspace:IF FNpeek=")" PROCbad("Empty formal parameter lists are unsupported")
+13350 pos%=pos%+1:PROCspace:IF FNpeek=")" PROCbad("Empty formal parameter lists are unsupported")
 13360 REPEAT
-13370 IF cj%=16 PROCbad("Procedure argument limit exceeds 16")
-13380 cn$=FNname:IF FNreserved(cn$) PROCbad("Unsupported formal parameter "+cn$)
-13390 cv%=FNvariable(cn$):ck%=0
-13392 IF cvtype%(cv%)>255 PROCbad("Array formal parameters are unsupported")
-13400 WHILE ck%<cj%:IF cpar%(ci%,ck%)=cv% PROCbad("Duplicate formal parameter")
-13410 ck%=ck%+1:ENDWHILE
-13420 IF csave% THEN cpar%(ci%,cj%)=cv% ELSE IF cpar%(ci%,cj%)<>cv% PROCbad("Procedure signature changed")
-13430 cj%=cj%+1:PROCspace:cmore%=(FNpeek=","):IF cmore% cpos%=cpos%+1
-13440 UNTIL NOT cmore%
-13450 PROCexpect(")"):IF csave% THEN cparcnt%(ci%)=cj% ELSE IF cparcnt%(ci%)<>cj% PROCbad("Procedure signature changed")
+13370 IF j%=16 PROCbad("Procedure argument limit exceeds 16")
+13380 n$=FNname:IF FNreserved(n$) PROCbad("Unsupported formal parameter "+n$)
+13390 v%=FNvariable(n$):k%=0
+13392 IF vtype%(v%)>255 PROCbad("Array formal parameters are unsupported")
+13400 WHILE k%<j%:IF par&(i%,k%)=v% PROCbad("Duplicate formal parameter")
+13410 k%=k%+1:ENDWHILE
+13420 IF save% THEN par&(i%,j%)=v% ELSE IF par&(i%,j%)<>v% PROCbad("Procedure signature changed")
+13430 j%=j%+1:PROCspace:more%=(FNpeek=","):IF more% pos%=pos%+1
+13440 UNTIL NOT more%
+13450 PROCexpect(")"):IF save% THEN parcnt&(i%)=j% ELSE IF parcnt&(i%)<>j% PROCbad("Procedure signature changed")
 13460 ENDPROC
 13470 DEF PROCprocscope
-13480 LOCAL ci%:ci%=0
-13490 WHILE ci%<cpnum%
-13500 IF cpline%(ci%)=clnum% THEN IF cstructure$<>"" PROCbad("Definition crosses an open block")
-13510 IF cpline%(ci%)=clnum% cscope%=ci%+1
-13520 ci%=ci%+1:ENDWHILE
+13480 LOCAL i%:i%=scope%
+13490 IF i%>=pnum% ENDPROC
+13500 IF pline%(i%)<>lnum% ENDPROC
+13510 IF structure$<>"" PROCbad("Definition crosses an open block")
+13520 scope%=i%+1
 13530 ENDPROC
-13540 DEF FNtarget(cn$)
-13550 IF cscope%=0 THEN =cn$
-13560 ="$p"+STR$(cscope%)+cn$
+13540 DEF FNtarget(n$)
+13550 IF scope%=0 THEN =n$
+13560 ="$p"+STR$(scope%)+n$
 13570 DEF PROCdefinition
-13580 LOCAL cn$,ci%,ck%
-13590 PROCspace:ck%=0:IF MID$(cline$,cpos%,2)="FN" ck%=1
-13595 IF ck%=0 AND MID$(cline$,cpos%,4)<>"PROC" PROCbad("Expected PROC or FN after DEF")
-13600 cpos%=cpos%+4-2*ck%:cn$=FNcallname(ck%):ci%=FNprocfind(MID$("PF",ck%+1,1)+cn$)
-13610 IF ci%<0 PROCbad("DEF must begin its physical statement line")
-13620 IF cpline%(ci%)<>clnum% PROCbad("DEF must begin its physical statement line")
-13630 PROCprocparams(ci%,FALSE):cdeclskip$=FNflow:PROCaddr("C3",cdeclskip$):PROClabel("$proc"+STR$(ci%)):PROCerrmark
-13635 PROCspace:IF ck%=1 AND FNpeek="=" ccont%=TRUE
+13580 LOCAL n$,i%,k%
+13590 PROCspace:k%=0:IF MID$(line$,pos%,2)="FN" k%=1
+13595 IF k%=0 AND MID$(line$,pos%,4)<>"PROC" PROCbad("Expected PROC or FN after DEF")
+13600 pos%=pos%+4-2*k%:n$=FNcallname(k%):i%=FNprocfind(MID$("PF",k%+1,1)+n$)
+13610 IF i%<0 PROCbad("DEF must begin its physical statement line")
+13620 IF pline%(i%)<>lnum% PROCbad("DEF must begin its physical statement line")
+13630 PROCprocparams(i%,FALSE):declskip$=FNflow:PROCaddr("C3",declskip$):PROClabel("$proc"+STR$(i%)):PROCerrmark
+13635 PROCspace:IF k%=1 AND FNpeek="=" cont%=TRUE
 13640 ENDPROC
 13650 DEF PROCproccall
-13660 LOCAL cn$,ci%,cj%,cv%,ccount%,ck%,cframe%
-13670 cn$=FNname:ci%=FNprocfind("P"+cn$):IF ci%<0 PROCbad("Undefined PROC "+cn$)
-13675 cframe%=ccalldepth%:ccalldepth%=ccalldepth%+1:IF ccalldepth%>32 PROCbad("Call expression nesting exceeds 32")
-13680 PROCuseacts:PROCaddr("CD","$actbegin"):PROCaddr("DA","$acterror"):ccount%=cparcnt%(ci%)
-13690 IF ccount%>0 THEN FOR cj%=0 TO ccount%-1:PROCsavebinding(cpar%(ci%,cj%)):NEXT
-13700 cndepth%=0:csdepth%=0:PROCspace
-13710 IF ccount%=0 AND FNpeek="(" PROCbad("Empty call argument lists are unsupported")
-13720 IF ccount%>0 THEN PROCexpect("("):FOR cj%=0 TO ccount%-1:PROCprocarg(ci%,cj%):NEXT:PROCexpect(")")
-13730 IF ccount%>0 THEN FOR cj%=ccount%-1 TO 0 STEP -1:PROCprocbind(cj%,ccount%-1-cj%):NEXT
-13740 PROCaddr("CD","$proc"+STR$(ci%)):cndepth%=0:csdepth%=0:PROCerrmark
-13745 ccalldepth%=ccalldepth%-1
+13660 LOCAL n$,i%,j%,v%,count%,k%,frame%
+13670 n$=FNname:i%=FNprocfind("P"+n$):IF i%<0 PROCbad("Undefined PROC "+n$)
+13675 frame%=calldepth%:calldepth%=calldepth%+1:IF calldepth%>32 PROCbad("Call expression nesting exceeds 32")
+13680 PROCuseacts:PROCusecompact:PROCaddr("CD","$cpbegin"):count%=parcnt&(i%)
+13690 IF count%>0 THEN FOR j%=0 TO count%-1:PROCsavebinding(par&(i%,j%)):NEXT
+13700 ndepth%=0:sdepth%=0:PROCspace
+13710 IF count%=0 AND FNpeek="(" PROCbad("Empty call argument lists are unsupported")
+13720 IF count%>0 THEN PROCexpect("("):FOR j%=0 TO count%-1:PROCprocarg(i%,j%):NEXT:PROCexpect(")")
+13730 IF count%>0 THEN FOR j%=count%-1 TO 0 STEP -1:PROCprocbind(j%,count%-1-j%):NEXT
+13740 PROCaddr("CD","$proc"+STR$(i%)):ndepth%=0:sdepth%=0:PROCerrmark
+13745 calldepth%=calldepth%-1
 13750 ENDPROC
-13760 DEF PROCprocarg(ci%,cj%)
-13770 LOCAL cv%,ck%
-13780 IF cj%>0 PROCexpect(",")
-13790 PROCexpr(1):cv%=cpar%(ci%,cj%):ck%=ABS(cvtype%(cv%)=129)
-13800 IF cvaluekind%<>ck% PROCbad("Procedure argument type mismatch")
-13810 cargkind%(cframe%,cj%)=ck%:IF ck%=0 THEN cargindex%(cframe%,cj%)=cndepth%-1 ELSE cargindex%(cframe%,cj%)=csdepth%-1
+13760 DEF PROCprocarg(i%,j%)
+13770 LOCAL v%,k%
+13780 IF j%>0 PROCexpect(",")
+13790 PROCexpr(1):v%=par&(i%,j%):k%=ABS(vtype%(v%)=129)
+13800 IF valuekind%<>k% PROCbad("Procedure argument type mismatch")
+13810 argkind&(frame%,j%)=k%:IF k%=0 THEN argindex&(frame%,j%)=ndepth%-1 ELSE argindex&(frame%,j%)=sdepth%-1
 13820 ENDPROC
-13830 DEF PROCprocbind(ci%,co%)
-13840 LOCAL cn$:cn$="$v":IF cargkind%(cframe%,ci%)=1 cn$="$s"
-13850 PROCbyte(&3E):PROCbyte(co%):PROCaddr("FD21",cn$+STR$(cargindex%(cframe%,ci%))):PROCaddr("CD","$actbind"):PROCaddr("DA","$acterror")
+13830 DEF PROCprocbind(i%,o%)
+13840 PROCusecompact:PROCaddr("CD","$cpbind")
+13850 PROCbyte(o%):PROCbyte(argkind&(frame%,i%)):PROCbyte(argindex&(frame%,i%))
 13860 ENDPROC
-13870 DEF PROCsavebinding(ci%)
-13880 PROCaddr("DD21","$bind"+STR$(ci%)):PROCbyte(&3E):PROCbyte(cvtype%(ci%)):PROCaddr("CD","$actsave"):PROCaddr("DA","$acterror")
+13870 DEF PROCsavebinding(i%)
+13880 PROCusecompact:PROCaddr("CD","$cpsave"):PROCaddr("","$bind"+STR$(i%)):PROCbyte(vtype%(i%))
 13890 ENDPROC
 13900 DEF PROClocal
-13910 LOCAL cn$,ci%,cmore%
-13915 PROCspace:IF FNword("ERROR") THEN cpos%=cpos%+5:ENDPROC
+13910 LOCAL n$,i%,more%
+13915 PROCspace:IF FNword("ERROR") THEN pos%=pos%+5:ENDPROC
 13920 PROCuseacts
 13930 REPEAT
-13940 cn$=FNname:IF FNreserved(cn$) PROCbad("Unsupported LOCAL form "+cn$)
-13950 ci%=FNvariable(cn$)
-13952 IF cvtype%(ci%)>255 PROCbad("LOCAL arrays are unsupported")
-13954 PROCsavebinding(ci%):PROCaddr("CD","$actinstall")
-13960 PROCspace:cmore%=(FNpeek=","):IF cmore% cpos%=cpos%+1
-13970 UNTIL NOT cmore%
+13940 n$=FNname:IF FNreserved(n$) PROCbad("Unsupported LOCAL form "+n$)
+13950 i%=FNvariable(n$)
+13952 IF vtype%(i%)>255 PROCbad("LOCAL arrays are unsupported")
+13954 PROCsavebinding(i%):PROCaddr("CD","$actinstall")
+13960 PROCspace:more%=(FNpeek=","):IF more% pos%=pos%+1
+13970 UNTIL NOT more%
 13980 ENDPROC
 14000 DEF PROCactruntime
-14010 LOCAL cb%,ci%,cp%,cv%,csave%
-14020 cb%=cpc%:IF cpc%+casize%>65536 PROCbad("Executable exceeds 65536 bytes")
-14030 FOR ci%=0 TO casize%-1:ccode%?(cb%+ci%)=caimage%?ci%:NEXT:cpc%=cpc%+casize%
-14040 IF carelocs%>0 THEN FOR ci%=0 TO carelocs%-1:cp%=cb%+careloc%(ci%):cv%=ccode%?cp%+256*ccode%?(cp%+1)+65536*ccode%?(cp%+2):PROCpatch(cp%,cv%+&40000+cb%):NEXT
-14050 PROCctlexport("$actinit",cb%+cainit%):PROCctlexport("$actbegin",cb%+cabegin%):PROCctlexport("$actsave",cb%+casave%)
-14060 PROCctlexport("$actinstall",cb%+cainstall%):PROCctlexport("$actbind",cb%+cabind%):PROCctlexport("$actleave",cb%+caleave%)
-14065 PROCctlexport("$fnbegin",cb%+cafnbegin%):PROCctlexport("$fnleave",cb%+cafnleave%)
-14067 IF cerrors% PROCctlexport("$acttop",cb%+catop%)
-14070 csave%=cpc%:cpc%=cb%+capushslot%:PROCaddr("","$ctlpush"):cpc%=cb%+cacheckslot%:PROCaddr("","$ctlcheck")
-14080 cpc%=cb%+capopslot%:PROCaddr("","$ctlpop"):cpc%=cb%+canumslot%:PROCaddr("","$numop"):cpc%=csave%
+14010 LOCAL b%,i%,p%,v%,save%
+14020 b%=pc%:PROCtemplate(aimage%,asize%,arelocs%,3)
+14050 PROCctlexport("$actinit",b%+ainit%):PROCctlexport("$actbegin",b%+abegin%):PROCctlexport("$actsave",b%+asave%)
+14060 PROCctlexport("$actinstall",b%+ainstall%):PROCctlexport("$actbind",b%+abind%):PROCctlexport("$actleave",b%+aleave%)
+14065 PROCctlexport("$fnbegin",b%+afnbegin%):PROCctlexport("$fnleave",b%+afnleave%)
+14067 IF errors% PROCctlexport("$acttop",b%+atop%)
+14070 REM Control/numeric bridges emitted with activation template.
 14090 PROClabel("$acterror"):PROCbytes("B7"):PROCaddr("CA","$flowerr0")
 14100 PROCbytes("FE0C"):PROCaddr("CA","$notlocal"):PROCbytes("FE0D"):PROCaddr("CA","$notproc"):PROCbytes("FE07"):PROCaddr("CA","$notfn"):PROCaddr("C3","$numerror")
 14105 REM Act error7 must be dispatched before falling through to numeric error.
 14110 PROClabel("$notlocal"):PROCerrorconstant(12,"Not in a FN or PROC")
 14120 PROClabel("$notproc"):PROCerrorconstant(13,"Not in a PROC")
 14125 PROClabel("$notfn"):PROCerrorconstant(7,"Not in a FN")
-14127 IF cfunctions% THEN PROClabel("$fnnum"):PROCbytes("0000000000"):PROClabel("$fnstr"):FOR ci%=0 TO 255:PROCbyte(0):NEXT
+14127 IF functions% THEN PROClabel("$fnnum"):PROCbytes("0000000000"):PROClabel("$fnstr"):PROCzeros(256)
 14130 ENDPROC
 14140 DEF PROCactworkspace
-14150 LOCAL cp%,ci%
-14160 cp%=&40000+cpc%:IF cstrings% OR cmemory% cp%=csaddr%(FNsymbol("$sheapend"))
-14170 PROClabel("$actbase"):csaddr%(csnum%-1)=cp%:PROClabel("$actlimit"):csaddr%(csnum%-1)=cp%+32768
-14180 IF cp%+32768>&B0000 PROCbad("Activation workspace exceeds user RAM")
+14150 LOCAL p%,i%
+14160 p%=&40000+pc%:IF strings% OR memory% p%=FNsymboladdr(FNsymbol("$sheapend"))
+14170 PROCdefine("$actbase",p%):PROCdefine("$actlimit",p%+32768)
+14180 IF p%+32768>&B0000 PROCbad("Activation workspace exceeds user RAM")
 14190 ENDPROC
-15000 DEF FNcallname(ck%)
-15010 LOCAL cn$:cn$=FNname
-15020 IF ck%=1 AND FNpeek="$" THEN cn$=cn$+"$":cpos%=cpos%+1
-15030 =cn$
-15040 DEF FNfnstring(cp%)
-15050 LOCAL cs%,ci%:cs%=cpos%:cpos%=cp%+2:ci%=FNprocfind("F"+FNcallname(1)):cpos%=cs%
-15060 IF ci%<0 THEN =FALSE
-15070 =(cpret%(ci%)=1)
+15000 DEF FNcallname(k%)
+15010 LOCAL n$:n$=FNname
+15020 IF k%=1 AND FNpeek="$" THEN n$=n$+"$":pos%=pos%+1
+15030 =n$
+15040 DEF FNfnstring(p%)
+15050 LOCAL s%,i%:s%=pos%:pos%=p%+2:i%=FNprocfind("F"+FNcallname(1)):pos%=s%
+15060 IF i%<0 THEN =FALSE
+15070 =(pret%(i%)=1)
 15080 DEF PROCfncall
-15090 LOCAL cn$,ci%,cj%,ccount%,cframe%,cnstart%,csstart%,ck%
-15095 IF cdimparse%>0 PROCbad("FN calls in array DIM expressions are unqualified")
-15100 cn$=FNcallname(1):ci%=FNprocfind("F"+cn$):IF ci%<0 PROCbad("Undefined FN "+cn$)
-15110 PROCuseacts:cfunctions%=TRUE:cnstart%=cndepth%:csstart%=csdepth%:cframe%=ccalldepth%:ccalldepth%=ccalldepth%+1
-15120 IF ccalldepth%>32 PROCbad("Call expression nesting exceeds 32")
-15130 IF cnstart%>0 THEN PROCaddr("DD21","$v0") ELSE PROCbytes("DD21000000")
-15140 IF csstart%>0 THEN PROCaddr("FD21","$s0") ELSE PROCbytes("FD21000000")
-15150 PROCbytes("0100000006"):PROCbyte(cnstart%):PROCbyte(&0E):PROCbyte(csstart%):PROCaddr("CD","$fnbegin"):PROCaddr("DA","$acterror")
-15160 ccount%=cparcnt%(ci%):IF ccount%>0 THEN FOR cj%=0 TO ccount%-1:PROCsavebinding(cpar%(ci%,cj%)):NEXT
-15170 PROCspace:IF ccount%=0 AND FNpeek="(" PROCbad("Empty call argument lists are unsupported")
-15180 IF ccount%>0 THEN PROCexpect("("):FOR cj%=0 TO ccount%-1:PROCprocarg(ci%,cj%):NEXT:PROCexpect(")")
-15190 IF ccount%>0 THEN FOR cj%=ccount%-1 TO 0 STEP -1:PROCprocbind(cj%,ccount%-1-cj%):NEXT
-15200 PROCaddr("CD","$proc"+STR$(ci%)):cndepth%=cnstart%:csdepth%=csstart%
-15210 IF cpret%(ci%)=0 THEN PROCnumslot:PROCvarcopy("$fnnum","$v"+STR$(cndepth%-1),5) ELSE PROCstrslot:PROCcopystr("$fnstr","$s"+STR$(csdepth%-1))
-15215 IF cpret%(ci%)=1 csunsafe%(csdepth%-1)=TRUE
-15220 cvaluekind%=cpret%(ci%):ccalldepth%=ccalldepth%-1:PROCerrmark:ENDPROC
-15230 DEF PROCcopystr(cf$,ct$)
-15240 PROCaddr("21",cf$):PROCaddr("11",ct$):PROCaddr("CD","$strcopy"):ENDPROC
+15090 LOCAL n$,i%,j%,count%,frame%,nstart%,sstart%,k%
+15095 IF dimparse%>0 PROCbad("FN calls in array DIM expressions are unqualified")
+15100 n$=FNcallname(1):i%=FNprocfind("F"+n$):IF i%<0 PROCbad("Undefined FN "+n$)
+15110 PROCuseacts:functions%=TRUE:nstart%=ndepth%:sstart%=sdepth%:frame%=calldepth%:calldepth%=calldepth%+1
+15120 IF calldepth%>32 PROCbad("Call expression nesting exceeds 32")
+15130 IF nstart%>0 THEN PROCaddr("DD21","$v0") ELSE PROCbytes("DD21000000")
+15140 IF sstart%>0 THEN PROCaddr("FD21","$s0") ELSE PROCbytes("FD21000000")
+15150 PROCbytes("0100000006"):PROCbyte(nstart%):PROCbyte(&0E):PROCbyte(sstart%):PROCaddr("CD","$fnbegin"):PROCaddr("DA","$acterror")
+15160 count%=parcnt&(i%):IF count%>0 THEN FOR j%=0 TO count%-1:PROCsavebinding(par&(i%,j%)):NEXT
+15170 PROCspace:IF count%=0 AND FNpeek="(" PROCbad("Empty call argument lists are unsupported")
+15180 IF count%>0 THEN PROCexpect("("):FOR j%=0 TO count%-1:PROCprocarg(i%,j%):NEXT:PROCexpect(")")
+15190 IF count%>0 THEN FOR j%=count%-1 TO 0 STEP -1:PROCprocbind(j%,count%-1-j%):NEXT
+15200 PROCaddr("CD","$proc"+STR$(i%)):ndepth%=nstart%:sdepth%=sstart%
+15210 IF pret%(i%)=0 THEN PROCnumslot:PROCvarcopy("$fnnum","$v"+STR$(ndepth%-1),5) ELSE PROCstrslot:PROCcopystr("$fnstr","$s"+STR$(sdepth%-1))
+15215 IF pret%(i%)=1 sunsafe%(sdepth%-1)=TRUE
+15220 valuekind%=pret%(i%):calldepth%=calldepth%-1:PROCerrmark:ENDPROC
+15230 DEF PROCcopystr(f$,t$)
+15240 PROCaddr("21",f$):PROCaddr("11",t$):PROCaddr("CD","$strcopy"):ENDPROC
 15250 DEF PROCfnreturn
-15260 PROCuseacts:cfunctions%=TRUE:cndepth%=0:csdepth%=0:PROCexpr(1)
-15270 IF cscope%>0 THEN IF cpkind%(cscope%-1)=1 AND cpret%(cscope%-1)<>cvaluekind% PROCbad("Mixed numeric/string FN results are unsupported")
-15280 IF cvaluekind%=0 THEN PROCvarcopy("$v0","$fnnum",5) ELSE PROCcopystr("$s0","$fnstr")
-15290 PROCaddr("CD","$fnleave"):PROCaddr("DA","$acterror"):PROCbyte(&C9):cndepth%=0:csdepth%=0:ENDPROC
-15300 DEF PROCcollectreturns(ci%,cs%)
-15310 LOCAL cp%,cq%,cd%,ce%,cc$
-15320 cp%=cs%:cq%=FALSE:cd%=0
-15330 WHILE cp%<=LEN(cline$)
-15340 cc$=MID$(cline$,cp%,1)
-15350 IF cc$=CHR$(34) THEN cq%=NOT cq%
-15355 IF NOT cq% AND cd%=0 THEN IF FNkindword(cline$,cp%,"REM") OR FNkindword(cline$,cp%,"DATA") cp%=LEN(cline$)+1
-15360 IF NOT cq% THEN IF cc$="=" AND cd%=0 AND FNreturnmark(cp%,cs%) THEN ce%=FNreturnend(cp%+1):PROCrememberreturn(ci%,MID$(cline$,cp%+1,ce%-cp%-1),cp%+1):cp%=ce%-1
-15370 IF NOT cq% THEN IF cc$="(" cd%=cd%+1
-15380 IF NOT cq% THEN IF cc$=")" cd%=cd%-1
-15390 cp%=cp%+1:ENDWHILE
+15260 PROCuseacts:functions%=TRUE:ndepth%=0:sdepth%=0:PROCexpr(1)
+15270 IF scope%>0 THEN IF pkind&(scope%-1)=1 AND pret%(scope%-1)<>valuekind% PROCbad("Mixed numeric/string FN results are unsupported")
+15280 IF valuekind%=0 THEN PROCvarcopy("$v0","$fnnum",5) ELSE PROCcopystr("$s0","$fnstr")
+15290 PROCaddr("CD","$fnleave"):PROCaddr("DA","$acterror"):PROCbyte(&C9):ndepth%=0:sdepth%=0:ENDPROC
+15300 DEF PROCcollectreturns(i%,s%)
+15310 LOCAL p%,q%,d%,e%,c$
+15320 p%=s%:q%=FALSE:d%=0
+15330 WHILE p%<=LEN(line$)
+15340 c$=MID$(line$,p%,1)
+15350 IF c$=CHR$(34) THEN q%=NOT q%
+15355 IF NOT q% AND d%=0 THEN IF FNkindword(line$,p%,"REM") OR FNkindword(line$,p%,"DATA") p%=LEN(line$)+1
+15360 IF NOT q% THEN IF c$="=" AND d%=0 AND FNreturnmark(p%,s%) THEN e%=FNreturnend(p%+1):PROCrememberreturn(i%,MID$(line$,p%+1,e%-p%-1),p%+1):p%=e%-1
+15370 IF NOT q% THEN IF c$="(" d%=d%+1
+15380 IF NOT q% THEN IF c$=")" d%=d%-1
+15390 p%=p%+1:ENDWHILE
 15400 ENDPROC
-15410 DEF FNreturnmark(cp%,cs%)
-15420 cp%=cp%-1:WHILE cp%>=cs% AND (MID$(cline$,cp%,1)=" " OR MID$(cline$,cp%,1)=CHR$(9)):cp%=cp%-1:ENDWHILE
-15430 IF cp%<cs% OR MID$(cline$,cp%,1)=":" THEN =TRUE
-15435 IF cp%<4 THEN =FALSE
-15440 =FNkindword(cline$,cp%-3,"THEN") OR FNkindword(cline$,cp%-3,"ELSE")
-15450 DEF FNreturnend(cp%)
-15460 LOCAL cq%,cd%,cc%,cf%:cq%=FALSE:cd%=0:cf%=FALSE
-15470 WHILE cp%<=LEN(cline$) AND NOT cf%
-15480 cc%=ASC(MID$(cline$,cp%,1)):IF cc%=34 cq%=NOT cq%
-15490 IF NOT cq% AND cd%=0 THEN IF cc%=58 OR FNkindword(cline$,cp%,"ELSE") cf%=TRUE
-15500 IF NOT cq% THEN IF cc%=40 cd%=cd%+1
-15510 IF NOT cq% THEN IF cc%=41 cd%=cd%-1
-15520 IF NOT cf% cp%=cp%+1
+15410 DEF FNreturnmark(p%,s%)
+15420 p%=p%-1:WHILE p%>=s% AND (MID$(line$,p%,1)=" " OR MID$(line$,p%,1)=CHR$(9)):p%=p%-1:ENDWHILE
+15430 IF p%<s% OR MID$(line$,p%,1)=":" THEN =TRUE
+15435 IF p%<4 THEN =FALSE
+15440 =FNkindword(line$,p%-3,"THEN") OR FNkindword(line$,p%-3,"ELSE")
+15450 DEF FNreturnend(p%)
+15460 LOCAL q%,d%,c%,f%:q%=FALSE:d%=0:f%=FALSE
+15470 WHILE p%<=LEN(line$) AND NOT f%
+15480 c%=ASC(MID$(line$,p%,1)):IF c%=34 q%=NOT q%
+15490 IF NOT q% AND d%=0 THEN IF c%=58 OR FNkindword(line$,p%,"ELSE") f%=TRUE
+15500 IF NOT q% THEN IF c%=40 d%=d%+1
+15510 IF NOT q% THEN IF c%=41 d%=d%-1
+15520 IF NOT f% p%=p%+1
 15530 ENDWHILE
-15540 =cp%
-15550 DEF PROCrememberreturn(ci%,cs$,ccol%)
-15560 IF cretnum%=512 PROCbad("FN result expression limit exceeds 512")
-15570 creturn$(cretnum%)=cs$:cretdef%(cretnum%)=ci%:cretline%(cretnum%)=clnum%:cretcol%(cretnum%)=ccol%:cretnum%=cretnum%+1:ENDPROC
+15540 =p%
+15550 DEF PROCrememberreturn(i%,s$,col%)
+15560 IF retnum%=512 PROCbad("FN result expression limit exceeds 512")
+15570 return$(retnum%)=s$:retdef&(retnum%)=i%:retline%(retnum%)=lnum%:retcol%(retnum%)=col%:retnum%=retnum%+1:ENDPROC
 15580 DEF PROCinferreturns
-15590 LOCAL ci%,cj%,ck%,cchange%
+15590 LOCAL i%,j%,k%,change%
 15600 REPEAT
-15610 cchange%=FALSE:ci%=0
-15620 WHILE ci%<cretnum%
-15625 clnum%=cretline%(ci%):cpos%=cretcol%(ci%)
-15630 cj%=cretdef%(ci%):ck%=FNinferkind(creturn$(ci%))
-15640 IF ck%>=0 AND cpret%(cj%)>=0 AND ck%<>cpret%(cj%) PROCbad("Mixed numeric/string FN results are unsupported")
-15650 IF ck%>=0 AND cpret%(cj%)<0 THEN cpret%(cj%)=ck%:cchange%=TRUE
-15660 ci%=ci%+1:ENDWHILE
-15670 UNTIL NOT cchange%
-15680 ci%=0:WHILE ci%<cpnum%
-15690 IF cpkind%(ci%)=1 AND cpret%(ci%)<0 THEN clnum%=cpline%(ci%):cpos%=1:PROCbad("Unresolved FN result kind "+cpname$(ci%))
-15700 ci%=ci%+1:ENDWHILE
+15610 change%=FALSE:i%=0
+15620 WHILE i%<retnum%
+15625 lnum%=retline%(i%):pos%=retcol%(i%)
+15630 j%=retdef&(i%):k%=FNinferkind(return$(i%))
+15640 IF k%>=0 AND pret%(j%)>=0 AND k%<>pret%(j%) PROCbad("Mixed numeric/string FN results are unsupported")
+15650 IF k%>=0 AND pret%(j%)<0 THEN pret%(j%)=k%:change%=TRUE
+15660 i%=i%+1:ENDWHILE
+15670 UNTIL NOT change%
+15680 i%=0:WHILE i%<pnum%
+15690 IF pkind&(i%)=1 AND pret%(i%)<0 THEN lnum%=pline%(i%):pos%=1:PROCbad("Unresolved FN result kind "+pname$(i%))
+15700 i%=i%+1:ENDWHILE
 15710 ENDPROC
-15720 DEF FNinferkindcore(cs$)
-15730 LOCAL cp%,cd%,cq%,cc$,co%,ci%,ck%,cl%,cr%,cn$
-15740 cs$=FNkindtrim(cs$):IF cs$="" PROCbad("Missing FN result expression")
-15750 WHILE LEFT$(cs$,1)="(" AND FNkindouter(cs$):cs$=FNkindtrim(MID$(cs$,2,LEN(cs$)-2)):ENDWHILE
-15760 cp%=1:cd%=0:cq%=FALSE:co%=0
-15770 WHILE cp%<=LEN(cs$)
-15780 cc$=MID$(cs$,cp%,1):IF cc$=CHR$(34) cq%=NOT cq%
-15790 IF NOT cq% AND cd%=0 AND INSTR("<>=*/^-",cc$)>0 co%=1
-15800 IF NOT cq% AND cd%=0 THEN IF FNkindword(cs$,cp%,"AND") OR FNkindword(cs$,cp%,"OR") OR FNkindword(cs$,cp%,"EOR") OR FNkindword(cs$,cp%,"DIV") OR FNkindword(cs$,cp%,"MOD") co%=1
-15810 IF NOT cq% THEN IF cc$="(" cd%=cd%+1
-15820 IF NOT cq% THEN IF cc$=")" cd%=cd%-1
-15830 cp%=cp%+1:ENDWHILE
-15840 IF co%=1 THEN =0
-15845 IF LEFT$(cs$,1)="+" THEN =0
-15850 cp%=FNkindplus(cs$):IF cp%>0 THEN cl%=FNinferkind(LEFT$(cs$,cp%-1)):cr%=FNinferkind(MID$(cs$,cp%+1)):PROCkindpair: =ck%
-15860 IF LEFT$(cs$,1)=CHR$(34) THEN =1
-15870 IF LEFT$(cs$,2)="FN" THEN cp%=3:cn$=FNkindname(cs$,cp%):ci%=FNprocfind("F"+cn$):IF ci%<0 PROCbad("Undefined FN "+cn$)
-15880 IF LEFT$(cs$,2)="FN" THEN =cpret%(ci%)
-15890 cp%=1:cn$=FNkindname(cs$,cp%):IF RIGHT$(cn$,1)="$" THEN =1
+15720 DEF FNinferkindcore(s$)
+15730 LOCAL p%,d%,q%,c$,o%,i%,k%,l%,r%,n$
+15740 s$=FNkindtrim(s$):IF s$="" PROCbad("Missing FN result expression")
+15750 WHILE LEFT$(s$,1)="(" AND FNkindouter(s$):s$=FNkindtrim(MID$(s$,2,LEN(s$)-2)):ENDWHILE
+15760 p%=1:d%=0:q%=FALSE:o%=0
+15770 WHILE p%<=LEN(s$)
+15780 c$=MID$(s$,p%,1):IF c$=CHR$(34) q%=NOT q%
+15790 IF NOT q% AND d%=0 AND INSTR("<>=*/^-",c$)>0 o%=1
+15800 IF NOT q% AND d%=0 THEN IF FNkindword(s$,p%,"AND") OR FNkindword(s$,p%,"OR") OR FNkindword(s$,p%,"EOR") OR FNkindword(s$,p%,"DIV") OR FNkindword(s$,p%,"MOD") o%=1
+15810 IF NOT q% THEN IF c$="(" d%=d%+1
+15820 IF NOT q% THEN IF c$=")" d%=d%-1
+15830 p%=p%+1:ENDWHILE
+15840 IF o%=1 THEN =0
+15845 IF LEFT$(s$,1)="+" THEN =0
+15850 p%=FNkindplus(s$):IF p%>0 THEN l%=FNinferkind(LEFT$(s$,p%-1)):r%=FNinferkind(MID$(s$,p%+1)):PROCkindpair: =k%
+15860 IF LEFT$(s$,1)=CHR$(34) THEN =1
+15870 IF LEFT$(s$,2)="FN" THEN p%=3:n$=FNkindname(s$,p%):i%=FNprocfind("F"+n$):IF i%<0 PROCbad("Undefined FN "+n$)
+15880 IF LEFT$(s$,2)="FN" THEN =pret%(i%)
+15890 p%=1:n$=FNkindname(s$,p%):IF RIGHT$(n$,1)="$" THEN =1
 15900 =0
 15910 DEF PROCkindpair
-15920 ck%=cl%:IF ck%<0 ck%=cr%
-15930 IF cl%>=0 AND cr%>=0 AND cl%<>cr% PROCbad("Numeric/string type mismatch in FN result")
+15920 k%=l%:IF k%<0 k%=r%
+15930 IF l%>=0 AND r%>=0 AND l%<>r% PROCbad("Numeric/string type mismatch in FN result")
 15940 ENDPROC
-15950 DEF FNkindname(cs$,cp%)
-15960 LOCAL cn$:cn$=""
-15970 WHILE FNalpha(MID$(cs$,cp%,1)) OR FNdigit(MID$(cs$,cp%,1)):cn$=cn$+MID$(cs$,cp%,1):cp%=cp%+1:ENDWHILE
-15980 IF MID$(cs$,cp%,1)="$" cn$=cn$+"$"
-15990 =cn$
-16000 DEF FNkindtrim(cs$)
-16010 WHILE LEFT$(cs$,1)=" " OR LEFT$(cs$,1)=CHR$(9):cs$=MID$(cs$,2):ENDWHILE
-16020 WHILE RIGHT$(cs$,1)=" " OR RIGHT$(cs$,1)=CHR$(9):cs$=LEFT$(cs$,LEN(cs$)-1):ENDWHILE
-16030 =cs$
-16040 DEF FNkindouter(cs$)
-16050 LOCAL cp%,cd%,cq%,cf%,cc$:cp%=1:cd%=0:cq%=FALSE:cf%=TRUE
-16060 WHILE cp%<=LEN(cs$)
-16070 cc$=MID$(cs$,cp%,1):IF cc$=CHR$(34) cq%=NOT cq%
-16080 IF NOT cq% THEN IF cc$="(" cd%=cd%+1
-16090 IF NOT cq% THEN IF cc$=")" cd%=cd%-1
-16100 IF NOT cq% AND cd%=0 AND cp%<LEN(cs$) cf%=FALSE
-16110 cp%=cp%+1:ENDWHILE
-16120 =(cf% AND cd%=0)
-16130 DEF FNkindword(cs$,cp%,cw$)
-16135 LOCAL cb$,ca$:cb$="":IF cp%>1 cb$=MID$(cs$,cp%-1,1)
-16137 ca$=MID$(cs$,cp%+LEN(cw$),1)
-16140 =(MID$(cs$,cp%,LEN(cw$))=cw$ AND NOT FNalpha(cb$) AND NOT FNdigit(cb$) AND NOT FNalpha(ca$) AND NOT FNdigit(ca$))
-16150 DEF FNkindplus(cs$)
-16160 LOCAL cp%,cd%,cq%,cf%,cc$:cp%=1:cd%=0:cq%=FALSE:cf%=0
-16170 WHILE cp%<=LEN(cs$) AND cf%=0
-16180 cc$=MID$(cs$,cp%,1):IF cc$=CHR$(34) cq%=NOT cq%
-16190 IF NOT cq% AND cd%=0 AND cc$="+" cf%=cp%
-16200 IF NOT cq% THEN IF cc$="(" cd%=cd%+1
-16210 IF NOT cq% THEN IF cc$=")" cd%=cd%-1
-16220 cp%=cp%+1:ENDWHILE
-16230 =cf%
-16300 DEF FNinferkind(cs$)
-16310 LOCAL ck%:ckinddepth%=ckinddepth%+1:IF ckinddepth%>32 PROCbad("FN kind expression nesting exceeds 32")
-16320 ck%=FNinferkindcore(cs$):ckinddepth%=ckinddepth%-1:=ck%
+15950 DEF FNkindname(s$,p%)
+15960 LOCAL n$:n$=""
+15970 WHILE FNalpha(MID$(s$,p%,1)) OR FNdigit(MID$(s$,p%,1)):n$=n$+MID$(s$,p%,1):p%=p%+1:ENDWHILE
+15980 IF MID$(s$,p%,1)="$" n$=n$+"$"
+15990 =n$
+16000 DEF FNkindtrim(s$)
+16010 WHILE LEFT$(s$,1)=" " OR LEFT$(s$,1)=CHR$(9):s$=MID$(s$,2):ENDWHILE
+16020 WHILE RIGHT$(s$,1)=" " OR RIGHT$(s$,1)=CHR$(9):s$=LEFT$(s$,LEN(s$)-1):ENDWHILE
+16030 =s$
+16040 DEF FNkindouter(s$)
+16050 LOCAL p%,d%,q%,f%,c$:p%=1:d%=0:q%=FALSE:f%=TRUE
+16060 WHILE p%<=LEN(s$)
+16070 c$=MID$(s$,p%,1):IF c$=CHR$(34) q%=NOT q%
+16080 IF NOT q% THEN IF c$="(" d%=d%+1
+16090 IF NOT q% THEN IF c$=")" d%=d%-1
+16100 IF NOT q% AND d%=0 AND p%<LEN(s$) f%=FALSE
+16110 p%=p%+1:ENDWHILE
+16120 =(f% AND d%=0)
+16130 DEF FNkindword(s$,p%,w$)
+16135 LOCAL b$,a$:b$="":IF p%>1 b$=MID$(s$,p%-1,1)
+16137 a$=MID$(s$,p%+LEN(w$),1)
+16140 =(MID$(s$,p%,LEN(w$))=w$ AND NOT FNalpha(b$) AND NOT FNdigit(b$) AND NOT FNalpha(a$) AND NOT FNdigit(a$))
+16150 DEF FNkindplus(s$)
+16160 LOCAL p%,d%,q%,f%,c$:p%=1:d%=0:q%=FALSE:f%=0
+16170 WHILE p%<=LEN(s$) AND f%=0
+16180 c$=MID$(s$,p%,1):IF c$=CHR$(34) q%=NOT q%
+16190 IF NOT q% AND d%=0 AND c$="+" f%=p%
+16200 IF NOT q% THEN IF c$="(" d%=d%+1
+16210 IF NOT q% THEN IF c$=")" d%=d%-1
+16220 p%=p%+1:ENDWHILE
+16230 =f%
+16300 DEF FNinferkind(s$)
+16310 LOCAL k%:kinddepth%=kinddepth%+1:IF kinddepth%>32 PROCbad("FN kind expression nesting exceeds 32")
+16320 k%=FNinferkindcore(s$):kinddepth%=kinddepth%-1:=k%
 16400 DEF PROCloadmemory
-16402 LOCAL ci%,cj%,cs$
-16404 RESTORE 60000:READ cmsize%,cmrelocs%,cmalloc%,cmdim%,cmaddr%,cmstep%,cmprefix%
-16406 DIM cmimage% cmsize%-1,cmreloc%(cmrelocs%-1)
-16408 FOR ci%=0 TO cmsize%-1 STEP 40:READ cs$
-16410 FOR cj%=1 TO LEN(cs$) STEP 2:cmimage%?(ci%+(cj%-1) DIV 2)=FNhexbyte(MID$(cs$,cj%,2)):NEXT:NEXT
-16412 IF cmrelocs%>0 THEN FOR ci%=0 TO cmrelocs%-1:READ cmreloc%(ci%):NEXT
+16402 LOCAL i%,j%,s$
+16404 RESTORE 60000:READ msize%,mrelocs%,malloc%,mdim%,maddr%,mstep%,mprefix%
+16406 DIM mimage% msize%-1,mreloc%(mrelocs%-1)
+16408 FOR i%=0 TO msize%-1 STEP 40:READ s$
+16410 FOR j%=1 TO LEN(s$) STEP 2:mimage%?(i%+(j%-1) DIV 2)=FNhexbyte(MID$(s$,j%,2)):NEXT:NEXT
+16412 IF mrelocs%>0 THEN FOR i%=0 TO mrelocs%-1:READ mreloc%(i%):NEXT
 16414 ENDPROC
 16416 DEF PROCusememory
-16418 cmemory%=TRUE:cnumeric%=TRUE:ENDPROC
+16418 memory%=TRUE:numeric%=TRUE:ENDPROC
 16420 DEF PROCmemoryruntime
-16422 LOCAL cb%,ci%,cp%,cv%,ce%,cm$
-16424 cb%=cpc%:FOR ci%=0 TO cmsize%-1:PROCbyte(cmimage%?ci%):NEXT
-16426 FOR ci%=0 TO cmrelocs%-1:cp%=cb%+cmreloc%(ci%)
-16428 cv%=ccode%?cp%+256*ccode%?(cp%+1)+65536*ccode%?(cp%+2):PROCpatch(cp%,cv%+&40000+cb%):NEXT
-16430 PROCctlexport("$memalloc",cb%+cmalloc%):PROCctlexport("$arraydim",cb%+cmdim%):PROCctlexport("$arrayaddr",cb%+cmaddr%)
-16432 PROCctlexport("$dimstep",cb%+cmstep%):PROCctlexport("$arrayprefix",cb%+cmprefix%)
+16422 LOCAL b%,i%,p%,v%,e%,m$
+16424 b%=pc%:PROCtemplate(mimage%,msize%,mrelocs%,4)
+16430 PROCctlexport("$memalloc",b%+malloc%):PROCctlexport("$arraydim",b%+mdim%):PROCctlexport("$arrayaddr",b%+maddr%)
+16432 PROCctlexport("$dimstep",b%+mstep%):PROCctlexport("$arrayprefix",b%+mprefix%)
 16434 PROClabel("$memerror")
-16436 FOR ci%=0 TO 6:ce%=VAL(MID$("05101114151627",ci%*2+1,2)):PROCbyte(&FE):PROCbyte(ce%):PROCaddr("CA","$me"+STR$(ce%)):NEXT
+16436 FOR i%=0 TO 6:e%=VAL(MID$("05101114151627",i%*2+1,2)):PROCbyte(&FE):PROCbyte(e%):PROCaddr("CA","$me"+STR$(e%)):NEXT
 16438 PROCerrorconstant(0,"No room")
-16440 FOR ci%=0 TO 6:ce%=VAL(MID$("05101114151627",ci%*2+1,2)):cm$=""
-16442 IF ce%=5 cm$="Missing ,"
-16444 IF ce%=10 cm$="Bad DIM"
-16446 IF ce%=11 cm$="DIM space"
-16448 IF ce%=14 cm$="Bad use of array"
-16450 IF ce%=15 cm$="Bad subscript"
-16452 IF ce%=16 cm$="Syntax error"
-16454 IF ce%=27 cm$="Missing )"
-16456 PROClabel("$me"+STR$(ce%)):PROCerrorconstant(ce%,cm$):NEXT
+16440 FOR i%=0 TO 6:e%=VAL(MID$("05101114151627",i%*2+1,2)):m$=""
+16442 IF e%=5 m$="Missing ,"
+16444 IF e%=10 m$="Bad DIM"
+16446 IF e%=11 m$="DIM space"
+16448 IF e%=14 m$="Bad use of array"
+16450 IF e%=15 m$="Bad subscript"
+16452 IF e%=16 m$="Syntax error"
+16454 IF e%=27 m$="Missing )"
+16456 PROClabel("$me"+STR$(e%)):PROCerrorconstant(e%,m$):NEXT
 16458 ENDPROC
 16460 DEF PROCmemoryworkspace
-16462 LOCAL cp%
+16462 LOCAL p%
 16464 PROClabel("$sheapctx"):PROCaddr("","$sheap"):PROCaddr("","$sheapend")
-16466 PROClabel("$sheap"):cp%=&AFF00-32768*ABS(cacts%)
-16468 IF cp%<&40000+cpc% PROCbad("Memory workspace exceeds user RAM")
-16470 PROClabel("$sheapend"):csaddr%(csnum%-1)=cp%:ENDPROC
-16472 DEF FNmemwidth(ci%)
-16474 LOCAL ct%:ct%=cvtype%(ci%) AND 255:IF ct%=129 ct%=5
-16476 =ct%
-16478 DEF PROCarrayarity(ci%,cn%)
-16480 IF cvdim%(ci%)=0 cvdim%(ci%)=cn%
-16482 IF cvdim%(ci%)<>cn% PROCbad("Array arity must be consistent in this compiler subset")
+16466 PROClabel("$sheap"):p%=&AFF00-32768*ABS(acts%)
+16468 IF p%<&40000+pc% PROCbad("Memory workspace exceeds user RAM")
+16470 PROCdefine("$sheapend",p%):ENDPROC
+16472 DEF FNmemwidth(i%)
+16474 LOCAL t%:t%=vtype%(i%) AND 255:IF t%=129 t%=5
+16476 =t%
+16478 DEF PROCarrayarity(i%,n%)
+16480 IF vdim&(i%)=0 vdim&(i%)=n%
+16482 IF vdim&(i%)<>n% PROCbad("Array arity must be consistent in this compiler subset")
 16484 ENDPROC
-16486 DEF PROCarraycall(cr$,ci%,cn%,cs%)
-16488 PROCaddr("DD21","$var"+STR$(ci%)):PROCaddr("FD21","$v"+STR$(cs%))
-16490 PROCbyte(&06):PROCbyte(FNmemwidth(ci%)):PROCbyte(&3E):PROCbyte(cn%)
-16492 PROCaddr("CD",cr$):PROCaddr("DA","$memerror"):ENDPROC
-16494 DEF PROCarrayaddress(ci%,cw%)
-16496 LOCAL cp%,cs%,cn%,cmore%
-16498 PROCusememory:PROCvalue(0):cp%=cndepth%-1:cs%=cndepth%:cn%=0
-16500 IF cw% THEN PROCbytes("3E01"):PROCaddr("32","$bind"+STR$(ci%)) ELSE PROCaddr("3A","$bind"+STR$(ci%)):PROCbyte(&B7):PROCaddr("CA","$novar")
+16486 DEF PROCarraycall(r$,i%,n%,s%)
+16487 IF r$="$arrayprefix" OR r$="$arrayaddr" THEN
+16488 PROCusecompact:IF r$="$arrayprefix" THEN PROCaddr("CD","$cpprefix") ELSE PROCaddr("CD","$cpaddr")
+16489 PROCaddr("","$var"+STR$(i%)):PROCbyte(s%):PROCbyte(FNmemwidth(i%)):PROCbyte(n%):ENDPROC
+16490 ENDIF
+16491 PROCaddr("DD21","$var"+STR$(i%)):PROCaddr("FD21","$v"+STR$(s%))
+16492 PROCbyte(&06):PROCbyte(FNmemwidth(i%)):PROCbyte(&3E):PROCbyte(n%)
+16493 PROCaddr("CD",r$):PROCaddr("DA","$memerror"):ENDPROC
+16494 DEF PROCarrayaddress(i%,w%)
+16496 LOCAL p%,s%,n%,more%
+16498 PROCusememory:PROCvalue(0):p%=ndepth%-1:s%=ndepth%:n%=0
+16500 IF w% THEN PROCbytes("3E01"):PROCaddr("32","$bind"+STR$(i%)) ELSE PROCaddr("3A","$bind"+STR$(i%)):PROCbyte(&B7):PROCaddr("CA","$novar")
 16502 PROCexpect("("):IF FNpeek=")" PROCbad("Whole-array values are unsupported")
-16504 PROCarraycall("$arrayprefix",ci%,0,cs%)
+16504 PROCarraycall("$arrayprefix",i%,0,s%)
 16506 REPEAT
-16508 IF cn%=16 PROCbad("Array dimension limit exceeds 16")
-16510 IF cn%>0 PROCexpect(",")
-16512 PROCexpr(1):PROCneednumber:PROCnumindices(cndepth%-1,cndepth%-1):PROCnumcall(38)
-16514 cn%=cn%+1:PROCarraycall("$arrayprefix",ci%,cn%,cs%)
-16516 PROCspace:cmore%=(FNpeek=",")
-16518 UNTIL NOT cmore%
-16520 PROCexpect(")"):PROCarrayarity(ci%,cn%):PROCarraycall("$arrayaddr",ci%,cn%,cs%)
-16522 PROCaddr("22","$v"+STR$(cp%)):cndepth%=cp%+1:ENDPROC
-16524 DEF PROCarrayread(ci%)
-16526 LOCAL ct%,cp%,cj%
-16528 PROCarrayaddress(ci%,FALSE):ct%=cvtype%(ci%) AND 255:cp%=cndepth%-1
-16530 IF ct%=129 THEN PROCstrslot:PROCaddr("DD21","$s"+STR$(csdepth%-1)):PROCaddr("FD2A","$v"+STR$(cp%)):PROCaddr("CD","$strload"):cndepth%=cp%:cvaluekind%=1:ENDPROC
-16532 PROCaddr("2A","$v"+STR$(cp%)):PROCaddr("11","$v"+STR$(cp%))
-16534 PROCbyte(&01):PROCbyte(ct%):PROCbytes("0000EDB0")
-16536 IF ct%<5 THEN PROCbyte(&AF):FOR cj%=ct% TO 4:PROCbytes("1213"):NEXT
-16538 cvaluekind%=0:ENDPROC
-16540 DEF PROCarrayassign(ci%)
-16542 LOCAL ct%:ct%=cvtype%(ci%) AND 255:cndepth%=0:csdepth%=0:PROCarrayaddress(ci%,TRUE):PROCexpect("=")
+16508 IF n%=16 PROCbad("Array dimension limit exceeds 16")
+16510 IF n%>0 PROCexpect(",")
+16512 PROCexpr(1):PROCneednumber:PROCnumoperation(ndepth%-1,ndepth%-1,38)
+16514 n%=n%+1:PROCarraycall("$arrayprefix",i%,n%,s%)
+16516 PROCspace:more%=(FNpeek=",")
+16518 UNTIL NOT more%
+16520 PROCexpect(")"):PROCarrayarity(i%,n%):PROCarraycall("$arrayaddr",i%,n%,s%)
+16522 PROCaddr("22","$v"+STR$(p%)):ndepth%=p%+1:ENDPROC
+16524 DEF PROCarrayread(i%)
+16526 LOCAL t%,p%,j%
+16528 PROCarrayaddress(i%,FALSE):t%=vtype%(i%) AND 255:p%=ndepth%-1
+16530 IF t%=129 THEN PROCstrslot:PROCaddr("DD21","$s"+STR$(sdepth%-1)):PROCaddr("FD2A","$v"+STR$(p%)):PROCaddr("CD","$strload"):ndepth%=p%:valuekind%=1:ENDPROC
+16532 PROCaddr("2A","$v"+STR$(p%)):PROCaddr("11","$v"+STR$(p%))
+16534 PROCbyte(&01):PROCbyte(t%):PROCbytes("0000EDB0")
+16536 IF t%<5 THEN PROCbyte(&AF):FOR j%=t% TO 4:PROCbytes("1213"):NEXT
+16538 valuekind%=0:ENDPROC
+16540 DEF PROCarrayassign(i%)
+16542 LOCAL t%:t%=vtype%(i%) AND 255:ndepth%=0:sdepth%=0:PROCarrayaddress(i%,TRUE):PROCexpect("=")
 16544 PROCexpr(1)
-16546 IF ct%=129 THEN IF cvaluekind%<>1 PROCbad("Expected a string item")
-16548 IF ct%=129 THEN PROCaddr("DD2A","$v0"):PROCaddr("FD21","$s0"):PROCaddr("21","$sheapctx"):PROCaddr("CD","$strstore"):PROCaddr("DA","$strerror"):cndepth%=0:csdepth%=0:ENDPROC
-16550 PROCneednumber:IF ct%<>5 THEN PROCnumindices(1,1):PROCnumcall(38)
-16552 PROCaddr("21","$v1"):PROCaddr("ED5B","$v0"):PROCbyte(&01):PROCbyte(ct%):PROCbytes("0000EDB0")
-16554 cndepth%=0:csdepth%=0:ENDPROC
+16546 IF t%=129 THEN IF valuekind%<>1 PROCbad("Expected a string item")
+16548 IF t%=129 THEN PROCaddr("DD2A","$v0"):PROCaddr("FD21","$s0"):PROCaddr("21","$sheapctx"):PROCaddr("CD","$strstore"):PROCaddr("DA","$strerror"):ndepth%=0:sdepth%=0:ENDPROC
+16550 PROCneednumber:IF t%<>5 THEN PROCnumoperation(1,1,38)
+16552 PROCaddr("21","$v1"):PROCaddr("ED5B","$v0"):PROCbyte(&01):PROCbyte(t%):PROCbytes("0000EDB0")
+16554 ndepth%=0:sdepth%=0:ENDPROC
 16556 DEF PROCdim
-16558 LOCAL cn$,ci%,cmore%,ct%,cj%
+16558 LOCAL n$,i%,more%,t%,j%
 16560 PROCusememory
 16562 REPEAT
-16564 cn$=FNname:IF FNreserved(cn$) PROCbad("Unsupported DIM target "+cn$)
-16566 ci%=FNvariable(cn$):ct%=cvtype%(ci%):PROCspace
-16568 IF ct%>255 THEN PROCdimarray(ci%) ELSE PROCdimblock(ci%)
-16570 PROCspace:cmore%=(FNpeek=","):IF cmore% cpos%=cpos%+1
-16572 UNTIL NOT cmore%
+16564 n$=FNname:IF FNreserved(n$) PROCbad("Unsupported DIM target "+n$)
+16566 i%=FNvariable(n$):t%=vtype%(i%):PROCspace
+16568 IF t%>255 THEN PROCdimarray(i%) ELSE PROCdimblock(i%)
+16570 PROCspace:more%=(FNpeek=","):IF more% pos%=pos%+1
+16572 UNTIL NOT more%
 16574 ENDPROC
-16576 DEF PROCdimarray(ci%)
-16578 LOCAL cn%,cs%,cmore%,cnew$,ct%
-16580 PROCbytes("3E01"):PROCaddr("32","$bind"+STR$(ci%))
-16582 cndepth%=0:csdepth%=0:PROCvalue(1):PROCvalue(0):PROCaddr("2A","$var"+STR$(ci%)):PROCaddr("22","$v1")
-16584 cs%=cndepth%:cn%=0:PROCexpect("("):cnew$=FNflow:PROCdimbranch(cnew$,TRUE):PROCarraycall("$arrayprefix",ci%,0,cs%):PROClabel(cnew$)
+16576 DEF PROCdimarray(i%)
+16578 LOCAL n%,s%,more%,new$,t%
+16580 PROCbytes("3E01"):PROCaddr("32","$bind"+STR$(i%))
+16582 ndepth%=0:sdepth%=0:PROCvalue(1):PROCvalue(0):PROCaddr("2A","$var"+STR$(i%)):PROCaddr("22","$v1")
+16584 s%=ndepth%:n%=0:PROCexpect("("):new$=FNflow:PROCdimbranch(new$,TRUE):PROCarraycall("$arrayprefix",i%,0,s%):PROClabel(new$)
 16586 IF FNpeek=")" PROCbad("Empty DIM dimensions are unsupported")
 16588 REPEAT
-16590 IF cn%=16 PROCbad("Array dimension limit exceeds 16")
-16592 IF cn%>0 PROCexpect(",")
-16594 cdimparse%=cdimparse%+1:PROCexpr(1):cdimparse%=cdimparse%-1:PROCneednumber:PROCnumindices(cndepth%-1,cndepth%-1):PROCnumcall(38)
-16596 cn%=cn%+1:PROCdimchoice(ci%,cn%,cs%)
-16598 PROCspace:cmore%=(FNpeek=",")
-16600 UNTIL NOT cmore%
-16602 PROCexpect(")"):PROCarrayarity(ci%,cn%):cnew$=FNflow:PROCdimbranch(cnew$,TRUE)
-16604 PROCarraycall("$arrayaddr",ci%,cn%,cs%):ct%=cvtype%(ci%) AND 255
-16606 IF ct%=129 THEN PROCbytes("3E0A"):PROCaddr("C3","$memerror") ELSE PROCdimseed(ct%):PROCbytes("3E10"):PROCaddr("C3","$memerror")
-16608 PROClabel(cnew$):PROCaddr("21","$sheapctx"):PROCarraycall("$arraydim",ci%,cn%,cs%):cndepth%=0:ENDPROC
-16610 DEF PROCdimblock(ci%)
-16612 LOCAL ct%,cj%:ct%=cvtype%(ci%)
-16614 IF ct%<>4 AND ct%<>5 PROCbad("Raw DIM requires a four-byte or variant numeric target")
+16590 IF n%=16 PROCbad("Array dimension limit exceeds 16")
+16592 IF n%>0 PROCexpect(",")
+16594 dimparse%=dimparse%+1:PROCexpr(1):dimparse%=dimparse%-1:PROCneednumber:PROCnumoperation(ndepth%-1,ndepth%-1,38)
+16596 n%=n%+1:PROCdimchoice(i%,n%,s%)
+16598 PROCspace:more%=(FNpeek=",")
+16600 UNTIL NOT more%
+16602 PROCexpect(")"):PROCarrayarity(i%,n%):new$=FNflow:PROCdimbranch(new$,TRUE)
+16604 PROCarraycall("$arrayaddr",i%,n%,s%):t%=vtype%(i%) AND 255
+16606 IF t%=129 THEN PROCbytes("3E0A"):PROCaddr("C3","$memerror") ELSE PROCdimseed(t%):PROCbytes("3E10"):PROCaddr("C3","$memerror")
+16608 PROClabel(new$):PROCaddr("21","$sheapctx"):PROCarraycall("$arraydim",i%,n%,s%):ndepth%=0:ENDPROC
+16610 DEF PROCdimblock(i%)
+16612 LOCAL t%,j%:t%=vtype%(i%)
+16614 IF t%<>4 AND t%<>5 PROCbad("Raw DIM requires a four-byte or variant numeric target")
 16616 IF FNword("LOCAL") PROCbad("DIM LOCAL storage is unsupported")
-16618 PROCbytes("3E01"):PROCaddr("32","$bind"+STR$(ci%)):PROCaddr("21","$var"+STR$(ci%)):PROCdimseed(ct%)
-16620 cndepth%=0:csdepth%=0:PROCexpr(1):PROCneednumber:PROCnumindices(0,0):PROCnumcall(38)
+16618 PROCbytes("3E01"):PROCaddr("32","$bind"+STR$(i%)):PROCaddr("21","$var"+STR$(i%)):PROCdimseed(t%)
+16620 ndepth%=0:sdepth%=0:PROCexpr(1):PROCneednumber:PROCnumoperation(0,0,38)
 16622 PROCaddr("2A","$v0"):PROCbyte(&23):PROCaddr("DD21","$sheapctx"):PROCaddr("CD","$memalloc"):PROCaddr("DA","$memerror")
-16624 PROCaddr("ED53","$var"+STR$(ci%)):cndepth%=0:ENDPROC
-16626 DEF PROCreadscalar(ci%)
-16628 LOCAL ct%,cs$,cj%:ct%=cvsize%(ci%)
-16630 IF cvtype%(ci%)=129 PROCbad("String value used as a numeric item")
-16632 PROCaddr("3A","$bind"+STR$(ci%)):PROCbyte(&B7):PROCaddr("CA","$novar")
-16634 PROCnumslot:cs$="$v"+STR$(cndepth%-1):PROCvarcopy("$var"+STR$(ci%),cs$,ct%)
-16636 IF ct%<5 THEN PROCbyte(&AF):FOR cj%=ct% TO 4:PROCbytes("1213"):NEXT
-16638 cvaluekind%=0:ENDPROC
+16624 PROCaddr("ED53","$var"+STR$(i%)):ndepth%=0:ENDPROC
+16626 DEF PROCreadscalar(i%)
+16628 LOCAL t%,s$,j%:t%=vsize&(i%)
+16630 IF vtype%(i%)=129 PROCbad("String value used as a numeric item")
+16632 PROCusecompact:PROCnumslot:PROCaddr("CD","$cpread"+STR$(t%))
+16634 PROCaddr("","$bind"+STR$(i%)):PROCbyte(ndepth%-1)
+16638 valuekind%=0:ENDPROC
 16640 DEF PROCmemtail
-16642 LOCAL ct%:IF FNpeek<>"?" AND FNpeek<>"!" ENDPROC
-16644 ct%=1:IF FNpeek="!" ct%=4
-16646 cpos%=cpos%+1:PROCmemoffset:PROCmemload(ct%):ENDPROC
+16642 LOCAL t%:IF FNpeek<>"?" AND FNpeek<>"!" ENDPROC
+16644 t%=1:IF FNpeek="!" t%=4
+16646 pos%=pos%+1:PROCmemoffset:PROCmemload(t%):ENDPROC
 16648 DEF PROCmemoffset
-16650 LOCAL cp%:cp%=cndepth%-1:PROCnumindices(cp%,cp%):PROCnumcall(38)
-16652 PROCitem:PROCneednumber:PROCnumindices(cndepth%-1,cndepth%-1):PROCnumcall(38)
-16654 PROCaddr("2A","$v"+STR$(cp%)):PROCaddr("ED5B","$v"+STR$(cndepth%-1)):PROCbyte(&19)
-16656 PROCaddr("22","$v"+STR$(cp%)):PROCaddr("21","$v"+STR$(cp%)):PROCbytes("232323AF772377")
-16658 cndepth%=cp%+1:ENDPROC
-16660 DEF PROCmemload(ct%)
-16662 LOCAL cp%,cj%:cp%=cndepth%-1:PROCusememory
-16664 PROCaddr("2A","$v"+STR$(cp%)):PROCaddr("11","$v"+STR$(cp%))
-16666 PROCbyte(&01):PROCbyte(ct%):PROCbytes("0000EDB0")
-16668 IF ct%<5 THEN PROCbyte(&AF):FOR cj%=ct% TO 4:PROCbytes("1213"):NEXT
-16670 cvaluekind%=0:ENDPROC
-16672 DEF PROCmemitem(cc$)
-16674 LOCAL ct%
-16676 IF cc$="^" THEN cpos%=cpos%+1:PROCaddress:ENDPROC
-16678 ct%=1:IF cc$="!" ct%=4
-16680 IF cc$="|" ct%=5
-16682 cpos%=cpos%+1:PROCitem:PROCneednumber:PROCnumindices(cndepth%-1,cndepth%-1):PROCnumcall(38)
-16684 PROCmemload(ct%):ENDPROC
+16650 LOCAL p%:p%=ndepth%-1:PROCnumoperation(p%,p%,38)
+16652 PROCitem:PROCneednumber:PROCnumoperation(ndepth%-1,ndepth%-1,38)
+16654 PROCaddr("2A","$v"+STR$(p%)):PROCaddr("ED5B","$v"+STR$(ndepth%-1)):PROCbyte(&19)
+16656 PROCaddr("22","$v"+STR$(p%)):PROCaddr("21","$v"+STR$(p%)):PROCbytes("232323AF772377")
+16658 ndepth%=p%+1:ENDPROC
+16660 DEF PROCmemload(t%)
+16662 LOCAL p%,j%:p%=ndepth%-1:PROCusememory
+16664 PROCaddr("2A","$v"+STR$(p%)):PROCaddr("11","$v"+STR$(p%))
+16666 PROCbyte(&01):PROCbyte(t%):PROCbytes("0000EDB0")
+16668 IF t%<5 THEN PROCbyte(&AF):FOR j%=t% TO 4:PROCbytes("1213"):NEXT
+16670 valuekind%=0:ENDPROC
+16672 DEF PROCmemitem(c$)
+16674 LOCAL t%
+16676 IF c$="^" THEN pos%=pos%+1:PROCaddress:ENDPROC
+16678 t%=1:IF c$="!" t%=4
+16680 IF c$="|" t%=5
+16682 pos%=pos%+1:PROCitem:PROCneednumber:PROCnumoperation(ndepth%-1,ndepth%-1,38)
+16684 PROCmemload(t%):ENDPROC
 16686 DEF PROCaddress
-16688 LOCAL cn$,ci%,cp%
-16690 IF cdimparse%>0 PROCbad("Address-of in array DIM expressions is unqualified")
-16692 cn$=FNname:IF FNreserved(cn$) PROCbad("Unsupported address target "+cn$)
-16694 ci%=FNvariable(cn$):IF cvtype%(ci%)>255 THEN PROCarrayaddress(ci%,TRUE):cvaluekind%=0:ENDPROC
-16696 PROCbytes("3E01"):PROCaddr("32","$bind"+STR$(ci%)):PROCvalue(0):cp%=cndepth%-1
-16698 PROCaddr("21","$var"+STR$(ci%)):PROCaddr("22","$v"+STR$(cp%)):cvaluekind%=0:ENDPROC
-16700 DEF PROCindirectassign(ci%)
-16702 LOCAL ct%:ct%=1:IF FNpeek="!" ct%=4
-16704 cndepth%=0:csdepth%=0:PROCreadscalar(ci%):cpos%=cpos%+1:PROCmemoffset:PROCmemstore(ct%):ENDPROC
-16706 DEF PROCmemassign(cc$)
-16708 LOCAL ct%:ct%=1:IF cc$="!" ct%=4
-16710 IF cc$="|" ct%=5
-16712 PROCusememory:cndepth%=0:csdepth%=0:cpos%=cpos%+1:PROCitem:PROCneednumber:PROCnumindices(0,0):PROCnumcall(38)
-16714 PROCmemstore(ct%):ENDPROC
-16716 DEF PROCmemstore(ct%)
+16688 LOCAL n$,i%,p%
+16690 IF dimparse%>0 PROCbad("Address-of in array DIM expressions is unqualified")
+16692 n$=FNname:IF FNreserved(n$) PROCbad("Unsupported address target "+n$)
+16694 i%=FNvariable(n$):IF vtype%(i%)>255 THEN PROCarrayaddress(i%,TRUE):valuekind%=0:ENDPROC
+16696 PROCbytes("3E01"):PROCaddr("32","$bind"+STR$(i%)):PROCvalue(0):p%=ndepth%-1
+16698 PROCaddr("21","$var"+STR$(i%)):PROCaddr("22","$v"+STR$(p%)):valuekind%=0:ENDPROC
+16700 DEF PROCindirectassign(i%)
+16702 LOCAL t%:t%=1:IF FNpeek="!" t%=4
+16704 ndepth%=0:sdepth%=0:PROCreadscalar(i%):pos%=pos%+1:PROCmemoffset:PROCmemstore(t%):ENDPROC
+16706 DEF PROCmemassign(c$)
+16708 LOCAL t%:t%=1:IF c$="!" t%=4
+16710 IF c$="|" t%=5
+16712 PROCusememory:ndepth%=0:sdepth%=0:pos%=pos%+1:PROCitem:PROCneednumber:PROCnumoperation(0,0,38)
+16714 PROCmemstore(t%):ENDPROC
+16716 DEF PROCmemstore(t%)
 16718 PROCusememory:PROCexpect("="):PROCexpr(1):PROCneednumber
-16720 IF ct%<>5 THEN PROCnumindices(1,1):PROCnumcall(38)
-16722 PROCaddr("21","$v1"):PROCaddr("ED5B","$v0"):PROCbyte(&01):PROCbyte(ct%):PROCbytes("0000EDB0")
-16724 cndepth%=0:csdepth%=0:ENDPROC
-16726 DEF PROCdimseed(ct%)
-16728 LOCAL cj%
-16730 IF ct%=1 THEN PROCbytes("7D77"):ENDPROC
-16732 PROCbytes("E5D173237223AF"):FOR cj%=3 TO ct%:PROCbytes("7723"):NEXT:ENDPROC
-16734 DEF PROCdimbranch(cn$,cz%)
-16736 LOCAL cr$:cr$="C2":IF cz% cr$="CA"
-16738 PROCaddr("2A","$v1"):PROCbytes("01000000B7ED42"):PROCaddr(cr$,cn$):ENDPROC
-16740 DEF PROCdimchoice(ci%,cn%,cs%)
-16742 LOCAL cold$,cend$:cold$=FNflow:cend$=FNflow:PROCdimbranch(cold$,FALSE)
-16744 PROCnumindices(0,cndepth%-1):PROCaddr("CD","$dimstep"):PROCaddr("DA","$memerror"):PROCaddr("C3",cend$)
-16746 PROClabel(cold$):PROCarraycall("$arrayprefix",ci%,cn%,cs%):PROClabel(cend$):ENDPROC
+16720 IF t%<>5 THEN PROCnumoperation(1,1,38)
+16722 PROCaddr("21","$v1"):PROCaddr("ED5B","$v0"):PROCbyte(&01):PROCbyte(t%):PROCbytes("0000EDB0")
+16724 ndepth%=0:sdepth%=0:ENDPROC
+16726 DEF PROCdimseed(t%)
+16728 LOCAL j%
+16730 IF t%=1 THEN PROCbytes("7D77"):ENDPROC
+16732 PROCbytes("E5D173237223AF"):FOR j%=3 TO t%:PROCbytes("7723"):NEXT:ENDPROC
+16734 DEF PROCdimbranch(n$,z%)
+16736 LOCAL r$:r$="C2":IF z% r$="CA"
+16738 PROCaddr("2A","$v1"):PROCbytes("01000000B7ED42"):PROCaddr(r$,n$):ENDPROC
+16740 DEF PROCdimchoice(i%,n%,s%)
+16742 LOCAL old$,end$:old$=FNflow:end$=FNflow:PROCdimbranch(old$,FALSE)
+16744 PROCnumindices(0,ndepth%-1):PROCaddr("CD","$dimstep"):PROCaddr("DA","$memerror"):PROCaddr("C3",end$)
+16746 PROClabel(old$):PROCarraycall("$arrayprefix",i%,n%,s%):PROClabel(end$):ENDPROC
 17500 DEF PROCloadio
-17502 LOCAL ci%,cj%,cs$
-17504 RESTORE 61000:READ cisize%,cirelocs%,ciopen%,ciget%,cieof%,ciput%,ciputs%,ciclose%,ciinput%
-17506 DIM ciimage% cisize%-1,cireloc%(cirelocs%-1)
-17508 FOR ci%=0 TO cisize%-1 STEP 40:READ cs$
-17510 FOR cj%=1 TO LEN(cs$) STEP 2:ciimage%?(ci%+(cj%-1) DIV 2)=FNhexbyte(MID$(cs$,cj%,2)):NEXT:NEXT
-17512 IF cirelocs%>0 THEN FOR ci%=0 TO cirelocs%-1:READ cireloc%(ci%):NEXT
+17502 LOCAL i%,j%,s$
+17504 RESTORE 61000:READ isize%,irelocs%,iopen%,iget%,ieof%,iput%,iputs%,iclose%,iinput%
+17506 DIM iimage% isize%-1,ireloc%(irelocs%-1)
+17508 FOR i%=0 TO isize%-1 STEP 40:READ s$
+17510 FOR j%=1 TO LEN(s$) STEP 2:iimage%?(i%+(j%-1) DIV 2)=FNhexbyte(MID$(s$,j%,2)):NEXT:NEXT
+17512 IF irelocs%>0 THEN FOR i%=0 TO irelocs%-1:READ ireloc%(i%):NEXT
 17514 ENDPROC
 17516 DEF PROCchannel
-17518 PROCexpect("#"):PROCitem:PROCneednumber:PROCnumindices(cndepth%-1,cndepth%-1):PROCnumcall(38)
+17518 PROCexpect("#"):PROCitem:PROCneednumber:PROCnumoperation(ndepth%-1,ndepth%-1,38)
 17520 ENDPROC
-17522 DEF PROCioitem(cw$)
-17524 LOCAL cm%,cp%:cio%=TRUE:cfileio%=TRUE
-17526 IF cw$="BGET" OR cw$="EOF" THEN PROCchannel:cp%=cndepth%-1:PROCaddr("3A","$v"+STR$(cp%)):PROCaddr("DD21","$v"+STR$(cp%)):PROCaddr("CD","$io"+cw$):cvaluekind%=0:ENDPROC
-17528 cm%=1:IF cw$="OPENOUT" cm%=10
-17530 IF cw$="OPENUP" cm%=3
-17532 PROCstritem:IF csunsafe%(csdepth%-1) PROCbad("Direct FN filename carriers are unqualified")
-17534 PROCnumslot:PROCaddr("DD21","$v"+STR$(cndepth%-1)):PROCaddr("FD21","$s"+STR$(csdepth%-1))
-17536 PROCbyte(&3E):PROCbyte(cm%):PROCaddr("CD","$ioopen"):csdepth%=csdepth%-1:cvaluekind%=0:ENDPROC
+17522 DEF PROCioitem(w$)
+17524 LOCAL m%,p%:io%=TRUE:fileio%=TRUE
+17526 IF w$="BGET" OR w$="EOF" THEN PROCchannel:p%=ndepth%-1:PROCaddr("3A","$v"+STR$(p%)):PROCaddr("DD21","$v"+STR$(p%)):PROCaddr("CD","$io"+w$):valuekind%=0:ENDPROC
+17528 m%=1:IF w$="OPENOUT" m%=10
+17530 IF w$="OPENUP" m%=3
+17532 PROCstritem:IF sunsafe%(sdepth%-1) PROCbad("Direct FN filename carriers are unqualified")
+17534 PROCnumslot:PROCaddr("DD21","$v"+STR$(ndepth%-1)):PROCaddr("FD21","$s"+STR$(sdepth%-1))
+17536 PROCbyte(&3E):PROCbyte(m%):PROCaddr("CD","$ioopen"):sdepth%=sdepth%-1:valuekind%=0:ENDPROC
 17538 DEF PROCclosestatement
-17540 cio%=TRUE:cfileio%=TRUE:cndepth%=0:csdepth%=0:PROCchannel
-17542 PROCaddr("3A","$v0"):PROCaddr("CD","$ioclose"):cndepth%=0:ENDPROC
+17540 io%=TRUE:fileio%=TRUE:ndepth%=0:sdepth%=0:PROCchannel
+17542 PROCaddr("3A","$v0"):PROCaddr("CD","$ioclose"):ndepth%=0:ENDPROC
 17544 DEF PROCbput
-17546 LOCAL cf%:cio%=TRUE:cfileio%=TRUE:cndepth%=0:csdepth%=0:PROCchannel:PROCexpect(","):PROCexpr(1):PROCspace
-17548 IF cvaluekind%=0 THEN PROCneednumber:PROCnumindices(1,1):PROCnumcall(38):PROCaddr("3A","$v1"):PROCbyte(&47):PROCaddr("3A","$v0"):PROCaddr("CD","$ioput"):cndepth%=0:ENDPROC
-17550 cf%=1:IF FNpeek=";" THEN cf%=0:cpos%=cpos%+1
-17552 PROCaddr("FD21","$s0"):PROCbyte(&0E):PROCbyte(cf%):PROCaddr("3A","$v0"):PROCaddr("CD","$ioputs"):cndepth%=0:csdepth%=0:ENDPROC
+17546 LOCAL f%:io%=TRUE:fileio%=TRUE:ndepth%=0:sdepth%=0:PROCchannel:PROCexpect(","):PROCexpr(1):PROCspace
+17548 IF valuekind%=0 THEN PROCneednumber:PROCnumoperation(1,1,38):PROCaddr("3A","$v1"):PROCbyte(&47):PROCaddr("3A","$v0"):PROCaddr("CD","$ioput"):ndepth%=0:ENDPROC
+17550 f%=1:IF FNpeek=";" THEN f%=0:pos%=pos%+1
+17552 PROCaddr("FD21","$s0"):PROCbyte(&0E):PROCbyte(f%):PROCaddr("3A","$v0"):PROCaddr("CD","$ioputs"):ndepth%=0:sdepth%=0:ENDPROC
 17554 DEF PROCinputline
-17556 LOCAL cp$,cn$,ci%:cio%=TRUE:PROCspace:IF NOT FNword("LINE") PROCbad("Only INPUT LINE is supported")
-17558 cpos%=cpos%+4:PROCspace:cp$="? ":IF FNpeek=CHR$(34) cp$=FNstring
-17560 PROCspace:cn$=FNname:IF FNreserved(cn$) PROCbad("Unsupported INPUT LINE target")
-17562 ci%=FNvariable(cn$):IF cvtype%(ci%)<>129 PROCbad("INPUT LINE requires one scalar string variable")
+17556 LOCAL p$,n$,i%:io%=TRUE:PROCspace:IF NOT FNword("LINE") PROCbad("Only INPUT LINE is supported")
+17558 pos%=pos%+4:PROCspace:p$="? ":IF FNpeek=CHR$(34) p$=FNstring
+17560 PROCspace:n$=FNname:IF FNreserved(n$) PROCbad("Unsupported INPUT LINE target")
+17562 i%=FNvariable(n$):IF vtype%(i%)<>129 PROCbad("INPUT LINE requires one scalar string variable")
 17564 PROCspace:IF NOT FNstmtend PROCbad("INPUT LINE separators and multiple targets are unsupported")
-17566 PROCbytes("3E01"):PROCaddr("32","$bind"+STR$(ci%)):PROCtext(cp$):cndepth%=0:csdepth%=0:PROCstrslot
+17566 PROCbytes("3E01"):PROCaddr("32","$bind"+STR$(i%)):PROCtext(p$):ndepth%=0:sdepth%=0:PROCstrslot
 17568 PROCaddr("DD21","$s0"):PROCaddr("CD","$ioinput"):PROCaddr("DA","$ioerror")
-17570 PROCaddr("DD21","$var"+STR$(ci%)):PROCaddr("FD21","$s0"):PROCaddr("21","$sheapctx"):PROCaddr("CD","$strstore"):PROCaddr("DA","$strerror"):csdepth%=0:ENDPROC
+17570 PROCaddr("DD21","$var"+STR$(i%)):PROCaddr("FD21","$s0"):PROCaddr("21","$sheapctx"):PROCaddr("CD","$strstore"):PROCaddr("DA","$strerror"):sdepth%=0:ENDPROC
 17572 DEF PROCIOruntime
-17574 LOCAL cb%,ci%,cp%,cv%
-17576 cb%=cpc%:FOR ci%=0 TO cisize%-1:PROCbyte(ciimage%?ci%):NEXT
-17578 FOR ci%=0 TO cirelocs%-1:cp%=cb%+cireloc%(ci%):cv%=ccode%?cp%+256*ccode%?(cp%+1)+65536*ccode%?(cp%+2):PROCpatch(cp%,cv%+&40000+cb%):NEXT
-17580 PROCctlexport("$ioopen",cb%+ciopen%):PROCctlexport("$ioBGET",cb%+ciget%):PROCctlexport("$ioEOF",cb%+cieof%)
-17582 PROCctlexport("$ioput",cb%+ciput%):PROCctlexport("$ioputs",cb%+ciputs%):PROCctlexport("$ioclose",cb%+ciclose%):PROCctlexport("$ioinput",cb%+ciinput%)
+17574 LOCAL b%,i%,p%,v%
+17576 b%=pc%:PROCtemplate(iimage%,isize%,irelocs%,5)
+17580 PROCctlexport("$ioopen",b%+iopen%):PROCctlexport("$ioBGET",b%+iget%):PROCctlexport("$ioEOF",b%+ieof%)
+17582 PROCctlexport("$ioput",b%+iput%):PROCctlexport("$ioputs",b%+iputs%):PROCctlexport("$ioclose",b%+iclose%):PROCctlexport("$ioinput",b%+iinput%)
 17584 PROClabel("$ioerror"):PROCerrorconstant(17,"Escape")
 17586 ENDPROC
 18000 DEF PROCloaddata
-18002 LOCAL ci%,cj%,cs$
-18004 RESTORE 62000:READ cdsize%,cdrelocs%,cdpeek%,cdnumber%,cdstring%,cdcommit%
-18006 DIM cdimage% cdsize%-1,cdreloc%(cdrelocs%),cdpacket% 4
-18008 FOR ci%=0 TO cdsize%-1 STEP 40:READ cs$
-18010 FOR cj%=1 TO LEN(cs$) STEP 2:cdimage%?(ci%+(cj%-1) DIV 2)=FNhexbyte(MID$(cs$,cj%,2)):NEXT:NEXT
-18012 IF cdrelocs%>0 THEN FOR ci%=0 TO cdrelocs%-1:READ cdreloc%(ci%):NEXT
+18002 LOCAL i%,j%,s$
+18004 RESTORE 62000:READ dsize%,drelocs%,dpeek%,dnumber%,dstring%,dcommit%
+18006 DIM dimage% dsize%-1,dreloc%(drelocs%),dpacket% 4
+18008 FOR i%=0 TO dsize%-1 STEP 40:READ s$
+18010 FOR j%=1 TO LEN(s$) STEP 2:dimage%?(i%+(j%-1) DIV 2)=FNhexbyte(MID$(s$,j%,2)):NEXT:NEXT
+18012 IF drelocs%>0 THEN FOR i%=0 TO drelocs%-1:READ dreloc%(i%):NEXT
 18014 ENDPROC
-18016 DEF PROCcapturenumber(cv)
-18018 LOCAL ci%,cp%:cp%=^cv:FOR ci%=0 TO 4:cdpacket%?ci%=cp%?ci%:NEXT
+18016 DEF PROCcapturenumber(v)
+18018 LOCAL i%,p%:p%=^v:FOR i%=0 TO 4:dpacket%?i%=p%?i%:NEXT
 18020 ENDPROC
-18022 DEF PROCcapturepacked(cv,ce%)
-18024 LOCAL ci%,cq:FOR ci%=0 TO 3:cq=INT(cv/256):cdpacket%?ci%=cv-cq*256:cv=cq:NEXT:cdpacket%?4=ce%
+18022 DEF PROCcapturepacked(v,e%)
+18024 LOCAL i%,q:FOR i%=0 TO 3:q=INT(v/256):dpacket%?i%=v-q*256:v=q:NEXT:dpacket%?4=e%
 18026 ENDPROC
 18028 DEF PROCusedata
-18030 cdataused%=TRUE:cnumeric%=TRUE:ENDPROC
+18030 dataused%=TRUE:numeric%=TRUE:ENDPROC
 18032 DEF PROCdatastatement
-18034 IF NOT cfirst% PROCbad("DATA must lead a physical line")
-18036 cpos%=LEN(cline$)+1:ENDPROC
+18034 IF NOT first% PROCbad("DATA must lead a physical line")
+18036 pos%=LEN(line$)+1:ENDPROC
 18038 DEF PROCrestoredata
-18040 LOCAL ct$:PROCusedata:PROCspace:ct$="$databegin"
-18042 IF NOT FNstmtend ct$="$data#"+STR$(FNnumber(65279))
-18044 PROCaddr("21",ct$):PROCaddr("22","$datactx"):ENDPROC
+18040 LOCAL t$:PROCusedata:PROCspace:t$="$databegin"
+18042 IF NOT FNstmtend t$="$data#"+STR$(FNnumber(65279))
+18044 PROCaddr("21",t$):PROCaddr("22","$datactx"):ENDPROC
 18046 DEF PROCreadstatement
-18048 LOCAL cn$,ci%,ct%,ca%,cs%,cmore%
+18048 LOCAL n$,i%,t%,a%,s%,more%
 18050 PROCusedata
 18052 REPEAT
-18054 cndepth%=0:csdepth%=0:PROCvalue(0):PROCaddr("DD21","$datactx"):PROCaddr("FD21","$v0"):PROCaddr("CD","$datapeek"):PROCaddr("DA","$dataerror")
-18056 cn$=FNname:IF FNreserved(cn$) PROCbad("Unsupported READ target "+cn$)
-18058 ci%=FNvariable(cn$):ct%=cvtype%(ci%) AND 255:ca%=(cvtype%(ci%)>255)
-18060 IF ca% THEN PROCarrayaddress(ci%,TRUE) ELSE PROCbytes("3E01"):PROCaddr("32","$bind"+STR$(ci%))
-18062 IF ct%=129 THEN PROCreadstring(ci%,ca%) ELSE PROCreadnumber(ci%,ca%,ct%)
-18064 PROCaddr("DD21","$datactx"):PROCaddr("FD2A","$v0"):PROCaddr("CD","$datacommit"):cndepth%=0:csdepth%=0
-18066 PROCspace:cmore%=(FNpeek=","):IF cmore% cpos%=cpos%+1
-18068 UNTIL NOT cmore%
+18054 ndepth%=0:sdepth%=0:PROCvalue(0):PROCaddr("DD21","$datactx"):PROCaddr("FD21","$v0"):PROCaddr("CD","$datapeek"):PROCaddr("DA","$dataerror")
+18056 n$=FNname:IF FNreserved(n$) PROCbad("Unsupported READ target "+n$)
+18058 i%=FNvariable(n$):t%=vtype%(i%) AND 255:a%=(vtype%(i%)>255)
+18060 IF a% THEN PROCarrayaddress(i%,TRUE) ELSE PROCbytes("3E01"):PROCaddr("32","$bind"+STR$(i%))
+18062 IF t%=129 THEN PROCreadstring(i%,a%) ELSE PROCreadnumber(i%,a%,t%)
+18064 PROCaddr("DD21","$datactx"):PROCaddr("FD2A","$v0"):PROCaddr("CD","$datacommit"):ndepth%=0:sdepth%=0
+18066 PROCspace:more%=(FNpeek=","):IF more% pos%=pos%+1
+18068 UNTIL NOT more%
 18070 ENDPROC
-18072 DEF PROCreadnumber(ci%,ca%,ct%)
-18074 LOCAL cs%:cdnumeric%=TRUE:PROCnumslot:cs%=cndepth%-1
-18076 PROCaddr("DD21","$v"+STR$(cs%)):PROCaddr("FD2A","$v0"):PROCaddr("CD","$datanumber"):PROCaddr("DA","$dataerror")
-18078 IF ct%<>5 THEN PROCnumindices(cs%,cs%):PROCnumcall(38)
-18080 IF NOT ca% THEN PROCvarcopy("$v"+STR$(cs%),"$var"+STR$(ci%),ct%):ENDPROC
-18082 PROCaddr("21","$v"+STR$(cs%)):PROCaddr("ED5B","$v1"):PROCbyte(&01):PROCbyte(ct%):PROCbytes("0000EDB0"):ENDPROC
-18084 DEF PROCreadstring(ci%,ca%)
+18072 DEF PROCreadnumber(i%,a%,t%)
+18074 LOCAL s%:dnumeric%=TRUE:PROCnumslot:s%=ndepth%-1
+18076 PROCaddr("DD21","$v"+STR$(s%)):PROCaddr("FD2A","$v0"):PROCaddr("CD","$datanumber"):PROCaddr("DA","$dataerror")
+18078 IF t%<>5 THEN PROCnumoperation(s%,s%,38)
+18080 IF NOT a% THEN PROCvarcopy("$v"+STR$(s%),"$var"+STR$(i%),t%):ENDPROC
+18082 PROCaddr("21","$v"+STR$(s%)):PROCaddr("ED5B","$v1"):PROCbyte(&01):PROCbyte(t%):PROCbytes("0000EDB0"):ENDPROC
+18084 DEF PROCreadstring(i%,a%)
 18086 PROCstrslot:PROCaddr("DD21","$s0"):PROCaddr("FD2A","$v0"):PROCaddr("CD","$datastring")
-18088 IF ca% THEN PROCaddr("DD2A","$v1") ELSE PROCaddr("DD21","$var"+STR$(ci%))
+18088 IF a% THEN PROCaddr("DD2A","$v1") ELSE PROCaddr("DD21","$var"+STR$(i%))
 18090 PROCaddr("FD21","$s0"):PROCaddr("21","$sheapctx"):PROCaddr("CD","$strstore"):PROCaddr("DA","$strerror"):ENDPROC
 18092 DEF PROCdataruntime
-18094 LOCAL cb%,ci%,cp%,cv%
-18096 cb%=cpc%:FOR ci%=0 TO cdsize%-1:PROCbyte(cdimage%?ci%):NEXT
-18098 IF cdrelocs%>0 THEN FOR ci%=0 TO cdrelocs%-1:cp%=cb%+cdreloc%(ci%):cv%=ccode%?cp%+256*ccode%?(cp%+1)+65536*ccode%?(cp%+2):PROCpatch(cp%,cv%+&40000+cb%):NEXT
-18100 PROCctlexport("$datapeek",cb%+cdpeek%):PROCctlexport("$datanumber",cb%+cdnumber%):PROCctlexport("$datastring",cb%+cdstring%):PROCctlexport("$datacommit",cb%+cdcommit%)
-18102 PROClabel("$datactx"):PROCaddr("","$databegin"):PROCaddr("","$dataend")
-18104 PROClabel("$dataerror"):PROCbytes("FE06"):PROCaddr("CA","$datatypemismatch"):PROCbytes("FE10"):PROCaddr("CA","$datasyntax"):PROCbytes("FE2A"):PROCaddr("CA","$dataempty"):PROCaddr("C3","$numerror")
-18106 PROClabel("$datatypemismatch"):PROCerrorconstant(6,"Type mismatch")
-18108 PROClabel("$datasyntax"):PROCerrorconstant(16,"Syntax error")
-18110 PROClabel("$dataempty"):PROCerrorconstant(42,"Out of DATA")
-18112 ENDPROC
-18114 DEF PROCdatatable
-18116 LOCAL ch%,cn%,ci%,cp%,clnum%,cpos%,cline$,ccr%
-18118 ch%=OPENIN(csource$):IF ch%=0 PROCbad("Cannot reopen DATA source")
-18120 clnum%=0:ccr%=FALSE:PROClabel("$databegin")
-18122 WHILE NOT EOF#ch%
-18124 clnum%=clnum%+1:cpos%=1:PROCreadline(ch%):PROCspace:cn%=-1
-18126 IF FNdigit(FNpeek) cn%=FNnumber(65279)
-18128 PROCspace:IF FNword("DATA") PROCdataline(cn%)
-18130 ENDWHILE
-18132 CLOSE#ch%:PROClabel("$dataend")
-18134 ci%=FNsymbol("$start"):cp%=csaddr%(ci%):csaddr%(ci%)=&40000+cpc%
-18136 PROCaddr("21","$databegin"):PROCaddr("22","$datactx"):PROCbyte(&C3):PROCbyte(cp% MOD 256):PROCbyte((cp% DIV 256) MOD 256):PROCbyte(cp% DIV 65536)
-18138 ENDPROC
-18140 DEF PROCdataline(cn%)
-18142 LOCAL cmore%:IF cn%>=0 PROClabel("$data#"+STR$(cn%))
-18144 cpos%=cpos%+4
-18146 REPEAT
-18148 PROCdatafield:cmore%=(FNpeek=","):IF cmore% cpos%=cpos%+1
-18150 UNTIL NOT cmore%
-18152 ENDPROC
-18154 DEF PROCdatafield
-18156 LOCAL cs$,cp%,ci%,ce%,cq%
-18158 PROCspace:cq%=(FNpeek=CHR$(34))
-18160 IF cq% THEN cs$=FNstring:PROCspace:IF FNpeek<>"" AND FNpeek<>"," PROCbad("Trailing text after quoted DATA is unqualified")
-18162 IF NOT cq% THEN cp%=cpos%:WHILE FNpeek<>"" AND FNpeek<>",":cpos%=cpos%+1:ENDWHILE:cs$=MID$(cline$,cp%,cpos%-cp%)
-18164 ce%=6:FOR ci%=0 TO 4:cdpacket%?ci%=0:NEXT
-18166 IF NOT cq% ce%=FNdataencode(cs$)
-18168 IF ce%=-1 AND cdnumeric% PROCbad("Numeric READ requires literal DATA fields")
-18170 IF ce%=-1 ce%=16
-18171 IF cs$<>"" THEN FOR ci%=1 TO LEN(cs$):PROCdatabytecheck(ASC(MID$(cs$,ci%,1))):NEXT
-18172 PROCbyte(LEN(cs$)):PROCbyte(ce%):FOR ci%=0 TO 4:PROCbyte(cdpacket%?ci%):NEXT:PROCbyte(0)
-18174 IF cs$<>"" THEN FOR ci%=1 TO LEN(cs$):PROCbyte(ASC(MID$(cs$,ci%,1))):NEXT
-18176 ENDPROC
-18178 DEF FNdataencode(cs$)
-18180 LOCAL cline$,cpos%,csign%,cv,ci%,ce%,cp%:cline$=cs$:cpos%=1:csign%=0:cnumerr%=0
-18182 PROCspace:IF FNpeek="" THEN =16
-18184 IF FNpeek="+" OR FNpeek="-" THEN csign%=(FNpeek="-"):cpos%=cpos%+1:PROCspace
-18186 IF NOT FNdigit(FNpeek) AND FNpeek<>"&" AND FNpeek<>"." THEN =-1
-18188 cdcapture%=TRUE:PROCconstant:cdcapture%=FALSE:PROCspace:IF FNpeek<>"" THEN =-1
-18190 IF csign% AND cnumerr%=0 THEN cv=|cdpacket%:cv=-cv:cp%=^cv:FOR ci%=0 TO 4:cdpacket%?ci%=cp%?ci%:NEXT
-18192 =cnumerr%
-18194 DEF PROCdatabytecheck(cb%)
-18196 IF cb%<32 PROCbad("Control bytes in DATA are unsupported")
-18198 ENDPROC
+18094 LOCAL b%,i%,p%,v%
+18096 b%=pc%:PROCtemplate(dimage%,dsize%,drelocs%,6)
+18098 PROCctlexport("$datapeek",b%+dpeek%):PROCctlexport("$datanumber",b%+dnumber%):PROCctlexport("$datastring",b%+dstring%):PROCctlexport("$datacommit",b%+dcommit%)
+18100 PROClabel("$datactx"):PROCaddr("","$databegin"):PROCaddr("","$dataend")
+18102 PROClabel("$dataerror"):PROCbytes("FE06"):PROCaddr("CA","$datatypemismatch"):PROCbytes("FE10"):PROCaddr("CA","$datasyntax"):PROCbytes("FE2A"):PROCaddr("CA","$dataempty"):PROCaddr("C3","$numerror")
+18104 PROClabel("$datatypemismatch"):PROCerrorconstant(6,"Type mismatch")
+18106 PROClabel("$datasyntax"):PROCerrorconstant(16,"Syntax error")
+18108 PROClabel("$dataempty"):PROCerrorconstant(42,"Out of DATA")
+18110 ENDPROC
+18112 DEF PROCdatatable
+18114 LOCAL h%,n%,i%,p%,lnum%,pos%,line$,cr%
+18116 h%=OPENIN(source$):IF h%=0 PROCbad("Cannot reopen DATA source")
+18118 lnum%=0:cr%=FALSE:PROClabel("$databegin")
+18120 WHILE NOT EOF#h%
+18122 lnum%=lnum%+1:pos%=1:PROCreadline(h%):PROCspace:n%=-1
+18124 IF FNdigit(FNpeek) n%=FNnumber(65279)
+18126 PROCspace:IF FNword("DATA") PROCdataline(n%)
+18128 ENDWHILE
+18130 CLOSE#h%:PROClabel("$dataend")
+18132 p%=start%:start%=&40000+pc%
+18134 PROCaddr("21","$databegin"):PROCaddr("22","$datactx"):PROCbyte(&C3):PROCbyte(p% MOD 256):PROCbyte((p% DIV 256) MOD 256):PROCbyte(p% DIV 65536)
+18136 ENDPROC
+18138 DEF PROCdataline(n%)
+18140 LOCAL more%:IF n%>=0 THEN IF FNlineref(n%,1,FALSE) PROClabel("$data#"+STR$(n%))
+18142 pos%=pos%+4
+18144 REPEAT
+18146 PROCdatafield:more%=(FNpeek=","):IF more% pos%=pos%+1
+18148 UNTIL NOT more%
+18150 ENDPROC
+18152 DEF PROCdatafield
+18154 LOCAL s$,p%,i%,e%,q%
+18156 PROCspace:q%=(FNpeek=CHR$(34))
+18158 IF q% THEN s$=FNstring:PROCspace:IF FNpeek<>"" AND FNpeek<>"," PROCbad("Trailing text after quoted DATA is unqualified")
+18160 IF NOT q% THEN p%=pos%:WHILE FNpeek<>"" AND FNpeek<>",":pos%=pos%+1:ENDWHILE:s$=MID$(line$,p%,pos%-p%)
+18162 e%=6:FOR i%=0 TO 4:dpacket%?i%=0:NEXT
+18164 IF NOT q% e%=FNdataencode(s$)
+18166 IF e%=-1 AND dnumeric% PROCbad("Numeric READ requires literal DATA fields")
+18168 IF e%=-1 e%=16
+18170 IF s$<>"" THEN
+18172 FOR i%=1 TO LEN(s$)
+18174 IF ASC(MID$(s$,i%,1))<32 PROCbad("Control bytes in DATA are unsupported")
+18176 NEXT
+18178 ENDIF
+18180 PROCcodecount(8):IF phase%=3 THEN BPUT#oh%,LEN(s$):BPUT#oh%,e%:FOR i%=0 TO 4:BPUT#oh%,dpacket%?i%:NEXT:BPUT#oh%,0
+18182 PROCstringbytes(s$)
+18184 ENDPROC
+18186 DEF FNdataencode(s$)
+18188 LOCAL line$,pos%,sign%,v,i%,e%,p%:line$=s$:pos%=1:sign%=0:numerr%=0
+18190 PROCspace:IF FNpeek="" THEN =16
+18192 IF FNpeek="+" OR FNpeek="-" THEN sign%=(FNpeek="-"):pos%=pos%+1:PROCspace
+18194 IF NOT FNdigit(FNpeek) AND FNpeek<>"&" AND FNpeek<>"." THEN =-1
+18196 dcapture%=TRUE:PROCconstant:dcapture%=FALSE:PROCspace:IF FNpeek<>"" THEN =-1
+18198 IF sign% AND numerr%=0 THEN v=|dpacket%:v=-v:p%=^v:FOR i%=0 TO 4:dpacket%?i%=p%?i%:NEXT
+18200 =numerr%
+18202 DEF PROCdatabytecheck(b%)
+18204 IF b%<32 PROCbad("Control bytes in DATA are unsupported")
+18206 ENDPROC
 19000 DEF PROCloaderrors
-19002 LOCAL ci%,cj%,cs$
-19004 DIM ceentry%(23):RESTORE 63000:READ cesize%,cerelocs%:FOR ci%=0 TO 23:READ ceentry%(ci%):NEXT
-19006 DIM ceimage% cesize%-1,cereloc%(cerelocs%-1)
-19008 FOR ci%=0 TO cesize%-1 STEP 40:READ cs$
-19010 FOR cj%=1 TO LEN(cs$) STEP 2:ceimage%?(ci%+(cj%-1) DIV 2)=FNhexbyte(MID$(cs$,cj%,2)):NEXT:NEXT
-19012 IF cerelocs%>0 THEN FOR ci%=0 TO cerelocs%-1:READ cereloc%(ci%):NEXT
+19002 LOCAL i%,j%,s$
+19004 DIM eentry%(23):RESTORE 63000:READ esize%,erelocs%:FOR i%=0 TO 23:READ eentry%(i%):NEXT
+19006 DIM eimage% esize%-1,ereloc%(erelocs%-1)
+19008 FOR i%=0 TO esize%-1 STEP 40:READ s$
+19010 FOR j%=1 TO LEN(s$) STEP 2:eimage%?(i%+(j%-1) DIV 2)=FNhexbyte(MID$(s$,j%,2)):NEXT:NEXT
+19012 IF erelocs%>0 THEN FOR i%=0 TO erelocs%-1:READ ereloc%(i%):NEXT
 19014 ENDPROC
 19016 DEF PROCuseerrors
-19018 PROCuseacts:PROCusememory:cstrings%=TRUE:IF csslots%=0 csslots%=1
+19018 PROCuseacts:PROCusememory:strings%=TRUE:IF sslots%=0 sslots%=1
 19020 ENDPROC
 19022 DEF PROCerrorscan
-19024 LOCAL cp%,cq%,cc$
+19024 LOCAL p%,q%,c$
 19026 IF FNword("DATA") OR FNword("REM") ENDPROC
-19027 IF INSTR(cline$,"ERR")=0 AND INSTR(cline$,"ERL")=0 AND INSTR(cline$,"REPORT")=0 ENDPROC
-19028 cp%=cpos%:cq%=FALSE
-19030 WHILE cp%<=LEN(cline$)
-19032 cc$=MID$(cline$,cp%,1):IF cc$=CHR$(34) cq%=NOT cq%
-19034 IF NOT cq% THEN IF FNkindword(cline$,cp%,"REM") cp%=LEN(cline$)+1
-19036 IF NOT cq% THEN IF FNkindword(cline$,cp%,"ERROR") OR FNkindword(cline$,cp%,"ERR") OR FNkindword(cline$,cp%,"ERL") OR FNkindword(cline$,cp%,"REPORT") cerrors%=TRUE
-19038 cp%=cp%+1:ENDWHILE
+19027 IF INSTR(line$,"ERR")=0 AND INSTR(line$,"ERL")=0 AND INSTR(line$,"REPORT")=0 ENDPROC
+19028 p%=pos%:q%=FALSE
+19030 WHILE p%<=LEN(line$)
+19032 c$=MID$(line$,p%,1):IF c$=CHR$(34) q%=NOT q%
+19034 IF NOT q% THEN IF FNkindword(line$,p%,"REM") p%=LEN(line$)+1
+19036 IF NOT q% THEN IF FNkindword(line$,p%,"ERROR") OR FNkindword(line$,p%,"ERR") OR FNkindword(line$,p%,"ERL") OR FNkindword(line$,p%,"REPORT") errors%=TRUE
+19038 p%=p%+1:ENDWHILE
 19040 ENDPROC
 19042 DEF PROCerrmark
-19044 IF NOT cerrors% ENDPROC
+19044 IF NOT errors% ENDPROC
 19045 IF FNword("REM") OR FNword("DATA") ENDPROC
 19046 PROCerrorline
 19050 ENDPROC
 19052 DEF PROCerrorinstall
-19054 LOCAL cm%,ct$:PROCexpectword("ERROR"):PROCspace:cm%=0
-19056 IF FNword("LOCAL") THEN cm%=1:cpos%=cpos%+5:PROCspace
-19058 IF FNword("OFF") THEN cpos%=cpos%+3:PROCbytes("210000003E"):PROCbyte(cm%):PROCaddr("CD","$errinstall"):PROCaddr("DA","$acterror"):ENDPROC
-19060 IF cinum%<>0 PROCbad("ON ERROR handler installation inside inline IF is unsupported")
-19062 IF chskip$<>"" PROCbad("Only one ON ERROR handler body per physical line is supported")
-19064 ct$=FNflow:chskip$=FNflow
-19066 PROCaddr("21",ct$):PROCbyte(&3E):PROCbyte(cm%):PROCaddr("CD","$errinstall"):PROCaddr("DA","$acterror")
-19068 PROCaddr("C3",chskip$):PROClabel(ct$):PROCerrorline:PROCaddr("CD","$errtrap"):ccont%=TRUE
+19054 LOCAL m%,t$:PROCexpectword("ERROR"):PROCspace:m%=0
+19056 IF FNword("LOCAL") THEN m%=1:pos%=pos%+5:PROCspace
+19058 IF FNword("OFF") THEN pos%=pos%+3:PROCbytes("210000003E"):PROCbyte(m%):PROCaddr("CD","$errinstall"):PROCaddr("DA","$acterror"):ENDPROC
+19060 IF inum%<>0 PROCbad("ON ERROR handler installation inside inline IF is unsupported")
+19062 IF hskip$<>"" PROCbad("Only one ON ERROR handler body per physical line is supported")
+19064 t$=FNflow:hskip$=FNflow
+19066 PROCaddr("21",t$):PROCbyte(&3E):PROCbyte(m%):PROCaddr("CD","$errinstall"):PROCaddr("DA","$acterror")
+19068 PROCaddr("C3",hskip$):PROClabel(t$):PROCerrorline:PROCaddr("CD","$errtrap"):cont%=TRUE
 19070 ENDPROC
 19072 DEF PROCerrorstatement
-19074 cndepth%=0:csdepth%=0:PROCexpr(1):PROCneednumber:PROCnumindices(0,0):PROCnumcall(38):PROCexpect(","):PROCstrexpr
-19076 IF csunsafe%(csdepth%-1) PROCbad("Direct FN error-message carriers are unqualified")
-19078 PROCaddr("3A","$v0"):PROCaddr("FD21","$s0"):PROCaddr("C3","$errraise"):cndepth%=0:csdepth%=0
+19074 ndepth%=0:sdepth%=0:PROCexpr(1):PROCneednumber:PROCnumoperation(0,0,38):PROCexpect(","):PROCstrexpr
+19076 IF sunsafe%(sdepth%-1) PROCbad("Direct FN error-message carriers are unqualified")
+19078 PROCaddr("3A","$v0"):PROCaddr("FD21","$s0"):PROCaddr("C3","$errraise"):ndepth%=0:sdepth%=0
 19080 ENDPROC
-19082 DEF PROCerritem(cw$)
-19084 LOCAL ct%,cs$:ct%=1:cs$="$errcode":IF cw$="ERL" ct%=4:cs$="$errlastline"
-19086 PROCvalue(0):PROCvarcopy(cs$,"$v"+STR$(cndepth%-1),ct%):ENDPROC
-19088 DEF PROCerrorconstant(cn%,cs$)
-19090 LOCAL ci%
-19092 IF NOT cerrors% THEN PROCtext(cs$):PROCnewline:PROCaddr("C3","$error"):ENDPROC
-19094 IF cn%>=0 THEN PROCbyte(&3E):PROCbyte(cn%)
-19095 PROCaddr("CD","$errinline"):PROCbyte(LEN(cs$))
-19096 IF cs$<>"" THEN FOR ci%=1 TO LEN(cs$):PROCbyte(ASC(MID$(cs$,ci%,1))):NEXT
+19082 DEF PROCerritem(w$)
+19084 LOCAL t%,s$:t%=1:s$="$errcode":IF w$="ERL" t%=4:s$="$errlastline"
+19086 PROCvalue(0):PROCvarcopy(s$,"$v"+STR$(ndepth%-1),t%):ENDPROC
+19088 DEF PROCerrorconstant(n%,s$)
+19090 LOCAL i%
+19092 IF NOT errors% THEN PROCtext(s$):PROCnewline:PROCaddr("C3","$error"):ENDPROC
+19094 IF n%>=0 THEN PROCbyte(&3E):PROCbyte(n%)
+19095 PROCaddr("CD","$errinline"):PROCbyte(LEN(s$))
+19096 PROCstringbytes(s$)
 19098 ENDPROC
 19100 DEF PROCerrorruntime
-19102 LOCAL cb%,ci%,cp%,cv%,cs%,cs$,cj%
-19104 cb%=cpc%:FOR ci%=0 TO cesize%-1:PROCbyte(ceimage%?ci%):NEXT
-19106 FOR ci%=0 TO cerelocs%-1:cp%=cb%+cereloc%(ci%):cv%=ccode%?cp%+256*ccode%?(cp%+1)+65536*ccode%?(cp%+2):PROCpatch(cp%,cv%+&40000+cb%):NEXT
-19108 cs$="errinit|errinstall|errraise|errinline|errreport|errline|errcode|errcurrent|errlastline|errmsg|errstate|":cp%=1
-19110 FOR ci%=0 TO 10:cj%=INSTR(cs$,"|",cp%):PROCctlexport("$"+MID$(cs$,cp%,cj%-cp%),cb%+ceentry%(ci%)):cp%=cj%+1:NEXT
-19112 cs$="$ctlpush|$strload|$strstore|$error|$ctltop|$acttop|$ctlframes|$actbase|$actlimit|$savedsp|$depth|$sheapctx|":cp%=1:cs%=cpc%
-19114 FOR ci%=11 TO 22:cj%=INSTR(cs$,"|",cp%):cpc%=cb%+ceentry%(ci%):PROCaddr("",MID$(cs$,cp%,cj%-cp%)):cp%=cj%+1:NEXT:cpc%=cs%
-19115 PROCctlexport("$errtrap",cb%+ceentry%(23))
+19102 LOCAL b%,i%,p%,v%,s%,s$,j%
+19104 b%=pc%:PROCtemplate(eimage%,esize%,erelocs%,7)
+19108 s$="errinit|errinstall|errraise|errinline|errreport|errline|errcode|errcurrent|errlastline|errmsg|errstate|":p%=1
+19110 FOR i%=0 TO 10:j%=INSTR(s$,"|",p%):PROCctlexport("$"+MID$(s$,p%,j%-p%),b%+eentry%(i%)):p%=j%+1:NEXT
+19112 REM Error bridges emitted with error template.
+19115 PROCctlexport("$errtrap",b%+eentry%(23))
 19116 ENDPROC
 19118 DEF PROCerrorline
-19120 LOCAL ci%,cp%:PROCaddr("CD","$errline"):cp%=cbasicline%
-19122 FOR ci%=0 TO 3:PROCbyte(cp% AND 255):cp%=cp% DIV 256:NEXT
+19120 LOCAL i%,p%:PROCaddr("CD","$errline"):p%=basicline%
+19122 FOR i%=0 TO 3:PROCbyte(p% AND 255):p%=p% DIV 256:NEXT
 19124 ENDPROC
+19200 DEF PROCdefine(n$,a%)
+19202 LOCAL i%,j%:i%=FNsymbol(n$)
+19204 IF phase%>1 THEN IF i%<0 PROCbad("Layout target disappeared "+n$)
+19206 IF phase%>1 THEN IF FNsymboladdr(i%)<>a% PROCbad("Layout target moved "+n$)
+19208 IF phase%>1 ENDPROC
+19210 IF i%>=0 PROCbad("Duplicate target "+n$)
+19212 IF snum%=4096 PROCbad("Too many labels")
+19214 IF snum%>sinsert% THEN FOR j%=2*snum%-1 TO 2*sinsert% STEP -1:sort%?(j%+2)=sort%?j%:NEXT
+19216 PROCsortindex(sinsert%,snum%):sname$(snum%)=n$:PROCsymboladdr(snum%,a%):snum%=snum%+1
+19218 ENDPROC
+19220 DEF PROCword24(v%)
+19222 LOCAL i%:PROCcodecount(3):IF phase%<>3 ENDPROC
+19223 BPUT#oh%,CHR$(v%)+CHR$(v% DIV 256)+CHR$(v% DIV 65536);
+19224 ENDPROC
+19226 DEF FNlineref(n%,m%,w%)
+19228 LOCAL i%,b%,p%:p%=FNrefpage(n% DIV 2048+32*m%,w%):IF p%=0 THEN =FALSE
+19229 i%=(n% DIV 8) AND 255:b%=2^(n% AND 7)
+19230 IF w% p%?i%=p%?i% OR b%
+19232 =(p%?i% AND b%)<>0
+19234 DEF PROCtargetscan
+19236 LOCAL p%,q%,c$,w$,s%,n%,m%
+19238 IF FNword("DATA") OR FNword("REM") ENDPROC
+19240 IF INSTR(line$,"GOTO")=0 AND INSTR(line$,"GOSUB")=0 AND INSTR(line$,"THEN")=0 AND INSTR(line$,"ELSE")=0 AND INSTR(line$,"RESTORE")=0 ENDPROC
+19242 p%=pos%:q%=FALSE
+19244 WHILE p%<=LEN(line$)
+19246 c$=MID$(line$,p%,1):IF c$=CHR$(34) q%=NOT q%
+19248 w$="":m%=0
+19250 IF NOT q% AND FNkindword(line$,p%,"REM") p%=LEN(line$)+1
+19252 IF NOT q% AND FNkindword(line$,p%,"GOTO") w$="GOTO"
+19254 IF NOT q% AND FNkindword(line$,p%,"GOSUB") w$="GOSUB"
+19256 IF NOT q% AND FNkindword(line$,p%,"THEN") w$="THEN"
+19258 IF NOT q% AND FNkindword(line$,p%,"ELSE") w$="ELSE"
+19260 IF NOT q% AND FNkindword(line$,p%,"RESTORE") THEN w$="RESTORE":m%=1
+19262 IF w$<>"" THEN s%=pos%:pos%=p%+LEN(w$):PROCspace:IF FNdigit(FNpeek) OR (m%=1 AND FNpeek="&") n%=FNnumber(65279):n%=FNlineref(n%,m%,TRUE)
+19264 IF w$<>"" pos%=s%
+19266 p%=p%+1:ENDWHILE
+19268 ENDPROC
+19270 DEF FNrelocindex(k%,i%)
+19272 IF k%=0 THEN =nreloc%(i%)
+19274 IF k%=1 THEN =sreloc%(i%)
+19276 IF k%=2 THEN =treloc%(i%)
+19278 IF k%=3 THEN =areloc%(i%)
+19280 IF k%=4 THEN =mreloc%(i%)
+19282 IF k%=5 THEN =ireloc%(i%)
+19284 IF k%=6 THEN =dreloc%(i%)
+19286 IF k%=7 THEN =ereloc%(i%)
+19287 =xreloc%(i%)
+19288 DEF PROCtemplate(p%,s%,r%,k%)
+19289 LOCAL i%,j%,b%,o%,v%,n$,t%,x%,e%
+19290 IF &40000+pc%+s%>&B0000 PROCbad("Executable exceeds user RAM")
+19291 IF phase%=1 THEN pc%=pc%+s%:ENDPROC
+19292 i%=0:j%=0:b%=&40000+pc%:t%=0:IF k%=7 t%=11
+19293 IF k%=8 t%=13
+19294 x%=FNbridgeoffset(k%,t%):o%=-1:IF r%>0 o%=FNrelocindex(k%,0)
+19295 WHILE i%<s%
+19296 IF i%=x% THEN
+19297 PROCaddr("",FNbridgename(k%,t%)):i%=i%+3:t%=t%+1:x%=FNbridgeoffset(k%,t%)
+19298 ELSE
+19299 IF i%=o% THEN
+19300 v%=p%?i%+256*p%?(i%+1)+65536*p%?(i%+2):PROCword24(v%+b%):i%=i%+3:j%=j%+1:o%=-1
+19301 IF j%<r% o%=FNrelocindex(k%,j%)
+19302 ELSE
+19303 e%=s%:IF o%>=0 AND o%<e% e%=o%
+19304 IF x%>=0 AND x%<e% e%=x%
+19305 IF k%=2 AND i%<tframes% AND e%>tframes% e%=tframes%
+19306 IF e%<=i% PROCbad("Invalid runtime relocation order")
+19307 IF k%=2 AND i%>=tframes% THEN
+19308 PROCzeros(e%-i%)
+19309 ELSE
+19310 IF phase%=3 THEN FOR v%=i% TO e%-1:BPUT#oh%,p%?v%:NEXT
+19311 pc%=pc%+e%-i%
+19312 ENDIF
+19313 i%=e%
+19314 ENDIF
+19315 ENDIF
+19316 ENDWHILE
+19317 IF j%<>r% PROCbad("Invalid runtime relocation order")
+19318 ENDPROC
+19336 DEF FNbridgeoffset(k%,i%)
+19338 IF k%=2 AND i%=0 THEN =tnumslot%
+19340 IF k%=3 AND i%=0 THEN =apushslot%
+19342 IF k%=3 AND i%=1 THEN =acheckslot%
+19344 IF k%=3 AND i%=2 THEN =apopslot%
+19346 IF k%=3 AND i%=3 THEN =anumslot%
+19348 IF k%=7 AND i%<=22 THEN =eentry%(i%)
+19349 IF k%=8 AND i%<=25 THEN =xentry%(i%)
+19350 =-1
+19352 DEF FNerrorslot(i%)
+19354 LOCAL s$,p%,j%,k%:s$="$ctlpush|$strload|$strstore|$error|$ctltop|$acttop|$ctlframes|$actbase|$actlimit|$savedsp|$depth|$sheapctx|":p%=1
+19356 FOR k%=11 TO i%:j%=INSTR(s$,"|",p%):IF k%<i% p%=j%+1
+19358 NEXT
+19360 =MID$(s$,p%,j%-p%)
+19362 DEF FNbridgename(k%,i%)
+19364 IF k%=7 THEN =FNerrorslot(i%)
+19365 IF k%=8 THEN =FNcompactbridge(i%)
+19366 IF k%=2 OR i%=3 THEN ="$numop"
+19368 IF i%=0 THEN ="$ctlpush"
+19370 IF i%=1 THEN ="$ctlcheck"
+19372 ="$ctlpop"
+19400 DEF PROCcodecount(n%)
+19402 IF &40000+pc%+n%>&B0000 PROCbad("Executable exceeds user RAM")
+19404 pc%=pc%+n%:ENDPROC
+19406 DEF PROCblob(p%,n%)
+19408 LOCAL i%:IF n%=0 ENDPROC
+19410 PROCcodecount(n%):IF phase%<>3 ENDPROC
+19412 FOR i%=0 TO n%-1:BPUT#oh%,p%?i%:NEXT:ENDPROC
+19414 DEF PROCstringbytes(s$)
+19416 LOCAL i%:IF s$="" ENDPROC
+19418 PROCcodecount(LEN(s$)):IF phase%<>3 ENDPROC
+19420 BPUT#oh%,s$;
+19421 ENDPROC
+19422 DEF PROCzeros(n%)
+19424 LOCAL i%:IF n%=0 ENDPROC
+19426 PROCcodecount(n%):IF phase%<>3 ENDPROC
+19428 FOR i%=1 TO n%:BPUT#oh%,0:NEXT:ENDPROC
+19500 DEF PROCusecompact
+19502 compact%=TRUE:numeric%=TRUE:ENDPROC
+19504 DEF PROCnumoperation(l%,r%,o%)
+19506 PROCusecompact:PROCaddr("CD","$cpnum"):PROCbyte(l%):PROCbyte(r%):PROCbyte(o%):ENDPROC
+19510 DEF PROCloadcompact
+19512 LOCAL i%,j%,s$
+19514 RESTORE 64000:READ xsize%,xrelocs%:DIM xentry%(25)
+19516 FOR i%=0 TO 25:READ xentry%(i%):NEXT
+19518 DIM ximage% xsize%-1,xreloc%(xrelocs%-1)
+19520 FOR i%=0 TO xsize%-1 STEP 40:READ s$
+19522 FOR j%=1 TO LEN(s$) STEP 2:ximage%?(i%+(j%-1) DIV 2)=FNhexbyte(MID$(s$,j%,2)):NEXT:NEXT
+19524 IF xrelocs%>0 THEN FOR i%=0 TO xrelocs%-1:READ xreloc%(i%):NEXT
+19526 ENDPROC
+19530 DEF PROCcompactruntime
+19532 LOCAL b%,i%,s$,p%,j%
+19534 b%=pc%:PROCtemplate(ximage%,xsize%,xrelocs%,8)
+19536 s$="$cplit|$cpnum|$cpread1|$cpread4|$cpread5|$cpstore1|$cpstore4|$cpstore5|$cpprefix|$cpaddr|$cpsave|$cpbind|$cpbegin|":p%=1
+19538 FOR i%=0 TO 12:j%=INSTR(s$,"|",p%):PROCctlexport(MID$(s$,p%,j%-p%),b%+xentry%(i%)):p%=j%+1:NEXT
+19540 PROCdefine("$zero",0):ENDPROC
+19544 DEF FNcompactbridge(i%)
+19546 LOCAL s$:s$="$zero"
+19548 IF i%=13 AND nslots%>0 s$="$v0"
+19550 IF i%=14 AND sslots%>0 s$="$s0"
+19552 IF i%=15 s$="$numop"
+19554 IF i%=16 s$="$numerror"
+19556 IF i%=17 s$="$numlit"
+19558 IF i%=18 AND vnum%>0 s$="$novar"
+19560 IF i%=19 AND memory% s$="$arrayprefix"
+19562 IF i%=20 AND memory% s$="$arrayaddr"
+19564 IF i%=21 AND memory% s$="$memerror"
+19566 IF i%=22 AND acts% s$="$actsave"
+19568 IF i%=23 AND acts% s$="$actbind"
+19570 IF i%=24 AND acts% s$="$actbegin"
+19572 IF i%=25 AND acts% s$="$acterror"
+19574 =s$
+19580 DEF FNsortindex(i%)
+19582 LOCAL p%:p%=2*i%
+19584 =sort%?p%+256*sort%?(p%+1)
+19586 DEF PROCsortindex(i%,v%)
+19588 LOCAL p%:p%=2*i%:sort%?p%=v%:sort%?(p%+1)=v% DIV 256:ENDPROC
+19590 DEF FNsymboladdr(i%)
+19592 LOCAL p%:p%=3*i%
+19594 =saddr%?p%+256*saddr%?(p%+1)+65536*saddr%?(p%+2)
+19596 DEF PROCsymboladdr(i%,v%)
+19598 LOCAL p%:p%=3*i%:saddr%?p%=v%:saddr%?(p%+1)=v% DIV 256:saddr%?(p%+2)=v% DIV 65536:ENDPROC
+19600 DEF FNrefpage(i%,w%)
+19602 LOCAL p%,j%:p%=lrefs%(i%):IF p%<>0 OR NOT w% THEN =p%
+19604 DIM p% 255:FOR j%=0 TO 255:p%?j%=0:NEXT:lrefs%(i%)=p%
+19606 =p%
+19610 DEF PROCclearrefs
+19612 LOCAL i%,j%,p%
+19614 FOR i%=0 TO 63
+19616 IF lrefs%(i%)<>0 THEN
+19618 p%=lrefs%(i%):FOR j%=0 TO 255:p%?j%=0:NEXT
+19620 ENDIF
+19622 NEXT:ENDPROC
 20000 DATA 4460,387,644,0,12,113,212,267,283
 20010 DATA "E1DDE5D101050000EDB0E5C9DD7E04B72809DD7E03EE80DD7703C9DDE5E10604377E2FCE00772310"
 20020 DATA "F8C9DDE5FDE50100000021000000DD6E02DD6603DD4E04D921000000DD6E00DD6601D9FDE5D1DD21"
@@ -1754,214 +1902,9 @@
 40090 DATA "000000FD4E08EDB0DD21C90100FDE5FDE5E1110E000019E5FDE13E0BCDC50100FDE13853FD7E08FE"
 40100 DATA "052810FDE5DDE5FDE13E26CDC50100FDE1383C21C90100FD170501000000FD4E08EDB0FD7E13B73E"
 40110 DATA "0C28023E08FDE5F5FDE5E11109000019E5FDE1F1CDC50100FDE1380B3AC90100B72809CD810000FD"
-40120 DATA "E1DDE1C9FD2702FDE1DDE1D1E9C30000000000000000000000000000000000000000000000000000"
-40130 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40140 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40150 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40160 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40170 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40180 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40190 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40200 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40210 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40220 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40230 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40240 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40250 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40260 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40270 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40280 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40290 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40300 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40310 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40320 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40330 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40340 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40350 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40360 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40370 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40380 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40390 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40400 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40410 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40420 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40430 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40440 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40450 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40460 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40470 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40480 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40490 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40500 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40510 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40520 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40530 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40540 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40550 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40560 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40570 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40580 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40590 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40600 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40610 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40620 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40630 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40640 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40650 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40660 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40670 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40680 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40690 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40700 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40710 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40720 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40730 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40740 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40750 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40760 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40770 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40780 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40790 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40800 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40810 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40820 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40830 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40840 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40850 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40860 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40870 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40880 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40890 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40900 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40910 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40920 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40930 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40940 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40950 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40960 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40970 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40980 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-40990 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41000 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41010 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41020 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41030 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41040 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41050 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41060 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41070 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41080 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41090 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41100 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41110 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41120 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41130 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41140 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41150 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41160 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41170 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41180 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41190 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41200 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41210 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41220 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41230 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41240 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41250 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41260 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41270 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41280 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41290 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41300 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41310 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41320 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41330 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41340 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41350 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41360 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41370 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41380 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41390 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41400 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41410 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41420 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41430 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41440 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41450 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41460 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41470 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41480 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41490 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41500 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41510 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41520 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41530 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41540 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41550 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41560 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41570 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41580 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41590 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41600 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41610 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41620 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41630 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41640 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41650 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41660 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41670 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41680 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41690 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41700 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41710 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41720 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41730 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41740 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41750 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41760 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41770 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41780 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41790 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41800 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41810 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41820 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41830 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41840 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41850 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41860 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41870 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41880 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41890 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41900 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41910 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41920 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41930 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41940 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41950 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41960 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41970 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41980 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-41990 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-42000 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-42010 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-42020 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-42030 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-42040 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-42050 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-42060 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-42070 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-42080 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-42090 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-42100 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-42110 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-42120 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-42130 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-42140 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-42150 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-42160 DATA "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-42170 DATA "0000000000000000000000000000000000"
-42180 DATA 1,5,17,21,56,74,78,87,130,141,150,158,170,183,196,251,256,281,287,297
-42190 DATA 305,309,316,330,349,372,380,421,429,436
+40120 DATA "E1DDE1C9FD2702FDE1DDE1D1E9C30000000000000000000000"
+40130 DATA 1,5,17,21,56,74,78,87,130,141,150,158,170,183,196,251,256,281,287,297
+40140 DATA 305,309,316,330,349,372,380,421,429,436
 50000 DATA 783,58,0,10,20,215,268,397,747,751,755,759,762,556,401
 50010 DATA "22FA0200ED53FD0200C92AFA02003E05C3EA0200DDE5FDE5F53E06CDEE020030123E05CDEE020030"
 50020 DATA "0A3E07CDEE0200DAD10000F14F47FE8120020605DD7E00B7200DDD360001DDE5E123AF772310FC79"
@@ -2109,3 +2052,16 @@
 63690 DATA 574,580,585,591,596,602,606,612,616,627,635,644,653,662,675,680,684,692,696,701
 63700 DATA 706,710,714,719,724,737,741,745,755,770,774,786,794,807,823,829,835,845,853,862
 63710 DATA 867,881,888,894,898,902,2509,2515
+64000 DATA 394,29,28,43,78,84,90,157,163,204,222,252,282,300,335,344,347,351,355,359,363,367,371,375,379,383,387,391
+64010 DATA "210000006F2605ED6CED5B58010019C92100000067ED5B5B010019C9E17E23E5CD000000E5DDE1C3"
+64020 DATA "660100E146234E237E23E5F578CD000000E5DDE179CD000000E5FDE1F1CD5E0100DA620100C90101"
+64030 DATA "0000180A01040000180401050000E1ED172323237E23E5DDE5FDE5D5DDE1CD000000E5FDE1DD7E00"
+64040 DATA "B7281ADDE5E123FDE5D13E0591EDB0B7280647AF121310FCFDE1DDE1C9FDE1DDE1C36A0100010100"
+64050 DATA "00180401040000E1ED17232323E5C5D5DD2A580100DDE5FDE13E26CD5E0100D1C1DA6201002A5801"
+64060 DATA "00EDB0C9E1ED17232323E52A58010001050000EDB0C9E1ED372323237E2346234E23E5CD000000E5"
+64070 DATA "FDE179CD6E0100DA760100C9E1ED372323237E2346234E23E5CD000000E5FDE179CD720100DA7601"
+64080 DATA "00C9E1ED372323237E23E5CD7A0100DA860100C9E146234E237E23E5CB412006CD0000001804CD10"
+64090 DATA "0000E5FDE178CD7E0100DA860100C9CD820100DA860100C9000000000000C3000000C3000000C300"
+64100 DATA "0000C3000000C3000000C3000000C3000000C3000000C3000000C3000000C3000000"
+64110 DATA 11,23,33,40,54,62,70,74,111,154,178,188,194,198,212,236,244,248,266,274
+64120 DATA 278,292,296,313,319,327,331,336,340

@@ -1,187 +1,104 @@
 # BBC BASIC native compiler project handoff
 
-Read `/Agon/mystuff/agon-dev-env/codex/AGENTS.md` first. That directory owns
-shared environment, ownership, assembly and emulator instructions.
+Read `/Agon/mystuff/agon-dev-env/codex/AGENTS.md` first. It owns shared
+environment, ownership, assembly, emulator, hardware and coordination rules.
 
-This working repository contains the reference BASIC V ADL interpreter and a
-promoted compiler at `compiler/compiler.bas` and numeric runtime under
-`compiler/runtime/`. C002 retains qualification harnesses and historical evidence.
-Keep interpreter changes separate from compiler work. The active compiler
-branch is `codex/native-bbc-compiler`.
+## Project contract
 
-Read `compiler/README.md`, `compiler/SPECIFICATION.md`,
-`compiler/COMPATIBILITY.md`, `compiler/REFERENCE.md`, and the latest
-`docs/compiler-development-*.md` log before changing compiler behavior. The
-compiler is BBC BASIC; Python may orchestrate tests but must not implement the
-compiler or substitute another numeric representation.
+1. This repository contains the reference BASIC V ADL interpreter and the live
+   BBC BASIC compiler at `compiler/compiler.bas`, with assembly runtime under
+   `compiler/runtime/`. Keep interpreter changes separate. Python may prepare
+   source, package assembly and orchestrate tests; it must not implement a BASIC
+   compiler or substitute a numeric representation.
+2. Work on `codex/native-bbc-compiler`, origin
+   `https://github.com/bgates747/agon-bbc-basic.git`. Keep development here;
+   promote to main only after testing is accepted. Main remains2998edd4.
+   Do not create a redundant compiled branch.
+3. For supported conventional programs, speed is the only intended observable
+   behavioral difference. Preserve reference quirks,32-bit integers,float40,
+   conversion/rounding/output and LOCAL behavior. EVAL remains excluded. Agreed
+   line-number/label syntax and explicit unsupported admissions retain scope.
+   Interpreter improvement ideas belong in `compiler/INTERPRETER-FINDINGS.md`;
+   the superseded exact-decimal experiment does not authorize divergence.
+4. Before changing behavior, read compiler/README.md, SPECIFICATION.md,
+   COMPATIBILITY.md, REFERENCE.md and the latest dated development log,
+   currently `docs/compiler-development-2026-11-03.md`.
+5. TODO.md is the only unfinished-work list. Immutable IDs map to
+   docs/tasks/ID.md; experiments/scripts live under docs/tasks/ID/. Read
+   docs/tasks/README.md and retrospective C000/C001. Task briefs own scope and
+   acceptance; dated logs own chronological evidence. Preserve frozen committed
+   evidence; use new cohort names. Promotion records identify exact source,
+   qualification and destination. Automated passes are not human validation.
 
-`TODO.md` is the only unfinished-work list. Each immutable ID maps to
-`docs/tasks/<ID>.md`; experimental scripts and code belong in
-`docs/tasks/<ID>/`. Read `docs/tasks/README.md` for the accepted lifecycle and
-`docs/tasks/C000.md` / `docs/tasks/C001.md` for the retrospective records.
-Task briefs own scope and acceptance criteria; dated logs own chronological
-evidence. Passing experiments can be promoted to live source with the evidence
-and destination recorded in the task document. Do not treat placement or an
-automated test pass as human emulator validation or commit approval.
+## Current qualified compiler
 
-C001 and C002's corrected numeric baseline are promoted on the development
-branch. The Author approved committing/pushing that baseline on 2026-11-01.
-For supported conventional programs, execution speed is the only intended
-observable behavioral difference. Preserve reference quirks, numeric conversions,
-rounding and output; do not fix BBC BASIC as part of this compiler. Agreed
-line-number/label syntax and clearly rejected unsupported features retain their
-documented scope. Interpreter improvement ideas belong in
-`compiler/INTERPRETER-FINDINGS.md`; they do not authorize compiler divergences.
-The earlier exact-decimal experiment and its altered test oracles are superseded.
-Read `docs/tasks/C002/LITERALS.md`, `docs/tasks/C002/OUTPUT.md`, `docs/tasks/C002/EXPRESSIONS.md`,
-`docs/tasks/C002/ABI.md` and its task record for scope/results. C003 scalar
-numeric bindings are promoted and the Author approved their development
-checkpoint on 2026-11-01 (`4577673`, build-ignore cleanup `c9f0b5f`, complete
-binary evidence `58feb04`, all pushed). The Author accepted the qualified
-mutable string core checkpoint `be0f299`, also pushed. Expression slicing and
-string comparisons and VAL/STR$/ASC were accepted in checkpoint `c55c951`,
-committed/pushed at the Author's request. INSTR/STRING$ are now promoted for
-development; selected live checks and earlier regressions pass.
-Slice assignment is qualified and promoted; C003 initial scalar/string scope is complete. Read
-`docs/tasks/C003/SCALARS.md`, `docs/tasks/C003/STRINGS.md`,
-`docs/tasks/C003/SLICES.md`, `docs/tasks/C003/CONVERSIONS.md`,
-`docs/tasks/C003/SEARCH-REPEAT.md`, `docs/tasks/C003/SLICE-STORE.md` and the task record. C004's selected conditionals, loops and scalar PROC/FN/LOCAL are complete and
-promoted. FN28 programs plus five supplements, both ABI probes, baseline and
-selected live/string integration pass. Source SHA6feb0b21b09ac4353347876df89043caf8800727b5a8c4f985588c3e6741c8f4; activation module783 bytes/58 relocations.
-Mixed/unresolved FN kinds and interpreter-dependent direct FN carriers in omitted
-RIGHT$/STRING$ are clearly rejected; see compiler/INTERPRETER-FINDINGS.md.
-Read docs/tasks/C004.md, conditionals/AUDIT.md, loops/CONTROL.md,
-activations/PROCEDURES.md and functions/RETURN-KINDS.md. C005 is active. Its256-definition/resource checkpoint is promoted at SHA0f0884ca, with633-byte strings and a sorted BBC symbol index. Read docs/tasks/C005.md, C005/PLAN.md, C005/RESOURCES.md and C005/ARRAYS.md. Global arrays, raw DIM and indirection are qualified/promoted at SHAd0368b1e
-(1777 lines,256 shared bindings,4096 fixups). Read C005/MEMORY.md; retain the
-actual DIM quirks. Full53-case scope, binding capacity5, baseline/FN and selected
-live checks pass. File/input language is qualified/promoted at SHA483e1730
-(1849 lines,788-byte/7-relocation I/O helper). Full29 sources, actual keyboard
-INPUT LINE, same-session exit cleanup and baseline pass; read C005/IO.md for
-unqualified FN carriers and255-character path boundary. DATA/READ/RESTORE is now qualified/promoted at SHA55643c54
-(1962 lines,120-byte PIC helper). Full32 sources (22 native/10 rejection), verified
-fresh repeat/resumed output/GNU+entry checks, baseline80.355s and live smoke170.183s
-pass; seven packers reproduce it. Read C005/DATA.md for fixture corrections,
-separate exhaustion oracles and explicit literal-only admissions. Resource closure remains open. Source handlers are now promoted at SHA7cac4bba
-(2111 BBC lines), with2530-byte/128-relocation error runtime and licensed REPORT
-table. Its original2481-byte module prefix independently rebuilds identically;
-held-key polling uses MOS sysvars at handler entry. Current CORE6, modern ERL0,
-actual Escape/open-file/exit checks, baseline/golden and nine regeneration tools
-pass. Earlier39-case scopes retain their8bb1dd9a/44533e0d identities, including
-WHILE/FN-return ERL quirks; no full39-case rerun on7cac4bba is claimed. Read
-C005/ERRORS.md. The promoted7cac4bba source reaches4096-fixup exhaustion at
-physical108 in1459.137s, preserving output. C005/streaming replaces the output /
-fixup buffers with BBC layout, validation and direct BPUT passes. Earlier1b3e4b33
-passes39/15 baseline196.992s and resource12 (six native/six rejected)3613.441s,
-including70076-byte output,2048 labels and4097-label rejection. All four complete
-old images remain identical. Private-name revision690fd519 passes smoke54.687s
-and baseline86.029s but its actual source probe rejects Duplicate definition
-count at1655:20 in371.199s, before layout. Retain those exact scopes.
+1. C001–C005 and C007 have completed their initial scopes. C005's language,
+   streaming/resource and compact-runtime work is promoted. Live source SHA:
+   `6597a0df3f99b4f43c42bff1cdbc59f5fdf730c57837f3d4112a598fbfbe5fb8`.
+   It has2067 lines,177 PROC/42 FN definitions. Actual self-source uses2094
+   symbols/219 routines/254 bindings and emits324275 bytes.
+2. The first native self-source preflight succeeds through normal prompts with
+   status0 and exact full-image equality to the interpreted resource seed:
+   `299a31190c380541a73ed9eb144a303fa37abccc4f3c3e0ad47f99f1538122c0`.
+   Evidence: C005/packed-source-002 and C006/packed-native-preflight-001.
+   Controller durations3911.701s/1983.653s are not hardware benchmarks.
+3. C005 all39 fresh source-error oracles/repeats/runtime links pass, with all39
+   complete images identical to earlier2f81c6fb. The73821-byte program and2048
+   labels execute;4097 labels reject; large repeat matches. Fresh promoted live
+   baseline39/15 passes49.956s and nine integrations142.153s. Promotion and
+   REPORT/all nine packer identity are retained in packed-live-promotion-001.
+4. Read C005/COMPACTION.md, STREAMING.md and compact/ABI.md before resource
+   changes. The compiler scans signatures, then lays out, validates and streams
+   BPUT output without fixed output/fixup buffers. Keep4096 symbols, exact
+   private u24/u16 cells and reusable branch/DATA pages. These private choices
+   do not narrow BASIC program values. Code plus heap respects&B0000; the
+   compiler heap ends&A7F00, with32768 activation bytes and the&AFF00 guard.
+5. The394-byte/29-relocation adapter uses fixed native CALL operands, not a
+   bytecode/source execution loop. It calls unchanged NUM/MEM/ACT routines.
+   Keep its code before STR pools/heaps. Control remains8657 emitted bytes;
+   the private loader stores465 initialized bytes and streams8192 zero frames.
+   Error repacking must preserve following DATA64000. All ten generators
+   (REPORT plus nine module packers) reproduce the exact source.
+6. Numeric baseline and calling conventions: C002/LITERALS.md, OUTPUT.md,
+   EXPRESSIONS.md, ABI.md and runtime/vendor/PROVENANCE.md. C003 owns scalars,
+   strings, slices/conversions/search/repetition/slice-store. C004 owns typed
+   control, scalar PROC/FN/LOCAL and return kinds. C005/MEMORY.md, IO.md,
+   DATA.md and ERRORS.md preserve actual platform quirks and partial admissions.
+   The compatibility matrix remains authoritative; no full BBC implementation
+   or unsupported feature admission follows from self-compilation.
 
-Current isolated candidates are prefixed d5144921 and name-spread508a74f2
-(2188 lines,208 unique definitions,248 static private names). Rename only the
-new emitter helper to PROCcodecount, preserving the old slice parser PROCcount;
-source preparation checks unique names per PROC/FN family. Fixed508a74f2 passes
-four-image smoke57.312s, targeted count consumers6 in97.969s and baseline39/15
-86.013s, with repeat/GNU/old-image equality. Its exact source probe stream-source-002 reaches458752-byte code exhaustion
-at2182:67 in1322.639s (1972 symbols/208 definitions/248 bindings), preserving
-output. Source body alone is390190 bytes. No executable is emitted. Read
-C005/COMPACTION.md before resource reductions; actual native fit remains open. String arrays already use five-byte descriptors: a proposed
-1MB fixed-slot inventory was wrong and withdrawn. Read C005/STREAMING.md.
-C006 has refined generation/native-regression workflows only; no generation or
-physical result exists yet. Assembly is runtime code; the compiler stays BBC BASIC.
+## Active qualification and authorization
 
-Use `.venv/bin/python` explicitly. `compiler/README.md` contains build/test
-commands. `.emulator/` is an ignored automated CLI fixture, not a graphical
-human review instance. No graphical emulator or hardware has been deployed.
-The Author explicitly requested pre-tranche checkpoints on 2026-11-01:
-`a45a15f`, `ccd09af` before C007, `227b620` before expression integration,
-`b1b708c` before numeric functions/output, and `7f45af9` before decimal literals.
-All are pushed to the Author's origin. Keep this development branch and promote
-to `main` only after testing is accepted; do not create a redundant `compiled`
-branch. Oryx remains unavailable: never contact it until the Author says otherwise.
-The Author reauthorized Pi5 automated CLI emulator work and explicitly authorized
-continuing through the entire remaining TODO, skipping previous approval stops.
-Complete qualification and checkpoint qualified work on this development branch
-without asking again. Actual hardware/human evidence must still be reported
-truthfully; an approval waiver is not a test result.
-C007's completed source search and measurement contract are indexed by
-`compiler/TESTING.md`; no new benchmark performance was measured. The Author's latest authorization waives earlier approval stops for remaining
-work. Commit authorization is not a claim of human validation.
-
-C005 compaction now has metadata-only compact/compiler.bas558c39a9: eight private
-arrays use bounded existing byte types (19968 native element bytes saved). Smoke
-54.599s retains four old images; boundary5/4-native340.239s and mixed/string
-consumers2 in86.522s and baseline39/15 in86.246s pass. compact/runtime.s is a separate394-byte/29-relocation native CALL
-adapter, with21-stage ABI and GNU-link proof, not yet integrated. Read compact/ABI.md
-and COMPACTION.md. No native compiler image exists yet.
-
-Compact frontend2f81c6fb is now integrated in the isolated candidate. Nine native
-programs pass122.399s with fresh BBC output, repeat and independent full adapter
-PIC/bridge/map checks; the first failed heap-overlap integration is frozen.
-Module code must precede STR virtual heaps; map checks guard heap/arena overlap.
-Baseline39/15 passes87.971s; all39 source-error cases pass in CORE6/remaining33
-cohorts143.390s/549.218s with fresh ERR/ERL/output, repeat and runtime/entry links.
-No self-source fit on2f81c6fb is yet measured; live compiler remains7cac4bba.
-
-Actual2f81c6fb self-source layout completes339291 bytes/body265236,2078 symbols/
-213 routines/254 bindings. Mandatory private payload112761 exceeds available86437
-by26324 before string/header overhead. Deliberately stopped after layout; old
-output survives and no native image exists. compact-source-001 retains disposition
-and raw interrupted evidence (1366.536s). zero_tail.bas14e56cee passes nine actual
-reference/native cases118.267s and all complete2f images remain identical. It
-saves8192 private template bytes; actual native fit remains open. COMPACTION.md
-refines private symbol widths and sparse reusable numbered-target pages next.
-Latest log is docs/compiler-development-2026-11-03.md.
-
-Current packed.bas6597a0df has2067 lines/219 unique routines, same4096-symbol and
-numbered-target limits. Exact three-byte symbol addresses/two-byte sort cells
-save12288 private payload bytes;64 reusable target-page pointers replace eager
-bitmaps. Native exact-helper4096-cell/64-page/guard/reuse test passes262.754s,
-complete standard/adapter GNU links and entry/arena checks included. Nine native
-integration cases pass123.659s with all complete2f images identical; observer-only
-failure is frozen. Five target cases/three native58.636s and baseline39/15
-56.360s pass. The pinned text loader treats line0 as immediate mode; ordinary
-reference fixtures use positive lines, compiler-zero-label syntax is separate.
-New exact-source probe can report actual BBC page/string-length counts with
---private-storage; no packed-source size/fit or native compiler exists yet.
-
-check_compiler_image.py --image PATH --output NEW_BUILD_DIR independently checks
-all-feature images before native execution (standard modules/entry plus compact
-PIC, seven bridge anchors and explicit pool/wrapper/placement bounds). It passes
-the retained helper image and rejects three unexecuted one-byte corruptions in
-image-validator-001. This is validator qualification, not a native compiler.
-
-Packed-source-001 phase1 completes324275 bytes/body268243,2094 symbols/219
-routines/254 bindings. Actual BBC observations:7 pages,13948 symbol bytes,5473
-other metadata string bytes. Private bound including observed content97366 leaves
-4087 of101453 before headers/scalars/overhead. Validation/output are still active;
-no native fit/image is claimed from this arithmetic alone.
-
-packed-source-001 was externally terminated with controller exit143/SIGTERM
-before validation finished; no BBC diagnostic or output pass is claimed. Its
-partial logs/layout/disposition are frozen with unknown termination origin.
-packed-source-002 restarts the identical target and BBC driver. Host orchestration
-now streams SOURCE progress and records SIGTERM; poll the running tool session
-regularly. Inputs are persisted up front by the latest controller revision. No
-native compiler image exists yet. Do not run another CLI against this SD while
-the source probe is active.
-
-packed-source-002 has now completed all three passes in3911.701 controller
-seconds: exact6597a0df yields324275 bytes SHA299a3119. Full machine-image checks
-pass and evidence is retained. C006 packed-native-preflight-001 is active through
-normal native prompts; no native self-source result or full generation chain yet.
-The Author authorizes Extender consultation for Olimex time, file transfer and
-remote CLI facilities. Request sent to Extender2026-10-13Sol; canonical mailbox
-2026-11-03_02-34-30_bbc-basic_bbc-olimex-access-request-one. Physical lease/access
-instructions are owned by agon-dev-env/cross-agent/olimex-bench and Extender;
-no physical deployment or result exists yet.
-
-C006 packed-native-preflight-001 completes native self-source compilation through
-normal prompts in1983.653 controller seconds, MOS status0. Its entire324275-byte
-G1 equals the interpreted resource seed SHA299a31190c380541a73ed9eb144a303fa37abccc4f3c3e0ad47f99f1538122c0.
-Exact6597a0df source and source/seed/output/console/controller identities are
-retained. Actual native initialization, source metadata/storage and all output
-passes fit; the lower-bound estimate is no longer the sole resource evidence.
-This preflight did not run unmodified interpreted main and does not replace the
-full default four-image chain, native regressions or physical qualification.
-No hardware or performance benchmark result is claimed.
+1. Only C006 remains unfinished: full unmodified interpreted main G0, native
+   G1/G2/repeat, exact equality and native regressions, then physical Olimex.
+   Read C006.md, C006/BOOTSTRAP.md and C006/OLIMEX.md. The completed resource
+   preflight does not replace the full chain. bootstrap.py --expected-image
+   pins the checked resource seed before executing successor generations.
+2. C006 native_baseline.py compares39 actual standard sources against15 complete
+   baseline images/24 diagnostics. regressions.py runs12 representative cases;
+   native_errors.py runs39 fresh reference ERR/ERL programs. Prepared workflows
+   are not results; preserve exact input/runtime hashes and interrupted state.
+3. Use `.venv/bin/python` explicitly. compiler/README.md owns commands. The
+   ignored `.emulator/` is automated CLI only; launch through its generated
+   `./fab-agon-emulator` wrapper from the profile directory. One active run owns
+   that SD; freeze output before the next run. No project graphical/human or
+   physical compiler validation has occurred. Never contact Oryx until the
+   Author says it is available; Pi5 automated emulator work is authorized.
+4. The Author explicitly authorized continuing through the remaining TODO and
+   skipping previous approval stops, qualifying and checkpointing this branch
+   without asking again. Commit/push authority persists for the configured
+   origin. A waiver is not a test result; report real limitations truthfully.
+5. C007's completed source search/measurement contract is compiler/TESTING.md.
+   No new benchmark performance is measured by the controller durations above.
+6. The Author specifically authorizes coordination with Extender for Olimex
+   time, file transfer and remote CLI. Our mailbox is bbc-basic; use Extender's
+   maintained scripts/agentcoms.py with structured JSON stdin, never handwritten
+   mailbox files. It owns routing/quoted metadata/idempotency. The initial
+   malformed request was preserved/repaired; C006/OLIMEX.md owns the record.
+7. Physical custody is solely agon-dev-env/cross-agent/olimex-bench. Prepare an
+   exact finite fixture, reserve, receive Extender's grant and assert its token
+   before target operations. No BBC reservation/lease exists yet; we reported
+   not-ready so other prepared work can use the bench. Use pinned new staged
+   transfers, admitted keyboard/CLI and maintained passive serial/printer mirror
+   per Extender. Preserve installed firmware/startup/wiring; no unmount/eject.
+   Do not treat old hardware headers or an empty queue as current readiness.

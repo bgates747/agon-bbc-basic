@@ -1,0 +1,75 @@
+[
+  {
+    "source": "a%=7:b&=257:c=2.75\nPRINT ;a%;\":\";b&;\":\";c;\":\";(a%+b&)*(c-1)\na%=c:b&=-1:c=a%+0.5:PRINT ;a%;\":\";b&;\":\";c\n",
+    "reference": true,
+    "status": 0,
+    "expected": "7:1:2.75:14\n2:255:2.5\n"
+  },
+  {
+    "source": "DIM a%(1,1),b&(1),f(1),s$(1)\na%(1,1)=-123:b&(1)=257:f(1)=2.75:s$(1)=\"array\"\nPRINT ;a%(1,1);\":\";b&(1);\":\";f(1);\":\";s$(1)\n",
+    "reference": true,
+    "status": 0,
+    "expected": "-123:1:2.75:array\n"
+  },
+  {
+    "source": "text$=\"outer\":PROCouter:PRINT text$\nvalue=1.5:whole%=-7:byte&=255:s$=\"old\":PROCtypes(2.5,9.9,257,\"new\"):PRINT ;value;\":\";whole%;\":\";byte&;\":\";s$\ncopy$=\"original\":PROCslice(copy$):PRINT copy$\nPROCrecursive(4):PRINT ;n%\nEND\nDEF PROCouter:LOCAL text$:text$=\"inner\":PROCsee:ENDPROC\nDEF PROCsee:PRINT text$:ENDPROC\nDEF PROCtypes(value,whole%,byte&,s$):PRINT ;value;\":\";whole%;\":\";byte&;\":\";s$:ENDPROC\nDEF PROCslice(s$):MID$(s$,2,2)=\"XY\":PRINT s$:ENDPROC\nDEF PROCrecursive(n%):PRINT ;n%:IF n%>0 THEN PROCrecursive(n%-1)\nENDPROC\n",
+    "reference_source": "text$=\"outer\":PROCouter:PRINT text$\nvalue=1.5:whole%=-7:byte&=255:s$=\"old\":PROCtypes(2.5,9.9,257,\"new\"):PRINT ;value;\":\";whole%;\":\";byte&;\":\";s$\ncopy$=\"original\":PROCslice(copy$):PRINT copy$\nPROCrecursive(4):PRINT ;n%\n",
+    "reference_definitions": [
+      "DEF PROCouter:LOCAL text$:text$=\"inner\":PROCsee:ENDPROC",
+      "DEF PROCsee:PRINT text$:ENDPROC",
+      "DEF PROCtypes(value,whole%,byte&,s$):PRINT ;value;\":\";whole%;\":\";byte&;\":\";s$:ENDPROC",
+      "DEF PROCslice(s$):MID$(s$,2,2)=\"XY\":PRINT s$:ENDPROC",
+      "DEF PROCrecursive(n%):PRINT ;n%:IF n%>0 THEN PROCrecursive(n%-1)",
+      "ENDPROC"
+    ],
+    "reference": true,
+    "status": 0,
+    "procedure_observations": 4,
+    "expected": "inner\nouter\n2.5:9:1:new\n1.5:-7:255:old\noXYginal\noriginal\n4\n3\n2\n1\n0\n0\n"
+  },
+  {
+    "source": "PRINT ;1+FNwouter(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,FNwargs(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15))\nEND\nDEF FNwouter(wo0%,wo1%,wo2%,wo3%,wo4%,wo5%,wo6%,wo7%,wo8%,wo9%,wo10%,wo11%,wo12%,wo13%,wo14%,wo15%)=wo0%+wo15%\nDEF FNwargs(w0%,w1%,w2%,w3%,w4%,w5%,w6%,w7%,w8%,w9%,w10%,w11%,w12%,w13%,w14%,w15%)=w0%+w15%\n",
+    "reference_source": "PRINT ;1+FNwouter(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,FNwargs(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15))\n",
+    "reference_definitions": [
+      "DEF FNwouter(wo0%,wo1%,wo2%,wo3%,wo4%,wo5%,wo6%,wo7%,wo8%,wo9%,wo10%,wo11%,wo12%,wo13%,wo14%,wo15%)=wo0%+wo15%",
+      "DEF FNwargs(w0%,w1%,w2%,w3%,w4%,w5%,w6%,w7%,w8%,w9%,w10%,w11%,w12%,w13%,w14%,w15%)=w0%+w15%"
+    ],
+    "reference": true,
+    "status": 0,
+    "expected": "16\n"
+  },
+  {
+    "source": "a$=\"string only\":PRINT a$\n",
+    "reference": true,
+    "status": 0,
+    "expected": "string only\n"
+  },
+  {
+    "source": "PRINT ;1/0\n",
+    "reference": true,
+    "reference_error": true,
+    "status": 1,
+    "expected": "Division by zero\n"
+  },
+  {
+    "source": "PRINT ;missing%\n",
+    "reference": true,
+    "reference_error": true,
+    "status": 1,
+    "expected": "No such variable\n"
+  },
+  {
+    "source": "a%=2147483648\n",
+    "reference": true,
+    "reference_error": true,
+    "status": 1,
+    "expected": "Number too big\n"
+  },
+  {
+    "source": "DIM a%(0):PRINT ;a%(1)\n",
+    "reference": true,
+    "reference_error": true,
+    "status": 1,
+    "expected": "Bad subscript\n"
+  }
+]

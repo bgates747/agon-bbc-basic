@@ -1,13 +1,15 @@
 # Native BBC BASIC compiler — development
 
-This is the first small implementation of the self-hosting compiler project.
-The compiler is BBC BASIC and emits native eZ80 ADL code directly. It currently
+The compiler is written in BBC BASIC and emits standalone native eZ80 ADL code.
+Its first native build has compiled its own source and reproduced the complete
+compiler image byte for byte. Repeated generations and physical qualification
+remain pending.
+It currently
 compiles literal/numeric output, labelled control flow, numeric byte VDU
 expressions, standard math functions, scalar numeric variables and a mutable
 string core with expression/assignment slicing, comparisons, VAL/STR$/ASC and INSTR/STRING$, typed loops, scalar PROC/FN/LOCAL, global arrays, raw DIM and
 byte/integer/variant indirection, file byte/string I/O, scalar INPUT LINE and
 literal DATA/READ/RESTORE and source error handlers, ERROR/REPORT/ERR/ERL.
-It cannot compile itself.
 The interpreter elsewhere in this repository remains the compatibility
 reference and bootstrap host. The tested implementation was promoted under
 [task C001](../docs/tasks/C001.md) to `compiler/compiler.bas`; sample programs,
@@ -27,6 +29,11 @@ prompts. For example, compile `examples/hello.bas` into `hello.bin`. Exit BASIC
 with `*BYE`, then run `hello.bin` from MOS. Loading the generated program
 replaces the interpreter at `&40000`; reload BASIC for another compilation.
 
+The [qualified development executable](../docs/tasks/C006/evidence/packed-native-preflight-001/g1.dat)
+can be copied to the card as `compiler.bin`. At MOS, use `LOAD compiler.bin`
+followed by `RUN .`, then enter the input/output filenames at its prompts.
+This executable contains its runtime; BASIC serves as the source-bootstrap host.
+
 `compiler.bas` has line numbers so that the existing interpreter can load it
 without a preprocessor. Programs being compiled may omit line numbers. The
 compiler performs source parsing, symbol resolution, relocation, runtime
@@ -43,7 +50,7 @@ needs no separate runtime image or assembler.
    register conventions, dependencies and licensing.
 4. [Tasks](../TODO.md) — the single unfinished-work list, linked to detailed
    immutable-ID documents in `docs/tasks/`.
-5. [Development log](../docs/compiler-development-2026-11-02.md) — experiments
+5. [Development log](../docs/compiler-development-2026-11-03.md) — experiments
    and verification evidence.
 6. [Testing and benchmarking corpus](TESTING.md) — curated source programs,
    eligibility, correctness oracles and measurement protocol.
@@ -156,12 +163,16 @@ unsuffixed string functions. Pending numeric/string values survive nested calls.
 Mixed/unresolved result kinds and interpreter-dependent direct FN carriers in
 omitted RIGHT$/STRING$ are rejected clearly; see the compatibility matrix.
 C004 is complete for its initial scope. C005 has promoted arrays, indirection, DATA, I/O and source error handlers for
-their documented scopes. Resource closure remains before self-compilation.
+their documented scopes. The native compiler has completed its first self-source preflight.
 
 [Bootstrap resources](../docs/tasks/C005/RESOURCES.md) qualify256 shared routine
-definitions, bounded FN value transfer and a sorted BBC symbol index. The65536-byte output buffer,1024-symbol table and4096 fixups still constrain
-self-compilation. C005 holds an unqualified three-pass streaming candidate.
-The compiler cannot compile itself yet.
+definitions, bounded FN value transfer and a sorted BBC symbol index. The live
+compiler now uses three streaming passes and4096 symbols, compact native CALL
+adapters and bounded private metadata. Its324275-byte self-source image matches
+the interpreter-produced seed exactly in the first native preflight. See the
+[compaction record](../docs/tasks/C005/COMPACTION.md) and
+[generation contract](../docs/tasks/C006/BOOTSTRAP.md) for evidence and the
+remaining repeated-generation/physical boundary.
 
 [Source error recovery](../docs/tasks/C005/ERRORS.md) supports ON ERROR,
 ON ERROR LOCAL/OFF, LOCAL ERROR's reference no-op, ERROR, REPORT and read-only

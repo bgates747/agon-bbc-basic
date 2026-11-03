@@ -1,0 +1,23 @@
+{
+  "bytes": 788,
+  "relocations": 7,
+  "exports": {
+    "io_open": 0,
+    "io_get": 47,
+    "io_eof": 66,
+    "io_put": 120,
+    "io_puts": 150,
+    "io_close": 135,
+    "io_input": 195
+  },
+  "independent_link_bases": [
+    270336,
+    294912
+  ],
+  "unresolved_symbols": 0,
+  "hashes": {
+    "compiler/runtime/io.s": "32110ac03d4509d88dfd548679fc5bdc2d285c3c1b16b10184de72d0b9525d1c",
+    "compiler/build/io-runtime/runtime_data.bas": "72279a1e9082f54224bb39d652bab3dbcd5fe335f5e6bf80f82b592651a45f34",
+    "compiler/build/io-runtime/runtime-0.bin": "bde255025daeae570075a3910a0d102e7fbeb2f20058390c781b3e3be5b98115"
+  }
+}

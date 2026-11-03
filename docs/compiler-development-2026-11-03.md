@@ -246,3 +246,21 @@ programs/images/repeat, console and independent numeric links. This is capacity
 qualification, not a speed benchmark. Packed6597a0df now has native source fit,
 all39 errors, baseline/helper/integration and public capacity qualification.
 Proceed with guarded development promotion, then fresh live checks.
+
+## C005 completed and promoted
+
+Guarded packed-live-promotion-001 promotes exact6597a0df to compiler/compiler.bas,
+compact.s and its new packer plus rehearsed control/error packer changes.
+REPORT/all nine packers preserve the full source and every complete runtime hash.
+Fresh live baseline39/15 passes49.956s (GNU golden/repeat); live compact frontend9
+passes142.153s with fresh references, full adapter maps/PIC/bridges and repeat.
+promoted-inventory-001 records2067 lines/177 PROC/42 FN definitions and current
+construct searches; initial inventory remains unchanged. The successful native
+self-source fit supplies actual execution evidence beyond those searches.
+
+C005 acceptance is complete for its documented initial scope. Remove its sole
+unfinished TODO entry; update live specification, matrix, runbooks and concise
+handoff. The Author waived previous approval stops and authorized development
+checkpoints; no graphical/human/hardware validation or performance result is
+claimed. Main remains untouched. C006 full normal-main G0/G1/G2/repeat, native
+baseline/representative/error qualification and Olimex execution remain.

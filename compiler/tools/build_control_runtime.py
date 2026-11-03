@@ -48,14 +48,26 @@ def main():
     rows+=[','.join(map(str,relocations[i:i+20])) for i in range(0,len(relocations),20)]
     data='\n'.join(f'{40000+i*10} DATA {row}' for i,row in enumerate(rows))+'\n'
     (build/'runtime_data.bas').write_text(data)
+    prefix=syms['ctl_frames']
+    assert syms['ctl_frames_end']==len(template)
+    assert template[prefix:]==bytes(len(template)-prefix)
+    assert all(off+3<=prefix for off in relocations)
+    assert syms['ctl_numslot']+3<=prefix
+    prefix_rows=[rows[0]]
+    prefix_rows+=['"'+template[i:min(i+40,prefix)].hex().upper()+'"' for i in range(0,prefix,40)]
+    prefix_rows+=[','.join(map(str,relocations[i:i+20])) for i in range(0,len(relocations),20)]
+    prefix_data='\n'.join(f'{40000+i*10} DATA {row}' for i,row in enumerate(prefix_rows))+'\n'
+    (build/'prefix_data.bas').write_text(prefix_data)
+    selected=data
+    if args.compiler and 'DIM timage% tframes%-1' in args.compiler.read_text():selected=prefix_data
     if args.compiler:
         original,previous=args.compiler.read_text().split('40000 DATA',1)
         procedures='50000 DATA'+previous.split('50000 DATA',1)[1] if '50000 DATA' in previous else ''
-        args.compiler.write_text(original+data+procedures)
+        args.compiler.write_text(original+selected+procedures)
     report=dict(bytes=len(template),relocations=len(relocations),exports={n:syms[n] for n in EXPORTS},
                 independent_link_bases=[0x42000,0x48000],unresolved_symbols=0,
                 hashes={str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest()
-                        for p in [source,build/'runtime_data.bas',build/'runtime-0.bin']})
+                        for p in [source,build/'runtime_data.bas',build/'prefix_data.bas',build/'runtime-0.bin']})
     (build/'runtime.json').write_text(json.dumps(report,indent=2)+'\n');print(json.dumps(report,indent=2))
 
 

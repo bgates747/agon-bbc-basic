@@ -1,0 +1,31 @@
+{
+  "symbol_maps": true,
+  "programs": 9,
+  "native_executions": 9,
+  "rejected_sources": 0,
+  "reference_output_programs": 9,
+  "legacy_arithmetic_observations": 0,
+  "deterministic_repeat": true,
+  "independent_link_bases": [
+    262777,
+    264058,
+    263610,
+    263415,
+    262413,
+    262394,
+    262386,
+    262664
+  ],
+  "string_link_bases": [
+    269223,
+    278600,
+    262491
+  ],
+  "duration_seconds": 142.153,
+  "hashes": {
+    "compiler/compiler.bas": "6597a0df3f99b4f43c42bff1cdbc59f5fdf730c57837f3d4112a598fbfbe5fb8",
+    "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+    "docs/tasks/C005/build/output-integration/cases.json": "36e35eb823587443a240e375f05f7b3c014e0dbb740d1256e360967c5db5a9ec"
+  }
+}
+Independent compact modules: [(0, '0x41514'), (1, '0x41a1d'), (2, '0x43ebe'), (3, '0x4400d'), (5, '0x41375'), (6, '0x41383'), (7, '0x4137b'), (8, '0x4149a')]

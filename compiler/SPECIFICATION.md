@@ -248,7 +248,8 @@ The Author accepted the corrected C002 baseline for a development checkpoint.
 
 ## Current backend and runtime contract
 
-1. The compiler owns a 65536-byte output buffer. Code loads at `&040000`, with
+1. A signature/kind scan precedes three BBC passes: layout, validation and direct
+   BPUT emission. There is no fixed output buffer or source-fixup list. Code loads at `&040000`, with
    the conventional MOS header at file offset `&40`, version 0, ADL type 1.
    This initial image uses no module services or moslet memory.
 2. Absolute addresses and relocations occupy exactly three little-endian
@@ -267,10 +268,14 @@ The Author accepted the corrected C002 baseline for a development checkpoint.
    decrements depth and executes RET in the original C001 path. Current C004
    programs use distinct typed GOSUB/PROC/FN records and matching exits, as above.
    Other register values and flags are volatile.
-6. Limits are 1024 symbols including runtime symbols and 4096 relocations
-   including runtime references. Limit breaches are diagnosed. Relocations
-   carry their originating source location.
-7. Source and relocations validate before opening the output. A compilation
+6. The sorted symbol table holds 4096 names including runtime symbols. Private
+   symbol addresses use exact three-byte cells and sort indices use two-byte
+   cells; source-program integers remain 32 bits. Separate branch/DATA target
+   bitmaps cover 0..65279 through 64 reusable 256-byte pages allocated on first
+   write. Missing-page reads are false; later compilations clear and reuse pages.
+   Logical capacities remain subject to available memory. Limit breaches are
+   diagnosed at the source position encountered during validation.
+7. Source and resolved addresses validate before opening the output. A compilation
    error preserves an existing output. An I/O error during the final write can
    leave an incomplete file. Exact identical source/output path strings are
    rejected; path aliases are not canonicalised, so use distinct files.
@@ -279,7 +284,7 @@ The Author accepted the corrected C002 baseline for a development checkpoint.
    literal/unary helpers, formatter/conversion bridges, private 32-byte display
    scratch and 256-byte VAL scratch. Scratch is synchronous and non-reentrant.
    BBC BASIC copies and rebases its 387 internal
-   three-byte relocations; these do not occupy the source-fixup array. The
+   three-byte relocations directly from its private template. The
    template is included once per numeric program and omitted otherwise.
    Up to32 five-byte temporary slots are allocated. C004 FN calls preserve live
    numeric/string temporary prefixes in their bounded activation arena.
@@ -308,6 +313,15 @@ The Author accepted the corrected C002 baseline for a development checkpoint.
     use private arena buffers. With C005 memory facilities, DIM and strings share
     an explicit heap ending at&AFF00, excluding the32768-byte activation arena
     when present. See the string and C005 memory contracts for ownership.
+12. A 394-byte/29-relocation native CALL adapter shares numeric literal/operator,
+    scalar copy, array-prefix/address and activation setup. Fixed inline operands
+    follow native calls; it contains no BASIC or bytecode execution loop. The
+    unchanged NUM/MEM/ACT routines retain arithmetic, conversion and error
+    semantics. Adapter code precedes the string pools/heap to prevent overlap.
+    Its 13 external fields are patched by BBC BASIC. The control runtime still
+    emits all 8657 bytes, but the compiler stores its 465-byte initialized prefix
+    and streams 8192 zero frame bytes. Private bounded metadata uses existing byte
+    arrays; this does not narrow any source-program numeric representation.
 
 ## Current numeric expression subset
 

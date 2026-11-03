@@ -1,0 +1,1 @@
+PRINT "ok" rubbish

@@ -148,5 +148,27 @@ polls held Escape at handler entry; broader asynchronous polling is unqualified.
 
 The first command checks the reference assembly data against the pinned built
 BASIC image/map; it does not compile BASIC programs. The second packages DATA63000
-and verifies independent GNU links at&42000/&48000. All eight packers reproduce
+and verifies independent GNU links at&42000/&48000. All nine module packers reproduce
 the exact promoted compiler. The Agon program needs no separate runtime file.
+
+## Compact native call adapters
+
+`compact.s` contains 394 bytes and 29 internal ADL relocations. Its 13 entries
+share fixed native CALL setup for numeric literals/operators, scalar loads and
+stores, arrays and activation records. Arithmetic still calls the unchanged
+numeric package. Fixed inline fields follow native calls; there is no BASIC
+source or bytecode execution loop. The BBC compiler patches 13 explicit external
+fields and places adapter code before string storage. The
+[ABI and qualification](../../docs/tasks/C005/compact/ABI.md) record calling
+conventions, stack/register/error behavior and dependencies.
+
+```bash
+.venv/bin/python compiler/tools/build_compact_runtime.py --compiler compiler/compiler.bas
+```
+
+This packages DATA64000 and independently checks rebasing. Error repacking
+preserves that following package. Control repacking retains the full 8657-byte
+runtime for GNU checks while selecting its 465-byte initialized prefix for the
+compiler's private loader; BBC emission writes the full 8192-byte zero frame
+tail. Runtime bytes and capacities remain unchanged. REPORT-table regeneration
+and every module packer preserve the exact qualified compiler source.

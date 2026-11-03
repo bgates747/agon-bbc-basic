@@ -1,0 +1,1312 @@
+{
+  "source": "compiler/compiler.bas",
+  "source_sha256": "6597a0df3f99b4f43c42bff1cdbc59f5fdf730c57837f3d4112a598fbfbe5fb8",
+  "ordered_source_lines": 2067,
+  "procedure_definitions": 177,
+  "function_definitions": 42,
+  "scope": "Static search inventory; counts are not a compiler parser or feature qualification",
+  "matches": {
+    "definitions": [
+      {
+        "line": 1000,
+        "source": "DEF PROCinit"
+      },
+      {
+        "line": 1040,
+        "source": "DEF PROCcompile(source$,target$)"
+      },
+      {
+        "line": 1099,
+        "source": "DEF PROCpass"
+      },
+      {
+        "line": 1370,
+        "source": "DEF PROCreadline(h%)"
+      },
+      {
+        "line": 1510,
+        "source": "DEF PROCline"
+      },
+      {
+        "line": 1622,
+        "source": "DEF PROCnumberlabel"
+      },
+      {
+        "line": 1632,
+        "source": "DEF PROCstatement"
+      },
+      {
+        "line": 1770,
+        "source": "DEF PROCbranch(w$)"
+      },
+      {
+        "line": 1830,
+        "source": "DEF PROCprint"
+      },
+      {
+        "line": 1941,
+        "source": "DEF PROCprintitem"
+      },
+      {
+        "line": 1945,
+        "source": "DEF PROCprintnumber"
+      },
+      {
+        "line": 1950,
+        "source": "DEF PROCvdu"
+      },
+      {
+        "line": 2030,
+        "source": "DEF FNstring"
+      },
+      {
+        "line": 2140,
+        "source": "DEF FNname"
+      },
+      {
+        "line": 2230,
+        "source": "DEF FNnumber(max%)"
+      },
+      {
+        "line": 2360,
+        "source": "DEF FNalpha(c$)"
+      },
+      {
+        "line": 2380,
+        "source": "DEF FNdigit(c$)"
+      },
+      {
+        "line": 2400,
+        "source": "DEF FNpeek"
+      },
+      {
+        "line": 2420,
+        "source": "DEF PROCspace"
+      },
+      {
+        "line": 2450,
+        "source": "DEF PROCexpect(c$)"
+      },
+      {
+        "line": 2500,
+        "source": "DEF FNsymbol(n$)"
+      },
+      {
+        "line": 2560,
+        "source": "DEF PROClabel(n$)"
+      },
+      {
+        "line": 2610,
+        "source": "DEF PROCaddr(h$,n$)"
+      },
+      {
+        "line": 2720,
+        "source": "DEF PROCbyte(v%)"
+      },
+      {
+        "line": 2760,
+        "source": "DEF PROCbytes(h$)"
+      },
+      {
+        "line": 2840,
+        "source": "DEF PROCcharacter(v%)"
+      },
+      {
+        "line": 2870,
+        "source": "DEF PROCnewline"
+      },
+      {
+        "line": 2900,
+        "source": "DEF PROCtext(s$)"
+      },
+      {
+        "line": 2950,
+        "source": "DEF PROCruntime"
+      },
+      {
+        "line": 3240,
+        "source": "DEF PROCbad(m$)"
+      },
+      {
+        "line": 4000,
+        "source": "DEF PROCloadnumbers"
+      },
+      {
+        "line": 4110,
+        "source": "DEF PROCnumslot"
+      },
+      {
+        "line": 4160,
+        "source": "DEF PROCvalue(v)"
+      },
+      {
+        "line": 4220,
+        "source": "DEF PROCnumindices(l%,r%)"
+      },
+      {
+        "line": 4250,
+        "source": "DEF PROCnumcall(o%)"
+      },
+      {
+        "line": 4290,
+        "source": "DEF PROCbinary(o%)"
+      },
+      {
+        "line": 4330,
+        "source": "DEF PROCexpr(min%)"
+      },
+      {
+        "line": 4430,
+        "source": "DEF PROCexprtail"
+      },
+      {
+        "line": 4480,
+        "source": "DEF FNoperator"
+      },
+      {
+        "line": 4710,
+        "source": "DEF PROCitem"
+      },
+      {
+        "line": 4820,
+        "source": "DEF PROCworditem"
+      },
+      {
+        "line": 4920,
+        "source": "DEF PROCconstant"
+      },
+      {
+        "line": 5101,
+        "source": "DEF PROCdecimal"
+      },
+      {
+        "line": 5110,
+        "source": "DEF PROCdecexponent"
+      },
+      {
+        "line": 5120,
+        "source": "DEF FNreaddecimal(s$)"
+      },
+      {
+        "line": 5184,
+        "source": "DEF PROCpacked(v,e%)"
+      },
+      {
+        "line": 5193,
+        "source": "DEF PROCnumruntime"
+      },
+      {
+        "line": 6000,
+        "source": "DEF FNvariable(n$)"
+      },
+      {
+        "line": 6160,
+        "source": "DEF PROCassign(n$)"
+      },
+      {
+        "line": 6260,
+        "source": "DEF PROCvariable(n$)"
+      },
+      {
+        "line": 6340,
+        "source": "DEF PROCvarcopy(f$,t$,n%)"
+      },
+      {
+        "line": 6380,
+        "source": "DEF PROCvarruntime"
+      },
+      {
+        "line": 6460,
+        "source": "DEF PROCkeywords:LOCAL i%"
+      },
+      {
+        "line": 6500,
+        "source": "DEF FNreserved(n$)"
+      },
+      {
+        "line": 7000,
+        "source": "DEF PROCloadstrings"
+      },
+      {
+        "line": 7110,
+        "source": "DEF FNstringstart"
+      },
+      {
+        "line": 7190,
+        "source": "DEF PROCprintstring"
+      },
+      {
+        "line": 7270,
+        "source": "DEF PROCprintstrvalue"
+      },
+      {
+        "line": 7300,
+        "source": "DEF PROCstrslot"
+      },
+      {
+        "line": 7340,
+        "source": "DEF PROCstrexpr"
+      },
+      {
+        "line": 7420,
+        "source": "DEF PROCstritem"
+      },
+      {
+        "line": 7460,
+        "source": "DEF PROCstratom"
+      },
+      {
+        "line": 7570,
+        "source": "DEF PROCstrliteral"
+      },
+      {
+        "line": 7620,
+        "source": "DEF PROCstrchr"
+      },
+      {
+        "line": 7670,
+        "source": "DEF PROCstrlen"
+      },
+      {
+        "line": 7710,
+        "source": "DEF PROCstrassign(i%)"
+      },
+      {
+        "line": 7760,
+        "source": "DEF PROCstrruntime"
+      },
+      {
+        "line": 8010,
+        "source": "DEF FNstrreserved(n$)"
+      },
+      {
+        "line": 8100,
+        "source": "DEF PROCneednumber"
+      },
+      {
+        "line": 8130,
+        "source": "DEF PROCtypedbinary"
+      },
+      {
+        "line": 8210,
+        "source": "DEF PROCstrcompare(o%)"
+      },
+      {
+        "line": 8320,
+        "source": "DEF PROCslice(t%)"
+      },
+      {
+        "line": 8410,
+        "source": "DEF PROCcount"
+      },
+      {
+        "line": 8440,
+        "source": "DEF PROCslicecount(t%,i%)"
+      },
+      {
+        "line": 8470,
+        "source": "DEF PROCtypeditem"
+      },
+      {
+        "line": 8500,
+        "source": "DEF PROCstrval"
+      },
+      {
+        "line": 8540,
+        "source": "DEF PROCstrnum"
+      },
+      {
+        "line": 8600,
+        "source": "DEF PROCstrasc"
+      },
+      {
+        "line": 8700,
+        "source": "DEF PROCstrinstr"
+      },
+      {
+        "line": 8760,
+        "source": "DEF PROCsearchstart"
+      },
+      {
+        "line": 8790,
+        "source": "DEF PROCstrrepeat"
+      },
+      {
+        "line": 8900,
+        "source": "DEF PROCstrsliceassign(t$)"
+      },
+      {
+        "line": 9030,
+        "source": "DEF PROCwriterange"
+      },
+      {
+        "line": 9100,
+        "source": "DEF FNword(w$)"
+      },
+      {
+        "line": 9120,
+        "source": "DEF FNstmtend"
+      },
+      {
+        "line": 9140,
+        "source": "DEF FNflow"
+      },
+      {
+        "line": 9160,
+        "source": "DEF PROCcondition"
+      },
+      {
+        "line": 9200,
+        "source": "DEF PROCif"
+      },
+      {
+        "line": 9300,
+        "source": "DEF PROCifblock(id$)"
+      },
+      {
+        "line": 9350,
+        "source": "DEF PROCiffalse"
+      },
+      {
+        "line": 9380,
+        "source": "DEF PROCelse"
+      },
+      {
+        "line": 9440,
+        "source": "DEF PROCinlineelse"
+      },
+      {
+        "line": 9490,
+        "source": "DEF PROCendif"
+      },
+      {
+        "line": 11000,
+        "source": "DEF PROCloadcontrol"
+      },
+      {
+        "line": 11080,
+        "source": "DEF FNhexbyte(s$)"
+      },
+      {
+        "line": 11100,
+        "source": "DEF PROCflowcheck(t%)"
+      },
+      {
+        "line": 11130,
+        "source": "DEF PROCloop(w$)"
+      },
+      {
+        "line": 11250,
+        "source": "DEF PROCfor(id$)"
+      },
+      {
+        "line": 11340,
+        "source": "DEF PROCexpectword(w$)"
+      },
+      {
+        "line": 11370,
+        "source": "DEF PROCloopend(w$)"
+      },
+      {
+        "line": 11480,
+        "source": "DEF PROCnext"
+      },
+      {
+        "line": 11700,
+        "source": "DEF PROCflowruntime"
+      },
+      {
+        "line": 11880,
+        "source": "DEF PROCctlexport(n$,p%)"
+      },
+      {
+        "line": 11900,
+        "source": "DEF FNtrim(s$)"
+      },
+      {
+        "line": 13000,
+        "source": "DEF PROCloadacts"
+      },
+      {
+        "line": 13080,
+        "source": "DEF PROCuseacts"
+      },
+      {
+        "line": 13110,
+        "source": "DEF FNprocfind(n$)"
+      },
+      {
+        "line": 13160,
+        "source": "DEF PROCprocscan(h%)"
+      },
+      {
+        "line": 13240,
+        "source": "DEF PROCscandef"
+      },
+      {
+        "line": 13320,
+        "source": "DEF PROCprocparams(i%,save%)"
+      },
+      {
+        "line": 13470,
+        "source": "DEF PROCprocscope"
+      },
+      {
+        "line": 13540,
+        "source": "DEF FNtarget(n$)"
+      },
+      {
+        "line": 13570,
+        "source": "DEF PROCdefinition"
+      },
+      {
+        "line": 13650,
+        "source": "DEF PROCproccall"
+      },
+      {
+        "line": 13760,
+        "source": "DEF PROCprocarg(i%,j%)"
+      },
+      {
+        "line": 13830,
+        "source": "DEF PROCprocbind(i%,o%)"
+      },
+      {
+        "line": 13870,
+        "source": "DEF PROCsavebinding(i%)"
+      },
+      {
+        "line": 13900,
+        "source": "DEF PROClocal"
+      },
+      {
+        "line": 14000,
+        "source": "DEF PROCactruntime"
+      },
+      {
+        "line": 14140,
+        "source": "DEF PROCactworkspace"
+      },
+      {
+        "line": 15000,
+        "source": "DEF FNcallname(k%)"
+      },
+      {
+        "line": 15040,
+        "source": "DEF FNfnstring(p%)"
+      },
+      {
+        "line": 15080,
+        "source": "DEF PROCfncall"
+      },
+      {
+        "line": 15230,
+        "source": "DEF PROCcopystr(f$,t$)"
+      },
+      {
+        "line": 15250,
+        "source": "DEF PROCfnreturn"
+      },
+      {
+        "line": 15300,
+        "source": "DEF PROCcollectreturns(i%,s%)"
+      },
+      {
+        "line": 15410,
+        "source": "DEF FNreturnmark(p%,s%)"
+      },
+      {
+        "line": 15450,
+        "source": "DEF FNreturnend(p%)"
+      },
+      {
+        "line": 15550,
+        "source": "DEF PROCrememberreturn(i%,s$,col%)"
+      },
+      {
+        "line": 15580,
+        "source": "DEF PROCinferreturns"
+      },
+      {
+        "line": 15720,
+        "source": "DEF FNinferkindcore(s$)"
+      },
+      {
+        "line": 15910,
+        "source": "DEF PROCkindpair"
+      },
+      {
+        "line": 15950,
+        "source": "DEF FNkindname(s$,p%)"
+      },
+      {
+        "line": 16000,
+        "source": "DEF FNkindtrim(s$)"
+      },
+      {
+        "line": 16040,
+        "source": "DEF FNkindouter(s$)"
+      },
+      {
+        "line": 16130,
+        "source": "DEF FNkindword(s$,p%,w$)"
+      },
+      {
+        "line": 16150,
+        "source": "DEF FNkindplus(s$)"
+      },
+      {
+        "line": 16300,
+        "source": "DEF FNinferkind(s$)"
+      },
+      {
+        "line": 16400,
+        "source": "DEF PROCloadmemory"
+      },
+      {
+        "line": 16416,
+        "source": "DEF PROCusememory"
+      },
+      {
+        "line": 16420,
+        "source": "DEF PROCmemoryruntime"
+      },
+      {
+        "line": 16460,
+        "source": "DEF PROCmemoryworkspace"
+      },
+      {
+        "line": 16472,
+        "source": "DEF FNmemwidth(i%)"
+      },
+      {
+        "line": 16478,
+        "source": "DEF PROCarrayarity(i%,n%)"
+      },
+      {
+        "line": 16486,
+        "source": "DEF PROCarraycall(r$,i%,n%,s%)"
+      },
+      {
+        "line": 16494,
+        "source": "DEF PROCarrayaddress(i%,w%)"
+      },
+      {
+        "line": 16524,
+        "source": "DEF PROCarrayread(i%)"
+      },
+      {
+        "line": 16540,
+        "source": "DEF PROCarrayassign(i%)"
+      },
+      {
+        "line": 16556,
+        "source": "DEF PROCdim"
+      },
+      {
+        "line": 16576,
+        "source": "DEF PROCdimarray(i%)"
+      },
+      {
+        "line": 16610,
+        "source": "DEF PROCdimblock(i%)"
+      },
+      {
+        "line": 16626,
+        "source": "DEF PROCreadscalar(i%)"
+      },
+      {
+        "line": 16640,
+        "source": "DEF PROCmemtail"
+      },
+      {
+        "line": 16648,
+        "source": "DEF PROCmemoffset"
+      },
+      {
+        "line": 16660,
+        "source": "DEF PROCmemload(t%)"
+      },
+      {
+        "line": 16672,
+        "source": "DEF PROCmemitem(c$)"
+      },
+      {
+        "line": 16686,
+        "source": "DEF PROCaddress"
+      },
+      {
+        "line": 16700,
+        "source": "DEF PROCindirectassign(i%)"
+      },
+      {
+        "line": 16706,
+        "source": "DEF PROCmemassign(c$)"
+      },
+      {
+        "line": 16716,
+        "source": "DEF PROCmemstore(t%)"
+      },
+      {
+        "line": 16726,
+        "source": "DEF PROCdimseed(t%)"
+      },
+      {
+        "line": 16734,
+        "source": "DEF PROCdimbranch(n$,z%)"
+      },
+      {
+        "line": 16740,
+        "source": "DEF PROCdimchoice(i%,n%,s%)"
+      },
+      {
+        "line": 17500,
+        "source": "DEF PROCloadio"
+      },
+      {
+        "line": 17516,
+        "source": "DEF PROCchannel"
+      },
+      {
+        "line": 17522,
+        "source": "DEF PROCioitem(w$)"
+      },
+      {
+        "line": 17538,
+        "source": "DEF PROCclosestatement"
+      },
+      {
+        "line": 17544,
+        "source": "DEF PROCbput"
+      },
+      {
+        "line": 17554,
+        "source": "DEF PROCinputline"
+      },
+      {
+        "line": 17572,
+        "source": "DEF PROCIOruntime"
+      },
+      {
+        "line": 18000,
+        "source": "DEF PROCloaddata"
+      },
+      {
+        "line": 18016,
+        "source": "DEF PROCcapturenumber(v)"
+      },
+      {
+        "line": 18022,
+        "source": "DEF PROCcapturepacked(v,e%)"
+      },
+      {
+        "line": 18028,
+        "source": "DEF PROCusedata"
+      },
+      {
+        "line": 18032,
+        "source": "DEF PROCdatastatement"
+      },
+      {
+        "line": 18038,
+        "source": "DEF PROCrestoredata"
+      },
+      {
+        "line": 18046,
+        "source": "DEF PROCreadstatement"
+      },
+      {
+        "line": 18072,
+        "source": "DEF PROCreadnumber(i%,a%,t%)"
+      },
+      {
+        "line": 18084,
+        "source": "DEF PROCreadstring(i%,a%)"
+      },
+      {
+        "line": 18092,
+        "source": "DEF PROCdataruntime"
+      },
+      {
+        "line": 18112,
+        "source": "DEF PROCdatatable"
+      },
+      {
+        "line": 18138,
+        "source": "DEF PROCdataline(n%)"
+      },
+      {
+        "line": 18152,
+        "source": "DEF PROCdatafield"
+      },
+      {
+        "line": 18186,
+        "source": "DEF FNdataencode(s$)"
+      },
+      {
+        "line": 18202,
+        "source": "DEF PROCdatabytecheck(b%)"
+      },
+      {
+        "line": 19000,
+        "source": "DEF PROCloaderrors"
+      },
+      {
+        "line": 19016,
+        "source": "DEF PROCuseerrors"
+      },
+      {
+        "line": 19022,
+        "source": "DEF PROCerrorscan"
+      },
+      {
+        "line": 19042,
+        "source": "DEF PROCerrmark"
+      },
+      {
+        "line": 19052,
+        "source": "DEF PROCerrorinstall"
+      },
+      {
+        "line": 19072,
+        "source": "DEF PROCerrorstatement"
+      },
+      {
+        "line": 19082,
+        "source": "DEF PROCerritem(w$)"
+      },
+      {
+        "line": 19088,
+        "source": "DEF PROCerrorconstant(n%,s$)"
+      },
+      {
+        "line": 19100,
+        "source": "DEF PROCerrorruntime"
+      },
+      {
+        "line": 19118,
+        "source": "DEF PROCerrorline"
+      },
+      {
+        "line": 19200,
+        "source": "DEF PROCdefine(n$,a%)"
+      },
+      {
+        "line": 19220,
+        "source": "DEF PROCword24(v%)"
+      },
+      {
+        "line": 19226,
+        "source": "DEF FNlineref(n%,m%,w%)"
+      },
+      {
+        "line": 19234,
+        "source": "DEF PROCtargetscan"
+      },
+      {
+        "line": 19270,
+        "source": "DEF FNrelocindex(k%,i%)"
+      },
+      {
+        "line": 19288,
+        "source": "DEF PROCtemplate(p%,s%,r%,k%)"
+      },
+      {
+        "line": 19336,
+        "source": "DEF FNbridgeoffset(k%,i%)"
+      },
+      {
+        "line": 19352,
+        "source": "DEF FNerrorslot(i%)"
+      },
+      {
+        "line": 19362,
+        "source": "DEF FNbridgename(k%,i%)"
+      },
+      {
+        "line": 19400,
+        "source": "DEF PROCcodecount(n%)"
+      },
+      {
+        "line": 19406,
+        "source": "DEF PROCblob(p%,n%)"
+      },
+      {
+        "line": 19414,
+        "source": "DEF PROCstringbytes(s$)"
+      },
+      {
+        "line": 19422,
+        "source": "DEF PROCzeros(n%)"
+      },
+      {
+        "line": 19500,
+        "source": "DEF PROCusecompact"
+      },
+      {
+        "line": 19504,
+        "source": "DEF PROCnumoperation(l%,r%,o%)"
+      },
+      {
+        "line": 19510,
+        "source": "DEF PROCloadcompact"
+      },
+      {
+        "line": 19530,
+        "source": "DEF PROCcompactruntime"
+      },
+      {
+        "line": 19544,
+        "source": "DEF FNcompactbridge(i%)"
+      },
+      {
+        "line": 19580,
+        "source": "DEF FNsortindex(i%)"
+      },
+      {
+        "line": 19586,
+        "source": "DEF PROCsortindex(i%,v%)"
+      },
+      {
+        "line": 19590,
+        "source": "DEF FNsymboladdr(i%)"
+      },
+      {
+        "line": 19596,
+        "source": "DEF PROCsymboladdr(i%,v%)"
+      },
+      {
+        "line": 19600,
+        "source": "DEF FNrefpage(i%,w%)"
+      },
+      {
+        "line": 19610,
+        "source": "DEF PROCclearrefs"
+      }
+    ],
+    "arrays_and_blocks": [
+      {
+        "line": 1010,
+        "source": "DIM sname$(4095),saddr% 12287,sort% 8191,lrefs%(63)"
+      },
+      {
+        "line": 1021,
+        "source": "DIM pname$(255),pline%(255),parcnt&(255),par&(255,15),argkind&(31,15),argindex&(31,15),pkind&(255),pret%(255),return$(511),retdef&(511),retline%(511),retcol%(511)"
+      },
+      {
+        "line": 1024,
+        "source": "DIM vname$(255),vsize&(255),vstatic%(255),vtype%(255),vdim&(255),kwords$(4)"
+      },
+      {
+        "line": 1025,
+        "source": "DIM sunsafe%(15)"
+      },
+      {
+        "line": 1029,
+        "source": "DIM ifid$(31),bid$(31),belse%(31),lkind%(31),lname$(31),lvar%(31)"
+      },
+      {
+        "line": 4030,
+        "source": "DIM nimage% nsize%-1,nreloc%(nrelocs%-1)"
+      },
+      {
+        "line": 7030,
+        "source": "DIM simage% ssize%-1,sreloc%(srelocs%)"
+      },
+      {
+        "line": 11030,
+        "source": "DIM timage% tframes%-1,treloc%(trelocs%-1)"
+      },
+      {
+        "line": 13030,
+        "source": "DIM aimage% asize%-1,areloc%(arelocs%-1)"
+      },
+      {
+        "line": 16406,
+        "source": "DIM mimage% msize%-1,mreloc%(mrelocs%-1)"
+      },
+      {
+        "line": 17506,
+        "source": "DIM iimage% isize%-1,ireloc%(irelocs%-1)"
+      },
+      {
+        "line": 18006,
+        "source": "DIM dimage% dsize%-1,dreloc%(drelocs%),dpacket% 4"
+      },
+      {
+        "line": 19004,
+        "source": "DIM eentry%(23):RESTORE 63000:READ esize%,erelocs%:FOR i%=0 TO 23:READ eentry%(i%):NEXT"
+      },
+      {
+        "line": 19006,
+        "source": "DIM eimage% esize%-1,ereloc%(erelocs%-1)"
+      },
+      {
+        "line": 19514,
+        "source": "RESTORE 64000:READ xsize%,xrelocs%:DIM xentry%(25)"
+      },
+      {
+        "line": 19518,
+        "source": "DIM ximage% xsize%-1,xreloc%(xrelocs%-1)"
+      },
+      {
+        "line": 19604,
+        "source": "DIM p% 255:FOR j%=0 TO 255:p%?j%=0:NEXT:lrefs%(i%)=p%"
+      }
+    ],
+    "file_io": [
+      {
+        "line": 30,
+        "source": "ON ERROR REPORT:PRINT:CLOSE#0:END"
+      },
+      {
+        "line": 1080,
+        "source": "fh%=OPENIN(source$)"
+      },
+      {
+        "line": 1092,
+        "source": "PROCprocscan(fh%):CLOSE#fh%"
+      },
+      {
+        "line": 1096,
+        "source": "IF phase%=3 THEN oh%=OPENOUT(target$):IF oh%=0 PROCbad(\"\")"
+      },
+      {
+        "line": 1098,
+        "source": "NEXT:CLOSE#oh%:ENDPROC"
+      },
+      {
+        "line": 1100,
+        "source": "fh%=OPENIN(source$):IF fh%=0 PROCbad(\"\")"
+      },
+      {
+        "line": 1180,
+        "source": "WHILE NOT EOF#fh%"
+      },
+      {
+        "line": 1230,
+        "source": "CLOSE#fh%:fh%=0"
+      },
+      {
+        "line": 1400,
+        "source": "WHILE NOT EOF#h% AND NOT done%"
+      },
+      {
+        "line": 1410,
+        "source": "b%=BGET#h%"
+      },
+      {
+        "line": 2740,
+        "source": "IF phase%=3 BPUT#oh%,v%"
+      },
+      {
+        "line": 2810,
+        "source": "BPUT#oh%,a%*16+b%"
+      },
+      {
+        "line": 5189,
+        "source": "FOR i%=0 TO 3:q=INT(v/256):BPUT#oh%,v-q*256:v=q:NEXT"
+      },
+      {
+        "line": 5190,
+        "source": "BPUT#oh%,e%"
+      },
+      {
+        "line": 13180,
+        "source": "WHILE NOT EOF#h%"
+      },
+      {
+        "line": 18116,
+        "source": "h%=OPENIN(source$):IF h%=0 PROCbad(\"\")"
+      },
+      {
+        "line": 18120,
+        "source": "WHILE NOT EOF#h%"
+      },
+      {
+        "line": 18130,
+        "source": "CLOSE#h%:PROClabel(\"\")"
+      },
+      {
+        "line": 18180,
+        "source": "PROCcodecount(8):IF phase%=3 THEN BPUT#oh%,LEN(s$):BPUT#oh%,e%:FOR i%=0 TO 4:BPUT#oh%,dpacket%?i%:NEXT:BPUT#oh%,0"
+      },
+      {
+        "line": 19223,
+        "source": "BPUT#oh%,CHR$(v%)+CHR$(v% DIV 256)+CHR$(v% DIV 65536);"
+      },
+      {
+        "line": 19310,
+        "source": "IF phase%=3 THEN FOR v%=i% TO e%-1:BPUT#oh%,p%?v%:NEXT"
+      },
+      {
+        "line": 19412,
+        "source": "FOR i%=0 TO n%-1:BPUT#oh%,p%?i%:NEXT:ENDPROC"
+      },
+      {
+        "line": 19420,
+        "source": "BPUT#oh%,s$;"
+      },
+      {
+        "line": 19428,
+        "source": "FOR i%=1 TO n%:BPUT#oh%,0:NEXT:ENDPROC"
+      }
+    ],
+    "interactive_input": [
+      {
+        "line": 50,
+        "source": "INPUT LINE \"\"input$"
+      },
+      {
+        "line": 60,
+        "source": "INPUT LINE \"\"output$"
+      }
+    ],
+    "data_runtime": [
+      {
+        "line": 4020,
+        "source": "RESTORE 20000:READ nsize%,nrelocs%,nentry%,nliteral%,nnegate%,nprintnum%,nval%,nstrnum%,nstrhex%"
+      },
+      {
+        "line": 4050,
+        "source": "READ s$"
+      },
+      {
+        "line": 4090,
+        "source": "FOR i%=0 TO nrelocs%-1:READ nreloc%(i%):NEXT"
+      },
+      {
+        "line": 7020,
+        "source": "RESTORE 30000:READ ssize%,srelocs%,sliteral%,sload%,scat%,sstore%,sprint%,sleft%,sright%,smid%,scmp%,sinstr%,srepeat%,swrite%,scopy%"
+      },
+      {
+        "line": 7050,
+        "source": "READ s$"
+      },
+      {
+        "line": 7090,
+        "source": "IF srelocs%>0 THEN FOR i%=0 TO srelocs%-1:READ sreloc%(i%):NEXT"
+      },
+      {
+        "line": 11020,
+        "source": "RESTORE 40000:READ tsize%,trelocs%,tinit%,tpush%,tcheck%,tpop%,tuntil%,tagain%,tfor%,tnext%,tnumslot%,ttop%,tframes%,tend%"
+      },
+      {
+        "line": 11040,
+        "source": "FOR i%=0 TO tframes%-1 STEP 40:READ s$"
+      },
+      {
+        "line": 11060,
+        "source": "IF trelocs%>0 THEN FOR i%=0 TO trelocs%-1:READ treloc%(i%):NEXT"
+      },
+      {
+        "line": 13020,
+        "source": "RESTORE 50000:READ asize%,arelocs%,ainit%,abegin%,asave%,ainstall%,abind%,aleave%,apushslot%,acheckslot%,apopslot%,anumslot%,atop%,afnbegin%,afnleave%"
+      },
+      {
+        "line": 13040,
+        "source": "FOR i%=0 TO asize%-1 STEP 40:READ s$"
+      },
+      {
+        "line": 13060,
+        "source": "IF arelocs%>0 THEN FOR i%=0 TO arelocs%-1:READ areloc%(i%):NEXT"
+      },
+      {
+        "line": 16404,
+        "source": "RESTORE 60000:READ msize%,mrelocs%,malloc%,mdim%,maddr%,mstep%,mprefix%"
+      },
+      {
+        "line": 16408,
+        "source": "FOR i%=0 TO msize%-1 STEP 40:READ s$"
+      },
+      {
+        "line": 16412,
+        "source": "IF mrelocs%>0 THEN FOR i%=0 TO mrelocs%-1:READ mreloc%(i%):NEXT"
+      },
+      {
+        "line": 17504,
+        "source": "RESTORE 61000:READ isize%,irelocs%,iopen%,iget%,ieof%,iput%,iputs%,iclose%,iinput%"
+      },
+      {
+        "line": 17508,
+        "source": "FOR i%=0 TO isize%-1 STEP 40:READ s$"
+      },
+      {
+        "line": 17512,
+        "source": "IF irelocs%>0 THEN FOR i%=0 TO irelocs%-1:READ ireloc%(i%):NEXT"
+      },
+      {
+        "line": 18004,
+        "source": "RESTORE 62000:READ dsize%,drelocs%,dpeek%,dnumber%,dstring%,dcommit%"
+      },
+      {
+        "line": 18008,
+        "source": "FOR i%=0 TO dsize%-1 STEP 40:READ s$"
+      },
+      {
+        "line": 18012,
+        "source": "IF drelocs%>0 THEN FOR i%=0 TO drelocs%-1:READ dreloc%(i%):NEXT"
+      },
+      {
+        "line": 19004,
+        "source": "DIM eentry%(23):RESTORE 63000:READ esize%,erelocs%:FOR i%=0 TO 23:READ eentry%(i%):NEXT"
+      },
+      {
+        "line": 19008,
+        "source": "FOR i%=0 TO esize%-1 STEP 40:READ s$"
+      },
+      {
+        "line": 19012,
+        "source": "IF erelocs%>0 THEN FOR i%=0 TO erelocs%-1:READ ereloc%(i%):NEXT"
+      },
+      {
+        "line": 19514,
+        "source": "RESTORE 64000:READ xsize%,xrelocs%:DIM xentry%(25)"
+      },
+      {
+        "line": 19516,
+        "source": "FOR i%=0 TO 25:READ xentry%(i%):NEXT"
+      },
+      {
+        "line": 19520,
+        "source": "FOR i%=0 TO xsize%-1 STEP 40:READ s$"
+      },
+      {
+        "line": 19524,
+        "source": "IF xrelocs%>0 THEN FOR i%=0 TO xrelocs%-1:READ xreloc%(i%):NEXT"
+      }
+    ],
+    "error_facilities": [
+      {
+        "line": 30,
+        "source": "ON ERROR REPORT:PRINT:CLOSE#0:END"
+      },
+      {
+        "line": 3250,
+        "source": "ERROR 100,LEFT$(source$,80)+\"\"+STR$(lnum%)+\"\"+STR$(pos%)+\"\"+LEFT$(m$,130)"
+      },
+      {
+        "line": 5121,
+        "source": "LOCAL ERROR"
+      },
+      {
+        "line": 5122,
+        "source": "ON ERROR LOCAL numerr%=ERR:=0"
+      }
+    ],
+    "indirection": [
+      {
+        "line": 4070,
+        "source": "nimage%?(i%+(j%-1) DIV 2)=a%*16+b%"
+      },
+      {
+        "line": 4190,
+        "source": "p%=^v"
+      },
+      {
+        "line": 7080,
+        "source": "simage%?(i%+(j%-1) DIV 2)=a%*16+b%:NEXT:NEXT"
+      },
+      {
+        "line": 11050,
+        "source": "FOR j%=1 TO LEN(s$) STEP 2:timage%?(i%+(j%-1) DIV 2)=FNhexbyte(MID$(s$,j%,2)):NEXT:NEXT"
+      },
+      {
+        "line": 13050,
+        "source": "FOR j%=1 TO LEN(s$) STEP 2:aimage%?(i%+(j%-1) DIV 2)=FNhexbyte(MID$(s$,j%,2)):NEXT:NEXT"
+      },
+      {
+        "line": 16410,
+        "source": "FOR j%=1 TO LEN(s$) STEP 2:mimage%?(i%+(j%-1) DIV 2)=FNhexbyte(MID$(s$,j%,2)):NEXT:NEXT"
+      },
+      {
+        "line": 17510,
+        "source": "FOR j%=1 TO LEN(s$) STEP 2:iimage%?(i%+(j%-1) DIV 2)=FNhexbyte(MID$(s$,j%,2)):NEXT:NEXT"
+      },
+      {
+        "line": 18010,
+        "source": "FOR j%=1 TO LEN(s$) STEP 2:dimage%?(i%+(j%-1) DIV 2)=FNhexbyte(MID$(s$,j%,2)):NEXT:NEXT"
+      },
+      {
+        "line": 18018,
+        "source": "LOCAL i%,p%:p%=^v:FOR i%=0 TO 4:dpacket%?i%=p%?i%:NEXT"
+      },
+      {
+        "line": 18024,
+        "source": "LOCAL i%,q:FOR i%=0 TO 3:q=INT(v/256):dpacket%?i%=v-q*256:v=q:NEXT:dpacket%?4=e%"
+      },
+      {
+        "line": 18162,
+        "source": "e%=6:FOR i%=0 TO 4:dpacket%?i%=0:NEXT"
+      },
+      {
+        "line": 18180,
+        "source": "PROCcodecount(8):IF phase%=3 THEN BPUT#oh%,LEN(s$):BPUT#oh%,e%:FOR i%=0 TO 4:BPUT#oh%,dpacket%?i%:NEXT:BPUT#oh%,0"
+      },
+      {
+        "line": 18198,
+        "source": "IF sign% AND numerr%=0 THEN v=|dpacket%:v=-v:p%=^v:FOR i%=0 TO 4:dpacket%?i%=p%?i%:NEXT"
+      },
+      {
+        "line": 19010,
+        "source": "FOR j%=1 TO LEN(s$) STEP 2:eimage%?(i%+(j%-1) DIV 2)=FNhexbyte(MID$(s$,j%,2)):NEXT:NEXT"
+      },
+      {
+        "line": 19214,
+        "source": "IF snum%>sinsert% THEN FOR j%=2*snum%-1 TO 2*sinsert% STEP -1:sort%?(j%+2)=sort%?j%:NEXT"
+      },
+      {
+        "line": 19229,
+        "source": "i%=(n% DIV 8) AND 255:b%=2^(n% AND 7)"
+      },
+      {
+        "line": 19230,
+        "source": "IF w% p%?i%=p%?i% OR b%"
+      },
+      {
+        "line": 19232,
+        "source": "=(p%?i% AND b%)<>0"
+      },
+      {
+        "line": 19300,
+        "source": "v%=p%?i%+256*p%?(i%+1)+65536*p%?(i%+2):PROCword24(v%+b%):i%=i%+3:j%=j%+1:o%=-1"
+      },
+      {
+        "line": 19310,
+        "source": "IF phase%=3 THEN FOR v%=i% TO e%-1:BPUT#oh%,p%?v%:NEXT"
+      },
+      {
+        "line": 19412,
+        "source": "FOR i%=0 TO n%-1:BPUT#oh%,p%?i%:NEXT:ENDPROC"
+      },
+      {
+        "line": 19522,
+        "source": "FOR j%=1 TO LEN(s$) STEP 2:ximage%?(i%+(j%-1) DIV 2)=FNhexbyte(MID$(s$,j%,2)):NEXT:NEXT"
+      },
+      {
+        "line": 19584,
+        "source": "=sort%?p%+256*sort%?(p%+1)"
+      },
+      {
+        "line": 19588,
+        "source": "LOCAL p%:p%=2*i%:sort%?p%=v%:sort%?(p%+1)=v% DIV 256:ENDPROC"
+      },
+      {
+        "line": 19594,
+        "source": "=saddr%?p%+256*saddr%?(p%+1)+65536*saddr%?(p%+2)"
+      },
+      {
+        "line": 19598,
+        "source": "LOCAL p%:p%=3*i%:saddr%?p%=v%:saddr%?(p%+1)=v% DIV 256:saddr%?(p%+2)=v% DIV 65536:ENDPROC"
+      },
+      {
+        "line": 19604,
+        "source": "DIM p% 255:FOR j%=0 TO 255:p%?j%=0:NEXT:lrefs%(i%)=p%"
+      },
+      {
+        "line": 19618,
+        "source": "p%=lrefs%(i%):FOR j%=0 TO 255:p%?j%=0:NEXT"
+      }
+    ]
+  }
+}

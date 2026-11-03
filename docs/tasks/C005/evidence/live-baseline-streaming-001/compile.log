@@ -1,0 +1,73 @@
+Warning: unused arguments left: ["--firmware", "platform"].
+Tom's Fake VDP Version 1.03
+unknown packet VDU 0x17, 0, 0xf8
+unknown packet VDU 0x17, 0, 0x99
+uunknown packet VDU 0x17, 0, 0x94
+
+Agon Platform MOS Version 3.0.2 Arthur
+
+CASE_OK:t0.bas
+CASE_OK:t1.bas
+CASE_OK:t2.bas
+CASE_OK:t3.bas
+CASE_OK:t4.bas
+CASE_OK:t5.bas
+CASE_OK:t6.bas
+CASE_OK:t7.bas
+CASE_OK:t8.bas
+CASE_OK:t9.bas
+CASE_OK:t10.bas
+CASE_ERR:t11.bas
+t11.bas:1:14: Undefined target @missing
+CASE_ERR:t12.bas
+t12.bas:1:9: Undefined target #123
+CASE_ERR:t13.bas
+t13.bas:2:4: Duplicate target @a
+CASE_ERR:t14.bas
+t14.bas:2:3: Line numbers must increase
+CASE_ERR:t15.bas
+t15.bas:2:3: Line numbers must increase
+CASE_ERR:t16.bas
+t16.bas:1:6: Number outside supported range
+CASE_ERR:t17.bas
+t17.bas:1:15: Hex literal exceeds eight digits
+CASE_ERR:t18.bas
+t18.bas:1:6: Unexpected text after statement
+CASE_ERR:t19.bas
+t19.bas:1:9: Unexpected text after statement
+CASE_ERR:t20.bas
+t20.bas:1:20: Unterminated string
+CASE_ERR:t21.bas
+t21.bas:1:11: EVAL is deliberately unsupported
+CASE_ERR:t22.bas
+t22.bas:1:5: EVAL is deliberately unsupported
+CASE_ERR:t23.bas
+t23.bas:1:5: Unsupported statement CALL
+CASE_ERR:t24.bas
+t24.bas:1:4: Unsupported statement SYS
+CASE_ERR:t25.bas
+t25.bas:1:5: Unsupported statement CASE
+CASE_ERR:t26.bas
+t26.bas:1:6: Expected an unsigned integer constant
+CASE_ERR:t27.bas
+t27.bas:1:8: Undefined target @A
+CASE_ERR:t28.bas
+t28.bas:1:10: Expected :
+CASE_ERR:t29.bas
+t29.bas:1:2: Expected a name
+CASE_ERR:t30.bas
+t30.bas:1:35: Name exceeds 32 characters
+CASE_ERR:t31.bas
+t31.bas:1:256: Source line exceeds 255 bytes
+CASE_ERR:t32.bas
+t32.bas:1:1: NUL byte in source
+CASE_ERR:t33.bas
+t33.bas:1:12: Unexpected text after statement
+CASE_ERR:t34.bas
+t34.bas:1:10: Unexpected text after statement
+CASE_OK:t35.bas
+CASE_OK:t36.bas
+CASE_OK:t37.bas
+CASE_OK:t38.bas
+CASE_OK:repeat.bas
+COMPILE_DONE
