@@ -245,3 +245,12 @@ frozen in `stream-names-baseline-002`. The six targeted count-consumer results
 and unchanged four-image smoke establish this name correction's scope; no
 whole resource-cohort rerun on508a74f2 is invented. A new exact self-source
 probe follows this qualified checkpoint.
+
+## Actual executable boundary
+
+Corrected508a74f2 completes source-body layout at390190 bytes and reaches the
+458752-byte executable bound during final DATA at2182:67. Actual counters
+1972 symbols/208 definitions/248 bindings; old output remains intact. Duration
+1322.639s; `stream-source-002` retains the exact failure. No image is emitted.
+[Compaction contract](COMPACTION.md) refines code/private-table reductions while
+retaining numeric representations, reference routines and native control flow.

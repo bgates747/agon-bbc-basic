@@ -485,3 +485,12 @@ The corrected508a74f2 baseline39/15 also passes86.013s with GNU golden/repeat.
 Freeze stream-names-baseline-002 and checkpoint the distinct-helper fix, six
 count consumers and full baseline before the next exact self-source attempt.
 The live compiler remains7cac4bba while resource closure is unresolved.
+
+## Actual source reaches executable RAM limit
+
+stream-source-002 on508a74f2 completes prescan208 definitions/74 returns and
+source-body layout390190 bytes. Final runtime/DATA emission reaches458752 and
+rejects at2182:67, with1972 symbols/248 bindings and old output preserved,
+1322.639s. No executable is emitted. COMPACTION.md refines private byte-table
+ranges (19968 element-byte saving) and native call-adapter boundaries, retaining
+reference arithmetic/conversion and BBC public values. Actual fit remains open.

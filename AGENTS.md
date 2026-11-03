@@ -68,21 +68,27 @@ held-key polling uses MOS sysvars at handler entry. Current CORE6, modern ERL0,
 actual Escape/open-file/exit checks, baseline/golden and nine regeneration tools
 pass. Earlier39-case scopes retain their8bb1dd9a/44533e0d identities, including
 WHILE/FN-return ERL quirks; no full39-case rerun on7cac4bba is claimed. Read
-C005/ERRORS.md. The self-source probe now records4096-fixup exhaustion at physical line108 in1459.137s,
-with existing output preserved. C005/streaming holds
-candidate1b3e4b33 (2188 lines,208 defs,248 static private names),
-with a BBC three-pass emitter. Its39-case/15-native baseline passes196.992s;
-earlier four-image smokes are byte-identical. Full12-source resource qualification passes3613.441s (six native/six rejection),
-including70076-byte output,2048 labels and4097-label rejection. All four earlier
-complete images remain identical. A private-name-only candidate690fd519 passes54.687s four-image smoke and86.029s
-39-case/15-native baseline with old-image/GNU/repeat equality. Its actual
-self-source probe stream-source-001 is active with host-only progress and exact
-unchanged target input. Do not modify that source while it runs. String arrays
-already use five-byte descriptors: a proposed1MB fixed-slot inventory was wrong
-and withdrawn. Actual source/native RAM fit remains unproved. Do not replace the active prototype while a
-qualification uses it. Read C005/STREAMING.md. C006 has refined generation and
-native-regression workflows only; no generation or physical result exists yet. The compiler is still BBC BASIC; assembly is runtime code, not a
-replacement compiler implementation.
+C005/ERRORS.md. The promoted7cac4bba source reaches4096-fixup exhaustion at
+physical108 in1459.137s, preserving output. C005/streaming replaces the output /
+fixup buffers with BBC layout, validation and direct BPUT passes. Earlier1b3e4b33
+passes39/15 baseline196.992s and resource12 (six native/six rejected)3613.441s,
+including70076-byte output,2048 labels and4097-label rejection. All four complete
+old images remain identical. Private-name revision690fd519 passes smoke54.687s
+and baseline86.029s but its actual source probe rejects Duplicate definition
+count at1655:20 in371.199s, before layout. Retain those exact scopes.
+
+Current isolated candidates are prefixed d5144921 and name-spread508a74f2
+(2188 lines,208 unique definitions,248 static private names). Rename only the
+new emitter helper to PROCcodecount, preserving the old slice parser PROCcount;
+source preparation checks unique names per PROC/FN family. Fixed508a74f2 passes
+four-image smoke57.312s, targeted count consumers6 in97.969s and baseline39/15
+86.013s, with repeat/GNU/old-image equality. Its exact source probe stream-source-002 reaches458752-byte code exhaustion
+at2182:67 in1322.639s (1972 symbols/208 definitions/248 bindings), preserving
+output. Source body alone is390190 bytes. No executable is emitted. Read
+C005/COMPACTION.md before resource reductions; actual native fit remains open. String arrays already use five-byte descriptors: a proposed
+1MB fixed-slot inventory was wrong and withdrawn. Read C005/STREAMING.md.
+C006 has refined generation/native-regression workflows only; no generation or
+physical result exists yet. Assembly is runtime code; the compiler stays BBC BASIC.
 
 Use `.venv/bin/python` explicitly. `compiler/README.md` contains build/test
 commands. `.emulator/` is an ignored automated CLI fixture, not a graphical
@@ -101,11 +107,3 @@ truthfully; an approval waiver is not a test result.
 C007's completed source search and measurement contract are indexed by
 `compiler/TESTING.md`; no new benchmark performance was measured. The Author's latest authorization waives earlier approval stops for remaining
 work. Commit authorization is not a claim of human validation.
-
-Latest C005 correction: stream-source-001 on690fd519 rejects Duplicate definition
-count at1655:20 in371.199s, preserving output (no layout yet). Rename the new
-emitter helper to PROCcodecount; the existing slice parser PROCcount stays.
-Fixed d5144921 / name-spread508a74f2 have208 unique definitions; source preparation
-asserts this invariant. Fixed four-image smoke57.312s, targeted count-consumer6 in97.969s and
-39-case/15-native baseline86.013s pass. A new self-source probe follows;
-do not claim earlier690fd519 self-source fit.
