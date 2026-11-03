@@ -1,0 +1,11 @@
+{
+  "completed": false,
+  "host_process_exit": 143,
+  "termination_origin": "unknown",
+  "compiler_source_sha256": "13c2a48802718040b1056921b1aedea3e5da9f6f36e946d990ccf36be92396b9",
+  "seed_sha256": "299a31190c380541a73ed9eb144a303fa37abccc4f3c3e0ad47f99f1538122c0",
+  "partial_image_bytes": 256674,
+  "partial_image_is_not_executable_or_qualification": true,
+  "successor": "native-build-003",
+  "scope": "Interrupted old-native compilation of the new source; neither normal return nor complete image inferred"
+}

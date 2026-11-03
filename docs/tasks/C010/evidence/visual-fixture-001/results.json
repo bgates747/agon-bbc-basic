@@ -1,0 +1,12 @@
+{
+  "scope": "New named program file only in the Author-owned emulator SD; no emulator control",
+  "started": "2026-11-03T22:08:33.919834+00:00",
+  "finished": "2026-11-03T22:08:34.337138+00:00",
+  "returncode": 1,
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 21, in <module>\n    print(json.dumps(dict(copied_and_synced=True,image_sha256=sha(image),image_bytes=len(image),\n          ^^^^\nNameError: name 'json' is not defined. Did you forget to import 'json'?\n",
+  "source_sha256": "1eb897c8ef3aecc99910e0352eba6d32064ebc4aef9e7bd32e9952b0878b43de",
+  "image_sha256": "bad741db6adfc250c7c2f48c37687aec93e8271f77c48bd760f309548dada196",
+  "human_validation": false,
+  "root_compiler_updated": false
+}

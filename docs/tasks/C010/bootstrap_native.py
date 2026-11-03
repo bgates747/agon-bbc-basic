@@ -6,6 +6,7 @@ import importlib.util
 import json
 import shutil
 import signal
+import threading
 import time
 
 ROOT = Path(__file__).resolve().parents[3]
@@ -42,8 +43,16 @@ if args.seed:
 def interrupted(signum, frame):
     report['interrupted_by_signal'] = signum
     raise InterruptedError(f'Controller received signal {signum}')
-signal.signal(signal.SIGTERM, interrupted)
+previous_term = signal.signal(signal.SIGTERM, interrupted)
 start = time.monotonic()
+stop = threading.Event()
+def heartbeat():
+    while not stop.wait(30):
+        target = sd/'c010-newcompiler.bin'
+        print('NATIVE_BUILD_ACTIVE', args.name, round(time.monotonic()-start, 1),
+              target.stat().st_size if target.exists() else 0, flush=True)
+observer = threading.Thread(target=heartbeat, daemon=True)
+observer.start()
 try:
     (sd/'c010-newcompiler.bin').unlink(missing_ok=True)
     log = k.run(PROFILE,
@@ -61,9 +70,14 @@ except BaseException as error:
     report['failure'] = repr(error)
     raise
 finally:
+    stop.set()
+    observer.join(timeout=3)
+    signal.signal(signal.SIGTERM, previous_term)
     report['controller_seconds'] = round(time.monotonic() - start, 3)
     if (PROFILE/'c010-bootstrap.log').exists():
         shutil.copyfile(PROFILE/'c010-bootstrap.log', evidence/'console.log')
+    if not report['completed'] and (sd/'c010-newcompiler.bin').exists():
+        shutil.copyfile(sd/'c010-newcompiler.bin', evidence/'partial-compiler.dat')
     (evidence/'results.json').write_text(json.dumps(report, indent=2)+'\n')
     (evidence/'manifest.json').write_text(json.dumps({str(p.relative_to(evidence)):sha(p)
         for p in sorted(evidence.iterdir()) if p.name!='manifest.json'},indent=2)+'\n')

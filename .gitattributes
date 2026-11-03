@@ -1,3 +1,4 @@
 # Preserve qualified executables and raw hardware captures byte for byte.
 /compiler/bin/compiler.bin binary
 /docs/tasks/C006/evidence/**/*.bin binary
+/docs/tasks/C010/evidence/**/*.bin binary

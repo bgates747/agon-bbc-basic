@@ -1,0 +1,180 @@
+{
+  "mode": "native",
+  "source_sha256": "1eb897c8ef3aecc99910e0352eba6d32064ebc4aef9e7bd32e9952b0878b43de",
+  "image_sha256": "bad741db6adfc250c7c2f48c37687aec93e8271f77c48bd760f309548dada196",
+  "reference_sha256": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+  "observer_sha256": "63d22f604af13317cf6532911b9206ac03e7b4f9ed257f93924a65d551646d8e",
+  "mos_sha256": "d564243283972690933a4554296ad6202ca4ef54572279533a942960846bebae",
+  "completed": true,
+  "rendered_validation": false,
+  "human_validation": false,
+  "performance_benchmark": false,
+  "key_supplied_after_final_plot": true,
+  "plots": 328833,
+  "gcol_commands": 328833,
+  "graphics_bytes": 2959501,
+  "graphics_sha256": "2988ce82e7e7e18def677bcaa6f14ac7079b7b9c3a9442133defabb78b5fcc5f",
+  "controller_seconds": 1214.525,
+  "progress": [
+    {
+      "controller_seconds": 30.071,
+      "wire_bytes": 116277
+    },
+    {
+      "controller_seconds": 60.187,
+      "wire_bytes": 180897
+    },
+    {
+      "controller_seconds": 90.313,
+      "wire_bytes": 233592
+    },
+    {
+      "controller_seconds": 120.427,
+      "wire_bytes": 279168
+    },
+    {
+      "controller_seconds": 150.574,
+      "wire_bytes": 321648
+    },
+    {
+      "controller_seconds": 180.738,
+      "wire_bytes": 364767
+    },
+    {
+      "controller_seconds": 210.904,
+      "wire_bytes": 412143
+    },
+    {
+      "controller_seconds": 240.921,
+      "wire_bytes": 462408
+    },
+    {
+      "controller_seconds": 271.072,
+      "wire_bytes": 542004
+    },
+    {
+      "controller_seconds": 301.247,
+      "wire_bytes": 692322
+    },
+    {
+      "controller_seconds": 331.315,
+      "wire_bytes": 836799
+    },
+    {
+      "controller_seconds": 361.357,
+      "wire_bytes": 908313
+    },
+    {
+      "controller_seconds": 391.363,
+      "wire_bytes": 963366
+    },
+    {
+      "controller_seconds": 421.465,
+      "wire_bytes": 1009041
+    },
+    {
+      "controller_seconds": 451.655,
+      "wire_bytes": 1051548
+    },
+    {
+      "controller_seconds": 481.84,
+      "wire_bytes": 1093398
+    },
+    {
+      "controller_seconds": 511.895,
+      "wire_bytes": 1140234
+    },
+    {
+      "controller_seconds": 541.981,
+      "wire_bytes": 1196484
+    },
+    {
+      "controller_seconds": 572.057,
+      "wire_bytes": 1271337
+    },
+    {
+      "controller_seconds": 602.172,
+      "wire_bytes": 1415778
+    },
+    {
+      "controller_seconds": 632.35,
+      "wire_bytes": 1568427
+    },
+    {
+      "controller_seconds": 662.482,
+      "wire_bytes": 1642974
+    },
+    {
+      "controller_seconds": 692.674,
+      "wire_bytes": 1700223
+    },
+    {
+      "controller_seconds": 722.863,
+      "wire_bytes": 1746654
+    },
+    {
+      "controller_seconds": 753.058,
+      "wire_bytes": 1789305
+    },
+    {
+      "controller_seconds": 783.108,
+      "wire_bytes": 1832325
+    },
+    {
+      "controller_seconds": 813.307,
+      "wire_bytes": 1879017
+    },
+    {
+      "controller_seconds": 843.505,
+      "wire_bytes": 1936554
+    },
+    {
+      "controller_seconds": 873.613,
+      "wire_bytes": 2011884
+    },
+    {
+      "controller_seconds": 903.642,
+      "wire_bytes": 2158530
+    },
+    {
+      "controller_seconds": 933.707,
+      "wire_bytes": 2310783
+    },
+    {
+      "controller_seconds": 963.814,
+      "wire_bytes": 2383701
+    },
+    {
+      "controller_seconds": 993.903,
+      "wire_bytes": 2440923
+    },
+    {
+      "controller_seconds": 1024.017,
+      "wire_bytes": 2487408
+    },
+    {
+      "controller_seconds": 1054.125,
+      "wire_bytes": 2530222
+    },
+    {
+      "controller_seconds": 1084.239,
+      "wire_bytes": 2573502
+    },
+    {
+      "controller_seconds": 1114.425,
+      "wire_bytes": 2620419
+    },
+    {
+      "controller_seconds": 1144.57,
+      "wire_bytes": 2678154
+    },
+    {
+      "controller_seconds": 1174.74,
+      "wire_bytes": 2755446
+    },
+    {
+      "controller_seconds": 1204.783,
+      "wire_bytes": 2901381
+    }
+  ]
+}

@@ -3,6 +3,8 @@ from pathlib import Path
 import argparse
 import hashlib
 import importlib.util
+import json
+import shutil
 import sys
 
 ROOT = Path(__file__).resolve().parents[3]
@@ -29,7 +31,28 @@ def main():
     if args.suite == 'baseline':
         sys.argv += ['--reference', str(TASK/'evidence/hosted-baseline-001')]
     print('Retained harness SHA256', hashlib.sha256(script.read_bytes()).hexdigest(), flush=True)
-    module.main()
+    same_images = []
+    try:
+        module.main()
+        if args.suite == 'representative':
+            for i in range(10):
+                fresh = TASK/'evidence'/args.name/f'p{i}.dat'
+                old = ROOT/'docs/tasks/C006/evidence/live-regressions-001'/f'p{i}.dat'
+                assert fresh.read_bytes() == old.read_bytes(), i
+                same_images.append(i)
+    finally:
+        evidence = TASK/'evidence'/args.name
+        if evidence.exists():
+            shutil.copyfile(__file__, evidence/'run_regressions.py')
+            metadata = dict(retained_harness=str(script.relative_to(ROOT)),
+                retained_harness_sha256=hashlib.sha256(script.read_bytes()).hexdigest(),
+                observer_sha256=hashlib.sha256(cli.read_bytes()).hexdigest(),
+                compiler_source_sha256=hashlib.sha256((TASK/'candidate.bas').read_bytes()).hexdigest(),
+                identical_representative_full_images=same_images,
+                scope='Original C006 assertions with explicit C010 destination/profile selection')
+            (evidence/'execution.json').write_text(json.dumps(metadata, indent=2)+'\n')
+            (evidence/'manifest.json').write_text(json.dumps({p.name:hashlib.sha256(p.read_bytes()).hexdigest()
+                for p in sorted(evidence.iterdir()) if p.is_file() and p.name!='manifest.json'},indent=2)+'\n')
 
 
 if __name__ == '__main__':

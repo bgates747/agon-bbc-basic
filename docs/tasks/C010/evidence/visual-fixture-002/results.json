@@ -1,0 +1,13 @@
+{
+  "scope": "New named program file only in the Author-owned emulator SD; no emulator control",
+  "started": "2026-11-03T22:08:57.518242+00:00",
+  "finished": "2026-11-03T22:08:57.761528+00:00",
+  "returncode": 0,
+  "stdout": "{\"existing_image_verified\": true, \"image_sha256\": \"bad741db6adfc250c7c2f48c37687aec93e8271f77c48bd760f309548dada196\", \"no_writes\": true, \"no_program_execution\": true, \"no_emulator_launch\": true}\n",
+  "stderr": "",
+  "source_sha256": "1eb897c8ef3aecc99910e0352eba6d32064ebc4aef9e7bd32e9952b0878b43de",
+  "image_sha256": "bad741db6adfc250c7c2f48c37687aec93e8271f77c48bd760f309548dada196",
+  "human_validation": false,
+  "root_compiler_updated": false,
+  "verification_only": true
+}

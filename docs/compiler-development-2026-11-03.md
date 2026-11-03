@@ -842,3 +842,28 @@ UART capture. Retain that incomplete attempt without inferring final GET/MODE
 or normal return. Fresh full-native-002 and independent full-reference-001 use
 separate profiles and remain active, as does native-build-002. Live source and
 native distribution remain unchanged pending their results.
+
+C010 full-native-002 completes the unchanged full source:328833 GCOL/PLOT pairs,
+2959501 graphics bytes/SHA2988ce82, supplied key only after the final observed
+plot, MODE1 acknowledgement and actual MOS status0. Host controller1214.525s
+was concurrent with other jobs and is not a CPU/performance benchmark. The
+separate full reference run remains active; no full-pair/rendered pass is yet
+claimed. Preserve full-native-001's earlier unknown-origin143 interruption.
+
+Stage the exact18329-byte/bad741db program under a new mandelbrot-c010.bin name
+in the Author's existing Oryx emulator SD directory, after checking the original
+source hash. No emulator process, source file or root compiler is changed. The
+copy/fsync/sync succeeds, but visual-fixture-001 records a final receipt-formatting
+NameError (missing remote json import). Do not replay that write. Correct the
+helper and perform a separate read-only full-file verification: visual-fixture-002
+confirms exact image bad741db, without new writes. The Author receives MOS LOAD/
+RUN instructions; no human result is implied by staging.
+
+The first old-native rebuild attempt native-build-002 later returns host exit143,
+with unknown termination origin and only256674 emitted bytes. Freeze its actual
+partial image/console/source/seed, without treating it as executable or proof.
+Restart unchanged source under native-build-003, with30-second controller
+heartbeats and explicit signal/failure capture (as in the established C006
+controller). Live source/native image remain6597a0df/299a3119. Prepared C010
+promotion and package helpers require completed matching evidence before live
+replacement; package updates check old managed hashes and preserve other files.

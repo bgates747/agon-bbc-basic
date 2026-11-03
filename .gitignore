@@ -38,3 +38,4 @@ __pycache__/
 
 # Exact physical payloads and raw captures referenced by C006 evidence manifests
 !/docs/tasks/C006/evidence/**/*.bin
+!/docs/tasks/C010/evidence/**/*.bin
