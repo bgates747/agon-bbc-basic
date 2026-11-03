@@ -112,6 +112,42 @@ class Dispatch(unittest.TestCase):
             self.invoke('get', remote, str(self.root / 'download.dat'))
         self.assertFalse(self.record.exists())
 
+    def test_exit_waits_for_offline_and_no_pending_after_acknowledgement(self):
+        observed = []
+
+        def fake(command, **kwargs):
+            if command[-1] == 'status':
+                observed.append(len(observed))
+                kwargs['stdout'].write(json.dumps(dict(protocol=2,
+                    online=len(observed)==1, pending=len(observed)==2)))
+            return SimpleNamespace(stdout='{}')
+
+        calls = self.invoke('exit', effect=fake)
+        self.assertEqual(len(calls), 8)
+        for call in calls[::2]:
+            self.assertIn('assert-owner', call.args[0])
+        self.assertEqual(len(observed), 3)
+        receipt = json.loads((self.record / 'receipt.json').read_text())
+        self.assertTrue(receipt['exit_acknowledged'])
+        self.assertTrue(receipt['listener_offline_observed'])
+        self.assertTrue(receipt['completed'])
+
+    def test_uncertain_exit_stops_without_new_session_or_retry(self):
+        def fake(command, **kwargs):
+            if command[-1] == 'status':
+                kwargs['stdout'].write(json.dumps(dict(protocol=2, online=True, pending=False)))
+            if command[-1] == 'exit':
+                raise subprocess.CalledProcessError(1, command)
+            return SimpleNamespace(stdout='{}')
+
+        with self.assertRaises(subprocess.CalledProcessError):
+            self.invoke('exit', effect=fake)
+        self.assertEqual(len(self.calls), 4)
+        self.assertEqual(sum(c.args[0][-1]=='exit' for c in self.calls), 1)
+        receipt = json.loads((self.record / 'receipt.json').read_text())
+        self.assertFalse(receipt['completed'])
+        self.assertNotIn('listener_offline_observed', receipt)
+
 
 def main():
     p = argparse.ArgumentParser(description=__doc__)

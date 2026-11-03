@@ -68,6 +68,8 @@ def main():
     assert regressions['completed_cases'] == list(range(len(cases)))
     assert len(cases) == 12
     for i, case in enumerate(cases):
+        assert case.get('status', 0) == 0, 'Nonzero application return needs an explicit EXEC error plan'
+        assert 'NREG_COMPILER_STATUS:0\n' in (a.regressions / f'compile-{i}.log').read_text()
         assert (a.regressions / f'nreg-{i}.bas').read_text() == case['source']
         if 'diagnostic' not in case:
             assert (a.regressions / f'p{i}.dat').is_file()
@@ -113,6 +115,7 @@ def main():
                   fixture_path=fixtures, result_path=results, filename_inputs=prompts,
                   bootstrap_evidence=str(a.bootstrap.resolve()),
                   regression_evidence=str(a.regressions.resolve()),
+                  planned_RUN_returns=0, EXEC_RUN_line=4,
                   hardware_validation=False)
     (out / 'cases.json').write_text(json.dumps(cases, indent=2)+'\n')
     (out / 'fixture.json').write_text(json.dumps(report, indent=2)+'\n')

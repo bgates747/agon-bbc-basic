@@ -1,0 +1,13 @@
+test_every_status_query_has_its_own_owner_check (__main__.Dispatch.test_every_status_query_has_its_own_owner_check) ... ok
+test_exit_waits_for_offline_and_no_pending_after_acknowledgement (__main__.Dispatch.test_exit_waits_for_offline_and_no_pending_after_acknowledgement) ... ok
+test_invalid_lease_prevents_target_operation (__main__.Dispatch.test_invalid_lease_prevents_target_operation) ... ok
+test_remote_parent_traversal_stops_before_lease_or_device (__main__.Dispatch.test_remote_parent_traversal_stops_before_lease_or_device) ... ok
+test_retrieval_uses_new_staged_client_and_absolute_output (__main__.Dispatch.test_retrieval_uses_new_staged_client_and_absolute_output) ... ok
+test_uncertain_exit_stops_without_new_session_or_retry (__main__.Dispatch.test_uncertain_exit_stops_without_new_session_or_retry) ... ok
+test_upload_outside_manifest_stops_before_lease_or_device (__main__.Dispatch.test_upload_outside_manifest_stops_before_lease_or_device) ... ok
+test_wrong_listener_protocol_prevents_transfer_submission (__main__.Dispatch.test_wrong_listener_protocol_prevents_transfer_submission) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.135s
+
+OK

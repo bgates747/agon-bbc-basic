@@ -111,10 +111,11 @@ real-input packaging awaits the generation/regression prerequisites.
 `olimex_step.py` delegates one selected operation to maintained Extender clients.
 It requires an existing lease, verifies the offline bundle manifest, asserts
 current ownership immediately before every delegated operation, and uses fresh
-local journals. File writes stay under the bundle's declared fixture/results
+local journals for new operations. File writes stay under the bundle's declared fixture/results
 roots; payload uploads must match its manifest. File payloads use the pinned new
 staged client. Metadata/transfer actions first observe an online major2 listener;
-EXIT uses a fresh metadata state after worker sessions. Keyboard completion
+EXIT uses a fresh metadata state after worker sessions, then observes both
+online=false and pending=false before recording completed handback. Keyboard completion
 means event emission, with actual MOS/application completion observed separately.
 
 The ignored local config supplies `extender_url` and, for capture,
@@ -131,3 +132,39 @@ guards reject wrong paths and wrong protocol prevents transfer submission.
 Earlier001/002 cohorts retain their narrower checks. No network/serial access
 or hardware result follows from these tests. Actual operation remains pending
 the full compiler qualification, exact prepared plan and Extender grant.
+
+Extender's source-only review
+2026-11-03_04-24-44_linux-extender_extender-bbc-operation-helper-review-r01
+confirms the current argument order and client interfaces. Its EXIT observation
+correction is implemented: acknowledgement is recorded separately, with bounded
+lease-checked online/pending observation before successful handback. Host005
+retains eight mocked tests, including offline-but-pending delay and uncertain
+EXIT stopping without a new session or retry. These are consumer host tests.
+
+Never rerun an uncertain operation using a fresh record directory. Retain its
+original staged-state.json or metadata-state.json, assert the current lease and
+use the maintained client's status/resume against that same state to observe or
+resolve the existing request. Do not submit a new POST, discard a spool, delete
+journals or reset as automatic recovery. Capture ready proves port open only;
+VDU2 plus a newly observed printable sentinel still qualifies the Legacy text
+channel. Download completion/SHA records arrival; independent expected-byte
+comparison remains required before execution. The900-second transfer timeout
+is an observation/request bound, not a compiler estimate or cleanup deadline.
+
+## MOS batch error boundary
+
+Extender source qualification
+2026-11-03_04-31-02_linux-extender_extender-bbc-exec-error-boundary-r01
+confirms that a nonzero RUN aborts EXEC before later end-marker/listener lines.
+The compiler's normal main catches compile diagnostics with REPORT/CLOSE/END;
+the prepared native suites require actual compiler status0, including rejection
+cases. Packaging checks those retained compile-status logs and excludes any
+planned generated-program status other than0. This is an expected return
+contract, not permission to treat a missing marker as success.
+
+Every generated batch puts RUN on line4. If an unexpected nonzero result aborts
+it, record the exact fresh launchfile/line error and actual returned CLI; do not
+wait for a supposedly guaranteed end marker or assume the listener restarted.
+Application entry, output/result validity and CLI return are separate evidence.
+Do not repeat RUN or an uncertain SAVE. Ambiguous foreground state stops further
+dispatch and is coordinated with Extender; no automatic recovery/reset occurs.

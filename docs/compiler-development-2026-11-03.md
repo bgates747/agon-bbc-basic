@@ -298,3 +298,20 @@ Mark original catalogue eligibility as the November1 snapshot and record W01's
 actual native self-source preflight. The live compatibility matrix owns current
 features. No benchmark adaptation, new source search or timing measurement is
 performed; no speedup is inferred from controller durations.
+
+Extender source review04-24-44 confirms maintained client argument ordering but
+corrects EXIT acknowledgement versus actual handback. Implement separate ACK
+record plus bounded owner-checked online=false AND pending=false observation;
+uncertainty stops without another EXIT/session. Host004 passes8 mocked checks;
+005 strengthens offline-but-pending and per-poll ownership assertions, also8.
+Document exact retained journals for status/resume; capture ready is port-open,
+not Legacy sentinel proof, and retrieved SHA still needs expected-byte equality.
+
+Further review04-31-02 verifies installed/current MOS EXEC aborts on nonzero RUN.
+All planned physical program cases expect0; packaging now verifies actual retained
+compiler-status0 logs, including rejected source, and rejects any planned nonzero
+application status. RUN is line4 in each finite batch. Unexpected aborted EXEC
+requires its exact fresh file/line error and actual CLI; no assumed end marker,
+listener restart or RUN/SAVE replay. Reply04-33-38_bbc-basic_bbc-exit-exec-boundaries-received-four
+acknowledges both corrections through maintained mail plus immediate chat. G0
+continues; no physical reservation/access or new approval gate is introduced.

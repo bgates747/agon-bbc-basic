@@ -127,6 +127,21 @@ def main():
             # A new operation record creates a fresh metadata connection after
             # the staged worker's private sessions, as required by Extender.
             execute('metadata', PINNED / 'sdcard.py', ['exit'])
+            report['exit_acknowledged'] = True
+            save()
+            deadline = time.monotonic()+15
+            index = 0
+            while True:
+                label = f'exit-presence-{index:03d}'
+                execute(label, PINNED / 'sdcard.py', ['status'])
+                presence = json.loads((a.record / (label+'.stdout')).read_text())
+                if not presence['online'] and not presence['pending']:
+                    report['listener_offline_observed'] = True
+                    break
+                if time.monotonic() >= deadline:
+                    raise TimeoutError('EXIT acknowledged but offline handback unobserved; retain state, do not repeat EXIT')
+                time.sleep(.1)
+                index += 1
         elif a.operation in ('put', 'get'):
             script = PINNED / 'sdcard_staged.py'
             assert digest(script) == 'f7aa43bd05d62cc1bdc051d8ae569128766cb9ec95076bd1bb951063997683ef'
@@ -148,6 +163,8 @@ def main():
                        '--ready-file', str(a.record / 'ready'), '--stop-file', str(a.record / 'stop')]
             with (a.record / 'capture.stdout').open('w') as stdout, (a.record / 'capture.stderr').open('w') as stderr:
                 subprocess.run(command, check=True, stdout=stdout, stderr=stderr, cwd=EXTENDER)
+            report.update(port_open_observed=(a.record / 'ready').is_file(),
+                          legacy_text_channel_qualified=False)
         report.update(completed=True, finished_epoch=time.time())
         save()
         print(json.dumps(dict(operation=a.operation, completed=True, receipt=str(report_path))))
