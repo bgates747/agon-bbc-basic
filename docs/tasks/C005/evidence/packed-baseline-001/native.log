@@ -1,0 +1,72 @@
+Warning: unused arguments left: ["--firmware", "platform"].
+Tom's Fake VDP Version 1.03
+unknown packet VDU 0x17, 0, 0xf8
+unknown packet VDU 0x17, 0, 0x99
+uunknown packet VDU 0x17, 0, 0x94
+
+Agon Platform MOS Version 3.0.2 Arthur
+
+BEGIN_0
+ok
+STATUS_0:0
+END_0
+BEGIN_1
+Native BBC BASIC on Agon
+A quoted "hello" from ADL code
+STATUS_1:0
+END_1
+BEGIN_2
+numbered
+sub
+STATUS_2:0
+END_2
+BEGIN_3
+back
+STATUS_3:0
+END_3
+BEGIN_4
+xy
+
+STATUS_4:0
+END_4
+BEGIN_5
+a:b"c"
+STATUS_5:0
+END_5
+BEGIN_6
+ABC
+STATUS_6:0
+END_6
+BEGIN_7
+unwind
+STATUS_7:0
+END_7
+BEGIN_8
+nested
+done
+STATUS_8:0
+END_8
+BEGIN_9
+STATUS_9:0
+END_9
+BEGIN_10
+STATUS_10:0
+END_10
+BEGIN_35
+No GOSUB
+STATUS_35:1
+END_35
+BEGIN_36
+Too many GOSUBs
+STATUS_36:1
+END_36
+BEGIN_37
+zero
+STATUS_37:0
+END_37
+BEGIN_38
+labels
+STATUS_38:0
+END_38
+NATIVE_DONE
+/ *

@@ -1,0 +1,30 @@
+Warning: unused arguments left: ["--firmware", "platform"].
+Tom's Fake VDP Version 1.03
+unknown packet VDU 0x17, 0, 0xf8
+unknown packet VDU 0x17, 0, 0x99
+uunknown packet VDU 0x17, 0, 0x94
+
+Agon Platform MOS Version 3.0.2 Arthur
+
+ERR:p0.bas
+No such variable at 540
+ERR:p1.bas
+No such variable at 540
+ERR:p2.bas
+No such variable at 540
+ERR:p3.bas
+No such variable at 540
+ERR:p4.bas
+No such variable at 540
+ERR:p5.bas
+No such variable at 540
+ERR:p6.bas
+No such variable at 540
+ERR:p7.bas
+No such variable at 540
+ERR:p8.bas
+No such variable at 540
+ERR:p0.bas
+No such variable at 540
+OUTPUT_COMPILE_DONE
+/ *

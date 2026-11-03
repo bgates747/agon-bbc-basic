@@ -1,0 +1,18 @@
+{
+  "source_sha256": "14e56cee04b1fc53068b5f3ad76314014925e5894798890d4acd3421b78cc4ef",
+  "candidate_sha256": "6597a0df3f99b4f43c42bff1cdbc59f5fdf730c57837f3d4112a598fbfbe5fb8",
+  "lines": 2067,
+  "definitions": 219,
+  "symbol_capacity": 4096,
+  "address_cell_bytes": 3,
+  "sorted_index_cell_bytes": 2,
+  "symbol_payload_bytes_saved": 12288,
+  "target_page_pointer_bytes": 256,
+  "target_page_bytes": 256,
+  "maximum_target_pages": 64,
+  "target_range": [
+    0,
+    65279
+  ],
+  "scope": "Private compiler storage only; output and public values unchanged"
+}

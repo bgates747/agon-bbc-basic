@@ -17,7 +17,7 @@ existing string/numeric regressions on the reauthorized Pi5 CLI.
 | BBC BASIC compiler implementation | Implemented | Numbered BBC BASIC source hosted by BASIC V ADL |
 | MOS native executable | Implemented | Direct eZ80 ADL emission, load at &40000 |
 | Unnumbered programs | Implemented | Plain-text input |
-| Optional line numbers | Partial | Increasing 0..65279; no source sorting or renumbering |
+| Optional line numbers | Partial | Increasing 0..65279; no source sorting or renumbering. Zero is a compiler label; pinned Agon text loading treats zero as immediate mode |
 | Control bytes in source | Partial | Line endings and whitespace tabs supported; quoted bytes below ASCII 32 rejected (use CHR$); reference text-loader normalization pending |
 | Named labels | Implemented extension | `@name:`, `GOTO @name`, `GOSUB @name` |
 | Conventional GOTO/GOSUB | Partial | Constant targets only; 255 nested GOSUBs |

@@ -35,7 +35,7 @@ def main():
     (build / 'zero-tail-identity.json').write_text(json.dumps(dict(
         scope='Complete executable equality with compact-frontend-002',
         identical_images=len(cases),
-        source='docs/tasks/C005/compact/zero_tail.bas'), indent=2)+'\n')
+        source=str(Path(sys.argv[sys.argv.index('--compiler')+1]).resolve().relative_to(ROOT))), indent=2)+'\n')
     print('Complete control-zero-tail image identity:', len(cases))
 
 

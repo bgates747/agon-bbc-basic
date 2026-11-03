@@ -158,3 +158,18 @@ not a faster-open benchmark or an accepted behavioral improvement.
    would need evidence that addresses, LOCAL restoration, creation and lookup
    behavior remain intact, plus an actual profile. No interpreter change,
    timing benefit or upstream submission is claimed here.
+
+## Zero-numbered text lines execute during loading
+
+1. src/agon_os.s OSEDIT calls LINNUM, tests HL for zero and selects XEQ direct
+   mode at LNZERO when zero. Thus a text row beginning0 is not an ordinary stored
+   BASIC line. A retained actual source probe executes GOTO2047 while its text
+   file is still loading and reports No such line before later targets exist.
+2. C005/evidence/packed-target-reference-zero-failure-001 retains the exact source,
+   actual pinned BASIC log and failed oracle controller. No compiler/native
+   phase ran in that attempt. Positive-numbered sources provide conventional
+   differential oracles; existing compiler zero-label syntax has a separate
+   explicit expected-output test. SPECIFICATION/COMPATIBILITY clarify this
+   existing syntax boundary, without changing either engine.
+3. This is an observed loader convention, not an authorized interpreter fix or
+   claim that a different line-zero behavior would be an improvement.

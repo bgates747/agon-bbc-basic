@@ -1,0 +1,37 @@
+[
+  {
+    "source": "DIM addrbuf% 12289,sortbuf% 8193,lrefs%(63),saved%(63)\nsaddr%=addrbuf%+1:sort%=sortbuf%+1\naddrbuf%?0=&A5:addrbuf%?12289=&A5:sortbuf%?0=&A5:sortbuf%?8193=&A5\nFOR i%=0 TO 4095\nv%=i%*173:IF i%=4095 v%=&B0000\nPROCsymboladdr(i%,v%):PROCsortindex(i%,4095-i%)\nNEXT\nFOR i%=0 TO 4095\nv%=i%*173:IF i%=4095 v%=&B0000\nIF FNsymboladdr(i%)<>v% ERROR 100,\"address cell\"\nIF FNsortindex(i%)<>4095-i% ERROR 100,\"sorted cell\"\nNEXT\nIF addrbuf%?0<>&A5 OR addrbuf%?12289<>&A5 ERROR 100,\"address guard\"\nIF sortbuf%?0<>&A5 OR sortbuf%?8193<>&A5 ERROR 100,\"sorted guard\"\nFOR i%=0 TO 63\nIF lrefs%(i%)<>0 ERROR 100,\"page initialization\"\nn%=(i% MOD 32)*2048+2047:IF i% MOD 32=31 n%=65279\nIF FNlineref(n%,i% DIV 32,FALSE) ERROR 100,\"absent page\"\nIF NOT FNlineref(n%,i% DIV 32,TRUE) ERROR 100,\"page write\"\nIF NOT FNlineref(n%,i% DIV 32,FALSE) ERROR 100,\"page read\"\nsaved%(i%)=lrefs%(i%)\nIF i%<32 THEN IF FNlineref(n%,1,FALSE) ERROR 100,\"branch data separation\"\nNEXT\nIF FNlineref(2048,0,FALSE) OR FNlineref(2048,1,FALSE) ERROR 100,\"unwritten boundary bit\"\nIF NOT FNlineref(2048,0,TRUE) ERROR 100,\"first bit of next page\"\nIF FNlineref(2048,1,FALSE) ERROR 100,\"boundary data separation\"\nPROCclearrefs\nFOR i%=0 TO 63\nIF saved%(i%)<>lrefs%(i%) ERROR 100,\"page reuse\"\nn%=(i% MOD 32)*2048+2047:IF i% MOD 32=31 n%=65279\nIF FNlineref(n%,i% DIV 32,FALSE) ERROR 100,\"page clearing\"\nIF NOT FNlineref(n%,i% DIV 32,TRUE) ERROR 100,\"page rewrite\"\nIF saved%(i%)<>lrefs%(i%) ERROR 100,\"page leaked\"\nNEXT\nPROCclearrefs\nIF FNlineref(2047,0,FALSE) OR FNlineref(2048,0,FALSE) OR FNlineref(65279,1,FALSE) ERROR 100,\"second clear\"\nPRINT \"4096 packed cells and 64 reusable pages\":END\nDEF FNlineref(n%,m%,w%)\nLOCAL i%,b%,p%:p%=FNrefpage(n% DIV 2048+32*m%,w%):IF p%=0 THEN =FALSE\ni%=(n% DIV 8) AND 255:b%=2^(n% AND 7)\nIF w% p%?i%=p%?i% OR b%\n=(p%?i% AND b%)<>0\nDEF FNsortindex(i%)\nLOCAL p%:p%=2*i%\n=sort%?p%+256*sort%?(p%+1)\nDEF PROCsortindex(i%,v%)\nLOCAL p%:p%=2*i%:sort%?p%=v%:sort%?(p%+1)=v% DIV 256:ENDPROC\nDEF FNsymboladdr(i%)\nLOCAL p%:p%=3*i%\n=saddr%?p%+256*saddr%?(p%+1)+65536*saddr%?(p%+2)\nDEF PROCsymboladdr(i%,v%)\nLOCAL p%:p%=3*i%:saddr%?p%=v%:saddr%?(p%+1)=v% DIV 256:saddr%?(p%+2)=v% DIV 65536:ENDPROC\nDEF FNrefpage(i%,w%)\nLOCAL p%,j%:p%=lrefs%(i%):IF p%<>0 OR NOT w% THEN =p%\nDIM p% 255:FOR j%=0 TO 255:p%?j%=0:NEXT:lrefs%(i%)=p%\n=p%\nDEF PROCclearrefs\nLOCAL i%,j%,p%\nFOR i%=0 TO 63\nIF lrefs%(i%)<>0 THEN\np%=lrefs%(i%):FOR j%=0 TO 255:p%?j%=0:NEXT\nENDIF\nNEXT:ENDPROC\n",
+    "reference": true,
+    "reference_source": "DIM addrbuf% 12289,sortbuf% 8193,lrefs%(63),saved%(63)\nsaddr%=addrbuf%+1:sort%=sortbuf%+1\naddrbuf%?0=&A5:addrbuf%?12289=&A5:sortbuf%?0=&A5:sortbuf%?8193=&A5\nFOR i%=0 TO 4095\nv%=i%*173:IF i%=4095 v%=&B0000\nPROCsymboladdr(i%,v%):PROCsortindex(i%,4095-i%)\nNEXT\nFOR i%=0 TO 4095\nv%=i%*173:IF i%=4095 v%=&B0000\nIF FNsymboladdr(i%)<>v% ERROR 100,\"address cell\"\nIF FNsortindex(i%)<>4095-i% ERROR 100,\"sorted cell\"\nNEXT\nIF addrbuf%?0<>&A5 OR addrbuf%?12289<>&A5 ERROR 100,\"address guard\"\nIF sortbuf%?0<>&A5 OR sortbuf%?8193<>&A5 ERROR 100,\"sorted guard\"\nFOR i%=0 TO 63\nIF lrefs%(i%)<>0 ERROR 100,\"page initialization\"\nn%=(i% MOD 32)*2048+2047:IF i% MOD 32=31 n%=65279\nIF FNlineref(n%,i% DIV 32,FALSE) ERROR 100,\"absent page\"\nIF NOT FNlineref(n%,i% DIV 32,TRUE) ERROR 100,\"page write\"\nIF NOT FNlineref(n%,i% DIV 32,FALSE) ERROR 100,\"page read\"\nsaved%(i%)=lrefs%(i%)\nIF i%<32 THEN IF FNlineref(n%,1,FALSE) ERROR 100,\"branch data separation\"\nNEXT\nIF FNlineref(2048,0,FALSE) OR FNlineref(2048,1,FALSE) ERROR 100,\"unwritten boundary bit\"\nIF NOT FNlineref(2048,0,TRUE) ERROR 100,\"first bit of next page\"\nIF FNlineref(2048,1,FALSE) ERROR 100,\"boundary data separation\"\nPROCclearrefs\nFOR i%=0 TO 63\nIF saved%(i%)<>lrefs%(i%) ERROR 100,\"page reuse\"\nn%=(i% MOD 32)*2048+2047:IF i% MOD 32=31 n%=65279\nIF FNlineref(n%,i% DIV 32,FALSE) ERROR 100,\"page clearing\"\nIF NOT FNlineref(n%,i% DIV 32,TRUE) ERROR 100,\"page rewrite\"\nIF saved%(i%)<>lrefs%(i%) ERROR 100,\"page leaked\"\nNEXT\nPROCclearrefs\nIF FNlineref(2047,0,FALSE) OR FNlineref(2048,0,FALSE) OR FNlineref(65279,1,FALSE) ERROR 100,\"second clear\"\nPRINT \"4096 packed cells and 64 reusable pages\"\n",
+    "reference_definitions": [
+      "DEF FNlineref(n%,m%,w%)",
+      "LOCAL i%,b%,p%:p%=FNrefpage(n% DIV 2048+32*m%,w%):IF p%=0 THEN =FALSE",
+      "i%=(n% DIV 8) AND 255:b%=2^(n% AND 7)",
+      "IF w% p%?i%=p%?i% OR b%",
+      "=(p%?i% AND b%)<>0",
+      "DEF FNsortindex(i%)",
+      "LOCAL p%:p%=2*i%",
+      "=sort%?p%+256*sort%?(p%+1)",
+      "DEF PROCsortindex(i%,v%)",
+      "LOCAL p%:p%=2*i%:sort%?p%=v%:sort%?(p%+1)=v% DIV 256:ENDPROC",
+      "DEF FNsymboladdr(i%)",
+      "LOCAL p%:p%=3*i%",
+      "=saddr%?p%+256*saddr%?(p%+1)+65536*saddr%?(p%+2)",
+      "DEF PROCsymboladdr(i%,v%)",
+      "LOCAL p%:p%=3*i%:saddr%?p%=v%:saddr%?(p%+1)=v% DIV 256:saddr%?(p%+2)=v% DIV 65536:ENDPROC",
+      "DEF FNrefpage(i%,w%)",
+      "LOCAL p%,j%:p%=lrefs%(i%):IF p%<>0 OR NOT w% THEN =p%",
+      "DIM p% 255:FOR j%=0 TO 255:p%?j%=0:NEXT:lrefs%(i%)=p%",
+      "=p%",
+      "DEF PROCclearrefs",
+      "LOCAL i%,j%,p%",
+      "FOR i%=0 TO 63",
+      "IF lrefs%(i%)<>0 THEN",
+      "p%=lrefs%(i%):FOR j%=0 TO 255:p%?j%=0:NEXT",
+      "ENDIF",
+      "NEXT:ENDPROC"
+    ],
+    "status": 0,
+    "expected": "4096 packed cells and 64 reusable pages\n"
+  }
+]

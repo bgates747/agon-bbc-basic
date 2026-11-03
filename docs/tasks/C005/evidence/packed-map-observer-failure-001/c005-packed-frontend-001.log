@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/Agon/mystuff/bbc-basic-v-adl/docs/tasks/C005/compact/test_zero_tail.py", line 43, in <module>
+    main()
+    ~~~~^^
+  File "/Agon/mystuff/bbc-basic-v-adl/docs/tasks/C005/compact/test_zero_tail.py", line 30, in main
+    harness.main()
+    ~~~~~~~~~~~~^^
+  File "/Agon/mystuff/bbc-basic-v-adl/docs/tasks/C002/tools/test_output.py", line 157, in main
+    assert (sd / "p0.bin").read_bytes() == (sd / "output-repeat.bin").read_bytes()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (0, 'Warning: unused arguments left: ["--firmware", "platform"].\nTom\'s Fake VDP Version 1.03\nunknown packet VDU 0x17, 0, 0xf8\nunknown packet VDU 0x17, 0, 0x99\nuunknown packet VDU 0x17, 0, 0x94\n\x80\nAgon Platform MOS Version 3.0.2 Arthur\n\nERR:p0.bas\nNo such variable at 540\nERR:p1.bas\nNo such variable at 540\nERR:p2.bas\nNo such variable at 540\nERR:p3.bas\nNo such variable at 540\nERR:p4.bas\nNo such variable at 540\nERR:p5.bas\nNo such variable at 540\nERR:p6.bas\nNo such variable at 540\nERR:p7.bas\nNo such variable at 540\nERR:p8.bas\nNo such variable at 540\nERR:p0.bas\nNo such variable at 540\nOUTPUT_COMPILE_DONE\n/ *')

@@ -1,0 +1,61 @@
+[
+  {
+    "program": 0,
+    "base": 290213,
+    "bytes": 394,
+    "bridges": {
+      "cp_num_base": {
+        "target": "$v0",
+        "address": 277412
+      },
+      "cp_str_base": {
+        "target": "$s0",
+        "address": 291282
+      },
+      "cp_slot_numeric": {
+        "target": "$numop",
+        "address": 273596
+      },
+      "cp_slot_numerror": {
+        "target": "$numerror",
+        "address": 277437
+      },
+      "cp_slot_literal": {
+        "target": "$numlit",
+        "address": 272952
+      },
+      "cp_slot_novar": {
+        "target": "$novar",
+        "address": 277607
+      },
+      "cp_slot_prefix": {
+        "target": "$arrayprefix",
+        "address": 291894
+      },
+      "cp_slot_addr": {
+        "target": "$arrayaddr",
+        "address": 291880
+      },
+      "cp_slot_memerror": {
+        "target": "$memerror",
+        "address": 292272
+      },
+      "cp_slot_save": {
+        "target": "$actsave",
+        "address": 286568
+      },
+      "cp_slot_bind": {
+        "target": "$actbind",
+        "address": 286816
+      },
+      "cp_slot_begin": {
+        "target": "$actbegin",
+        "address": 286558
+      },
+      "cp_slot_acterror": {
+        "target": "$acterror",
+        "address": 287331
+      }
+    }
+  }
+]

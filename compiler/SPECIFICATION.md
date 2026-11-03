@@ -33,7 +33,9 @@ The Author accepted the corrected C002 baseline for a development checkpoint.
    abbreviations and ambiguous keyword-prefix variable forms are unsupported.
 3. Optional decimal line numbers are labels in file order. Numbered lines must
    increase strictly and be in 0..65279. Mixed numbered and unnumbered source
-   is allowed. The compiler does not reorder physical lines.
+   is allowed. The compiler does not reorder physical lines. Zero is a compiler label here;
+   the pinned Agon text loader treats a zero-numbered line as immediate mode.
+   Direct interpreter comparisons therefore use positive conventional numbers.
 4. Proposed named label syntax is `@name:` at a statement boundary; targets
    are `GOTO @name` and `GOSUB @name`. For example:
 

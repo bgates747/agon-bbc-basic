@@ -132,3 +132,15 @@ reference/native cases118.267s and all complete2f images remain identical. It
 saves8192 private template bytes; actual native fit remains open. COMPACTION.md
 refines private symbol widths and sparse reusable numbered-target pages next.
 Latest log is docs/compiler-development-2026-11-03.md.
+
+Current packed.bas6597a0df has2067 lines/219 unique routines, same4096-symbol and
+numbered-target limits. Exact three-byte symbol addresses/two-byte sort cells
+save12288 private payload bytes;64 reusable target-page pointers replace eager
+bitmaps. Native exact-helper4096-cell/64-page/guard/reuse test passes262.754s,
+complete standard/adapter GNU links and entry/arena checks included. Nine native
+integration cases pass123.659s with all complete2f images identical; observer-only
+failure is frozen. Five target cases/three native58.636s and baseline39/15
+56.360s pass. The pinned text loader treats line0 as immediate mode; ordinary
+reference fixtures use positive lines, compiler-zero-label syntax is separate.
+New exact-source probe can report actual BBC page/string-length counts with
+--private-storage; no packed-source size/fit or native compiler exists yet.

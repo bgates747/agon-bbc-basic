@@ -176,3 +176,17 @@ occupancy remains bounded at16384 page bytes plus256 pointer bytes; sparse use
 saves storage without reducing the accepted numbered-target range. Qualify page
 boundaries, top line65279, branch/DATA separation and repeated clearing, complete
 image equality, all symbol-capacity guards and actual native fit before promotion.
+
+Packed6597a0df has2067 lines/219 routines. Native execution of the exact private
+helpers passes4096-cell/64-page/canary/reuse fixture262.754s, with actual BBC
+output and independent complete runtime/entry/adapter checks. Nine ordinary
+native integrations pass123.659s and all complete2f images remain identical.
+The earlier host map dumper error is frozen as observer-only failure. Five
+numbered-target cases/three native58.636s cover2047/2048/65279 and both domains,
+plus explicit zero-label behavior and two undefined-target rejections. A failed
+zero-line reference loader fixture remains separately recorded; conventional
+oracles use positive line numbers. Baseline39/15 passes56.360s, GNU golden/repeat.
+Initial zero-page payload lower bound76153 excludes headers/string contents and
+later page allocations. Optional BBC-only source-probe observations count actual
+pages and string lengths after layout; those lengths remain lower bounds on
+native allocation capacity, not an initialization/fit result.

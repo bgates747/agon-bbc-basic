@@ -30,22 +30,33 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--compiler', type=Path, default=TASK / 'compact/integrated.bas')
     parser.add_argument('--image-bytes', type=int)
+    parser.add_argument('--target-pages', type=int, default=0)
     args = parser.parse_args()
     compiler = args.compiler
     digest = hashlib.sha256(compiler.read_bytes()).hexdigest()
     candidates = {
         '2f81c6fb3987f92973de1a532367ac2e74f3398c2bb361fa336b028e5164cebf': 8657,
         '14e56cee04b1fc53068b5f3ad76314014925e5894798890d4acd3421b78cc4ef': 465,
+        '6597a0df3f99b4f43c42bff1cdbc59f5fdf730c57837f3d4112a598fbfbe5fb8': 465,
     }
     assert digest in candidates
+    packed = digest.startswith('6597a0df')
+    assert 0 <= args.target_pages <= 64 and (packed or args.target_pages == 0)
+    shapes = dict(SHAPES)
+    if packed:
+        del shapes['saddr%'], shapes['sort%']
+        shapes['lrefs%'] = (4, 64)
     arrays = {}
-    for name, shape in SHAPES.items():
+    for name, shape in shapes.items():
         count = 1
         for size in shape[1:]:
             count *= size
         arrays[name] = dict(element_bytes=shape[0], dimensions=shape[1:],
                             payload_bytes=count*shape[0])
     raw = {'lrefs': 16384, 'dpacket': 5}
+    if packed:
+        del raw['lrefs']
+        raw.update(saddr=12288, sort=8192, target_pages=256*args.target_pages)
     relocations = {}
     for name in ['numeric', 'string', 'control', 'procedure', 'memory', 'io', 'data', 'error', 'compact']:
         build = (TASK / f'build/{name}-runtime' if name in ['error', 'compact']

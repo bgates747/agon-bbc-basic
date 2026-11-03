@@ -1,0 +1,22 @@
+{
+  "symbol_maps": true,
+  "programs": 1,
+  "native_executions": 1,
+  "rejected_sources": 0,
+  "reference_output_programs": 1,
+  "legacy_arithmetic_observations": 0,
+  "deterministic_repeat": true,
+  "independent_link_bases": [
+    272952
+  ],
+  "string_link_bases": [
+    290607
+  ],
+  "duration_seconds": 262.754,
+  "hashes": {
+    "docs/tasks/C005/compact/packed.bas": "6597a0df3f99b4f43c42bff1cdbc59f5fdf730c57837f3d4112a598fbfbe5fb8",
+    "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+    "docs/tasks/C005/build/output-integration/cases.json": "319881f23d82ed20f0a58a62a549fbfdcae6a363d6808aff8bb1a86e02a18343"
+  }
+}
+Independent compact modules: [(0, '0x46da5')]

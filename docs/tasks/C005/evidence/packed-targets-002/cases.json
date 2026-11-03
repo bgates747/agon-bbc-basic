@@ -1,0 +1,28 @@
+[
+  {
+    "source": "10 A%=A%+1:IF A%=1 THEN GOTO 2047 ELSE GOTO 2048\n2047 GOSUB 65279:GOTO 10\n2048 PRINT ;A%:END\n65279 RETURN\n",
+    "reference": false,
+    "status": 0,
+    "expected": "2\n"
+  },
+  {
+    "source": "10 RESTORE 2048:READ a%:GOTO 2048\n2048 DATA 8\n2050 PRINT ;a%:RESTORE 65279:READ a%:PRINT ;a%:END\n65279 DATA 9\n",
+    "reference": false,
+    "status": 0,
+    "expected": "8\n9\n"
+  },
+  {
+    "source": "0 A%=A%+1:IF A%=1 THEN GOTO 2047 ELSE GOTO 2048\n2047 GOSUB 65279:GOTO 0\n2048 PRINT ;A%:END\n65279 RETURN\n",
+    "expected": "2\n",
+    "reference": false,
+    "status": 0
+  },
+  {
+    "source": "10 GOTO 65279\n20 END\n",
+    "diagnostic": "Undefined target #65279"
+  },
+  {
+    "source": "10 RESTORE 65279:END\n65279 PRINT \"not DATA\"\n",
+    "diagnostic": "Undefined target $data#65279"
+  }
+]

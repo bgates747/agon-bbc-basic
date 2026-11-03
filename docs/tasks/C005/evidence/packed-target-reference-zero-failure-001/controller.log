@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/Agon/mystuff/bbc-basic-v-adl/docs/tasks/C005/compact/test_targets.py", line 46, in <module>
+    main()
+    ~~~~^^
+  File "/Agon/mystuff/bbc-basic-v-adl/docs/tasks/C005/compact/test_targets.py", line 34, in main
+    stream.main()
+    ~~~~~~~~~~~^^
+  File "/Agon/mystuff/bbc-basic-v-adl/docs/tasks/C005/streaming/test_streaming.py", line 33, in main
+    out=host.run_profile(ROOT/'.emulator',f'echo STREAM_REF_BEGIN\nload /bin/basic.bin\nrun . /stream-reference-{i}.bas\necho STREAM_REF_END\n','STREAM_REF_END',f'stream-reference-{i}.log',timeout_seconds=120);(b/f'stream-reference-{i}.log').write_text(out);c['expected']=out.split('STREAM_REFERENCE_BEGIN\n',1)[1].split('STREAM_REF_END\n',1)[0];c['reference']=False;oracles.append(i)
+  File "/Agon/mystuff/bbc-basic-v-adl/compiler/tools/test_compiler.py", line 44, in run_profile
+    raise AssertionError(f"Timed out waiting for {marker}; see {log_path}")
+AssertionError: Timed out waiting for STREAM_REF_END; see /Agon/mystuff/bbc-basic-v-adl/.emulator/stream-reference-0.log

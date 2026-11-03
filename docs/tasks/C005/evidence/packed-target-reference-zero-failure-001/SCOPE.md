@@ -1,0 +1,1 @@
+The fresh reference oracle fails during text loading: Agon OSEDIT treats line number zero as immediate mode and executes GOTO before later lines are loaded. No compiler/native phase is attempted. Positive conventional numbers will be compared to BASIC; existing compiler zero-label syntax gets a separate explicit expected-output fixture. No interpreter/compiler behavior changes.

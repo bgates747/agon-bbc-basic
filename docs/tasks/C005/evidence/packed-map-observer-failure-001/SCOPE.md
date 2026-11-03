@@ -1,0 +1,1 @@
+All nine compiler outputs equal retained2f81c6fb images, but the host-only BBC map observer accesses removed saddr% array and reports No such variable at540. No native phase, repeat or overall pass is claimed. Stale native/results files deliberately excluded. Compiler source6597a0df unchanged.
