@@ -1,0 +1,26 @@
+{
+  "schema": "bbc-compiler-provenance-v1",
+  "target": "Agon MOS, eZ80 ADL24, load040000",
+  "image_file": "compiler.bin",
+  "image_bytes": 324275,
+  "image_sha256": "299a31190c380541a73ed9eb144a303fa37abccc4f3c3e0ad47f99f1538122c0",
+  "source_file": "compiler.bas",
+  "source_sha256": "6597a0df3f99b4f43c42bff1cdbc59f5fdf730c57837f3d4112a598fbfbe5fb8",
+  "license_file": "compiler-license.txt",
+  "license_sha256": "cc8e92d92cf12fb1d04ddae0b573367f14188df5fcd6c7909d36486ff53a108a",
+  "qualification": {
+    "emulator_generations": 4,
+    "native_regressions": {
+      "baseline": 39,
+      "representative": 12,
+      "errors": 39
+    },
+    "physical_qualification": {
+      "source_compiles": 12,
+      "generated_programs": 10,
+      "self_source_generations": 2
+    }
+  },
+  "human_optical_validation": false,
+  "performance_benchmark": false
+}

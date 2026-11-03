@@ -53,7 +53,7 @@ def main():
     package = args.package.resolve(strict=True)
     assert package.is_relative_to(TASK / 'build')
     metadata = json.loads((package / 'manifest.json').read_text())
-    assert metadata['oryx_directory'] == DESTINATION
+    assert metadata['schema'] == 'bbc-manual-package-v2' and metadata['package_root'] == '.'
     names = set(metadata['files']) | {'manifest.json'}
     actual = {str(p.relative_to(package)) for p in package.rglob('*') if p.is_file()}
     assert names == actual

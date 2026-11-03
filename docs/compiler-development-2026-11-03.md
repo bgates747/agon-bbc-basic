@@ -743,3 +743,28 @@ and historical C006 evidence. Record the new notice in the handoff/physical
 runbook; future plans must read Extender's current component selection and fresh
 grant. Do not modify frozen evidence, old helper pins or the Console8 package.
 Extender retains generation9; no bench request/access or reply-only message occurs.
+
+The Author identifies development paths in the consumer readme and requires all
+package paths to be installation-independent. Audit the full50-file payload,
+including binary/source bytes and JSON metadata. The deployed scan identifies17
+affected documents. Remove fixed install/host paths from root/test instructions,
+editor notes and manifest; keep a public compiler provenance record with only
+bundled filenames/hashes/qualification counts. Replace the copied compatibility
+document's repository-only links with a self-contained matrix preserving every
+feature admission. Maintainer lineage stays in repository evidence.
+
+prepare.py emits portable manifestv2/package_root=".", rejects known maintainer
+paths/names across every payload file and checks local Markdown links. Each test
+guide starts at the package root, LOADs compiler.bin, CDs to tests/name and uses
+relative input/output names; CD ../.. returns. Compiler/editor binaries, BASIC
+sources, licenses and expected outputs are byte-identical to the prior package.
+manual-004 has50 files/474769 bytes; manifest7fe79c81.
+
+The bounded update_sd.py checks old/new local package hashes and all18 changed
+targets against their previous hashes before replacement, preserving unrelated
+user files/results. Actual update completes15:00:51.689056EST, syncs and leaves
+the card mounted. portable-package-001 freezes exact before/after documents,
+manifests/scripts and successful receipt. Post-correction full deployed scan
+finds no maintainer paths/names; local general text-path and all12 relative
+command-sequence checks pass. No program, emulator, firmware or acceptance
+result changes. C008 remains awaiting manual results.

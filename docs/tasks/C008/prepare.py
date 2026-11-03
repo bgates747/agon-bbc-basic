@@ -6,6 +6,7 @@ from pathlib import Path
 import argparse
 import hashlib
 import json
+import re
 import shutil
 
 ROOT = Path(__file__).resolve().parents[3]
@@ -14,7 +15,6 @@ UTILITIES = Path('/Agon/agon-utilities')
 NAMES = ['00-smoke', '01-numeric', '02-loops', '03-functions', '04-local',
          '05-arrays', '06-indirection', '07-data', '08-files', '09-errors',
          '10-undefined-label', '11-eval-rejected']
-AGOND = '/mystuff/basic-compiled'
 
 
 def sha(path):
@@ -45,47 +45,59 @@ def main():
         'compiler.bin': ROOT / 'compiler/bin/compiler.bin',
         'compiler.bas': ROOT / 'compiler/compiler.bas',
         'compiler-license.txt': ROOT / 'compiler/bin/LICENSE.txt',
-        'compiler-provenance.json': ROOT / 'compiler/bin/manifest.json',
-        'compatibility.md': ROOT / 'compiler/COMPATIBILITY.md',
         'nano.bin': editor,
         'nano-license.txt': UTILITIES / 'LICENSE',
         'readme.txt': TASK / 'readme.txt',
     }
     for name, source in copies.items():
         shutil.copyfile(source, out / name)
+    public = dict(schema='bbc-compiler-provenance-v1',
+                  target=manifest['target'], image_file='compiler.bin',
+                  image_bytes=manifest['image_bytes'], image_sha256=manifest['image_sha256'],
+                  source_file='compiler.bas', source_sha256=manifest['source_sha256'],
+                  license_file='compiler-license.txt', license_sha256=manifest['license_sha256'],
+                  qualification=dict(emulator_generations=len(manifest['emulator_generations']),
+                                     native_regressions=manifest['native_regressions'],
+                                     physical_qualification=manifest['physical_qualification']),
+                  human_optical_validation=False, performance_benchmark=False)
+    (out / 'compiler-provenance.json').write_text(json.dumps(public, indent=2) + '\n')
+    compatibility = (ROOT / 'compiler/COMPATIBILITY.md').read_text()
+    table = '\n'.join(line for line in compatibility.splitlines() if line.startswith('|'))
+    table = table.replace('compiler/bin/compiler.bin', 'compiler.bin')
+    (out / 'compatibility.md').write_text(
+        '# Compiler compatibility\n\n'
+        'This describes the bundled compiler, not the reference interpreter. '
+        'Support is limited to each stated scope; self-hosting does not imply '
+        'complete BBC BASIC coverage. For supported conventional programs, '
+        'execution speed is the only intended observable behavioral difference.\n\n' + table + '\n')
     (out / 'hello.bas').write_bytes(cases[0]['source'].encode())
     (out / 'editor.txt').write_text(
         'Bundled editor: Lennart Benschop agon-utilities nano, unmodified.\n'
         'Source: https://github.com/lennart-benschop/agon-utilities\n'
         'Checkout:56d448534a1702973808dbc6156fac2e3b7e7910\n'
-        'The binary matches the existing AGONC8 /mos/nano.bin.\n'
         'MOSLET address&B0000; invoke using the root readme instructions.\n'
         'Ctrl-O save; Ctrl-X exit; Ctrl-G help;253-character lines; CRLF output.\n'
         'It may select mode3 for an80-column display.\n'
-        'These are upstream documented controls; no new Console8 editor run\n'
-        'has been performed by this deployment. See nano-license.txt.\n')
+        'These are upstream documented controls. See nano-license.txt.\n')
     tests = out / 'tests'
     tests.mkdir()
     (tests / 'readme.txt').write_text(
-        'Manual tests: sources/oracles copied from completed C006 qualification.\n'
-        'No manual Console8 pass is claimed by staging.\n\n' +
+        'Manual tests: previously qualified sources and expected outputs.\n'
+        'Copying this package does not establish a test pass on your machine.\n\n' +
         '\n'.join(NAMES) + '\n\n'
         'Follow each subdirectory readme. For numeric/array checks compare exact\n'
         'text, including scientific notation. Source errors intentionally test\n'
         'the reference LOCAL/handler behavior, not an improved error unwind.\n'
         'The compiler reports no intermediate progress. Hardware timing is not\n'
-        'qualified per case; use the following prior aggregate only as context:\n'
-        'R01 automated remaining19 compile/run stages took506.254 host seconds,\n'
-        'including transfers/keyboard/listener overhead. This is not CPU time\n'
-        'or a promised Console8 duration. Wait for Wrote and actual MOS return.\n'
+        'qualified per case. Wait for Wrote and actual MOS return.\n'
         'If a small compile/run remains unclear after several minutes, retain\n'
         'the observed state/error and report it; do not mark the case passed.\n')
     for i, (name, case) in enumerate(zip(NAMES, cases)):
         d = tests / name
         d.mkdir()
         (d / 'source.bas').write_bytes(case['source'].encode())
-        prefix = (f'{name}\n\nAt MOS:\n  CD {AGOND}/tests/{name}\n'
-                  f'  LOAD {AGOND}/compiler.bin\n  RUN .\n\n'
+        prefix = (f'{name}\n\nStart in the package root. At MOS:\n'
+                  f'  LOAD compiler.bin\n  CD tests/{name}\n  RUN .\n\n'
                   'At Source file: enter source.bas\n')
         if 'diagnostic' in case:
             (d / 'preserve.dat').write_bytes((old / f'reject-{i}.dat').read_bytes())
@@ -96,7 +108,7 @@ def main():
                       'Native rejection preserves previous output\n'
                       'It is text, not an executable. Do not LOAD/RUN it.\n'
                       'Inspect it with the bundled editor without saving, or\n'
-                      'compare bytes from Oryx after the card is mounted there.\n')
+                      'compare bytes on your computer with the card mounted.\n')
         else:
             (d / 'expected.txt').write_text(case['expected'])
             suffix = ('At Output file: enter built.bin\n'
@@ -113,10 +125,22 @@ def main():
         (d / 'readme.txt').write_text(prefix + suffix +
             '\nNo intermediate compiler progress is printed. Compare visible output\n'
             'and actual return, not just a delivered command. See ../readme.txt\n'
-            'for duration/observation limits. No automatic timing/pass assertion.\n')
+            'for duration/observation limits. No automatic timing/pass assertion.\n'
+            'After finishing, CD ../.. returns from this test to the package root.\n')
+    # Distribution content must not depend on the maintainer's machine or tree.
+    forbidden = re.compile(rb'/Agon/|/home/|/run/|/mystuff/|/tmp/|/Users/|/media/|'
+                           rb'Oryx|oryx|AGONC8|raspberrypi|docs/tasks/')
+    for p in out.rglob('*'):
+        if not p.is_file():
+            continue
+        assert not forbidden.search(p.read_bytes()), p
+        if p.suffix == '.md':
+            for link in re.findall(r'\[[^\]]+\]\(([^)]+)\)', p.read_text()):
+                if '://' not in link and not link.startswith('#'):
+                    target = (p.parent / link.split('#')[0]).resolve()
+                    assert target.is_relative_to(out) and target.exists(), (p, link)
     files = {str(p.relative_to(out)): sha(p) for p in sorted(out.rglob('*')) if p.is_file()}
-    package = dict(schema='bbc-manual-package-v1', agon_directory=AGOND,
-                   oryx_directory='/run/media/smith/AGONC8' + AGOND,
+    package = dict(schema='bbc-manual-package-v2', package_root='.',
                    compiler_sha256=manifest['image_sha256'], source_sha256=manifest['source_sha256'],
                    editor_sha256=sha(editor), cases_source_sha256=sha(cases_path),
                    manual_validation=False, files=files)

@@ -5,14 +5,16 @@ This directory contains the standalone development compiler and a text editor.
 You can write, compile and run supported BASIC programs entirely on the Agon.
 No BASIC interpreter, assembler or host Python is needed for that workflow.
 
-Agon directory: /mystuff/basic-compiled
-Oryx directory: /run/media/smith/AGONC8/mystuff/basic-compiled
+Install this directory wherever you choose on your Agon SD card. The directory
+containing this readme is the package root. Before following the examples,
+change to your chosen installation directory at the MOS prompt. All filenames
+and test-directory paths below are relative to that root or the stated current
+test directory; no particular installation path is required.
 
 1. TRY THE STARTER
 
 At the MOS prompt, enter these commands separately:
 
-  CD /mystuff/basic-compiled
   LOAD compiler.bin
   RUN .
 
@@ -35,7 +37,6 @@ smoke-test source. Files staged on the card do not establish a manual pass.
 The bundled nano.bin is Lennart Benschop's Agon text editor, not GNU nano.
 It is a moslet built for &B0000, so use this exact load/run sequence:
 
-  CD /mystuff/basic-compiled
   LOAD nano.bin &B0000
   RUN &B0000 myprog.bas
 
@@ -49,10 +50,11 @@ Cursor keys move normally. It may switch to an 80-column screen mode.
 Keep editor lines at253 characters or fewer. It writes plain text with CRLF,
 which the compiler accepts. Existing saves may create an editor backup file.
 
-Alternatively, edit myprog.bas directly on the mounted card from Oryx using
-VS Code or another plain-text editor. Use ASCII source and uppercase keywords;
+Alternatively, edit myprog.bas on the mounted card from your computer using
+your preferred plain-text editor. Use ASCII source and uppercase keywords;
 do not save tokenised BASIC or a document format. Line numbers are optional.
-The compiler itself permits255-byte source lines. Use Oryx for longer lines.
+The compiler itself permits255-byte source lines; use an editor that preserves
+those longer lines if needed.
 
 After leaving the editor, LOAD compiler.bin and RUN . again. Supply myprog.bas
 and myprog.bin at its two prompts. After Wrote myprog.bin and MOS return:
@@ -82,8 +84,8 @@ commands. Outputs you compile are kept in that test directory. Nothing autoruns.
 The file-I/O test creates/overwrites only its own native-test.dat.
 The rejection tests use a supplied preserve.dat sentinel; do not execute it.
 
-These small programs previously passed on the Olimex. Console8 manual checks
-are awaiting your results. Record the test name, visible output, return to MOS,
+These small programs have prior automated and physical Agon qualification.
+For your own checks, record the test name, visible output, return to MOS,
 and any error or keyboard/display problem. They are not performance benchmarks.
 If progress/return is unclear, record what happened rather than retrying blindly.
 
@@ -92,8 +94,8 @@ If progress/return is unclear, record what happened rather than retrying blindly
 compiler.bas is the exact BBC source of compiler.bin, supplied for inspection
 and optional self-rebuild. compiler-provenance.json identifies its qualification.
 Rebuilding the compiler is optional and not a quick smoke test. Use a fresh
-output name, for example self-new.bin. On the tested Olimex, a full self-build
-took about99 minutes to observed completion; Console8 duration is unmeasured.
+output name, for example self-new.bin. A physical Agon qualification self-build
+took about99 minutes to observed completion; your system's duration may differ.
 There is no intermediate compiler progress display. That observation is not a
 benchmark or a promised duration. Keep the supplied compiler.bas unchanged when
 checking reproducibility; save your compiler experiments under a different name.

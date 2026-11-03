@@ -1,0 +1,7 @@
+Bundled editor: Lennart Benschop agon-utilities nano, unmodified.
+Source: https://github.com/lennart-benschop/agon-utilities
+Checkout:56d448534a1702973808dbc6156fac2e3b7e7910
+MOSLET address&B0000; invoke using the root readme instructions.
+Ctrl-O save; Ctrl-X exit; Ctrl-G help;253-character lines; CRLF output.
+It may select mode3 for an80-column display.
+These are upstream documented controls. See nano-license.txt.

@@ -160,6 +160,12 @@ Markdown documents must use .md, not .txt. The manual package's compatibility
 document is compatibility.md; readme.txt and the remaining .txt files are plain
 text. C008/evidence/markdown-extension-001 records the card correction and updated
 manifest; preserve the earlier deployment evidence unchanged.
+Consumer packages must be installation-independent. Keep maintainer hostnames,
+mountpoints, repository paths and task-evidence paths out of every payload file,
+including JSON metadata and test instructions. Use package-relative paths and
+links to files actually shipped. C008's portable manual-004 package and
+portable-package-001 receipt supersede the original development-specific payload;
+development provenance and deployment coordinates remain repository-only.
 
 Shared /tmp tmpfs filled during G2 handoff; only our inactive Cargo build cache
 was moved to C006/build/relocated-cli-cache-001, preserving the active CLI at its
