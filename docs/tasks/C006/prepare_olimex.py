@@ -33,12 +33,16 @@ def main():
     p.add_argument('--compiler', type=Path, default=ROOT / 'compiler/compiler.bas')
     p.add_argument('--bootstrap', type=Path, required=True)
     p.add_argument('--regressions', type=Path, required=True)
+    p.add_argument('--native-baseline', type=Path, required=True)
+    p.add_argument('--native-errors', type=Path, required=True)
     p.add_argument('--run-id', required=True)
     p.add_argument('--output', type=Path, required=True)
     a = p.parse_args()
     assert re.fullmatch(r'[a-z][a-z0-9-]{0,31}', a.run_id)
     boot = verified(a.bootstrap)
     regressions = verified(a.regressions)
+    baseline = verified(a.native_baseline)
+    errors = verified(a.native_errors)
     source = a.compiler.resolve(strict=True)
     assert boot['all_four_images_identical']
     assert boot['unmodified_interpreted_main_executed']
@@ -52,6 +56,14 @@ def main():
     assert all(path.read_bytes() == seed for path in images)
     assert regressions['all_cases_passed']
     assert regressions['native_compiler_sha256'] == digest(images[0])
+    assert baseline['native_compiler_sha256'] == digest(images[0])
+    assert baseline['reference_compiler_sha256'] == digest(source)
+    assert baseline['all_cases_passed'] and baseline['completed_cases'] == list(range(39))
+    assert baseline['images_matched'] == 15 and baseline['diagnostics_matched'] == 24
+    assert errors['native_compiler_sha256'] == digest(images[0])
+    assert errors['supplied_compiler_source_sha256'] == digest(source)
+    assert errors['source_case_indices'] == errors['completed_cases'] == list(range(39))
+    assert errors['all_outputs_and_ERR_ERL_match'] and errors['deterministic_repeat']
     cases = json.loads((a.regressions / 'cases.json').read_text())
     assert regressions['completed_cases'] == list(range(len(cases)))
     assert len(cases) == 12
@@ -104,6 +116,9 @@ def main():
                   hardware_validation=False)
     (out / 'cases.json').write_text(json.dumps(cases, indent=2)+'\n')
     (out / 'fixture.json').write_text(json.dumps(report, indent=2)+'\n')
+    for name, directory in [('bootstrap', a.bootstrap), ('regressions', a.regressions),
+                            ('native-baseline', a.native_baseline), ('native-errors', a.native_errors)]:
+        shutil.copy2(directory / 'results.json', out / (name+'-results.json'))
     shutil.copy2(__file__, out / 'prepare_olimex.py')
     manifest = {str(path.relative_to(out)): digest(path)
                 for path in sorted(out.rglob('*')) if path.is_file()}

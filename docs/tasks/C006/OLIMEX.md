@@ -93,8 +93,9 @@ the compiler. Do not allocate compiler memory above&B0000 or change MOS/EMOS.
 
 ## Offline packaging
 
-`prepare_olimex.py` requires a completed normal-main four-image bootstrap and
-completed12-case native regression evidence, verifies their retained manifests,
+`prepare_olimex.py` requires a completed normal-main four-image bootstrap,
+completed12-case native regressions,39-case native baseline equivalence and39
+fresh native source-error programs. It verifies their retained manifests,
 source and complete image equality, and creates a new host-only bundle. It
 copies qualified source/images, fresh per-stage MOS command files, filename
 inputs and retained expected outputs. It neither compiles nor accesses hardware.

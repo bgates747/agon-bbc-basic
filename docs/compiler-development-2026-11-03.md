@@ -285,3 +285,9 @@ No reservation or live board operation occurs. Host-only mocked qualification
 progresses4 checks001,5 checks002,6 checks003; final tests include no target
 submission after failed lease/wrong protocol, path boundaries and separate
 owner assertions. These do not qualify hardware or the P4 protocol.
+
+Tighten offline Olimex packaging to require all four qualification records:
+normal-main bootstrap, native baseline39/15+24, representative12 and fresh
+native errors39. All source/native hashes and completed case ranges must agree;
+copy the four result records into the host bundle. Syntax passes; actual bundle
+creation still awaits the active full chain and native suites. No target action.
