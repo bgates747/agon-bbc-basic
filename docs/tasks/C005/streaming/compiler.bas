@@ -67,15 +67,20 @@
 1390 cline$="":cdone%=FALSE
 1400 WHILE NOT EOF#ch% AND NOT cdone%
 1410 cb%=BGET#ch%
-1420 IF ccr% AND cb%=10 THEN ccr%=FALSE ELSE PROCreadchar(cb%):ccr%=(cb%=13)
-1430 ENDWHILE
-1440 ENDPROC
-1450 DEF PROCreadchar(cb%)
-1460 IF cb%=10 OR cb%=13 THEN cdone%=TRUE:ENDPROC
-1470 IF cb%=0 PROCbad("NUL byte in source")
-1480 IF LEN(cline$)=255 THEN cpos%=256:PROCbad("Source line exceeds 255 bytes")
-1490 cline$=cline$+CHR$(cb%)
-1500 ENDPROC
+1420 IF ccr% AND cb%=10 THEN
+1422 ccr%=FALSE
+1424 ELSE
+1426 IF cb%=10 OR cb%=13 THEN
+1428 cdone%=TRUE
+1430 ELSE
+1432 IF cb%=0 PROCbad("NUL byte in source")
+1434 IF LEN(cline$)=255 THEN cpos%=256:PROCbad("Source line exceeds 255 bytes")
+1436 cline$=cline$+CHR$(cb%)
+1438 ENDIF
+1440 ccr%=(cb%=13)
+1442 ENDIF
+1444 ENDWHILE
+1446 ENDPROC
 1510 DEF PROCline
 1520 LOCAL cn%,cw$,ct%,cinum%,cleid$,ccont%,cfirst%,cinseen%,cdeclskip$,chskip$
 1522 cinum%=0:cleid$="":cfirst%=TRUE:cinseen%=FALSE:cdeclskip$="":chskip$="":cbasicline%=0:PROCprocscope
@@ -246,10 +251,12 @@
 2750 cpc%=cpc%+1:ENDPROC
 2760 DEF PROCbytes(ch$)
 2770 LOCAL ci%,ca%,cb%
+2772 IF ch$="" ENDPROC
+2774 PROCcount(LEN(ch$) DIV 2):IF cphase%<>3 ENDPROC
 2780 FOR ci%=1 TO LEN(ch$) STEP 2
 2790 ca%=INSTR("0123456789ABCDEF",MID$(ch$,ci%,1))-1
 2800 cb%=INSTR("0123456789ABCDEF",MID$(ch$,ci%+1,1))-1
-2810 PROCbyte(ca%*16+cb%)
+2810 BPUT#coh%,ca%*16+cb%
 2820 NEXT
 2830 ENDPROC
 2840 DEF PROCcharacter(cv%)
@@ -262,7 +269,7 @@
 2910 LOCAL ci%
 2915 IF cs$="" ENDPROC
 2920 PROCaddr("CD","$print"):PROCbyte(LEN(cs$))
-2930 FOR ci%=1 TO LEN(cs$):PROCbyte(ASC(MID$(cs$,ci%,1))):NEXT
+2930 PROCstringbytes(cs$)
 2940 ENDPROC
 2950 DEF PROCruntime
 2960 PROClabel("$print")
@@ -333,7 +340,7 @@
 4172 IF cdcapture% THEN PROCcapturenumber(cv):ENDPROC
 4180 PROCnumslot:cvaluekind%=0:PROCaddr("DD21","$v"+STR$(cndepth%-1))
 4190 PROCaddr("CD","$numlit"):cp%=^cv
-4200 FOR ci%=0 TO 4:PROCbyte(cp%?ci%):NEXT
+4200 PROCblob(cp%,5)
 4210 ENDPROC
 4220 DEF PROCnumindices(cl%,cr%)
 4230 PROCaddr("DD21","$v"+STR$(cl%)):PROCaddr("FD21","$v"+STR$(cr%))
@@ -461,9 +468,9 @@
 5185 LOCAL ci%,cq
 5186 IF cdcapture% THEN PROCcapturepacked(cv,ce%):ENDPROC
 5187 PROCnumslot:PROCaddr("DD21","$v"+STR$(cndepth%-1)):PROCaddr("CD","$numlit")
-5188 FOR ci%=0 TO 3
-5189 cq=INT(cv/256):PROCbyte(cv-cq*256):cv=cq
-5190 NEXT:PROCbyte(ce%)
+5188 PROCcount(5):IF cphase%<>3 ENDPROC
+5189 FOR ci%=0 TO 3:cq=INT(cv/256):BPUT#coh%,cv-cq*256:cv=cq:NEXT
+5190 BPUT#coh%,ce%
 5191 ENDPROC
 5193 DEF PROCnumruntime
 5194 LOCAL ci%,cp%,cv%,cbase%,cn$,cm$
@@ -542,7 +549,7 @@
 6400 PROClabel("$novar"):PROCerrorconstant(26,"No such variable")
 6410 FOR ci%=0 TO cvnum%-1
 6420 PROClabel("$bind"+STR$(ci%)):PROCbyte(ABS(cvstatic%(ci%)))
-6430 PROClabel("$var"+STR$(ci%)):FOR cj%=1 TO cvsize%(ci%):PROCbyte(0):NEXT
+6430 PROClabel("$var"+STR$(ci%)):PROCzeros(cvsize%(ci%))
 6440 NEXT
 6450 ENDPROC
 6460 DEF PROCkeywords:LOCAL ci%
@@ -630,7 +637,7 @@
 7570 DEF PROCstrliteral
 7580 LOCAL cs$,ci%
 7590 cs$=FNstring:PROCstrslot:PROCaddr("DD21","$s"+STR$(csdepth%-1)):PROCaddr("CD","$strlit")
-7600 PROCbyte(LEN(cs$)):IF cs$<>"" THEN FOR ci%=1 TO LEN(cs$):PROCbyte(ASC(MID$(cs$,ci%,1))):NEXT
+7600 PROCbyte(LEN(cs$)):PROCstringbytes(cs$)
 7610 ENDPROC
 7620 DEF PROCstrchr
 7630 PROCitem:PROCneednumber:PROCnumindices(cndepth%-1,cndepth%-1):PROCnumcall(38):PROCstrslot
@@ -666,7 +673,7 @@
 7870 PROCerrorconstant(0,"No room")
 7880 PROClabel("$strlong"):PROCerrorconstant(19,"String too long")
 7890 FOR ci%=0 TO csslots%-1
-7900 PROClabel("$s"+STR$(ci%)):FOR cj%=0 TO 255:PROCbyte(0):NEXT
+7900 PROClabel("$s"+STR$(ci%)):PROCzeros(256)
 7910 NEXT
 7920 IF NOT cmemory% THEN PROClabel("$sheapctx"):PROCaddr("","$sheap"):PROCaddr("","$sheapend")
 7930 IF NOT cmemory% THEN PROClabel("$sheap"):PROCdefine("$sheapend",&40000+cpc%+1024*csvars%)
@@ -1031,7 +1038,7 @@
 14110 PROClabel("$notlocal"):PROCerrorconstant(12,"Not in a FN or PROC")
 14120 PROClabel("$notproc"):PROCerrorconstant(13,"Not in a PROC")
 14125 PROClabel("$notfn"):PROCerrorconstant(7,"Not in a FN")
-14127 IF cfunctions% THEN PROClabel("$fnnum"):PROCbytes("0000000000"):PROClabel("$fnstr"):FOR ci%=0 TO 255:PROCbyte(0):NEXT
+14127 IF cfunctions% THEN PROClabel("$fnnum"):PROCbytes("0000000000"):PROClabel("$fnstr"):PROCzeros(256)
 14130 ENDPROC
 14140 DEF PROCactworkspace
 14150 LOCAL cp%,ci%
@@ -1438,57 +1445,61 @@
 18092 DEF PROCdataruntime
 18094 LOCAL cb%,ci%,cp%,cv%
 18096 cb%=cpc%:PROCtemplate(cdimage%,cdsize%,cdrelocs%,6)
-18100 PROCctlexport("$datapeek",cb%+cdpeek%):PROCctlexport("$datanumber",cb%+cdnumber%):PROCctlexport("$datastring",cb%+cdstring%):PROCctlexport("$datacommit",cb%+cdcommit%)
-18102 PROClabel("$datactx"):PROCaddr("","$databegin"):PROCaddr("","$dataend")
-18104 PROClabel("$dataerror"):PROCbytes("FE06"):PROCaddr("CA","$datatypemismatch"):PROCbytes("FE10"):PROCaddr("CA","$datasyntax"):PROCbytes("FE2A"):PROCaddr("CA","$dataempty"):PROCaddr("C3","$numerror")
-18106 PROClabel("$datatypemismatch"):PROCerrorconstant(6,"Type mismatch")
-18108 PROClabel("$datasyntax"):PROCerrorconstant(16,"Syntax error")
-18110 PROClabel("$dataempty"):PROCerrorconstant(42,"Out of DATA")
-18112 ENDPROC
-18114 DEF PROCdatatable
-18116 LOCAL ch%,cn%,ci%,cp%,clnum%,cpos%,cline$,ccr%
-18118 ch%=OPENIN(csource$):IF ch%=0 PROCbad("Cannot reopen DATA source")
-18120 clnum%=0:ccr%=FALSE:PROClabel("$databegin")
-18122 WHILE NOT EOF#ch%
-18124 clnum%=clnum%+1:cpos%=1:PROCreadline(ch%):PROCspace:cn%=-1
-18126 IF FNdigit(FNpeek) cn%=FNnumber(65279)
-18128 PROCspace:IF FNword("DATA") PROCdataline(cn%)
-18130 ENDWHILE
-18132 CLOSE#ch%:PROClabel("$dataend")
-18134 cp%=cstart%:cstart%=&40000+cpc%
-18136 PROCaddr("21","$databegin"):PROCaddr("22","$datactx"):PROCbyte(&C3):PROCbyte(cp% MOD 256):PROCbyte((cp% DIV 256) MOD 256):PROCbyte(cp% DIV 65536)
-18138 ENDPROC
-18140 DEF PROCdataline(cn%)
-18142 LOCAL cmore%:IF cn%>=0 THEN IF FNlineref(cn%,1,FALSE) PROClabel("$data#"+STR$(cn%))
-18144 cpos%=cpos%+4
-18146 REPEAT
-18148 PROCdatafield:cmore%=(FNpeek=","):IF cmore% cpos%=cpos%+1
-18150 UNTIL NOT cmore%
-18152 ENDPROC
-18154 DEF PROCdatafield
-18156 LOCAL cs$,cp%,ci%,ce%,cq%
-18158 PROCspace:cq%=(FNpeek=CHR$(34))
-18160 IF cq% THEN cs$=FNstring:PROCspace:IF FNpeek<>"" AND FNpeek<>"," PROCbad("Trailing text after quoted DATA is unqualified")
-18162 IF NOT cq% THEN cp%=cpos%:WHILE FNpeek<>"" AND FNpeek<>",":cpos%=cpos%+1:ENDWHILE:cs$=MID$(cline$,cp%,cpos%-cp%)
-18164 ce%=6:FOR ci%=0 TO 4:cdpacket%?ci%=0:NEXT
-18166 IF NOT cq% ce%=FNdataencode(cs$)
-18168 IF ce%=-1 AND cdnumeric% PROCbad("Numeric READ requires literal DATA fields")
-18170 IF ce%=-1 ce%=16
-18171 IF cs$<>"" THEN FOR ci%=1 TO LEN(cs$):PROCdatabytecheck(ASC(MID$(cs$,ci%,1))):NEXT
-18172 PROCbyte(LEN(cs$)):PROCbyte(ce%):FOR ci%=0 TO 4:PROCbyte(cdpacket%?ci%):NEXT:PROCbyte(0)
-18174 IF cs$<>"" THEN FOR ci%=1 TO LEN(cs$):PROCbyte(ASC(MID$(cs$,ci%,1))):NEXT
-18176 ENDPROC
-18178 DEF FNdataencode(cs$)
-18180 LOCAL cline$,cpos%,csign%,cv,ci%,ce%,cp%:cline$=cs$:cpos%=1:csign%=0:cnumerr%=0
-18182 PROCspace:IF FNpeek="" THEN =16
-18184 IF FNpeek="+" OR FNpeek="-" THEN csign%=(FNpeek="-"):cpos%=cpos%+1:PROCspace
-18186 IF NOT FNdigit(FNpeek) AND FNpeek<>"&" AND FNpeek<>"." THEN =-1
-18188 cdcapture%=TRUE:PROCconstant:cdcapture%=FALSE:PROCspace:IF FNpeek<>"" THEN =-1
-18190 IF csign% AND cnumerr%=0 THEN cv=|cdpacket%:cv=-cv:cp%=^cv:FOR ci%=0 TO 4:cdpacket%?ci%=cp%?ci%:NEXT
-18192 =cnumerr%
-18194 DEF PROCdatabytecheck(cb%)
-18196 IF cb%<32 PROCbad("Control bytes in DATA are unsupported")
-18198 ENDPROC
+18098 PROCctlexport("$datapeek",cb%+cdpeek%):PROCctlexport("$datanumber",cb%+cdnumber%):PROCctlexport("$datastring",cb%+cdstring%):PROCctlexport("$datacommit",cb%+cdcommit%)
+18100 PROClabel("$datactx"):PROCaddr("","$databegin"):PROCaddr("","$dataend")
+18102 PROClabel("$dataerror"):PROCbytes("FE06"):PROCaddr("CA","$datatypemismatch"):PROCbytes("FE10"):PROCaddr("CA","$datasyntax"):PROCbytes("FE2A"):PROCaddr("CA","$dataempty"):PROCaddr("C3","$numerror")
+18104 PROClabel("$datatypemismatch"):PROCerrorconstant(6,"Type mismatch")
+18106 PROClabel("$datasyntax"):PROCerrorconstant(16,"Syntax error")
+18108 PROClabel("$dataempty"):PROCerrorconstant(42,"Out of DATA")
+18110 ENDPROC
+18112 DEF PROCdatatable
+18114 LOCAL ch%,cn%,ci%,cp%,clnum%,cpos%,cline$,ccr%
+18116 ch%=OPENIN(csource$):IF ch%=0 PROCbad("Cannot reopen DATA source")
+18118 clnum%=0:ccr%=FALSE:PROClabel("$databegin")
+18120 WHILE NOT EOF#ch%
+18122 clnum%=clnum%+1:cpos%=1:PROCreadline(ch%):PROCspace:cn%=-1
+18124 IF FNdigit(FNpeek) cn%=FNnumber(65279)
+18126 PROCspace:IF FNword("DATA") PROCdataline(cn%)
+18128 ENDWHILE
+18130 CLOSE#ch%:PROClabel("$dataend")
+18132 cp%=cstart%:cstart%=&40000+cpc%
+18134 PROCaddr("21","$databegin"):PROCaddr("22","$datactx"):PROCbyte(&C3):PROCbyte(cp% MOD 256):PROCbyte((cp% DIV 256) MOD 256):PROCbyte(cp% DIV 65536)
+18136 ENDPROC
+18138 DEF PROCdataline(cn%)
+18140 LOCAL cmore%:IF cn%>=0 THEN IF FNlineref(cn%,1,FALSE) PROClabel("$data#"+STR$(cn%))
+18142 cpos%=cpos%+4
+18144 REPEAT
+18146 PROCdatafield:cmore%=(FNpeek=","):IF cmore% cpos%=cpos%+1
+18148 UNTIL NOT cmore%
+18150 ENDPROC
+18152 DEF PROCdatafield
+18154 LOCAL cs$,cp%,ci%,ce%,cq%
+18156 PROCspace:cq%=(FNpeek=CHR$(34))
+18158 IF cq% THEN cs$=FNstring:PROCspace:IF FNpeek<>"" AND FNpeek<>"," PROCbad("Trailing text after quoted DATA is unqualified")
+18160 IF NOT cq% THEN cp%=cpos%:WHILE FNpeek<>"" AND FNpeek<>",":cpos%=cpos%+1:ENDWHILE:cs$=MID$(cline$,cp%,cpos%-cp%)
+18162 ce%=6:FOR ci%=0 TO 4:cdpacket%?ci%=0:NEXT
+18164 IF NOT cq% ce%=FNdataencode(cs$)
+18166 IF ce%=-1 AND cdnumeric% PROCbad("Numeric READ requires literal DATA fields")
+18168 IF ce%=-1 ce%=16
+18170 IF cs$<>"" THEN
+18172 FOR ci%=1 TO LEN(cs$)
+18174 IF ASC(MID$(cs$,ci%,1))<32 PROCbad("Control bytes in DATA are unsupported")
+18176 NEXT
+18178 ENDIF
+18180 PROCcount(8):IF cphase%=3 THEN BPUT#coh%,LEN(cs$):BPUT#coh%,ce%:FOR ci%=0 TO 4:BPUT#coh%,cdpacket%?ci%:NEXT:BPUT#coh%,0
+18182 PROCstringbytes(cs$)
+18184 ENDPROC
+18186 DEF FNdataencode(cs$)
+18188 LOCAL cline$,cpos%,csign%,cv,ci%,ce%,cp%:cline$=cs$:cpos%=1:csign%=0:cnumerr%=0
+18190 PROCspace:IF FNpeek="" THEN =16
+18192 IF FNpeek="+" OR FNpeek="-" THEN csign%=(FNpeek="-"):cpos%=cpos%+1:PROCspace
+18194 IF NOT FNdigit(FNpeek) AND FNpeek<>"&" AND FNpeek<>"." THEN =-1
+18196 cdcapture%=TRUE:PROCconstant:cdcapture%=FALSE:PROCspace:IF FNpeek<>"" THEN =-1
+18198 IF csign% AND cnumerr%=0 THEN cv=|cdpacket%:cv=-cv:cp%=^cv:FOR ci%=0 TO 4:cdpacket%?ci%=cp%?ci%:NEXT
+18200 =cnumerr%
+18202 DEF PROCdatabytecheck(cb%)
+18204 IF cb%<32 PROCbad("Control bytes in DATA are unsupported")
+18206 ENDPROC
 19000 DEF PROCloaderrors
 19002 LOCAL ci%,cj%,cs$
 19004 DIM ceentry%(23):RESTORE 63000:READ cesize%,cerelocs%:FOR ci%=0 TO 23:READ ceentry%(ci%):NEXT
@@ -1539,7 +1550,7 @@
 19092 IF NOT cerrors% THEN PROCtext(cs$):PROCnewline:PROCaddr("C3","$error"):ENDPROC
 19094 IF cn%>=0 THEN PROCbyte(&3E):PROCbyte(cn%)
 19095 PROCaddr("CD","$errinline"):PROCbyte(LEN(cs$))
-19096 IF cs$<>"" THEN FOR ci%=1 TO LEN(cs$):PROCbyte(ASC(MID$(cs$,ci%,1))):NEXT
+19096 PROCstringbytes(cs$)
 19098 ENDPROC
 19100 DEF PROCerrorruntime
 19102 LOCAL cb%,ci%,cp%,cv%,cs%,cs$,cj%
@@ -1564,7 +1575,8 @@
 19216 csort%(csinsert%)=csnum%:csname$(csnum%)=cn$:csaddr%(csnum%)=ca%:csnum%=csnum%+1
 19218 ENDPROC
 19220 DEF PROCword24(cv%)
-19222 LOCAL ci%:FOR ci%=0 TO 2:PROCbyte(cv% AND 255):cv%=cv% DIV 256:NEXT
+19222 LOCAL ci%:PROCcount(3):IF cphase%<>3 ENDPROC
+19223 BPUT#coh%,CHR$(cv%)+CHR$(cv% DIV 256)+CHR$(cv% DIV 65536);
 19224 ENDPROC
 19226 DEF FNlineref(cn%,cm%,cw%)
 19228 LOCAL ci%,cb%:ci%=cn% DIV 8+8192*cm%:cb%=2^(cn% AND 7)
@@ -1640,6 +1652,22 @@
 19368 IF ci%=0 THEN ="$ctlpush"
 19370 IF ci%=1 THEN ="$ctlcheck"
 19372 ="$ctlpop"
+19400 DEF PROCcount(cn%)
+19402 IF &40000+cpc%+cn%>&B0000 PROCbad("Executable exceeds user RAM")
+19404 cpc%=cpc%+cn%:ENDPROC
+19406 DEF PROCblob(cp%,cn%)
+19408 LOCAL ci%:IF cn%=0 ENDPROC
+19410 PROCcount(cn%):IF cphase%<>3 ENDPROC
+19412 FOR ci%=0 TO cn%-1:BPUT#coh%,cp%?ci%:NEXT:ENDPROC
+19414 DEF PROCstringbytes(cs$)
+19416 LOCAL ci%:IF cs$="" ENDPROC
+19418 PROCcount(LEN(cs$)):IF cphase%<>3 ENDPROC
+19420 BPUT#coh%,cs$;
+19421 ENDPROC
+19422 DEF PROCzeros(cn%)
+19424 LOCAL ci%:IF cn%=0 ENDPROC
+19426 PROCcount(cn%):IF cphase%<>3 ENDPROC
+19428 FOR ci%=1 TO cn%:BPUT#coh%,0:NEXT:ENDPROC
 20000 DATA 4460,387,644,0,12,113,212,267,283
 20010 DATA "E1DDE5D101050000EDB0E5C9DD7E04B72809DD7E03EE80DD7703C9DDE5E10604377E2FCE00772310"
 20020 DATA "F8C9DDE5FDE50100000021000000DD6E02DD6603DD4E04D921000000DD6E00DD6601D9FDE5D1DD21"

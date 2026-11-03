@@ -1,0 +1,2 @@
+10 DATA 1,"text"
+20 READ a,s$:PRINT ;a;":";s$:RESTORE 10:READ a:PRINT ;a:END

@@ -13,7 +13,7 @@ def programs():
   dict(source='10 DATA 1\n20 RESTORE 30:END\n30 PRINT "not DATA"\n',diagnostic='Undefined target $data#30'),
   dict(source='@same:\n@same:\n',diagnostic='Duplicate target @same'),
   dict(source='10 PRINT "one"\n10 PRINT "two"\n',diagnostic='Line numbers must increase'),
-  dict(source='READ s$:PRINT s$:FOR i%=1 TO 300:READ s$:NEXT\nPRINT ;LEN s$:RESTORE:READ s$:PRINT s$:END\nDATA "first"\n'+('DATA "'+'q'*248+'"\n')*300,expected='first\n248\nfirst\n',status=0,reference=False),
+  dict(source='x%=0\n'+('x%=x%+1\n')*650+'PRINT ;x%:END\n',expected='650\n',status=0,reference=False),
   dict(source='PRINT "many-labels":END\n'+''.join(f'@L{i:04d}:\n' for i in range(2048)),expected='many-labels\n',status=0,reference=False),
   dict(source=''.join(f'@L{i:04d}:\n' for i in range(4097)),diagnostic='Too many labels'),
  ]

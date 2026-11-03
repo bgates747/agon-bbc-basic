@@ -398,3 +398,39 @@ The isolated streaming candidate fc67e57c counts/validates/writes separately,
 merges template operands through raw spans and advances ordered definition scopes.
 It remains unexecuted. Old/new smoke images and resource/scope failures are its
 next qualification; no inferred native RAM fit or source closure is asserted.
+
+## Streaming smoke byte identity
+
+Promoted-buffer emitter comparison passes five-source scope98.736s. Candidate
+fc67e57c then passes the same four executions/one rejection206.272s, including
+fresh conventional branch/scope/DATA oracles, deterministic repeat, linked numeric /
+string templates and existing-output preservation. All four complete old/new
+executables are byte-identical (including14845-byte control/activation and DATA
+entry/workspace cases). The larger resource cohort is running with an unrolled
+650-store output-size case and2048/4097 label boundaries; no result is claimed yet.
+The candidate remains isolated. A prepared progress host driver records exact
+source input separately from debug PRINT instrumentation and C006 generation proof.
+
+## Streaming batching and source-reader baseline
+
+Candidate8eeea648 batches fixed opcode/data counts and passes the four-native /
+one-rejection smoke180.807s. f11b3e22 then uses binary semicolon string BPUT for
+words/literals and passes180.881s. All four complete old images remain identical.
+The earlier fc67 large cohort was deliberately interrupted during its large case;
+its partial inputs/log/images are retained without a pass claim.
+
+Candidate1b3e4b33 inlines unchanged source-character checks. Baseline39/15 passes
+196.992s with deterministic repeat and GNU golden equality. The full resource
+cohort is running. A proposed private text-packing change was based on a mistaken
+reading of array storage: actual native arrays use five-byte string descriptors
+with separately allocated contents, as already recorded in MEMORY.md. The1MB
+claim is withdrawn. The preparation was not executed or promoted, and its files
+are removed. Actual native heap/code/arena fit still needs measurement. No
+source-generation, hardware or benchmark result follows from these tests.
+
+The resource cohort has generated its70076-byte650-store image successfully;
+native execution awaits the rest of that batch. MAIN.Z80 LOCATE/LOC1/LOC2
+confirms first-character chains for host dynamic variables. Candidate690fd519
+therefore prepares a private-identifier-only revision, removing redundant leading
+c prefixes while preserving quoted text, DATA, REM and PROC/FN names. It remains
+unexecuted; no timing or behavior claim follows from that preparation.

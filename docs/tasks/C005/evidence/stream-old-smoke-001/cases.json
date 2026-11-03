@@ -1,0 +1,30 @@
+[
+  {
+    "source": "10 GOTO 100\n20 PRINT \"WRONG\"\n100 GOSUB 300\n110 IF 1 THEN 200 ELSE 200\n200 PRINT \"targets\":END\n300 RETURN\n",
+    "reference": false,
+    "status": 0,
+    "expected": "targets\n"
+  },
+  {
+    "source": "10 PROCp:END\n100 DEF PROCp:GOTO 130\n110 PRINT \"WRONG\":ENDPROC\n130 PRINT \"scoped\":ENDPROC\n",
+    "reference": false,
+    "status": 0,
+    "expected": "scoped\n"
+  },
+  {
+    "source": "10 DATA 1,\"text\"\n20 READ a,s$:PRINT ;a;\":\";s$:RESTORE 10:READ a:PRINT ;a:END\n",
+    "reference": false,
+    "status": 0,
+    "expected": "1:text\n1\n"
+  },
+  {
+    "source": "PRINT \"GOTO 65279 GOSUB 0 THEN 2 ELSE 3 RESTORE 4\":END\nREM GOTO 1\n",
+    "reference": false,
+    "status": 0,
+    "expected": "GOTO 65279 GOSUB 0 THEN 2 ELSE 3 RESTORE 4\n"
+  },
+  {
+    "source": "10 GOTO 100\n20 END\n",
+    "diagnostic": "Undefined target #100"
+  }
+]

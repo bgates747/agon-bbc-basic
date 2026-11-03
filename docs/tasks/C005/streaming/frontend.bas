@@ -9,7 +9,8 @@
 19216 csort%(csinsert%)=csnum%:csname$(csnum%)=cn$:csaddr%(csnum%)=ca%:csnum%=csnum%+1
 19218 ENDPROC
 19220 DEF PROCword24(cv%)
-19222 LOCAL ci%:FOR ci%=0 TO 2:PROCbyte(cv% AND 255):cv%=cv% DIV 256:NEXT
+19222 LOCAL ci%:PROCcount(3):IF cphase%<>3 ENDPROC
+19223 BPUT#coh%,CHR$(cv%)+CHR$(cv% DIV 256)+CHR$(cv% DIV 65536);
 19224 ENDPROC
 19226 DEF FNlineref(cn%,cm%,cw%)
 19228 LOCAL ci%,cb%:ci%=cn% DIV 8+8192*cm%:cb%=2^(cn% AND 7)
@@ -85,3 +86,19 @@
 19368 IF ci%=0 THEN ="$ctlpush"
 19370 IF ci%=1 THEN ="$ctlcheck"
 19372 ="$ctlpop"
+19400 DEF PROCcount(cn%)
+19402 IF &40000+cpc%+cn%>&B0000 PROCbad("Executable exceeds user RAM")
+19404 cpc%=cpc%+cn%:ENDPROC
+19406 DEF PROCblob(cp%,cn%)
+19408 LOCAL ci%:IF cn%=0 ENDPROC
+19410 PROCcount(cn%):IF cphase%<>3 ENDPROC
+19412 FOR ci%=0 TO cn%-1:BPUT#coh%,cp%?ci%:NEXT:ENDPROC
+19414 DEF PROCstringbytes(cs$)
+19416 LOCAL ci%:IF cs$="" ENDPROC
+19418 PROCcount(LEN(cs$)):IF cphase%<>3 ENDPROC
+19420 BPUT#coh%,cs$;
+19421 ENDPROC
+19422 DEF PROCzeros(cn%)
+19424 LOCAL ci%:IF cn%=0 ENDPROC
+19426 PROCcount(cn%):IF cphase%<>3 ENDPROC
+19428 FOR ci%=1 TO cn%:BPUT#coh%,0:NEXT:ENDPROC

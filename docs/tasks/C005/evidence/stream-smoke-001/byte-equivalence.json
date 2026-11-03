@@ -1,0 +1,22 @@
+[
+  {
+    "program": 0,
+    "bytes": 5046,
+    "complete_image_identical": true
+  },
+  {
+    "program": 1,
+    "bytes": 14845,
+    "complete_image_identical": true
+  },
+  {
+    "program": 2,
+    "bytes": 6599,
+    "complete_image_identical": true
+  },
+  {
+    "program": 3,
+    "bytes": 278,
+    "complete_image_identical": true
+  }
+]

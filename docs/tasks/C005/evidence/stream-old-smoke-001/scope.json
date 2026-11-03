@@ -1,0 +1,10 @@
+{
+  "compiler": "promoted7cac4bba buffer emitter",
+  "purpose": "Complete old-image comparison before streaming changes",
+  "fresh_numbered_reference_probes": [
+    0,
+    1,
+    2,
+    3
+  ]
+}

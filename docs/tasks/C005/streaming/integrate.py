@@ -62,6 +62,58 @@ block('13480 LOCAL ci%','13540 DEF FNtarget',"""13480 LOCAL ci%:ci%=cscope%
 13510 IF cstructure$<>\"\" PROCbad(\"Definition crosses an open block\")
 13520 cscope%=ci%+1
 13530 ENDPROC""")
+# Inline the existing character checks to avoid a BBC procedure invocation per
+# source byte. CR/LF/CRLF, NUL and physical-length behavior remain unchanged.
+block('1380 LOCAL cb%,cdone%','1510 DEF PROCline',"""1380 LOCAL cb%,cdone%
+1390 cline$=\"\":cdone%=FALSE
+1400 WHILE NOT EOF#ch% AND NOT cdone%
+1410 cb%=BGET#ch%
+1420 IF ccr% AND cb%=10 THEN
+1422 ccr%=FALSE
+1424 ELSE
+1426 IF cb%=10 OR cb%=13 THEN
+1428 cdone%=TRUE
+1430 ELSE
+1432 IF cb%=0 PROCbad(\"NUL byte in source\")
+1434 IF LEN(cline$)=255 THEN cpos%=256:PROCbad(\"Source line exceeds 255 bytes\")
+1436 cline$=cline$+CHR$(cb%)
+1438 ENDIF
+1440 ccr%=(cb%=13)
+1442 ENDIF
+1444 ENDWHILE
+1446 ENDPROC""")
+# Count fixed chunks during layout/validation; write their exact bytes only in
+# the final pass. These are compiler opcode/data templates, not user evaluation.
+block('2760 DEF PROCbytes','2840 DEF PROCcharacter',"""2760 DEF PROCbytes(ch$)
+2770 LOCAL ci%,ca%,cb%
+2772 IF ch$="" ENDPROC
+2774 PROCcount(LEN(ch$) DIV 2):IF cphase%<>3 ENDPROC
+2780 FOR ci%=1 TO LEN(ch$) STEP 2
+2790 ca%=INSTR("0123456789ABCDEF",MID$(ch$,ci%,1))-1
+2800 cb%=INSTR("0123456789ABCDEF",MID$(ch$,ci%+1,1))-1
+2810 BPUT#coh%,ca%*16+cb%
+2820 NEXT
+2830 ENDPROC""")
+change('2930 FOR ci%=1 TO LEN(cs$):PROCbyte(ASC(MID$(cs$,ci%,1))):NEXT','2930 PROCstringbytes(cs$)')
+change('4200 FOR ci%=0 TO 4:PROCbyte(cp%?ci%):NEXT','4200 PROCblob(cp%,5)')
+block('5188 FOR ci%=0 TO 3','5191 ENDPROC',"""5188 PROCcount(5):IF cphase%<>3 ENDPROC
+5189 FOR ci%=0 TO 3:cq=INT(cv/256):BPUT#coh%,cv-cq*256:cv=cq:NEXT
+5190 BPUT#coh%,ce%""")
+change('7600 PROCbyte(LEN(cs$)):IF cs$<>"" THEN FOR ci%=1 TO LEN(cs$):PROCbyte(ASC(MID$(cs$,ci%,1))):NEXT','7600 PROCbyte(LEN(cs$)):PROCstringbytes(cs$)')
+change('7900 PROClabel("$s"+STR$(ci%)):FOR cj%=0 TO 255:PROCbyte(0):NEXT','7900 PROClabel("$s"+STR$(ci%)):PROCzeros(256)')
+change('6430 PROClabel("$var"+STR$(ci%)):FOR cj%=1 TO cvsize%(ci%):PROCbyte(0):NEXT','6430 PROClabel("$var"+STR$(ci%)):PROCzeros(cvsize%(ci%))')
+change('14127 IF cfunctions% THEN PROClabel("$fnnum"):PROCbytes("0000000000"):PROClabel("$fnstr"):FOR ci%=0 TO 255:PROCbyte(0):NEXT','14127 IF cfunctions% THEN PROClabel("$fnnum"):PROCbytes("0000000000"):PROClabel("$fnstr"):PROCzeros(256)')
+change('19096 IF cs$<>"" THEN FOR ci%=1 TO LEN(cs$):PROCbyte(ASC(MID$(cs$,ci%,1))):NEXT','19096 PROCstringbytes(cs$)')
+change('18172 PROCbyte(LEN(cs$)):PROCbyte(ce%):FOR ci%=0 TO 4:PROCbyte(cdpacket%?ci%):NEXT:PROCbyte(0)','18172 PROCcount(8):IF cphase%=3 THEN BPUT#coh%,LEN(cs$):BPUT#coh%,ce%:FOR ci%=0 TO 4:BPUT#coh%,cdpacket%?ci%:NEXT:BPUT#coh%,0')
+change('18174 IF cs$<>"" THEN FOR ci%=1 TO LEN(cs$):PROCbyte(ASC(MID$(cs$,ci%,1))):NEXT','18174 PROCstringbytes(cs$)')
+# Preserve validation before writing; inlining the existing byte check avoids
+# another BBC call per DATA character without changing its order or diagnostic.
+change('18171 IF cs$<>"" THEN FOR ci%=1 TO LEN(cs$):PROCdatabytecheck(ASC(MID$(cs$,ci%,1))):NEXT',"""18170 IF cs$<>"" THEN
+181701 FOR ci%=1 TO LEN(cs$)
+181702 IF ASC(MID$(cs$,ci%,1))<32 PROCbad("Control bytes in DATA are unsupported")
+181703 NEXT
+181704 ENDIF""")
+a=s.index('18000 DEF PROCloaddata');b=s.index('19000 DEF PROCloaderrors',a);r=s[a:b].splitlines();s=s[:a]+'\n'.join(f'{18000+2*i} {row.split(" ",1)[1]}' for i,row in enumerate(r))+'\n'+s[b:]
 a,b=s.split('20000 DATA',1);s=a+(T/'streaming/frontend.bas').read_text()+'20000 DATA'+b
 assert not re.search(r'ccode%|crname\$|craddr%|crline%|crcol%|PROCpatch|csaddr%\(csnum%-1\)',s)
 s='\n'.join(x for x in s.splitlines() if x.strip())+'\n';rows=s.splitlines();numbers=[int(x.split()[0]) for x in rows];assert numbers==sorted(set(numbers));assert max(len(x.split(' ',1)[1]) for x in rows)<=255

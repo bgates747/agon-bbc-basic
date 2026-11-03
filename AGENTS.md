@@ -70,8 +70,13 @@ pass. Earlier39-case scopes retain their8bb1dd9a/44533e0d identities, including
 WHILE/FN-return ERL quirks; no full39-case rerun on7cac4bba is claimed. Read
 C005/ERRORS.md. The self-source probe now records4096-fixup exhaustion at physical line108 in1459.137s,
 with existing output preserved. C005/streaming holds
-unqualified candidate fc67e57c (2160 lines,205 defs,248 static private names),
-with a BBC three-pass emitter. Do not replace the active prototype while a
+candidate1b3e4b33 (2188 lines,208 defs,248 static private names),
+with a BBC three-pass emitter. Its39-case/15-native baseline passes196.992s;
+earlier four-image smokes are byte-identical. The full resource cohort is active;
+its large image has been generated at70076 bytes but native execution is pending.
+A private-name-only candidate690fd519 is prepared and unexecuted. String arrays
+already use five-byte descriptors: a proposed1MB fixed-slot inventory was wrong
+and withdrawn. Actual source/native RAM fit remains unproved. Do not replace the active prototype while a
 qualification uses it. Read C005/STREAMING.md. C006 has refined generation and
 native-regression workflows only; no generation or physical result exists yet. The compiler is still BBC BASIC; assembly is runtime code, not a
 replacement compiler implementation.

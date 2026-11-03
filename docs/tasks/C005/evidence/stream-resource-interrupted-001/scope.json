@@ -1,0 +1,25 @@
+{
+  "complete": false,
+  "compiler_sha256": "fc67e57ceb1ee75d2ff0cf4f905491faea77c31f9fd232fbb49d04f5d2703d39",
+  "operator_stopped": true,
+  "reason": "Slow interpreted large-output validation; retain partial before emission batching",
+  "completed_compiles": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "observed_rejections": [
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "remaining_cases_not_qualified": [
+    9,
+    10,
+    11
+  ],
+  "native_execution_phase_not_reached": true
+}

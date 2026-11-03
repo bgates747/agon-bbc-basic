@@ -5,8 +5,8 @@ compiler can fit beside its own metadata and output. The actual7cac4bba self-sou
 probe exhausts4096 address fixups at physical line108, preserving its old output
 in1459.137s (`evidence/errors-source-gap-001`). The next actual self-source
 probe, after language closure, must measure generated size, symbols, fixups and
-RAM. This note records a possible bounded streaming emitter if those measurements
-require it; no streaming implementation or size result is claimed.
+RAM. This note records the isolated BBC streaming emitter and its qualification.
+The live compiler remains unchanged; no native self-source size result is claimed.
 
 ## Current constraints and proposed boundary
 
@@ -103,7 +103,7 @@ actual self-source/native RAM remain its evidence requirements.
 
 The prepared resource cohort includes numeric forward/backward/THEN/ELSE and
 scoped targets, early RESTORE addresses, quoted/comment decoys, missing targets,
-duplicate labels/numbers, a DATA-backed executable exceeding65536 bytes,2048
+duplicate labels/numbers, an unrolled integer-store executable exceeding65536 bytes,2048
 named labels and4097-label rejection. Large pure-capacity fixtures have explicit
 known output rather than a claimed reference execution; conventional smaller
 cases use the actual BBC oracle. The retained old-image baseline remains the
@@ -121,3 +121,61 @@ candidate now advances a scope cursor when the next definition's physical line
 arrives, instead of scanning every routine on every source line. It adds no
 metadata table or new language behavior. Scope/branch tests must prove the same
 boundaries; no performance result is claimed from this unexecuted change.
+
+The large-output fixture uses650 repeated integer stores and checks actual file
+size above65536 plus native output650. This exercises code/operand addresses
+across the old boundary with a short source. The real self-source inventory
+will independently exercise the compiler's full embedded DATA catalog.
+
+`streaming/probe_source.py` prepares a resource probe with optional BBC progress
+PRINTs in its host driver. The target input stays the exact supplied compiler
+source. It records phase/line/code/symbol/binding counts and failed/interrupted
+runs, retaining old output on failures; an optional layout-only mode never
+claims a generated compiler. A full successful resource image is still distinct
+from C006's unmodified-main generation chain. These workflows have not run yet.
+
+The unrolled resource run using fc67e57c was deliberately stopped during its large
+case after observing slow interpreted validation; its first four compiles and
+five rejection diagnostics are retained separately, with no native-phase/pass
+claim. Candidate8eeea648 batches opcode counts, words, numeric packets, strings,
+zero workspaces and DATA headers; its smoke180.807s retains identical complete
+old images. A subsequent candidate uses length-aware semicolon BPUT for words /
+strings. Source-line reading is also being prepared with the existing CR/LF,
+NUL and255-byte checks inline, avoiding a BBC routine call per source byte.
+These are compiler implementation changes; each revision needs fresh identity /
+source-validation checks before promotion. No alternate BBC numeric format is used.
+
+## Reader and repeated-image qualification
+
+Candidate1b3e4b33 inlines the old source-character reader without changing CR, LF,
+CRLF, NUL, maximum line length or final-newline handling. The complete39-case
+baseline passes in196.992s, including15 native executions, rejection/output
+preservation, deterministic repeat and GNU golden-image equality. Exact source,
+driver, logs and results are frozen in `evidence/stream-reader-baseline-001`.
+The earlier f11b3e22 word/string BPUT smoke passes180.881s with all four complete
+old images identical (`stream-string-writes-smoke-001`). The larger resource
+cohort is running on1b3e4b33; no resource or source-fit result is claimed yet.
+
+## Withdrawn metadata-storage preparation
+
+A mistaken static reading treated native string-array elements as256-byte slots.
+The actual qualified MEMORY.md, FNmemwidth and memory/strings runtimes use
+five-byte descriptors with separately owned contents. Thus csname$(4095) has
+20480 element bytes plus its array descriptor and actual allocated text, not1MB
+of fixed payload. The suggested private text packing was prepared but never
+executed or promoted; its files are removed and that motivation is withdrawn.
+Actual heap/code/arena use still needs measurement. No native failure or result
+is attributed to this mistaken inventory.
+
+## Interpreted bootstrap name-lookup experiment
+
+MAIN.Z80 LOCATE/LOC1/LOC2 selects a dynamic-variable chain from the first name
+character and then searches it linearly. Nearly all compiler private variables
+currently begin with c, concentrating their host lookups in that chain. A separate
+source-preparation experiment will remove that redundant prefix consistently
+from private variable identifiers, preserving quoted text, DATA, REM, PROC/FN
+names, source line numbers and the compiler algorithms. The result remains the
+actual BBC compiler source, suitable for unchanged-main generations if qualified.
+Fresh whole-image comparison and reference/native tests must establish behavior;
+no speed benefit is claimed before measurement. This affects compiler-private
+identifiers, not admitted user syntax or BBC variable lookup semantics.
