@@ -1,0 +1,6 @@
+CD /agents/extender/results/bbc-basic/c006-r01
+ECHO BBC_BEGIN_SELF_B
+LOAD /agents/extender/results/bbc-basic/c006-r01/self-a.bin
+RUN .
+ECHO BBC_END_SELF_B
+EMOS sdserve --fast /

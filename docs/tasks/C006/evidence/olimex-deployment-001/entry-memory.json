@@ -1,0 +1,13 @@
+{
+  "observed_epoch": 1793709194.461447,
+  "console": "entry-console.bin",
+  "user_lo_start": 262144,
+  "user_lo_end_exclusive": 770048,
+  "mos_stack_start": 784384,
+  "mos_stack_end_exclusive": 786432,
+  "mos_stack_bytes": 2048,
+  "compiler_owned_end_exclusive": 720896,
+  "ranges_compatible": true,
+  "stack_high_water_measured": false,
+  "actual_cli_directory": "/mystuff/fsim/p066-2a7f76a18f-q1"
+}

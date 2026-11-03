@@ -1,0 +1,3 @@
+n%=0:FOR i%=1 TO 10:IF i% MOD 2 THEN n%=n%+i%
+NEXT:WHILE n%<30:n%=n%+1:ENDWHILE:REPEAT:n%=n%-1:UNTIL n%=25
+PRINT ;n%:END

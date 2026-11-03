@@ -108,7 +108,19 @@ environment, ownership, assembly, emulator, hardware and coordination rules.
    exact finite fixture, reserve, receive Extender's grant and assert its token
    before target operations. Physical bundle olimex-fixture-001 and finite plan
    C006/OLIMEX-R01.md are prepared. Reservation ee0ad664f72a is submitted;
-   Extender is asked for fresh readiness/grant. No BBC lease exists yet. Use pinned new staged
+   Extender granted generation7. Exact lease/config/receipts are local under
+   C006/build/physical-c006-r01/{grant,config}.json; assert current ownership
+   before every target operation. Maintained passive capture-small is active
+   (session80842). All40 deployment readbacks pass (242.466s); retained as
+   olimex-deployment-001 with actual entry/MEM and manual compile/run0 proof.
+   Actual sentinel/CLI/MEM pass: userLO040000..0BBFFF, stack0BF800..0BFFFF.
+   Physical compile/run0 and compile1/2 pass. Remaining small cohort is active
+   in session54827 (run_olimex_small.py); no new target operations alongside it.
+   It runs compile2..11 then run1..9, never repeats completed case0/compile1.
+   Read its local small-cohort/results.json for exact current progress.
+   Extender has stopped all target access.
+   Keep custody through restoration/release; consult actual local receipts.
+   Use pinned new staged
    transfers, admitted keyboard/CLI and maintained passive serial/printer mirror
    per Extender. Preserve installed firmware/startup/wiring; no unmount/eject.
    Do not treat old hardware headers or an empty queue as current readiness.

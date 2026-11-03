@@ -1,0 +1,248 @@
+{
+  "started_epoch": 1793709275.3923705,
+  "completed_files": [
+    {
+      "name": "payload/case-0.bas",
+      "remote": "/extender/diagnostics/bbc-basic/c006-r01/case-0.bas",
+      "bytes": 28,
+      "sha256": "53fb3b335a5eeca2f037c1464697fdf4010ac9b3f1eebbe2b213710c0a4a92a3"
+    },
+    {
+      "name": "payload/case-1.bas",
+      "remote": "/extender/diagnostics/bbc-basic/c006-r01/case-1.bas",
+      "bytes": 50,
+      "sha256": "b9ea00bd9bd6d1ba143788226f4831138f8195f12434dfeec6bc8793b507b1bb"
+    },
+    {
+      "name": "payload/case-10.bas",
+      "remote": "/extender/diagnostics/bbc-basic/c006-r01/case-10.bas",
+      "bytes": 14,
+      "sha256": "46dc9a5fdbaf67638dc23c8fb1ed50c55538a9e0699c070aa2186cea3de3b9f2"
+    },
+    {
+      "name": "payload/case-11.bas",
+      "remote": "/extender/diagnostics/bbc-basic/c006-r01/case-11.bas",
+      "bytes": 16,
+      "sha256": "0bbbb5c903c283741223ceadd62557943ff8e4fcda50627d73136dc7cf22103b"
+    },
+    {
+      "name": "payload/case-2.bas",
+      "remote": "/extender/diagnostics/bbc-basic/c006-r01/case-2.bas",
+      "bytes": 121,
+      "sha256": "7307ee48aae29fc11ec5c0a044859ca06d71435ca6ba23639f5d4f8f36194480"
+    },
+    {
+      "name": "payload/case-3.bas",
+      "remote": "/extender/diagnostics/bbc-basic/c006-r01/case-3.bas",
+      "bytes": 94,
+      "sha256": "80ff09e5186550f4e11b63c70ea10c0e2a5919ea4d6456e02e4e10871e792def"
+    },
+    {
+      "name": "payload/case-4.bas",
+      "remote": "/extender/diagnostics/bbc-basic/c006-r01/case-4.bas",
+      "bytes": 78,
+      "sha256": "559003140caf43ca864a4ac9407c6a9e34d73ffb081d52b0a3fa736b715edb61"
+    },
+    {
+      "name": "payload/case-5.bas",
+      "remote": "/extender/diagnostics/bbc-basic/c006-r01/case-5.bas",
+      "bytes": 80,
+      "sha256": "844a0912198e566520cb125ea990bae6a03dc74df4be8a8448d95f2861795042"
+    },
+    {
+      "name": "payload/case-6.bas",
+      "remote": "/extender/diagnostics/bbc-basic/c006-r01/case-6.bas",
+      "bytes": 57,
+      "sha256": "a98cf3a7d930e54b4cf1d7b7c9d82c11e137b8051854aca5aa729c86f5484469"
+    },
+    {
+      "name": "payload/case-7.bas",
+      "remote": "/extender/diagnostics/bbc-basic/c006-r01/case-7.bas",
+      "bytes": 71,
+      "sha256": "9db1c33c82b2f83d3236d0aba7dfaf30560e0ab30d49bee9bef3559405145207"
+    },
+    {
+      "name": "payload/case-8.bas",
+      "remote": "/extender/diagnostics/bbc-basic/c006-r01/case-8.bas",
+      "bytes": 147,
+      "sha256": "0fd184f0382cd832c63eabe48051cf7276e3cb0fbed218be21f2b873c84e0b05"
+    },
+    {
+      "name": "payload/case-9.bas",
+      "remote": "/extender/diagnostics/bbc-basic/c006-r01/case-9.bas",
+      "bytes": 122,
+      "sha256": "1b39c09a7a203fc3a256423969edfb89fec5aa1aa7ee5850af6ba1dc57c2247e"
+    },
+    {
+      "name": "payload/compile-0.txt",
+      "remote": "/extender/diagnostics/bbc-basic/c006-r01/compile-0.txt",
+      "bytes": 182,
+      "sha256": "b7183d250c94dab23fe7f5c5bb3bfe396e64bd526a4cadbb218dcf77f24a2c0f"
+    },
+    {
+      "name": "payload/compile-1.txt",
+      "remote": "/extender/diagnostics/bbc-basic/c006-r01/compile-1.txt",
+      "bytes": 182,
+      "sha256": "2155eb353415e11471023c767e0698f4c5fe8e72f9615d9e223a8f567cc466e1"
+    },
+    {
+      "name": "payload/compile-10.txt",
+      "remote": "/extender/diagnostics/bbc-basic/c006-r01/compile-10.txt",
+      "bytes": 184,
+      "sha256": "d705d4e6f1e14d709bce94d5621205f949e642eafdd560f0ad832fe6fd060764"
+    },
+    {
+      "name": "payload/compile-11.txt",
+      "remote": "/extender/diagnostics/bbc-basic/c006-r01/compile-11.txt",
+      "bytes": 184,
+      "sha256": "78ad6e820ea11fc3f1339a58e13c1a45927fb349a88293a18a9ec95a79314dd9"
+    },
+    {
+      "name": "payload/compile-2.txt",
+      "remote": "/extender/diagnostics/bbc-basic/c006-r01/compile-2.txt",
+      "bytes": 182,
+      "sha256": "fcb3270f283f0be6cb3436341e59804c3c5ed9c58b091ad660363dacc9a779b2"
+    },
+    {
+      "name": "payload/compile-3.txt",
+      "remote": "/extender/diagnostics/bbc-basic/c006-r01/compile-3.txt",
+      "bytes": 182,
+      "sha256": "c6a819ebcb9689045bec07e86f29f00990771e7359b98f82cf9c636231d7aea0"
+    },
+    {
+      "name": "payload/compile-4.txt",
+      "remote": "/extender/diagnostics/bbc-basic/c006-r01/compile-4.txt",
+      "bytes": 182,
+      "sha256": "1c6272167d163f8b504549ae3565a980a1348f4f774c2919c2767c8540985b39"
+    },
+    {
+      "name": "payload/compile-5.txt",
+      "remote": "/extender/diagnostics/bbc-basic/c006-r01/compile-5.txt",
+      "bytes": 182,
+      "sha256": "af3f69709e02f3e642f7586fd163e830e095e1a5fea4e2f1828e01043d9d5513"
+    },
+    {
+      "name": "payload/compile-6.txt",
+      "remote": "/extender/diagnostics/bbc-basic/c006-r01/compile-6.txt",
+      "bytes": 182,
+      "sha256": "2abc31c4c78141b6c508d76cbefda6c81fa1493f82b1b1e0aa4d907428b396dd"
+    },
+    {
+      "name": "payload/compile-7.txt",
+      "remote": "/extender/diagnostics/bbc-basic/c006-r01/compile-7.txt",
+      "bytes": 182,
+      "sha256": "82edb7e55790b176dc7a14006179f331e4f61299838098c3cb8d893678fc9f7d"
+    },
+    {
+      "name": "payload/compile-8.txt",
+      "remote": "/extender/diagnostics/bbc-basic/c006-r01/compile-8.txt",
+      "bytes": 182,
+      "sha256": "34c6e5e4c54b915023d6e21538b2bed4798f969dbb03d2d5307137eb5c938289"
+    },
+    {
+      "name": "payload/compile-9.txt",
+      "remote": "/extender/diagnostics/bbc-basic/c006-r01/compile-9.txt",
+      "bytes": 182,
+      "sha256": "beb37c9e40ad6eae0f079ca0b4cc8be54ef7b002862672ecb7cdc5ee520c7d5b"
+    },
+    {
+      "name": "payload/compiler.bas",
+      "remote": "/extender/diagnostics/bbc-basic/c006-r01/compiler.bas",
+      "bytes": 111810,
+      "sha256": "6597a0df3f99b4f43c42bff1cdbc59f5fdf730c57837f3d4112a598fbfbe5fb8"
+    },
+    {
+      "name": "payload/compiler.bin",
+      "remote": "/extender/diagnostics/bbc-basic/c006-r01/compiler.bin",
+      "bytes": 324275,
+      "sha256": "299a31190c380541a73ed9eb144a303fa37abccc4f3c3e0ad47f99f1538122c0"
+    },
+    {
+      "name": "payload/reject-10.dat",
+      "remote": "/agents/extender/results/bbc-basic/c006-r01/case-10.bin",
+      "bytes": 42,
+      "sha256": "6be1191dfe4356af71a85d2c5c2f7d5094394ea2220799144b778e550bd50c16"
+    },
+    {
+      "name": "payload/reject-11.dat",
+      "remote": "/agents/extender/results/bbc-basic/c006-r01/case-11.bin",
+      "bytes": 42,
+      "sha256": "6be1191dfe4356af71a85d2c5c2f7d5094394ea2220799144b778e550bd50c16"
+    },
+    {
+      "name": "payload/run-0.txt",
+      "remote": "/extender/diagnostics/bbc-basic/c006-r01/run-0.txt",
+      "bytes": 181,
+      "sha256": "7815de4636462a31731f940626182144ab241c6b039883bb87031f9e9318f24e"
+    },
+    {
+      "name": "payload/run-1.txt",
+      "remote": "/extender/diagnostics/bbc-basic/c006-r01/run-1.txt",
+      "bytes": 181,
+      "sha256": "ee7b2f91ab81a97049a923cb9d049f2b4ea1af10d614050b715be9c7bab06e54"
+    },
+    {
+      "name": "payload/run-2.txt",
+      "remote": "/extender/diagnostics/bbc-basic/c006-r01/run-2.txt",
+      "bytes": 181,
+      "sha256": "81a61b5c7f43cbb03e467ed03a337708038454e612d544999e32cc19cb4bd66a"
+    },
+    {
+      "name": "payload/run-3.txt",
+      "remote": "/extender/diagnostics/bbc-basic/c006-r01/run-3.txt",
+      "bytes": 181,
+      "sha256": "0aeddbe25552e3605fe08b61dd475a5a335b9bfe0f79ed8b44d73b0627d576e5"
+    },
+    {
+      "name": "payload/run-4.txt",
+      "remote": "/extender/diagnostics/bbc-basic/c006-r01/run-4.txt",
+      "bytes": 181,
+      "sha256": "116b28dfd44019b94a22e557a0609a3fd16c9b6d195d93afe18be187bc4a0dbf"
+    },
+    {
+      "name": "payload/run-5.txt",
+      "remote": "/extender/diagnostics/bbc-basic/c006-r01/run-5.txt",
+      "bytes": 181,
+      "sha256": "89a483ee1ec740ded9682ef917426ec2af70581b6f414efa6e98d50be924d385"
+    },
+    {
+      "name": "payload/run-6.txt",
+      "remote": "/extender/diagnostics/bbc-basic/c006-r01/run-6.txt",
+      "bytes": 181,
+      "sha256": "c65c029186e6e5647ef214fe923ffe2f3da5ed4d6ec8e21ba088ef236acd5366"
+    },
+    {
+      "name": "payload/run-7.txt",
+      "remote": "/extender/diagnostics/bbc-basic/c006-r01/run-7.txt",
+      "bytes": 181,
+      "sha256": "fe46f470f2c283bef1b9511c8e6c0cf8a795cf98d1edfc013dbbc5621e30ef27"
+    },
+    {
+      "name": "payload/run-8.txt",
+      "remote": "/extender/diagnostics/bbc-basic/c006-r01/run-8.txt",
+      "bytes": 181,
+      "sha256": "ee2a9d941977c543e7eaecc127e651f65f4534bdebf14797fc4ee3c54dd978f7"
+    },
+    {
+      "name": "payload/run-9.txt",
+      "remote": "/extender/diagnostics/bbc-basic/c006-r01/run-9.txt",
+      "bytes": 181,
+      "sha256": "b99af533df41340a84a789bf180ed01b3afe02039d91231ef3652b0a4224da55"
+    },
+    {
+      "name": "payload/self-a.txt",
+      "remote": "/extender/diagnostics/bbc-basic/c006-r01/self-a.txt",
+      "bytes": 176,
+      "sha256": "b17592e8e76992d9100bdee649eb6740a07505a15daf15cb69366b8281263703"
+    },
+    {
+      "name": "payload/self-b.txt",
+      "remote": "/extender/diagnostics/bbc-basic/c006-r01/self-b.txt",
+      "bytes": 177,
+      "sha256": "681a051c42acdfff40cb5da366ab24859406e6b85d99322aae283a4d2de6aa60"
+    }
+  ],
+  "all_bytes_equal": true,
+  "fixture_manifest_sha256": "05149bd76c5f23f8f6bf97c8db7bde3871e858a1e579a55784f05dd3a84d4787",
+  "finished_epoch": 1793709517.8581827
+}

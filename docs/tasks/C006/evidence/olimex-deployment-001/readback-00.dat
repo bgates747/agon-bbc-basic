@@ -1,0 +1,1 @@
+PRINT "native compiler":END

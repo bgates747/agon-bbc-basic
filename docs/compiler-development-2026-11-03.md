@@ -445,3 +445,32 @@ Canonical reservation ee0ad664f72a is submitted for c006-r01. Durable mailbox
 the exact scope/manifest/plan to Extender. No lease or target access is inferred.
 Correct the plan's sentinel-size transcription to42 bytes, matching actual
 frozen payloads; no payload or manifest changes.
+
+Extender07-31-52 explicit grant assigns generation7, after fresh canonical
+listener/staged startup+utility reads/EXIT and neutral idle resources. Save the
+immutable grant/config locally, assert current token for every operation, and
+independently verify input/listener/worker. Maintained joined-control capture,
+VDU2 and fresh BBC_C006_ENTRY_R01 sentinel prove actual Legacy CLI. Fresh MEM:
+USER:LO040000..0BBFFF, MOSdata0BC000..0BD05C, heap0BD05D..0BF7FF,
+stack24 at0BF800..0BFFFF/2048B, compatible with the compiler's below0B0000
+allocations. This does not measure stack high-water. Preserve actual incoming
+directory/mode and components. Explicitly start canonical major2 listener,
+create only fresh BBC roots, begin sequential40-file upload/readback verification
+through deploy_olimex.py and maintained one-operation helper. No workload yet.
+
+All40 independent readbacks pass in242.466 deployment seconds. Fresh listener
+EXIT/offline returns actual CLI (with the documented SD service stopped line).
+One overly strict host string assertion omitted that known line; actual raw
+console positively shows the current CLI. Preserve it and use the complete
+observed framing in subsequent guards; no target failure or replay occurred.
+Invoke compile0 exactly once through normal source/output prompts; retrieve its
+251-byte output and compare every byte equal. Invoke run0 exactly once; actual
+native compiler text and normal batch/listener return match. Freeze entry/MEM,
+all40 readbacks and these two partial results in olimex-deployment-001.
+
+The one-stage observer is checked against both retained actual case0 windows,
+then compile1 passes with its complete6447-byte output equal. Its exact known
+mode records are removed only for text comparison, while raw capture is retained.
+The bounded small coordinator starts remaining compile2..11/run1..9, requiring
+each child's actual passed result before proceeding. No self-source or retry/
+cleanup is included. Physical qualification is not yet complete.

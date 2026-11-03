@@ -1,0 +1,9 @@
+{
+  "scope": "Actual Olimex owner entry, memory and forty independent deployment readbacks; first manually observed compile/run0 also pass",
+  "hardware_validation": true,
+  "complete_physical_cohort": false,
+  "startup_firmware_mode_changes": false,
+  "capture_and_private_grant_location": "docs/tasks/C006/build/physical-c006-r01",
+  "deployment_seconds": 242.466,
+  "physical_self_compilation": false
+}
