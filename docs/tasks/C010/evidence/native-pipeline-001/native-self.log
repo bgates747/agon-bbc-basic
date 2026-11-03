@@ -1,0 +1,46 @@
+NATIVE_BUILD_ACTIVE native-self-001 30.0 0
+NATIVE_BUILD_ACTIVE native-self-001 60.0 0
+NATIVE_BUILD_ACTIVE native-self-001 90.0 0
+NATIVE_BUILD_ACTIVE native-self-001 120.0 0
+NATIVE_BUILD_ACTIVE native-self-001 150.0 0
+NATIVE_BUILD_ACTIVE native-self-001 180.0 0
+NATIVE_BUILD_ACTIVE native-self-001 210.0 0
+NATIVE_BUILD_ACTIVE native-self-001 240.0 0
+NATIVE_BUILD_ACTIVE native-self-001 270.0 0
+NATIVE_BUILD_ACTIVE native-self-001 300.0 0
+NATIVE_BUILD_ACTIVE native-self-001 330.0 0
+NATIVE_BUILD_ACTIVE native-self-001 360.0 0
+NATIVE_BUILD_ACTIVE native-self-001 390.0 0
+NATIVE_BUILD_ACTIVE native-self-001 420.0 0
+NATIVE_BUILD_ACTIVE native-self-001 450.0 0
+NATIVE_BUILD_ACTIVE native-self-001 480.0 0
+NATIVE_BUILD_ACTIVE native-self-001 510.0 0
+NATIVE_BUILD_ACTIVE native-self-001 540.0 0
+NATIVE_BUILD_ACTIVE native-self-001 570.0 0
+NATIVE_BUILD_ACTIVE native-self-001 600.0 0
+NATIVE_BUILD_ACTIVE native-self-001 630.0 0
+NATIVE_BUILD_ACTIVE native-self-001 660.0 0
+NATIVE_BUILD_ACTIVE native-self-001 690.0 0
+NATIVE_BUILD_ACTIVE native-self-001 720.0 0
+NATIVE_BUILD_ACTIVE native-self-001 750.0 0
+NATIVE_BUILD_ACTIVE native-self-001 780.0 0
+NATIVE_BUILD_ACTIVE native-self-001 810.0 0
+NATIVE_BUILD_ACTIVE native-self-001 840.0 0
+NATIVE_BUILD_ACTIVE native-self-001 870.0 0
+NATIVE_BUILD_ACTIVE native-self-001 900.0 0
+NATIVE_BUILD_ACTIVE native-self-001 930.0 0
+NATIVE_BUILD_ACTIVE native-self-001 960.0 0
+NATIVE_BUILD_ACTIVE native-self-001 990.0 0
+{"scope": "Actual supplied native compiler self-compiles the exact BBC candidate", "compiler_source_sha256": "13c2a48802718040b1056921b1aedea3e5da9f6f36e946d990ccf36be92396b9", "seed_sha256": "a59160c44784dfb37e0606145e5cbcdb35c390651377e6162cffab03ded592ba", "cli_sha256": "63d22f604af13317cf6532911b9206ac03e7b4f9ed257f93924a65d551646d8e", "completed": false, "interrupted_by_signal": 15, "failure": "InterruptedError('Controller received signal 15')", "controller_seconds": 992.631}
+Traceback (most recent call last):
+  File "/Agon/mystuff/bbc-basic-v-adl/docs/tasks/C010/bootstrap_native.py", line 58, in <module>
+    log = k.run(PROFILE,
+        'load /c010-bootstrap.bin\nrun .\necho C010_BOOT_DONE\n',
+        [('Source file: ', 'c010-self-source.bas'), ('Output file: ', 'c010-newcompiler.bin')],
+        'C010_BOOT_DONE', 'c010-bootstrap.log', timeout_seconds=args.timeout)
+  File "/Agon/mystuff/bbc-basic-v-adl/docs/tasks/C005/io/interactive.py", line 32, in run
+    time.sleep(0.1)
+    ~~~~~~~~~~^^^^^
+  File "/Agon/mystuff/bbc-basic-v-adl/docs/tasks/C010/bootstrap_native.py", line 45, in interrupted
+    raise InterruptedError(f'Controller received signal {signum}')
+InterruptedError: Controller received signal 15

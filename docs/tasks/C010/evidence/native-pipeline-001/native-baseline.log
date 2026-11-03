@@ -1,0 +1,93 @@
+Retained harness SHA256 248fbe6a50e3ee5eb7bdb4b0d9fe84cb826c7de6fb0438264f46ce8a5a6f4c8e
+Native baseline equivalence 0 passed
+Native baseline equivalence 1 passed
+Native baseline equivalence 2 passed
+Native baseline equivalence 3 passed
+Native baseline equivalence 4 passed
+Native baseline equivalence 5 passed
+Native baseline equivalence 6 passed
+Native baseline equivalence 7 passed
+Native baseline equivalence 8 passed
+Native baseline equivalence 9 passed
+Native baseline equivalence 10 passed
+Native baseline equivalence 11 passed
+Native baseline equivalence 12 passed
+Native baseline equivalence 13 passed
+Native baseline equivalence 14 passed
+Native baseline equivalence 15 passed
+Native baseline equivalence 16 passed
+Native baseline equivalence 17 passed
+Native baseline equivalence 18 passed
+Native baseline equivalence 19 passed
+Native baseline equivalence 20 passed
+Native baseline equivalence 21 passed
+Native baseline equivalence 22 passed
+Native baseline equivalence 23 passed
+Native baseline equivalence 24 passed
+Native baseline equivalence 25 passed
+Native baseline equivalence 26 passed
+Native baseline equivalence 27 passed
+Native baseline equivalence 28 passed
+Native baseline equivalence 29 passed
+Native baseline equivalence 30 passed
+Native baseline equivalence 31 passed
+Native baseline equivalence 32 passed
+Native baseline equivalence 33 passed
+Native baseline equivalence 34 passed
+Native baseline equivalence 35 passed
+Native baseline equivalence 36 passed
+Native baseline equivalence 37 passed
+Native baseline equivalence 38 passed
+{
+  "native_compiler_sha256": "a59160c44784dfb37e0606145e5cbcdb35c390651377e6162cffab03ded592ba",
+  "reference_directory": "/Agon/mystuff/bbc-basic-v-adl/docs/tasks/C010/evidence/hosted-baseline-001",
+  "reference_compiler_sha256": "13c2a48802718040b1056921b1aedea3e5da9f6f36e946d990ccf36be92396b9",
+  "completed_cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38
+  ],
+  "images_matched": 15,
+  "diagnostics_matched": 24,
+  "hardware_validation": false,
+  "scope": "Native compiler output equivalence; reference cohort owns runtime execution",
+  "attempted_case": 38,
+  "all_cases_passed": true,
+  "controller_seconds": 410.516
+}

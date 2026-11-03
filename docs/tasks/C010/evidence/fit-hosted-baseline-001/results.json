@@ -1,0 +1,14 @@
+{
+  "cases": 39,
+  "native_executions": 15,
+  "deterministic_repeat": true,
+  "assembler_oracle": true,
+  "duration_seconds": 107.19,
+  "basic_sha256": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+  "compiler_sha256": "ac24edae2cb2197e3cddaeaa014a3b3d9c27ce8e655304fcf3cceda93069bdfb",
+  "cli_sha256": "63d22f604af13317cf6532911b9206ac03e7b4f9ed257f93924a65d551646d8e",
+  "mos_sha256": "d564243283972690933a4554296ad6202ca4ef54572279533a942960846bebae",
+  "all_15_complete_images_identical_to_earlier_source": true,
+  "all_24_diagnostics_and_preserved_outputs_match": true,
+  "prior_cohort": "docs/tasks/C005/evidence/live-baseline-streaming-001"
+}

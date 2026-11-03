@@ -1,0 +1,3 @@
+PRINT "";:PRINT "x";"y"
+PRINT
+END

@@ -1,0 +1,416 @@
+{
+  "source_sha256": "ac24edae2cb2197e3cddaeaa014a3b3d9c27ce8e655304fcf3cceda93069bdfb",
+  "original_source_sha256": "13c2a48802718040b1056921b1aedea3e5da9f6f36e946d990ccf36be92396b9",
+  "combined_pairs": 26,
+  "changes": [
+    {
+      "kind": "zero_assignment",
+      "text": ":ndepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":sdepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":valuekind%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":ndepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":sdepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": "1946 ndepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":sdepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":ndepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":ndepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":ndepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":valuekind%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":valuekind%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": "6220 ndepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":ndepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":valuekind%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":valuekind%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":valuekind%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":valuekind%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": "8950 ndepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":sdepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": "9170 ndepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":sdepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":ndepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": "11290 ndepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":ndepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": "13700 ndepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":sdepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":ndepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":sdepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":ndepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":sdepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":ndepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":sdepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": "16538 valuekind%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":ndepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":sdepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":ndepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":sdepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": "16554 ndepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":sdepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": "16582 ndepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":sdepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":ndepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": "16620 ndepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":sdepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":ndepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": "16638 valuekind%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": "16670 valuekind%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":valuekind%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":valuekind%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": "16704 ndepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":sdepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":ndepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":sdepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": "16724 ndepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":sdepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":valuekind%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":valuekind%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":ndepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":sdepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":ndepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":ndepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":sdepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":ndepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":ndepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":sdepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":ndepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":sdepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":sdepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": "18054 ndepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":sdepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":ndepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":sdepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": "19074 ndepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":sdepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":ndepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":sdepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": "19646 ndepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":sdepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":ndepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": "19666 ndepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": "19674 ndepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":sdepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":ndepth%=0"
+    },
+    {
+      "kind": "zero_assignment",
+      "text": ":valuekind%=0"
+    },
+    {
+      "kind": "equal_index_sfix",
+      "text": "PROCnumoperation(ndepth%-1,ndepth%-1,38)"
+    },
+    {
+      "kind": "equal_index_sfix",
+      "text": "PROCnumoperation(ndepth%-1,ndepth%-1,38)"
+    },
+    {
+      "kind": "equal_index_sfix",
+      "text": "PROCnumoperation(0,0,38)"
+    },
+    {
+      "kind": "equal_index_sfix",
+      "text": "PROCnumoperation(ndepth%-1,ndepth%-1,38)"
+    },
+    {
+      "kind": "equal_index_sfix",
+      "text": "PROCnumoperation(1,1,38)"
+    },
+    {
+      "kind": "equal_index_sfix",
+      "text": "PROCnumoperation(ndepth%-1,ndepth%-1,38)"
+    },
+    {
+      "kind": "equal_index_sfix",
+      "text": "PROCnumoperation(0,0,38)"
+    },
+    {
+      "kind": "equal_index_sfix",
+      "text": "PROCnumoperation(p%,p%,38)"
+    },
+    {
+      "kind": "equal_index_sfix",
+      "text": "PROCnumoperation(ndepth%-1,ndepth%-1,38)"
+    },
+    {
+      "kind": "equal_index_sfix",
+      "text": "PROCnumoperation(ndepth%-1,ndepth%-1,38)"
+    },
+    {
+      "kind": "equal_index_sfix",
+      "text": "PROCnumoperation(0,0,38)"
+    },
+    {
+      "kind": "equal_index_sfix",
+      "text": "PROCnumoperation(1,1,38)"
+    },
+    {
+      "kind": "equal_index_sfix",
+      "text": "PROCnumoperation(ndepth%-1,ndepth%-1,38)"
+    },
+    {
+      "kind": "equal_index_sfix",
+      "text": "PROCnumoperation(1,1,38)"
+    },
+    {
+      "kind": "equal_index_sfix",
+      "text": "PROCnumoperation(s%,s%,38)"
+    },
+    {
+      "kind": "equal_index_sfix",
+      "text": "PROCnumoperation(0,0,38)"
+    },
+    {
+      "kind": "equal_index_sfix",
+      "text": "PROCnumoperation(ndepth%-1,ndepth%-1,38)"
+    }
+  ],
+  "scope": "Private compiler implementation factoring; no runtime/numeric representation or language change"
+}

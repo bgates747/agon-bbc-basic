@@ -119,3 +119,38 @@ recorded evidence and an explicit live promotion identify exact versions.
    the same qualified seed and candidate with progress heartbeats and signal
    capture. The native pipeline uses separate owned profiles for self-building
    and serial regressions. Only completed evidence can satisfy promotion gates.
+
+## Actual self-hosting fit blocker and private factoring
+
+1. `native-build-003` completes in2261.251 controller seconds, producing329054
+   bytes/SHA a59160c4 from13c2a488. Complete GNU runtime/entry/adapter checks
+   pass. This compiler's normal prompts emit the unchanged18329-byte Mandelbrot
+   image bad741db. Native baseline39, representative12 and all18 graphics/key
+   pairs pass; the representative ten complete images match C006's old images.
+2. The image grows4779 bytes and leaves96674 heap bytes. C005 recorded97366
+   mandatory/observed self-source bytes before remaining overhead. Actual
+   `native-self-001` reports `No room at line19216`, storing a new symbol name.
+   MOS aborts autoexec before the controller's completion marker. After verifying
+   this failure and the exact owned process arguments, send SIGTERM only to the
+   waiting controller so it freezes the failure and closes its idle emulator.
+   `self-fit-block-001` records that deliberate post-failure stop. The failed
+   native pipeline retains its successful earlier stages without claiming
+   self-hosting or promotion. No SD-card fault is inferred from MOS status text.
+3. `growth-001` is a failed measurement fixture (missing PROClabel stub), not a
+   feature failure. Corrected `growth-002` measures3642 additional native body
+   bytes with constant stubs; the actual full329054-byte image owns fit evidence.
+4. `make_fit_candidate.py` factors85 assignment-position counter/type resets,
+   combines26 adjacent reset pairs and factors17 pure equal-index SFIX calls.
+   Conditions are retained; the helper uses existing i% and existing typed
+   fields. It changes compiler implementation code, not its runtime modules,
+   numeric representation, language features or resource limits. Three reset
+   helpers assign standard FALSE, integer0, to `%` fields. User decimal literals
+   continue through the reference reader; target emission must remain identical.
+5. Initial ac24edae (`fit-refactor-001`) preserves all15 whole baseline images,
+   24 diagnostics and all12 unsupported-form outputs, and emits the same full
+   Mandelbrot binary. The helper-only typed-zero refinement b8afbfdb is frozen
+   separately in the fresh build input. `fit-hosted-baseline-002` and
+   `fit-admissions-002` qualify that exact source with the same image/diagnostic
+   equalities. `fit-repack-001` preserves its exact source under all ten packers
+   and verifies unchanged nine runtime templates. Its native build and new
+   self-fit/behavioral qualification remain separate gates.

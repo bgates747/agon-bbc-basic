@@ -1,0 +1,14 @@
+Warning: unused arguments left: ["--firmware", "platform"].
+Tom's Fake VDP Version 1.03
+unknown packet VDU 0x17, 0, 0xf8
+unknown packet VDU 0x17, 0, 0x99
+uunknown packet VDU 0x17, 0, 0x94
+
+Agon Platform MOS Version 3.0.2 Arthur
+
+Source file: t22.bas
+Output file: nbaseline-22.bin
+t22.bas:1:5: EVAL is deliberately unsupported
+NBASE_STATUS:0
+NBASE_DONE_22
+/ *

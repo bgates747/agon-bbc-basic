@@ -1,0 +1,7 @@
+{
+  "scope": "Initial private factoring variant, before typed-zero helper spelling refinement",
+  "source_sha256": "ac24edae2cb2197e3cddaeaa014a3b3d9c27ce8e655304fcf3cceda93069bdfb",
+  "hosted_baseline": "fit-hosted-baseline-001",
+  "admissions": "fit-admissions-001",
+  "target_program_images_unchanged": true
+}

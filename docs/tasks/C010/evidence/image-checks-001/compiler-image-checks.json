@@ -1,0 +1,35 @@
+{
+  "image_sha256": "a59160c44784dfb37e0606145e5cbcdb35c390651377e6162cffab03ded592ba",
+  "image_bytes": 329054,
+  "complete_standard_runtimes_and_entry_checked": true,
+  "compact_base": 588441,
+  "compact_bytes": 394,
+  "compact_PIC_matches_GNU": true,
+  "external_fields": {
+    "cp_num_base": 539780,
+    "cp_str_base": 589510,
+    "cp_slot_numeric": 535964,
+    "cp_slot_numerror": 539805,
+    "cp_slot_literal": 535320,
+    "cp_slot_novar": 540981,
+    "cp_slot_prefix": 590634,
+    "cp_slot_addr": 590620,
+    "cp_slot_memerror": 591012,
+    "cp_slot_save": 551134,
+    "cp_slot_bind": 551382,
+    "cp_slot_begin": 551124,
+    "cp_slot_acterror": 551897
+  },
+  "independently_anchored_export_fields": [
+    "cp_slot_numeric",
+    "cp_slot_literal",
+    "cp_slot_prefix",
+    "cp_slot_addr",
+    "cp_slot_save",
+    "cp_slot_bind",
+    "cp_slot_begin"
+  ],
+  "other_checks": "two zeroed-pool ranges, four compiled-error-wrapper ranges, STR adjacency",
+  "native_execution_performed": false,
+  "scope": "Machine-image qualification; native behavioral/generation tests remain separate"
+}

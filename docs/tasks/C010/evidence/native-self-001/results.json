@@ -1,0 +1,10 @@
+{
+  "scope": "Actual supplied native compiler self-compiles the exact BBC candidate",
+  "compiler_source_sha256": "13c2a48802718040b1056921b1aedea3e5da9f6f36e946d990ccf36be92396b9",
+  "seed_sha256": "a59160c44784dfb37e0606145e5cbcdb35c390651377e6162cffab03ded592ba",
+  "cli_sha256": "63d22f604af13317cf6532911b9206ac03e7b4f9ed257f93924a65d551646d8e",
+  "completed": false,
+  "interrupted_by_signal": 15,
+  "failure": "InterruptedError('Controller received signal 15')",
+  "controller_seconds": 992.631
+}

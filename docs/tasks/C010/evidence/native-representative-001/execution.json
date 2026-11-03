@@ -1,0 +1,19 @@
+{
+  "retained_harness": "docs/tasks/C006/regressions.py",
+  "retained_harness_sha256": "cbf8bcfd2c80a3392cc7c5bc8e5f723b2d4899ec31568ce237a817eca5920bbe",
+  "observer_sha256": "63d22f604af13317cf6532911b9206ac03e7b4f9ed257f93924a65d551646d8e",
+  "compiler_source_sha256": "13c2a48802718040b1056921b1aedea3e5da9f6f36e946d990ccf36be92396b9",
+  "identical_representative_full_images": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "scope": "Original C006 assertions with explicit C010 destination/profile selection"
+}

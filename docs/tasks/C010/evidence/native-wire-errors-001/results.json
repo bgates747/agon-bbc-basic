@@ -1,0 +1,76 @@
+{
+  "scope": "Actual CPU UART stream parity; protocol peer, no renderer or human validation",
+  "compiler_source_sha256": "13c2a48802718040b1056921b1aedea3e5da9f6f36e946d990ccf36be92396b9",
+  "reference_sha256": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+  "observer_sha256": "63d22f604af13317cf6532911b9206ac03e7b4f9ed257f93924a65d551646d8e",
+  "mos_sha256": "d564243283972690933a4554296ad6202ca4ef54572279533a942960846bebae",
+  "suite": "errors",
+  "cases": [
+    {
+      "name": "gcol-first-overflow",
+      "equal": true,
+      "reference_hex": "32303a33300d0a4e756d62657220746f6f206269670d0a",
+      "native_hex": "32303a33300d0a4e756d62657220746f6f206269670d0a",
+      "image_bytes": 20176
+    },
+    {
+      "name": "gcol-second-overflow",
+      "equal": true,
+      "reference_hex": "4132303a33300d0a4e756d62657220746f6f206269670d0a",
+      "native_hex": "4132303a33300d0a4e756d62657220746f6f206269670d0a",
+      "image_bytes": 20176
+    },
+    {
+      "name": "plot-first-overflow",
+      "equal": true,
+      "reference_hex": "32303a33300d0a4e756d62657220746f6f206269670d0a",
+      "native_hex": "32303a33300d0a4e756d62657220746f6f206269670d0a",
+      "image_bytes": 20263
+    },
+    {
+      "name": "plot-second-overflow",
+      "equal": true,
+      "reference_hex": "4132303a33300d0a4e756d62657220746f6f206269670d0a",
+      "native_hex": "4132303a33300d0a4e756d62657220746f6f206269670d0a",
+      "image_bytes": 20263
+    },
+    {
+      "name": "plot-third-overflow",
+      "equal": true,
+      "reference_hex": "414132303a33300d0a4e756d62657220746f6f206269670d0a",
+      "native_hex": "414132303a33300d0a4e756d62657220746f6f206269670d0a",
+      "image_bytes": 20263
+    },
+    {
+      "name": "mode-overflow",
+      "equal": true,
+      "reference_hex": "32303a33300d0a4e756d62657220746f6f206269670d0a",
+      "native_hex": "32303a33300d0a4e756d62657220746f6f206269670d0a",
+      "image_bytes": 20127
+    },
+    {
+      "name": "mode-expression-error",
+      "equal": true,
+      "reference_hex": "31383a33300d0a4469766973696f6e206279207a65726f0d0a",
+      "native_hex": "31383a33300d0a4469766973696f6e206279207a65726f0d0a",
+      "image_bytes": 20149
+    },
+    {
+      "name": "gcol-expression-error",
+      "equal": true,
+      "reference_hex": "31383a33300d0a4469766973696f6e206279207a65726f0d0a",
+      "native_hex": "31383a33300d0a4469766973696f6e206279207a65726f0d0a",
+      "image_bytes": 20193
+    },
+    {
+      "name": "keyboard-escape",
+      "equal": true,
+      "reference_hex": "433031305f574149540d0a31373a32300d0a4573636170650d0a",
+      "native_hex": "433031305f574149540d0a31373a32300d0a4573636170650d0a",
+      "image_bytes": 19766
+    }
+  ],
+  "completed": true,
+  "native_compiler_sha256": "a59160c44784dfb37e0606145e5cbcdb35c390651377e6162cffab03ded592ba",
+  "controller_seconds": 138.651
+}

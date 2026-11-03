@@ -1,0 +1,18 @@
+{
+  "seed_sha256": "299a31190c380541a73ed9eb144a303fa37abccc4f3c3e0ad47f99f1538122c0",
+  "compiler_source_sha256": "13c2a48802718040b1056921b1aedea3e5da9f6f36e946d990ccf36be92396b9",
+  "completed": true,
+  "images": {
+    "empty": {
+      "bytes": 17198,
+      "numeric_offset": 951
+    },
+    "bodies": {
+      "bytes": 21357,
+      "numeric_offset": 4593
+    }
+  },
+  "body_code_delta": 3642,
+  "image_delta": 4159,
+  "scope": "Actual compiler size probe; full-image and native fit checks remain authoritative"
+}

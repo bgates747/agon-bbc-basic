@@ -1,0 +1,28 @@
+10 ndepth%=0:sdepth%=0:valuekind%=0:w$="":n$="":s$="":i%=0:j%=0:n%=0
+20 PROCbyte(0):FOR q%=0 TO 0:NEXT:END
+1000 DEF PROCexpr(a%):ENDPROC
+1010 DEF PROCneednumber:ENDPROC
+1020 DEF PROCnumoperation(a%,b%,c%):ENDPROC
+1030 DEF PROCaddr(a$,b$):ENDPROC
+1040 DEF PROCbyte(a%):ENDPROC
+1050 DEF PROCbytes(a$):ENDPROC
+1060 DEF PROCcharacter(a%):ENDPROC
+1070 DEF PROCspace:ENDPROC
+1080 DEF PROCexpect(a$):ENDPROC
+1090 DEF PROCbad(a$):ENDPROC
+1100 DEF PROCnumslot:ENDPROC
+1110 DEF PROCerrorconstant(a%,a$):ENDPROC
+1120 DEF FNpeek=""
+1130 DEF FNflow=""
+1140 DEF PROClabel(a$):ENDPROC
+1500 DEF PROCdispatch
+1510 REM baseline
+1520 ENDPROC
+1530 DEF PROCitemdispatch
+1540 REM baseline
+1550 ENDPROC
+19630 DEF PROCgraphicarg:ENDPROC
+19634 DEF PROCgraphicbyte(i%,j%):ENDPROC
+19640 DEF PROCgraphics(w$):ENDPROC
+19670 DEF PROCmode:ENDPROC
+19680 DEF PROCkeyvalue:ENDPROC

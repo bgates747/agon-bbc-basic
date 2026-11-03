@@ -1,0 +1,14 @@
+{
+  "compile.log": "3ded31f6cbf879e4fb5bc30445c08e3f5bdafbe31e06da50a937d08203f85ca8",
+  "mandelbrot-bounded-native-body.dat": "eb8fd4a57ded554f5e8d7f3b9e53dd49205815e1e8e60173e058e1743cd5ae46",
+  "mandelbrot-bounded-native-wire.dat": "15bcecc9dce9c610633af22e480f0797ca4fbaaa3e0d60411968e0b33469cabb",
+  "mandelbrot-bounded-native.log": "3efe9d471ee6ec427680425b845256e64947d5a7011747f874b1409463c35f3a",
+  "mandelbrot-bounded-reference-body.dat": "eb8fd4a57ded554f5e8d7f3b9e53dd49205815e1e8e60173e058e1743cd5ae46",
+  "mandelbrot-bounded-reference-wire.dat": "e05ffe3bf750b37b132dc751ef6f4af3679cffd542e232ee5a4cc32bda84e5d0",
+  "mandelbrot-bounded-reference.bas": "d759a9d019a205e66987d8e334a36b23d881286879ca4292fe33532b3b701d6c",
+  "mandelbrot-bounded-reference.log": "51f796ce4b2368bb6a8909da17e0c061d9e44a1889d58b2e80eae4641906f4e6",
+  "mandelbrot-bounded.bas": "656d696bd0513d268bdcb230229730c678e95254d438ef904a5c09f0e4757253",
+  "mandelbrot-bounded.dat": "785287074f4b8de5d9b7874b26f7627dc1602c22a3d62144cbd83c1f52cbb3f8",
+  "qualify_wire.py": "eb1120c09352c9ba7e1155a97e557c20ea11c125b717adf54c1568610b1a495b",
+  "results.json": "b3098c78721ff1c9df8a6bc82099d5c4a7f8e4b9795a271b38f47890548e03de"
+}

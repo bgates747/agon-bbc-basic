@@ -1,0 +1,10 @@
+{
+  "scope": "Actual previous qualified native compiler compiles the new BBC source",
+  "compiler_source_sha256": "13c2a48802718040b1056921b1aedea3e5da9f6f36e946d990ccf36be92396b9",
+  "seed_sha256": "299a31190c380541a73ed9eb144a303fa37abccc4f3c3e0ad47f99f1538122c0",
+  "cli_sha256": "63d22f604af13317cf6532911b9206ac03e7b4f9ed257f93924a65d551646d8e",
+  "completed": true,
+  "image_sha256": "a59160c44784dfb37e0606145e5cbcdb35c390651377e6162cffab03ded592ba",
+  "image_bytes": 329054,
+  "controller_seconds": 2261.251
+}

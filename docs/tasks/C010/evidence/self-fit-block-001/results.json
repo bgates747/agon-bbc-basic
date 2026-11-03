@@ -1,0 +1,12 @@
+{
+  "reason": "Actual self-source run reports No room and returns to MOS; completion marker cannot follow aborted autoexec",
+  "compiler_source_sha256": "13c2a48802718040b1056921b1aedea3e5da9f6f36e946d990ccf36be92396b9",
+  "native_image_sha256": "a59160c44784dfb37e0606145e5cbcdb35c390651377e6162cffab03ded592ba",
+  "native_bytes": 329054,
+  "heap_bytes": 96674,
+  "prior_observed_mandatory_lower_bound": 97366,
+  "owned_controller_pid": 37886,
+  "signal": "SIGTERM",
+  "sent_at": "2026-11-03T23:04:44.484960+00:00",
+  "scope": "Stop owned waiting controller/idle emulator after actual failure; no successful self-build inferred"
+}

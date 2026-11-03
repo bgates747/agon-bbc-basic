@@ -39,6 +39,18 @@ and continuing implementation. C008 manual results remain pending; C009 is a
 low-priority possible feature only. Prior qualification below remains tied to
 its exact older source/image until new evidence is recorded.
 
+C010's13c2a488 prototype emits the unchanged18329-byte Mandelbrot image bad741db;
+actual full reference/native CPU runs match all2959501 graphics bytes/328833
+plots. Its329054-byte native image a59160c4 passes native baseline39,
+representative12 and18 new graphics/key pairs, but actual self-source reports
+No room (native-self-001/self-fit-block-001). It is not promoted. The selected
+fit experiment is C010/candidate-fit.bas, SHA b8afbfdb51de803e7c8e670d4c00e434371e3f2d0af4ce354ce29f3580cdd875;
+it factors private bookkeeping with unchanged target images. Fresh hosted39/
+admissions/repacking pass; fit-native-build-001 and fit_pipeline.py own pending
+native/self-fit qualification. See C010/AUDIT.md. Live source/bin remain the
+older qualified versions below. The staged Oryx mandelbrot-c010.bin is exact
+bad741db; its visual result remains pending, and no Oryx emulator was controlled.
+
 1. C001–C005 and C007 have completed their initial scopes. C005's language,
    streaming/resource and compact-runtime work is promoted. Live source SHA:
    `6597a0df3f99b4f43c42bff1cdbc59f5fdf730c57837f3d4112a598fbfbe5fb8`.

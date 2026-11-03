@@ -878,3 +878,55 @@ observations with a protocol-only peer, not a paired performance benchmark.
 Neither renders pixels; the Author's newly staged native visual result remains
 pending. Root compiler/source are still the older qualified version while the
 fresh native build and its automatically sequenced native qualification proceed.
+
+C010 native-build-003 completes2261.251 controller seconds:329054 bytes,
+SHA a59160c44784dfb37e0606145e5cbcdb35c390651377e6162cffab03ded592ba.
+Complete GNU runtime/entry/compact checks pass. Native normal-prompt Mandelbrot
+compilation yields the exact18329-byte/bad741db image. Native baseline39,
+representative12 and18 fresh reference/native graphics/key pairs pass; all ten
+representative full images also equal their C006 counterparts. These successes
+remain bound to source13c2a488 and do not establish native self-source fit.
+
+Actual native-self-001 reports No room at source line19216, the symbol-name
+store, then returns to MOS with autoexec aborted before its final echo. The
+329054-byte image's96674-byte heap is already below C005's97366 mandatory/
+observed lower bound before new metadata and allocator overhead. The controller
+is waiting after the program has failed; verify its exact owned argv and the
+actual No room log, then send it SIGTERM to freeze evidence and close its idle
+CLI. self-fit-block-001 records this intentional post-failure action. The native
+pipeline correctly remains failed, with eight successful stages and no self
+success. The live6597a0df/299a3119 source/image remain unchanged.
+
+A size-only fixture growth-001 initially lacks a PROClabel stub and rejects;
+preserve that fixture failure. Corrected growth-002 measures3642 body-code bytes
+with constant stubs, while the actual complete image increase is4779. The full
+image and actual failed self-source own the resource decision.
+
+Scope C010's necessary compiler-private fit work explicitly. make_fit_candidate.py
+mechanically factors85 assignment-position zero resets (not comparisons),26
+adjacent depth-reset pairs and17 pure equal-index SFIX calls. It reuses existing
+variable names and preserves all resource capacities, runtime modules, language
+and numeric representations. Initial ac24edae is retained in fit-refactor-001;
+its hosted39 and12 rejection checks pass and it emits the same Mandelbrot image.
+The selected b8afbfdb revision spells the three typed counter resets as standard
+FALSE/integer0; ordinary source decimal readers are unchanged. Its fresh hosted
+39 cases/15 executions, GNU oracle, repeat and all24 diagnostics preserve exact
+earlier images/outputs (fit-hosted-baseline-002,45.012s). fit-admissions-002 also
+emits exact bad741db and preserves all12 rejected outputs (84.114s). The initial
+ac24 timings107.190s/150.399s are separate observations, not benchmark evidence.
+
+fit-repack-001 reproduces exact b8afbfdb after all ten packers and verifies all
+nine unchanged runtime templates. Its old-native build and fit pipeline use
+separate canonical c010-fit-build/c010-fit profiles. The fit self controller
+also detects fatal/aborted-autoexec output, avoiding a wait for an impossible
+marker. Native fit is still an actual-execution gate; the source refactor alone
+is not a successful self-build. No live promotion, package replacement, rendered
+result or new physical operation has occurred.
+
+The selected b8afbfdb source completes all18 fresh reference/native graphics/key
+pairs in fit-wire-basic-001, fit-wire-bounded-001, fit-wire-errors-001 and
+fit-wire-interactions-001. These preserve the initial prototype's complete
+program images/streams and all local/error/input behavior; rendered acceptance
+remains separate. Its native seed build continues with frozen exact source in
+fit-native-build-001; fit-native-pipeline-001 waits for that completed image.
+The native image/self-source fit remains unclaimed until actual execution.
