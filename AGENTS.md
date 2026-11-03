@@ -114,3 +114,11 @@ arrays use bounded existing byte types (19968 native element bytes saved). Smoke
 consumers2 in86.522s and baseline39/15 in86.246s pass. compact/runtime.s is a separate394-byte/29-relocation native CALL
 adapter, with21-stage ABI and GNU-link proof, not yet integrated. Read compact/ABI.md
 and COMPACTION.md. No native compiler image exists yet.
+
+Compact frontend2f81c6fb is now integrated in the isolated candidate. Nine native
+programs pass122.399s with fresh BBC output, repeat and independent full adapter
+PIC/bridge/map checks; the first failed heap-overlap integration is frozen.
+Module code must precede STR virtual heaps; map checks guard heap/arena overlap.
+Baseline39/15 passes87.971s; all39 source-error cases pass in CORE6/remaining33
+cohorts143.390s/549.218s with fresh ERR/ERL/output, repeat and runtime/entry links.
+No self-source fit on2f81c6fb is yet measured; live compiler remains7cac4bba.

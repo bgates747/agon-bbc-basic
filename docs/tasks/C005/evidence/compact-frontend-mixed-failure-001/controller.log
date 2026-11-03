@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/Agon/mystuff/bbc-basic-v-adl/docs/tasks/C005/compact/test_frontend.py", line 21, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/Agon/mystuff/bbc-basic-v-adl/docs/tasks/C005/compact/test_frontend.py", line 20, in main
+    h.programs=lambda:cases;sys.argv+=['--skip-legacy','--isolate-reference','--string-runtime',str(ROOT/'compiler/build/string-runtime')];h.main();module('links',TASK/'compact/check_images.py').check(TASK/'build/output-integration')
+                                                                                                                                           ~~~~~~^^
+  File "/Agon/mystuff/bbc-basic-v-adl/docs/tasks/C002/tools/test_output.py", line 197, in main
+    report = dict(programs=len(tests), native_executions=sum("diagnostic" not in c for c in tests),
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (2, "'inner\\nouter\\n255:255:255:new\\n255:255:255:Numeric error\\nOUTPUT_STATUS:1\\n'", {'source': 'text$="outer":PROCouter:PRINT text$\nvalue=1.5:whole%=-7:byte&=255:s$="old":PROCtypes(2.5,9.9,257,"new"):PRINT ;value;":";whole%;":";byte&;":";s$\ncopy$="original":PROCslice(copy$):PRINT copy$\nPROCrecursive(4):PRINT ;n%\nEND\nDEF PROCouter:LOCAL text$:text$="inner":PROCsee:ENDPROC\nDEF PROCsee:PRINT text$:ENDPROC\nDEF PROCtypes(value,whole%,byte&,s$):PRINT ;value;":";whole%;":";byte&;":";s$:ENDPROC\nDEF PROCslice(s$):MID$(s$,2,2)="XY":PRINT s$:ENDPROC\nDEF PROCrecursive(n%):PRINT ;n%:IF n%>0 THEN PROCrecursive(n%-1)\nENDPROC\n', 'reference_source': 'text$="outer":PROCouter:PRINT text$\nvalue=1.5:whole%=-7:byte&=255:s$="old":PROCtypes(2.5,9.9,257,"new"):PRINT ;value;":";whole%;":";byte&;":";s$\ncopy$="original":PROCslice(copy$):PRINT copy$\nPROCrecursive(4):PRINT ;n%\n', 'reference_definitions': ['DEF PROCouter:LOCAL text$:text$="inner":PROCsee:ENDPROC', 'DEF PROCsee:PRINT text$:ENDPROC', 'DEF PROCtypes(value,whole%,byte&,s$):PRINT ;value;":";whole%;":";byte&;":";s$:ENDPROC', 'DEF PROCslice(s$):MID$(s$,2,2)="XY":PRINT s$:ENDPROC', 'DEF PROCrecursive(n%):PRINT ;n%:IF n%>0 THEN PROCrecursive(n%-1)', 'ENDPROC'], 'reference': True, 'status': 0, 'procedure_observations': 4, 'expected': 'inner\nouter\n2.5:9:1:new\n1.5:-7:255:old\noXYginal\noriginal\n4\n3\n2\n1\n0\n0\n'})

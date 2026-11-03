@@ -517,3 +517,36 @@ Byte-table558c39a9 baseline39/15 passes86.246s, GNU golden and repeat included.
 Adapter21-stage ABI passes with the same394-byte module; a prepared host-only
 BBC label-map observer will support independent emitted-template/bridge checks
 after integration. That observer has not executed yet.
+
+## BBC frontend uses compact native calls
+
+Prepared f8d46de6 (2244 lines/213 unique definitions/254 static private names)
+connects the394-byte adapters. DIM retains its original HL context call; FOR/DIM
+explicit register uses and err_line remain unchanged. Typed scalar/array2 smoke
+passes54.011s with actual reference output, native execution, repeat, GNU NUM/STR
+and complete adapter PIC/bridge equality through actual BBC-emitted symbol maps.
+No Python source compiler/address calculation is involved. Nine-source scope is
+running; actual source size and native fit remain unproved.
+
+## Integration heap-overlap failure and correction
+
+The f8d46de6 broader batch compiles9 but native mixed PROC values become255 and
+restoration fails. Independent module/bridge bytes still match; actual maps show
+compact base equals scalar string heap&4427B. The virtual heap reserves through
+aliases rather than advancing cpc. Move compact code before STR runtime and its
+workspace; independently reject module/heap/arena overlap in map checks.
+Corrected2f81c6fb nine-source/native cohort passes122.399s against fresh BBC,
+repeat, NUM/STR links and full adapter PIC/bridge equality. The failed images /
+source/maps remain frozen. No arithmetic behavior or numeric oracle changes.
+Full baseline and source-error checks precede another size/fit claim.
+
+## Compact frontend qualification checkpoint
+
+Exact isolated2f81c6fb passes baseline39/15 in87.971s, including deterministic
+repeat and GNU golden. Source-error CORE6 passes143.390s and remaining33 pass
+549.218s: all39 fresh reference outputs and ERR/ERL match, repeat and independent
+runtime/entry links pass. Evidence compact-baseline-001, compact-errors-core-001
+and compact-errors-tail-001 preserves exact compiler/source/runtime identities.
+Two identical consumer inputs shrink complete executables by98 and325 bytes,
+including the394-byte shared adapter; these are size comparisons, not speed
+benchmarks. Actual self-source fit is still unproved and live7cac4bba is unchanged.

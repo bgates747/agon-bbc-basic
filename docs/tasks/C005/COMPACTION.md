@@ -86,3 +86,48 @@ a host-only observer that has the actual BBC compiler write its completed label
 addresses to a map file. It observes tables rather than compiling source or
 calculating addresses on the host. Only its guarded Python preparation has run;
 no map-based frontend qualification is claimed yet.
+
+## Prepared BBC adapter integration
+
+`compact/integrated.bas` SHA f8d46de6 has2244 ordered lines,213 distinct routine
+names and254 static private identifiers. It replaces numeric literals, adjacent
+NUM setup/calls, scalar reads/stores, PROC begin/save/bind and array prefix/address
+setup with native calls and fixed operands. Original FOR/DIM register setup and
+DIM's HL allocation-context ABI stay intact; the existing err_line ABI also stays.
+The additional module has no interpreter state or source execution engine.
+
+Its first two actual-reference/native programs pass54.011s: typed scalars,
+fractional SFIX/byte wrapping and numeric/string arrays. Repeat, GNU NUM/STR
+links and full compact-module PIC/bridge equality pass. BBC itself emits completed
+label maps; Python uses those maps only to verify linked runtime bytes, never to
+compile BASIC or calculate program addresses from source. Exact source, maps and
+links are frozen in `compact-frontend-smoke-001`. The broader nine-source cohort
+is active; no native compiler size/fit is inferred yet.
+
+## Scalar string heap placement corrected
+
+The first f8d46de6 nine-source batch compiles all inputs but fails native mixed
+PROC values/restoration. The module's own bytes and bridges match GNU, but its
+base&4427B equals the scalar string heap start. STR's non-memory-mode heap is
+reserved by aliases without advancing cpc; placing new code after it lets string
+assignments overwrite code. `compact-frontend-mixed-failure-001` retains the
+actual wrong output, all images/maps and source before correction.
+
+Move the adapter before STR runtime/pools/virtual heap, keeping all later workspace
+reservations last. Check adapter end against $sheap and $actbase through the
+actual BBC maps. Corrected2f81c6fb passes nine programs/native executions122.399s
+with actual reference outputs, repeat, GNU NUM/STR and complete adapter PIC /
+bridge equality. This includes mixed numeric/byte/string PROC restoration,
+slot31, string-only omission and expected division/missing-variable/SFIX/bounds
+failures. The full baseline and source-error qualification follow.
+
+## Compact frontend qualification checkpoint
+
+Exact isolated2f81c6fb passes baseline39/15 in87.971s, including deterministic
+repeat and GNU golden. Source-error CORE6 passes143.390s and remaining33 pass
+549.218s: all39 fresh reference outputs and ERR/ERL match, repeat and independent
+runtime/entry links pass. Evidence compact-baseline-001, compact-errors-core-001
+and compact-errors-tail-001 preserves exact compiler/source/runtime identities.
+Two identical consumer inputs shrink complete executables by98 and325 bytes,
+including the394-byte shared adapter; these are size comparisons, not speed
+benchmarks. Actual self-source fit is still unproved and live7cac4bba is unchanged.

@@ -1,0 +1,1 @@
+All nine inputs compile and repeat, but native case2 mixed PROC arguments produces255:255:255 instead of2.5:9:1, then a Numeric error. No complete cohort/GNU-adapter-check pass is claimed. Exact images, maps, actual reference, driver and logs are retained before diagnosis.

@@ -1,0 +1,120 @@
+[
+  {
+    "program": 0,
+    "base": 267540,
+    "bytes": 394,
+    "bridges": {
+      "cp_num_base": {
+        "target": "$v0",
+        "address": 267237
+      },
+      "cp_str_base": {
+        "target": "$s0",
+        "address": 0
+      },
+      "cp_slot_numeric": {
+        "target": "$numop",
+        "address": 263421
+      },
+      "cp_slot_numerror": {
+        "target": "$numerror",
+        "address": 267252
+      },
+      "cp_slot_literal": {
+        "target": "$numlit",
+        "address": 262777
+      },
+      "cp_slot_novar": {
+        "target": "$novar",
+        "address": 267494
+      },
+      "cp_slot_prefix": {
+        "target": "$arrayprefix",
+        "address": 0
+      },
+      "cp_slot_addr": {
+        "target": "$arrayaddr",
+        "address": 0
+      },
+      "cp_slot_memerror": {
+        "target": "$memerror",
+        "address": 0
+      },
+      "cp_slot_save": {
+        "target": "$actsave",
+        "address": 0
+      },
+      "cp_slot_bind": {
+        "target": "$actbind",
+        "address": 0
+      },
+      "cp_slot_begin": {
+        "target": "$actbegin",
+        "address": 0
+      },
+      "cp_slot_acterror": {
+        "target": "$acterror",
+        "address": 0
+      }
+    }
+  },
+  {
+    "program": 1,
+    "base": 270774,
+    "bytes": 394,
+    "bridges": {
+      "cp_num_base": {
+        "target": "$v0",
+        "address": 268518
+      },
+      "cp_str_base": {
+        "target": "$s0",
+        "address": 269524
+      },
+      "cp_slot_numeric": {
+        "target": "$numop",
+        "address": 264702
+      },
+      "cp_slot_numerror": {
+        "target": "$numerror",
+        "address": 268538
+      },
+      "cp_slot_literal": {
+        "target": "$numlit",
+        "address": 264058
+      },
+      "cp_slot_novar": {
+        "target": "$novar",
+        "address": 268780
+      },
+      "cp_slot_prefix": {
+        "target": "$arrayprefix",
+        "address": 270136
+      },
+      "cp_slot_addr": {
+        "target": "$arrayaddr",
+        "address": 270122
+      },
+      "cp_slot_memerror": {
+        "target": "$memerror",
+        "address": 270514
+      },
+      "cp_slot_save": {
+        "target": "$actsave",
+        "address": 0
+      },
+      "cp_slot_bind": {
+        "target": "$actbind",
+        "address": 0
+      },
+      "cp_slot_begin": {
+        "target": "$actbegin",
+        "address": 0
+      },
+      "cp_slot_acterror": {
+        "target": "$acterror",
+        "address": 0
+      }
+    }
+  }
+]

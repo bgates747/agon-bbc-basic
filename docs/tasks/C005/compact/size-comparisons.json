@@ -1,0 +1,23 @@
+{
+  "scope": "Identical input-source strings; actual complete executable sizes, not execution-speed benchmarks",
+  "old_compiler_sha256": "558c39a9656a46c5799a209c957fdfce48a9fafbb93bc08bfe5b50fe9f53a30b",
+  "new_compiler_sha256": "2f81c6fb3987f92973de1a532367ac2e74f3398c2bb361fa336b028e5164cebf",
+  "programs": [
+    {
+      "old_cohort": "byte-tables-consumers-001",
+      "old_program": 0,
+      "new_program": 2,
+      "old_bytes": 17511,
+      "new_bytes": 17413,
+      "saved_bytes": 98
+    },
+    {
+      "old_cohort": "byte-tables-boundary-002",
+      "old_program": 2,
+      "new_program": 3,
+      "old_bytes": 17116,
+      "new_bytes": 16791,
+      "saved_bytes": 325
+    }
+  ]
+}

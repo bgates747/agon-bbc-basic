@@ -1,0 +1,599 @@
+[
+  {
+    "program": 0,
+    "bases": {
+      "numeric": 262747,
+      "strings": 280058,
+      "memory": 280989,
+      "control": 267410,
+      "procedure": 276260,
+      "error": 277134
+    },
+    "arena": 687872,
+    "limit": 720640,
+    "saved_sp_slot": 262743,
+    "depth_slot": 262746,
+    "heap_context": 281903,
+    "data_cursor_entry_reset": false,
+    "error_and_ACT_bridges_checked": true
+  },
+  {
+    "program": 1,
+    "bases": {
+      "numeric": 262724,
+      "strings": 280012,
+      "memory": 281199,
+      "control": 267364,
+      "procedure": 276214,
+      "error": 277088
+    },
+    "arena": 687872,
+    "limit": 720640,
+    "saved_sp_slot": 262720,
+    "depth_slot": 262723,
+    "heap_context": 282113,
+    "data_cursor_entry_reset": false,
+    "error_and_ACT_bridges_checked": true
+  },
+  {
+    "program": 2,
+    "bases": {
+      "numeric": 262659,
+      "strings": 279942,
+      "memory": 280873,
+      "control": 267294,
+      "procedure": 276144,
+      "error": 277018
+    },
+    "arena": 687872,
+    "limit": 720640,
+    "saved_sp_slot": 262655,
+    "depth_slot": 262658,
+    "heap_context": 281787,
+    "data_cursor_entry_reset": false,
+    "error_and_ACT_bridges_checked": true
+  },
+  {
+    "program": 3,
+    "bases": {
+      "numeric": 262798,
+      "strings": 280342,
+      "memory": 281529,
+      "control": 267433,
+      "procedure": 276283,
+      "error": 277418
+    },
+    "arena": 687872,
+    "limit": 720640,
+    "saved_sp_slot": 262794,
+    "depth_slot": 262797,
+    "heap_context": 282443,
+    "data_cursor_entry_reset": false,
+    "error_and_ACT_bridges_checked": true
+  },
+  {
+    "program": 4,
+    "bases": {
+      "numeric": 262652,
+      "strings": 279940,
+      "memory": 280871,
+      "control": 267292,
+      "procedure": 276142,
+      "error": 277016
+    },
+    "arena": 687872,
+    "limit": 720640,
+    "saved_sp_slot": 262648,
+    "depth_slot": 262651,
+    "heap_context": 281785,
+    "data_cursor_entry_reset": false,
+    "error_and_ACT_bridges_checked": true
+  },
+  {
+    "program": 5,
+    "bases": {
+      "numeric": 262911,
+      "strings": 280231,
+      "memory": 281162,
+      "control": 267583,
+      "procedure": 276433,
+      "error": 277307
+    },
+    "arena": 687872,
+    "limit": 720640,
+    "saved_sp_slot": 262907,
+    "depth_slot": 262910,
+    "heap_context": 282076,
+    "data_cursor_entry_reset": false,
+    "error_and_ACT_bridges_checked": true
+  },
+  {
+    "program": 6,
+    "bases": {
+      "numeric": 262682,
+      "strings": 280216,
+      "memory": 281147,
+      "data": 267322,
+      "control": 267556,
+      "procedure": 276406,
+      "error": 277280
+    },
+    "arena": 687872,
+    "limit": 720640,
+    "saved_sp_slot": 262678,
+    "depth_slot": 262681,
+    "heap_context": 282061,
+    "data_cursor_entry_reset": true,
+    "error_and_ACT_bridges_checked": true
+  },
+  {
+    "program": 7,
+    "bases": {
+      "numeric": 262791,
+      "strings": 280343,
+      "memory": 281274,
+      "data": 267431,
+      "control": 267670,
+      "procedure": 276520,
+      "error": 277394
+    },
+    "arena": 687872,
+    "limit": 720640,
+    "saved_sp_slot": 262787,
+    "depth_slot": 262790,
+    "heap_context": 282188,
+    "data_cursor_entry_reset": true,
+    "error_and_ACT_bridges_checked": true
+  },
+  {
+    "program": 8,
+    "bases": {
+      "numeric": 262791,
+      "strings": 280342,
+      "memory": 281273,
+      "data": 267431,
+      "control": 267670,
+      "procedure": 276520,
+      "error": 277394
+    },
+    "arena": 687872,
+    "limit": 720640,
+    "saved_sp_slot": 262787,
+    "depth_slot": 262790,
+    "heap_context": 282187,
+    "data_cursor_entry_reset": true,
+    "error_and_ACT_bridges_checked": true
+  },
+  {
+    "program": 9,
+    "bases": {
+      "numeric": 262822,
+      "strings": 280399,
+      "memory": 281330,
+      "control": 267490,
+      "procedure": 276340,
+      "error": 277475
+    },
+    "arena": 687872,
+    "limit": 720640,
+    "saved_sp_slot": 262818,
+    "depth_slot": 262821,
+    "heap_context": 282244,
+    "data_cursor_entry_reset": false,
+    "error_and_ACT_bridges_checked": true
+  },
+  {
+    "program": 10,
+    "bases": {
+      "numeric": 262857,
+      "strings": 280430,
+      "memory": 281617,
+      "control": 267521,
+      "procedure": 276371,
+      "error": 277506
+    },
+    "arena": 687872,
+    "limit": 720640,
+    "saved_sp_slot": 262853,
+    "depth_slot": 262856,
+    "heap_context": 282531,
+    "data_cursor_entry_reset": false,
+    "error_and_ACT_bridges_checked": true
+  },
+  {
+    "program": 11,
+    "bases": {
+      "numeric": 262703,
+      "strings": 279986,
+      "memory": 280917,
+      "control": 267338,
+      "procedure": 276188,
+      "error": 277062
+    },
+    "arena": 687872,
+    "limit": 720640,
+    "saved_sp_slot": 262699,
+    "depth_slot": 262702,
+    "heap_context": 281831,
+    "data_cursor_entry_reset": false,
+    "error_and_ACT_bridges_checked": true
+  },
+  {
+    "program": 12,
+    "bases": {
+      "numeric": 262791,
+      "strings": 280107,
+      "memory": 281038,
+      "control": 267459,
+      "procedure": 276309,
+      "error": 277183
+    },
+    "arena": 687872,
+    "limit": 720640,
+    "saved_sp_slot": 262787,
+    "depth_slot": 262790,
+    "heap_context": 281952,
+    "data_cursor_entry_reset": false,
+    "error_and_ACT_bridges_checked": true
+  },
+  {
+    "program": 13,
+    "bases": {
+      "numeric": 262619,
+      "strings": 279902,
+      "memory": 280833,
+      "control": 267254,
+      "procedure": 276104,
+      "error": 276978
+    },
+    "arena": 687872,
+    "limit": 720640,
+    "saved_sp_slot": 262615,
+    "depth_slot": 262618,
+    "heap_context": 281747,
+    "data_cursor_entry_reset": false,
+    "error_and_ACT_bridges_checked": true
+  },
+  {
+    "program": 14,
+    "bases": {
+      "numeric": 262551,
+      "strings": 279834,
+      "memory": 280765,
+      "control": 267186,
+      "procedure": 276036,
+      "error": 276910
+    },
+    "arena": 687872,
+    "limit": 720640,
+    "saved_sp_slot": 262547,
+    "depth_slot": 262550,
+    "heap_context": 281679,
+    "data_cursor_entry_reset": false,
+    "error_and_ACT_bridges_checked": true
+  },
+  {
+    "program": 15,
+    "bases": {
+      "numeric": 262551,
+      "strings": 279834,
+      "memory": 280765,
+      "control": 267186,
+      "procedure": 276036,
+      "error": 276910
+    },
+    "arena": 687872,
+    "limit": 720640,
+    "saved_sp_slot": 262547,
+    "depth_slot": 262550,
+    "heap_context": 281679,
+    "data_cursor_entry_reset": false,
+    "error_and_ACT_bridges_checked": true
+  },
+  {
+    "program": 16,
+    "bases": {
+      "numeric": 262566,
+      "strings": 279849,
+      "memory": 280780,
+      "control": 267201,
+      "procedure": 276051,
+      "error": 276925
+    },
+    "arena": 687872,
+    "limit": 720640,
+    "saved_sp_slot": 262562,
+    "depth_slot": 262565,
+    "heap_context": 281694,
+    "data_cursor_entry_reset": false,
+    "error_and_ACT_bridges_checked": true
+  },
+  {
+    "program": 17,
+    "bases": {
+      "numeric": 262677,
+      "strings": 280221,
+      "memory": 281408,
+      "control": 267312,
+      "procedure": 276162,
+      "error": 277297
+    },
+    "arena": 687872,
+    "limit": 720640,
+    "saved_sp_slot": 262673,
+    "depth_slot": 262676,
+    "heap_context": 282322,
+    "data_cursor_entry_reset": false,
+    "error_and_ACT_bridges_checked": true
+  },
+  {
+    "program": 18,
+    "bases": {
+      "numeric": 262952,
+      "strings": 280534,
+      "memory": 281465,
+      "control": 267625,
+      "procedure": 276475,
+      "error": 277610
+    },
+    "arena": 687872,
+    "limit": 720640,
+    "saved_sp_slot": 262948,
+    "depth_slot": 262951,
+    "heap_context": 282379,
+    "data_cursor_entry_reset": false,
+    "error_and_ACT_bridges_checked": true
+  },
+  {
+    "program": 19,
+    "bases": {
+      "numeric": 262666,
+      "strings": 279949,
+      "memory": 280880,
+      "control": 267301,
+      "procedure": 276151,
+      "error": 277025
+    },
+    "arena": 687872,
+    "limit": 720640,
+    "saved_sp_slot": 262662,
+    "depth_slot": 262665,
+    "heap_context": 281794,
+    "data_cursor_entry_reset": false,
+    "error_and_ACT_bridges_checked": true
+  },
+  {
+    "program": 20,
+    "bases": {
+      "numeric": 262740,
+      "strings": 280284,
+      "memory": 281215,
+      "control": 267375,
+      "procedure": 276225,
+      "error": 277360
+    },
+    "arena": 687872,
+    "limit": 720640,
+    "saved_sp_slot": 262736,
+    "depth_slot": 262739,
+    "heap_context": 282129,
+    "data_cursor_entry_reset": false,
+    "error_and_ACT_bridges_checked": true
+  },
+  {
+    "program": 21,
+    "bases": {
+      "numeric": 262804,
+      "strings": 280348,
+      "memory": 281279,
+      "control": 267439,
+      "procedure": 276289,
+      "error": 277424
+    },
+    "arena": 687872,
+    "limit": 720640,
+    "saved_sp_slot": 262800,
+    "depth_slot": 262803,
+    "heap_context": 282193,
+    "data_cursor_entry_reset": false,
+    "error_and_ACT_bridges_checked": true
+  },
+  {
+    "program": 22,
+    "bases": {
+      "numeric": 262541,
+      "strings": 279824,
+      "memory": 280755,
+      "control": 267176,
+      "procedure": 276026,
+      "error": 276900
+    },
+    "arena": 687872,
+    "limit": 720640,
+    "saved_sp_slot": 262537,
+    "depth_slot": 262540,
+    "heap_context": 281669,
+    "data_cursor_entry_reset": false,
+    "error_and_ACT_bridges_checked": true
+  },
+  {
+    "program": 23,
+    "bases": {
+      "numeric": 262668,
+      "strings": 279951,
+      "memory": 280882,
+      "control": 267303,
+      "procedure": 276153,
+      "error": 277027
+    },
+    "arena": 687872,
+    "limit": 720640,
+    "saved_sp_slot": 262664,
+    "depth_slot": 262667,
+    "heap_context": 281796,
+    "data_cursor_entry_reset": false,
+    "error_and_ACT_bridges_checked": true
+  },
+  {
+    "program": 24,
+    "bases": {
+      "numeric": 263268,
+      "strings": 280580,
+      "memory": 281767,
+      "control": 267932,
+      "procedure": 276782,
+      "error": 277656
+    },
+    "arena": 687872,
+    "limit": 720640,
+    "saved_sp_slot": 263264,
+    "depth_slot": 263267,
+    "heap_context": 282681,
+    "data_cursor_entry_reset": false,
+    "error_and_ACT_bridges_checked": true
+  },
+  {
+    "program": 25,
+    "bases": {
+      "numeric": 262764,
+      "strings": 280313,
+      "memory": 281244,
+      "control": 267404,
+      "procedure": 276254,
+      "error": 277389
+    },
+    "arena": 687872,
+    "limit": 720640,
+    "saved_sp_slot": 262760,
+    "depth_slot": 262763,
+    "heap_context": 282158,
+    "data_cursor_entry_reset": false,
+    "error_and_ACT_bridges_checked": true
+  },
+  {
+    "program": 26,
+    "bases": {
+      "numeric": 262700,
+      "strings": 279983,
+      "memory": 280914,
+      "control": 267335,
+      "procedure": 276185,
+      "error": 277059
+    },
+    "arena": 687872,
+    "limit": 720640,
+    "saved_sp_slot": 262696,
+    "depth_slot": 262699,
+    "heap_context": 281828,
+    "data_cursor_entry_reset": false,
+    "error_and_ACT_bridges_checked": true
+  },
+  {
+    "program": 27,
+    "bases": {
+      "numeric": 262838,
+      "strings": 280164,
+      "memory": 281095,
+      "control": 267516,
+      "procedure": 276366,
+      "error": 277240
+    },
+    "arena": 687872,
+    "limit": 720640,
+    "saved_sp_slot": 262834,
+    "depth_slot": 262837,
+    "heap_context": 282009,
+    "data_cursor_entry_reset": false,
+    "error_and_ACT_bridges_checked": true
+  },
+  {
+    "program": 28,
+    "bases": {
+      "numeric": 262816,
+      "strings": 280138,
+      "memory": 281325,
+      "control": 267490,
+      "procedure": 276340,
+      "error": 277214
+    },
+    "arena": 687872,
+    "limit": 720640,
+    "saved_sp_slot": 262812,
+    "depth_slot": 262815,
+    "heap_context": 282239,
+    "data_cursor_entry_reset": false,
+    "error_and_ACT_bridges_checked": true
+  },
+  {
+    "program": 29,
+    "bases": {
+      "numeric": 262941,
+      "strings": 280528,
+      "memory": 281459,
+      "control": 267619,
+      "procedure": 276469,
+      "error": 277604
+    },
+    "arena": 687872,
+    "limit": 720640,
+    "saved_sp_slot": 262937,
+    "depth_slot": 262940,
+    "heap_context": 282373,
+    "data_cursor_entry_reset": false,
+    "error_and_ACT_bridges_checked": true
+  },
+  {
+    "program": 30,
+    "bases": {
+      "numeric": 262862,
+      "strings": 280183,
+      "memory": 281114,
+      "control": 267535,
+      "procedure": 276385,
+      "error": 277259
+    },
+    "arena": 687872,
+    "limit": 720640,
+    "saved_sp_slot": 262858,
+    "depth_slot": 262861,
+    "heap_context": 282028,
+    "data_cursor_entry_reset": false,
+    "error_and_ACT_bridges_checked": true
+  },
+  {
+    "program": 31,
+    "bases": {
+      "numeric": 262858,
+      "strings": 280179,
+      "memory": 281110,
+      "control": 267531,
+      "procedure": 276381,
+      "error": 277255
+    },
+    "arena": 687872,
+    "limit": 720640,
+    "saved_sp_slot": 262854,
+    "depth_slot": 262857,
+    "heap_context": 282024,
+    "data_cursor_entry_reset": false,
+    "error_and_ACT_bridges_checked": true
+  },
+  {
+    "program": 32,
+    "bases": {
+      "numeric": 262811,
+      "strings": 280132,
+      "memory": 281063,
+      "control": 267484,
+      "procedure": 276334,
+      "error": 277208
+    },
+    "arena": 687872,
+    "limit": 720640,
+    "saved_sp_slot": 262807,
+    "depth_slot": 262810,
+    "heap_context": 281977,
+    "data_cursor_entry_reset": false,
+    "error_and_ACT_bridges_checked": true
+  }
+]
