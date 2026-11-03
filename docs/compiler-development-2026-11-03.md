@@ -485,3 +485,8 @@ reader normally. Open fresh maintained7200s self-a capture, enable/qualify it
 with new BBC_C006_SELF_A_CAPTURE_R01 sentinel and observed CLI, then start the
 canonical listener for the one-stage driver. Invoke self-a exactly once through
 its observed normal prompts. It is active; self-b is not invoked yet.
+
+Refresh BOOTSTRAP.md and public README/matrix references that still described
+the now-completed native suites as merely prepared. Keep physical small-suite
+success distinct from the still-active first self-source pass. No compiler,
+runtime, frozen fixture or device input changes accompany this documentation.

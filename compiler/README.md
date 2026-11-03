@@ -3,7 +3,8 @@
 The compiler is written in BBC BASIC and emits standalone native eZ80 ADL code.
 It compiles its own source: the reference-hosted build, two native generations
 and a repeat produce identical complete324275-byte images. Native baseline39,
-representative12 and fresh error39 regressions pass; physical qualification remains.
+representative12 and fresh error39 regressions pass. All12 physical source
+compiles and10 generated programs pass; physical self-compilation remains active.
 It currently
 compiles literal/numeric output, labelled control flow, numeric byte VDU
 expressions, standard math functions, scalar numeric variables and a mutable
@@ -186,4 +187,5 @@ The completed generation record is live-bootstrap-resume-001. It preserves the
 successful normal-main G0/G1/G2 stages from the first attempt and records a fresh
 repeat after host interruption; all four actual images match. This is automated
 self-hosting proof. The native baseline39, representative12 and error39 suites
-also pass; physical qualification remains separate and pending.
+also pass. Physical olimex-small-001 qualifies all12 source compiles/10 generated
+programs; physical self-source qualification is separate and remains active.

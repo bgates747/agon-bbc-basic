@@ -39,9 +39,9 @@ indirection, DATA, file and rejection fixtures through the normal native UI.
 `native_errors.py` reuses C005's39 exact numbered reference programs, compiling
 and executing each through an actual native compiler, then checking its complete
 runtime links and a deterministic repeat. Both retain per-program console logs
-and supplied source/native hashes. These are prepared workflows, with no executed
-native-generation or regression result yet. Supplied file identities do not by
-themselves prove derivation; the generation chain owns that evidence.
+and supplied source/native hashes. Completed live-regressions-001 and
+live-native-errors-001 pass all12 and39 cases respectively. Supplied file
+identities do not by themselves prove derivation; the generation chain owns it.
 
 The interpreted G0 driver now aborts on an unexpected BASIC prompt before either
 filename prompt as well as after both filenames. A PROCinit failure must be
@@ -75,19 +75,19 @@ output must survive every rejection. Image equality carries that reference
 cohort's independent assembly/runtime execution evidence without claiming a
 second native-program execution in this comparison. This supplements the12
 representative native-execution cases and39 fresh source-error programs. The
-new comparator and full-source baseline freezer are prepared, syntax checked,
-and await their first fresh live-baseline inputs.
+comparator passes all39 cases in live-native-baseline-001 against the frozen
+C005 live-baseline-streaming-001 cohort.
 
 For the full chain, `--expected-image` can pin the independently checked resource
 image. The controller retains that exact file and stops on any differing complete
 generation before executing a successor. This adds a byte-identity gate without
-changing the BBC main, source or generation stages. The first full-chain run will
-use the qualified resource seed; this new controller path is prepared only.
+changing the BBC main, source or generation stages. The completed full-chain
+cohort uses the qualified resource seed and retains the exact expected bytes.
 
 The representative file case removes its own old scratch file before execution,
 verifies all five bytes (255 followed by text), and retains the actual output
-for physical comparison. This is prepared orchestration; its first native run
-is still pending the generation chain.
+for physical comparison. Both live-regressions-001 and physical olimex-small-001
+verify the actual five-byte output; this is executed evidence.
 
 If the host terminates after completed G0/G1/G2 but before repeat completes,
 freeze the interrupted cohort first. `--resume-repeat` accepts only that exact
@@ -108,3 +108,23 @@ passes fit; the lower-bound estimate is no longer the sole resource evidence.
 This preflight did not run unmodified interpreted main and does not replace the
 full default four-image chain, native regressions or physical qualification.
 No hardware or performance benchmark result is claimed.
+
+## Completed generation and regression evidence
+
+The source SHA6597a0df emits324275-byte image SHA299a3119 in every actual stage.
+Normal interpreted-main G0, native G1 and native G2 complete in the original
+live-bootstrap-001 attempt. Its host exits143 during unfinished repeat, with
+unknown origin; the original evidence remains frozen. live-bootstrap-resume-001
+verifies and carries the actual completed three stages and performs a fresh
+native repeat. All four complete images match. This explicitly resumed lineage
+is not presented as one uninterrupted invocation.
+
+Native baseline39 (15 full image/24 diagnostic matches), representative12
+(ten programs/two preserved-output rejections) and fresh error39 (ERR/ERL,
+full runtime/entry linkage and deterministic repeat) all pass. Their completed
+manifests are prerequisites for the physical bundle. olimex-fixture-001 freezes
+the exact deployment; olimex-small-001 retains all12 actual physical compiler
+invocations and10 generated program invocations, with exact image/output/file
+comparisons. Both physical self-source passes remain separate and unfinished.
+The finite physical plan and actual custody/observation rules are in
+[OLIMEX-R01.md](OLIMEX-R01.md); task/log records own subsequent results.
