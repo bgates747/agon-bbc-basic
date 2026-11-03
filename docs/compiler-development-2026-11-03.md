@@ -683,3 +683,38 @@ C006 from the sole TODO. C000–C007 initial scopes are closed. Keep the qualifi
 development branch separate from main, which is not merged or promoted. Full
 BBC language coverage, human optical validation and formal speedup benchmarks
 are not asserted by this milestone.
+
+## C008 — Stage the Author's manual programming and qualification directory
+
+The Author selects Oryx path /run/media/smith/AGONC8/mystuff/basic-compiled,
+with programming essentials at its root and individual tests in subdirectories.
+Promote C008 to TODO before implementation. Read canonical deployment/network
+instructions; the new explicit destination authorizes bounded file deployment
+despite the earlier Oryx maintenance restriction, without scheduling an emulator.
+Actual Oryx inspection finds the exact rw vfat mount and empty target.
+
+The card's existing /mos/nano.bin equals the6560-byte upstream artifact SHA051f
+from clean agon-utilities56d44853. Retain its MIT notice and inspected controls.
+MOS Run permits explicit address plus arguments; editor is a&B0000 moslet,
+compiler/generated images run at&40000. The root guide supplies exact separate
+edit/save, compile/prompt and load/run commands. No interpreter or assembler is
+required. Copy exact qualified compiler/source/notices, compatibility and starter.
+Twelve subdirectories reuse C006's exact qualified sources/oracles, ten successful
+programs and two preserved-output rejections; no manual pass or new run is inferred.
+
+prepare.py emits manual-002,50 files/477595 bytes, package manifest SHA256
+16d0d6e3954e0ca2be7e53eb077252d278aa73bf353cea352bc427ffb526ec9a.
+The earlier disposable package was superseded before deployment by a readme
+wording correction. deploy_sd.py validates exact host/mount/rw-vfat/resolved empty
+target and local payload hashes, streams regular files with keep-old-files, then
+syncs the filesystem. Actual transfer succeeds at14:46:22.767816EST, return0,
+50 files and the card still mounted. No deletions, unrelated writes, firmware/
+startup changes, program execution or redundant post-copy readback occur.
+
+manual-deployment-001 freezes the actual receipt, package manifest, scripts,
+root runbook, exact cases/oracles, compatibility, compiler provenance and editor
+bytes/license. Root stays stable for user programs and later tests; the initial
+deployment helper deliberately refuses this now-nonempty directory. Future
+updates must preserve user programs/results. C008 is staged and remains on TODO
+pending the Author's actual manual results; main and compiler/runtime sources
+remain unchanged. No emulator/bench reservation or new CPU-heavy work is selected.

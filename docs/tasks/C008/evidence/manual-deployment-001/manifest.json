@@ -1,0 +1,13 @@
+{
+  "cases.json": "c930c86f0be2c3d3bfcced4c2b9a07a3a7266784d15e880cbfb258b16b75ac99",
+  "compatibility.txt": "d5429b96626d4dcfc43a5aafa48d0e244b86a0ab63a2a4fd6332a8bc7fefa1be",
+  "compiler-provenance.json": "459765db4ebb9ea40aab58c650ad7045d966991013d8baa976b9020868706e9f",
+  "deploy_sd.py": "57b516d6a695fb8de7efd2bad68c6183c723a9373050435fdbce479ac2e7f77e",
+  "editor.dat": "051fcacb92fc129c46ee235626cbef5631b5e74062dd8d5a40a03a326a6c9189",
+  "editor.txt": "bdbb6aaaa8f5dfea73082125733f58c06a30f2730d0270f795b330114bdbe46b",
+  "nano-license.txt": "1626485d1989fe02bb2638ce01105ddb7993cc9883d8416729950648bc3b6bcc",
+  "package-manifest.json": "16d0d6e3954e0ca2be7e53eb077252d278aa73bf353cea352bc427ffb526ec9a",
+  "prepare.py": "cc72b1d57149a3a06fe92f717273c5f8f69ae8482558a3f91b9d1c2dc04b2f63",
+  "readme.txt": "e55aa7d4c6bf1702172bd3be483d0fe54c72c2f95510e0bbd21f4a68102b76ab",
+  "results.json": "83a5d36ae1a4ba97c99b7d95dcf18ab807e11d82b2af75d63d22e9ceb0043c6e"
+}

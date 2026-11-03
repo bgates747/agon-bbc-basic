@@ -69,8 +69,9 @@ environment, ownership, assembly, emulator, hardware and coordination rules.
 
 ## Completed qualification and authorization
 
-1. C006 completes the initial self-hosting/physical scope; TODO.md has no
-   unfinished promoted tasks. Read C006.md, C006/BOOTSTRAP.md and C006/OLIMEX.md.
+1. C006 completes the initial self-hosting/physical scope; C008 now owns the
+   staged manual qualification awaiting Author results. Read C006.md,
+   C006/BOOTSTRAP.md, C006/OLIMEX.md and C008.md for their distinct evidence.
    Actual normal-main G0, native G1/G2 and repeat produce identical324275-byte
    images299a3119. live-bootstrap-001 was interrupted during unfinished repeat
    (host exit143/unknown origin). live-bootstrap-resume-001 verifies/carries the
@@ -107,8 +108,9 @@ environment, ownership, assembly, emulator, hardware and coordination rules.
 6. Use .venv/bin/python explicitly; compiler/README.md owns commands. Ignored
    .emulator/ is automated CLI only, launched through its generated profile-local
    ./fab-agon-emulator wrapper. Freeze owned results before subsequent work.
-   No graphical/human optical validation has occurred. Never contact Oryx until
-   the Author says it is available; Pi5 automated emulator work is authorized.
+   No graphical/human optical validation has occurred. The Author's new C008
+   card path authorizes bounded Oryx file deployment; it does not select a new
+   Oryx emulator session. Pi5 automated emulator work remains authorized.
 7. The Author authorized completing the remaining TODO and skipping earlier
    approval stops, qualifying/checkpointing this development branch without
    asking again. Commit/push authority persists for the configured origin.
@@ -122,6 +124,19 @@ environment, ownership, assembly, emulator, hardware and coordination rules.
    Canonical physical custody is agon-dev-env/cross-agent/olimex-bench. Both clean
    handbacks were delivered through durable mail and immediate steering; latest
    is2026-11-03_11-55-11_bbc-basic_bbc-c006-r02-clean-release-one.
+
+## Manual Console8 package
+
+C008 is staged at the Author-selected Oryx path
+`/run/media/smith/AGONC8/mystuff/basic-compiled/`, Agon path
+`/mystuff/basic-compiled/`. Keep that root stable. Its50 files include the exact
+compiler/source, MIT nano editor, notices, starter, compatibility/runbook and12
+manual test subdirectories. Actual deployment completed14:46:22EST November3,
+with sync and the card left mounted; receipt C008/evidence/manual-deployment-001.
+No user result is implied. Do not delete or overwrite later user programs/results.
+deploy_sd.py refuses a nonempty target: future updates need explicit preservation.
+Editor is a&B0000 moslet; compiler/generated programs run at&40000. No firmware
+or startup change, emulator reservation or hardware test is part of deployment.
 
 Shared /tmp tmpfs filled during G2 handoff; only our inactive Cargo build cache
 was moved to C006/build/relocated-cli-cache-001, preserving the active CLI at its

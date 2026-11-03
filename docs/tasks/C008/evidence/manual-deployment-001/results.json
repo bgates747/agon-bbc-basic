@@ -1,0 +1,15 @@
+{
+  "scope": "Initial SD file deployment only; no compiler/editor/hardware test execution",
+  "started": "2026-11-03T19:46:17.203928+00:00",
+  "finished": "2026-11-03T19:46:22.767816+00:00",
+  "host": "oryx-linuxlite",
+  "destination": "/run/media/smith/AGONC8/mystuff/basic-compiled",
+  "files": 50,
+  "package_manifest_sha256": "16d0d6e3954e0ca2be7e53eb077252d278aa73bf353cea352bc427ffb526ec9a",
+  "returncode": 0,
+  "stdout": "COPIED_AND_SYNCED\n50\n/run/media/smith/AGONC8 vfat\n",
+  "stderr": "",
+  "synchronized_and_left_mounted": true,
+  "manual_validation": false,
+  "firmware_changed": false
+}

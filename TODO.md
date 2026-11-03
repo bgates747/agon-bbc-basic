@@ -6,6 +6,6 @@ under `docs/tasks`; experiments belong in the matching task directory. See
 initial scopes and evidence in their task records and dated logs. Feature status
 and partial admissions are explicit in `compiler/COMPATIBILITY.md`.
 
-No unfinished tasks are currently promoted. C006 completes the initial
-self-hosting and physical qualification scope; this does not imply full BBC
-BASIC coverage or promotion to main. New work requires an explicit task scope.
+1. [ ] [C008](docs/tasks/C008.md) — Manual hardware qualification awaits the
+   Author's results. The self-contained compiler/editor package and12 manual
+   cases are staged at the selected Console8 card location.

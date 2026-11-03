@@ -37,6 +37,12 @@ can be copied to the card as `compiler.bin`. At MOS, use `LOAD compiler.bin`
 followed by `RUN .`, then enter the input/output filenames at its prompts.
 This executable contains its runtime; BASIC serves as the source-bootstrap host.
 
+The Author's manual Console8 package is staged at `/mystuff/basic-compiled/`
+on the card (Oryx mount `/run/media/smith/AGONC8/mystuff/basic-compiled/`). Its root
+contains the compiler, source, nano editor, starter, licenses and `readme.txt`;
+individual tests live under `tests/`. See [C008](../docs/tasks/C008.md) for the
+deployment record. Manual acceptance awaits the Author's actual results.
+
 `compiler.bas` has line numbers so that the existing interpreter can load it
 without a preprocessor. Programs being compiled may omit line numbers. The
 compiler performs source parsing, symbol resolution, relocation, runtime
