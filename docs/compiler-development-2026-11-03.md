@@ -334,3 +334,12 @@ in live-main-g0-001 without freezing or claiming the active cohort's later
 status. This is actual unmodified interpreted-main proof, not the earlier
 instrumented resource driver. G1/G2/repeat and native suites remain active or
 pending. No hardware/performance result follows from these controller times.
+
+## Full-chain G1 completed
+
+G1 completes1983.142 controller seconds/status0 with324275 bytes equal to G0
+and expected seed299a3119. G2 starts only after that comparison. Retain immutable
+live-native-g1-001 snapshot using freeze_generation.py; leave original cohort
+status active/unfrozen. This now demonstrates normal interpreted main followed
+by actual native self-source generation. G2/repeat and native suites still
+require execution; no full-chain, hardware or benchmark result is inferred.

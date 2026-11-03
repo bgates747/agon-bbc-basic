@@ -76,7 +76,8 @@ environment, ownership, assembly, emulator, hardware and coordination rules.
    pins the checked resource seed before executing successor generations.
    Current live-bootstrap-001 and its sequential native qualification pipeline
    are active on the sole CLI SD. Unmodified-main G0 completes3951.738s and
-   exactly matches the seed (completed snapshot live-main-g0-001). G1 is active;
+   exactly matches the seed (live-main-g0-001). G1 also matches all324275 bytes
+   with status0 in1983.142s (live-native-g1-001). G2 is active;
    no full-chain result exists yet. Do not launch another CLI against this fixture.
 2. C006 native_baseline.py compares39 actual standard sources against15 complete
    baseline images/24 diagnostics. regressions.py runs12 representative cases;
