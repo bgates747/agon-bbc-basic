@@ -156,3 +156,22 @@ and remote CLI access. Send the request to Extender2026-10-13Sol and record
 canonical mailbox2026-11-03_02-31-54_bbc-basic_bbc-olimex-access-request-one.
 Read the shared physical-bench lease protocol and staged-transfer decision.
 No lease, target access, reset, flash, deployment or physical result yet exists.
+
+The initial direct-written mailbox used generic YAML rather than the helper's
+JSON-valued metadata/routing format and blocked its global parser. Extender
+owns the repair: preserve exact original in quarantine, republish unchanged
+request body through agentcoms.py as
+2026-11-03_02-34-30_bbc-basic_bbc-olimex-access-request-one, verify parser restored.
+Use the maintained helper for all future mail. A separate proposed shared-index
+append was rejected by automatic review (published Markdown restriction); leave
+that index unchanged. Local physical plan C006/OLIMEX.md records the bounded
+scope, preserved components, lease, transfer, remote command and evidence rules.
+
+Extender sends canonical guidance2026-11-03_02-36-44_linux-extender_bbc-olimex-access-guidance-one.
+Acknowledge and reply using maintained helper as02-37-29_bbc-basic_bbc-access-guidance-received-two,
+with immediate chat alert. Confirm remote MOS keyboard/CLI, pinned P4-staged
+file transport and joined-control passive Legacy printer-mirror capture.
+Use Extender-owned diagnostic/results paths; retain all installed components,
+startup, wiring and display mode. Finish emulator qualification and prepare an
+exact finite fixture before reserving. Empty logical registry is not readiness;
+no target operation or lease occurs. Current native preflight remains active.
