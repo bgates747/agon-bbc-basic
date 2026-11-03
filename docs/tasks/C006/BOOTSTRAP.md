@@ -89,6 +89,16 @@ verifies all five bytes (255 followed by text), and retains the actual output
 for physical comparison. This is prepared orchestration; its first native run
 is still pending the generation chain.
 
+If the host terminates after completed G0/G1/G2 but before repeat completes,
+freeze the interrupted cohort first. `--resume-repeat` accepts only that exact
+three-stage prefix with a retained interruption record, matching source/runtime
+inputs, verified complete manifest and three images equal to --expected-image.
+It copies the actual completed-stage evidence and origin records, explicitly
+labels inherited stages, then executes only a fresh normal native repeat from
+the verified G1. A final four-image result therefore records resumption rather
+than claiming one uninterrupted invocation. No missing generation is inferred
+from a hash or marked successful before its actual execution.
+
 C006 packed-native-preflight-001 completes native self-source compilation through
 normal prompts in1983.653 controller seconds, MOS status0. Its entire324275-byte
 G1 equals the interpreted resource seed SHA299a31190c380541a73ed9eb144a303fa37abccc4f3c3e0ad47f99f1538122c0.

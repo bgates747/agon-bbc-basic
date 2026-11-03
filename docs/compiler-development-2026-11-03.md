@@ -360,3 +360,31 @@ actual receipt/dynamic-section and explicit disposition; no compiler input,
 firmware/profile or hardware change. Notify Extender via06-14-44_bbc-basic_bbc-shared-tmpfs-full-one
 and immediate chat so it can inspect its own inactive trees. No file deletion
 or takeover of another owner's work occurs.
+
+Extender durable result06-22-22_linux-extender_extender-bbc-tmpfs-recovered-r01
+reports relocating its eight historical temp source trees to ignored SSD storage,
+preserving old paths through symlinks and verifying complete metadata/content
+manifests plus Git status. Current df independently shows /tmp332MiB used,
+3.7GiB available. Our files/runtime remain untouched; repeat continues. Ack the
+mail, with no reply/bench action requested. Treat Extender's receipt as its
+owned recovery evidence, not a new compiler or hardware qualification.
+
+## Host interruption of final repeat; explicit resumption
+
+The long shell pipeline reports exit143 during repeat, without normal controller
+unwind or recorded compiler diagnostic. Read-only process audit finds no owned
+CLI/bootstrap process left. Parent metadata contains completed G0/G1/G2 and
+attempted repeat only; no repeat image exists. Origin remains unknown. Preserve
+original metadata, copied partial repeat console, controller stream and observed
+interruption in live-bootstrap-001, then finalize its manifest. Later native
+suites never ran. Do not reclassify this as a BASIC rejection or successful repeat.
+
+Add a narrow --resume-repeat path: require exactly the three completed stages,
+interruption record, verified full manifest, same source/runtime inputs and all
+three bytestrings equal the checked seed. Carry their actual immutable evidence
+and original interruption/controller records, explicitly mark inherited stages,
+then execute only a fresh normal native repeat from verified G1. Syntax and
+actual input guards pass; live-bootstrap-resume-001 starts repeat. The compiler
+source/main/image is unchanged. This avoids redoing qualified work while retaining
+actual execution requirements and truthful interrupted lineage. Run each later
+native suite separately after the resumed repeat completes.

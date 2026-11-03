@@ -1,0 +1,3 @@
+load /bin/basic.bin
+run . /self-source.bas
+echo SELF_G0_DONE

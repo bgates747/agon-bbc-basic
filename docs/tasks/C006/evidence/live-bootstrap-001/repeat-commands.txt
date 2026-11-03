@@ -1,0 +1,3 @@
+try /self-g1.bin
+echo SELF_STATUS:<Try$ReturnCode>
+echo SELF_REPEAT_DONE
