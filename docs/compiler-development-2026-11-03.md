@@ -90,3 +90,25 @@ that full source. Extended rehearsal also preserves the old7cac4bba compiler
 through the modified control/error packers. promotion-preparation-002 retains
 both rehearsal identities, exact staged changes, source and module data. No live
 promotion, emulator change or actual native fit is implied by packaging success.
+
+Packed exact-source phase1 completes324275 bytes/body268243,2094 symbols/
+219 routines/254 bindings. BBC observations report7 target pages,13948 symbol
+string bytes and5473 other metadata-string bytes. Mandatory payload76153 plus
+1792 pages plus19421 observed string bytes totals97366, against101453 private
+bytes available:4087 remain before headers/scalars/allocation overhead. This is
+a lower-bound comparison, not fit proof. Continue actual validation/output;
+no native compiler exists at this point. Exact target source is unchanged.
+
+## Machine-image validator preparation
+
+Before native compiler execution, check_compiler_image.py reuses independent
+complete standard runtime/entry/arena checks and identifies the unique full
+394-byte compact module by GNU PIC equality. Seven external entries anchor to
+independent NUM/MEM/ACT exports; two pool ranges/initial zeros, four error-wrapper
+ranges and compact/STR adjacency receive explicit checks. The wrapper ranges
+are not a semantic proof; native differential regressions remain required.
+image-validator-001 passes the existing native helper image and rejects separate
+one-byte internal-PIC, numeric-entry and zero-pool corruptions for the intended
+assertions. Corruptions are never executed. This uses no BASIC parsing/address
+calculation on the host. Packed-source-001 validation continues independently;
+no actual compiler image or native fit result is yet claimed.

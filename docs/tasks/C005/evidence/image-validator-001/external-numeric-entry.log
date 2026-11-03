@@ -1,0 +1,9 @@
+Complete error-enabled runtime/entry checks: 1
+Traceback (most recent call last):
+  File "/Agon/mystuff/bbc-basic-v-adl/docs/tasks/C005/compact/check_compiler_image.py", line 105, in <module>
+    main()
+    ~~~~^^
+  File "/Agon/mystuff/bbc-basic-v-adl/docs/tasks/C005/compact/check_compiler_image.py", line 84, in main
+    assert observed[field] == bases[module]+meta['exports'][entry], field
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: cp_slot_numeric

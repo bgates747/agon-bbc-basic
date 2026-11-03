@@ -1,0 +1,24 @@
+{
+  "scope": "Machine-image validator qualification; corrupt fixtures never executed",
+  "reference_sha256": "aa735e5dd205239209013775711b88acee7c559b71939f7753c77d94f57c95c8",
+  "original_passes": true,
+  "corruptions": {
+    "internal-PIC": {
+      "changed_offset": 28080,
+      "sha256": "97bd1b7a9813b82b436928c89928ae1ac469c4ed77ced6d2283aaac5784a5973",
+      "rejected": true
+    },
+    "external-numeric-entry": {
+      "changed_offset": 28420,
+      "sha256": "48a073b089feed34f52b7a1681d057bd7caf97dd2af658478a5acb12d01fd9a0",
+      "rejected": true
+    },
+    "initial-numeric-pool": {
+      "changed_offset": 15268,
+      "sha256": "d2c12ff5ec6cccf86c517c26c99145886bc07a6aea4b34f81954e63d71a5a83c",
+      "rejected": true
+    }
+  },
+  "hardware_validation": false,
+  "native_compiler_claim": false
+}

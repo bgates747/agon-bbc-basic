@@ -144,3 +144,15 @@ failure is frozen. Five target cases/three native58.636s and baseline39/15
 reference fixtures use positive lines, compiler-zero-label syntax is separate.
 New exact-source probe can report actual BBC page/string-length counts with
 --private-storage; no packed-source size/fit or native compiler exists yet.
+
+check_compiler_image.py --image PATH --output NEW_BUILD_DIR independently checks
+all-feature images before native execution (standard modules/entry plus compact
+PIC, seven bridge anchors and explicit pool/wrapper/placement bounds). It passes
+the retained helper image and rejects three unexecuted one-byte corruptions in
+image-validator-001. This is validator qualification, not a native compiler.
+
+Packed-source-001 phase1 completes324275 bytes/body268243,2094 symbols/219
+routines/254 bindings. Actual BBC observations:7 pages,13948 symbol bytes,5473
+other metadata string bytes. Private bound including observed content97366 leaves
+4087 of101453 before headers/scalars/overhead. Validation/output are still active;
+no native fit/image is claimed from this arithmetic alone.
