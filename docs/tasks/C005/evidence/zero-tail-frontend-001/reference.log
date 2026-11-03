@@ -1,0 +1,49 @@
+Warning: unused arguments left: ["--firmware", "platform"].
+Tom's Fake VDP Version 1.03
+unknown packet VDU 0x17, 0, 0xf8
+unknown packet VDU 0x17, 0, 0x99
+uunknown packet VDU 0x17, 0, 0x94
+
+Agon Platform MOS Version 3.0.2 Arthur
+
+REF_BEGIN_0
+7:1:2.75:14
+2:255:2.5
+REF_END_0
+REF_BEGIN_1
+-123:1:2.75:array
+REF_END_1
+REF_BEGIN_2
+inner
+outer
+2.5:9:1:new
+1.5:-7:255:old
+oXYginal
+original
+4
+3
+2
+1
+0
+0
+REF_END_2
+REF_BEGIN_3
+16
+REF_END_3
+REF_BEGIN_4
+string only
+REF_END_4
+REF_BEGIN_5
+Division by zero
+REF_END_5
+REF_BEGIN_6
+No such variable
+REF_END_6
+REF_BEGIN_7
+Number too big
+REF_END_7
+REF_BEGIN_8
+Bad subscript
+REF_END_8
+OUTPUT_REFERENCE_DONE
+/ *

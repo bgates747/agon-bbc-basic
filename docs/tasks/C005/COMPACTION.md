@@ -54,7 +54,7 @@ C006 still requires a functioning native compiler and generation evidence.
    source errors and output preservation. Changed code sizes require fresh fit
    measurements; no predicted saving is a test result.
 4. Compacting zero-filled runtime-template DATA is also a possible private-source
-   storage change, provided loaders reconstruct the exact old template bytes and
+   storage change, provided loaders/emitters reconstruct the exact old template bytes and
    packers/GNU links prove identity. It does not authorize changing user DATA.
 
 The task record and dated log own results and promotion. This contract records
@@ -131,3 +131,48 @@ and compact-errors-tail-001 preserves exact compiler/source/runtime identities.
 Two identical consumer inputs shrink complete executables by98 and325 bytes,
 including the394-byte shared adapter; these are size comparisons, not speed
 benchmarks. Actual self-source fit is still unproved and live7cac4bba is unchanged.
+
+## Private control-template zero tail
+
+Prepared14e56cee derives from2f81c6fb without changing source-program behavior.
+The control runtime remains8657 bytes with30 relocations and256 typed records;
+its465-byte initialized prefix is stored, and its8192-byte all-zero frame tail
+is streamed during emission. All relocation operand fields and the numeric
+bridge field precede that tail; full-relative relocation values and exported
+frame/end addresses retain their original meaning. Layout counts the full image,
+validation reads only backed prefix bytes, and output emits the complete image.
+The private loader allocates465 rather than8657 raw bytes. Assembly links still
+prove the unchanged complete control template at independent bases. No user DATA
+format or runtime capacity changes. The generated source is19104 bytes shorter;
+this source-text saving is not a measured executable saving or native fit result.
+Actual BBC/native image-identity qualification follows the active2f source probe.
+
+## Completed layout and next private-storage boundary
+
+compact-source-001 completes2f81c6fb layout339291 bytes with2078 symbols/213
+routines/254 bindings. Its private heap has86437 bytes; storage_bounds.py's
+handwritten, source-pinned declaration inventory proves112761 payload bytes
+before headers/string contents. The run is deliberately stopped after layout
+and beginning validation in1366.536s; old output survives, no image/native
+initialization is claimed. Raw interrupted logs and explicit disposition remain.
+
+Zero-tail14e56cee passes all nine real-reference/native cases118.267s, full GNU
+adapter/standard checks, repeat and complete image equality with2f81c6fb. Its
+minimum private payload bound is104569 bytes; this alone is not a fit proof.
+
+Private symbol addresses are0..B0000 and can use exact three-byte raw cells;
+sorted insertion indices are0..4095 and can use exact two-byte raw cells. Keep
+4096 entries, sorted lookup/insertion order and all address/layout checks. BBC
+getters/setters must operate only inside backed cells; no wide over-read or
+24-bit replacement of source-program integer values is permitted. These two
+representations save12288 payload bytes before added compiler code is measured.
+
+Referenced numbered targets retain separate branch/DATA sets covering0..65279.
+A64-entry pointer table can own256-byte pages, each covering2048 numbers. Allocate
+and explicitly zero a page on its first write; a read of an absent page is false.
+At every subsequent compile, zero already allocated pages and retain their
+pointers for reuse, so repeated compilation cannot leak a new set of pages. Full
+occupancy remains bounded at16384 page bytes plus256 pointer bytes; sparse use
+saves storage without reducing the accepted numbered-target range. Qualify page
+boundaries, top line65279, branch/DATA separation and repeated clearing, complete
+image equality, all symbol-capacity guards and actual native fit before promotion.

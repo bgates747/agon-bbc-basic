@@ -1,0 +1,16 @@
+{
+  "disposition": "Deliberately stopped after completed layout: mandatory private allocation lower bound cannot fit",
+  "completed_layout_bytes": 339291,
+  "source_body_bytes": 265236,
+  "symbols": 2078,
+  "definitions": 213,
+  "bindings": 254,
+  "available_private_heap_bytes": 86437,
+  "minimum_private_allocation_bytes": 112761,
+  "minimum_deficit_bytes": 26324,
+  "owned_string_contents_and_headers_excluded": true,
+  "old_output_preserved": true,
+  "output_pass_executed": false,
+  "native_initialization_executed": false,
+  "self_hosted": false
+}

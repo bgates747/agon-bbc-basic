@@ -550,3 +550,14 @@ and compact-errors-tail-001 preserves exact compiler/source/runtime identities.
 Two identical consumer inputs shrink complete executables by98 and325 bytes,
 including the394-byte shared adapter; these are size comparisons, not speed
 benchmarks. Actual self-source fit is still unproved and live7cac4bba is unchanged.
+
+## Private control zero-tail preparation
+
+After pushing compact frontend checkpoint5396cd8, launch actual2f81c6fb self-source
+probe compact-source-001. While it runs, prepare14e56cee from exact2f81c6fb:
+stored control prefix465 bytes, streamed zero tail8192 bytes, full output8657 and
+30 internal relocations unchanged. All relocations/bridge fields are within the
+prefix. Independent GNU images at42000/48000 match prefix-plus-zero reconstruction.
+Source shrinks19104 bytes to2045 lines; private template allocation saves8192.
+The nine-case test requires whole executable equality with compact-frontend-002;
+it is prepared, not yet executed. No new native fit or benchmark claim follows.

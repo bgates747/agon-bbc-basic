@@ -122,3 +122,13 @@ Module code must precede STR virtual heaps; map checks guard heap/arena overlap.
 Baseline39/15 passes87.971s; all39 source-error cases pass in CORE6/remaining33
 cohorts143.390s/549.218s with fresh ERR/ERL/output, repeat and runtime/entry links.
 No self-source fit on2f81c6fb is yet measured; live compiler remains7cac4bba.
+
+Actual2f81c6fb self-source layout completes339291 bytes/body265236,2078 symbols/
+213 routines/254 bindings. Mandatory private payload112761 exceeds available86437
+by26324 before string/header overhead. Deliberately stopped after layout; old
+output survives and no native image exists. compact-source-001 retains disposition
+and raw interrupted evidence (1366.536s). zero_tail.bas14e56cee passes nine actual
+reference/native cases118.267s and all complete2f images remain identical. It
+saves8192 private template bytes; actual native fit remains open. COMPACTION.md
+refines private symbol widths and sparse reusable numbered-target pages next.
+Latest log is docs/compiler-development-2026-11-03.md.

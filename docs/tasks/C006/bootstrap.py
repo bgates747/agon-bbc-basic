@@ -18,7 +18,7 @@ def main():
     auto='load /bin/basic.bin\nrun . /self-source.bas\necho '+marker+'\n';steps.append(('Wrote '+target,'*BYE'))
    else:auto=f'try /self-{executable}.bin\necho SELF_STATUS:<Try$ReturnCode>\necho {marker}\n'
    (e/f'{stage}-commands.txt').write_text(auto);(e/f'{stage}-keyboard.json').write_text(json.dumps(steps,indent=2)+'\n');report['attempted_stages'].append(stage);(PROFILE/f'self-{stage}.log').unlink(missing_ok=True);print('Starting',stage,flush=True)
-   log=keyboard.run(PROFILE,auto,steps,marker,f'self-{stage}.log',timeout_seconds=a.timeout,abort_patterns=[(2,'\n>')] if executable is None else []);(e/f'{stage}.log').write_text(log);assert 'Wrote '+target in log,log
+   log=keyboard.run(PROFILE,auto,steps,marker,f'self-{stage}.log',timeout_seconds=a.timeout,abort_patterns=[(i,'\n>') for i in range(3)] if executable is None else []);(e/f'{stage}.log').write_text(log);assert 'Wrote '+target in log,log
    if executable is not None:assert 'SELF_STATUS:0\n' in log,log
    blob=(sd/target).read_bytes();assert blob[64:69]==b'MOS\x00\x01',blob[:80];shutil.copy2(sd/target,e/f'{stage}.dat');images[stage]=blob;durations[stage]=round(time.monotonic()-start,3);report['completed_stages'].append(stage);report['generation_hashes']={n:hashlib.sha256(v).hexdigest() for n,v in images.items()};report['generation_sizes']={n:len(v) for n,v in images.items()};report['controller_seconds']=durations;save();print('Completed',stage,len(blob),durations[stage],flush=True)
    if executable is not None:assert blob==images['g0'],f'{stage} differs from interpreted generation'

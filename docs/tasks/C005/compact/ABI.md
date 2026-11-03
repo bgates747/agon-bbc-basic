@@ -5,8 +5,8 @@ Every site remains an actual native CALL with a fixed operand layout; there is
 no source parser, bytecode loop or instruction-stream dispatch engine. The BBC
 compiler chooses each entry and writes its operands. Arithmetic/conversion,
 array ordering and activation semantics stay in the previously qualified modules.
-The394-byte/29-relocation runtime passes21 native ABI stages; frontend
-integration has not run yet. GNU links independently match at&42000/&48000.
+The394-byte/29-relocation runtime passes21 native ABI stages and the isolated
+2f81c6fb frontend integration. GNU links independently match at&42000/&48000.
 
 ## Operand and result contracts
 
@@ -60,7 +60,8 @@ bindings, real NUM operations, real SFIX success/overflow/store atomicity and
 array/activation register/error bridges. GNU links independently establish PIC
 rebasing and bridge-field separation. Then actual BBC differential programs
 qualify frontend use, LOCAL/FN live prefixes, arrays, errors and fresh output fit.
-Only exact passing sources may be promoted. No test result is claimed here yet.
+Only exact passing sources may be promoted; actual native compiler fit remains
+a separate resource measurement.
 
 ## Retained ABI observations
 
@@ -76,3 +77,14 @@ The actual pinned interpreter observation `compact-reference-packets-001` gives
 0000003081 /000000b081 and integer assignments2 /-2. Correcting those fixture
 bytes makes the original runtime pass; no arithmetic routine or oracle changes.
 The failed attempts and an unchanged rerun are retained separately.
+
+## Actual frontend qualification
+
+Exact2f81c6fb passes nine actual-reference/native programs, baseline39/15 and all39
+source-handler cases. Full adapter PIC and all13 bridge fields match GNU through
+BBC-emitted symbol maps in the nine-case cohort; source-error cohorts additionally
+check complete standard runtimes, entry chains and external bridges. The first
+f8d46de6 integration wrongly placed code at the virtual scalar string heap start;
+its native mixed-PROC failure remains frozen. Corrected placement emits compact
+code before STR pools/virtual heap. Independent map checks now require the module
+end to precede $sheap and $actbase. COMPACTION.md owns cohort identities/timings.

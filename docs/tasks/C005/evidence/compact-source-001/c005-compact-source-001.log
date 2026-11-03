@@ -1,0 +1,54 @@
+Traceback (most recent call last):
+  File "/Agon/mystuff/bbc-basic-v-adl/docs/tasks/C005/streaming/probe_source.py", line 46, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/Agon/mystuff/bbc-basic-v-adl/docs/tasks/C005/streaming/probe_source.py", line 35, in main
+    ks=importlib.util.spec_from_file_location('keyboard',TASK/'io/interactive.py');keyboard=importlib.util.module_from_spec(ks);ks.loader.exec_module(keyboard);log=keyboard.run(PROFILE,'load /bin/basic.bin\nrun . /source-probe-driver.bas\n',[],'SOURCE_PROBE_DONE','source-probe.log',timeout_seconds=a.timeout,abort_patterns=[(0,'\n>')]);(d/'native-host.log').write_text(log);report['source_compilation_succeeded']='SOURCE_PROBE_SUCCESS' in log;report['counters']=log.split('SOURCE_COUNTERS:',1)[1].splitlines()[0].strip();report['source_position']=log.split('SOURCE_POSITION:',1)[1].splitlines()[0].strip()
+                                                                                                                                                                    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Agon/mystuff/bbc-basic-v-adl/docs/tasks/C005/io/interactive.py", line 31, in run
+    raise AssertionError(f'CLI exited before {marker}: {output}')
+AssertionError: CLI exited before SOURCE_PROBE_DONE: Warning: unused arguments left: ["--firmware", "platform"].
+Tom's Fake VDP Version 1.03
+unknown packet VDU 0x17, 0, 0xf8
+unknown packet VDU 0x17, 0, 0x99
+uunknown packet VDU 0x17, 0, 0x94
+
+Agon Platform MOS Version 3.0.2 Arthur
+
+SOURCE_INIT_DONE
+SOURCE_SCAN_LINE:250
+SOURCE_SCAN_LINE:500
+SOURCE_SCAN_LINE:750
+SOURCE_SCAN_LINE:1000
+SOURCE_SCAN_LINE:1250
+SOURCE_SCAN_LINE:1500
+SOURCE_SCAN_LINE:1750
+SOURCE_SCAN_LINE:2000
+SOURCE_SCAN_DONE:213:78:35
+SOURCE_PASS_BEGIN:1
+SOURCE_LINE:1:100:14128:165:117
+SOURCE_LINE:1:200:28309:242:121
+SOURCE_LINE:1:300:38595:308:129
+SOURCE_LINE:1:400:50497:379:145
+SOURCE_LINE:1:500:64928:452:148
+SOURCE_LINE:1:600:80392:517:166
+SOURCE_LINE:1:700:93626:572:167
+SOURCE_LINE:1:800:108830:639:168
+SOURCE_LINE:1:900:126615:717:184
+SOURCE_LINE:1:1000:144401:808:203
+SOURCE_LINE:1:1100:161349:889:206
+SOURCE_LINE:1:1200:180117:1000:218
+SOURCE_LINE:1:1300:197104:1062:219
+SOURCE_LINE:1:1400:215693:1137:233
+SOURCE_LINE:1:1500:232861:1215:243
+SOURCE_LINE:1:1600:249463:1305:248
+SOURCE_LINE:1:1700:263558:1404:254
+SOURCE_LINE:1:1800:265236:1417:254
+SOURCE_LINE:1:1900:265236:1417:254
+SOURCE_LINE:1:2000:265236:1417:254
+SOURCE_LINE:1:2100:265236:1417:254
+SOURCE_LINE:1:2200:265236:1417:254
+SOURCE_PASS_END:1:339291:2078:254
+SOURCE_PASS_BEGIN:2
+SOURCE_LINE:2:100:14128:2078:254
+

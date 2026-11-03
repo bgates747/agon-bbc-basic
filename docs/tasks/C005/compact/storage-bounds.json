@@ -1,0 +1,254 @@
+{
+  "compiler_sha256": "2f81c6fb3987f92973de1a532367ac2e74f3398c2bb361fa336b028e5164cebf",
+  "scope": "Static lower bound from explicit pinned private declarations",
+  "array_payloads": {
+    "sname$": {
+      "element_bytes": 5,
+      "dimensions": [
+        4096
+      ],
+      "payload_bytes": 20480
+    },
+    "saddr%": {
+      "element_bytes": 4,
+      "dimensions": [
+        4096
+      ],
+      "payload_bytes": 16384
+    },
+    "sort%": {
+      "element_bytes": 4,
+      "dimensions": [
+        4096
+      ],
+      "payload_bytes": 16384
+    },
+    "pname$": {
+      "element_bytes": 5,
+      "dimensions": [
+        256
+      ],
+      "payload_bytes": 1280
+    },
+    "pline%": {
+      "element_bytes": 4,
+      "dimensions": [
+        256
+      ],
+      "payload_bytes": 1024
+    },
+    "parcnt&": {
+      "element_bytes": 1,
+      "dimensions": [
+        256
+      ],
+      "payload_bytes": 256
+    },
+    "par&": {
+      "element_bytes": 1,
+      "dimensions": [
+        256,
+        16
+      ],
+      "payload_bytes": 4096
+    },
+    "argkind&": {
+      "element_bytes": 1,
+      "dimensions": [
+        32,
+        16
+      ],
+      "payload_bytes": 512
+    },
+    "argindex&": {
+      "element_bytes": 1,
+      "dimensions": [
+        32,
+        16
+      ],
+      "payload_bytes": 512
+    },
+    "pkind&": {
+      "element_bytes": 1,
+      "dimensions": [
+        256
+      ],
+      "payload_bytes": 256
+    },
+    "pret%": {
+      "element_bytes": 4,
+      "dimensions": [
+        256
+      ],
+      "payload_bytes": 1024
+    },
+    "return$": {
+      "element_bytes": 5,
+      "dimensions": [
+        512
+      ],
+      "payload_bytes": 2560
+    },
+    "retdef&": {
+      "element_bytes": 1,
+      "dimensions": [
+        512
+      ],
+      "payload_bytes": 512
+    },
+    "retline%": {
+      "element_bytes": 4,
+      "dimensions": [
+        512
+      ],
+      "payload_bytes": 2048
+    },
+    "retcol%": {
+      "element_bytes": 4,
+      "dimensions": [
+        512
+      ],
+      "payload_bytes": 2048
+    },
+    "vname$": {
+      "element_bytes": 5,
+      "dimensions": [
+        256
+      ],
+      "payload_bytes": 1280
+    },
+    "vsize&": {
+      "element_bytes": 1,
+      "dimensions": [
+        256
+      ],
+      "payload_bytes": 256
+    },
+    "vstatic%": {
+      "element_bytes": 4,
+      "dimensions": [
+        256
+      ],
+      "payload_bytes": 1024
+    },
+    "vtype%": {
+      "element_bytes": 4,
+      "dimensions": [
+        256
+      ],
+      "payload_bytes": 1024
+    },
+    "vdim&": {
+      "element_bytes": 1,
+      "dimensions": [
+        256
+      ],
+      "payload_bytes": 256
+    },
+    "kwords$": {
+      "element_bytes": 5,
+      "dimensions": [
+        5
+      ],
+      "payload_bytes": 25
+    },
+    "sunsafe%": {
+      "element_bytes": 4,
+      "dimensions": [
+        16
+      ],
+      "payload_bytes": 64
+    },
+    "ifid$": {
+      "element_bytes": 5,
+      "dimensions": [
+        32
+      ],
+      "payload_bytes": 160
+    },
+    "bid$": {
+      "element_bytes": 5,
+      "dimensions": [
+        32
+      ],
+      "payload_bytes": 160
+    },
+    "belse%": {
+      "element_bytes": 4,
+      "dimensions": [
+        32
+      ],
+      "payload_bytes": 128
+    },
+    "lkind%": {
+      "element_bytes": 4,
+      "dimensions": [
+        32
+      ],
+      "payload_bytes": 128
+    },
+    "lname$": {
+      "element_bytes": 5,
+      "dimensions": [
+        32
+      ],
+      "payload_bytes": 160
+    },
+    "lvar%": {
+      "element_bytes": 4,
+      "dimensions": [
+        32
+      ],
+      "payload_bytes": 128
+    },
+    "eentry%": {
+      "element_bytes": 4,
+      "dimensions": [
+        24
+      ],
+      "payload_bytes": 96
+    },
+    "xentry%": {
+      "element_bytes": 4,
+      "dimensions": [
+        26
+      ],
+      "payload_bytes": 104
+    }
+  },
+  "raw_allocations": {
+    "lrefs": 16384,
+    "dpacket": 5,
+    "numeric": 4460,
+    "string": 633,
+    "control": 8657,
+    "procedure": 783,
+    "memory": 734,
+    "io": 788,
+    "data": 120,
+    "error": 2530,
+    "compact": 394
+  },
+  "relocation_payloads": {
+    "numeric": 1548,
+    "string": 12,
+    "control": 120,
+    "procedure": 232,
+    "memory": 332,
+    "io": 28,
+    "data": 4,
+    "error": 512,
+    "compact": 116
+  },
+  "minimum_private_allocation_bytes": 112761,
+  "omitted": [
+    "array headers",
+    "owned string contents",
+    "allocator alignment/metadata",
+    "other dynamic allocations"
+  ],
+  "executable_and_heap_limit": 687872,
+  "user_origin": 262144,
+  "activation_arena_bytes": 32768,
+  "native_initialization_executed": false
+}

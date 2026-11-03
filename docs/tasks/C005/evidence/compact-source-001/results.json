@@ -1,0 +1,26 @@
+{
+  "scope": "Actual source-resource experiment, not C006 generation proof",
+  "source_sha256": "2f81c6fb3987f92973de1a532367ac2e74f3398c2bb361fa336b028e5164cebf",
+  "host_driver_sha256": "47ef63c05e414bb5c4963c1ee3707d21afdf8aa0190346c6992e1c3374ab40bf",
+  "host_progress_instrumentation": true,
+  "host_counter_names": {
+    "cpc%": "pc%",
+    "csnum%": "snum%",
+    "cpnum%": "pnum%",
+    "cvnum%": "vnum%",
+    "cphase%": "phase%",
+    "clnum%": "lnum%",
+    "cpos%": "pos%",
+    "cretnum%": "retnum%"
+  },
+  "layout_only": false,
+  "hardware_validation": false,
+  "inputs": {
+    "/Agon/mystuff/bbc-basic-v-adl/bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+    "/Agon/mystuff/bbc-basic-v-adl/.emulator/mos_platform.bin": "d564243283972690933a4554296ad6202ca4ef54572279533a942960846bebae",
+    "/Agon/mystuff/bbc-basic-v-adl/.emulator/fab-agon-emulator.bin": "bf5f29b243b8214e54c515dcc26edf47399ce440356af2ebc3ce3d7664ae11eb",
+    "/Agon/mystuff/bbc-basic-v-adl/.emulator/fab-agon-emulator": "e822acb348e1be281dce6a80128d3924651f41157b407088b23ea73a4eba728c"
+  },
+  "failure": "AssertionError('CLI exited before SOURCE_PROBE_DONE: Warning: unused arguments left: [\"--firmware\", \"platform\"].\\nTom\\'s Fake VDP Version 1.03\\nunknown packet VDU 0x17, 0, 0xf8\\nunknown packet VDU 0x17, 0, 0x99\\nuunknown packet VDU 0x17, 0, 0x94\\n\\x80\\nAgon Platform MOS Version 3.0.2 Arthur\\n\\nSOURCE_INIT_DONE\\nSOURCE_SCAN_LINE:250\\nSOURCE_SCAN_LINE:500\\nSOURCE_SCAN_LINE:750\\nSOURCE_SCAN_LINE:1000\\nSOURCE_SCAN_LINE:1250\\nSOURCE_SCAN_LINE:1500\\nSOURCE_SCAN_LINE:1750\\nSOURCE_SCAN_LINE:2000\\nSOURCE_SCAN_DONE:213:78:35\\nSOURCE_PASS_BEGIN:1\\nSOURCE_LINE:1:100:14128:165:117\\nSOURCE_LINE:1:200:28309:242:121\\nSOURCE_LINE:1:300:38595:308:129\\nSOURCE_LINE:1:400:50497:379:145\\nSOURCE_LINE:1:500:64928:452:148\\nSOURCE_LINE:1:600:80392:517:166\\nSOURCE_LINE:1:700:93626:572:167\\nSOURCE_LINE:1:800:108830:639:168\\nSOURCE_LINE:1:900:126615:717:184\\nSOURCE_LINE:1:1000:144401:808:203\\nSOURCE_LINE:1:1100:161349:889:206\\nSOURCE_LINE:1:1200:180117:1000:218\\nSOURCE_LINE:1:1300:197104:1062:219\\nSOURCE_LINE:1:1400:215693:1137:233\\nSOURCE_LINE:1:1500:232861:1215:243\\nSOURCE_LINE:1:1600:249463:1305:248\\nSOURCE_LINE:1:1700:263558:1404:254\\nSOURCE_LINE:1:1800:265236:1417:254\\nSOURCE_LINE:1:1900:265236:1417:254\\nSOURCE_LINE:1:2000:265236:1417:254\\nSOURCE_LINE:1:2100:265236:1417:254\\nSOURCE_LINE:1:2200:265236:1417:254\\nSOURCE_PASS_END:1:339291:2078:254\\nSOURCE_PASS_BEGIN:2\\nSOURCE_LINE:2:100:14128:2078:254\\n')",
+  "controller_seconds": 1366.536
+}

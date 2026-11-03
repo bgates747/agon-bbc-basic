@@ -1,0 +1,5 @@
+{
+  "scope": "Complete executable equality with compact-frontend-002",
+  "identical_images": 9,
+  "source": "docs/tasks/C005/compact/zero_tail.bas"
+}

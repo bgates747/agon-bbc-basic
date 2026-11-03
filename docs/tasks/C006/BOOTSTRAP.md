@@ -42,3 +42,15 @@ runtime links and a deterministic repeat. Both retain per-program console logs
 and supplied source/native hashes. These are prepared workflows, with no executed
 native-generation or regression result yet. Supplied file identities do not by
 themselves prove derivation; the generation chain owns that evidence.
+
+The interpreted G0 driver now aborts on an unexpected BASIC prompt before either
+filename prompt as well as after both filenames. A PROCinit failure must be
+reported promptly rather than waiting for the full generation timeout. This is
+prepared failure handling; no native generation is implied. Native early exits
+are already detected when the MOS completion marker arrives before pending input.
+
+Read-only Pi5 deployment inventory at2026-11-02T23:51-05:00 found the development
+SSD, Pi boot/root card and swap only; no mounted Agon FAT card or established
+project hardware fixture was present. No transfer, flash or hardware execution
+occurred. This observation does not block automated C005/C006 qualification and
+does not constitute a physical test result.
