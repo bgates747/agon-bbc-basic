@@ -1,0 +1,35 @@
+{
+  "scope": "Actual source-resource experiment, not C006 generation proof",
+  "source_sha256": "6597a0df3f99b4f43c42bff1cdbc59f5fdf730c57837f3d4112a598fbfbe5fb8",
+  "host_driver_sha256": "5f365395c81de1a539f437a14ab9bcf89b22d5212055d44f4e2a5bbd4483b169",
+  "host_progress_instrumentation": true,
+  "host_storage_observation": true,
+  "host_counter_names": {
+    "cpc%": "pc%",
+    "csnum%": "snum%",
+    "cpnum%": "pnum%",
+    "cvnum%": "vnum%",
+    "cphase%": "phase%",
+    "clnum%": "lnum%",
+    "cpos%": "pos%",
+    "cretnum%": "retnum%"
+  },
+  "layout_only": false,
+  "hardware_validation": false,
+  "inputs": {
+    "/Agon/mystuff/bbc-basic-v-adl/bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+    "/Agon/mystuff/bbc-basic-v-adl/.emulator/mos_platform.bin": "d564243283972690933a4554296ad6202ca4ef54572279533a942960846bebae",
+    "/Agon/mystuff/bbc-basic-v-adl/.emulator/fab-agon-emulator.bin": "bf5f29b243b8214e54c515dcc26edf47399ce440356af2ebc3ce3d7664ae11eb",
+    "/Agon/mystuff/bbc-basic-v-adl/.emulator/fab-agon-emulator": "e822acb348e1be281dce6a80128d3924651f41157b407088b23ea73a4eba728c"
+  },
+  "source_compilation_succeeded": true,
+  "counters": "324275:2094:219:254",
+  "source_position": "4:2067:47",
+  "image_bytes": 324275,
+  "image_sha256": "299a31190c380541a73ed9eb144a303fa37abccc4f3c3e0ad47f99f1538122c0",
+  "layout_bytes": 324275,
+  "allocated_target_pages": 7,
+  "symbol_content_bytes": 13948,
+  "metadata_string_content_bytes": 5473,
+  "controller_seconds": 3911.701
+}

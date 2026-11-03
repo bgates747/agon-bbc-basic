@@ -1,0 +1,12 @@
+{
+  "bootstrap.py": "77ebf884cd6f37f95b140c1667f029ea8cc5386923cb64afb45ef9507aba5ae2",
+  "compiler.bas": "6597a0df3f99b4f43c42bff1cdbc59f5fdf730c57837f3d4112a598fbfbe5fb8",
+  "controller.log": "f834a302c345929d1a0a15a546c24db10f7dd30f96cadd25f614bc552f25c138",
+  "g0-seed.dat": "299a31190c380541a73ed9eb144a303fa37abccc4f3c3e0ad47f99f1538122c0",
+  "g1-commands.txt": "abe90de6e433c2e8252bad8cf8d8326fc6361f2726bcacba9b30696cd5983129",
+  "g1-keyboard.json": "634688fa2543ffd812cec7f8361a4fd565aff688e085f5e79841cc1408088810",
+  "g1.dat": "299a31190c380541a73ed9eb144a303fa37abccc4f3c3e0ad47f99f1538122c0",
+  "g1.log": "12af593c113ebc7b3a045dbdb930c93f2e871333ba18616220735dcea21bc931",
+  "resource-seed-results.json": "3b5b1c480830a253cd87de93a0bddda27fbea9de155505ccc269a3932c450751",
+  "results.json": "9e25b7226d5673740e9b1fb39aa37c4d0c3ba59911faf31eec6a2fa9a144beda"
+}

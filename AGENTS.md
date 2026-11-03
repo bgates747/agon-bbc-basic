@@ -175,3 +175,13 @@ remote CLI facilities. Request sent to Extender2026-10-13Sol; canonical mailbox
 2026-11-03_02-34-30_bbc-basic_bbc-olimex-access-request-one. Physical lease/access
 instructions are owned by agon-dev-env/cross-agent/olimex-bench and Extender;
 no physical deployment or result exists yet.
+
+C006 packed-native-preflight-001 completes native self-source compilation through
+normal prompts in1983.653 controller seconds, MOS status0. Its entire324275-byte
+G1 equals the interpreted resource seed SHA299a31190c380541a73ed9eb144a303fa37abccc4f3c3e0ad47f99f1538122c0.
+Exact6597a0df source and source/seed/output/console/controller identities are
+retained. Actual native initialization, source metadata/storage and all output
+passes fit; the lower-bound estimate is no longer the sole resource evidence.
+This preflight did not run unmodified interpreted main and does not replace the
+full default four-image chain, native regressions or physical qualification.
+No hardware or performance benchmark result is claimed.

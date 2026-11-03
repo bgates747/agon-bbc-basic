@@ -184,3 +184,20 @@ use LOAD/RUN ., explicit entry/return markers and post-return listener start;
 filename inputs and rejection sentinels remain explicit coordinator steps.
 No network/device connection, compiler implementation or image patch is present.
 Python syntax checks pass; real-input packaging awaits completed prerequisites.
+
+Extender scheduling inquiry02-59-16 asks whether BBC is ready before a prepared
+6502 finite tranche. Reply03-01-26_bbc-basic_bbc-priority-not-ready-r02 through
+helper plus immediate chat: still independently qualifying, no reservation or
+reliable hardware-ready ETA; do not idle the bench for us. No BBC lease, target
+operation or authority over the other project's tests is asserted. Native
+preflight has started output; only partial-prefix equality is observed so far.
+
+C006 packed-native-preflight-001 completes native self-source compilation through
+normal prompts in1983.653 controller seconds, MOS status0. Its entire324275-byte
+G1 equals the interpreted resource seed SHA299a31190c380541a73ed9eb144a303fa37abccc4f3c3e0ad47f99f1538122c0.
+Exact6597a0df source and source/seed/output/console/controller identities are
+retained. Actual native initialization, source metadata/storage and all output
+passes fit; the lower-bound estimate is no longer the sole resource evidence.
+This preflight did not run unmodified interpreted main and does not replace the
+full default four-image chain, native regressions or physical qualification.
+No hardware or performance benchmark result is claimed.

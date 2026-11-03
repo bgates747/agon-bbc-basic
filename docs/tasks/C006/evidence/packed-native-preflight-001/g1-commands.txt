@@ -1,0 +1,3 @@
+try /self-g0.bin
+echo SELF_STATUS:<Try$ReturnCode>
+echo SELF_G1_DONE
