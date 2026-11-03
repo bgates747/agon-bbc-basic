@@ -315,3 +315,11 @@ requires its exact fresh file/line error and actual CLI; no assumed end marker,
 listener restart or RUN/SAVE replay. Reply04-33-38_bbc-basic_bbc-exit-exec-boundaries-received-four
 acknowledges both corrections through maintained mail plus immediate chat. G0
 continues; no physical reservation/access or new approval gate is introduced.
+
+Prepare exact physical upload mapping, including rejection sentinels placed at
+old-output destinations rather than ordinary source locations. Extend the still
+unexecuted representative native file case to remove its own scratch file,
+verify255+text (five bytes) and retain actual output for physical comparison;
+packaging requires that proof and copies its bytes. Syntax checks pass. These
+host-only changes affect future native qualification, not active G0 source,
+BASIC main or compiler image. No file-I/O result is claimed before execution.

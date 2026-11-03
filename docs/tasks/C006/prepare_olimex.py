@@ -55,6 +55,7 @@ def main():
     assert int.from_bytes(seed[-3:], 'little') == 0xA7F00
     assert all(path.read_bytes() == seed for path in images)
     assert regressions['all_cases_passed']
+    assert regressions['file_io_bytes_verified']
     assert regressions['native_compiler_sha256'] == digest(images[0])
     assert baseline['native_compiler_sha256'] == digest(images[0])
     assert baseline['reference_compiler_sha256'] == digest(source)
@@ -107,12 +108,19 @@ def main():
         else:
             shutil.copy2(a.regressions / f'p{i}.dat', expected / f'case-{i}.dat')
             command(f'run-{i}.txt', results + f'/case-{i}.bin', f'NATIVE_{i}')
+    shutil.copy2(a.regressions / 'native-test.dat', expected / 'native-test.dat')
+    uploads = {str(path.relative_to(out)): fixtures+'/'+path.name
+               for path in sorted(payload.iterdir())}
+    for i, case in enumerate(cases):
+        if 'diagnostic' in case:
+            uploads[f'payload/reject-{i}.dat'] = results+f'/case-{i}.bin'
     report = dict(scope='Offline fixture preparation; no hardware access or result',
                   compiler_sha256=digest(source), native_compiler_sha256=digest(images[0]),
                   image_bytes=len(seed), load_address=0x40000,
                   static_image_end=0x40000+len(seed), private_heap_limit=0xA7F00,
                   activation_arena_bytes=32768, top_reserve_bytes=256,
                   fixture_path=fixtures, result_path=results, filename_inputs=prompts,
+                  uploads=uploads,
                   bootstrap_evidence=str(a.bootstrap.resolve()),
                   regression_evidence=str(a.regressions.resolve()),
                   planned_RUN_returns=0, EXEC_RUN_line=4,

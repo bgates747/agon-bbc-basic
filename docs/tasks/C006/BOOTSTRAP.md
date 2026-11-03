@@ -84,6 +84,11 @@ generation before executing a successor. This adds a byte-identity gate without
 changing the BBC main, source or generation stages. The first full-chain run will
 use the qualified resource seed; this new controller path is prepared only.
 
+The representative file case removes its own old scratch file before execution,
+verifies all five bytes (255 followed by text), and retains the actual output
+for physical comparison. This is prepared orchestration; its first native run
+is still pending the generation chain.
+
 C006 packed-native-preflight-001 completes native self-source compilation through
 normal prompts in1983.653 controller seconds, MOS status0. Its entire324275-byte
 G1 equals the interpreted resource seed SHA299a31190c380541a73ed9eb144a303fa37abccc4f3c3e0ad47f99f1538122c0.

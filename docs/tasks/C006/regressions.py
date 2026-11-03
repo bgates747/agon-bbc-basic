@@ -34,7 +34,10 @@ def main():
     if c.get('reference'):
      ref='10 PRINT "NREG_REFERENCE_BEGIN"\n'+'\n'.join(f'{100+j*10} {line}' for j,line in enumerate(c['source'].splitlines()))+'\n';ref=ref.replace(':END\n',':OSCLI "BYE"\n');(sd/f'nreg-ref-{i}.bas').write_text(ref);(e/f'reference-{i}.bas').write_text(ref)
      out=h.run_profile(PROFILE,f'load /bin/basic.bin\nrun . /nreg-ref-{i}.bas\necho NREG_REFERENCE_END\n','NREG_REFERENCE_END',f'nreg-reference-{i}.log',timeout_seconds=120);(e/f'reference-{i}.log').write_text(out);body=out.split('NREG_REFERENCE_BEGIN\n',1)[1].split('NREG_REFERENCE_END\n',1)[0];c['expected']=body
+    if i==8:(sd/'native-test.dat').unlink(missing_ok=True)
     out=h.run_profile(PROFILE,f'echo NREG_NATIVE_BEGIN\ntry /{target}\necho NREG_STATUS:<Try$ReturnCode>\necho NREG_NATIVE_END\n','NREG_NATIVE_END',f'nreg-native-{i}.log',timeout_seconds=120);(e/f'native-{i}.log').write_text(out);got=out.split('NREG_NATIVE_BEGIN\n',1)[1].split('NREG_NATIVE_END\n',1)[0];assert got==c['expected']+f'NREG_STATUS:{c["status"]}\n',(i,got,c)
+    if i==8:
+     assert (sd/'native-test.dat').read_bytes()==bytes([255])+b'text';shutil.copy2(sd/'native-test.dat',e/'native-test.dat');report['file_io_bytes_verified']=True
    report['completed_cases'].append(i);print('Native compiler regression',i,'passed',flush=True)
   report.update(all_cases_passed=True,controller_seconds=round(time.monotonic()-start,3))
  except BaseException as err:report['failure']=repr(err);raise

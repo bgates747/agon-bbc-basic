@@ -98,7 +98,9 @@ completed12-case native regressions,39-case native baseline equivalence and39
 fresh native source-error programs. It verifies their retained manifests,
 source and complete image equality, and creates a new host-only bundle. It
 copies qualified source/images, fresh per-stage MOS command files, filename
-inputs and retained expected outputs. It neither compiles nor accesses hardware.
+inputs, exact upload destinations and retained expected outputs. Rejection
+sentinels map to the intended existing result files, and the actual native
+file-I/O fixture supplies the expected native-test.dat bytes. It neither compiles nor accesses hardware.
 The caller must deploy rejection sentinels under the corresponding output names
 before those cases, assert its actual lease and verify all payload readbacks.
 The generated command files use LOAD/RUN ., mark entry/return and start the
