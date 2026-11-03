@@ -474,3 +474,14 @@ mode records are removed only for text comparison, while raw capture is retained
 The bounded small coordinator starts remaining compile2..11/run1..9, requiring
 each child's actual passed result before proceeding. No self-source or retry/
 cleanup is included. Physical qualification is not yet complete.
+
+All remaining19 small stages finish506.254 coordinator seconds: total physical
+12 source compiles/10 actual native programs pass. Exact ten image comparisons,
+two42-byte prior-output sentinels, visible output and native-test.dat FF74657874
+match. Freeze complete raw small capture/per-stage windows, outputs, observation
+times and report in olimex-small-001. No optical or performance pass follows.
+Exit the final listener, observe actual CLI, disable VDU2 and close its owned
+reader normally. Open fresh maintained7200s self-a capture, enable/qualify it
+with new BBC_C006_SELF_A_CAPTURE_R01 sentinel and observed CLI, then start the
+canonical listener for the one-stage driver. Invoke self-a exactly once through
+its observed normal prompts. It is active; self-b is not invoked yet.

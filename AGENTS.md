@@ -111,13 +111,15 @@ environment, ownership, assembly, emulator, hardware and coordination rules.
    Extender granted generation7. Exact lease/config/receipts are local under
    C006/build/physical-c006-r01/{grant,config}.json; assert current ownership
    before every target operation. Maintained passive capture-small is active
-   (session80842). All40 deployment readbacks pass (242.466s); retained as
+   was closed normally after the small cohort. All40 deployment readbacks pass (242.466s); retained as
    olimex-deployment-001 with actual entry/MEM and manual compile/run0 proof.
    Actual sentinel/CLI/MEM pass: userLO040000..0BBFFF, stack0BF800..0BFFFF.
-   Physical compile/run0 and compile1/2 pass. Remaining small cohort is active
-   in session54827 (run_olimex_small.py); no new target operations alongside it.
-   It runs compile2..11 then run1..9, never repeats completed case0/compile1.
-   Read its local small-cohort/results.json for exact current progress.
+   All12 physical compiles/10 native programs now pass, including exact file
+   bytes and two preserved-output rejections, frozen as olimex-small-001.
+   First physical self-source is active in session94215; fresh maintained
+   capture-self-a is session25803 (7200s). Read local stages/self-a/results.json
+   for actual prompt/completion progress; do not issue other target operations
+   alongside it. No physical self-source result exists yet; self-b is unstarted.
    Extender has stopped all target access.
    Keep custody through restoration/release; consult actual local receipts.
    Use pinned new staged

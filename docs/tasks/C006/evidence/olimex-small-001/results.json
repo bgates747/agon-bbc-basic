@@ -1,0 +1,14 @@
+{
+  "scope": "Actual Olimex twelve native compiler invocations and ten generated-program invocations; physical self-source separate",
+  "all_twelve_compiles_pass": true,
+  "all_ten_programs_pass": true,
+  "whole_images_equal": 10,
+  "rejections_preserve_output": 2,
+  "file_io_bytes_equal": true,
+  "hardware_validation": true,
+  "human_optical_validation": false,
+  "physical_self_compilation": false,
+  "source_sha256": "6597a0df3f99b4f43c42bff1cdbc59f5fdf730c57837f3d4112a598fbfbe5fb8",
+  "native_compiler_sha256": "299a31190c380541a73ed9eb144a303fa37abccc4f3c3e0ad47f99f1538122c0",
+  "remaining_coordinator_seconds": 506.254
+}

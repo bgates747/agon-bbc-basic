@@ -1,0 +1,10 @@
+{
+  "case": 0,
+  "all_output_bytes_equal": true,
+  "image_bytes": 251,
+  "image_sha256": "71d66d9dcd3d2d75f5d9cbf0362570230733791daea78493f48b0a650b973f8b",
+  "completion_marker_observed": true,
+  "listener_return_observed": true,
+  "observed_epoch": 1793709609.5972357,
+  "physical_hardware": true
+}

@@ -1,0 +1,33 @@
+{
+  "stage": "run-4",
+  "started_epoch": 1793710352.85704,
+  "passed": true,
+  "physical_hardware": true,
+  "capture": "/Agon/mystuff/bbc-basic-v-adl/docs/tasks/C006/build/physical-c006-r01/capture-small/capture.bin",
+  "capture_start": 12013,
+  "observations": [
+    {
+      "token": "/agents/extender/results/bbc-basic/c006-r01 *",
+      "epoch": 1793710354.2831573,
+      "end": 12079
+    },
+    {
+      "token": "BBC_BEGIN_NATIVE_4\r\n",
+      "epoch": 1793710357.8393807,
+      "end": 12253
+    },
+    {
+      "token": "BBC_END_NATIVE_4\r\n",
+      "epoch": 1793710358.340413,
+      "end": 12286
+    },
+    {
+      "token": "Escape returns to MOS.\r\n",
+      "epoch": 1793710358.641203,
+      "end": 12416
+    }
+  ],
+  "completion_observed_epoch": 1793710358.3407948,
+  "finished_epoch": 1793710359.3264441,
+  "capture_end": 12416
+}
