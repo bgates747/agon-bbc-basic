@@ -179,3 +179,38 @@ actual BBC compiler source, suitable for unchanged-main generations if qualified
 Fresh whole-image comparison and reference/native tests must establish behavior;
 no speed benefit is claimed before measurement. This affects compiler-private
 identifiers, not admitted user syntax or BBC variable lookup semantics.
+
+## Complete resource cohort
+
+Exact1b3e4b33 passes the full12-source cohort in3613.441s: six native executions,
+six rejected sources, deterministic repeat, numeric/string GNU links and output
+preservation. Its70076-byte unrolled executable prints650. The2048-label image
+prints many-labels;4097 labels reject at physical4097,column8 before opening the
+output. Four fresh separately numbered BBC oracles are retained; the shared
+reference harness's counter is zero because those outputs were supplied from
+the separate actual probes. All four complete smaller images remain identical
+to the promoted7cac4bba baseline. `evidence/stream-resource-002` retains exact
+inputs, images, logs, links and hashes. This is functional controller time, not
+an Agon performance benchmark or self-source/native-memory result.
+
+The identifier-only690fd519 smoke is now running. Reverse renaming has already
+reproduced1b3e4b33 exactly; quoted text, DATA and comments are unchanged. No timing
+or execution result is claimed yet for690fd519.
+
+The690fd519 name-only smoke passes54.687s, with all four complete executables
+identical to the promoted old-image baseline, four fresh actual BBC probes,
+rejection/output preservation, repeat and GNU numeric/string links. This
+compares to180.881s for the earlier f11b3e22 same-shape smoke (the intervening
+reader revision has its separate39-case evidence). It measures this controller
+workflow, not a standalone Agon benchmark or a controlled attribution of every
+saved second. `stream-names-smoke-001` freezes source, map, outputs and proof.
+The full39-case baseline on690fd519 is running before the self-source attempt.
+
+Exact690fd519 passes the full39-case/15-native baseline86.029s, including
+rejections, deterministic repeat and GNU golden equality, retained in
+`stream-names-baseline-001`. The otherwise identical prefixed1b3e4b33 baseline
+was196.992s; both are Pi5 automated CLI controller durations, with no hardware
+calibration. The actual690fd519 source probe `stream-source-001` is now active
+with explicit host-only PRINT instrumentation and unchanged target input.
+Its next result must establish real source/resource limits; no native compiler
+or source fit is claimed before that result.

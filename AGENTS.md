@@ -72,9 +72,12 @@ C005/ERRORS.md. The self-source probe now records4096-fixup exhaustion at physic
 with existing output preserved. C005/streaming holds
 candidate1b3e4b33 (2188 lines,208 defs,248 static private names),
 with a BBC three-pass emitter. Its39-case/15-native baseline passes196.992s;
-earlier four-image smokes are byte-identical. The full resource cohort is active;
-its large image has been generated at70076 bytes but native execution is pending.
-A private-name-only candidate690fd519 is prepared and unexecuted. String arrays
+earlier four-image smokes are byte-identical. Full12-source resource qualification passes3613.441s (six native/six rejection),
+including70076-byte output,2048 labels and4097-label rejection. All four earlier
+complete images remain identical. A private-name-only candidate690fd519 passes54.687s four-image smoke and86.029s
+39-case/15-native baseline with old-image/GNU/repeat equality. Its actual
+self-source probe stream-source-001 is active with host-only progress and exact
+unchanged target input. Do not modify that source while it runs. String arrays
 already use five-byte descriptors: a proposed1MB fixed-slot inventory was wrong
 and withdrawn. Actual source/native RAM fit remains unproved. Do not replace the active prototype while a
 qualification uses it. Read C005/STREAMING.md. C006 has refined generation and

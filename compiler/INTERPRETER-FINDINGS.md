@@ -140,3 +140,21 @@ not a faster-open benchmark or an accepted behavioral improvement.
    need separate upstream compatibility review. The native adapter instead polls
    documented MOS state at handler entry and preserves the observed retrigger.
    No interpreter keyboard/FLAGS code has been modified.
+
+## Dynamic-variable first-character chains
+
+1. MAIN.Z80 LOCATE/LOC1 derives the dynamic-variable root from the first name
+   character; LOC2/LOC3 then follow links and compare names linearly. The
+   compiler's private c-prefixed variables therefore share one host chain.
+   This is a source audit, not a measured profile or speedup.
+2. C005's isolated `streaming/names.bas` removes that redundant private prefix
+   while preserving quoted text, DATA, comments, PROC/FN names and the compiler
+   algorithm. Reverse renaming reproduces the original source exactly. Its four-native /
+   one-rejection smoke passes54.687s with all four complete old images identical;
+   comparable earlier workflow180.881s also includes a source-reader difference.
+   These are CLI controller observations, not hardware profiling. This changes compiler implementation names, not
+   the interpreter or the variable semantics of compiled programs.
+3. A secondary lookup index is a possible separate interpreter improvement. It
+   would need evidence that addresses, LOCAL restoration, creation and lookup
+   behavior remain intact, plus an actual profile. No interpreter change,
+   timing benefit or upstream submission is claimed here.

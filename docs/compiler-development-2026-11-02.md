@@ -434,3 +434,31 @@ confirms first-character chains for host dynamic variables. Candidate690fd519
 therefore prepares a private-identifier-only revision, removing redundant leading
 c prefixes while preserving quoted text, DATA, REM and PROC/FN names. It remains
 unexecuted; no timing or behavior claim follows from that preparation.
+
+## Complete streaming resource qualification
+
+Candidate1b3e4b33 passes12 sources (six native/six rejected) in3613.441s. The
+70076-byte650-store program runs and prints650;2048 labels compile/run and4097
+reject at4097:8 with old output intact. Deterministic repeat and independent
+numeric/string links pass; all four smaller whole images match promoted7cac4bba.
+Four actual separately numbered reference oracles are retained alongside the
+shared harness's results. `stream-resource-002` freezes this scope.
+
+The private-name-only690fd519 smoke is running next. Its reverse rename exactly
+reconstructs1b3e4b33. No source compilation, hardware validation or performance
+benchmark has been claimed; live source remains7cac4bba.
+
+The690fd519 smoke passes54.687s with all four complete images identical, actual
+reference probes, repeat/rejection preservation and GNU links. The39-case
+baseline is running. Earlier f11b3e22's comparable smoke180.881s includes the
+intervening source-reader difference; no pure first-letter cost profile, Agon
+performance benchmark or self-source result is claimed.
+
+## Private-name baseline and actual source probe
+
+The full690fd519 baseline39/15 passes86.029s, GNU golden and repeat included.
+The same baseline on prefixed1b3e4b33 was196.992s; this is bootstrap controller
+time, not a calibrated Agon benchmark. The exact690fd519 self-source experiment
+stream-source-001 is active with host-only progress PRINTs, recorded input hashes,
+phase/line counters and unchanged target source. No generated compiler or actual
+native-memory fit is yet claimed.
