@@ -134,6 +134,16 @@ instructions and the notice before requesting hardware; do not infer availabilit
 from an empty queue or an old completed run. Console8 remains separately
 coordinated by the Author. This project has no new reservation or bench operation.
 
+Extender's14:55:28 adoption notice reports canonical /emos/sdserve.bin updated
+to24753 bytes, SHA2560566e17f18747c2e625d2450ce5324a2b1097bce323a5e4d70fad6dcb41cdff2
+(sdserve-v0.3.0-b2026-11-03-08-07-19Z, Extender8aa3245d). The22968-byte04e7
+listener remains historical C006 evidence/rollback, not a current selection.
+Before any future finite plan/grant, read Extender's current
+docs/mainboard-sd-tools.json and mainboard-sd.md; do not infer current listener
+identity from historical FAST-TRANSFER-PIN.json. Major2/client ABI is reported
+unchanged. No existing cohort, helper pin, card package or hardware is changed
+by receipt of this notice; retained custody still requires an explicit new grant.
+
 ## Manual Console8 package
 
 C008 is staged at the Author-selected Oryx path

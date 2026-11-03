@@ -735,3 +735,11 @@ document, updates the two references and syncs the mounted card. Other .txt file
 remain plain text. markdown-extension-001 retains the successful receipt and new
 package manifestababb88b; previous evidence is unchanged. No program, firmware,
 test result or manual-acceptance status changes.
+
+Extender14:55:28 reports BENCH-013 listener adoption in8aa3245d: canonical
+/emos/sdserve.bin is now24753B/SHA0566e17f, exact tested November3 sequential
+reader, with unchanged major2/client ABI. Original22968B/04e7 remains rollback
+and historical C006 evidence. Record the new notice in the handoff/physical
+runbook; future plans must read Extender's current component selection and fresh
+grant. Do not modify frozen evidence, old helper pins or the Console8 package.
+Extender retains generation9; no bench request/access or reply-only message occurs.

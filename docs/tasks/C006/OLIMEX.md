@@ -9,6 +9,16 @@ granted repeat follows [R02](OLIMEX-R02.md); olimex-repeat-001 retains its actua
 result and release. Exact access details remain in Extender's machine-local
 records. Any future target work requires a new finite scope and fresh grant.
 
+Subsequent Extender notice2026-11-03_14-55-28 reports a new canonical listener:
+24753 bytes, SHA2560566e17f18747c2e625d2450ce5324a2b1097bce323a5e4d70fad6dcb41cdff2,
+buildsdserve-v0.3.0-b2026-11-03-08-07-19Z, published in Extender8aa3245d.
+The22968-byte04e7 listener in C006 remains the exact historical tested component.
+Preserve those original records and pins. Future preparation must consult
+Extender's current mainboard-sd-tools.json/mainboard-sd.md and the fresh grant,
+rather than treating historical FAST-TRANSFER-PIN.json as current selection.
+The notice reports unchanged major2/host-client ABI and retained generation9
+custody; clean resources do not authorize another project's target access.
+
 ## Scope and custody
 
 1. Use the canonical `agon-dev-env/cross-agent/olimex-bench` reservation/grant
