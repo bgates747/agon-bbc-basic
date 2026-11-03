@@ -86,3 +86,36 @@ recorded evidence and an explicit live promotion identify exact versions.
    The fixture now selects a project-local observer build through its canonical
    generated wrapper. The missing target's cause is unknown. Historical CLI
    hashes/evidence remain unchanged; the new selected tool is recorded afresh.
+
+## Completed experiment evidence
+
+1. `wire-probes-001`, `wire-bounded-001`, `wire-errors-001` and
+   `wire-interactions-001` complete18 fresh reference/native pairs for candidate
+   `13c2a488`: graphics packets and conversions, argument/error order, GET and
+   Escape, expression temporaries, function/LOCAL recovery and bounded fractal
+   work. `admissions-001` completes the unchanged full source compile and12
+   output-preserving unsupported-form rejections. `repack-001` checks all ten
+   generators and unchanged nine runtime templates. `hosted-baseline-001` passes
+   all39 existing cases/15 executions, assembler oracle and repeat; its15 entire
+   images and24 diagnostics/preserved outputs match the preceding live source.
+2. `full-native-002` executes the unchanged full program, after interrupted
+   `full-native-001` (host exit143, origin unknown). It completes328833 GCOL/PLOT
+   pairs and2959501 graphics bytes, SHA256
+   `2988ce82e7e7e18def677bcaa6f14ac7079b7b9c3a9442133defabb78b5fcc5f`.
+   The key is supplied only after the final observed plot. MODE1 acknowledgement
+   and actual MOS status0 follow. Its1214.525-second concurrent controller run
+   is not a CPU benchmark. `full-reference-001` also completes, with the same
+   counts and complete stream bytes. `full-pair-001` verifies both frozen
+   manifests and exact equality. The reference's2505.852 concurrent controller
+   seconds are likewise not a paired benchmark. Rendered acceptance is separate.
+3. `visual-fixture-001` records an actual new-file Oryx copy/fsync/sync followed
+   by a receipt-formatting NameError. The corrected helper does not replay that
+   write: `visual-fixture-002` independently reads and verifies the full staged
+   `mandelbrot-c010.bin`, SHA bad741db. Original source/root compiler/processes
+   remain unchanged. Delivery is not a human result.
+4. `native-build-002` also exits143 with unknown origin, after writing only
+   256674 bytes. Its partial image, source, seed and console are retained;
+   that image is incomplete and unqualified. `native-build-003` restarts from
+   the same qualified seed and candidate with progress heartbeats and signal
+   capture. The native pipeline uses separate owned profiles for self-building
+   and serial regressions. Only completed evidence can satisfy promotion gates.

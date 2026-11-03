@@ -1,0 +1,23 @@
+{
+  "completed": true,
+  "whole_graphics_stream_identical": true,
+  "source_sha256": "1eb897c8ef3aecc99910e0352eba6d32064ebc4aef9e7bd32e9952b0878b43de",
+  "native_image_sha256": "bad741db6adfc250c7c2f48c37687aec93e8271f77c48bd760f309548dada196",
+  "plots": 328833,
+  "gcol_commands": 328833,
+  "graphics_bytes": 2959501,
+  "graphics_sha256": "2988ce82e7e7e18def677bcaa6f14ac7079b7b9c3a9442133defabb78b5fcc5f",
+  "key_supplied_only_after_last_plot_both": true,
+  "mode1_and_normal_return_both": true,
+  "input_cohorts": [
+    "full-native-002",
+    "full-reference-001"
+  ],
+  "reference_sha256": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+  "observer_sha256": "63d22f604af13317cf6532911b9206ac03e7b4f9ed257f93924a65d551646d8e",
+  "mos_sha256": "d564243283972690933a4554296ad6202ca4ef54572279533a942960846bebae",
+  "rendered_validation": false,
+  "human_validation": false,
+  "performance_benchmark": false,
+  "scope": "Full unchanged source; actual reference/native CPU execution and UART packets"
+}

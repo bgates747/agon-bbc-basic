@@ -74,11 +74,31 @@ def main():
         'Use CD ../.. to return to the package root afterward.\n\n'
         'Record the compiler hash/version, observed drawing, key wait, final mode\n'
         'and return. No elapsed-time or performance acceptance is implied.\n')
-    with (out/'readme.txt').open('a') as file:
-        file.write('\nMandelbrot support: MODE, GCOL, PLOT and bare numeric GET are included.\n'
-            'For the unchanged source and supplied program, read\n'
-            'tests/12-mandelbrot/native-readme.txt. The twelve earlier tests remain.\n'
-            'Compiler provenance separates this version from earlier physical tests.\n')
+    readme = (out/'readme.txt').read_text()
+    replacements = [
+        ('In particular, general graphics/sound statements, RND, CASE, numeric INPUT,',
+         'MODE, GCOL, PLOT and bare numeric GET support their documented forms.\n'
+         'Other graphics/sound statements, RND, CASE, numeric INPUT,'),
+        ('Each subdirectory has source.bas, expected.txt and its own readme.txt with\ncommands.',
+         'Those twelve subdirectories have source.bas, expected.txt and readme.txt\nwith commands.'),
+        ('These small programs have prior automated and physical Agon qualification.',
+         'An earlier compiler version passed automated and physical checks of these\n'
+         'small sources. This version has fresh automated checks; its physical and\n'
+         'human qualification remain pending. See compiler-provenance.json.'),
+        ('output name, for example self-new.bin. A physical Agon qualification self-build\ntook about99 minutes to observed completion;',
+         'output name, for example self-new.bin. An earlier compiler version took\n'
+         'about99 minutes to observed completion in physical Agon qualification;'),
+        ('The qualified compiler is324275 bytes, SHA256:\n'
+         '299a31190c380541a73ed9eb144a303fa37abccc4f3c3e0ad47f99f1538122c0',
+         f'This compiler is {native["image_bytes"]} bytes, SHA256:\n{native["image_sha256"]}'),
+    ]
+    for old_text,new_text in replacements:
+        assert readme.count(old_text) == 1,old_text
+        readme = readme.replace(old_text,new_text)
+    readme += ('\nFor unchanged Mandelbrot source and its supplied native program, read\n'
+        'tests/12-mandelbrot/native-readme.txt. The twelve earlier tests remain.\n'
+        'Compiler provenance separates this version from earlier physical tests.\n')
+    (out/'readme.txt').write_text(readme)
     with (out/'tests/readme.txt').open('a') as file:
         file.write('\n12-mandelbrot: follow native-readme.txt in that directory.\n'
             'Command parity is qualified; rendered/human acceptance remains pending.\n')

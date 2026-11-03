@@ -867,3 +867,14 @@ heartbeats and explicit signal/failure capture (as in the established C006
 controller). Live source/native image remain6597a0df/299a3119. Prepared C010
 promotion and package helpers require completed matching evidence before live
 replacement; package updates check old managed hashes and preserve other files.
+
+C010 full-reference-001 completes actual pinned interpreter execution of the
+unchanged source. Both full CPU runs produce328833 GCOL/PLOT pairs and the
+same2959501-byte graphics stream, SHA2988ce82. compare_full.py verifies both
+frozen manifests and complete stream bytes, then freezes full-pair-001. Both
+supply a key only after the final plot, restore MODE1 and return normally. The
+reference controller2505.852s and native1214.525s were concurrent workload
+observations with a protocol-only peer, not a paired performance benchmark.
+Neither renders pixels; the Author's newly staged native visual result remains
+pending. Root compiler/source are still the older qualified version while the
+fresh native build and its automatically sequenced native qualification proceed.

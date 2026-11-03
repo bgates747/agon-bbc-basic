@@ -11,7 +11,7 @@ import shutil
 
 ROOT = Path(__file__).resolve().parents[3]
 TASK = Path(__file__).resolve().parent
-SOURCE = '13c2a48802718040b1056921b1aedea3e5da9f6f36be92396b9'
+SOURCE = '13c2a48802718040b1056921b1aedea3e5da9f6f36e946d990ccf36be92396b9'
 PRIOR_SOURCE = '6597a0df3f99b4f43c42bff1cdbc59f5fdf730c57837f3d4112a598fbfbe5fb8'
 PRIOR_IMAGE = '299a31190c380541a73ed9eb144a303fa37abccc4f3c3e0ad47f99f1538122c0'
 
@@ -83,6 +83,8 @@ def main():
         assert report['native_compiler_sha256'] == image_hash
         assert report['all_cases_passed'] and report['completed_cases'] == list(range(count))
         inputs.append(name)
+    representative_execution = retained('native-representative-001', 'execution.json')
+    assert representative_execution['identical_representative_full_images'] == list(range(10))
     for suite, count in [('basic', 5), ('bounded', 1), ('errors', 9), ('interactions', 3)]:
         name = f'native-wire-{suite}-001'
         report = retained(name)
@@ -104,6 +106,17 @@ def main():
     assert full_native['plots'] == full_native['gcol_commands'] == full_reference['plots'] == full_reference['gcol_commands']
     assert (TASK/'evidence/full-native-002/graphics.dat').read_bytes() == (TASK/'evidence/full-reference-001/graphics.dat').read_bytes()
     inputs += ['full-native-002', 'full-reference-001']
+    pair = retained('full-pair-001')
+    assert pair['completed'] and pair['whole_graphics_stream_identical']
+    assert pair['native_image_sha256'] == native_mandel['image_sha256']
+    inputs.append('full-pair-001')
+    pipeline = retained('native-pipeline-001')
+    assert pipeline['completed'] and pipeline['failure'] is None
+    assert pipeline['image_sha256'] == image_hash
+    assert set(pipeline['completed_stages']) == {'image-checks', 'native-mandelbrot',
+        'native-baseline', 'native-representative', 'native-wire-basic', 'native-wire-bounded',
+        'native-wire-errors', 'native-wire-interactions', 'native-self'}
+    inputs.append('native-pipeline-001')
     evidence = TASK/'evidence'/args.name
     evidence.mkdir(parents=True, exist_ok=False)
     shutil.copyfile(__file__, evidence/'promote.py')
