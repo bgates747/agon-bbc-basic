@@ -1,0 +1,5 @@
+{
+  "completed": false,
+  "failure": "InterruptedError('Error controller received signal 15')",
+  "controller_seconds": 651.572
+}

@@ -930,3 +930,34 @@ program images/streams and all local/error/input behavior; rendered acceptance
 remains separate. Its native seed build continues with frozen exact source in
 fit-native-build-001; fit-native-pipeline-001 waits for that completed image.
 The native image/self-source fit remains unclaimed until actual execution.
+
+The first fit build's tool session later returns143 despite progress heartbeats;
+fit-native-pipeline-001's waiting session also returns143. A filtered native
+host process check confirms their controllers and emulator are gone. Neither
+produced a complete image/qualification record; retain both incomplete cohorts
+with unknown termination origin. The separate error waiter is still alive but
+its prerequisite can no longer complete. Verify its exact argv/CWD and stop only
+that owned waiter; controller-migration-001 records the intentional dependency
+recovery. No language/compiler error was observed in that interrupted fit run.
+
+Run the identical frozen b8afbfdb source through fresh fit-native-build-002 under
+a finite transient user service, with two dependent finite qualification services
+for native/self/regressions and error39. durable-launch-001 records their exact
+scripts/arguments, invocation IDs, project-local log paths and runtime limits.
+No unit is installed/enabled for login/startup; they collect on exit. The build
+limit is7500s (controller guard7200), dependent service limits16000s. Actual
+user-manager verification shows all three active/running and normal filename
+prompts in the new build log. Launch success is not a test pass. The reason for
+the earlier tool-session terminations remains unknown; service lifetime is now
+independent of those sessions. No hardware/Oryx emulator control is involved.
+
+The fit error controller reuses the unmodified C00639-case native harness in the
+now-idle root automated profile, while self-building and serial regressions use
+their separate fit profiles. It additionally requires whole-image equality to
+all39 older C006 error images. This checks the private bookkeeping refactor's
+existing error/string/control paths without changing numerical/runtime sources.
+Prepared fit promotion gates require those exact completed results, along with
+fresh self-image equality and the other retained evidence. Live admissions remain
+unchanged. Reference/test catalogue documentation now records the actual MODE/
+GCOL/PLOT/GET audit and full unchanged Mandelbrot parity with rendering/timing
+limits explicit. The conditional documentation updater runs only after promotion.

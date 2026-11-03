@@ -296,3 +296,27 @@ preserving IX/IY/SP on ordinary return. OSLINE/LTRAP1 leaves a held key observab
 XEQ/TRAP can therefore raise Escape again after selecting the handler's source
 position. The native helper preserves that mechanism without importing FLAGS or
 BASIC's keyboard vector. Broader asynchronous keyboard polling remains unqualified.
+
+## Graphics statements and bare keyboard GET
+
+[C010's audit](../docs/tasks/C010/AUDIT.md) derives MODE, GCOL, PLOT and bare
+numeric GET from the actual `src/agon_os.s` and `include/bbc-ez80/EVAL.Z80`
+handlers. Their EXPRI/CEXPRI paths convert each argument with SFIX before the
+next argument runs. Native emission uses the existing numeric selector38,
+then the reference low8 action/colour/mode and low16 coordinate bytes.
+
+MODE clears MOS sysvar flag4 at offset4 before evaluating its argument, sends
+VDU22 and waits for the acknowledgement. MOS selector8 supplies the sysvar
+pointer; incoming IX is preserved. Bare GET uses selector0, preserves IX/IY,
+zero-extends the returned byte into the existing packed integer format and
+raises Escape17 for byte27 through the existing native error interface.
+Interpreter MOS_SYSVARS/FLAGS, its source parser and keyboard vector are not
+linked. OSWRCH's interpreter redirection/COUNT/WIDTH state also remains separate;
+output uses the existing native MOS path. Existing numeric code/notices remain
+unchanged. No additional interpreter statement-handler image is extracted.
+
+The task-local CLI protocol observer records actual CPU UART bytes and supplies
+bounded MODE acknowledgements; it has no renderer. The unchanged full Mandelbrot
+program produces the exact reference graphics stream. Task records distinguish
+that program evidence, compiler-source/native qualification and human visual
+results. Current feature admissions remain in [the matrix](COMPATIBILITY.md).

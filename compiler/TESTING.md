@@ -13,6 +13,15 @@ four identical324275-byte emulator images, native regression suites and two
 physical self-source generations. This is correctness evidence. Recorded test-controller durations
 are not paired benchmark results; no physical speedup is claimed.
 
+[C010](../docs/tasks/C010.md) also retains actual CPU execution of the unchanged
+Mandelbrot source: reference and emitted native code produce identical2959501
+graphics bytes for328833 plots, wait for a key, restore MODE1 and return normally.
+The source and output binary are pinned, with complete raw streams and earlier
+failed/interrupted attempts retained. The CLI observation peer does not render
+pixels. Concurrent controller durations are not a paired performance comparison;
+rendered/manual qualification and the current compiler promotion state remain
+separate in the task record and compatibility matrix.
+
 1. [Curated catalogue and source assessments](../docs/tasks/C007/CATALOG.md)
    — selected programs, correctness oracles, required features, adaptations,
    licenses and rejected leads.

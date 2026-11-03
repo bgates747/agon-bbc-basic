@@ -1,0 +1,47 @@
+{
+  "scope": "Finite project-owned user services; no startup installation/hardware/Oryx operation",
+  "started": "2026-11-03T23:34:07.059012+00:00",
+  "source_sha256": "b8afbfdb51de803e7c8e670d4c00e434371e3f2d0af4ce354ce29f3580cdd875",
+  "launch_is_not_qualification": true,
+  "jobs": [
+    {
+      "unit": "bbc-basic-c010-fit-build-002",
+      "script": "bootstrap_fit_self.py",
+      "script_sha256": "46e6ed8081f80959d9fed4a924452daf626056e7a08e507195797093fe63fddc",
+      "arguments": [
+        "--name",
+        "fit-native-build-002",
+        "--timeout",
+        "7200"
+      ],
+      "runtime_max_seconds": 7500,
+      "log": "docs/tasks/C010/build/controller-logs/bbc-basic-c010-fit-build-002.log",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "Running as unit: bbc-basic-c010-fit-build-002.service; invocation ID: 4289514081be477e83126e3a8bcb8b2d\n"
+    },
+    {
+      "unit": "bbc-basic-c010-fit-pipeline-002",
+      "script": "fit_pipeline_v2.py",
+      "script_sha256": "e4d11a83d35dc27b80c1e6a47f74e1ca60b7f8fb4feec5f6a1a91d6750416afc",
+      "arguments": [],
+      "runtime_max_seconds": 16000,
+      "log": "docs/tasks/C010/build/controller-logs/bbc-basic-c010-fit-pipeline-002.log",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "Running as unit: bbc-basic-c010-fit-pipeline-002.service; invocation ID: e4aa7403e08c45e9be079398b412eb69\n"
+    },
+    {
+      "unit": "bbc-basic-c010-fit-errors-002",
+      "script": "fit_error_pipeline_v2.py",
+      "script_sha256": "1ffc5ff2043fa67324ff3c8e7e9d2a554e414321a49b4c96d7057bd4af7cb613",
+      "arguments": [],
+      "runtime_max_seconds": 16000,
+      "log": "docs/tasks/C010/build/controller-logs/bbc-basic-c010-fit-errors-002.log",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "Running as unit: bbc-basic-c010-fit-errors-002.service; invocation ID: 58d3d5106c7e4dfb8ad75a1e55b12ee3\n"
+    }
+  ],
+  "completed": true
+}

@@ -1,0 +1,8 @@
+{
+  "scope": "Controller lifecycle recovery only; no compiler source/image change",
+  "stopped_waiter_pid": 65686,
+  "reason": "Its prerequisite build controller and emulator have disappeared after host tool exit143; migrate finite jobs to transient user services",
+  "signal": "SIGTERM",
+  "sent_at": "2026-11-03T23:33:22.202416+00:00",
+  "source_sha256": "b8afbfdb51de803e7c8e670d4c00e434371e3f2d0af4ce354ce29f3580cdd875"
+}

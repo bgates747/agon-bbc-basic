@@ -1,0 +1,8 @@
+{
+  "completed": false,
+  "host_process_exit": 143,
+  "termination_origin": "unknown",
+  "compiler_source_sha256": "b8afbfdb51de803e7c8e670d4c00e434371e3f2d0af4ce354ce29f3580cdd875",
+  "successor": "fit-native-pipeline-002",
+  "scope": "Controller/CPU run did not complete; no native output or successful fit inferred"
+}

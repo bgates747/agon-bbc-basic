@@ -55,7 +55,7 @@ def main():
     case = out/'tests/12-mandelbrot'
     case.mkdir(exist_ok=False)
     shutil.copyfile(TASK/'evidence/source-001/mandelbrot.bas', case/'mandelbrot.bas')
-    shutil.copyfile(TASK/'evidence/native-mandelbrot-001/mandelbrot.dat', case/'mandelbrot-c010.bin')
+    shutil.copyfile(TASK/'evidence/fit-native-mandelbrot-001/mandelbrot.dat', case/'mandelbrot-c010.bin')
     (case/'native-readme.txt').write_text(
         'Unchanged Mandelbrot by P. Mainwaring, March1990 (see source comments).\n'
         'Automated native/reference graphics commands match for the complete program.\n'
