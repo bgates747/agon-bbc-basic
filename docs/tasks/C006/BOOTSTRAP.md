@@ -54,3 +54,9 @@ SSD, Pi boot/root card and swap only; no mounted Agon FAT card or established
 project hardware fixture was present. No transfer, flash or hardware execution
 occurred. This observation does not block automated C005/C006 qualification and
 does not constitute a physical test result.
+
+The prepared bootstrap controller saves input identities and attempted-stage
+state before invoking each compiler. It emits a host-only liveness message every
+30 seconds and records SIGTERM when possible; this does not indicate eZ80
+progress or performance. The BBC source and normal main remain unmodified.
+This records host-controller preparation, not an executed generation result.

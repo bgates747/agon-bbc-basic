@@ -128,3 +128,8 @@ packed-source-002 through a live tee and poll the tool session itself regularly.
 Target6597a0df and the entire BBC driver are byte-identical to the interrupted
 run; only host orchestration changes. The new signal path is prepared, not a
 claimed tested interruption recovery. Native compiler generation remains open.
+
+Apply early input/stage persistence, host-only liveness messages and SIGTERM
+recording to the prepared C006 bootstrap controller too. Syntax checks pass;
+normal and interrupted generation paths are not yet exercised. These changes
+never edit the BBC target/source/main or substitute a source compiler.
