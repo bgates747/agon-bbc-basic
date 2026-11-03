@@ -60,6 +60,8 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--cli", required=True, type=Path)
     parser.add_argument("--compiler", type=Path, default=TASK_ROOT / "compiler.bas")
+    parser.add_argument("--profile", type=Path, default=ROOT / ".emulator",
+                        help="isolated automated profile within the project's .emulator directory")
     parser.add_argument("--timeout", type=float, default=180, help="compile-batch guard in seconds")
     parser.add_argument("--runtime", type=Path, default=Path.home() / "Agon/fab-agon-emulator")
     parser.add_argument("--setup", type=Path, default=Path.home() / "Agon/mystuff/agon-dev-env/scripts/setup_emulator.py")
@@ -67,7 +69,8 @@ def main() -> None:
     parser.add_argument("--linker", type=Path, default=Path.home() / "Agon/agondev/release/bin/ez80-none-elf-ld")
     args = parser.parse_args()
     cli = args.cli.resolve(strict=True)
-    profile = ROOT / ".emulator"
+    profile = args.profile.resolve()
+    assert profile.is_relative_to((ROOT / ".emulator").resolve()), profile
     if (profile / ".compiler-tests").exists() is False and profile.exists():
         raise SystemExit(f"Refusing to reuse an unmarked profile: {profile}")
     spec = importlib.util.spec_from_file_location("canonical_setup", args.setup)

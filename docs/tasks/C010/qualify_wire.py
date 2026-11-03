@@ -48,6 +48,16 @@ def cases(suite):
         body = body.replace('ITERS=32', 'ITERS=8').replace('SCALE=1', 'SCALE=64')
         body = body.replace('A%=GET', 'PRINT "C010_WAIT":A%=GET')
         return [dict(name='mandelbrot-bounded', body=body, keyboard=[('C010_WAIT', 'Q')])]
+    if suite == 'interactions':
+        return [
+            dict(name='mode-local-recovery', body='x%=77\nMODE FNmode\nPRINT ;x%\nMODE 1',
+                definitions='DEF FNmode\nLOCAL x%:x%=9\nON ERROR LOCAL =8\nERROR 100,"mode argument"\n=1'),
+            dict(name='keyboard-local', body='s$="outer":x%=7\nPRINT "C010_WAIT"\n'
+                'PRINT ;FNkey(100);":";x%;":";s$',
+                definitions='DEF FNkey(n%)\nLOCAL x%,s$\nx%=9:s$="inner"\n=n%+GET',
+                keyboard=[('C010_WAIT', 'Q')]),
+            dict(name='mode-handler-reuse', body='ON ERROR MODE 1:PRINT ;ERR;":";ERL:GOTO 900\nMODE 1E20'),
+        ]
     errors = []
     for name, statement in [
         ('gcol-first-overflow', 'GCOL 1E20,FNlater'),
@@ -77,11 +87,13 @@ def source(case, reference=False):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--name', required=True)
-    parser.add_argument('--suite', choices=['basic', 'bounded', 'errors'], default='basic')
+    parser.add_argument('--suite', choices=['basic', 'bounded', 'errors', 'interactions'], default='basic')
+    parser.add_argument('--native', type=Path, help='compile probes with this actual native compiler')
     args = parser.parse_args()
     assert args.name.replace('-', '').isalnum()
     evidence = TASK / 'evidence' / args.name
     evidence.mkdir(parents=True, exist_ok=False)
+    shutil.copyfile(__file__, evidence/'qualify_wire.py')
     keyboard = load('keyboard', ROOT / 'docs/tasks/C005/io/interactive.py')
     selected = cases(args.suite)
     report = dict(scope='Actual CPU UART stream parity; protocol peer, no renderer or human validation',
@@ -89,6 +101,7 @@ def main():
                   reference_sha256=digest(SD/'bin/basic.bin'),
                   observer_sha256=digest(PROFILE/'fab-agon-emulator.bin'),
                   mos_sha256=digest(PROFILE/'mos_platform.bin'), suite=args.suite, cases=[], completed=False)
+    report['native_compiler_sha256'] = digest(args.native) if args.native else None
     start = time.monotonic()
     try:
         # BBC BASIC performs every parse, conversion and byte of native emission.
@@ -101,8 +114,20 @@ def main():
             driver.append(f'{30+i*10} PROCcompile("w{i}.bas","w{i}.bin"):PRINT "COMPILED:{i}"')
         driver += [f'{30+len(selected)*10} PRINT "C010_COMPILE_DONE":OSCLI "BYE"']
         (SD/'wire-driver.bas').write_text('\n'.join(driver)+'\n1000 DEF'+definitions)
-        log = keyboard.run(PROFILE, 'load /bin/basic.bin\nrun . /wire-driver.bas\n', [],
-                           'C010_COMPILE_DONE', 'c010-wire-compile.log', timeout_seconds=300)
+        if args.native:
+            shutil.copyfile(args.native, SD/'wire-compiler.bin')
+            logs = []
+            for i, case in enumerate(selected):
+                log = keyboard.run(PROFILE, 'try /wire-compiler.bin\necho C010_CC_STATUS:<Try$ReturnCode>\n'
+                    'echo C010_CC_DONE\n', [('Source file: ', f'w{i}.bas'), ('Output file: ', f'w{i}.bin')],
+                    'C010_CC_DONE', f'c010-native-compile-{i}.log', timeout_seconds=300)
+                (evidence/f'compile-{i}.log').write_text(log)
+                assert f'Wrote w{i}.bin\n' in log and 'C010_CC_STATUS:0\n' in log, log
+                logs.append(log+f'COMPILED:{i}\n')
+            log = '\n'.join(logs)
+        else:
+            log = keyboard.run(PROFILE, 'load /bin/basic.bin\nrun . /wire-driver.bas\n', [],
+                               'C010_COMPILE_DONE', 'c010-wire-compile.log', timeout_seconds=300)
         (evidence/'compile.log').write_text(log)
         assert all(f'COMPILED:{i}\n' in log for i in range(len(selected))), log
         for i, case in enumerate(selected):

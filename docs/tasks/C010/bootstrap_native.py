@@ -5,6 +5,7 @@ import argparse
 import importlib.util
 import json
 import shutil
+import signal
 import time
 
 ROOT = Path(__file__).resolve().parents[3]
@@ -13,14 +14,20 @@ PROFILE = ROOT / '.emulator'
 sd = PROFILE / 'sdcard'
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--name', default='native-build-001')
+parser.add_argument('--seed', type=Path)
+parser.add_argument('--expected', type=Path)
+parser.add_argument('--timeout', type=float, default=3600)
 args = parser.parse_args()
 assert args.name.replace('-', '').isalnum()
 evidence = TASK / 'evidence' / args.name
 evidence.mkdir(parents=True, exist_ok=False)
 source = TASK / 'candidate.bas'
-image = ROOT / 'compiler/bin/compiler.bin'
+image = args.seed or ROOT / 'compiler/bin/compiler.bin'
 sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
-assert sha(image) == '299a31190c380541a73ed9eb144a303fa37abccc4f3c3e0ad47f99f1538122c0'
+if args.seed is None:
+    assert sha(image) == '299a31190c380541a73ed9eb144a303fa37abccc4f3c3e0ad47f99f1538122c0'
+assert image.read_bytes()[64:69] == b'MOS\x00\x01'
+shutil.copyfile(__file__, evidence/'bootstrap_native.py')
 for p, name in [(image, 'c010-bootstrap.bin'), (source, 'c010-self-source.bas')]:
     shutil.copyfile(p, sd / name)
     shutil.copyfile(p, evidence / (name.replace('.bin', '.dat')))
@@ -30,16 +37,29 @@ spec.loader.exec_module(k)
 report = dict(scope='Actual previous qualified native compiler compiles the new BBC source',
               compiler_source_sha256=sha(source), seed_sha256=sha(image),
               cli_sha256=sha(PROFILE/'fab-agon-emulator.bin'), completed=False)
+if args.seed:
+    report['scope'] = 'Actual supplied native compiler self-compiles the exact BBC candidate'
+def interrupted(signum, frame):
+    report['interrupted_by_signal'] = signum
+    raise InterruptedError(f'Controller received signal {signum}')
+signal.signal(signal.SIGTERM, interrupted)
 start = time.monotonic()
 try:
+    (sd/'c010-newcompiler.bin').unlink(missing_ok=True)
     log = k.run(PROFILE,
         'load /c010-bootstrap.bin\nrun .\necho C010_BOOT_DONE\n',
         [('Source file: ', 'c010-self-source.bas'), ('Output file: ', 'c010-newcompiler.bin')],
-        'C010_BOOT_DONE', 'c010-bootstrap.log', timeout_seconds=3600)
+        'C010_BOOT_DONE', 'c010-bootstrap.log', timeout_seconds=args.timeout)
     assert 'Wrote c010-newcompiler.bin' in log, log
     target = sd / 'c010-newcompiler.bin'
     shutil.copyfile(target, evidence/'compiler.dat')
     report.update(completed=True, image_sha256=sha(target), image_bytes=target.stat().st_size)
+    if args.expected:
+        assert target.read_bytes() == args.expected.read_bytes()
+        report['complete_image_equals_expected'] = True
+except BaseException as error:
+    report['failure'] = repr(error)
+    raise
 finally:
     report['controller_seconds'] = round(time.monotonic() - start, 3)
     if (PROFILE/'c010-bootstrap.log').exists():

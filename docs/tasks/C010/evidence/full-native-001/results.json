@@ -1,0 +1,14 @@
+{
+  "mode": "native",
+  "completed": false,
+  "host_process_exit": 143,
+  "termination_origin": "unknown",
+  "source_sha256": "1eb897c8ef3aecc99910e0352eba6d32064ebc4aef9e7bd32e9952b0878b43de",
+  "image_sha256": "bad741db6adfc250c7c2f48c37687aec93e8271f77c48bd760f309548dada196",
+  "wire_bytes": 155139,
+  "scope": "Interrupted full-program attempt; no final plot, GET, mode restoration or normal return inferred",
+  "successor": "full-native-002",
+  "rendered_validation": false,
+  "human_validation": false,
+  "performance_benchmark": false
+}

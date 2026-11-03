@@ -815,3 +815,30 @@ reduced Mandelbrot fixture (ITERS8/SCALE64, with a key-input marker). This is
 not acceptance of the unchanged full source. Native rebuilding, error probes
 and unchanged full-program runs remain active. No rendered/human validation,
 paired performance measurement, live promotion or main merge is claimed.
+
+C010 second experiment checkpoint: wire-errors-001 completes nine fresh
+reference/native pairs. SFIX overflow in each argument position prevents later
+side effects; MODE division/overflow and GET Escape preserve ERR/ERL/message
+bytes. wire-interactions-001 adds three matching pairs for MODE's temporary CPU
+stack across LOCAL error recovery, GET within a scalar FN with LOCAL restoration,
+and a handler issuing another MODE after a failed MODE conversion.
+
+admissions-001 compiles the exact unchanged Mandelbrot source and returns
+normally through a BBC batch driver. Its18329-byte image SHA bad741db equals the
+first partial compile in full. All12 intentionally unsupported graphics/input
+forms reject and preserve their old destination bytes. repack-001 rebuilds all
+ten REPORT/runtime packers in isolated storage, preserves exact candidate13c2a488
+at each step, and verifies all nine runtime templates unchanged.
+
+Add an optional bounded --profile argument to the existing baseline harness so
+its CLI run does not disturb the separately occupied self-build fixture. The
+fresh hosted-baseline-001 completes39 cases/15 native executions, assembler
+oracle and repeat; all15 full images and24 rejection diagnostics/old outputs
+match the frozen earlier6597a0df baseline exactly. These are compatibility
+checks, not performance measurements.
+
+full-native-001's host controller exits143 with no known cause after a partial
+UART capture. Retain that incomplete attempt without inferring final GET/MODE
+or normal return. Fresh full-native-002 and independent full-reference-001 use
+separate profiles and remain active, as does native-build-002. Live source and
+native distribution remain unchanged pending their results.

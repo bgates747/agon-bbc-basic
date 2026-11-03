@@ -1,0 +1,54 @@
+{
+  "candidate_sha256": "13c2a48802718040b1056921b1aedea3e5da9f6f36e946d990ccf36be92396b9",
+  "completed": [
+    "report_keywords",
+    "numeric_runtime",
+    "strings_runtime",
+    "control_runtime",
+    "procedure_runtime",
+    "memory_runtime",
+    "io_runtime",
+    "data_runtime",
+    "error_runtime",
+    "compact_runtime"
+  ],
+  "modules": {
+    "numeric": {
+      "bytes": 4460,
+      "sha256": "dbb59e07b90b344b038afa95ae6d1deeda96e2096fa053aed6bfe2258e5945fd"
+    },
+    "string": {
+      "bytes": 633,
+      "sha256": "4e617e8783191501a0c12e490069da082373be677a042de59fece11ac34a91f7"
+    },
+    "control": {
+      "bytes": 8657,
+      "sha256": "8abe4b024278563ffce45b6927a30e553a64f10f9494e6284791106e814e8a75"
+    },
+    "procedure": {
+      "bytes": 783,
+      "sha256": "db52a06ca96c060ddb75b75563b95269e9d08330ef28a514d0ca59d5757bee22"
+    },
+    "memory": {
+      "bytes": 734,
+      "sha256": "f2b61865d28e83cd729ede7ead5b4061af04de8c0c993194bb409f7f9c421cb7"
+    },
+    "io": {
+      "bytes": 788,
+      "sha256": "bde255025daeae570075a3910a0d102e7fbeb2f20058390c781b3e3be5b98115"
+    },
+    "data": {
+      "bytes": 120,
+      "sha256": "533864b6c4608d1a9e371f136fd7a6fa2417d487069cc5054cbd74ec49068e05"
+    },
+    "error": {
+      "bytes": 2530,
+      "sha256": "c9d04b2e032a773f9b45007377d73c59d71781ead01fa1cac947483b5bbb9aab"
+    },
+    "compact": {
+      "bytes": 394,
+      "sha256": "0ba523c366f36ad08a120df8e56bb53b4176406d9ae14b5369515f2e09b0f49a"
+    }
+  },
+  "all_identical": true
+}

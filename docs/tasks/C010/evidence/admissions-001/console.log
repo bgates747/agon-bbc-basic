@@ -1,0 +1,35 @@
+Warning: unused arguments left: ["--firmware", "platform"].
+Tom's Fake VDP Version 1.03
+unknown packet VDU 0x17, 0, 0xf8
+unknown packet VDU 0x17, 0, 0x99
+uunknown packet VDU 0x17, 0, 0x94
+
+Agon Platform MOS Version 3.0.2 Arthur
+
+SUCCESS:0
+REJECT:1
+admission-1.bas:1:9: String value used as a numeric item
+REJECT:2
+admission-2.bas:1:9: String value used as a numeric item
+REJECT:3
+admission-3.bas:1:11: String value used as a numeric item
+REJECT:4
+admission-4.bas:1:12: String value used as a numeric item
+REJECT:5
+admission-5.bas:1:14: String value used as a numeric item
+REJECT:6
+admission-6.bas:1:8: PLOT needs two or three numeric arguments
+REJECT:7
+admission-7.bas:1:8: Unsupported numeric item BY
+REJECT:8
+admission-8.bas:1:9: Unexpected text after statement
+REJECT:9
+admission-9.bas:1:7: Only bare keyboard GET is supported
+REJECT:10
+admission-10.bas:1:7: Only bare keyboard GET is supported
+REJECT:11
+admission-11.bas:1:7: Unsupported string item GET
+REJECT:12
+admission-12.bas:1:7: Unexpected text after statement
+C010_ADMISSIONS_DONE
+/ *
