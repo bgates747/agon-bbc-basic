@@ -201,3 +201,28 @@ passes fit; the lower-bound estimate is no longer the sole resource evidence.
 This preflight did not run unmodified interpreted main and does not replace the
 full default four-image chain, native regressions or physical qualification.
 No hardware or performance benchmark result is claimed.
+
+Prepare compact/promote.py as a guarded development promotion operation. It
+verifies retained manifests for native source preflight, packed baseline/helper/
+integration, all39 error cases and large-output/symbol capacity before copying
+exact6597a0df plus the rehearsed compact runtime and three packers. It then runs
+REPORT/nine module generators and requires unchanged source after each and all
+complete module hashes equal the rehearsal. No emulator, Git or hardware action
+is inside it. Syntax checks pass; actual promotion awaits pending cohorts.
+
+Packed source-error CORE6 passes149.768s and remaining33 passes585.087s:
+all39 fresh reference outputs/ERR/ERL match, deterministic repeat and complete
+standard-runtime/entry links pass. packed-errors-core-001/tail-001 retain exact
+6597a0df inputs/results. compare_errors.py verifies retained manifests and
+identical source/oracle plus every complete emitted image against the earlier
+2f81c6fb cohorts; packed-error-equivalence-001 passes all39. These are controller
+durations and retained-byte comparisons, not hardware/performance measurements.
+Large-output/symbol-capacity qualification is active; live7cac4bba is unchanged.
+
+Prepare a full-source baseline freezer and C006/native_baseline.py. They retain
+all39 actual standard inputs and compare actual native-compiler output against
+15 complete fresh baseline images and24 exact diagnostics, preserving old
+output on rejection. That comparison supplements representative12-case native
+execution and fresh39-case error tests, without claiming another program
+execution merely from byte equality. Syntax checks pass; live baseline inputs
+and actual native comparison are still pending.

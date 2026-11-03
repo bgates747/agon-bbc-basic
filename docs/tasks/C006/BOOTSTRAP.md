@@ -68,6 +68,16 @@ seed and records that unmodified interpreted main was not executed. This is an
 early native RAM/functionality check, not a replacement for the full default
 G0/G1/G2/repeat chain. The mode cannot accept an interrupted resource run as seed.
 
+`native_baseline.py` additionally drives all39 standard baseline source files
+through the generated native compiler's normal UI. A fresh frozen reference
+baseline supplies15 complete expected images and24 exact diagnostics; old
+output must survive every rejection. Image equality carries that reference
+cohort's independent assembly/runtime execution evidence without claiming a
+second native-program execution in this comparison. This supplements the12
+representative native-execution cases and39 fresh source-error programs. The
+new comparator and full-source baseline freezer are prepared, syntax checked,
+and await their first fresh live-baseline inputs.
+
 C006 packed-native-preflight-001 completes native self-source compilation through
 normal prompts in1983.653 controller seconds, MOS status0. Its entire324275-byte
 G1 equals the interpreted resource seed SHA299a31190c380541a73ed9eb144a303fa37abccc4f3c3e0ad47f99f1538122c0.

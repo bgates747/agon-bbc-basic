@@ -1,0 +1,110 @@
+[
+  {
+    "program": 0,
+    "bases": {
+      "numeric": 262839,
+      "strings": 280150,
+      "memory": 281081,
+      "control": 267502,
+      "procedure": 276352,
+      "error": 277226
+    },
+    "arena": 687872,
+    "limit": 720640,
+    "saved_sp_slot": 262835,
+    "depth_slot": 262838,
+    "heap_context": 281995,
+    "data_cursor_entry_reset": false,
+    "error_and_ACT_bridges_checked": true
+  },
+  {
+    "program": 1,
+    "bases": {
+      "numeric": 262976,
+      "strings": 280553,
+      "memory": 281484,
+      "control": 267644,
+      "procedure": 276494,
+      "error": 277629
+    },
+    "arena": 687872,
+    "limit": 720640,
+    "saved_sp_slot": 262972,
+    "depth_slot": 262975,
+    "heap_context": 282398,
+    "data_cursor_entry_reset": false,
+    "error_and_ACT_bridges_checked": true
+  },
+  {
+    "program": 2,
+    "bases": {
+      "numeric": 262886,
+      "strings": 280463,
+      "memory": 281394,
+      "control": 267554,
+      "procedure": 276404,
+      "error": 277539
+    },
+    "arena": 687872,
+    "limit": 720640,
+    "saved_sp_slot": 262882,
+    "depth_slot": 262885,
+    "heap_context": 282308,
+    "data_cursor_entry_reset": false,
+    "error_and_ACT_bridges_checked": true
+  },
+  {
+    "program": 3,
+    "bases": {
+      "numeric": 263368,
+      "strings": 280686,
+      "memory": 281617,
+      "control": 268038,
+      "procedure": 276888,
+      "error": 277762
+    },
+    "arena": 687872,
+    "limit": 720640,
+    "saved_sp_slot": 263364,
+    "depth_slot": 263367,
+    "heap_context": 282531,
+    "data_cursor_entry_reset": false,
+    "error_and_ACT_bridges_checked": true
+  },
+  {
+    "program": 4,
+    "bases": {
+      "numeric": 263183,
+      "strings": 280767,
+      "memory": 281698,
+      "control": 267858,
+      "procedure": 276708,
+      "error": 277843
+    },
+    "arena": 687872,
+    "limit": 720640,
+    "saved_sp_slot": 263179,
+    "depth_slot": 263182,
+    "heap_context": 282612,
+    "data_cursor_entry_reset": false,
+    "error_and_ACT_bridges_checked": true
+  },
+  {
+    "program": 5,
+    "bases": {
+      "numeric": 262805,
+      "strings": 280121,
+      "memory": 281052,
+      "control": 267473,
+      "procedure": 276323,
+      "error": 277197
+    },
+    "arena": 687872,
+    "limit": 720640,
+    "saved_sp_slot": 262801,
+    "depth_slot": 262804,
+    "heap_context": 281966,
+    "data_cursor_entry_reset": false,
+    "error_and_ACT_bridges_checked": true
+  }
+]
