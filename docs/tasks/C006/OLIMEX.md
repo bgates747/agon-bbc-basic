@@ -104,3 +104,29 @@ The generated command files use LOAD/RUN ., mark entry/return and start the
 foreground listener only after application return. The caller observes prompts
 and markers before providing inputs or transferring files. Syntax checks pass;
 real-input packaging awaits the generation/regression prerequisites.
+
+## Explicit operation journal
+
+`olimex_step.py` delegates one selected operation to maintained Extender clients.
+It requires an existing lease, verifies the offline bundle manifest, asserts
+current ownership immediately before every delegated operation, and uses fresh
+local journals. File writes stay under the bundle's declared fixture/results
+roots; payload uploads must match its manifest. File payloads use the pinned new
+staged client. Metadata/transfer actions first observe an online major2 listener;
+EXIT uses a fresh metadata state after worker sessions. Keyboard completion
+means event emission, with actual MOS/application completion observed separately.
+
+The ignored local config supplies `extender_url` and, for capture,
+`mainboard_serial` from the canonical machine records. Operation receipts contain
+local details and stay under C006/build outside the exported fixture. The helper
+invokes Extender's own Python environment and maintained serial monitor; it
+does not implement a new transport, reserve/grant, reset, flash, retry uncertain
+work or dispatch another operation. Capture uses new ready/stop/output files.
+
+`olimex-step-host-003` retains six device-free checks with every subprocess
+mocked: lease failure prevents target dispatch, every status query checks its
+owner, relative paths become absolute for delegated tools, upload/traversal
+guards reject wrong paths and wrong protocol prevents transfer submission.
+Earlier001/002 cohorts retain their narrower checks. No network/serial access
+or hardware result follows from these tests. Actual operation remains pending
+the full compiler qualification, exact prepared plan and Extender grant.

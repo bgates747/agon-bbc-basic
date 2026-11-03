@@ -1,0 +1,10 @@
+test_every_status_query_has_its_own_owner_check (__main__.Dispatch.test_every_status_query_has_its_own_owner_check) ... ok
+test_invalid_lease_prevents_target_operation (__main__.Dispatch.test_invalid_lease_prevents_target_operation) ... ok
+test_remote_parent_traversal_stops_before_lease_or_device (__main__.Dispatch.test_remote_parent_traversal_stops_before_lease_or_device) ... ok
+test_retrieval_uses_new_staged_client_and_absolute_output (__main__.Dispatch.test_retrieval_uses_new_staged_client_and_absolute_output) ... ok
+test_upload_outside_manifest_stops_before_lease_or_device (__main__.Dispatch.test_upload_outside_manifest_stops_before_lease_or_device) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.022s
+
+OK

@@ -1,0 +1,8 @@
+{
+  "tests": 6,
+  "all_passed": true,
+  "subprocess_calls_mocked": true,
+  "network_or_serial_access": false,
+  "hardware_validation": false,
+  "scope": "Host-only owner-check/dispatch/journal boundary qualification"
+}

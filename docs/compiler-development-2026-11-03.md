@@ -264,3 +264,24 @@ handoff. The Author waived previous approval stops and authorized development
 checkpoints; no graphical/human/hardware validation or performance result is
 claimed. Main remains untouched. C006 full normal-main G0/G1/G2/repeat, native
 baseline/representative/error qualification and Olimex execution remain.
+
+## C006 full-chain run started
+
+After pushing development checkpoint89b8f41, start live-bootstrap-001 using
+unmodified live6597a0df normal main, pinned BASIC/CLI/MOS and --expected-image
+C005/packed-source-002/native-compiler.dat. Both actual filename prompts are
+answered; G0 is compiling. The sequential host pipeline stops on any failure;
+only successful full four-image equality proceeds to live-native-baseline-001,
+live-regressions-001 and live-native-errors-001. None of those later results is
+claimed yet. No second CLI may use this SD while the pipeline is active.
+
+During G0, prepare C006/olimex_step.py for one explicit physical operation at a
+time through maintained Extender tools. It verifies fixture payloads and owner
+before each operation, journals requested actions before submission, uses new
+staged files and fresh major2 metadata/EXIT, and delegates passive capture to
+the maintained joined-control opener. Relative paths are normalized before
+changing child cwd. Local machine/lease details remain in ignored records.
+No reservation or live board operation occurs. Host-only mocked qualification
+progresses4 checks001,5 checks002,6 checks003; final tests include no target
+submission after failed lease/wrong protocol, path boundaries and separate
+owner assertions. These do not qualify hardware or the P4 protocol.
