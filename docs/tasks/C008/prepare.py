@@ -46,7 +46,7 @@ def main():
         'compiler.bas': ROOT / 'compiler/compiler.bas',
         'compiler-license.txt': ROOT / 'compiler/bin/LICENSE.txt',
         'compiler-provenance.json': ROOT / 'compiler/bin/manifest.json',
-        'compatibility.txt': ROOT / 'compiler/COMPATIBILITY.md',
+        'compatibility.md': ROOT / 'compiler/COMPATIBILITY.md',
         'nano.bin': editor,
         'nano-license.txt': UTILITIES / 'LICENSE',
         'readme.txt': TASK / 'readme.txt',

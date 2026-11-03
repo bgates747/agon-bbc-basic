@@ -726,3 +726,12 @@ does not automatically release the bench or grant access. Record the restriction
 in the handoff; do not create a second queue or request/access hardware. Console8
 manual qualification remains separately under the Author's coordination. No
 acknowledgement-only reply is sent and no test or implementation change follows.
+
+The Author corrects Markdown file naming. Audit the deployed .txt documents:
+only compatibility.txt contains Markdown headings/tables/links. Correct the
+package generator to compatibility.md and the root readme reference. A bounded
+C008 fix checks original compatibility/readme/manifest hashes, renames only that
+document, updates the two references and syncs the mounted card. Other .txt files
+remain plain text. markdown-extension-001 retains the successful receipt and new
+package manifestababb88b; previous evidence is unchanged. No program, firmware,
+test result or manual-acceptance status changes.

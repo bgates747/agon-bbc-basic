@@ -1,0 +1,16 @@
+{
+  "scope": "Filename/reference correction only",
+  "returncode": 0,
+  "stdout": "RENAMED_REFERENCES_UPDATED_AND_SYNCED\n",
+  "stderr": "",
+  "renamed": {
+    "compatibility.txt": "compatibility.md"
+  },
+  "updated": [
+    "readme.txt",
+    "manifest.json"
+  ],
+  "expected_package_manifest_sha256": "ababb88b286b30e043e26a08d0594ba15cdbeae4ce26332940c2299f16fcea74",
+  "other_markdown_txt_files_found": false,
+  "manual_validation": false
+}

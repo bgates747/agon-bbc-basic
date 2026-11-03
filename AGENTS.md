@@ -146,6 +146,10 @@ No user result is implied. Do not delete or overwrite later user programs/result
 deploy_sd.py refuses a nonempty target: future updates need explicit preservation.
 Editor is a&B0000 moslet; compiler/generated programs run at&40000. No firmware
 or startup change, emulator reservation or hardware test is part of deployment.
+Markdown documents must use .md, not .txt. The manual package's compatibility
+document is compatibility.md; readme.txt and the remaining .txt files are plain
+text. C008/evidence/markdown-extension-001 records the card correction and updated
+manifest; preserve the earlier deployment evidence unchanged.
 
 Shared /tmp tmpfs filled during G2 handoff; only our inactive Cargo build cache
 was moved to C006/build/relocated-cli-cache-001, preserving the active CLI at its

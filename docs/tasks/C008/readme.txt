@@ -67,7 +67,7 @@ Reload nano.bin at&B0000 before another editing session as well.
 3. LANGUAGE COVERAGE
 
 This is a self-hosting compiler for a documented BBC BASIC subset. It is not
-complete BBC BASIC. Read compatibility.txt for exact supported forms and limits.
+complete BBC BASIC. Read compatibility.md for exact supported forms and limits.
 In particular, general graphics/sound statements, RND, CASE, numeric INPUT,
 OSCLI, RUN/CHAIN, inline assembly and EVAL are not supported by this compiler.
 MOS LOAD/RUN commands above are operating-system commands, not BASIC syntax.
