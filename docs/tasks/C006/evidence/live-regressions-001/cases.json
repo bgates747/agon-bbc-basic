@@ -1,0 +1,67 @@
+[
+  {
+    "source": "PRINT \"native compiler\":END\n",
+    "expected": "native compiler\n",
+    "status": 0
+  },
+  {
+    "source": "PRINT ;STR$(1/10);\":\";STR$~(-1);\":\";INT(-1.1):END\n",
+    "reference": true,
+    "status": 0,
+    "expected": "0.1:FFFFFFFF:-2\n"
+  },
+  {
+    "source": "n%=0:FOR i%=1 TO 10:IF i% MOD 2 THEN n%=n%+i%\nNEXT:WHILE n%<30:n%=n%+1:ENDWHILE:REPEAT:n%=n%-1:UNTIL n%=25\nPRINT ;n%:END\n",
+    "reference": true,
+    "status": 0,
+    "expected": "25\n"
+  },
+  {
+    "source": "x%=7:PRINT ;FNsum(5);\":\";x%:END\nDEF FNsum(n%):LOCAL x%:x%=n%:IF n%<=1 THEN =1\n=n%+FNsum(n%-1)\n",
+    "reference": true,
+    "status": 0,
+    "expected": "15:7\n"
+  },
+  {
+    "source": "s$=\"outer\":PROCp:PRINT s$:END\nDEF PROCp:LOCAL s$:s$=\"inside\":PRINT s$:ENDPROC\n",
+    "reference": true,
+    "status": 0,
+    "expected": "inside\nouter\n"
+  },
+  {
+    "source": "DIM a%(1,2),s$(1):a%(1,2)=2147483647:s$(1)=\"array\"\nPRINT ;a%(1,2);\":\";s$(1):END\n",
+    "reference": true,
+    "status": 0,
+    "expected": "2.14748365E9:array\n"
+  },
+  {
+    "source": "DIM p% 9:p%?0=255:p%!1=&80000000:PRINT ;?p%;\":\";p%!1:END\n",
+    "reference": true,
+    "status": 0,
+    "expected": "255:-2.14748365E9\n"
+  },
+  {
+    "source": "READ a,s$:PRINT ;a;\":\";s$:RESTORE:READ a:PRINT ;a:END\nDATA .1,\"record\"\n",
+    "reference": true,
+    "status": 0,
+    "expected": "0.1:record\n0.1\n"
+  },
+  {
+    "source": "h%=OPENOUT(\"native-test.dat\"):BPUT#h%,255:BPUT#h%,\"text\";:CLOSE#h%\nh%=OPENIN(\"native-test.dat\"):PRINT ;BGET#h%;\":\";BGET#h%;\":\";EOF#h%:CLOSE#h%:END\n",
+    "expected": "255:116:0\n",
+    "status": 0
+  },
+  {
+    "source": "10 x%=7\n20 ON ERROR PRINT ;ERR;\":\";ERL;\":\";x%:REPORT:PRINT:END\n30 PROCp\n100 DEF PROCp:LOCAL x%:x%=99:ERROR 100,\"recovery\"\n",
+    "expected": "100:100:99\nrecovery\n",
+    "status": 0
+  },
+  {
+    "source": "GOTO @missing\n",
+    "diagnostic": "Undefined target @missing"
+  },
+  {
+    "source": "PRINT EVAL(\"1\")\n",
+    "diagnostic": "EVAL is deliberately unsupported"
+  }
+]

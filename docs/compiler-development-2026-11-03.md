@@ -410,3 +410,10 @@ confirming the normal main's caught-diagnostic contract for the planned MOS EXEC
 files. Retain the final controller stream and refreshed manifest before freezing.
 This suite compares compiler output; the reference cohort owns program execution.
 Start the separate live-regressions-001 run next. No physical result is claimed.
+
+live-regressions-001 passes all12 cases in131.049 controller seconds. Actual
+generated programs match their retained expectations/fresh BASIC references;
+native-test.dat contains exactly FF74657874. Both rejected inputs preserve their
+old output, and all12 compiler returns are0. Retain final controller/manifest.
+Start live-native-errors-001 as its own host command for the final39 fresh
+reference ERR/ERL/native-output/linkage checks before offline physical packaging.

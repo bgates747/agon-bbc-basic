@@ -79,7 +79,8 @@ environment, ownership, assembly, emulator, hardware and coordination rules.
    and executes a fresh repeat, explicitly recording that lineage; all four
    bytestrings match. The cohort is complete. live-native-baseline-001 passes
    all39 cases (15 full images/24 diagnostics) in245.15 controller seconds.
-   live-regressions-001 is active on the sole CLI SD; do not launch another CLI
+   live-regressions-001 passes all12 cases, including exact file bytes, in131.049s.
+   live-native-errors-001 is active on the sole CLI SD; do not launch another CLI
    against it. Run each remaining
    native suite separately, retaining failure evidence and avoiding a long
    multi-stage host command. No physical compiler result exists yet.
