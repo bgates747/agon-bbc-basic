@@ -165,3 +165,13 @@ now streams SOURCE progress and records SIGTERM; poll the running tool session
 regularly. Inputs are persisted up front by the latest controller revision. No
 native compiler image exists yet. Do not run another CLI against this SD while
 the source probe is active.
+
+packed-source-002 has now completed all three passes in3911.701 controller
+seconds: exact6597a0df yields324275 bytes SHA299a3119. Full machine-image checks
+pass and evidence is retained. C006 packed-native-preflight-001 is active through
+normal native prompts; no native self-source result or full generation chain yet.
+The Author authorizes Extender consultation for Olimex time, file transfer and
+remote CLI facilities. Request sent to Extender2026-10-13Sol; canonical mailbox
+2026-11-03_02-31-54_bbc-basic_bbc-olimex-access-request-one. Physical lease/access
+instructions are owned by agon-dev-env/cross-agent/olimex-bench and Extender;
+no physical deployment or result exists yet.

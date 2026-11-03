@@ -206,3 +206,13 @@ before remaining overhead. This is not native fit proof. The controller later
 exits143/SIGTERM during validation, with origin unknown; no output pass/image.
 Retain interrupted evidence and restart identical source/driver aspacked-source-002
 with live host progress, regular session polling and signal/input recording.
+
+Identical packed-source-002 completes all three passes in3911.701 controller
+seconds, producing324275 bytes SHA299a31190c380541a73ed9eb144a303fa37abccc4f3c3e0ad47f99f1538122c0.
+Its complete standard runtime/entry/heap/arena checks and compact GNU PIC,
+seven independent bridge anchors and explicit pool/wrapper/placement checks
+pass. Exact source6597a0df and driver5f365395 are retained with console, image,
+controller output and storage inventory. This proves interpreted source
+compilation and machine-image structure; native self-source/RAM preflight is
+running separately under C006. No physical result or full generation chain is
+claimed, and live source remains7cac4bba.

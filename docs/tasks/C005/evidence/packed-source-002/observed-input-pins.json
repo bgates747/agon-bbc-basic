@@ -1,0 +1,10 @@
+{
+  "scope": "Read-only input identities observed after the interrupted run and during the restart; original start-time in-memory report was lost",
+  "observed_at": "2026-11-03T01:23:27.698908-05:00",
+  "pins": {
+    "bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+    ".emulator/mos_platform.bin": "d564243283972690933a4554296ad6202ca4ef54572279533a942960846bebae",
+    ".emulator/fab-agon-emulator.bin": "bf5f29b243b8214e54c515dcc26edf47399ce440356af2ebc3ce3d7664ae11eb",
+    ".emulator/fab-agon-emulator": "e822acb348e1be281dce6a80128d3924651f41157b407088b23ea73a4eba728c"
+  }
+}

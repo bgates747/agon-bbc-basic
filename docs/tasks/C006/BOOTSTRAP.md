@@ -60,3 +60,10 @@ state before invoking each compiler. It emits a host-only liveness message every
 30 seconds and records SIGTERM when possible; this does not indicate eZ80
 progress or performance. The BBC source and normal main remain unmodified.
 This records host-controller preparation, not an executed generation result.
+
+The optional --resource-preflight C005_EVIDENCE_DIRECTORY mode verifies a completed
+resource run's exact source/image identities and executes one native self-source
+compile through the normal native UI. It compares that result with the resource
+seed and records that unmodified interpreted main was not executed. This is an
+early native RAM/functionality check, not a replacement for the full default
+G0/G1/G2/repeat chain. The mode cannot accept an interrupted resource run as seed.

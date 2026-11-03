@@ -133,3 +133,26 @@ Apply early input/stage persistence, host-only liveness messages and SIGTERM
 recording to the prepared C006 bootstrap controller too. Syntax checks pass;
 normal and interrupted generation paths are not yet exercised. These changes
 never edit the BBC target/source/main or substitute a source compiler.
+
+Prepare one native self-source/RAM preflight mode in C006 bootstrap.py, accepting
+only a completed source/image-matched C005 resource run. It uses the normal
+native UI and exact byte comparison, explicitly records that no unmodified
+interpreted main stage ran, and does not replace the full default generation
+chain. Syntax checks pass; actual native execution is still pending image output.
+
+## First complete compiler image and Olimex coordination
+
+packed-source-002 completes all three BBC passes in3911.701 controller seconds,
+same exact6597a0df source/5f365395 driver and324275-byte layout. Image SHA
+299a31190c380541a73ed9eb144a303fa37abccc4f3c3e0ad47f99f1538122c0 passes
+independent full runtime/entry/heap/arena and compact PIC/bridge/pool/placement
+checks. Retain image, logs and storage lower bound. Start C006
+packed-native-preflight-001 through normal native filename prompts; no native
+self-compilation result is yet claimed. This does not replace the default full
+generation chain.
+
+The Author directs consultation with Extender for Olimex time, file transfers
+and remote CLI access. Send the request to Extender2026-10-13Sol and record
+canonical mailbox2026-11-03_02-31-54_bbc-basic_bbc-olimex-access-request-one.
+Read the shared physical-bench lease protocol and staged-transfer decision.
+No lease, target access, reset, flash, deployment or physical result yet exists.
