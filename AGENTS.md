@@ -68,7 +68,8 @@ held-key polling uses MOS sysvars at handler entry. Current CORE6, modern ERL0,
 actual Escape/open-file/exit checks, baseline/golden and nine regeneration tools
 pass. Earlier39-case scopes retain their8bb1dd9a/44533e0d identities, including
 WHILE/FN-return ERL quirks; no full39-case rerun on7cac4bba is claimed. Read
-C005/ERRORS.md. The self-source capacity probe is running. C005/streaming holds
+C005/ERRORS.md. The self-source probe now records4096-fixup exhaustion at physical line108 in1459.137s,
+with existing output preserved. C005/streaming holds
 unqualified candidate fc67e57c (2160 lines,205 defs,248 static private names),
 with a BBC three-pass emitter. Do not replace the active prototype while a
 qualification uses it. Read C005/STREAMING.md. C006 has refined generation and

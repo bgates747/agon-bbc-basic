@@ -383,3 +383,18 @@ remains unqualified and isolated; no self-compilation is claimed. C006 generatio
 and native-regression drivers are prepared only. Continue resource closure and
 self-generation under the Author's standing authorization; no Oryx, human emulator,
 hardware or performance result has been claimed.
+
+## Development checkpoint and measured fixup failure
+
+Error-handler checkpoint f486d09 is committed/pushed to codex/native-bbc-compiler;
+main is unchanged. The exact7cac4bba self-source probe returns its actual first
+failure at physical line108,column26: Too many address fixups. Old output remains
+unchanged. Controller duration1459.137s; no native compiler is generated. The
+original probe inputs were committed while it was running; result/log/manifest
+are appended without changing those inputs. This is a resource failure, not a
+self-hosting result or performance benchmark.
+
+The isolated streaming candidate fc67e57c counts/validates/writes separately,
+merges template operands through raw spans and advances ordered definition scopes.
+It remains unexecuted. Old/new smoke images and resource/scope failures are its
+next qualification; no inferred native RAM fit or source closure is asserted.

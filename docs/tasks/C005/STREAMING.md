@@ -1,7 +1,9 @@
 # Bootstrap resource closure design notes
 
 The current interpreted-host headroom measurement does not prove that the native
-compiler can fit beside its own metadata and output. The next actual self-source
+compiler can fit beside its own metadata and output. The actual7cac4bba self-source
+probe exhausts4096 address fixups at physical line108, preserving its old output
+in1459.137s (`evidence/errors-source-gap-001`). The next actual self-source
 probe, after language closure, must measure generated size, symbols, fixups and
 RAM. This note records a possible bounded streaming emitter if those measurements
 require it; no streaming implementation or size result is claimed.

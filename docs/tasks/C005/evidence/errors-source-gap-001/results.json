@@ -1,0 +1,8 @@
+{
+  "scope": "Initial bootstrap-gap probe, not self-hosting",
+  "compiler_sha256": "7cac4bba8644a047c38c496a5fc7cb0fc6c9118b892aad6c3314091867c7fe36",
+  "diagnostic": "bootstrap-source.bas:108:26: Too many address fixups\n",
+  "existing_output_preserved": true,
+  "duration_seconds": 1459.137,
+  "human_hardware_validation": false
+}
