@@ -1,0 +1,41 @@
+[
+  {
+    "main": [
+      "ON ERROR PRINT ;ERR;\":\";ERL;\":\";n%:@EXIT@",
+      "n%=0",
+      "WHILE n%<2:n%=n%+1:PRINT 1/(2-n%)",
+      "ENDWHILE",
+      "@EXIT@"
+    ],
+    "defs": [],
+    "source": "10 PRINT \"ERROR_CASE_BEGIN_0\"\n20 ON ERROR PRINT ;ERR;\":\";ERL;\":\";n%:END\n30 n%=0\n40 WHILE n%<2:n%=n%+1:PRINT 1/(2-n%)\n50 ENDWHILE\n60 END\n",
+    "reference_source": "10 PRINT \"ERROR_CASE_BEGIN_0\"\n20 ON ERROR PRINT ;ERR;\":\";ERL;\":\";n%:OSCLI \"BYE\"\n30 n%=0\n40 WHILE n%<2:n%=n%+1:PRINT 1/(2-n%)\n50 ENDWHILE\n60 OSCLI \"BYE\"\n",
+    "expected": "         1\n18:40:2\n"
+  },
+  {
+    "main": [
+      "ON ERROR PRINT ;ERR;\":\";ERL;\":\";n%:@EXIT@",
+      "n%=0",
+      "REPEAT:n%=n%+1:PRINT 1/(2-n%)",
+      "UNTIL n%>3",
+      "@EXIT@"
+    ],
+    "defs": [],
+    "source": "10 PRINT \"ERROR_CASE_BEGIN_1\"\n20 ON ERROR PRINT ;ERR;\":\";ERL;\":\";n%:END\n30 n%=0\n40 REPEAT:n%=n%+1:PRINT 1/(2-n%)\n50 UNTIL n%>3\n60 END\n",
+    "reference_source": "10 PRINT \"ERROR_CASE_BEGIN_1\"\n20 ON ERROR PRINT ;ERR;\":\";ERL;\":\";n%:OSCLI \"BYE\"\n30 n%=0\n40 REPEAT:n%=n%+1:PRINT 1/(2-n%)\n50 UNTIL n%>3\n60 OSCLI \"BYE\"\n",
+    "expected": "         1\n18:40:2\n"
+  },
+  {
+    "main": [
+      "ON ERROR PRINT ;ERR;\":\";ERL;\":\";n%:@EXIT@",
+      "n%=0",
+      "FOR n%=1 TO 2:PRINT 1/(2-n%)",
+      "NEXT",
+      "@EXIT@"
+    ],
+    "defs": [],
+    "source": "10 PRINT \"ERROR_CASE_BEGIN_2\"\n20 ON ERROR PRINT ;ERR;\":\";ERL;\":\";n%:END\n30 n%=0\n40 FOR n%=1 TO 2:PRINT 1/(2-n%)\n50 NEXT\n60 END\n",
+    "reference_source": "10 PRINT \"ERROR_CASE_BEGIN_2\"\n20 ON ERROR PRINT ;ERR;\":\";ERL;\":\";n%:OSCLI \"BYE\"\n30 n%=0\n40 FOR n%=1 TO 2:PRINT 1/(2-n%)\n50 NEXT\n60 OSCLI \"BYE\"\n",
+    "expected": "         1\n18:40:2\n"
+  }
+]

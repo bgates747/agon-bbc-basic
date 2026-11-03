@@ -1,0 +1,38 @@
+[
+  {
+    "program": 0,
+    "bases": {
+      "numeric": 262688,
+      "strings": 279577,
+      "memory": 280508,
+      "control": 267323,
+      "procedure": 276173,
+      "error": 277047
+    },
+    "arena": 687872,
+    "limit": 720640,
+    "saved_sp_slot": 262684,
+    "depth_slot": 262687,
+    "heap_context": 281422,
+    "data_cursor_entry_reset": false,
+    "error_and_ACT_bridges_checked": true
+  },
+  {
+    "program": 1,
+    "bases": {
+      "numeric": 262458,
+      "strings": 279347,
+      "memory": 280278,
+      "control": 267093,
+      "procedure": 275943,
+      "error": 276817
+    },
+    "arena": 687872,
+    "limit": 720640,
+    "saved_sp_slot": 262454,
+    "depth_slot": 262457,
+    "heap_context": 281192,
+    "data_cursor_entry_reset": false,
+    "error_and_ACT_bridges_checked": true
+  }
+]

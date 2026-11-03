@@ -7,7 +7,7 @@ import re
 import subprocess
 
 ROOT=Path(__file__).resolve().parents[3]
-EXPORTS=('err_init','err_install','err_raise','err_inline','err_report','err_line','err_code','err_current','err_lastline','err_message','err_state','err_ctlpush_slot','err_strload_slot','err_strstore_slot','err_exit_slot','err_cfg_ctltop','err_cfg_acttop','err_cfg_frames','err_cfg_base','err_cfg_limit','err_cfg_rootsp','err_cfg_depth','err_cfg_heap')
+EXPORTS=('err_init','err_install','err_raise','err_inline','err_report','err_line','err_code','err_current','err_lastline','err_message','err_state','err_ctlpush_slot','err_strload_slot','err_strstore_slot','err_exit_slot','err_cfg_ctltop','err_cfg_acttop','err_cfg_frames','err_cfg_base','err_cfg_limit','err_cfg_rootsp','err_cfg_depth','err_cfg_heap','err_trap')
 
 
 def main():
@@ -21,7 +21,7 @@ def main():
     tc=Path('/Agon/agondev/release/bin')
     def run(name,*arguments):return subprocess.check_output([str(tc/name),*map(str,arguments)],text=True)
     obj=build/'runtime.o'
-    run('ez80-none-elf-as','-march=ez80+full',f'-al={build/"runtime.lst"}','-o',obj,source)
+    run('ez80-none-elf-as','-march=ez80+full','-I',source.parent,f'-al={build/"runtime.lst"}','-o',obj,source)
     assert not run('ez80-none-elf-nm','-u',obj).strip()
     syms={f[2]:int(f[0],16) for line in run('ez80-none-elf-nm','-n',obj).splitlines()
           if len(f:=line.split())==3 and f[1] in ('t','T')}
@@ -54,7 +54,7 @@ def main():
     report=dict(bytes=len(template),relocations=len(relocations),exports={n:syms[n] for n in EXPORTS},
                 independent_link_bases=[0x42000,0x48000],unresolved_symbols=0,
                 hashes={str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest()
-                        for p in [source,build/'runtime_data.bas',build/'runtime-0.bin']})
+                        for p in [source,source.parent/'report_keywords.inc',build/'runtime_data.bas',build/'runtime-0.bin']})
     (build/'runtime.json').write_text(json.dumps(report,indent=2)+'\n');print(json.dumps(report,indent=2))
 
 

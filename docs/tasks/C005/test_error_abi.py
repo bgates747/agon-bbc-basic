@@ -38,7 +38,7 @@ def main():
         'ERROR_ABI_STATUS:', 'error-abi.log', timeout_seconds=60)
     (build/'native.log').write_text(log)
     assert 'ERROR_ABI_STATUS:0\n' in log, log
-    assert 'boom\nboom\n\nfatal-zero at line 65279\n' in log, log
+    assert '(C) Copyright R.T.Russell 2025\n\n[ANDABSNo such variable\nOSCLI]\nboom\nboom\n\nfatal-zero at line 65279\n' in log, log
     report = dict(scope='Native error adapter ABI; no source-handler language yet',
         global_and_local_stack_transfer=True, root_and_loop_installation=True, handler_retained=True, fatal_zero_bypasses=True,
         discarded_numeric_values_remain=True, retained_local_normal_restoration=True,

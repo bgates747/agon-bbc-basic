@@ -1,0 +1,8 @@
+{
+  "programs": 2,
+  "fresh_reference_per_program": true,
+  "all_outputs_and_ERR_ERL_match": true,
+  "deterministic_repeat": true,
+  "duration_seconds": 163.859,
+  "compiler_sha256": "cbd443a1bd24e0caa3ec6f181407607a6a584174770965ed0919aac1c56b2ac0"
+}

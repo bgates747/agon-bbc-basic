@@ -1,0 +1,21 @@
+{
+  "programs": 6,
+  "source_case_indices": [
+    18,
+    19,
+    20,
+    21,
+    22,
+    23
+  ],
+  "fresh_reference_per_program": true,
+  "all_outputs_and_ERR_ERL_match": true,
+  "deterministic_repeat": true,
+  "duration_seconds": 311.543,
+  "compiler_sha256": "8bb1dd9a8b0018bc40d32ca5dfb62e6136146a322ea9949d3eb864fe8a7f7fff",
+  "hashes": {
+    "/Agon/mystuff/bbc-basic-v-adl/bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+    "/Agon/mystuff/bbc-basic-v-adl/.emulator/mos_platform.bin": "d564243283972690933a4554296ad6202ca4ef54572279533a942960846bebae",
+    "/Agon/mystuff/bbc-basic-v-adl/.emulator/fab-agon-emulator.bin": "bf5f29b243b8214e54c515dcc26edf47399ce440356af2ebc3ce3d7664ae11eb"
+  }
+}

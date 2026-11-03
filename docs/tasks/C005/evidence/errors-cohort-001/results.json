@@ -1,0 +1,16 @@
+{
+  "programs": 6,
+  "source_case_indices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "fresh_reference_per_program": true,
+  "all_outputs_and_ERR_ERL_match": true,
+  "deterministic_repeat": true,
+  "duration_seconds": 357.251,
+  "compiler_sha256": "5a8cc4f6a1f39d9693e6593d8cc41ac49c11efc85d99c8a332cbee80614469c9"
+}

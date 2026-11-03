@@ -265,3 +265,32 @@ Actual reference RIGHT$/STRING$ probes expose a string-result pointer dependency
 [Finding](INTERPRETER-FINDINGS.md) records evidence and a possible separate upstream
 audit. [Function contract](../docs/tasks/C004/functions/RETURN-KINDS.md) documents
 clear rejection of those unqualified carriers rather than divergent output.
+
+## Source error handling and REPORT investigation
+
+C005's standalone error adapter is promoted for its documented scope; its actual
+reference, ABI and source-language qualification is recorded in [the error contract](../docs/tasks/C005/ERRORS.md).
+EXEC.Z80 ONERR saves handler/stack state through LOCAL records; LOCAL ERROR itself
+is a no-op. MAIN.Z80 error transfer resets stacks without restoring discarded
+locals. Copying these routines directly would retain interpreter CURLIN/PAGE,
+ERRTRP/ONERSP, SPL and execution-stack dependencies. The native adapter instead
+has explicit control/activation/heap/entry pointers, restores earlier handler
+state on normal returns and rescues the current strings whose private storage
+would otherwise be reclaimed. It does not restore discarded prior values.
+
+REPORT depends on MAIN.Z80 TEXT/OUT and KEYWDS: NUL terminates, LF bypasses token
+expansion, and other mapped bytes expand as BASIC tokens/error fragments. A
+private858-byte read-only table is byte-checked against the pinned interpreter
+at&42F15; the adapted output path uses MOS output instead of interpreter COUNT /
+WIDTH globals. Those controls remain unsupported language features. The include
+retains the original1981–2025 copyright and non-transferable BBC naming notice;
+repository license.txt applies. It is assembly data adaptation, with no interpreter
+RAM addresses/parser linked and no Python BASIC compiler. The initial REPORT
+copyright text and actual error-line quirks are compatibility requirements.
+
+The2530-byte/128-relocation module has explicit compiler-patched bridges and bounds.
+Its final49-byte helper polls MOS sysvar ASCII5 and key-down18h at handler entry,
+preserving IX/IY/SP on ordinary return. OSLINE/LTRAP1 leaves a held key observable;
+XEQ/TRAP can therefore raise Escape again after selecting the handler's source
+position. The native helper preserves that mechanism without importing FLAGS or
+BASIC's keyboard vector. Broader asynchronous keyboard polling remains unqualified.

@@ -37,7 +37,8 @@ discarded and its changed value persists after return. String contents persist
 after later calls. The same handler catches successive errors. LOCAL ERROR is a
 no-op; ERROR257 reports1, ERROR-1 reports255 and REPORT stops at embedded NUL.
 ERL names the actual failing definition line, not the caller's line. These results
-qualify the source audit; they do not prove the unimplemented native recovery.
+qualify the source audit; the later native ABI and language cohorts provide
+separate implementation evidence.
 
 ## Native recovery boundary and source integration contract
 
@@ -76,7 +77,7 @@ finishes each session. No native-handler result is inferred from these probes.
 
 ## Standalone helper experiment, not language promotion
 
-`errors/errors.s` currently packages1511 bytes/116 internal ADL24 relocations and
+`errors/errors.s` first packaged1511 bytes/116 internal ADL24 relocations and
 passes two independent link checks. Its explicit patch slots connect control,
 activation bounds, heap/string helpers, saved entry SP and exit. Four opaque5-byte
 LOCAL state snapshots preserve normal restoration; error transfer instead rescues
@@ -98,3 +99,128 @@ arena transfer, retained handlers, fatal zero, numeric discard versus earlier
 normal restoration, repeated/max255/empty string rescue and growth, subsequent
 arena overwrites, full line packet, REPORT NUL truncation and line65279 display.
 The complete probe and exact module/other runtime metadata are retained.
+
+## Frontend integration and startup REPORT correction
+
+The first2079-line source SHA cbd443a1 passes two exact numbered programs163.859s
+and an initial six-program cohort374.876s, with independent complete runtime and
+entry/bridge checks. The later initial-REPORT probe shows ERR=0, ERL=0 and the
+pinned `(C) Copyright R.T.Russell 2025` notice followed by CR/LF/LF. The original
+empty-message startup assumption was wrong; preserve this quirk rather than
+modernising its date or omitting its output.
+
+The1559-byte/118-relocation adapter now copies that33-byte notice at entry; its
+revised ABI probe passes including actual notice output. A three-INSTR prescan
+filter avoids character-by-character keyword work on lines containing none of
+ERR/ERL/REPORT, while the existing quote/comment/word checks still determine the
+feature flag. Exact source SHA5a8cc4f6 passes the first six-program cohort357.251s;
+all six complete runtimes, twelve error configuration bridges, four activation
+bridges, numeric/control bridge and entry/arena/heap/saved-SP targets match.
+`errors-cohort-001` retains this source; earlier evidence retains its older scope.
+No source-handler language is promoted yet. Cohorts use a fresh pinned BASIC per
+reference program and fixed explicit line numbers, preventing shared DATA/error
+state and keeping ERL comparisons meaningful. Fixture @EXIT@ is instantiated as
+END for the native program and MOS BYE for the reference only; it is not syntax.
+
+## REPORT token dependency correction
+
+MAIN.Z80 REPORT calls TEXT/OUT, which expands token bytes instead of writing every
+byte directly. Seven actual reference cases1.016s show AND/ABS/CIRCLE/OSCLI and
+compressed error fragments, with LF specifically bypassing token expansion and
+NUL still terminating the message. The earlier raw-byte reporter was incomplete.
+
+The corrected2481-byte/126-relocation adapter includes an altered OUT path and an
+858-byte private copy of KEYWDS, byte-checked against the pinned basic.bin at
+&42F15. `report_keywords.inc` retains the original1981–2025 copyright and naming
+notice; repository license applies. `build_report_keywords.py` adapts assembly
+data, not BASIC programs. No interpreter address/state/parser is linked. Private
+MOS output replaces OUTCHR's COUNT/WIDTH dependency; those language controls remain
+outside this admission. Exact token spacing and the TEXTLF exception are retained.
+The revised native ABI (`error-abi-003`,1.017s) prints the actual notice, token
+expansion, NUL-truncated messages and default fatal line format while preserving
+all earlier checkpoint/ownership checks. Its BBC source SHA8bb1dd9a is experimental;
+prior cohorts remain scoped to their earlier helper and are rerun for this source.
+
+A final one-program high-byte sweep complements the seven diagnostic REPORT
+cases:128 successive local handlers report CHAR128..255 through the actual
+reference and native paths. Its result is not yet claimed. A separate I/O cohort
+is prepared for real keyboard Escape17 recovery (old string preserved, ERL40)
+and eight-handle cleanup after caught END and uncaught ERROR.
+
+## WHILE re-evaluation attribution correction
+
+The final33rd-index case fails with native ERL40 versus actual ERL60. The full
+failed cohort is retained in `errors-loop-attribution-failure-001`; changing the
+oracle to40 would hide an observable divergence. Source audit shows ENDWH1 calls
+EXPRI directly without XEQ updating CURLIN, so a direct failing re-evaluation
+belongs to ENDWHILE. Five fresh reference probes1.069s additionally establish
+that a normally returning FN in that condition resets attribution to the WHILE
+line, while same-line WHILE/REPEAT/FOR body failures belong to their body line.
+
+The corrected source SHA44533e0d changes only line11220: it omits the extra WHILE
+condition-entry mark, retaining the existing marks for REPEAT. Initial WHILE
+still has its ordinary statement mark; normal FN returns retain their existing
+caller mark, preserving the observed reference quirk. Subsequent body statements
+already carry their own correct marks. No error-runtime or numeric code changes.
+Earlier0..29 cohorts contain no WHILE and retain their exact qualification scope;
+new30..38 cohorts include direct/FN-return conditions, all three same-line bodies
+and the128-high-byte REPORT sweep. Their results are pending. Selected unchanged
+old images and the full compact baseline must be checked on this exact source
+before promotion. There is no new dynamic source-line extension or interpreter fix.
+
+## Held Escape at handler entry
+
+The first real keyboard I/O cohort exposes actual reference ERL30 (handler),
+versus native40 (INPUT), while both preserve the old string and Escape text.
+`errors-escape-attribution-failure-001` retains all three compiled programs and
+those observations; file cleanup had not executed. OSLINE jumps to LTRAP1, which
+clears FLAGS but leaves a held KEYDOWN/KEYASCII visible. XEQ selects the handler's
+CURLIN then TRAP can raise Escape again before its first statement. It is a
+held-key mechanism, not an unconditional rule that every Escape names a handler.
+
+A direct MOS probe2.070s returns editline1B, sysvar ASCII1B and down01. The new
+49-byte err_trap helper polls documented MOS sysvars5/18h at native handler entry,
+with IX/IY/SP preserved on ordinary return. It raises17 again while Escape is
+held; released/no/other keys return. No interpreter FLAGS/keyboard globals are
+linked. A mandatory entry source mark also handles an empty/comment body. General
+asynchronous Escape elsewhere remains unqualified; this admission covers line
+input and source-handler entry, not every interpreter keyboard safe point.
+
+Exact source SHA7cac4bba embeds2530 bytes/128 relocations and24 exported addresses.
+The complete previous2481-byte module prefix independently rebuilds identically;
+its native ABI passes1.068s (`error-abi-004`). Actual resumed I/O checks pass8.127s:
+Escape ERR/ERL/old string/REPORT match, a caught handler reads its still-open file,
+and caught END/uncaught ERROR release all eight handles. Exact driver/source/image
+identity is verified before reuse. This8.127s excludes completed compilation.
+An obsolete literal40 assertion and an IO signature crossing its first relocation
+are fixture/checker failures retained with the final evidence; neither changes the
+actual reference oracle. Core-handler and baseline requalification remain pending.
+
+## Development promotion and exact qualification scope
+
+The2111-line BBC source SHA7cac4bba is copied verbatim to compiler/compiler.bas.
+It has197 definitions and250 static private binding-name candidates; the latter
+is an inventory, not self-source acceptance. The2530-byte/128-relocation module
+and licensed keyword include promote to compiler/runtime/errors.s and
+report_keywords.inc; the runtime packer and table generator promote to
+compiler/tools with only their host root/default paths adapted. Target compilation
+still takes place entirely in BBC BASIC. No numeric vendor/interpreter source changes.
+
+The retained conventional corpus covers39 programs across exact earlier versions:
+0..29 at8bb1dd9a, corrected30..38 at44533e0d, plus selected full-image equivalence
+24/25. This is not labelled a full39-case rerun on7cac4bba. The held-key addition
+has an independent identical old-module prefix proof, current native ABI1.068s,
+current CORE6 fresh-reference/repeat/link checks386.004s, two modern ERL0 programs
+136.623s and the resumed three-program I/O checks8.127s. The exact current source
+also passes the39-case/15-native compact baseline and assembly golden86.851s.
+Nine exclusions and output preservation retain their44533e0d evidence; current
+baseline also covers malformed source and EVAL. The existing C004 LOCAL ERROR
+negative fixture becomes LOCAL DATA because LOCAL ERROR is now the admitted no-op.
+
+All eight live runtime packers and the live keyword generator reproduce the exact
+promoted source (`errors-repack-001`). Source-copy identity and complete package
+rebasing qualify this promotion; a separate selected live-path check is recorded
+when executed. The Author's waiver permits this development checkpoint, not a
+claim of human/hardware review. C005 resource closure remains open. Full native
+compiler execution of the39-case corpus is prepared under C006; it is not yet
+claimed. No new benchmark or physical result is implied by these controller times.

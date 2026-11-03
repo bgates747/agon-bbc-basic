@@ -1,0 +1,29 @@
+[
+  {
+    "main": [
+      "PRINT ;FNlooptrap;\":\";i%:@EXIT@"
+    ],
+    "defs": [
+      "DEF FNlooptrap:LOCAL n%",
+      "ON ERROR LOCAL PRINT ;ERR;\":\";ERL:=42",
+      "FOR i%=1 TO 2:ERROR 100,\"loop\"",
+      "NEXT:=0"
+    ],
+    "source": "10 PRINT \"ERROR_CASE_BEGIN_0\"\n20 PRINT ;FNlooptrap;\":\";i%:END\n1000 DEF FNlooptrap:LOCAL n%\n1010 ON ERROR LOCAL PRINT ;ERR;\":\";ERL:=42\n1020 FOR i%=1 TO 2:ERROR 100,\"loop\"\n1030 NEXT:=0\n",
+    "reference_source": "10 PRINT \"ERROR_CASE_BEGIN_0\"\n20 PRINT ;FNlooptrap;\":\";i%:OSCLI \"BYE\"\n1000 DEF FNlooptrap:LOCAL n%\n1010 ON ERROR LOCAL PRINT ;ERR;\":\";ERL:=42\n1020 FOR i%=1 TO 2:ERROR 100,\"loop\"\n1030 NEXT:=0\n",
+    "expected": "100:1020\n42:1\n"
+  },
+  {
+    "main": [
+      "ON ERROR LOCAL PRINT ;ERR;\":\";ERL:@EXIT@",
+      "GOSUB 1000",
+      "@EXIT@"
+    ],
+    "defs": [
+      "ERROR 100,\"sub\":RETURN"
+    ],
+    "source": "10 PRINT \"ERROR_CASE_BEGIN_1\"\n20 ON ERROR LOCAL PRINT ;ERR;\":\";ERL:END\n30 GOSUB 1000\n40 END\n1000 ERROR 100,\"sub\":RETURN\n",
+    "reference_source": "10 PRINT \"ERROR_CASE_BEGIN_1\"\n20 ON ERROR LOCAL PRINT ;ERR;\":\";ERL:OSCLI \"BYE\"\n30 GOSUB 1000\n40 OSCLI \"BYE\"\n1000 ERROR 100,\"sub\":RETURN\n",
+    "expected": "100:1000\n"
+  }
+]

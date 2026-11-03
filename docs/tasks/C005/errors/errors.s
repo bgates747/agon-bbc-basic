@@ -4,6 +4,7 @@
     .assume adl=1
     .text
     .global err_init,err_install,err_raise,err_inline,err_report,err_line
+    .global err_trap
     .global err_code,err_current,err_lastline,err_message,err_state
     .global err_ctlpush_slot,err_strload_slot,err_strstore_slot,err_exit_slot
     .global err_cfg_ctltop,err_cfg_acttop,err_cfg_frames,err_cfg_base
@@ -35,6 +36,10 @@ err_init:
     ld (err_current+1),hl
     ld (err_lastline),hl
     ld (err_lastline+1),hl
+    ld hl,initial_notice
+    ld de,err_message
+    ld bc,34
+    ldir
     pop iy
     pop ix
     pop hl
@@ -348,7 +353,7 @@ report_loop:
     ld a,(hl)
     push bc
     push hl
-    rst.lis 0x10
+    call report_out
     pop hl
     pop bc
     inc hl
@@ -356,6 +361,44 @@ report_loop:
 report_done:
     pop iy
     pop ix
+    ret
+; Altered MAIN.Z80 TEXT/OUT adaptation. Keyword data retains the original
+; (C) COPYRIGHT R.T.RUSSELL 1981-2025 notice in report_keywords.inc.
+; LF is raw output (TEXTLF), not the TINT token. Other mapped token/control
+; bytes expand exactly through the private copied table. COUNT/WIDTH parser
+; state is not linked; those source facilities remain outside this admission.
+report_out:
+    cp 10
+    jp z,report_putchar
+    cp 160
+    jp pe,report_putchar
+    push bc
+    push hl
+    ld hl,err_keywords
+    ld bc,err_keyword_length
+    cpir
+    call nz,report_putchar
+    ld b,160
+    cp report_wrap_last+129
+    jp pe,report_token
+    inc b
+report_token:
+    ld a,(hl)
+    inc hl
+    cp b
+    push af
+    call pe,report_putchar
+    pop af
+    jp pe,report_token
+    pop hl
+    pop bc
+    ret
+report_putchar:
+    push bc
+    push hl
+    rst.lis 0x10
+    pop hl
+    pop bc
     ret
  ; Conventional ERL is0..65279; unnumbered source uses0. Match SAYLN's
 ; low16 zero check and exact unsigned decimal line display. This formatter is
@@ -450,3 +493,35 @@ no_room_message: .byte 7
 line_prefix: .ascii " at line "
 line_digits: .space 5,0
     .byte 0xa5 ; One-past digit cursor remains an in-template relocation.
+initial_notice: .byte 33
+    .ascii "(C) Copyright R.T.Russell 2025"
+    .byte 13,10,10
+    .include "report_keywords.inc"
+
+; XEQ polls Escape after selecting an ON ERROR body. OSLINE's Escape path
+; leaves a held key visible, so entering that handler can raise Escape again
+; with the handler's CURLIN. Poll documented MOS sysvars instead of linking
+; interpreter FLAGS/KEYASCII/KEYDOWN or assuming a fixed resulting ERL.
+; IX/IY/SP preserved on ordinary return; other registers volatile.
+err_trap:
+    push ix
+    push iy
+    ld a,8
+    rst.lil 0x08
+    ld a,(ix+0x18)
+    cp 1
+    jr nz,trap_done
+    ld a,(ix+5)
+    cp 27
+    jr nz,trap_done
+    pop iy
+    pop ix
+    ld iy,escape_message
+    ld a,17
+    jp err_raise
+trap_done:
+    pop iy
+    pop ix
+    ret
+escape_message: .byte 6
+    .ascii "Escape"

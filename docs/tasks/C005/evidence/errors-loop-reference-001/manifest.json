@@ -1,0 +1,9 @@
+{
+  "while-body-colon.bas": "b354d0806e824486d80e0e19b31264867fae8286c74a2298a3d3ffe1c7320f1e",
+  "repeat-body-colon.bas": "e6100e42c11ad30527adcaecadd7cd764352f8576defbfa7eced1989a3eabb2f",
+  "while-fn-return.bas": "f64ea2360fd42e45e67b6baefdb814e63c1c03701349d4b52a14685fd1f3b5fc",
+  "for-body-colon.bas": "be3db270713c0ee380c4edc5ddd64c7f134f2d5504b1a84b6c1343cffc47ba8f",
+  "while-direct.bas": "3f80d6894e7ac3c39b784b073c032642c2c70c18832547b0fe2344909b962e69",
+  "reference.log": "7652922e9bdd19ab9816721cac2f8c865d03f2d75114b7e0298f3e723b644571",
+  "results.json": "7a778996fefa38de966e2520bf9c04de827bafba702cf6074db8be4e601f745d"
+}

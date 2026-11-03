@@ -1,0 +1,6 @@
+10 PRINT "ERROR_CASE_BEGIN_1"
+20 x%=7
+30 r%=FNlocal:PRINT ;r%;":";x%;":";ERL:OSCLI "BYE"
+1000 DEF FNlocal:LOCAL x%:x%=99
+1010 ON ERROR LOCAL PRINT ;ERR;":";ERL;":";x%:=42
+1020 ERROR 100,"boom"

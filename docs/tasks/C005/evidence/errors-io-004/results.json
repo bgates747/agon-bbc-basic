@@ -1,0 +1,11 @@
+{
+  "programs": 3,
+  "real_Escape_matches_reference": true,
+  "ERR_ERL_old_string_and_REPORT_match": true,
+  "caught_handler_keeps_open_file": true,
+  "caught_END_and_uncaught_error_close_all_eight_handles": true,
+  "duration_scope": "resume validation and UI/native checks",
+  "reused_complete_compile": true,
+  "duration_seconds": 8.127,
+  "compiler_sha256": "7cac4bba8644a047c38c496a5fc7cb0fc6c9118b892aad6c3314091867c7fe36"
+}

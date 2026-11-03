@@ -1,0 +1,14 @@
+[
+  {
+    "source": "ON ERROR PRINT ;ERR;\":\";ERL:REPORT:PRINT:END\nGOTO @fail\nPRINT \"WRONG\"\n@fail:ERROR 100,\"modern\"\n",
+    "expected": "100:0\nmodern\n",
+    "status": 0,
+    "reference": false
+  },
+  {
+    "source": "ERROR 100,\"modern-untrapped\"\n",
+    "expected": "\nmodern-untrapped\n",
+    "status": 1,
+    "reference": false
+  }
+]

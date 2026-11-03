@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/Agon/mystuff/bbc-basic-v-adl/docs/tasks/C005/test_error_io.py", line 35, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/Agon/mystuff/bbc-basic-v-adl/docs/tasks/C005/test_error_io.py", line 24, in main
+    assert logs['reference']==logs['native'],logs;assert '17:40:old\nEscape\n' in logs['native'],logs;assert 'ERROR_IO_STATUS:0\n' in (b/'native.log').read_text()
+                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'reference': 'ERROR_ESCAPE:\n17:30:old\nEscape\n', 'native': 'ERROR_ESCAPE:\n17:30:old\nEscape\n'}

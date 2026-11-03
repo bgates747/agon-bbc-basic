@@ -1,0 +1,16 @@
+{
+  "passed": false,
+  "compiler_sha256": "8bb1dd9a8b0018bc40d32ca5dfb62e6136146a322ea9949d3eb864fe8a7f7fff",
+  "compiled_cases": [
+    30,
+    31,
+    32,
+    33
+  ],
+  "repeat_matched": true,
+  "output_mismatch": {
+    "case": 33,
+    "reference": "18:60:1",
+    "native": "18:40:1"
+  }
+}

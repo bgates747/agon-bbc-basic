@@ -270,3 +270,116 @@ max/empty/repeated string ownership, root/loop install, nested transfer, normal
 retained-local restoration, handler persistence and fatal/NUL/line formatting.
 Its BBC frontend is prepared; source-handler language is still unimplemented.
 Continue C005 errors/resources and C006 under the Author's authorization.
+
+## C005 source-handler integration and first cohorts
+
+An experimental BBC frontend wires ON ERROR/LOCAL/OFF, LOCAL ERROR no-op, ERROR,
+REPORT, ERR/ERL, source marks and normal caller-location restoration to the native
+adapter. Initial2 smoke163.859s and6 programs374.876s pass, but a fresh initial
+REPORT probe exposes a missed startup quirk: the pinned copyright notice and two
+line endings, with ERR/ERL0. Retain it, including2025. Revised1559-byte/118-relocation
+helper ABI passes with actual notice printing. A fast prescan filter retains the
+same token checks. Source SHA5a8cc4f6 passes the first6-program cohort357.251s and
+full GNU/runtime/entry/bridge validation. Further cohorts remain unqualified;
+live compiler stays at the accepted DATA checkpoint053fd83.
+
+## C005 REPORT token-output dependency identified
+
+The full MAIN.Z80 TEXT/OUT audit exposes token expansion in REPORT, beyond NUL
+termination. Actual7-case probes1.016s confirm keyword/error-fragment expansion,
+LF exception and NUL behavior. The raw-byte reporter missed this dependency.
+A private858-byte KEYWDS table is byte-verified against the reference image and
+retains notices/license. Corrected2481-byte/126-relocation standalone helper and
+ABI1.017s preserve initial notice, token output, fatal line formatting and earlier
+ownership/stack checks. Source SHA8bb1dd9a remains experimental. Prior1559-byte
+cohort6..11 passed302.222s after repairing a fixture's compile-time-excluded direct
+FN message with concatenation; no numeric/compiler behavior changed for that fix.
+Final cohorts rerun the corrected reporter before any live promotion.
+
+## C005 final error cohorts and isolated resource preparation
+
+Exact source SHA8bb1dd9a passes final0..5 (374.981s),6..11 (319.755s) and12..17
+cohorts, each with fresh per-program BASIC oracles, deterministic repeats and
+complete independent runtime/entry/bridge checks. The current checker additionally
+links optional DATA/I/O modules when present. Later cohorts remain running; no
+error-language live promotion is claimed yet. Real Escape/file-cleanup and a
+128-byte REPORT-token sweep are prepared as additional qualification.
+
+An isolated pure-BBC streaming candidate in C005/streaming replaces the code/
+fixup buffers with layout, validation and direct-output passes. Static reference
+bitsets and explicit final aliases/entry chaining remove unused numeric-label
+pressure. It retains256 bindings,4096 symbols and204 definitions; static248 private
+names are an inventory, not a self-compilation or RAM result. Prepared resource
+fixtures include >65536 output,2048 labels and4097-label rejection. No runtime or
+live compiler changes accompany this unqualified candidate.
+
+C006's BOOTSTRAP.md and bootstrap.py now prepare exact unmodified-main interpreted,
+native G1/G2/repeat execution through actual line-input prompts, complete image
+comparison and retained failed/interrupted stages. C005 closure remains pending;
+no C006 generation or physical result has occurred. A backwards-compatible optional
+keyboard abort check distinguishes a failed BASIC return from waiting for a success
+message; it is not a new emulator configuration or hardware deployment.
+
+## Actual WHILE error-line quirk and correction
+
+Final cohort30..33 compiles and repeats but fails its last native comparison:
+reference direct WHILE re-evaluation error is18:60:1, native18:40:1. Preserve the
+failed four images/oracles/logs. Five additional actual probes1.069s and ENDWH1 /
+CURLIN audit show that a direct condition failure belongs to ENDWHILE, but a
+normally returning FN in that condition resets attribution to WHILE. Same-line
+WHILE/REPEAT/FOR body failures name that body line. Do not replace these oracles
+with an idealised source location.
+
+Source SHA44533e0d changes only11220 to skip the extra entry mark for WHILE.
+Existing FN-return and ordinary body marks are retained. The runtime stays2481
+bytes/126 relocations; earlier non-WHILE cohorts remain scoped to SHA8bb1dd9a.
+Corrected30..38 cohorts are running, including a128-high-byte REPORT sweep and
+four supplemental loop attribution cases. Source handlers are not promoted yet.
+
+## Corrected error source and unchanged-image checks
+
+Exact SHA44533e0d passes corrected30..35 in344.702s and36..38 in196.539s, each with
+fresh numbered oracles, repeat and complete runtime links. This includes all128
+high-byte REPORT values, direct ENDWHILE attribution, FN-return attribution and
+same-line WHILE/REPEAT/FOR bodies. Recompiled24/25 complete images equal their
+retained SHA8bb1dd9a images. Source-diff proof is exactly the11220 WHILE conditional;
+all earlier0..29 sources contain no WHILE, so that emission path is unchanged.
+The old and new exact-source scopes remain explicit in evidence, not relabelled
+as a wholesale rerun. Nine exclusions/output preservation and quoted-word compact
+output pass98.501s. Modern unnumbered/named-label ERL0 programs also pass; actual
+Escape/file recovery, baseline and self-source-gap checks remain in progress.
+
+## Held Escape dependency and bounded native polling
+
+Real keyboard Escape first yields reference17:30:old versus native17:40:old.
+Retain failure and trace OSLINE/LTRAP1, keyboard state and XEQ/TRAP: a held key
+can retrigger at the handler's CURLIN. A direct MOS probe returns1B:1B:01 after
+editline. Add a49-byte sysvar polling helper and mandatory handler entry mark,
+without importing interpreter FLAGS/state or changing the old2481-byte module
+prefix. Independent rebuild proves that prefix identical. New2530-byte/128-reloc
+ABI passes1.068s; exact BBC source SHA7cac4bba remains experimental.
+
+The I/O cohort's native Escape now matches reference; an old literal40 assertion
+then fails despite equality. Verified resume and corrected relocation-safe IO
+signature complete actual keyboard, retained-handle BGET and eight-handle exit
+checks8.127s (resume/UI/link time only, excluding compilation). CORE6 and baseline
+follow; general asynchronous Escape outside line input/handler entry remains
+unqualified. Earlier39-case scopes retain their exact older source/runtime hashes.
+
+## C005 source handlers promoted; source-capacity probe running
+
+Exact2111-line source7cac4bba passes current CORE6 in386.004s, modern ERL0 cases
+136.623s and the39-case/15-native baseline/golden86.851s. It promotes verbatim with
+2530-byte/128-reloc errors.s, the licensed keyword include, runtime packer and
+assembly-data generator. Eight packers plus the generator reproduce exact source.
+Prior39 conventional observations keep8bb1dd9a/44533e0d scope; no wholesale rerun
+on7cac4bba is invented. ERRORS.md records targeted held-key evidence and original
+module prefix proof. C004's excluded LOCAL ERROR fixture changes to LOCAL DATA
+because the former is now supported as its actual no-op.
+
+The actual self-source capacity probe is running separately with unchanged7cac4bba.
+Streaming candidate d2ba9abb (2149 lines,205 definitions,248 static private names)
+remains unqualified and isolated; no self-compilation is claimed. C006 generation
+and native-regression drivers are prepared only. Continue resource closure and
+self-generation under the Author's standing authorization; no Oryx, human emulator,
+hardware or performance result has been claimed.

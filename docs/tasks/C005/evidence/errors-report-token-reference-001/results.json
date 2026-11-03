@@ -1,0 +1,14 @@
+{
+  "scope": "Actual REPORT output; no intended-output oracle",
+  "observed": {
+    "and": "[AND]\n",
+    "abs": "[ABS]\n",
+    "compressed": "[No such variable]\n",
+    "low-token": "[CIRCLE]\n",
+    "oscli": "[OSCLI]\n",
+    "linefeed": "[\n]\n",
+    "nul": "[AND\n"
+  },
+  "duration_seconds": 1.016,
+  "basic_sha256": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d"
+}

@@ -111,3 +111,32 @@ a reference/native boundary but does not establish a root cause or authorize an
 interpreter change. Retained C005 long-path/reference-stall evidence owns the
 observations. The compiler's file admission records this as unqualified; it is
 not a faster-open benchmark or an accepted behavioral improvement.
+
+## WHILE condition error-line attribution
+
+1. The pinned reference reports ERL60 for a direct division failure while
+   ENDWHILE re-evaluates a WHILE on line40. Replacing part of that condition with
+   a normally returning FN yields ERL40 for the later failure. Five actual probes
+   are retained in [the loop observations](../docs/tasks/C005/evidence/errors-loop-reference-001/results.json).
+2. EXEC.Z80 ENDWH1 calls EXPRI without XEQ updating CURLIN. Normal FN return
+   restores caller expression context. This explains the observed difference;
+   it is not permission to substitute a more intuitive error line in the compiler.
+3. An upstream attribution change could be investigated separately for consistency
+   and historical BBC compatibility. The compiler retains both actual outcomes;
+   no interpreter change or upstream submission has been made.
+
+## Held Escape during line-input error handling
+
+1. Actual keyboard input terminated by Escape preserves the previous string,
+   but a handler on line30 reports ERL30 instead of INPUT LINE's40 in the retained
+   [failure observations](../docs/tasks/C005/evidence/errors-escape-attribution-failure-001/reference.log).
+   A direct [MOS key-state probe](../docs/tasks/C005/evidence/errors-escape-key-state-001/native.log)
+   reads editline1B, ASCII1B and key-down01 immediately after return.
+2. agon_os.s OSLINE1 jumps to LTRAP1, clearing the Escape flag while leaving a
+   held key observable. XEQ/TRAP can raise Escape again after selecting the
+   handler's CURLIN, before its first statement. This is timing-sensitive key
+   behavior, not a categorical ERL rule for released keys.
+3. Consuming line-editor Escape once, or changing its handler attribution, would
+   need separate upstream compatibility review. The native adapter instead polls
+   documented MOS state at handler entry and preserves the observed retrigger.
+   No interpreter keyboard/FLAGS code has been modified.

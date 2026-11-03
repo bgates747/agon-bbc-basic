@@ -1,0 +1,41 @@
+{
+  "compiler_sha256": "7cac4bba8644a047c38c496a5fc7cb0fc6c9118b892aad6c3314091867c7fe36",
+  "eight_runtime_packers_and_keyword_generator": [
+    {
+      "tool": "compiler/tools/build_report_keywords.py",
+      "compiler_unchanged": true
+    },
+    {
+      "tool": "compiler/tools/build_numeric_runtime.py",
+      "compiler_unchanged": true
+    },
+    {
+      "tool": "compiler/tools/build_strings_runtime.py",
+      "compiler_unchanged": true
+    },
+    {
+      "tool": "compiler/tools/build_control_runtime.py",
+      "compiler_unchanged": true
+    },
+    {
+      "tool": "compiler/tools/build_procedure_runtime.py",
+      "compiler_unchanged": true
+    },
+    {
+      "tool": "compiler/tools/build_memory_runtime.py",
+      "compiler_unchanged": true
+    },
+    {
+      "tool": "compiler/tools/build_io_runtime.py",
+      "compiler_unchanged": true
+    },
+    {
+      "tool": "compiler/tools/build_data_runtime.py",
+      "compiler_unchanged": true
+    },
+    {
+      "tool": "compiler/tools/build_error_runtime.py",
+      "compiler_unchanged": true
+    }
+  ]
+}

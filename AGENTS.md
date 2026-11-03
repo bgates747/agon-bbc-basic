@@ -61,9 +61,18 @@ unqualified FN carriers and255-character path boundary. DATA/READ/RESTORE is now
 (1962 lines,120-byte PIC helper). Full32 sources (22 native/10 rejection), verified
 fresh repeat/resumed output/GNU+entry checks, baseline80.355s and live smoke170.183s
 pass; seven packers reproduce it. Read C005/DATA.md for fixture corrections,
-separate exhaustion oracles and explicit literal-only admissions. Source handlers
-and resource closure remain open. The1511-byte error adapter passes native ABI
-1.020s; its BBC frontend is prepared but not integrated. Read C005/ERRORS.md. C006 remains unstarted. The compiler is still BBC BASIC; assembly is runtime code, not a
+separate exhaustion oracles and explicit literal-only admissions. Resource closure remains open. Source handlers are now promoted at SHA7cac4bba
+(2111 BBC lines), with2530-byte/128-relocation error runtime and licensed REPORT
+table. Its original2481-byte module prefix independently rebuilds identically;
+held-key polling uses MOS sysvars at handler entry. Current CORE6, modern ERL0,
+actual Escape/open-file/exit checks, baseline/golden and nine regeneration tools
+pass. Earlier39-case scopes retain their8bb1dd9a/44533e0d identities, including
+WHILE/FN-return ERL quirks; no full39-case rerun on7cac4bba is claimed. Read
+C005/ERRORS.md. The self-source capacity probe is running. C005/streaming holds
+unqualified candidate fc67e57c (2160 lines,205 defs,248 static private names),
+with a BBC three-pass emitter. Do not replace the active prototype while a
+qualification uses it. Read C005/STREAMING.md. C006 has refined generation and
+native-regression workflows only; no generation or physical result exists yet. The compiler is still BBC BASIC; assembly is runtime code, not a
 replacement compiler implementation.
 
 Use `.venv/bin/python` explicitly. `compiler/README.md` contains build/test

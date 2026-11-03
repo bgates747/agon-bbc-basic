@@ -1,0 +1,86 @@
+[
+  {
+    "main": [
+      "x%=7",
+      "ON ERROR PRINT ;ERR;\":\";ERL;\":\";x%:REPORT:PRINT:@EXIT@",
+      "PROCfail",
+      "PRINT \"WRONG\":@EXIT@"
+    ],
+    "defs": [
+      "DEF PROCfail:LOCAL x%:x%=99:ERROR 100,\"boom\""
+    ],
+    "source": "10 PRINT \"ERROR_CASE_BEGIN_0\"\n20 x%=7\n30 ON ERROR PRINT ;ERR;\":\";ERL;\":\";x%:REPORT:PRINT:END\n40 PROCfail\n50 PRINT \"WRONG\":END\n1000 DEF PROCfail:LOCAL x%:x%=99:ERROR 100,\"boom\"\n",
+    "reference_source": "10 PRINT \"ERROR_CASE_BEGIN_0\"\n20 x%=7\n30 ON ERROR PRINT ;ERR;\":\";ERL;\":\";x%:REPORT:PRINT:OSCLI \"BYE\"\n40 PROCfail\n50 PRINT \"WRONG\":OSCLI \"BYE\"\n1000 DEF PROCfail:LOCAL x%:x%=99:ERROR 100,\"boom\"\n",
+    "expected": "100:1000:99\nboom\n"
+  },
+  {
+    "main": [
+      "x%=7",
+      "r%=FNlocal:PRINT ;r%;\":\";x%;\":\";ERL:@EXIT@"
+    ],
+    "defs": [
+      "DEF FNlocal:LOCAL x%:x%=99",
+      "ON ERROR LOCAL PRINT ;ERR;\":\";ERL;\":\";x%:=42",
+      "ERROR 100,\"boom\""
+    ],
+    "source": "10 PRINT \"ERROR_CASE_BEGIN_1\"\n20 x%=7\n30 r%=FNlocal:PRINT ;r%;\":\";x%;\":\";ERL:END\n1000 DEF FNlocal:LOCAL x%:x%=99\n1010 ON ERROR LOCAL PRINT ;ERR;\":\";ERL;\":\";x%:=42\n1020 ERROR 100,\"boom\"\n",
+    "reference_source": "10 PRINT \"ERROR_CASE_BEGIN_1\"\n20 x%=7\n30 r%=FNlocal:PRINT ;r%;\":\";x%;\":\";ERL:OSCLI \"BYE\"\n1000 DEF FNlocal:LOCAL x%:x%=99\n1010 ON ERROR LOCAL PRINT ;ERR;\":\";ERL;\":\";x%:=42\n1020 ERROR 100,\"boom\"\n",
+    "expected": "100:1020:99\n42:7:1020\n"
+  },
+  {
+    "main": [
+      "x%=7",
+      "r%=FNafter:PRINT ;r%;\":\";x%:@EXIT@"
+    ],
+    "defs": [
+      "DEF FNafter",
+      "ON ERROR LOCAL PRINT ;ERR;\":\";x%:=42",
+      "LOCAL x%:x%=99:ERROR 100,\"boom\""
+    ],
+    "source": "10 PRINT \"ERROR_CASE_BEGIN_2\"\n20 x%=7\n30 r%=FNafter:PRINT ;r%;\":\";x%:END\n1000 DEF FNafter\n1010 ON ERROR LOCAL PRINT ;ERR;\":\";x%:=42\n1020 LOCAL x%:x%=99:ERROR 100,\"boom\"\n",
+    "reference_source": "10 PRINT \"ERROR_CASE_BEGIN_2\"\n20 x%=7\n30 r%=FNafter:PRINT ;r%;\":\";x%:OSCLI \"BYE\"\n1000 DEF FNafter\n1010 ON ERROR LOCAL PRINT ;ERR;\":\";x%:=42\n1020 LOCAL x%:x%=99:ERROR 100,\"boom\"\n",
+    "expected": "100:99\n42:99\n"
+  },
+  {
+    "main": [
+      "s$=\"outer\"",
+      "ON ERROR PRINT ;ERR;\":\";ERL;\":\";LEN s$;\":\";ASC s$:PROCoverwrite:PRINT ;LEN s$;\":\";ASC RIGHT$(s$):@EXIT@",
+      "PROCfail",
+      "@EXIT@"
+    ],
+    "defs": [
+      "DEF PROCfail:LOCAL s$:s$=\"small\":LOCAL s$:s$=STRING$(255,\"q\"):ERROR 100,\"lost\"",
+      "DEF PROCoverwrite:LOCAL t$:t$=STRING$(255,\"x\"):ENDPROC"
+    ],
+    "source": "10 PRINT \"ERROR_CASE_BEGIN_3\"\n20 s$=\"outer\"\n30 ON ERROR PRINT ;ERR;\":\";ERL;\":\";LEN s$;\":\";ASC s$:PROCoverwrite:PRINT ;LEN s$;\":\";ASC RIGHT$(s$):END\n40 PROCfail\n50 END\n1000 DEF PROCfail:LOCAL s$:s$=\"small\":LOCAL s$:s$=STRING$(255,\"q\"):ERROR 100,\"lost\"\n1010 DEF PROCoverwrite:LOCAL t$:t$=STRING$(255,\"x\"):ENDPROC\n",
+    "reference_source": "10 PRINT \"ERROR_CASE_BEGIN_3\"\n20 s$=\"outer\"\n30 ON ERROR PRINT ;ERR;\":\";ERL;\":\";LEN s$;\":\";ASC s$:PROCoverwrite:PRINT ;LEN s$;\":\";ASC RIGHT$(s$):OSCLI \"BYE\"\n40 PROCfail\n50 OSCLI \"BYE\"\n1000 DEF PROCfail:LOCAL s$:s$=\"small\":LOCAL s$:s$=STRING$(255,\"q\"):ERROR 100,\"lost\"\n1010 DEF PROCoverwrite:LOCAL t$:t$=STRING$(255,\"x\"):ENDPROC\n",
+    "expected": "100:1000:255:113\n255:113\n"
+  },
+  {
+    "main": [
+      "s$=\"outer\"",
+      "r%=FNstrlocal:PRINT ;r%;\":\";s$:PROCoverwrite:PRINT s$:@EXIT@"
+    ],
+    "defs": [
+      "DEF FNstrlocal",
+      "ON ERROR LOCAL PRINT s$:PROCoverwrite:PRINT s$:=42",
+      "LOCAL s$:s$=\"after\":ERROR 100,\"lost\"",
+      "DEF PROCoverwrite:LOCAL t$:t$=STRING$(255,\"q\"):ENDPROC"
+    ],
+    "source": "10 PRINT \"ERROR_CASE_BEGIN_4\"\n20 s$=\"outer\"\n30 r%=FNstrlocal:PRINT ;r%;\":\";s$:PROCoverwrite:PRINT s$:END\n1000 DEF FNstrlocal\n1010 ON ERROR LOCAL PRINT s$:PROCoverwrite:PRINT s$:=42\n1020 LOCAL s$:s$=\"after\":ERROR 100,\"lost\"\n1030 DEF PROCoverwrite:LOCAL t$:t$=STRING$(255,\"q\"):ENDPROC\n",
+    "reference_source": "10 PRINT \"ERROR_CASE_BEGIN_4\"\n20 s$=\"outer\"\n30 r%=FNstrlocal:PRINT ;r%;\":\";s$:PROCoverwrite:PRINT s$:OSCLI \"BYE\"\n1000 DEF FNstrlocal\n1010 ON ERROR LOCAL PRINT s$:PROCoverwrite:PRINT s$:=42\n1020 LOCAL s$:s$=\"after\":ERROR 100,\"lost\"\n1030 DEF PROCoverwrite:LOCAL t$:t$=STRING$(255,\"q\"):ENDPROC\n",
+    "expected": "after\nafter\n42:after\nafter\n"
+  },
+  {
+    "main": [
+      "n%=0",
+      "ON ERROR n%=n%+1:PRINT ;ERR;\":\";ERL;\":\";n%:IF n%<2 THEN GOTO 50 ELSE @EXIT@",
+      "REM handler stays enabled",
+      "ERROR 100,\"again\""
+    ],
+    "defs": [],
+    "source": "10 PRINT \"ERROR_CASE_BEGIN_5\"\n20 n%=0\n30 ON ERROR n%=n%+1:PRINT ;ERR;\":\";ERL;\":\";n%:IF n%<2 THEN GOTO 50 ELSE END\n40 REM handler stays enabled\n50 ERROR 100,\"again\"\n",
+    "reference_source": "10 PRINT \"ERROR_CASE_BEGIN_5\"\n20 n%=0\n30 ON ERROR n%=n%+1:PRINT ;ERR;\":\";ERL;\":\";n%:IF n%<2 THEN GOTO 50 ELSE OSCLI \"BYE\"\n40 REM handler stays enabled\n50 ERROR 100,\"again\"\n",
+    "expected": "100:50:1\n100:50:2\n"
+  }
+]

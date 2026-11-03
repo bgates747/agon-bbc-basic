@@ -5,7 +5,7 @@ import time
 
 
 def run(profile: Path, autoexec: str, keyboard_steps, marker: str, log_name: str,
-        timeout_seconds=120):
+        timeout_seconds=120, abort_patterns=()):
     (profile/'sdcard/autoexec.txt').write_bytes(autoexec.replace('\n', '\r\n').encode('ascii'))
     log_path = profile/log_name
     with log_path.open('w') as log:
@@ -16,6 +16,9 @@ def run(profile: Path, autoexec: str, keyboard_steps, marker: str, log_name: str
             deadline = time.monotonic()+timeout_seconds
             while time.monotonic() < deadline:
                 output = log_path.read_text(errors='replace')
+                for completed_steps, pattern in abort_patterns:
+                    if step == completed_steps and pattern in output and not (step < len(keyboard_steps) and keyboard_steps[step][0] in output):
+                        raise AssertionError(f'Unexpected {pattern!r} after input; see {log_path}: {output}')
                 if step < len(keyboard_steps) and keyboard_steps[step][0] in output:
                     text = keyboard_steps[step][1]
                     process.stdin.write((text+'\n').encode('ascii'))

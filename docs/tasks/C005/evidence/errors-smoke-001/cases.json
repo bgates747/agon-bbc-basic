@@ -1,0 +1,30 @@
+[
+  {
+    "main": [
+      "x%=7",
+      "ON ERROR PRINT ;ERR;\":\";ERL;\":\";x%:REPORT:PRINT:@EXIT@",
+      "PROCfail",
+      "PRINT \"WRONG\":@EXIT@"
+    ],
+    "defs": [
+      "DEF PROCfail:LOCAL x%:x%=99:ERROR 100,\"boom\""
+    ],
+    "source": "10 PRINT \"ERROR_CASE_BEGIN_0\"\n20 x%=7\n30 ON ERROR PRINT ;ERR;\":\";ERL;\":\";x%:REPORT:PRINT:END\n40 PROCfail\n50 PRINT \"WRONG\":END\n1000 DEF PROCfail:LOCAL x%:x%=99:ERROR 100,\"boom\"\n",
+    "reference_source": "10 PRINT \"ERROR_CASE_BEGIN_0\"\n20 x%=7\n30 ON ERROR PRINT ;ERR;\":\";ERL;\":\";x%:REPORT:PRINT:OSCLI \"BYE\"\n40 PROCfail\n50 PRINT \"WRONG\":OSCLI \"BYE\"\n1000 DEF PROCfail:LOCAL x%:x%=99:ERROR 100,\"boom\"\n",
+    "expected": "100:1000:99\nboom\n"
+  },
+  {
+    "main": [
+      "x%=7",
+      "r%=FNlocal:PRINT ;r%;\":\";x%;\":\";ERL:@EXIT@"
+    ],
+    "defs": [
+      "DEF FNlocal:LOCAL x%:x%=99",
+      "ON ERROR LOCAL PRINT ;ERR;\":\";ERL;\":\";x%:=42",
+      "ERROR 100,\"boom\""
+    ],
+    "source": "10 PRINT \"ERROR_CASE_BEGIN_1\"\n20 x%=7\n30 r%=FNlocal:PRINT ;r%;\":\";x%;\":\";ERL:END\n1000 DEF FNlocal:LOCAL x%:x%=99\n1010 ON ERROR LOCAL PRINT ;ERR;\":\";ERL;\":\";x%:=42\n1020 ERROR 100,\"boom\"\n",
+    "reference_source": "10 PRINT \"ERROR_CASE_BEGIN_1\"\n20 x%=7\n30 r%=FNlocal:PRINT ;r%;\":\";x%;\":\";ERL:OSCLI \"BYE\"\n1000 DEF FNlocal:LOCAL x%:x%=99\n1010 ON ERROR LOCAL PRINT ;ERR;\":\";ERL;\":\";x%:=42\n1020 ERROR 100,\"boom\"\n",
+    "expected": "100:1020:99\n42:7:1020\n"
+  }
+]

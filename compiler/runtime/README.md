@@ -1,7 +1,7 @@
 # Standalone runtimes
 
 The BBC compiler embeds this runtime as DATA and emits it only when a program
-uses numeric expressions. It preserves four-byte integers and five-byte BBC
+needs numeric, control, activation or error facilities. It preserves four-byte integers and five-byte BBC
 floats; generated programs execute without the interpreter. The current image
 is 4460 bytes before temporary slots and error-message glue.
 
@@ -127,3 +127,26 @@ strings are bounded; numeric errors do not affect string reads.
 checks independent links. All field parsing/literal conversion/table emission
 remains BBC BASIC; no new numeric parser/package or host compiler is introduced.
 See [C005](../../docs/tasks/C005/DATA.md) for scope and qualification.
+
+## Source error recovery and REPORT
+
+`errors.s` is2530 bytes with128 internal ADL24 relocations and explicit
+control/string/exit/arena/heap patch slots. Its scalar handler state uses ordinary
+LOCAL snapshots; recovery rescues current lost strings and discards records,
+while normal returns retain reverse restoration. Source provenance, calling
+conventions, line attribution and qualification are in [C005](../../docs/tasks/C005/ERRORS.md).
+`report_keywords.inc` is the byte-verified private KEYWDS copy, with original
+copyright/naming notices retained under the repository license. REPORT expands
+its mapped bytes, preserves LF/NUL and the pinned startup copyright notice.
+No interpreter address/global/parser is linked. A49-byte MOS key-state helper
+polls held Escape at handler entry; broader asynchronous polling is unqualified.
+
+```bash
+.venv/bin/python compiler/tools/build_report_keywords.py
+.venv/bin/python compiler/tools/build_error_runtime.py --compiler compiler/compiler.bas
+```
+
+The first command checks the reference assembly data against the pinned built
+BASIC image/map; it does not compile BASIC programs. The second packages DATA63000
+and verifies independent GNU links at&42000/&48000. All eight packers reproduce
+the exact promoted compiler. The Agon program needs no separate runtime file.

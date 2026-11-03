@@ -1,0 +1,76 @@
+[
+  {
+    "main": [
+      "PROCloop",
+      "@EXIT@"
+    ],
+    "defs": [
+      "DEF PROCloop:FOR i%=0 TO 0",
+      "ON ERROR LOCAL PRINT ;ERR;\":\";ERL:@EXIT@",
+      "ERROR 100,\"loop\"",
+      "NEXT:ENDPROC"
+    ],
+    "source": "10 PRINT \"ERROR_CASE_BEGIN_0\"\n20 PROCloop\n30 END\n1000 DEF PROCloop:FOR i%=0 TO 0\n1010 ON ERROR LOCAL PRINT ;ERR;\":\";ERL:END\n1020 ERROR 100,\"loop\"\n1030 NEXT:ENDPROC\n",
+    "reference_source": "10 PRINT \"ERROR_CASE_BEGIN_0\"\n20 PROCloop\n30 OSCLI \"BYE\"\n1000 DEF PROCloop:FOR i%=0 TO 0\n1010 ON ERROR LOCAL PRINT ;ERR;\":\";ERL:OSCLI \"BYE\"\n1020 ERROR 100,\"loop\"\n1030 NEXT:ENDPROC\n",
+    "expected": "100:1020\n"
+  },
+  {
+    "main": [
+      "ON ERROR LOCAL PRINT ;ERR;\":\";ERL:@EXIT@",
+      "ERROR 100,\"root\""
+    ],
+    "defs": [],
+    "source": "10 PRINT \"ERROR_CASE_BEGIN_1\"\n20 ON ERROR LOCAL PRINT ;ERR;\":\";ERL:END\n30 ERROR 100,\"root\"\n",
+    "reference_source": "10 PRINT \"ERROR_CASE_BEGIN_1\"\n20 ON ERROR LOCAL PRINT ;ERR;\":\";ERL:OSCLI \"BYE\"\n30 ERROR 100,\"root\"\n",
+    "expected": "100:30\n"
+  },
+  {
+    "main": [
+      "ON ERROR PRINT \"WRONG\":@EXIT@",
+      "ERROR 0,\"fatal-zero\""
+    ],
+    "defs": [],
+    "fatal": "fatal-zero",
+    "status": 1,
+    "source": "10 PRINT \"ERROR_CASE_BEGIN_2\"\n20 ON ERROR PRINT \"WRONG\":END\n30 ERROR 0,\"fatal-zero\"\n",
+    "reference_source": "10 PRINT \"ERROR_CASE_BEGIN_2\"\n20 ON ERROR PRINT \"WRONG\":OSCLI \"BYE\"\n30 ERROR 0,\"fatal-zero\"\n",
+    "expected": "\nfatal-zero at line 30\n"
+  },
+  {
+    "main": [
+      "ON ERROR PRINT \"WRONG\":@EXIT@",
+      "ERROR 256,\"fatal-wrap\""
+    ],
+    "defs": [],
+    "fatal": "fatal-wrap",
+    "status": 1,
+    "source": "10 PRINT \"ERROR_CASE_BEGIN_3\"\n20 ON ERROR PRINT \"WRONG\":END\n30 ERROR 256,\"fatal-wrap\"\n",
+    "reference_source": "10 PRINT \"ERROR_CASE_BEGIN_3\"\n20 ON ERROR PRINT \"WRONG\":OSCLI \"BYE\"\n30 ERROR 256,\"fatal-wrap\"\n",
+    "expected": "\nfatal-wrap at line 30\n"
+  },
+  {
+    "main": [
+      "ON ERROR PRINT \"WRONG\":@EXIT@",
+      "ON ERROR OFF",
+      "ERROR 100,\"off\""
+    ],
+    "defs": [],
+    "fatal": "off",
+    "status": 1,
+    "source": "10 PRINT \"ERROR_CASE_BEGIN_4\"\n20 ON ERROR PRINT \"WRONG\":END\n30 ON ERROR OFF\n40 ERROR 100,\"off\"\n",
+    "reference_source": "10 PRINT \"ERROR_CASE_BEGIN_4\"\n20 ON ERROR PRINT \"WRONG\":OSCLI \"BYE\"\n30 ON ERROR OFF\n40 ERROR 100,\"off\"\n",
+    "expected": "\noff at line 40\n"
+  },
+  {
+    "main": [
+      "ON ERROR REPORT:PRINT:@EXIT@",
+      "ERROR 100,FNmessage+\"\""
+    ],
+    "defs": [
+      "DEF FNmessage=\"from-FN\""
+    ],
+    "source": "10 PRINT \"ERROR_CASE_BEGIN_5\"\n20 ON ERROR REPORT:PRINT:END\n30 ERROR 100,FNmessage+\"\"\n1000 DEF FNmessage=\"from-FN\"\n",
+    "reference_source": "10 PRINT \"ERROR_CASE_BEGIN_5\"\n20 ON ERROR REPORT:PRINT:OSCLI \"BYE\"\n30 ERROR 100,FNmessage+\"\"\n1000 DEF FNmessage=\"from-FN\"\n",
+    "expected": "from-FN\n"
+  }
+]

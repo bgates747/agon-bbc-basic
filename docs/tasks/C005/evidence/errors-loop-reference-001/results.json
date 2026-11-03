@@ -1,0 +1,11 @@
+{
+  "observed": {
+    "while-direct": "18:60:1\n",
+    "while-fn-return": "18:40:1\n",
+    "while-body-colon": "         1\n18:40:2\n",
+    "repeat-body-colon": "         1\n18:40:2\n",
+    "for-body-colon": "         1\n18:40:2\n"
+  },
+  "duration_seconds": 1.069,
+  "basic_sha256": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d"
+}

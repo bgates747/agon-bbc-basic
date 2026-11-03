@@ -85,6 +85,26 @@ entry:
     push iy
     pop hl
     same 0xabcdef
+    ld a,(err_code)
+    or a
+    jp nz,failed
+    ld a,(err_message)
+    cp 33
+    jp nz,failed
+    call err_report
+    ld hl,token_handler
+    xor a
+    call err_install
+    good
+    ld iy,token_message
+    ld a,100
+    jp err_raise
+token_handler:
+    call err_report
+    ld a,13
+    rst.lis 0x10
+    ld a,10
+    rst.lis 0x10
     stage 1
     ld hl,wrong_handler
     ld a,1
@@ -372,3 +392,4 @@ heap: .space 4096,0
 heap_end:
 arena: .space 32768,0
 arena_end:
+token_message: .byte 8,91,128,148,18,21,10,255,93

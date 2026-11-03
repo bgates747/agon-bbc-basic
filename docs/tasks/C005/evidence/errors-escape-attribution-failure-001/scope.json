@@ -1,0 +1,9 @@
+{
+  "passed": false,
+  "compiler_sha256": "44533e0d4d5c2a0477ea80cae0ed263088e0c203e61d32a8dcd0e777d7f73104",
+  "compiled_programs": 3,
+  "executed_input_reference_and_native": true,
+  "reference_ERL": 30,
+  "native_ERL": 40,
+  "file_cleanup_not_executed": true
+}

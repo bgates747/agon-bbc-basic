@@ -1,0 +1,14 @@
+{
+  "cases.json": "fa4c7df6176d7af2981359bae9897a88033a09049a412c1f50428a02763fcbf6",
+  "native.log": "e656ae7a29ec467cad3b8fbfb08181ccf2c735138c87e21233553be156a37710",
+  "compiler.bas": "44533e0d4d5c2a0477ea80cae0ed263088e0c203e61d32a8dcd0e777d7f73104",
+  "reference.bas": "80493e1ae025066f7612ff7a1465c6bb406f2a47ccba14715abb4fb313cd5dea",
+  "driver.bas": "ce1d52b240feeb1ff2cdd9d314ba176018e32386f09c7aa4b64fff6ec848b172",
+  "p0.dat": "087a8755487806592d827a6d20d4abb95b94909f56114b21aee7f3449bd6036f",
+  "controller.log": "a69cfc84b3c7aae58c8cb475f29cdd9355d275f948642afaa46c40675da47aeb",
+  "reference.log": "b116ce8d193bdebb3d24db76727673f6135c488d7fa5064dbbbead7a89161948",
+  "compile.log": "76911bc31a03ed478411f2fc5fd30ef4e5f027c0e17bcf0ff9346a7ee66a97dd",
+  "test_error_rejections.py": "b276c1857bf4ddf7d6c8aa8f5c64fd9af0e7bbdf2a4ad3f59dab748f5a2b1d22",
+  "repeat.dat": "087a8755487806592d827a6d20d4abb95b94909f56114b21aee7f3449bd6036f",
+  "results.json": "a69cfc84b3c7aae58c8cb475f29cdd9355d275f948642afaa46c40675da47aeb"
+}

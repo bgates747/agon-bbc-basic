@@ -1,0 +1,11 @@
+[
+  {
+    "source": "10 PRINT \"IO_ERROR_BEGIN\"\n20 s$=\"old\"\n30 ON ERROR PRINT ;ERR;\":\";ERL;\":\";s$:REPORT:PRINT:END\n40 INPUT LINE \"ERROR_ESCAPE:\"s$\n50 PRINT \"WRONG\":END\n"
+  },
+  {
+    "source": "10 ON ERROR PRINT ;BGET#h%:END\n20 FOR i%=1 TO 8:h%=OPENIN(\"error-file.dat\"):NEXT\n30 ERROR 100,\"caught\"\n"
+  },
+  {
+    "source": "10 FOR i%=1 TO 8:h%=OPENIN(\"error-file.dat\"):NEXT\n20 ERROR 100,\"uncaught\"\n"
+  }
+]

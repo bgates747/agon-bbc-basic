@@ -1,0 +1,76 @@
+[
+  {
+    "main": [
+      "ON ERROR PRINT ;ERR;\":\";ERL:REPORT:PRINT:@EXIT@",
+      "READ x"
+    ],
+    "defs": [],
+    "source": "10 PRINT \"ERROR_CASE_BEGIN_0\"\n20 ON ERROR PRINT ;ERR;\":\";ERL:REPORT:PRINT:END\n30 READ x\n",
+    "reference_source": "10 PRINT \"ERROR_CASE_BEGIN_0\"\n20 ON ERROR PRINT ;ERR;\":\";ERL:REPORT:PRINT:OSCLI \"BYE\"\n30 READ x\n",
+    "expected": "42:30\nOut of DATA\n"
+  },
+  {
+    "main": [
+      "ON ERROR READ s$:PRINT ;ERR;\":\";ERL;\":\";s$:@EXIT@",
+      "READ x%"
+    ],
+    "defs": [],
+    "data": [
+      "\"retry\""
+    ],
+    "source": "10 PRINT \"ERROR_CASE_BEGIN_1\"\n20 ON ERROR READ s$:PRINT ;ERR;\":\";ERL;\":\";s$:END\n30 READ x%\n50000 DATA \"retry\"\n",
+    "reference_source": "10 PRINT \"ERROR_CASE_BEGIN_1\"\n20 ON ERROR READ s$:PRINT ;ERR;\":\";ERL;\":\";s$:OSCLI \"BYE\"\n30 READ x%\n50000 DATA \"retry\"\n",
+    "expected": "6:30:retry\n"
+  },
+  {
+    "main": [
+      "ON ERROR READ s$:PRINT ;ERR;\":\";ERL;\":\";s$:@EXIT@",
+      "READ x%"
+    ],
+    "defs": [],
+    "data": [
+      "1E20"
+    ],
+    "source": "10 PRINT \"ERROR_CASE_BEGIN_2\"\n20 ON ERROR READ s$:PRINT ;ERR;\":\";ERL;\":\";s$:END\n30 READ x%\n50000 DATA 1E20\n",
+    "reference_source": "10 PRINT \"ERROR_CASE_BEGIN_2\"\n20 ON ERROR READ s$:PRINT ;ERR;\":\";ERL;\":\";s$:OSCLI \"BYE\"\n30 READ x%\n50000 DATA 1E20\n",
+    "expected": "20:30:1E20\n"
+  },
+  {
+    "main": [
+      "PRINT ;100+FNnumbertrap;\":\";ERL:@EXIT@"
+    ],
+    "defs": [
+      "DEF FNnumbertrap",
+      "ON ERROR LOCAL =7",
+      "LOCAL x%:x%=99:PRINT 1/0:=0"
+    ],
+    "source": "10 PRINT \"ERROR_CASE_BEGIN_3\"\n20 PRINT ;100+FNnumbertrap;\":\";ERL:END\n1000 DEF FNnumbertrap\n1010 ON ERROR LOCAL =7\n1020 LOCAL x%:x%=99:PRINT 1/0:=0\n",
+    "reference_source": "10 PRINT \"ERROR_CASE_BEGIN_3\"\n20 PRINT ;100+FNnumbertrap;\":\";ERL:OSCLI \"BYE\"\n1000 DEF FNnumbertrap\n1010 ON ERROR LOCAL =7\n1020 LOCAL x%:x%=99:PRINT 1/0:=0\n",
+    "expected": "107:1020\n"
+  },
+  {
+    "main": [
+      "PRINT \"prefix\"+FNstringtrap;\":\";ERL:@EXIT@"
+    ],
+    "defs": [
+      "DEF FNstringtrap",
+      "ON ERROR LOCAL =\"result\"",
+      "LOCAL s$:s$=\"discard\":ERROR 100,\"string\":=\"wrong\""
+    ],
+    "source": "10 PRINT \"ERROR_CASE_BEGIN_4\"\n20 PRINT \"prefix\"+FNstringtrap;\":\";ERL:END\n1000 DEF FNstringtrap\n1010 ON ERROR LOCAL =\"result\"\n1020 LOCAL s$:s$=\"discard\":ERROR 100,\"string\":=\"wrong\"\n",
+    "reference_source": "10 PRINT \"ERROR_CASE_BEGIN_4\"\n20 PRINT \"prefix\"+FNstringtrap;\":\";ERL:OSCLI \"BYE\"\n1000 DEF FNstringtrap\n1010 ON ERROR LOCAL =\"result\"\n1020 LOCAL s$:s$=\"discard\":ERROR 100,\"string\":=\"wrong\"\n",
+    "expected": "prefixresult:1020\n"
+  },
+  {
+    "main": [
+      "ON ERROR PRINT ;ERR;\":\";ERL:@EXIT@",
+      "PROCp:ERROR 100,\"outer\""
+    ],
+    "defs": [
+      "DEF PROCp:ON ERROR LOCAL OFF:ENDPROC"
+    ],
+    "source": "10 PRINT \"ERROR_CASE_BEGIN_5\"\n20 ON ERROR PRINT ;ERR;\":\";ERL:END\n30 PROCp:ERROR 100,\"outer\"\n1000 DEF PROCp:ON ERROR LOCAL OFF:ENDPROC\n",
+    "reference_source": "10 PRINT \"ERROR_CASE_BEGIN_5\"\n20 ON ERROR PRINT ;ERR;\":\";ERL:OSCLI \"BYE\"\n30 PROCp:ERROR 100,\"outer\"\n1000 DEF PROCp:ON ERROR LOCAL OFF:ENDPROC\n",
+    "expected": "100:30\n"
+  }
+]

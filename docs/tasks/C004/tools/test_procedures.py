@@ -47,7 +47,7 @@ def programs():
  result += [dict(source=s,diagnostic=d) for s,d in [
   ('PROCmissing\n','Undefined PROC missing'),('DEF PROCp\nDEF PROCp\n','Duplicate definition p'),
   ('DEF PROCp(a%,a%)\n','Duplicate formal parameter'),('DEF PROCp(RETURN a%)\n','Unsupported formal parameter RETURN'),
-  ('DEF invalid\n','Expected PROC or FN after DEF'),('LOCAL ERROR\n','Unsupported LOCAL form ERROR'),
+  ('DEF invalid\n','Expected PROC or FN after DEF'),('LOCAL DATA\n','Unsupported LOCAL form DATA'),
   ('PROCp(1)\nEND\nDEF PROCp(s$):ENDPROC\n','Procedure argument type mismatch'),
   ('PROCp(1,2)\nEND\nDEF PROCp(a%):ENDPROC\n','Expected )'),
   ('PROCp\nEND\nDEF PROCp(a%):ENDPROC\n','Expected ('),

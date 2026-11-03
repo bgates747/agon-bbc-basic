@@ -1,0 +1,30 @@
+Warning: unused arguments left: ["--firmware", "platform"].
+Tom's Fake VDP Version 1.03
+unknown packet VDU 0x17, 0, 0xf8
+unknown packet VDU 0x17, 0, 0x99
+uunknown packet VDU 0x17, 0, 0x94
+
+Agon Platform MOS Version 3.0.2 Arthur
+
+OK:p0.bas
+ERR:p1.bas
+p1.bas:1:20: ON ERROR handler installation inside inline IF is unsupported at 3250
+ERR:p2.bas
+p2.bas:1:33: Only one ON ERROR handler body per physical line is supported at 3250
+ERR:p3.bas
+p3.bas:1:17: Direct FN error-message carriers are unqualified at 3250
+ERR:p4.bas
+p4.bas:1:11: Unsupported LOCAL form DATA at 3250
+ERR:p5.bas
+p5.bas:1:4: Expected ERROR at 3250
+ERR:p6.bas
+p6.bas:1:9: Expected an unsigned integer constant at 3250
+ERR:p7.bas
+p7.bas:1:13: Unsupported string item REPORT at 3250
+ERR:p8.bas
+p8.bas:1:10: Expected , at 3250
+ERR:p9.bas
+p9.bas:1:11: EVAL is deliberately unsupported at 3250
+OK:p0.bas
+OUTPUT_COMPILE_DONE
+/ *

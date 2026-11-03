@@ -1,0 +1,59 @@
+[
+  {
+    "program": 0,
+    "bases": {
+      "numeric": 262790,
+      "strings": 280509,
+      "memory": 281440,
+      "io": 267425,
+      "control": 268255,
+      "procedure": 277105,
+      "error": 277979
+    },
+    "arena": 687872,
+    "limit": 720640,
+    "saved_sp_slot": 262786,
+    "depth_slot": 262789,
+    "heap_context": 282354,
+    "data_cursor_entry_reset": false,
+    "error_and_ACT_bridges_checked": true
+  },
+  {
+    "program": 1,
+    "bases": {
+      "numeric": 262821,
+      "strings": 280549,
+      "memory": 281480,
+      "io": 267461,
+      "control": 268295,
+      "procedure": 277145,
+      "error": 278019
+    },
+    "arena": 687872,
+    "limit": 720640,
+    "saved_sp_slot": 262817,
+    "depth_slot": 262820,
+    "heap_context": 282394,
+    "data_cursor_entry_reset": false,
+    "error_and_ACT_bridges_checked": true
+  },
+  {
+    "program": 2,
+    "bases": {
+      "numeric": 262683,
+      "strings": 280411,
+      "memory": 281342,
+      "io": 267323,
+      "control": 268157,
+      "procedure": 277007,
+      "error": 277881
+    },
+    "arena": 687872,
+    "limit": 720640,
+    "saved_sp_slot": 262679,
+    "depth_slot": 262682,
+    "heap_context": 282256,
+    "data_cursor_entry_reset": false,
+    "error_and_ACT_bridges_checked": true
+  }
+]

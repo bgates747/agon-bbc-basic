@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/Agon/mystuff/bbc-basic-v-adl/docs/tasks/C005/test_errors.py", line 78, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/Agon/mystuff/bbc-basic-v-adl/docs/tasks/C005/test_errors.py", line 73, in main
+    got=native.split(f'ERROR_CASE_BEGIN_{i}\n',1)[1].split(f'ERROR_NATIVE_END_{i}\n',1)[0];assert got==c['expected']+f'ERROR_NATIVE_STATUS:{c.get("status",0)}\n',(i,repr(got),c)
+                                                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (3, "'18:40:1\\nERROR_NATIVE_STATUS:0\\n'", {'main': ['ON ERROR PRINT ;ERR;":";ERL;":";n%:@EXIT@', 'n%=0', 'WHILE n%<1 OR 1/(1-n%)', 'n%=n%+1', 'ENDWHILE', '@EXIT@'], 'defs': [], 'source': '10 PRINT "ERROR_CASE_BEGIN_3"\n20 ON ERROR PRINT ;ERR;":";ERL;":";n%:END\n30 n%=0\n40 WHILE n%<1 OR 1/(1-n%)\n50 n%=n%+1\n60 ENDWHILE\n70 END\n', 'reference_source': '10 PRINT "ERROR_CASE_BEGIN_3"\n20 ON ERROR PRINT ;ERR;":";ERL;":";n%:OSCLI "BYE"\n30 n%=0\n40 WHILE n%<1 OR 1/(1-n%)\n50 n%=n%+1\n60 ENDWHILE\n70 OSCLI "BYE"\n', 'expected': '18:60:1\n'})

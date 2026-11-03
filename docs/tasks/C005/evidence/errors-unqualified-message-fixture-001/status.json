@@ -1,0 +1,7 @@
+{
+  "passed": false,
+  "scope": "Original case9 number-conversion order fixture used a compile-time-excluded direct FN message",
+  "completed_compilations": 3,
+  "native_executions": 0,
+  "compiler_source_changed": false
+}

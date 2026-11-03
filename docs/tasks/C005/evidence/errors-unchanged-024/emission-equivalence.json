@@ -1,0 +1,41 @@
+{
+  "previous_source": "8bb1dd9a8b0018bc40d32ca5dfb62e6136146a322ea9949d3eb864fe8a7f7fff",
+  "current_source": "44533e0d4d5c2a0477ea80cae0ed263088e0c203e61d32a8dcd0e777d7f73104",
+  "only_change": "Skip extra error mark for WHILE condition reentry",
+  "previous_cases_without_WHILE": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29
+  ],
+  "actual_full_images_identical": [
+    24,
+    25
+  ]
+}

@@ -1,0 +1,45 @@
+[
+  {
+    "source": "PRINT \"ERROR ERR ERL REPORT\":END\n",
+    "reference_source": "PRINT \"ERROR ERR ERL REPORT\"\n",
+    "reference": true,
+    "status": 0,
+    "expected": "ERROR ERR ERL REPORT\n"
+  },
+  {
+    "source": "IF 1 THEN ON ERROR PRINT \"bad\"\n",
+    "diagnostic": "ON ERROR handler installation inside inline IF is unsupported"
+  },
+  {
+    "source": "ON ERROR PRINT \"first\":ON ERROR PRINT \"second\"\n",
+    "diagnostic": "Only one ON ERROR handler body per physical line is supported"
+  },
+  {
+    "source": "ERROR 100,FNtext\nEND\nDEF FNtext=\"text\"\n",
+    "diagnostic": "Direct FN error-message carriers are unqualified"
+  },
+  {
+    "source": "LOCAL DATA\n",
+    "diagnostic": "Unsupported LOCAL form DATA"
+  },
+  {
+    "source": "ON 1 GOTO 100\n100 END\n",
+    "diagnostic": "Expected ERROR"
+  },
+  {
+    "source": "RESTORE ERROR\n",
+    "diagnostic": "Expected an unsigned integer constant"
+  },
+  {
+    "source": "PRINT REPORT$\n",
+    "diagnostic": "Unsupported string item REPORT"
+  },
+  {
+    "source": "ERROR 100\n",
+    "diagnostic": "Expected ,"
+  },
+  {
+    "source": "PRINT EVAL(\"1\")\n",
+    "diagnostic": "EVAL is deliberately unsupported"
+  }
+]

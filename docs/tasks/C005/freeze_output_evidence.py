@@ -26,6 +26,12 @@ def main():
     q=b/f'{module}-{row["base"]:x}.dat'
     if not q.exists():q=q.with_suffix('.bin')
     shutil.copy2(q,d/(q.stem+'.dat'))
+ link=b/'runtime-links.json'
+ if link.is_file() and link.stat().st_mtime>=(b/'cases.json').stat().st_mtime:
+  shutil.copy2(link,d/link.name)
+  for row in json.loads(link.read_text()):
+   for name,base in row['bases'].items():
+    q=b/f'{name}-{base:x}.dat';shutil.copy2(q,d/q.name)
  (d/'manifest.json').write_text(json.dumps({x.name:hashlib.sha256(x.read_bytes()).hexdigest() for x in d.iterdir() if x.name!='manifest.json'},indent=2)+'\n')
  print('Frozen',d)
 if __name__=='__main__':main()

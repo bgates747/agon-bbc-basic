@@ -6,7 +6,7 @@ compiles literal/numeric output, labelled control flow, numeric byte VDU
 expressions, standard math functions, scalar numeric variables and a mutable
 string core with expression/assignment slicing, comparisons, VAL/STR$/ASC and INSTR/STRING$, typed loops, scalar PROC/FN/LOCAL, global arrays, raw DIM and
 byte/integer/variant indirection, file byte/string I/O, scalar INPUT LINE and
-literal DATA/READ/RESTORE.
+literal DATA/READ/RESTORE and source error handlers, ERROR/REPORT/ERR/ERL.
 It cannot compile itself.
 The interpreter elsewhere in this repository remains the compatibility
 reference and bootstrap host. The tested implementation was promoted under
@@ -155,10 +155,18 @@ recursive scalar calls with actual inferred numeric/string result kinds, includi
 unsuffixed string functions. Pending numeric/string values survive nested calls.
 Mixed/unresolved result kinds and interpreter-dependent direct FN carriers in
 omitted RIGHT$/STRING$ are rejected clearly; see the compatibility matrix.
-C004 is complete for its initial scope. Arrays, indirection, DATA, I/O and source
-error handlers remain C005 before the compiler can compile itself.
+C004 is complete for its initial scope. C005 has promoted arrays, indirection, DATA, I/O and source error handlers for
+their documented scopes. Resource closure remains before self-compilation.
 
 [Bootstrap resources](../docs/tasks/C005/RESOURCES.md) qualify256 shared routine
-definitions, bounded FN value transfer and a sorted BBC symbol index. Arrays,
-indirection, DATA, I/O and source error handlers are still C005 work; the
-compiler cannot compile itself yet.
+definitions, bounded FN value transfer and a sorted BBC symbol index. The65536-byte output buffer,1024-symbol table and4096 fixups still constrain
+self-compilation. C005 holds an unqualified three-pass streaming candidate.
+The compiler cannot compile itself yet.
+
+[Source error recovery](../docs/tasks/C005/ERRORS.md) supports ON ERROR,
+ON ERROR LOCAL/OFF, LOCAL ERROR's reference no-op, ERROR, REPORT and read-only
+ERR/ERL. Error transfer preserves changed discarded locals, while normal returns
+restore retained prior values and handlers. REPORT retains token expansion and
+the pinned startup notice. Held Escape is checked at handler entry; general
+asynchronous Escape elsewhere remains unqualified. Exact restrictions, source-line
+quirks and the older compact failure-format boundary are in the compatibility matrix.
