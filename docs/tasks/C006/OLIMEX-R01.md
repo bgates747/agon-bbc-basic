@@ -16,7 +16,7 @@ offline bundle and fresh Extender grant identify the exact inputs and bench.
    There are40 uploads/441398 total bytes, including111810-byte source and
    the324275-byte compiler. Ten expected program images total102941 bytes.
    Planned generated-image retrieval adds648550 bytes for the two self-compiles,
-   two preserved41-byte rejection outputs and the5-byte file fixture.
+   two preserved42-byte rejection outputs and the5-byte file fixture.
 2. Source SHA256:
    `6597a0df3f99b4f43c42bff1cdbc59f5fdf730c57837f3d4112a598fbfbe5fb8`.
    Standalone compiler:324275 bytes, SHA256

@@ -439,3 +439,9 @@ observe fresh installed MEM only after grant, separate mirrored host elapsed
 intervals from CPU/performance claims, and revise from actual first hardware
 results. No reset/flash/startup/mode changes are planned. Request a finite lease
 only after this frozen qualified fixture exists.
+
+Canonical reservation ee0ad664f72a is submitted for c006-r01. Durable mailbox
+07-29-35_bbc-basic_bbc-c006-r01-reservation-ready and immediate steering deliver
+the exact scope/manifest/plan to Extender. No lease or target access is inferred.
+Correct the plan's sentinel-size transcription to42 bytes, matching actual
+frozen payloads; no payload or manifest changes.

@@ -107,8 +107,8 @@ environment, ownership, assembly, emulator, hardware and coordination rules.
 7. Physical custody is solely agon-dev-env/cross-agent/olimex-bench. Prepare an
    exact finite fixture, reserve, receive Extender's grant and assert its token
    before target operations. Physical bundle olimex-fixture-001 and finite plan
-   C006/OLIMEX-R01.md are prepared; reserve and request fresh readiness next.
-   No BBC lease exists yet. Use pinned new staged
+   C006/OLIMEX-R01.md are prepared. Reservation ee0ad664f72a is submitted;
+   Extender is asked for fresh readiness/grant. No BBC lease exists yet. Use pinned new staged
    transfers, admitted keyboard/CLI and maintained passive serial/printer mirror
    per Extender. Preserve installed firmware/startup/wiring; no unmount/eject.
    Do not treat old hardware headers or an empty queue as current readiness.
