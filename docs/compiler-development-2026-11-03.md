@@ -490,3 +490,12 @@ Refresh BOOTSTRAP.md and public README/matrix references that still described
 the now-completed native suites as merely prepared. Keep physical small-suite
 success distinct from the still-active first self-source pass. No compiler,
 runtime, frozen fixture or device input changes accompany this documentation.
+
+At approximately one hour after self-a's final filename emission, no completion
+or diagnostic is observed; raw console remains1070 bytes. Preserve an immutable
+actual-prompt-only snapshot olimex-self-a-prompts-001, explicitly withholding
+completion and liveness claims. Source main prints no intermediate progress.
+The5400s observer remains active and no target operations are sent alongside it.
+Durable08-55-23_bbc-basic_bbc-c006-small-pass-self-a-observation-one and steering
+give Extender the completed small-suite results and this scheduling status;
+no repair, retry, parallel access or new grant is requested. Self-b is unstarted.

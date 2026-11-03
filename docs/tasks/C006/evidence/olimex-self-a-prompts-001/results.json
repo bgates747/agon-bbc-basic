@@ -1,0 +1,10 @@
+{
+  "scope": "Actual first physical self-source prompts only; invocation remains unreturned",
+  "observed_epoch": 1793714167.650649,
+  "elapsed_since_last_input_seconds": 3645.179,
+  "physical_self_source_completed": false,
+  "compiler_liveness_established": false,
+  "completion_or_diagnostic_observed": false,
+  "capture_bytes": 1070,
+  "later_stage_invoked": false
+}
