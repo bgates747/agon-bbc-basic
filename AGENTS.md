@@ -101,3 +101,11 @@ truthfully; an approval waiver is not a test result.
 C007's completed source search and measurement contract are indexed by
 `compiler/TESTING.md`; no new benchmark performance was measured. The Author's latest authorization waives earlier approval stops for remaining
 work. Commit authorization is not a claim of human validation.
+
+Latest C005 correction: stream-source-001 on690fd519 rejects Duplicate definition
+count at1655:20 in371.199s, preserving output (no layout yet). Rename the new
+emitter helper to PROCcodecount; the existing slice parser PROCcount stays.
+Fixed d5144921 / name-spread508a74f2 have208 unique definitions; source preparation
+asserts this invariant. Fixed four-image smoke57.312s, targeted count-consumer6 in97.969s and
+39-case/15-native baseline86.013s pass. A new self-source probe follows;
+do not claim earlier690fd519 self-source fit.

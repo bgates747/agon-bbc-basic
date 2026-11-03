@@ -87,7 +87,7 @@ block('1380 LOCAL cb%,cdone%','1510 DEF PROCline',"""1380 LOCAL cb%,cdone%
 block('2760 DEF PROCbytes','2840 DEF PROCcharacter',"""2760 DEF PROCbytes(ch$)
 2770 LOCAL ci%,ca%,cb%
 2772 IF ch$="" ENDPROC
-2774 PROCcount(LEN(ch$) DIV 2):IF cphase%<>3 ENDPROC
+2774 PROCcodecount(LEN(ch$) DIV 2):IF cphase%<>3 ENDPROC
 2780 FOR ci%=1 TO LEN(ch$) STEP 2
 2790 ca%=INSTR("0123456789ABCDEF",MID$(ch$,ci%,1))-1
 2800 cb%=INSTR("0123456789ABCDEF",MID$(ch$,ci%+1,1))-1
@@ -96,7 +96,7 @@ block('2760 DEF PROCbytes','2840 DEF PROCcharacter',"""2760 DEF PROCbytes(ch$)
 2830 ENDPROC""")
 change('2930 FOR ci%=1 TO LEN(cs$):PROCbyte(ASC(MID$(cs$,ci%,1))):NEXT','2930 PROCstringbytes(cs$)')
 change('4200 FOR ci%=0 TO 4:PROCbyte(cp%?ci%):NEXT','4200 PROCblob(cp%,5)')
-block('5188 FOR ci%=0 TO 3','5191 ENDPROC',"""5188 PROCcount(5):IF cphase%<>3 ENDPROC
+block('5188 FOR ci%=0 TO 3','5191 ENDPROC',"""5188 PROCcodecount(5):IF cphase%<>3 ENDPROC
 5189 FOR ci%=0 TO 3:cq=INT(cv/256):BPUT#coh%,cv-cq*256:cv=cq:NEXT
 5190 BPUT#coh%,ce%""")
 change('7600 PROCbyte(LEN(cs$)):IF cs$<>"" THEN FOR ci%=1 TO LEN(cs$):PROCbyte(ASC(MID$(cs$,ci%,1))):NEXT','7600 PROCbyte(LEN(cs$)):PROCstringbytes(cs$)')
@@ -104,7 +104,7 @@ change('7900 PROClabel("$s"+STR$(ci%)):FOR cj%=0 TO 255:PROCbyte(0):NEXT','7900 
 change('6430 PROClabel("$var"+STR$(ci%)):FOR cj%=1 TO cvsize%(ci%):PROCbyte(0):NEXT','6430 PROClabel("$var"+STR$(ci%)):PROCzeros(cvsize%(ci%))')
 change('14127 IF cfunctions% THEN PROClabel("$fnnum"):PROCbytes("0000000000"):PROClabel("$fnstr"):FOR ci%=0 TO 255:PROCbyte(0):NEXT','14127 IF cfunctions% THEN PROClabel("$fnnum"):PROCbytes("0000000000"):PROClabel("$fnstr"):PROCzeros(256)')
 change('19096 IF cs$<>"" THEN FOR ci%=1 TO LEN(cs$):PROCbyte(ASC(MID$(cs$,ci%,1))):NEXT','19096 PROCstringbytes(cs$)')
-change('18172 PROCbyte(LEN(cs$)):PROCbyte(ce%):FOR ci%=0 TO 4:PROCbyte(cdpacket%?ci%):NEXT:PROCbyte(0)','18172 PROCcount(8):IF cphase%=3 THEN BPUT#coh%,LEN(cs$):BPUT#coh%,ce%:FOR ci%=0 TO 4:BPUT#coh%,cdpacket%?ci%:NEXT:BPUT#coh%,0')
+change('18172 PROCbyte(LEN(cs$)):PROCbyte(ce%):FOR ci%=0 TO 4:PROCbyte(cdpacket%?ci%):NEXT:PROCbyte(0)','18172 PROCcodecount(8):IF cphase%=3 THEN BPUT#coh%,LEN(cs$):BPUT#coh%,ce%:FOR ci%=0 TO 4:BPUT#coh%,cdpacket%?ci%:NEXT:BPUT#coh%,0')
 change('18174 IF cs$<>"" THEN FOR ci%=1 TO LEN(cs$):PROCbyte(ASC(MID$(cs$,ci%,1))):NEXT','18174 PROCstringbytes(cs$)')
 # Preserve validation before writing; inlining the existing byte check avoids
 # another BBC call per DATA character without changing its order or diagnostic.
@@ -117,4 +117,5 @@ a=s.index('18000 DEF PROCloaddata');b=s.index('19000 DEF PROCloaderrors',a);r=s[
 a,b=s.split('20000 DATA',1);s=a+(T/'streaming/frontend.bas').read_text()+'20000 DATA'+b
 assert not re.search(r'ccode%|crname\$|craddr%|crline%|crcol%|PROCpatch|csaddr%\(csnum%-1\)',s)
 s='\n'.join(x for x in s.splitlines() if x.strip())+'\n';rows=s.splitlines();numbers=[int(x.split()[0]) for x in rows];assert numbers==sorted(set(numbers));assert max(len(x.split(' ',1)[1]) for x in rows)<=255
+defs=re.findall(r'^\d+ DEF (PROC|FN)([A-Za-z_][A-Za-z0-9_]*[$%&]?)',s,re.M);assert len(defs)==len(set(defs)),'Compiler source needs unique routine names'
 out=T/'streaming/compiler.bas';assert not out.exists(),'Preserve an existing candidate';out.write_text(s);print('Prepared',len(rows),'lines',hashlib.sha256(s.encode()).hexdigest())

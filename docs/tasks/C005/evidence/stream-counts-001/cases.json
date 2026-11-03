@@ -1,0 +1,40 @@
+[
+  {
+    "source": "a$=\"abc\":PRINT LEFT$(a$);\":\";RIGHT$(a$);\":\";MID$(a$,2)\nPRINT LEFT$(a$,2);\":\";RIGHT$(a$,2);\":\";MID$(a$,2,1)\nPRINT ;(\"a\"<\"b\");\":\";(\"abc\"=\"abc\");\":\";(\"a\">=\"b\")\nn%=((\"a\"=\"a\") AND (\"ab\">\"a\")):PRINT ;n%:VDU 65-(\"a\"=\"b\"),13,10\n",
+    "reference": true,
+    "status": 0,
+    "expected": "ab:c:bc\nab:bc:b\n-1:-1:0\n-1\nA\n"
+  },
+  {
+    "source": "a$=\"abracadabra\":PRINT ;INSTR(a$,\"abra\");\":\";INSTR(a$,\"abra\",2)\nb$=STRING$(3,\"ab\"):PRINT b$;\":\";STR$ INSTR(b$,\"ba\")\nPRINT \"[\";STRING$(0,\"x\");\"]:[\";STRING$(2.9,\"xy\");\"]\"\nPRINT ;INSTR(STRING$(4,\"ab\"),\"ab\",INSTR(\"123\",\"2\"))\nPRINT STRING$(INSTR(\"abc\",\"b\"),STR$ ASC \"A\")\n",
+    "reference": true,
+    "status": 0,
+    "expected": "1:8\nababab:2\n[]:[xyxy]\n3\n6565\n"
+  },
+  {
+    "source": "a$=\"abcdef\":LEFT$(a$,3)=RIGHT$(a$,3):PRINT a$\na$=\"abcdef\":RIGHT$(a$,4)=LEFT$(a$,2):PRINT a$\na$=\"abcdef\":MID$(a$,2,3)=a$:PRINT a$\nb$=a$:MID$(a$,2,LEN(a$)-2)=STRING$(2,\"Z\"):PRINT a$;\":\";b$\nLEFT$(a$,LEN(a$))=STR$ INSTR(a$,\"a\"):PRINT a$\n",
+    "reference": true,
+    "status": 0,
+    "expected": "defdef\nabcdab\naabcef\naZZcef:aabcef\n1ZZcef\n"
+  },
+  {
+    "source": "a$=\"abcdef\":LEFT$(a$,0)=\"XYZ\":PRINT a$\na$=\"abcdef\":LEFT$(a$,1)=\"XYZ\":PRINT a$\na$=\"abcdef\":LEFT$(a$,2)=\"XYZ\":PRINT a$\na$=\"abcdef\":LEFT$(a$,5)=\"XYZ\":PRINT a$\na$=\"abcdef\":LEFT$(a$,6)=\"XYZ\":PRINT a$\na$=\"abcdef\":LEFT$(a$,7)=\"XYZ\":PRINT a$\na$=\"abcdef\":LEFT$(a$,-1)=\"XYZ\":PRINT a$\na$=\"abcdef\":LEFT$(a$,-256)=\"XYZ\":PRINT a$\na$=\"abcdef\":LEFT$(a$,255)=\"XYZ\":PRINT a$\na$=\"abcdef\":LEFT$(a$,256)=\"XYZ\":PRINT a$\na$=\"abcdef\":LEFT$(a$,257)=\"XYZ\":PRINT a$\na$=\"abcdef\":LEFT$(a$,511)=\"XYZ\":PRINT a$\na$=\"abcdef\":LEFT$(a$,65536)=\"XYZ\":PRINT a$\na$=\"abcdef\":LEFT$(a$,16777217)=\"XYZ\":PRINT a$\na$=\"abcdef\":LEFT$(a$,1.9)=\"XYZ\":PRINT a$\na$=\"abcdef\":LEFT$(a$,-1.9)=\"XYZ\":PRINT a$\n",
+    "reference": true,
+    "status": 0,
+    "expected": "abcdef\nXbcdef\nXYcdef\nXYZdef\nXYZdef\nXYZdef\nXYZdef\nabcdef\nXYZdef\nabcdef\nXbcdef\nXYZdef\nabcdef\nXbcdef\nXbcdef\nXYZdef\n"
+  },
+  {
+    "source": "PRINT LEFT$(\"abc\",2147483648)\n",
+    "reference": true,
+    "reference_error": true,
+    "status": 1,
+    "expected": "Number too big\n"
+  },
+  {
+    "source": "PRINT STRING$(2147483648,missing$)\n",
+    "reference": true,
+    "reference_error": true,
+    "status": 1,
+    "expected": "Number too big\n"
+  }
+]

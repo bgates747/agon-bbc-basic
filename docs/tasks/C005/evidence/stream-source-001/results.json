@@ -1,0 +1,19 @@
+{
+  "scope": "Actual source-resource experiment, not C006 generation proof",
+  "source_sha256": "690fd519559ba7e4cfe0f975c5d81eb15e2a983d228b29d1c518a5d14e6c5828",
+  "host_driver_sha256": "b2b5a4ebac7c357e8b30a7eebb82b8e0763718aa48409a6d03241b52f2541485",
+  "host_progress_instrumentation": true,
+  "layout_only": false,
+  "hardware_validation": false,
+  "inputs": {
+    "/Agon/mystuff/bbc-basic-v-adl/bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+    "/Agon/mystuff/bbc-basic-v-adl/.emulator/mos_platform.bin": "d564243283972690933a4554296ad6202ca4ef54572279533a942960846bebae",
+    "/Agon/mystuff/bbc-basic-v-adl/.emulator/fab-agon-emulator.bin": "bf5f29b243b8214e54c515dcc26edf47399ce440356af2ebc3ce3d7664ae11eb",
+    "/Agon/mystuff/bbc-basic-v-adl/.emulator/fab-agon-emulator": "e822acb348e1be281dce6a80128d3924651f41157b407088b23ea73a4eba728c"
+  },
+  "source_compilation_succeeded": false,
+  "counters": "0:0:204:35",
+  "source_position": "1:1655:20",
+  "old_output_preserved": true,
+  "controller_seconds": 371.199
+}

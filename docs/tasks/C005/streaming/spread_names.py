@@ -5,7 +5,7 @@ from pathlib import Path
 import hashlib,json,re
 T=Path(__file__).resolve().parent
 source=(T/'compiler.bas').read_text()
-assert hashlib.sha256(source.encode()).hexdigest()=='1b3e4b336a1eeae6b56d1c5e4577685755022fbc47c28a0705abd3d802479b7e'
+assert hashlib.sha256(source.encode()).hexdigest()=='d5144921dda86fade54cc4e7bf82c257bcde744884ebcac9cf12b10cca341f5e'
 token=re.compile(r'"(?:[^"\n]|"")*"|&[0-9A-Fa-f]+|[A-Za-z_][A-Za-z0-9_]*[$%&]?|.',re.DOTALL)
 mapping={};rows=[]
 for row in source.splitlines():

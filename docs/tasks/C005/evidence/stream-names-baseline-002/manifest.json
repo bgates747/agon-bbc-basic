@@ -1,0 +1,13 @@
+{
+  "test_compiler.py": "a036e8b16e610555bce6f3e2acca0d5bb5c874f92aefc53cf7c91d5a5f083064",
+  "native.log": "44ee3e1bd9fafaf4f22e3bf0bd7059a5cc99d1ecf764de81f7ab14ac78e845d8",
+  "compiler.bas": "508a74f28f56aca3faf716aef021162ba24d73d9a5d01552deb9c4d12f3def4e",
+  "private-name-map.json": "af5cccb985e170f82c113386568010c0496971683c1daf48315bb2fa035aeb1f",
+  "driver.bas": "aaf7505ed8b88e1aa9b082ee446a5139a78ed1035125d60c0cce99c9ff577ffe",
+  "actual.dat": "143f83809737f396742852f6bff7185eb69bf9db8d1f3991d54a9503a31a416d",
+  "golden.dat": "143f83809737f396742852f6bff7185eb69bf9db8d1f3991d54a9503a31a416d",
+  "controller.log": "213667123590cdfbc6170fe39083bd5dda9aba6ca6bbaafb203fa79fb034677b",
+  "test-results.json": "213667123590cdfbc6170fe39083bd5dda9aba6ca6bbaafb203fa79fb034677b",
+  "compile.log": "fa489865a12d8e0db80c1411c002bc887f95903b7548e53551f21b038c7004e5",
+  "repeat.dat": "143f83809737f396742852f6bff7185eb69bf9db8d1f3991d54a9503a31a416d"
+}

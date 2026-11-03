@@ -462,3 +462,26 @@ time, not a calibrated Agon benchmark. The exact690fd519 self-source experiment
 stream-source-001 is active with host-only progress PRINTs, recorded input hashes,
 phase/line counters and unchanged target source. No generated compiler or actual
 native-memory fit is yet claimed.
+
+## Self-source prescan catches helper-name collision
+
+stream-source-001 rejects690fd519 at1655:20 Duplicate definition count in371.199s,
+with no emitted code/symbols,204 signatures/35 bindings and old output intact.
+The batched emitter helper reused the existing bare slice-count parser name.
+Rename only the new parameterised helper to PROCcodecount and enforce unique
+PROC/FN family names in source preparation. New prefixed d5144921 / name-spread
+508a74f2 contain208 unique definitions. Four complete old images remain identical
+in57.312s smoke. Six targeted old count-consumer fixtures are running next.
+No source layout, native fit or self-hosting result is inferred from the failed
+prescan; earlier cohort results retain their exact source identities.
+
+Fixed508a74f2 count-consumer6 passes97.969s with actual BBC oracles, six native
+executions, repeat and independent links; includes explicit/omitted slice counts,
+INSTR/STRING$, slice assignment/self-aliasing and SFIX overflow order. The full
+baseline is running before stream-source-002. Compatibility/specification now
+state the existing unique-name-per-PROC/FN-family admission explicitly.
+
+The corrected508a74f2 baseline39/15 also passes86.013s with GNU golden/repeat.
+Freeze stream-names-baseline-002 and checkpoint the distinct-helper fix, six
+count consumers and full baseline before the next exact self-source attempt.
+The live compiler remains7cac4bba while resource closure is unresolved.

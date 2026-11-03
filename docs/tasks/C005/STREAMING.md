@@ -214,3 +214,34 @@ calibration. The actual690fd519 source probe `stream-source-001` is now active
 with explicit host-only PRINT instrumentation and unchanged target input.
 Its next result must establish real source/resource limits; no native compiler
 or source fit is claimed before that result.
+
+## Self-source duplicate-helper rejection and correction
+
+Actual690fd519 source scanning rejects at physical1655,column20: Duplicate
+definition count. Counters0code/0symbols/204definitions/35bindings; old output is
+unchanged. Duration371.199s, retained in `stream-source-001`. The new parameterised
+byte-count helper accidentally shared the original bare slice-count parser's
+name. The interpreter-host cohorts can distinguish those forms, but the admitted
+compiler signature map requires unique routine names. No layout or native size
+is inferred from this failed prescan.
+
+The emitter helper is renamed PROCcodecount, leaving the existing slice parser
+PROCcount unchanged. Source preparation now checks distinct PROC/FN names within
+each family. Fixed prefixed source d5144921 and private-name source508a74f2 retain
+2188 lines/208 unique definitions/248 private names. The fixed smoke passes57.312s
+and all four complete old images remain identical (`stream-names-smoke-002`).
+Six retained C003 slice/search/repetition/assignment/error fixtures are now being
+rechecked against fresh BBC oracles before baseline and a new self-source probe.
+
+The fixed508a74f2 six-source count-consumer cohort passes97.969s against fresh
+BBC results: LEFT$/RIGHT$/MID$ explicit counts and starts, INSTR start, STRING$
+repetition, scalar slice assignment/self-aliasing and SFIX overflow ordering.
+All six native executions, repeat and GNU numeric/string links pass; frozen in
+`stream-counts-001`. The complete39-case baseline is now running.
+
+The corrected508a74f2 full39-case/15-native baseline passes86.013s, including
+source validation, rejection preservation, repeat and GNU golden equality,
+frozen in `stream-names-baseline-002`. The six targeted count-consumer results
+and unchanged four-image smoke establish this name correction's scope; no
+whole resource-cohort rerun on508a74f2 is invented. A new exact self-source
+probe follows this qualified checkpoint.

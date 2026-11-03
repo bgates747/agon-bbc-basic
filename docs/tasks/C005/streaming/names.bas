@@ -252,7 +252,7 @@
 2760 DEF PROCbytes(h$)
 2770 LOCAL i%,a%,b%
 2772 IF h$="" ENDPROC
-2774 PROCcount(LEN(h$) DIV 2):IF phase%<>3 ENDPROC
+2774 PROCcodecount(LEN(h$) DIV 2):IF phase%<>3 ENDPROC
 2780 FOR i%=1 TO LEN(h$) STEP 2
 2790 a%=INSTR("0123456789ABCDEF",MID$(h$,i%,1))-1
 2800 b%=INSTR("0123456789ABCDEF",MID$(h$,i%+1,1))-1
@@ -468,7 +468,7 @@
 5185 LOCAL i%,q
 5186 IF dcapture% THEN PROCcapturepacked(v,e%):ENDPROC
 5187 PROCnumslot:PROCaddr("DD21","$v"+STR$(ndepth%-1)):PROCaddr("CD","$numlit")
-5188 PROCcount(5):IF phase%<>3 ENDPROC
+5188 PROCcodecount(5):IF phase%<>3 ENDPROC
 5189 FOR i%=0 TO 3:q=INT(v/256):BPUT#oh%,v-q*256:v=q:NEXT
 5190 BPUT#oh%,e%
 5191 ENDPROC
@@ -1486,7 +1486,7 @@
 18174 IF ASC(MID$(s$,i%,1))<32 PROCbad("Control bytes in DATA are unsupported")
 18176 NEXT
 18178 ENDIF
-18180 PROCcount(8):IF phase%=3 THEN BPUT#oh%,LEN(s$):BPUT#oh%,e%:FOR i%=0 TO 4:BPUT#oh%,dpacket%?i%:NEXT:BPUT#oh%,0
+18180 PROCcodecount(8):IF phase%=3 THEN BPUT#oh%,LEN(s$):BPUT#oh%,e%:FOR i%=0 TO 4:BPUT#oh%,dpacket%?i%:NEXT:BPUT#oh%,0
 18182 PROCstringbytes(s$)
 18184 ENDPROC
 18186 DEF FNdataencode(s$)
@@ -1575,7 +1575,7 @@
 19216 sort%(sinsert%)=snum%:sname$(snum%)=n$:saddr%(snum%)=a%:snum%=snum%+1
 19218 ENDPROC
 19220 DEF PROCword24(v%)
-19222 LOCAL i%:PROCcount(3):IF phase%<>3 ENDPROC
+19222 LOCAL i%:PROCcodecount(3):IF phase%<>3 ENDPROC
 19223 BPUT#oh%,CHR$(v%)+CHR$(v% DIV 256)+CHR$(v% DIV 65536);
 19224 ENDPROC
 19226 DEF FNlineref(n%,m%,w%)
@@ -1652,21 +1652,21 @@
 19368 IF i%=0 THEN ="$ctlpush"
 19370 IF i%=1 THEN ="$ctlcheck"
 19372 ="$ctlpop"
-19400 DEF PROCcount(n%)
+19400 DEF PROCcodecount(n%)
 19402 IF &40000+pc%+n%>&B0000 PROCbad("Executable exceeds user RAM")
 19404 pc%=pc%+n%:ENDPROC
 19406 DEF PROCblob(p%,n%)
 19408 LOCAL i%:IF n%=0 ENDPROC
-19410 PROCcount(n%):IF phase%<>3 ENDPROC
+19410 PROCcodecount(n%):IF phase%<>3 ENDPROC
 19412 FOR i%=0 TO n%-1:BPUT#oh%,p%?i%:NEXT:ENDPROC
 19414 DEF PROCstringbytes(s$)
 19416 LOCAL i%:IF s$="" ENDPROC
-19418 PROCcount(LEN(s$)):IF phase%<>3 ENDPROC
+19418 PROCcodecount(LEN(s$)):IF phase%<>3 ENDPROC
 19420 BPUT#oh%,s$;
 19421 ENDPROC
 19422 DEF PROCzeros(n%)
 19424 LOCAL i%:IF n%=0 ENDPROC
-19426 PROCcount(n%):IF phase%<>3 ENDPROC
+19426 PROCcodecount(n%):IF phase%<>3 ENDPROC
 19428 FOR i%=1 TO n%:BPUT#oh%,0:NEXT:ENDPROC
 20000 DATA 4460,387,644,0,12,113,212,267,283
 20010 DATA "E1DDE5D101050000EDB0E5C9DD7E04B72809DD7E03EE80DD7703C9DDE5E10604377E2FCE00772310"

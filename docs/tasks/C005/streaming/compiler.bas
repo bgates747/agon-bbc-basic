@@ -252,7 +252,7 @@
 2760 DEF PROCbytes(ch$)
 2770 LOCAL ci%,ca%,cb%
 2772 IF ch$="" ENDPROC
-2774 PROCcount(LEN(ch$) DIV 2):IF cphase%<>3 ENDPROC
+2774 PROCcodecount(LEN(ch$) DIV 2):IF cphase%<>3 ENDPROC
 2780 FOR ci%=1 TO LEN(ch$) STEP 2
 2790 ca%=INSTR("0123456789ABCDEF",MID$(ch$,ci%,1))-1
 2800 cb%=INSTR("0123456789ABCDEF",MID$(ch$,ci%+1,1))-1
@@ -468,7 +468,7 @@
 5185 LOCAL ci%,cq
 5186 IF cdcapture% THEN PROCcapturepacked(cv,ce%):ENDPROC
 5187 PROCnumslot:PROCaddr("DD21","$v"+STR$(cndepth%-1)):PROCaddr("CD","$numlit")
-5188 PROCcount(5):IF cphase%<>3 ENDPROC
+5188 PROCcodecount(5):IF cphase%<>3 ENDPROC
 5189 FOR ci%=0 TO 3:cq=INT(cv/256):BPUT#coh%,cv-cq*256:cv=cq:NEXT
 5190 BPUT#coh%,ce%
 5191 ENDPROC
@@ -1486,7 +1486,7 @@
 18174 IF ASC(MID$(cs$,ci%,1))<32 PROCbad("Control bytes in DATA are unsupported")
 18176 NEXT
 18178 ENDIF
-18180 PROCcount(8):IF cphase%=3 THEN BPUT#coh%,LEN(cs$):BPUT#coh%,ce%:FOR ci%=0 TO 4:BPUT#coh%,cdpacket%?ci%:NEXT:BPUT#coh%,0
+18180 PROCcodecount(8):IF cphase%=3 THEN BPUT#coh%,LEN(cs$):BPUT#coh%,ce%:FOR ci%=0 TO 4:BPUT#coh%,cdpacket%?ci%:NEXT:BPUT#coh%,0
 18182 PROCstringbytes(cs$)
 18184 ENDPROC
 18186 DEF FNdataencode(cs$)
@@ -1575,7 +1575,7 @@
 19216 csort%(csinsert%)=csnum%:csname$(csnum%)=cn$:csaddr%(csnum%)=ca%:csnum%=csnum%+1
 19218 ENDPROC
 19220 DEF PROCword24(cv%)
-19222 LOCAL ci%:PROCcount(3):IF cphase%<>3 ENDPROC
+19222 LOCAL ci%:PROCcodecount(3):IF cphase%<>3 ENDPROC
 19223 BPUT#coh%,CHR$(cv%)+CHR$(cv% DIV 256)+CHR$(cv% DIV 65536);
 19224 ENDPROC
 19226 DEF FNlineref(cn%,cm%,cw%)
@@ -1652,21 +1652,21 @@
 19368 IF ci%=0 THEN ="$ctlpush"
 19370 IF ci%=1 THEN ="$ctlcheck"
 19372 ="$ctlpop"
-19400 DEF PROCcount(cn%)
+19400 DEF PROCcodecount(cn%)
 19402 IF &40000+cpc%+cn%>&B0000 PROCbad("Executable exceeds user RAM")
 19404 cpc%=cpc%+cn%:ENDPROC
 19406 DEF PROCblob(cp%,cn%)
 19408 LOCAL ci%:IF cn%=0 ENDPROC
-19410 PROCcount(cn%):IF cphase%<>3 ENDPROC
+19410 PROCcodecount(cn%):IF cphase%<>3 ENDPROC
 19412 FOR ci%=0 TO cn%-1:BPUT#coh%,cp%?ci%:NEXT:ENDPROC
 19414 DEF PROCstringbytes(cs$)
 19416 LOCAL ci%:IF cs$="" ENDPROC
-19418 PROCcount(LEN(cs$)):IF cphase%<>3 ENDPROC
+19418 PROCcodecount(LEN(cs$)):IF cphase%<>3 ENDPROC
 19420 BPUT#coh%,cs$;
 19421 ENDPROC
 19422 DEF PROCzeros(cn%)
 19424 LOCAL ci%:IF cn%=0 ENDPROC
-19426 PROCcount(cn%):IF cphase%<>3 ENDPROC
+19426 PROCcodecount(cn%):IF cphase%<>3 ENDPROC
 19428 FOR ci%=1 TO cn%:BPUT#coh%,0:NEXT:ENDPROC
 20000 DATA 4460,387,644,0,12,113,212,267,283
 20010 DATA "E1DDE5D101050000EDB0E5C9DD7E04B72809DD7E03EE80DD7703C9DDE5E10604377E2FCE00772310"

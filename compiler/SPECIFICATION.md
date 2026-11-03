@@ -155,6 +155,9 @@ The Author accepted the corrected C002 baseline for a development checkpoint.
     finish before reverse-order binding/conversion. ENDPROC restores recognised
     LOCAL records then requires a distinct PROC marker; RETURN still requires
     GOSUB. Unfinished loop/call markers preserve reference errors.
+    Names must be unique within each PROC/FN family; using the same stem for
+    bare and parameterised forms is currently rejected as a duplicate definition.
+
 21. Scalar LOCAL creates zero/empty dynamic bindings and restores prior numeric
     payloads/string descriptors in reverse order. Newly introduced bindings remain
     defined as zero/empty after exit, matching reference VAR creation. Each string
