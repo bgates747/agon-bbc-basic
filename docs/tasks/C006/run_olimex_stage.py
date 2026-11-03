@@ -29,6 +29,8 @@ def main():
     p.add_argument('--capture', type=Path, required=True)
     p.add_argument('--record', type=Path, required=True)
     p.add_argument('--stage', required=True)
+    p.add_argument('--entry-directory', help='Actual granted/observed CLI directory before this stage')
+    p.add_argument('--self-timeout', type=int, choices=(5400, 6600), default=5400)
     a = p.parse_args()
     assert re.fullmatch(r'compile-(?:[1-9]|10|11)|run-[1-9]|self-[ab]', a.stage)
     bundle = a.bundle.resolve(strict=True)
@@ -84,7 +86,9 @@ def main():
     try:
         status('entry-status')
         step('listener-exit', 'exit')
-        prompt = fixture['result_path']+' *'
+        entry_directory = a.entry_directory or fixture['result_path']
+        assert entry_directory.startswith('/') and '\n' not in entry_directory and '\r' not in entry_directory
+        prompt = entry_directory+' *'
         returned = observe(prompt.encode(), 15)
         assert returned == 'SD service stopped.\n'+prompt, repr(returned)
         # Complete mode records can follow the prompt; observe() removes only
@@ -109,7 +113,7 @@ def main():
             step('output-input', 'type', target)
             report['last_input_emission_return_epoch'] = time.time()
             save()
-            body = observe(end.replace('\n', '\r\n').encode(), 5400 if a.stage.startswith('self-') else 600)
+            body = observe(end.replace('\n', '\r\n').encode(), a.self_timeout if a.stage.startswith('self-') else 600)
             if a.stage.startswith('compile-') and int(a.stage.split('-')[1]) >= 10:
                 i = int(a.stage.split('-')[1])
                 oracle = (bundle.parent/'live-regressions-001'/f'compile-{i}.log').read_text()

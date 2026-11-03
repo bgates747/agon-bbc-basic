@@ -1,0 +1,30 @@
+{
+  "scope": "One physical self-source repeat from actual hardware-produced compiler; offline preparation only",
+  "compiler_sha256": "6597a0df3f99b4f43c42bff1cdbc59f5fdf730c57837f3d4112a598fbfbe5fb8",
+  "native_compiler_sha256": "299a31190c380541a73ed9eb144a303fa37abccc4f3c3e0ad47f99f1538122c0",
+  "image_bytes": 324275,
+  "previous_hardware_evidence": "/Agon/mystuff/bbc-basic-v-adl/docs/tasks/C006/evidence/olimex-self-a-late-001",
+  "previous_hardware_image": "299a31190c380541a73ed9eb144a303fa37abccc4f3c3e0ad47f99f1538122c0",
+  "previous_late_completion_preserved": true,
+  "previous_slot_released_at": "2026-11-03T14:48:42.976464+00:00",
+  "fixture_path": "/extender/diagnostics/bbc-basic/c006-r02",
+  "result_path": "/agents/extender/results/bbc-basic/c006-r02",
+  "filename_inputs": {
+    "self-b": [
+      "/extender/diagnostics/bbc-basic/c006-r02/compiler.bas",
+      "/agents/extender/results/bbc-basic/c006-r02/self-b.bin"
+    ]
+  },
+  "uploads": {
+    "payload/compiler.bas": "/extender/diagnostics/bbc-basic/c006-r02/compiler.bas",
+    "payload/compiler.bin": "/extender/diagnostics/bbc-basic/c006-r02/compiler.bin",
+    "payload/self-b.txt": "/extender/diagnostics/bbc-basic/c006-r02/self-b.txt"
+  },
+  "planned_RUN_returns": 0,
+  "EXEC_RUN_line": 4,
+  "completion_bound_seconds": 6600,
+  "capture_lifetime_seconds": 7200,
+  "hardware_validation": false,
+  "observed_previous_capture_interval_seconds": 5951.332,
+  "observed_previous_get_host_seconds": 251.9477095603943
+}

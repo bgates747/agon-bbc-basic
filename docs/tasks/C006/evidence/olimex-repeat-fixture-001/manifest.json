@@ -1,0 +1,8 @@
+{
+  "cases.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+  "fixture.json": "085a8d2fb38d8e01646f2d4b1bcdeadaffaa584b3f26aa0938f823e0e256e5a9",
+  "payload/compiler.bas": "6597a0df3f99b4f43c42bff1cdbc59f5fdf730c57837f3d4112a598fbfbe5fb8",
+  "payload/compiler.bin": "299a31190c380541a73ed9eb144a303fa37abccc4f3c3e0ad47f99f1538122c0",
+  "payload/self-b.txt": "06ea33a6a3c53d6d392cb5451b54ca70733e3c2c9005980b965a11dfe58b72bc",
+  "prepare_olimex_repeat.py": "353a024ad7269c8a0a19d2570907664b632a40eb694d8834b7f1c76caf74d4a2"
+}

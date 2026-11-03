@@ -562,3 +562,22 @@ through mailbox and steering. No lease or target action remains. No self-b,
 reset, firmware/startup/mode/wiring change or optical pass occurred. Prepare
 the outstanding physical repeat separately using the actual first observation;
 retain original finite scope/timeout and late-success lineage truthfully.
+
+## Prepare separately bounded physical repeat
+
+After checkpoint2384df9, prepare_olimex_repeat.py verifies both prior complete
+manifests, actual hardware output/seed equality and actual clean release. It
+copies the hardware-produced compiler unchanged, the exact source and one
+176-byte MOS batch into olimex-repeat-fixture-001:3 payloads436261 bytes,
+manifestb5d0761fc88e512f32d14217a8ee2de997e05e412edafc3c8236bd2101128e24.
+OLIMEX-R02.md defines one outstanding hardware generation only,6600s completion
+observation from the actual first5951.332s captured interval, fresh7200s reader
+after deployment, exact comparisons and unchanged preservation/stop boundaries.
+This is offline copying/hashing, not compilation or an execution result.
+
+The deployment experiment now accepts explicit expected file counts3 or40,
+default40 preserving the original scope. The one-stage observer accepts the
+actual incoming directory for its pre-EXEC CLI guard and an explicit self-timeout
+5400/6600 (default5400), preserving its old invocation. Syntax checks and actual
+manifest/byte/command-file preparation pass; no extra emulator/hardware experiment
+is run. New reservation/fresh Extender grant are still required.

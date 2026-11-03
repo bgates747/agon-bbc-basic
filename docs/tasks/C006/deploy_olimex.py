@@ -24,6 +24,7 @@ def main():
     p.add_argument('--config', type=Path, required=True)
     p.add_argument('--lease', required=True)
     p.add_argument('--record', type=Path, required=True)
+    p.add_argument('--expected-files', type=int, choices=(3, 40), default=40)
     a = p.parse_args()
     bundle = a.bundle.resolve(strict=True)
     manifest = json.loads((bundle/'manifest.json').read_text())
@@ -32,7 +33,7 @@ def main():
         assert path.is_relative_to(bundle) and digest(path) == expected, name
     fixture = json.loads((bundle/'fixture.json').read_text())
     uploads = fixture['uploads']
-    assert len(uploads) == 40 and len(set(uploads.values())) == 40
+    assert len(uploads) == a.expected_files and len(set(uploads.values())) == a.expected_files
     for name, remote in uploads.items():
         assert name in manifest and name.startswith('payload/')
         assert (remote.startswith(fixture['fixture_path']+'/') or
