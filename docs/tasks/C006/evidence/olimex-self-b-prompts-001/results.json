@@ -1,0 +1,10 @@
+{
+  "scope": "Actual second physical generation prompts only; invocation remains unreturned",
+  "observed_epoch": 1793722271.0805073,
+  "elapsed_since_last_input_seconds": 3731.458,
+  "completion_bound_seconds": 6600,
+  "capture_lifetime_seconds": 7200,
+  "physical_repeat_completed": false,
+  "compiler_liveness_established": false,
+  "capture_bytes": 1047
+}

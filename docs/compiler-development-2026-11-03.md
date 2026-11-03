@@ -621,3 +621,10 @@ notice and provenance metadata. Syntax checks only; no live native artifact is
 created while repeat remains pending. Main is outside this development promotion.
 Correct two stale REFERENCE.md statements that still treated completed C003/C004
 LOCAL/runtime work as unfinished; no source/runtime behavior changes.
+
+At approximately one hour, the repeat's original capture still contains1047
+bytes through the final filename echo, without a diagnostic or completion.
+Freeze actual-prompt-only olimex-self-b-prompts-001 with no completion/liveness
+claim. Durable11-08-53_bbc-basic_bbc-c006-r02-observation-status-one and steering
+give Extender scheduling status only; existing6600s observer/7200s reader remain
+active, no parallel access/extra workload or acknowledgement requested.
