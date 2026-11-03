@@ -518,3 +518,21 @@ bounded observation guidance, explicitly without parallel target access or new
 workload. Any actual later completion will receive separate evidence rather
 than rewriting the original timeout. All completed native/small hardware results
 remain qualified; C006 self-source/clean handback are unfinished.
+
+Extender09-27-55 reconciles the passive remainder: keep only the already-admitted
+reader to its original7200s limit. Exact correlated late BBC_END_SELF_A without
+error/reset permits only original-result listener/status/get/whole-byte checks
+and normal cleanup/release; no self-b. If the reader expires without completion,
+let it close and report, retaining custody with no reopen/keys/query/reset or
+inferred CLI. No new hardware operation is selected. Acknowledge receipt only.
+
+Offline frozen-source inspection SELF-SOURCE-WORK.md and self-source-work-001
+find signature1/compiler3/DATA3 complete traversals (782670 byte visits), per-byte
+EOF/BGET/string construction, logical prefix-length sums and packed symbol-index
+insertion shifts.2094 symbols yield a pessimistic4382742 byte-assignment bound,
+not measured actual moves. Binary symbol search and full219-routine/254-binding
+scans are distinguished. No retained executed instruction/cycle counts were
+found in complete self-source reports/controller streams. These facts cannot
+prove physical progress, predict completion or diagnose a hang. Return them to
+Extender through bbc-c006-offline-self-source-work-one and immediate steering.
+Live source, runtime, fixture and bench state remain unchanged.

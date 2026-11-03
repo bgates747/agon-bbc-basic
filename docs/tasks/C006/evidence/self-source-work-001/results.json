@@ -1,0 +1,16 @@
+{
+  "scope": "Offline static counts/bounds; no instruction, progress or time measurement",
+  "source_sha256": "6597a0df3f99b4f43c42bff1cdbc59f5fdf730c57837f3d4112a598fbfbe5fb8",
+  "source_bytes": 111810,
+  "source_lines": 2067,
+  "expected_complete_source_traversals": 7,
+  "complete_source_byte_visits": 782670,
+  "line_payload_bytes": 109743,
+  "cumulative_line_prefix_payload_lengths_one_traversal": 4152435,
+  "cumulative_line_prefix_payload_lengths_seven_traversals": 29067045,
+  "symbols_in_completed_emulator_run": 2094,
+  "sorted_index_worst_case_shifted_bytes_for_that_count": 4382742,
+  "actual_shift_count_measured": false,
+  "executed_instruction_counts_retained": false,
+  "physical_compiler_progress_established": false
+}

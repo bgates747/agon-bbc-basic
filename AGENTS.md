@@ -125,6 +125,14 @@ environment, ownership, assembly, emulator, hardware and coordination rules.
    mail09-26-09_bbc-basic_bbc-c006-self-a-observation-bound-one. Read local
    stages/self-a/results.json and raw capture for actual late observations.
    No physical self-source completion is proved; self-b is unstarted.
+   Extender reply09-27-55 permits ONLY the existing reader's original7200s
+   remainder. If exact correlated BBC_END_SELF_A arrives without error/reset,
+   only bounded original-result listener/status/retrieval/comparison and cleanup/
+   release are permitted; NO self-b even on equal late bytes. If reader expires
+   without completion, let it close; no reopening, keys, reset, target query or
+   release. Retain custody and promptly mail/steer Extender the final observation.
+   SELF-SOURCE-WORK.md/evidence/self-source-work-001 contain offline counts,
+   not a CPU-time estimate or progress proof; no extra experiment was run.
    Extender has stopped all target access.
    Keep custody through restoration/release; consult actual local receipts.
    Use pinned new staged
