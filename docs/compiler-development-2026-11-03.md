@@ -237,3 +237,12 @@ and the additional MOS-provided ADL stack. Read-only EMOS exec24/defines/startup
 inspection is distinct from installed firmware evidence; retain an actual MEM
 report after future checkout before running compiler fixtures. No hardware
 access, reset, flash, mode change or memory-policy change occurs here.
+
+packed-capacity-001 passes3 programs/two native executions/one rejection in
+1717.759 controller seconds. Actual large executable73821 bytes runs1800
+increments; repeat is byte-identical. The2048-label program runs, and4097 labels
+reject at the expected guard before output. Fresh evidence retains source,
+programs/images/repeat, console and independent numeric links. This is capacity
+qualification, not a speed benchmark. Packed6597a0df now has native source fit,
+all39 errors, baseline/helper/integration and public capacity qualification.
+Proceed with guarded development promotion, then fresh live checks.

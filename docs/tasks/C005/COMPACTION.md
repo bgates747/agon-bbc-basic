@@ -243,3 +243,12 @@ identical source/oracle plus every complete emitted image against the earlier
 2f81c6fb cohorts; packed-error-equivalence-001 passes all39. These are controller
 durations and retained-byte comparisons, not hardware/performance measurements.
 Large-output/symbol-capacity qualification is active; live7cac4bba is unchanged.
+
+packed-capacity-001 passes3 programs/two native executions/one rejection in
+1717.759 controller seconds. Actual large executable73821 bytes runs1800
+increments; repeat is byte-identical. The2048-label program runs, and4097 labels
+reject at the expected guard before output. Fresh evidence retains source,
+programs/images/repeat, console and independent numeric links. This is capacity
+qualification, not a speed benchmark. Packed6597a0df now has native source fit,
+all39 errors, baseline/helper/integration and public capacity qualification.
+Proceed with guarded development promotion, then fresh live checks.

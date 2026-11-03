@@ -1,0 +1,7 @@
+{
+  "large_executable_bytes": 73821,
+  "repeated_stores": 1800,
+  "named_labels_executed": 2048,
+  "labels_rejected": 4097,
+  "scope": "Capacity/output checks, not performance measurements"
+}
