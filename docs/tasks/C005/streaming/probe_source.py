@@ -3,7 +3,7 @@ Host progress PRINTs are not compiled into the supplied target compiler source.
 This is C005 resource evidence, not an unmodified-main C006 generation claim.
 """
 from pathlib import Path
-import argparse,hashlib,importlib.util,json,re,shutil,time
+import argparse,hashlib,importlib.util,json,re,shutil,time,signal,threading
 ROOT=Path(__file__).resolve().parents[4];TASK=ROOT/'docs/tasks/C005';PROFILE=ROOT/'.emulator'
 def digest(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def main():
@@ -50,6 +50,25 @@ def main():
 512 ENDPROC
 '''
  driver='\n'.join(names(row) for row in main)+'\n'+observer+body;assert max(len(row.split(' ',1)[1]) for row in driver.splitlines())<=255;(d/'driver.bas').write_text(driver);(sd/'source-probe-driver.bas').write_text(driver);(sd/'self-source.bas').write_text(source);sentinel=b'Prior output survives source-resource failure';(sd/'self-probe.bin').write_bytes(sentinel);sp=importlib.util.spec_from_file_location('h',ROOT/'compiler/tools/test_compiler.py');h=importlib.util.module_from_spec(sp);sp.loader.exec_module(h);start=time.monotonic();report=dict(scope='Actual source-resource experiment, not C006 generation proof',source_sha256=digest(a.compiler),host_driver_sha256=digest(d/'driver.bas'),host_progress_instrumentation=a.progress,host_storage_observation=a.private_storage,host_counter_names=mapping,layout_only=a.layout_only,hardware_validation=False,inputs={str(q):digest(q) for q in [ROOT/"bin/basic.bin",PROFILE/"mos_platform.bin",PROFILE/"fab-agon-emulator.bin",PROFILE/"fab-agon-emulator"]})
+ (d/'inputs.json').write_text(json.dumps(report,indent=2)+'\n')
+ stop=threading.Event();watcher=None;profile_log=PROFILE/'source-probe.log'
+ profile_log.unlink(missing_ok=True)
+ def interrupt(signum,frame):
+  report['interrupted_by_signal']=signum
+  (d/'interruption.json').write_text(json.dumps(dict(signal=signum,observed_unix_time=time.time(),source_sha256=report['source_sha256']),indent=2)+'\n')
+  if profile_log.exists():shutil.copy2(profile_log,d/'native-host.log')
+  raise InterruptedError(f'Controller received signal {signum}')
+ old_term=signal.signal(signal.SIGTERM,interrupt)
+ if a.progress:
+  def observe():
+   seen=0
+   while not stop.wait(2):
+    if not profile_log.exists():continue
+    rows=profile_log.read_text(errors='replace').split('\n')[:-1]
+    for row in rows[seen:]:
+     if row.startswith('SOURCE_'):print(row,flush=True)
+    seen=len(rows)
+  watcher=threading.Thread(target=observe,daemon=True);watcher.start()
  try:
   ks=importlib.util.spec_from_file_location('keyboard',TASK/'io/interactive.py');keyboard=importlib.util.module_from_spec(ks);ks.loader.exec_module(keyboard);log=keyboard.run(PROFILE,'load /bin/basic.bin\nrun . /source-probe-driver.bas\n',[],'SOURCE_PROBE_DONE','source-probe.log',timeout_seconds=a.timeout,abort_patterns=[(0,'\n>')]);(d/'native-host.log').write_text(log);report['source_compilation_succeeded']='SOURCE_PROBE_SUCCESS' in log;report['counters']=log.split('SOURCE_COUNTERS:',1)[1].splitlines()[0].strip();report['source_position']=log.split('SOURCE_POSITION:',1)[1].splitlines()[0].strip()
   if report['source_compilation_succeeded'] and not a.layout_only:
@@ -60,11 +79,13 @@ def main():
   if (PROFILE/'source-probe.log').exists():shutil.copy2(PROFILE/'source-probe.log',d/'native-host.log')
   raise
  finally:
+  stop.set()
+  if watcher:watcher.join(timeout=3)
   if (d/'native-host.log').is_file():
    observed=(d/'native-host.log').read_text(errors='replace')
    for key,marker in [('layout_bytes','SOURCE_PASS_END:1'),('allocated_target_pages','SOURCE_PRIVATE_PAGES'),('symbol_content_bytes','SOURCE_SYMBOL_BYTES'),('metadata_string_content_bytes','SOURCE_METADATA_STRING_BYTES')]:
     found=re.search(re.escape(marker)+r':\s*(\d+)',observed)
     if found:report[key]=int(found[1])
-  report['controller_seconds']=round(time.monotonic()-start,3);(d/'results.json').write_text(json.dumps(report,indent=2)+'\n');(d/'manifest.json').write_text(json.dumps({q.name:digest(q) for q in d.iterdir() if q.is_file() and q.name!='manifest.json'},indent=2)+'\n')
+  report['controller_seconds']=round(time.monotonic()-start,3);(d/'results.json').write_text(json.dumps(report,indent=2)+'\n');(d/'manifest.json').write_text(json.dumps({q.name:digest(q) for q in d.iterdir() if q.is_file() and q.name!='manifest.json'},indent=2)+'\n');signal.signal(signal.SIGTERM,old_term)
  print(json.dumps(report,indent=2))
 if __name__=='__main__':main()

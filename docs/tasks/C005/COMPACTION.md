@@ -198,3 +198,11 @@ runtime matches its earlier binary, and changed control/error packers preserve
 old7cac4bba too. promotion-preparation-002 retains exact staged tools and results.
 This supplies packaging evidence only; live source stays unchanged pending fit
 and remaining qualification.
+
+Actual packed-source-001 layout is324275 bytes,2094 symbols/219 routines/254
+bindings. Observed pages7, symbol contents13948 bytes and other metadata strings
+5473 give97366 mandatory/observed bytes against101453 available, leaving4087
+before remaining overhead. This is not native fit proof. The controller later
+exits143/SIGTERM during validation, with origin unknown; no output pass/image.
+Retain interrupted evidence and restart identical source/driver aspacked-source-002
+with live host progress, regular session polling and signal/input recording.

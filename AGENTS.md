@@ -156,3 +156,12 @@ routines/254 bindings. Actual BBC observations:7 pages,13948 symbol bytes,5473
 other metadata string bytes. Private bound including observed content97366 leaves
 4087 of101453 before headers/scalars/overhead. Validation/output are still active;
 no native fit/image is claimed from this arithmetic alone.
+
+packed-source-001 was externally terminated with controller exit143/SIGTERM
+before validation finished; no BBC diagnostic or output pass is claimed. Its
+partial logs/layout/disposition are frozen with unknown termination origin.
+packed-source-002 restarts the identical target and BBC driver. Host orchestration
+now streams SOURCE progress and records SIGTERM; poll the running tool session
+regularly. Inputs are persisted up front by the latest controller revision. No
+native compiler image exists yet. Do not run another CLI against this SD while
+the source probe is active.

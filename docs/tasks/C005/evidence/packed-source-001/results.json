@@ -1,0 +1,23 @@
+{
+  "scope": "Interrupted actual source-resource experiment, not C006 generation proof",
+  "source_sha256": "6597a0df3f99b4f43c42bff1cdbc59f5fdf730c57837f3d4112a598fbfbe5fb8",
+  "host_driver_sha256": "5f365395c81de1a539f437a14ab9bcf89b22d5212055d44f4e2a5bbd4483b169",
+  "disposition": "Controller terminated with SIGTERM; origin unestablished",
+  "controller_exit_code": 143,
+  "termination_detected": "2026-11-03T01:18:45.045418-05:00",
+  "completed_layout_bytes": 324275,
+  "source_body_bytes": 268243,
+  "symbols": 2094,
+  "definitions": 219,
+  "bindings": 254,
+  "allocated_target_pages": 7,
+  "symbol_content_bytes": 13948,
+  "metadata_string_content_bytes": 5473,
+  "last_logged_phase": 2,
+  "last_logged_physical_line": 2000,
+  "output_pass_executed": false,
+  "old_output_preserved": true,
+  "native_image_emitted": false,
+  "native_initialization_executed": false,
+  "hardware_validation": false
+}

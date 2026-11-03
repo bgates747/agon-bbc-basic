@@ -112,3 +112,19 @@ one-byte internal-PIC, numeric-entry and zero-pool corruptions for the intended
 assertions. Corruptions are never executed. This uses no BASIC parsing/address
 calculation on the host. Packed-source-001 validation continues independently;
 no actual compiler image or native fit result is yet claimed.
+
+## Controller termination during validation
+
+packed-source-001 controller exits143/SIGTERM before a normal result is written;
+its last logged state is validation phase2 after physical2000. No BBC diagnostic,
+completed validation or output pass is reported. Origin of termination is not
+established. Preserve raw console, exact source/driver/script, measured layout
+bound and explicit interrupted disposition; previous output remains unchanged.
+Do not count this as a successful compiler, memory failure or native fit result.
+
+The resource controller now mirrors actual SOURCE progress onto stdout, records
+SIGTERM promptly and retains normal failure metadata when it can unwind. Start
+packed-source-002 through a live tee and poll the tool session itself regularly.
+Target6597a0df and the entire BBC driver are byte-identical to the interrupted
+run; only host orchestration changes. The new signal path is prepared, not a
+claimed tested interruption recovery. Native compiler generation remains open.
