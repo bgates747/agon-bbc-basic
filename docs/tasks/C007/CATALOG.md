@@ -13,11 +13,13 @@ suite. No new benchmark was executed during this search.
    names below are catalogue references, not additional TODO tasks. Adaptations
    described here have not been implemented. Programme adoption is separate
    from compiler feature implementation.
-2. **No complete shortlisted performance program currently compiles.** They
-   require variables, expressions and loops at minimum. The existing C001
-   compiler regression suite is usable now; the C002 numeric probe is usable
-   separately. Neither establishes application performance. See the actual
-   [compatibility matrix](../../../compiler/COMPATIBILITY.md).
+2. **Eligibility below is the November 1 search snapshot.** At that checkpoint
+   complete performance programs still required missing variables, expressions
+   and loops; C001 regression and the separate C002 numeric probe were available.
+   C002–C005 have since promoted those facilities for the scopes in the live
+   [compatibility matrix](../../../compiler/COMPATIBILITY.md). W01 now has a
+   successful native self-source preflight. This is correctness qualification,
+   not a paired performance measurement or automatic admission of other sources.
 3. Local source links below refer to inspected files at checkpoint `ccd09af`.
    [The inventory](evidence/local-inventory.json) records exact Git objects,
    SHA-256 hashes and origins. Most interpreter tests predate the compiler;
@@ -34,7 +36,7 @@ suite. No new benchmark was executed during this search.
 | Candidate | Inspected source and purpose | Oracle and eligibility |
 | --- | --- | --- |
 | R01 — native bootstrap | [C001 runner](../../../compiler/tools/test_compiler.py), literal output, labels, GOTO/GOSUB/RETURN, diagnostics and output preservation | Existing golden assembly, expected transcripts/status and deterministic image checks. Previously qualified: 39 cases / 15 native executions. Runnable now; not a timing suite. |
-| R02 — numeric ABI | [C002 probe/harness](../C002/README.md), packed integers/floats, conversions, errors, aliasing and calling conventions | Existing byte-level reference comparisons and independent precision anchors: 257 cases previously qualified. Experimental runtime only; compiler expressions remain unavailable. |
+| R02 — numeric ABI | [C002 probe/harness](../C002/README.md), packed integers/floats, conversions, errors, aliasing and calling conventions | Existing byte-level reference comparisons and independent precision anchors: 257 cases previously qualified. At search time this was a separate experiment; consult the live matrix for subsequently promoted expressions/runtime. No new execution claim here. |
 | R03 — language regression | [Conformance suite](../../../tests/conformance/README.md), plus [locals](../../../tests/locals.bas), [by-reference](../../../tests/byreftest.bas) and [COUNT/output](../../../tests/counttest.bas) tests | Preserve expected values/error numbers and zero-failure summary for each selected test. Whole suites await their required features; use explicit feature-filtered extracts. No fresh execution claim. |
 
 R03's useful divisions are core/edge syntax, stress, file I/O, float precision,
@@ -179,7 +181,7 @@ placement is not proof of every author's grant.
 
 | Candidate | Work and adaptation | Oracle / feature gate |
 | --- | --- | --- |
-| W01 — **our BBC BASIC compiler** | [compiler.bas](../../../compiler/compiler.bas) parsing fixed plain-text programs, string scanning, symbol lookup, fixups and binary writing. Vary source size, line length and forward-reference density within its current limits; log input/output bytes. | Golden output for fixed compiler version and execution of generated files; separate parse/codegen from file writing where practical. Interpreter-hosted baseline possible now, native comparison awaits bootstrap closure/self-hosting. Later self-compile twice and compare deterministic output. Project provenance: C001 at `ccd09af`; no external benchmark grant required. |
+| W01 — **our BBC BASIC compiler** | [compiler.bas](../../../compiler/compiler.bas) parsing fixed plain-text programs, string scanning, symbol/address resolution and binary writing. Vary source size, line length and forward-reference density within its current limits; log input/output bytes. | Golden output for fixed compiler version and execution of generated files; separate parse/codegen from file writing where practical. Source 6597a0df now has a byte-identical 324275-byte native self-source preflight; C006 owns the full repeated-generation/physical proof. Controller durations are not benchmark timings. Original project checkpoint: ccd09af; runtime provenance/reuse terms remain in REFERENCE and vendor notices. |
 | W02 — **Game of Life** | [local life.bas](../../../tests/demos/life.bas), real two-dimensional arrays, neighbour branches and state updates. Replace random initialisation with a frozen grid and infinite loop with a generation count; compute and rendered variants separate. | Full final grid or checksum plus selected generation snapshots from an independently checked glider/oscillator fixture. Arrays/loops/logic; screen formatting only for the display variant. Local license qualification above. |
 | W03 — **CPU Mandelbrot** | [local mandlebrot.bas](../../../tests/demos/mandlebrot.bas), header P. Mainwaring, 1990. Fixed coordinates, iteration bound, deterministic escape-count map; separate pixels from computation and remove final GET. | Reference 40-bit escape counts with selected point checks, then display checksum. Float/arrays/DATA/control flow and optional graphics. Numeric-heavy control, not the main evidence for dispatch gains; local historical attribution must be retained. |
 

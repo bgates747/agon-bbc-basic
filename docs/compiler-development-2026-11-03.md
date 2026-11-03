@@ -291,3 +291,10 @@ normal-main bootstrap, native baseline39/15+24, representative12 and fresh
 native errors39. All source/native hashes and completed case ranges must agree;
 copy the four result records into the host bundle. Syntax passes; actual bundle
 creation still awaits the active full chain and native suites. No target action.
+
+Maintain C007-derived documentation after C005 promotion: Git history confirms
+completed search publication227b620, so correct its stale uncommitted status.
+Mark original catalogue eligibility as the November1 snapshot and record W01's
+actual native self-source preflight. The live compatibility matrix owns current
+features. No benchmark adaptation, new source search or timing measurement is
+performed; no speedup is inferred from controller durations.

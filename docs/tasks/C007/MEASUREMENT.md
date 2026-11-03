@@ -4,7 +4,9 @@ Measure identical, validated work on the same Agon configuration and retain
 results by workload. Cheap statements, lookup and control flow should expose
 interpreter overhead; arithmetic routines, allocation and MOS/VDP/SD services
 can limit the visible gain. Those are hypotheses to test, not speedup claims.
-The current compiler cannot run the shortlisted performance programs yet.
+The original search checkpoint could not run the shortlisted performance
+programs. The live matrix now owns eligibility; W01's native self-source
+preflight supplies correctness evidence, not a paired timing result.
 
 ## Separate the questions
 
