@@ -1,0 +1,11 @@
+{
+  "g0-commands.txt": "f5f8af1cbec93dff23e2bc76caf2324ceb667cdcfae4f074b3d81d68dc97a0a1",
+  "bootstrap.py": "486ad648caa0bd3c06bb41e3acdfde8de3bfde131452f7973af877d91b59cc45",
+  "freeze_generation.py": "fc01cff3ca18361ca82d37cd4d01271ae89d4908009c5c20387c95332aa7d833",
+  "compiler.bas": "6597a0df3f99b4f43c42bff1cdbc59f5fdf730c57837f3d4112a598fbfbe5fb8",
+  "g0-keyboard.json": "7ccd49070aa163758810e350f9f92547ed1196c34d38ef3dbc8dac5009ff353f",
+  "g0.dat": "299a31190c380541a73ed9eb144a303fa37abccc4f3c3e0ad47f99f1538122c0",
+  "expected-image.dat": "299a31190c380541a73ed9eb144a303fa37abccc4f3c3e0ad47f99f1538122c0",
+  "g0.log": "af0bc611339e0231036caf1fac2dbfe76d65a3da16aa83c33ec81d152af16f41",
+  "results.json": "2bcdd2284f4fab8c611fdf792943a420bb1605a11fa683ab7a8f068ae9a455d4"
+}

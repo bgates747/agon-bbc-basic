@@ -75,8 +75,9 @@ environment, ownership, assembly, emulator, hardware and coordination rules.
    preflight does not replace the full chain. bootstrap.py --expected-image
    pins the checked resource seed before executing successor generations.
    Current live-bootstrap-001 and its sequential native qualification pipeline
-   are active on the sole CLI SD. G0 has answered both prompts; no full-chain
-   result exists yet. Do not launch another CLI against this fixture.
+   are active on the sole CLI SD. Unmodified-main G0 completes3951.738s and
+   exactly matches the seed (completed snapshot live-main-g0-001). G1 is active;
+   no full-chain result exists yet. Do not launch another CLI against this fixture.
 2. C006 native_baseline.py compares39 actual standard sources against15 complete
    baseline images/24 diagnostics. regressions.py runs12 representative cases;
    native_errors.py runs39 fresh reference ERR/ERL programs. Prepared workflows

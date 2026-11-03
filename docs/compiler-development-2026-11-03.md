@@ -323,3 +323,14 @@ verify255+text (five bytes) and retain actual output for physical comparison;
 packaging requires that proof and copies its bytes. Syntax checks pass. These
 host-only changes affect future native qualification, not active G0 source,
 BASIC main or compiler image. No file-I/O result is claimed before execution.
+
+## Full unmodified-main G0 completed
+
+live-bootstrap-001 G0 completes3951.738 controller seconds through the actual
+normal Source/Output prompts and ordinary *BYE. Its full324275 bytes equal the
+independently qualified resource seed SHA299a3119; only then does G1 start.
+freeze_generation.py retains completed immutable inputs/G0 image/console/commands
+in live-main-g0-001 without freezing or claiming the active cohort's later
+status. This is actual unmodified interpreted-main proof, not the earlier
+instrumented resource driver. G1/G2/repeat and native suites remain active or
+pending. No hardware/performance result follows from these controller times.
