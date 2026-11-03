@@ -1,0 +1,12 @@
+{
+  "scope": "Host-only recovery from shared tmpfs exhaustion",
+  "observed_tmpfs_bytes": 4294967296,
+  "observed_tmp_free_before": 0,
+  "project_disk_free_approximately_GiB": 720,
+  "active_CLI_executable_unchanged": true,
+  "other_owners_files_modified": false,
+  "compiler_source_image_inputs_changed": false,
+  "hardware_access": false,
+  "qualification_continues": true,
+  "command_record": "Read-only df/du/readelf followed by reversible move of only owned release/.fingerprint,build,deps; exact paths and unchanged SHA in receipt"
+}

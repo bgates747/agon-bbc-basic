@@ -1,0 +1,11 @@
+{
+  "g2.log": "61df17a472ad329eacce6177d76f35d253e8b477a41d196cb2dd2cd71b380acb",
+  "bootstrap.py": "486ad648caa0bd3c06bb41e3acdfde8de3bfde131452f7973af877d91b59cc45",
+  "freeze_generation.py": "fc01cff3ca18361ca82d37cd4d01271ae89d4908009c5c20387c95332aa7d833",
+  "compiler.bas": "6597a0df3f99b4f43c42bff1cdbc59f5fdf730c57837f3d4112a598fbfbe5fb8",
+  "g2-keyboard.json": "d58550738c62ba20c361ab550cf52c8145661d2edcbd355143df0a8cfd890823",
+  "g2-commands.txt": "72727e0b2f090220340299adef8f3e65b514b2bf1efea82751b3c6cf66801948",
+  "expected-image.dat": "299a31190c380541a73ed9eb144a303fa37abccc4f3c3e0ad47f99f1538122c0",
+  "g2.dat": "299a31190c380541a73ed9eb144a303fa37abccc4f3c3e0ad47f99f1538122c0",
+  "results.json": "e3b7ba593d3bdabdb7b1b310122eed6a9993e73cd4fe93f4927a3ff1c40bdbe2"
+}

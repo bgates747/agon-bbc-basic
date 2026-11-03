@@ -343,3 +343,20 @@ live-native-g1-001 snapshot using freeze_generation.py; leave original cohort
 status active/unfrozen. This now demonstrates normal interpreted main followed
 by actual native self-source generation. G2/repeat and native suites still
 require execution; no full-chain, hardware or benchmark result is inferred.
+
+## G2 completed; shared tmpfs pressure resolved locally
+
+G2 completes1997.471 controller seconds/status0,324275 bytes identical to G0/G1
+and expected299a3119. Retain live-native-g2-001; repeat starts normally.
+A separate sandbox command then fails to create its synthetic .agents mount
+with ENOSPC. Read-only df shows /tmp tmpfs4GiB full, /Agon about720GiB free;
+most temporary usage is other Extender-owned source/build trees. Do not modify
+those. Reversibly move only our inactive Cargo release/.fingerprint,build,deps
+to C006/build/relocated-cli-cache-001, retaining active executable and logs in
+place. Before/after CLI SHA remainsbf5f29b2; dynamic-section check shows no
+runtime dependency on that cache path. Recover66846720 free bytes and normal
+sandbox commands. Repeat/controller continue. cli-cache-relocation-001 retains
+actual receipt/dynamic-section and explicit disposition; no compiler input,
+firmware/profile or hardware change. Notify Extender via06-14-44_bbc-basic_bbc-shared-tmpfs-full-one
+and immediate chat so it can inspect its own inactive trees. No file deletion
+or takeover of another owner's work occurs.

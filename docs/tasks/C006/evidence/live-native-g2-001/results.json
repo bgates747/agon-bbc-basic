@@ -1,0 +1,18 @@
+{
+  "scope": "Completed generation snapshot; full active chain is separate",
+  "original_cohort": "/Agon/mystuff/bbc-basic-v-adl/docs/tasks/C006/evidence/live-bootstrap-001",
+  "completed_stage": "g2",
+  "compiler_sha256": "6597a0df3f99b4f43c42bff1cdbc59f5fdf730c57837f3d4112a598fbfbe5fb8",
+  "image_sha256": "299a31190c380541a73ed9eb144a303fa37abccc4f3c3e0ad47f99f1538122c0",
+  "image_bytes": 324275,
+  "matches_previously_qualified_image": true,
+  "unmodified_interpreted_main": false,
+  "controller_seconds": 1997.471,
+  "inputs": {
+    "/Agon/mystuff/bbc-basic-v-adl/bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+    "/Agon/mystuff/bbc-basic-v-adl/.emulator/mos_platform.bin": "d564243283972690933a4554296ad6202ca4ef54572279533a942960846bebae",
+    "/Agon/mystuff/bbc-basic-v-adl/.emulator/fab-agon-emulator.bin": "bf5f29b243b8214e54c515dcc26edf47399ce440356af2ebc3ce3d7664ae11eb"
+  },
+  "hardware_validation": false,
+  "performance_benchmark": false
+}

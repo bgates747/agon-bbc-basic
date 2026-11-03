@@ -1,0 +1,10 @@
+{
+  "scope": "Move only owned inactive Cargo build caches off full shared tmpfs; executable/logs preserved",
+  "runtime_sha256": "bf5f29b243b8214e54c515dcc26edf47399ce440356af2ebc3ce3d7664ae11eb",
+  "moved": [
+    "/tmp/bbc-compiler-cli-target/release/.fingerprint",
+    "/tmp/bbc-compiler-cli-target/release/build",
+    "/tmp/bbc-compiler-cli-target/release/deps"
+  ],
+  "tmp_free_bytes": 66846720
+}

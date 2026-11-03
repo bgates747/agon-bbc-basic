@@ -77,7 +77,8 @@ environment, ownership, assembly, emulator, hardware and coordination rules.
    Current live-bootstrap-001 and its sequential native qualification pipeline
    are active on the sole CLI SD. Unmodified-main G0 completes3951.738s and
    exactly matches the seed (live-main-g0-001). G1 also matches all324275 bytes
-   with status0 in1983.142s (live-native-g1-001). G2 is active;
+   with status0 in1983.142s (live-native-g1-001). G2 also matches/status0 in
+   1997.471s (live-native-g2-001); repeat is active;
    no full-chain result exists yet. Do not launch another CLI against this fixture.
 2. C006 native_baseline.py compares39 actual standard sources against15 complete
    baseline images/24 diagnostics. regressions.py runs12 representative cases;
@@ -107,3 +108,8 @@ environment, ownership, assembly, emulator, hardware and coordination rules.
    transfers, admitted keyboard/CLI and maintained passive serial/printer mirror
    per Extender. Preserve installed firmware/startup/wiring; no unmount/eject.
    Do not treat old hardware headers or an empty queue as current readiness.
+
+Shared /tmp tmpfs filled during G2 handoff; only our inactive Cargo build cache
+was moved to C006/build/relocated-cli-cache-001, preserving the active CLI at its
+original /tmp path and exact hash. Evidence cli-cache-relocation-001; Extender
+owns review of its large temp trees. Do not touch other owners' files.
