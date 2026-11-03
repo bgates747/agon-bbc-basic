@@ -175,3 +175,12 @@ Use Extender-owned diagnostic/results paths; retain all installed components,
 startup, wiring and display mode. Finish emulator qualification and prepare an
 exact finite fixture before reserving. Empty logical registry is not readiness;
 no target operation or lease occurs. Current native preflight remains active.
+
+Prepare C006/prepare_olimex.py as an offline byte-copy/batch packaging tool.
+It requires the completed normal-main four-image chain plus all12 native
+regressions and verifies manifests/source/image identity before creating a new
+bundle. Exact compiler heap-start/limit fields are checked. Generated batches
+use LOAD/RUN ., explicit entry/return markers and post-return listener start;
+filename inputs and rejection sentinels remain explicit coordinator steps.
+No network/device connection, compiler implementation or image patch is present.
+Python syntax checks pass; real-input packaging awaits completed prerequisites.

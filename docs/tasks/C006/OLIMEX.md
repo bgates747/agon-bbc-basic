@@ -71,3 +71,17 @@ and current firmware identities remain in Extender's machine-local records.
 3. A proposed append to the shared mailbox index was rejected by automatic
    approval review citing published Markdown restrictions. The immutable request
    and direct chat were delivered; the shared index was left unchanged.
+
+## Offline packaging
+
+`prepare_olimex.py` requires a completed normal-main four-image bootstrap and
+completed12-case native regression evidence, verifies their retained manifests,
+source and complete image equality, and creates a new host-only bundle. It
+copies qualified source/images, fresh per-stage MOS command files, filename
+inputs and retained expected outputs. It neither compiles nor accesses hardware.
+The caller must deploy rejection sentinels under the corresponding output names
+before those cases, assert its actual lease and verify all payload readbacks.
+The generated command files use LOAD/RUN ., mark entry/return and start the
+foreground listener only after application return. The caller observes prompts
+and markers before providing inputs or transferring files. Syntax checks pass;
+real-input packaging awaits the generation/regression prerequisites.
