@@ -51,6 +51,7 @@ retrospectively to the compiler work already performed.
 | C006 | [Self-hosting and physical qualification](C006.md) |
 | C007 | [Curated correctness and performance program search](C007.md) |
 | C008 | [Manual hardware qualification and programming package](C008.md) |
+| C009 | [Possible anonymous labels — low-priority candidate](C009.md) |
 
 Open work is listed only in [TODO.md](../../TODO.md). Broad unstarted briefs
 must be refined before implementation; their existence does not mean work has

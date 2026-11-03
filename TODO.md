@@ -9,3 +9,6 @@ and partial admissions are explicit in `compiler/COMPATIBILITY.md`.
 1. [ ] [C008](docs/tasks/C008.md) — Manual hardware qualification awaits the
    Author's results. The self-contained compiler/editor package and12 manual
    cases are staged at the selected Console8 card location.
+2. [ ] [C009](docs/tasks/C009.md) — Low priority, possible feature: consider
+   anonymous labels with nearest forward/backward references. Syntax and
+   implementation are not approved.

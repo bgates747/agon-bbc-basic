@@ -768,3 +768,10 @@ manifests/scripts and successful receipt. Post-correction full deployed scan
 finds no maintainer paths/names; local general text-path and all12 relative
 command-sequence checks pass. No program, emulator, firmware or acceptance
 result changes. C008 remains awaiting manual results.
+
+At the Author's request, record C009 as a low-priority possible anonymous-label
+extension in TODO and its immutable task brief. Nearest forward/backward target
+resolution is an idea only; illustrative@@:/@B/@F syntax is not adopted and must
+not silently reserve existing named identifiers. Label scopes, conventional
+numbered targets and LOCAL variable semantics remain separate questions. No
+implementation, tests, deployment or resource reservation is selected.
