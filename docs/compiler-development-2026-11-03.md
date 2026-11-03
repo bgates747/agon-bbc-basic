@@ -400,3 +400,13 @@ with explicit resumption; no uninterrupted-run or hardware/performance claim.
 Start live-native-baseline-001 against the fresh frozen39-input live baseline;
 only completed outputs/diagnostics will count. Run remaining suites as separate
 host commands after the interrupted long shell pipeline.
+
+## Native baseline complete
+
+live-native-baseline-001 passes all39 inputs in245.15 controller seconds.
+All15 complete native outputs match live-baseline-streaming-001; all24 exact
+diagnostics match with old output preserved. Every compiler invocation returns0,
+confirming the normal main's caught-diagnostic contract for the planned MOS EXEC
+files. Retain the final controller stream and refreshed manifest before freezing.
+This suite compares compiler output; the reference cohort owns program execution.
+Start the separate live-regressions-001 run next. No physical result is claimed.

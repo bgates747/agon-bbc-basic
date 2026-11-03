@@ -77,8 +77,10 @@ environment, ownership, assembly, emulator, hardware and coordination rules.
    was interrupted during unfinished repeat (host exit143/unknown origin).
    live-bootstrap-resume-001 verifies/carries the real completed three stages
    and executes a fresh repeat, explicitly recording that lineage; all four
-   bytestrings match. The cohort is complete. live-native-baseline-001 is active
-   on the sole CLI SD; do not launch another CLI against it. Run each remaining
+   bytestrings match. The cohort is complete. live-native-baseline-001 passes
+   all39 cases (15 full images/24 diagnostics) in245.15 controller seconds.
+   live-regressions-001 is active on the sole CLI SD; do not launch another CLI
+   against it. Run each remaining
    native suite separately, retaining failure evidence and avoiding a long
    multi-stage host command. No physical compiler result exists yet.
 2. C006 native_baseline.py compares39 actual standard sources against15 complete
