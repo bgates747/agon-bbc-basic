@@ -14,7 +14,7 @@ existing string/numeric regressions on the reauthorized Pi5 CLI.
 
 | Feature | Status | Current scope or constraint |
 | --- | --- | --- |
-| BBC BASIC compiler implementation | Implemented | Numbered BBC BASIC source hosted by BASIC V ADL |
+| BBC BASIC compiler implementation | Implemented | Numbered BBC BASIC source hosted by BASIC V ADL and its own native compiler |
 | MOS native executable | Implemented | Direct eZ80 ADL emission, load at &40000 |
 | Unnumbered programs | Implemented | Plain-text input |
 | Optional line numbers | Partial | Increasing 0..65279; no source sorting or renumbering. Zero is a compiler label; pinned Agon text loading treats zero as immediate mode |
@@ -51,7 +51,7 @@ existing string/numeric regressions on the reauthorized Pi5 CLI.
 | EVAL | Deliberately unsupported | Compile-time rejection; absent from initial language |
 | STOP, RUN, CHAIN, OSCLI | Unsupported | STOP is not silently compiled as END |
 | Tokenised source, abbreviations, lowercase keywords | Unsupported | No silent tokenisation assumptions |
-| Self-compilation | Partial | Exact source6597a0df produces a324275-byte compiler; first native self-source preflight is byte-identical. Full normal-main generation chain, native regressions and physical qualification pending |
+| Self-compilation | Partial | Exact source6597a0df produces identical324275-byte G0/G1/G2/repeat images, including actual normal interpreted main. Explicit resumed lineage is retained; native regressions and physical qualification pending |
 
 The [C003 scalar record](../docs/tasks/C003/SCALARS.md) describes reference
 creation/storage rules, scope and qualification; the [string core record](../docs/tasks/C003/STRINGS.md) adds ownership, allocation and ABI evidence. [Slices and comparisons](../docs/tasks/C003/SLICES.md) records the typed expression extension and reference boundaries.

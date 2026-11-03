@@ -69,20 +69,18 @@ environment, ownership, assembly, emulator, hardware and coordination rules.
 
 ## Active qualification and authorization
 
-1. Only C006 remains unfinished: full unmodified interpreted main G0, native
-   G1/G2/repeat, exact equality and native regressions, then physical Olimex.
-   Read C006.md, C006/BOOTSTRAP.md and C006/OLIMEX.md. The completed resource
-   preflight does not replace the full chain. bootstrap.py --expected-image
-   pins the checked resource seed before executing successor generations.
-   Current live-bootstrap-001 and its sequential native qualification pipeline
-   are active on the sole CLI SD. Unmodified-main G0 completes3951.738s and
-   exactly matches the seed (live-main-g0-001). G1 also matches all324275 bytes
-   with status0 in1983.142s (live-native-g1-001). G2 also matches/status0 in
-   1997.471s (live-native-g2-001). Original live-bootstrap-001 was interrupted
-   during repeat (host exit143, origin unknown, no compiler diagnostic).
-   Its entire attempt is frozen. live-bootstrap-resume-001 verifies/carries the
-   three actual stages and runs only a fresh repeat from G1; it is active;
-   no full-chain result exists yet. Do not launch another CLI against this fixture.
+1. Only C006 remains unfinished: native compiler regressions and physical Olimex.
+   Read C006.md, C006/BOOTSTRAP.md and C006/OLIMEX.md. Full normal-main G0,
+   native G1/G2 and actual repeat now produce all four identical324275-byte
+   images299a3119. Durations3951.738/1983.142/1997.471/1996.877 seconds are
+   controller observations, not physical benchmarks. Original live-bootstrap-001
+   was interrupted during unfinished repeat (host exit143/unknown origin).
+   live-bootstrap-resume-001 verifies/carries the real completed three stages
+   and executes a fresh repeat, explicitly recording that lineage; all four
+   bytestrings match. The cohort is complete. live-native-baseline-001 is active
+   on the sole CLI SD; do not launch another CLI against it. Run each remaining
+   native suite separately, retaining failure evidence and avoiding a long
+   multi-stage host command. No physical compiler result exists yet.
 2. C006 native_baseline.py compares39 actual standard sources against15 complete
    baseline images/24 diagnostics. regressions.py runs12 representative cases;
    native_errors.py runs39 fresh reference ERR/ERL programs. Prepared workflows

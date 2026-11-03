@@ -1,0 +1,39 @@
+{
+  "scope": "Actual source/main interpreted and native generation experiment",
+  "compiler_sha256": "6597a0df3f99b4f43c42bff1cdbc59f5fdf730c57837f3d4112a598fbfbe5fb8",
+  "hardware_validation": false,
+  "performance_benchmark": false,
+  "inputs": {
+    "/Agon/mystuff/bbc-basic-v-adl/bin/basic.bin": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+    "/Agon/mystuff/bbc-basic-v-adl/.emulator/mos_platform.bin": "d564243283972690933a4554296ad6202ca4ef54572279533a942960846bebae",
+    "/Agon/mystuff/bbc-basic-v-adl/.emulator/fab-agon-emulator.bin": "bf5f29b243b8214e54c515dcc26edf47399ce440356af2ebc3ce3d7664ae11eb"
+  },
+  "completed_stages": [
+    "g0",
+    "g1",
+    "g2"
+  ],
+  "attempted_stages": [
+    "g0",
+    "g1",
+    "g2",
+    "repeat"
+  ],
+  "unmodified_interpreted_main_executed": true,
+  "expected_image_sha256": "299a31190c380541a73ed9eb144a303fa37abccc4f3c3e0ad47f99f1538122c0",
+  "generation_hashes": {
+    "g0": "299a31190c380541a73ed9eb144a303fa37abccc4f3c3e0ad47f99f1538122c0",
+    "g1": "299a31190c380541a73ed9eb144a303fa37abccc4f3c3e0ad47f99f1538122c0",
+    "g2": "299a31190c380541a73ed9eb144a303fa37abccc4f3c3e0ad47f99f1538122c0"
+  },
+  "generation_sizes": {
+    "g0": 324275,
+    "g1": 324275,
+    "g2": 324275
+  },
+  "controller_seconds": {
+    "g0": 3951.738,
+    "g1": 1983.142,
+    "g2": 1997.471
+  }
+}

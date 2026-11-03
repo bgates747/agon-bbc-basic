@@ -1,9 +1,9 @@
 # Native BBC BASIC compiler — development
 
 The compiler is written in BBC BASIC and emits standalone native eZ80 ADL code.
-Its first native build has compiled its own source and reproduced the complete
-compiler image byte for byte. Repeated generations and physical qualification
-remain pending.
+It compiles its own source: the reference-hosted build, two native generations
+and a repeat produce identical complete324275-byte images. Native-program
+regressions and physical qualification remain pending.
 It currently
 compiles literal/numeric output, labelled control flow, numeric byte VDU
 expressions, standard math functions, scalar numeric variables and a mutable
@@ -29,7 +29,7 @@ prompts. For example, compile `examples/hello.bas` into `hello.bin`. Exit BASIC
 with `*BYE`, then run `hello.bin` from MOS. Loading the generated program
 replaces the interpreter at `&40000`; reload BASIC for another compilation.
 
-The [qualified development executable](../docs/tasks/C006/evidence/packed-native-preflight-001/g1.dat)
+The [qualified development executable](../docs/tasks/C006/evidence/live-bootstrap-resume-001/g1.dat)
 can be copied to the card as `compiler.bin`. At MOS, use `LOAD compiler.bin`
 followed by `RUN .`, then enter the input/output filenames at its prompts.
 This executable contains its runtime; BASIC serves as the source-bootstrap host.
@@ -181,3 +181,8 @@ restore retained prior values and handlers. REPORT retains token expansion and
 the pinned startup notice. Held Escape is checked at handler entry; general
 asynchronous Escape elsewhere remains unqualified. Exact restrictions, source-line
 quirks and the older compact failure-format boundary are in the compatibility matrix.
+
+The completed generation record is live-bootstrap-resume-001. It preserves the
+successful normal-main G0/G1/G2 stages from the first attempt and records a fresh
+repeat after host interruption; all four actual images match. This is automated
+self-hosting proof, with native regressions and physical qualification separate.

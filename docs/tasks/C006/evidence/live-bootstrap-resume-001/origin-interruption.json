@@ -1,0 +1,16 @@
+{
+  "scope": "Observed host interruption; no compiler rejection or completed repeat",
+  "observed_at": "2026-11-03T06:30:55.140130-05:00",
+  "exec_session_exit_status": 143,
+  "termination_origin": "unknown",
+  "normal_controller_unwind_recorded": false,
+  "owned_emulator_processes_remaining": false,
+  "completed_stages": [
+    "g0",
+    "g1",
+    "g2"
+  ],
+  "repeat_output_exists": false,
+  "later_native_suites_executed": false,
+  "hardware_validation": false
+}

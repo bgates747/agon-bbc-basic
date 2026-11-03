@@ -388,3 +388,15 @@ actual input guards pass; live-bootstrap-resume-001 starts repeat. The compiler
 source/main/image is unchanged. This avoids redoing qualified work while retaining
 actual execution requirements and truthful interrupted lineage. Run each later
 native suite separately after the resumed repeat completes.
+
+## Actual repeat completed; all four images identical
+
+Resumed repeat completes1996.877 controller seconds/status0. Its full324275 bytes
+match original actual G0/G1/G2 and expected seed299a3119. Final resumed report
+lists inherited and newly executed stages and preserves original interruption,
+controller and normal-main records. Freeze complete live-bootstrap-resume-001
+with final controller stream/manifest. All four actual stages are now qualified
+with explicit resumption; no uninterrupted-run or hardware/performance claim.
+Start live-native-baseline-001 against the fresh frozen39-input live baseline;
+only completed outputs/diagnostics will count. Run remaining suites as separate
+host commands after the interrupted long shell pipeline.
