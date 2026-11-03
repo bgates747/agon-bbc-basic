@@ -190,3 +190,11 @@ Initial zero-page payload lower bound76153 excludes headers/string contents and
 later page allocations. Optional BBC-only source-probe observations count actual
 pages and string lengths after layout; those lengths remain lower bounds on
 native allocation capacity, not an initialization/fit result.
+
+Promotion packaging is rehearsed in an isolated tree: a prepared live compact
+packer, control-prefix/full-image selection and error-table suffix preservation
+regenerate exact6597a0df. All nine individual packers preserve it, every complete
+runtime matches its earlier binary, and changed control/error packers preserve
+old7cac4bba too. promotion-preparation-002 retains exact staged tools and results.
+This supplies packaging evidence only; live source stays unchanged pending fit
+and remaining qualification.

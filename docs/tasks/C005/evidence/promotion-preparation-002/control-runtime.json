@@ -1,0 +1,29 @@
+{
+  "bytes": 8657,
+  "relocations": 30,
+  "exports": {
+    "ctl_init": 0,
+    "ctl_push": 9,
+    "ctl_check": 72,
+    "ctl_pop": 129,
+    "ctl_until": 146,
+    "ctl_again": 167,
+    "ctl_for": 180,
+    "ctl_next": 243,
+    "ctl_numslot": 454,
+    "ctl_top": 462,
+    "ctl_frames": 465,
+    "ctl_frames_end": 8657
+  },
+  "independent_link_bases": [
+    270336,
+    294912
+  ],
+  "unresolved_symbols": 0,
+  "hashes": {
+    "compiler/runtime/control.s": "1d75d2c8708884f8bff57b0e23be98b5ff195d7ceeea4a1b1941f881dbad459f",
+    "compiler/build/control-runtime/runtime_data.bas": "a84b41ebeef694017bedee20a21e8e1a0b0830ab9e269560574db850f67e15e6",
+    "compiler/build/control-runtime/prefix_data.bas": "04cebe69634c227ea5e306d4499668a9301689ffd4ddf3600c26223b6a24e353",
+    "compiler/build/control-runtime/runtime-0.bin": "8abe4b024278563ffce45b6927a30e553a64f10f9494e6284791106e814e8a75"
+  }
+}

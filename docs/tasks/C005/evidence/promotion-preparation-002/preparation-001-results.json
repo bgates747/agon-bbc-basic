@@ -1,0 +1,51 @@
+{
+  "scope": "Isolated promotion rehearsal; live compiler and emulator unchanged",
+  "candidate_sha256": "6597a0df3f99b4f43c42bff1cdbc59f5fdf730c57837f3d4112a598fbfbe5fb8",
+  "regenerated_source_sha256": "6597a0df3f99b4f43c42bff1cdbc59f5fdf730c57837f3d4112a598fbfbe5fb8",
+  "individual_repackers_preserve_source": true,
+  "modules": {
+    "numeric": {
+      "bytes": 4460,
+      "sha256": "dbb59e07b90b344b038afa95ae6d1deeda96e2096fa053aed6bfe2258e5945fd"
+    },
+    "strings": {
+      "bytes": 633,
+      "sha256": "4e617e8783191501a0c12e490069da082373be677a042de59fece11ac34a91f7"
+    },
+    "control": {
+      "bytes": 8657,
+      "sha256": "8abe4b024278563ffce45b6927a30e553a64f10f9494e6284791106e814e8a75"
+    },
+    "procedure": {
+      "bytes": 783,
+      "sha256": "db52a06ca96c060ddb75b75563b95269e9d08330ef28a514d0ca59d5757bee22"
+    },
+    "memory": {
+      "bytes": 734,
+      "sha256": "f2b61865d28e83cd729ede7ead5b4061af04de8c0c993194bb409f7f9c421cb7"
+    },
+    "io": {
+      "bytes": 788,
+      "sha256": "bde255025daeae570075a3910a0d102e7fbeb2f20058390c781b3e3be5b98115"
+    },
+    "data": {
+      "bytes": 120,
+      "sha256": "533864b6c4608d1a9e371f136fd7a6fa2417d487069cc5054cbd74ec49068e05"
+    },
+    "error": {
+      "bytes": 2530,
+      "sha256": "c9d04b2e032a773f9b45007377d73c59d71781ead01fa1cac947483b5bbb9aab"
+    },
+    "compact": {
+      "bytes": 394,
+      "sha256": "0ba523c366f36ad08a120df8e56bb53b4176406d9ae14b5369515f2e09b0f49a"
+    }
+  },
+  "modified_tools": {
+    "build_control_runtime": "07768f00d71e596a8a9cdd3a3b75bad229b7daa46a6ff68d1805c24606ea8bfe",
+    "build_error_runtime": "a52b0359c0025ae131eadd4ea07166b360f02a526aadc10317347ad07cae11b5",
+    "build_compact_runtime": "8e10a65bda09ed2a912d9618d2733421e0e79103eb19cbdb1c287c4d6d3891d8"
+  },
+  "live_compiler_sha256": "7cac4bba8644a047c38c496a5fc7cb0fc6c9118b892aad6c3314091867c7fe36",
+  "hardware_validation": false
+}

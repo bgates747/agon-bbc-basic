@@ -76,3 +76,17 @@ controller durations, not Agon speed benchmarks. C005 source errors/capacity and
 actual native fit remain open; the next source probe adds BBC-only observations
 of allocated target pages and private string lengths after layout, preserving
 its exact target source and keeping host instrumentation separate.
+
+## Isolated promotion packaging rehearsal
+
+Push packed checkpoint4575516 and start exact packed-source-001 with BBC-only
+page/string observations. Separately stage the future source/runtime/tool tree
+under C005/build; live source stays7cac4bba. Add a private control-prefix package
+while retaining the full independently linked image, preserve following64000
+DATA when repacking errors, and prepare the394-byte adapter at its future live
+paths. All nine packages rebuild identical complete runtime bytes, combined
+regeneration exactly reproduces6597a0df, and each individual repacker preserves
+that full source. Extended rehearsal also preserves the old7cac4bba compiler
+through the modified control/error packers. promotion-preparation-002 retains
+both rehearsal identities, exact staged changes, source and module data. No live
+promotion, emulator change or actual native fit is implied by packaging success.
