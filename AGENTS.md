@@ -129,6 +129,12 @@ environment, ownership, assembly, emulator, hardware and coordination rules.
    Extender handback09-50-32_bbc-basic_bbc-c006-r01-clean-release-one delivered.
    No lease/target access remains. Physical self-b is unstarted; prepare a NEW
    finite plan/fixture and reserve/freshly receive a grant before continuing.
+   OLIMEX-R02.md/olimex-repeat-fixture-001 are now prepared:3 payloads436261B,
+   unchanged actual HW-produced image/source and one batch. Manifestb5d0761f.
+   New reservation9339623b747d is submitted, no grant/target access yet. Extender
+   is notified via bbc-c006-r02-ready-reservation-one. Deployment explicitly uses
+   --expected-files3, stage uses --self-timeout6600 and --entry-directory matching
+   the new grant's observed incoming directory; defaults40/5400 remain unchanged.
    SELF-SOURCE-WORK.md/evidence/self-source-work-001 contain offline counts,
    not a CPU-time estimate or progress proof; no extra experiment was run.
    Extender has stopped all target access.

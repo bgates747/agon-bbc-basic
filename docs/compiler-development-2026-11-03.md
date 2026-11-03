@@ -581,3 +581,8 @@ actual incoming directory for its pre-EXEC CLI guard and an explicit self-timeou
 5400/6600 (default5400), preserving its old invocation. Syntax checks and actual
 manifest/byte/command-file preparation pass; no extra emulator/hardware experiment
 is run. New reservation/fresh Extender grant are still required.
+
+Canonical new reservation9339623b747d is submitted14:57:47.823211Z, after actual
+release. Durable bbc-c006-r02-ready-reservation-one and immediate steering provide
+the exact frozen input provenance, scope and timing/stop/cleanup plan to Extender.
+No new lease or target operation is inferred from preparation/reservation.
