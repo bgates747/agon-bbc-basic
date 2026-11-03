@@ -1,0 +1,10 @@
+{
+  "observed_epoch": 1793716729.996404,
+  "capture_last_write_epoch": 1793716473.8029191,
+  "original_stage_timed_out": true,
+  "late_clean_return_observed": true,
+  "intervening_error_or_reset_observed": false,
+  "complete_image_compared": false,
+  "elapsed_to_observation_seconds": 6207.525181293488,
+  "scope": "Late completion after original5400s observation timeout; no execution replay; times are host observation, not CPU timing"
+}

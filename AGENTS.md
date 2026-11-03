@@ -116,21 +116,19 @@ environment, ownership, assembly, emulator, hardware and coordination rules.
    Actual sentinel/CLI/MEM pass: userLO040000..0BBFFF, stack0BF800..0BFFFF.
    All12 physical compiles/10 native programs now pass, including exact file
    bytes and two preserved-output rejections, frozen as olimex-small-001.
-   First physical self-source has no observed return at5400s. Host stage94215
-   exited1 with observation TimeoutError; this is not a compiler exit status or
-   hang diagnosis. Frozen olimex-self-a-bound-001 retains exact partial evidence.
-   Existing maintained capture-self-a remains session25803 (7200s), about28min
-   remaining at09:26EST. Do not issue ANY new target operations, retries or reset:
-   preserve custody/reader while awaiting Extender's reconciliation reply to
-   mail09-26-09_bbc-basic_bbc-c006-self-a-observation-bound-one. Read local
-   stages/self-a/results.json and raw capture for actual late observations.
-   No physical self-source completion is proved; self-b is unstarted.
-   Extender reply09-27-55 permits ONLY the existing reader's original7200s
-   remainder. If exact correlated BBC_END_SELF_A arrives without error/reset,
-   only bounded original-result listener/status/retrieval/comparison and cleanup/
-   release are permitted; NO self-b even on equal late bytes. If reader expires
-   without completion, let it close; no reopening, keys, reset, target query or
-   release. Retain custody and promptly mail/steer Extender the final observation.
+   First physical self-source returns cleanly after the5400s observation timeout.
+   The whole324275B image matches299a3119, frozen in olimex-self-a-late-001.
+   Original olimex-self-a-bound-001 failure stays immutable; no replay occurred.
+   Host final capture append follows last filename return by5951.332s, about99.2
+   minutes; this includes serial/listener timing and is not CPU/benchmark time.
+   Original GET takes251.948 host seconds. All owned processes/readers are closed.
+   Generation7 is CLEANLY RELEASED at2026-11-03T14:48:42.976464Z, next=null;
+   raw cleanup/release files remain local under C006/build/physical-c006-r01.
+   Startup/listener exact readbacks, original directory/mode/text/cursor/mirror
+   and neutral idle services/ownerlessUSB are verified; no reset/firmware change.
+   Extender handback09-50-32_bbc-basic_bbc-c006-r01-clean-release-one delivered.
+   No lease/target access remains. Physical self-b is unstarted; prepare a NEW
+   finite plan/fixture and reserve/freshly receive a grant before continuing.
    SELF-SOURCE-WORK.md/evidence/self-source-work-001 contain offline counts,
    not a CPU-time estimate or progress proof; no extra experiment was run.
    Extender has stopped all target access.

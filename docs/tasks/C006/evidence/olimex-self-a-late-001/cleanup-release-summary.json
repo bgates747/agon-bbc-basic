@@ -1,0 +1,32 @@
+{
+  "released_at": "2026-11-03T14:48:42.976464+00:00",
+  "generation": 7,
+  "next_request": null,
+  "checks": {
+    "no_workload": true,
+    "no_transfer": true,
+    "no_serial_readers": true,
+    "no_reset_holders": true,
+    "cli_verified": true,
+    "input_ready_neutral": true,
+    "listener_offline": true,
+    "staged_job_idle": true,
+    "restoration_verified": true
+  },
+  "components": {
+    "p4_app_sha256": "fb8283f7f57abb6b86e936ed41936b7cd545fc3f768a8a50590ab35095e0733d",
+    "emos_rom_sha256": "84da2c5ac3cebb1c470bab201f797a936296a6bfc33b6ebdbcf5d1dd3a1d1d79",
+    "native_vdp_sha256": "8ade1e7dbc8b82cfbb20bfc92bdeb02e909c38c9f93c37723f9c9d409a9af7c4",
+    "startup_sha256": "9e97ceae5489e1b6330c6a2f207d95c6566c60cac304d65e7aad54b610a5b423",
+    "listener_sha256": "04e7ef596a862b1a6b4f265b6c647e461ef0f65db4851873ac3dd31e4f03f10d"
+  },
+  "component_provenance": {
+    "p4_app_sha256": "Retained verified generation7 entry identity; BBC made no firmware writes. Retained verified r27 app; install/readback proof agents/remote009/bench-r01/install-golem-ready/receipt.json; never written by subsequent owners, not freshly read now.",
+    "emos_rom_sha256": "Retained verified generation7 entry identity; BBC made no firmware writes. Retained verified full131072B ROM from6502 R03 entry/ROM.bin; host hash checked before ROM-bound SAVE3; never written.",
+    "native_vdp_sha256": "Retained verified generation7 entry identity; BBC made no firmware writes. Exact1094512B application from6502 R03 restored full4194304B17caa5b0b2ede84bb627e207f10994b13dd3abfa2d04fc807ec393414fe33378; whole restore independently compared to incoming and app matches retained Wolf diagnostic. Not a fresh scheduler device read/capability query.",
+    "startup_sha256": "Fresh complete staged GET during known-return cleanup;108 bytes independently equal entry hash; never written by BBC.",
+    "listener_sha256": "Fresh complete staged GET during known-return cleanup;22968 bytes independently equal canonical entry hash; never written by BBC."
+  },
+  "disposition": "All12 source compiles/10 native programs pass. First physical self-source returns late after5400s observer timeout, whole324275B equals seed299a3119; original timeout retained. No self-b/replay/reset. Original directory restored, native/P4 mode0 unchanged, text/cursor controls returned, VDU3 mirror off and both owned readers closed. Fresh neutral input, offline/no-pending listener, worker0 and ownerless bothUSB. Startup/listener exact fresh readbacks; firmware retained unchanged, no optical claim. Hardware/self-source results retained only under declared BBC paths; card remains in Agon.",
+  "privacy": "Exact lease, machine endpoints/device identities and original per-operation journals remain local under C006/build/physical-c006-r01."
+}

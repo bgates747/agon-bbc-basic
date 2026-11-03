@@ -1,0 +1,15 @@
+{
+  "started_epoch": 1793717073.6663773,
+  "verified_files": {
+    "/autoexec.txt": {
+      "bytes": 108,
+      "sha256": "9e97ceae5489e1b6330c6a2f207d95c6566c60cac304d65e7aad54b610a5b423"
+    },
+    "/emos/sdserve.bin": {
+      "bytes": 22968,
+      "sha256": "04e7ef596a862b1a6b4f265b6c647e461ef0f65db4851873ac3dd31e4f03f10d"
+    }
+  },
+  "passed": true,
+  "finished_epoch": 1793717078.2087426
+}

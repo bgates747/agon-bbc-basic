@@ -536,3 +536,29 @@ found in complete self-source reports/controller streams. These facts cannot
 prove physical progress, predict completion or diagnose a hang. Return them to
 Extender through bbc-c006-offline-self-source-work-one and immediate steering.
 Live source, runtime, fixture and bench state remain unchanged.
+
+## Actual late physical self-source matches; clean release
+
+The original reader captures exact late Wrote/BBC_END_SELF_A/canonical listener
+sequence with no intervening error/reset. Strict normalized body comparison
+checks both prompt/filename echoes and all completion/listener lines. Under
+Extender's admitted known-return path, fresh status proves major2 listener online,
+worker idle and neutral input. Retrieve only the original result into a new
+path; a permitted progress observation shows304128/324275 bytes, no errors.
+GET completes251.948 host seconds; all324275 bytes equal SHA299a3119. Preserve
+olimex-self-a-late-001 with the old TimeoutError report unchanged alongside
+new late-observation/result and complete raw capture. No EXEC/RUN/SAVE repeats.
+Last capture append before retrieval is5951.332s after final filename emission;
+this is host/serial/listener observation, not CPU time or a performance benchmark.
+
+Fresh pinned complete-file GETs prove startup108B9e97/listener22968B04e7 unchanged.
+Fresh EXIT/offline returns actual CLI; restore exact incoming FSIM directory,
+observe native0 prompt after text/visible/flashingcursor controls, VDU3 mirroroff
+and close the owned reader normally. Fresh neutral input/worker0/offline-no-pending,
+P4mode0 and ownerless bothUSB pass. Retain per-field unchanged verified firmware
+provenance, not fresh flash-read claims. Canonical generation7 clean release is
+14:48:42.976464Z, next_request=null; complete Extender handback09-50-32 delivered
+through mailbox and steering. No lease or target action remains. No self-b,
+reset, firmware/startup/mode/wiring change or optical pass occurred. Prepare
+the outstanding physical repeat separately using the actual first observation;
+retain original finite scope/timeout and late-success lineage truthfully.

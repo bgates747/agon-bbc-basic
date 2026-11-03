@@ -1,0 +1,14 @@
+{
+  "scope": "Actual late physical self-source result; original5400s observation timeout retained separately; no replay",
+  "hardware_validation": true,
+  "late_completion_observed": true,
+  "all_output_bytes_equal": true,
+  "image_bytes": 324275,
+  "image_sha256": "299a31190c380541a73ed9eb144a303fa37abccc4f3c3e0ad47f99f1538122c0",
+  "source_sha256": "6597a0df3f99b4f43c42bff1cdbc59f5fdf730c57837f3d4112a598fbfbe5fb8",
+  "capture_last_write_after_input_seconds": 5951.332,
+  "time_scope": "Host last-capture-write after final filename-emission return; includes serial/listener timing; not CPU or benchmark time",
+  "get_host_seconds": 251.9477095603943,
+  "second_physical_generation_executed": false,
+  "comparison_epoch": 1793717071.7302794
+}

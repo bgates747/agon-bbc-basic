@@ -4,8 +4,8 @@ The compiler is written in BBC BASIC and emits standalone native eZ80 ADL code.
 It compiles its own source: the reference-hosted build, two native generations
 and a repeat produce identical complete324275-byte images. Native baseline39,
 representative12 and fresh error39 regressions pass. All12 physical source
-compiles and10 generated programs pass. Physical self-compilation remains
-unproved after the first invocation's observation bound expired without return.
+compiles and10 generated programs pass. The first physical self-compile also
+produces the identical image; the second physical generation remains pending.
 It currently
 compiles literal/numeric output, labelled control flow, numeric byte VDU
 expressions, standard math functions, scalar numeric variables and a mutable
@@ -189,5 +189,6 @@ successful normal-main G0/G1/G2 stages from the first attempt and records a fres
 repeat after host interruption; all four actual images match. This is automated
 self-hosting proof. The native baseline39, representative12 and error39 suites
 also pass. Physical olimex-small-001 qualifies all12 source compiles/10 generated
-programs. Physical self-source qualification remains unproved: its first
-observation bound expired, with foreground state unresolved and custody retained.
+programs. Physical olimex-self-a-late-001 also verifies one complete self-source
+image. Its original observation timeout is retained separately from the clean
+late return; the slot is cleanly released and the physical repeat remains pending.
