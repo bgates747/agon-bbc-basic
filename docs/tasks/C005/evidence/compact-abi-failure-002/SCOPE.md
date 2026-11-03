@@ -1,0 +1,1 @@
+Native ABI attempt reaches stage5 (FE/status1) after correcting the ADD selector in the fixture from0 to11. No full ABI pass; literal, arithmetic and read/missing stages precede the failing store check.

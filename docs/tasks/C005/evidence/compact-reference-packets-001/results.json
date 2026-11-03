@@ -1,0 +1,6 @@
+{
+  "scope": "Actual pinned BBC variable packets and integer assignment; no Python numeric model",
+  "positive_packet": "0000003081",
+  "negative_packet": "000000b081",
+  "controller_seconds": 1.069
+}

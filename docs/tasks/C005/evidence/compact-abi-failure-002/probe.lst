@@ -1,0 +1,650 @@
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C005/compact/abi.s 			page 1
+
+
+   1                       	; Native adapter probes: real unchanged NUM, observation bridges for MEM/ACT.
+   2                       	    .assume adl=1
+   3                       	    .text
+   4                       	    .global entry
+   5                       	    .extern cp_literal,cp_numeric,cp_read1,cp_read4,cp_read5
+   6                       	    .extern cp_store1,cp_store4,cp_store5,cp_arrayprefix,cp_arrayaddr
+   7                       	    .extern cp_actsave,cp_actbind,cp_actbegin
+   8                       	    .extern cp_num_base,cp_str_base,cp_slot_numeric,cp_slot_numerror
+   9                       	    .extern cp_slot_literal,cp_slot_novar,cp_slot_prefix,cp_slot_addr
+  10                       	    .extern cp_slot_memerror,cp_slot_save,cp_slot_bind,cp_slot_begin,cp_slot_acterror
+  11                       	    .extern rt_numeric,rt_literal
+  12                       	    .macro patch field,value
+  13                       	    ld hl,\value
+  14                       	    ld (\field),hl               ; ADL24 OK: three-byte bridge field
+  15                       	    .endm
+  16                       	    .macro stage n
+  17                       	    ld a,\n
+  18                       	    ld (stage_value),a
+  19                       	    .endm
+  20                       	    .macro same value
+  21                       	    ld de,\value
+  22                       	    or a
+  23                       	    sbc hl,de
+  24                       	    jp nz,failed
+  25                       	    .endm
+  26                       	    .macro stack_ok
+  27                       	    ld hl,0
+  28                       	    add hl,sp
+  29                       	    ld de,(saved_sp)             ; ADL24 OK: saved three-byte stack pointer
+  30                       	    or a
+  31                       	    sbc hl,de
+  32                       	    jp nz,failed
+  33                       	    .endm
+  34                       	    .macro byte_at address,value
+  35                       	    ld a,(\address)
+  36                       	    cp \value
+  37                       	    jp nz,failed
+  38                       	    .endm
+  39                       	    .macro same_packet address,expected
+  40                       	    ld hl,\address
+  41                       	    ld de,\expected
+  42                       	    ld bc,5
+  43                       	    call compare_bytes
+  44                       	    .endm
+  45 0000 C3 45 00 00       	    jp entry
+  46 0004 00 00 00 00 00 00 	    .org 0x40
+  46      00 00 00 00 
+  46      00 00 00 00 
+  46      00 00 00 00 
+  46      00 00 00 00 
+  47 0040 4D 4F 53          	    .ascii "MOS"
+  48 0043 00 01             	    .byte 0,1
+  49                       	entry:
+  50 0045 F5                	    push af
+  51 0046 C5                	    push bc
+  52 0047 D5                	    push de
+  53 0048 DD E5             	    push ix
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C005/compact/abi.s 			page 2
+
+
+  54 004a FD E5             	    push iy
+  55 004c ED 73 1B 07 00    	    ld (saved_sp),sp             ; ADL24 OK: three-byte saved pointer
+  56 0051 21 01 00 01 22 00 	    patch cp_num_base,num_pool
+  56      00 00 
+  57 0059 21 A2 00 01 22 00 	    patch cp_str_base,str_pool
+  57      00 00 
+  58 0061 21 00 00 00 22 00 	    patch cp_slot_numeric,rt_numeric
+  58      00 00 
+  59 0069 21 C8 06 00 22 00 	    patch cp_slot_numerror,error_bridge
+  59      00 00 
+  60 0071 21 00 00 00 22 00 	    patch cp_slot_literal,rt_literal
+  60      00 00 
+  61 0079 21 C6 06 00 22 00 	    patch cp_slot_novar,missing_bridge
+  61      00 00 
+  62 0081 21 CE 06 00 22 00 	    patch cp_slot_prefix,prefix_stub
+  62      00 00 
+  63 0089 21 D8 06 00 22 00 	    patch cp_slot_addr,addr_stub
+  63      00 00 
+  64 0091 21 C8 06 00 22 00 	    patch cp_slot_memerror,error_bridge
+  64      00 00 
+  65 0099 21 F3 06 00 22 00 	    patch cp_slot_save,save_stub
+  65      00 00 
+  66 00a1 21 FD 06 00 22 00 	    patch cp_slot_bind,bind_stub
+  66      00 00 
+  67 00a9 21 07 07 00 22 00 	    patch cp_slot_begin,begin_stub
+  67      00 00 
+  68 00b1 21 C8 06 00 22 00 	    patch cp_slot_acterror,error_bridge
+  68      00 00 
+  69                       	
+  70 00b9 3E 01 32 1E 07 00 	    stage 1
+  71 00bf FD 21 EF CD AB    	    ld iy,0xabcdef
+  72 00c4 01 BA DC FE       	    ld bc,0xfedcba
+  73 00c8 CD 00 00 00       	    call cp_literal
+  74 00cc 1F 00 00 00 30 82 	    .byte 31,0,0,0,0x30,0x82     ; float2.75; packet is copied, not reinterpreted
+  75 00d2 21 9C 00 01 11 40 	    same_packet num_pool+155,positive_fraction
+  75      07 00 01 05 
+  75      00 00 CD A9 
+  75      06 00 
+  76 00e2 DD E5             	    push ix
+  77 00e4 E1                	    pop hl
+  78 00e5 11 9C 00 01 B7 ED 	    same num_pool+155
+  78      52 C2 84 06 
+  78      00 
+  79 00f0 FD E5             	    push iy
+  80 00f2 E1                	    pop hl
+  81 00f3 11 EF CD AB B7 ED 	    same 0xabcdef
+  81      52 C2 84 06 
+  81      00 
+  82 00fe 21 00 00 00 39 ED 	    stack_ok
+  82      5B 1B 07 00 
+  82      B7 ED 52 C2 
+  82      84 06 00 
+  83                       	
+  84 010f 3E 02 32 1E 07 00 	    stage 2
+  85 0115 CD 00 00 00       	    call cp_literal
+  86 0119 00 02 00 00 00 00 	    .byte 0,2,0,0,0,0
+  87 011f CD 00 00 00       	    call cp_literal
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C005/compact/abi.s 			page 3
+
+
+  88 0123 1F 03 00 00 00 00 	    .byte 31,3,0,0,0,0
+  89 0129 01 BA DC FE       	    ld bc,0xfedcba
+  90 012d CD 00 00 00       	    call cp_numeric
+  91 0131 00 1F 0B          	    .byte 0,31,11               ; reference NUM selector11: ADD2+3
+  92 0134 21 01 00 01 11 4A 	    same_packet num_pool,five
+  92      07 00 01 05 
+  92      00 00 CD A9 
+  92      06 00 
+  93 0144 DD E5             	    push ix
+  94 0146 E1                	    pop hl
+  95 0147 11 01 00 01 B7 ED 	    same num_pool
+  95      52 C2 84 06 
+  95      00 
+  96 0152 FD E5             	    push iy
+  97 0154 E1                	    pop hl
+  98 0155 11 9C 00 01 B7 ED 	    same num_pool+155
+  98      52 C2 84 06 
+  98      00 
+  99 0160 21 00 00 00 39 ED 	    stack_ok
+  99      5B 1B 07 00 
+  99      B7 ED 52 C2 
+  99      84 06 00 
+ 100                       	
+ 101 0171 3E 03 32 1E 07 00 	    stage 3
+ 102 0177 DD 21 56 34 12    	    ld ix,0x123456
+ 103 017c FD 21 EF CD AB    	    ld iy,0xabcdef
+ 104 0181 CD 00 00 00       	    call cp_read1
+ 105 0185 24 07 00          	    .d24 byte_binding
+ 106 0188 1F                	    .byte 31
+ 107 0189 21 9C 00 01 11 36 	    same_packet num_pool+155,byte_value
+ 107      07 00 01 05 
+ 107      00 00 CD A9 
+ 107      06 00 
+ 108 0199 DD E5             	    push ix
+ 109 019b E1                	    pop hl
+ 110 019c 11 56 34 12 B7 ED 	    same 0x123456
+ 110      52 C2 84 06 
+ 110      00 
+ 111 01a7 FD E5             	    push iy
+ 112 01a9 E1                	    pop hl
+ 113 01aa 11 EF CD AB B7 ED 	    same 0xabcdef
+ 113      52 C2 84 06 
+ 113      00 
+ 114 01b5 CD 00 00 00       	    call cp_read4
+ 115 01b9 26 07 00          	    .d24 integer_binding
+ 116 01bc 00                	    .byte 0
+ 117 01bd 21 01 00 01 11 3B 	    same_packet num_pool,integer_value
+ 117      07 00 01 05 
+ 117      00 00 CD A9 
+ 117      06 00 
+ 118 01cd CD 00 00 00       	    call cp_read5
+ 119 01d1 2B 07 00          	    .d24 variant_binding
+ 120 01d4 1F                	    .byte 31
+ 121 01d5 21 9C 00 01 11 40 	    same_packet num_pool+155,positive_fraction
+ 121      07 00 01 05 
+ 121      00 00 CD A9 
+ 121      06 00 
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C005/compact/abi.s 			page 4
+
+
+ 122 01e5 21 00 00 00 39 ED 	    stack_ok
+ 122      5B 1B 07 00 
+ 122      B7 ED 52 C2 
+ 122      84 06 00 
+ 123                       	
+ 124 01f6 3E 04 32 1E 07 00 	    stage 4
+ 125 01fc CD 00 00 00       	    call cp_literal
+ 126 0200 00 A5 A5 A5 A5 00 	    .byte 0,0xa5,0xa5,0xa5,0xa5,0
+ 127 0206 CD 00 00 00       	    call cp_read4
+ 128 020a 31 07 00          	    .d24 missing_binding
+ 129 020d 00                	    .byte 0
+ 130 020e D2 84 06 00       	    jp nc,failed
+ 131 0212 FE 1A             	    cp 26
+ 132 0214 C2 84 06 00       	    jp nz,failed
+ 133 0218 21 01 00 01 11 45 	    same_packet num_pool,unchanged_value
+ 133      07 00 01 05 
+ 133      00 00 CD A9 
+ 133      06 00 
+ 134 0228 DD E5             	    push ix
+ 135 022a E1                	    pop hl
+ 136 022b 11 01 00 01 B7 ED 	    same num_pool                  ; cp_literal set IX before the missing read
+ 136      52 C2 84 06 
+ 136      00 
+ 137 0236 FD E5             	    push iy
+ 138 0238 E1                	    pop hl
+ 139 0239 11 EF CD AB B7 ED 	    same 0xabcdef
+ 139      52 C2 84 06 
+ 139      00 
+ 140 0244 21 00 00 00 39 ED 	    stack_ok
+ 140      5B 1B 07 00 
+ 140      B7 ED 52 C2 
+ 140      84 06 00 
+ 141                       	
+ 142 0255 3E 05 32 1E 07 00 	    stage 5
+ 143 025b CD 00 00 00       	    call cp_literal
+ 144 025f 00 00 00 00 30 82 	    .byte 0,0,0,0,0x30,0x82
+ 145 0265 CD 00 00 00       	    call cp_store4
+ 146 0269 50 07 00          	    .d24 integer_destination
+ 147 026c 3A 50 07 00 FE 02 	    byte_at integer_destination,2
+ 147      C2 84 06 00 
+ 148 0276 3A 51 07 00 FE 00 	    byte_at integer_destination+1,0
+ 148      C2 84 06 00 
+ 149 0280 3A 52 07 00 FE 00 	    byte_at integer_destination+2,0
+ 149      C2 84 06 00 
+ 150 028a 3A 53 07 00 FE 00 	    byte_at integer_destination+3,0
+ 150      C2 84 06 00 
+ 151 0294 3A 4F 07 00 FE 55 	    byte_at integer_destination-1,0x55
+ 151      C2 84 06 00 
+ 152 029e 3A 54 07 00 FE 66 	    byte_at integer_destination+4,0x66
+ 152      C2 84 06 00 
+ 153 02a8 DD E5             	    push ix
+ 154 02aa E1                	    pop hl
+ 155 02ab 11 01 00 01 B7 ED 	    same num_pool
+ 155      52 C2 84 06 
+ 155      00 
+ 156 02b6 FD E5             	    push iy
+ 157 02b8 E1                	    pop hl
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C005/compact/abi.s 			page 5
+
+
+ 158 02b9 11 01 00 01 B7 ED 	    same num_pool
+ 158      52 C2 84 06 
+ 158      00 
+ 159 02c4 21 00 00 00 39 ED 	    stack_ok
+ 159      5B 1B 07 00 
+ 159      B7 ED 52 C2 
+ 159      84 06 00 
+ 160                       	
+ 161 02d5 3E 06 32 1E 07 00 	    stage 6
+ 162 02db CD 00 00 00       	    call cp_literal
+ 163 02df 00 00 00 00 B0 82 	    .byte 0,0,0,0,0xb0,0x82
+ 164 02e5 CD 00 00 00       	    call cp_store4
+ 165 02e9 50 07 00          	    .d24 integer_destination
+ 166 02ec 2A 50 07 00       	    ld hl,(integer_destination)   ; ADL24 OK: inspect low three of four payload bytes
+ 167 02f0 11 FE FF FF B7 ED 	    same 0xfffffe
+ 167      52 C2 84 06 
+ 167      00 
+ 168 02fb 3A 53 07 00 FE FF 	    byte_at integer_destination+3,255
+ 168      C2 84 06 00 
+ 169 0305 21 00 00 00 39 ED 	    stack_ok
+ 169      5B 1B 07 00 
+ 169      B7 ED 52 C2 
+ 169      84 06 00 
+ 170                       	
+ 171 0316 3E 07 32 1E 07 00 	    stage 7
+ 172 031c CD 00 00 00       	    call cp_literal
+ 173 0320 00 01 01 00 00 00 	    .byte 0,1,1,0,0,0             ; integer257 -> byte1
+ 174 0326 CD 00 00 00       	    call cp_store1
+ 175 032a 56 07 00          	    .d24 byte_destination
+ 176 032d 3A 56 07 00 FE 01 	    byte_at byte_destination,1
+ 176      C2 84 06 00 
+ 177 0337 3A 55 07 00 FE 77 	    byte_at byte_destination-1,0x77
+ 177      C2 84 06 00 
+ 178 0341 3A 57 07 00 FE 88 	    byte_at byte_destination+1,0x88
+ 178      C2 84 06 00 
+ 179 034b CD 00 00 00       	    call cp_literal
+ 180 034f 00 FF FF FF FF 00 	    .byte 0,255,255,255,255,0
+ 181 0355 CD 00 00 00       	    call cp_store1
+ 182 0359 56 07 00          	    .d24 byte_destination
+ 183 035c 3A 56 07 00 FE FF 	    byte_at byte_destination,255
+ 183      C2 84 06 00 
+ 184 0366 21 00 00 00 39 ED 	    stack_ok
+ 184      5B 1B 07 00 
+ 184      B7 ED 52 C2 
+ 184      84 06 00 
+ 185                       	
+ 186 0377 3E 08 32 1E 07 00 	    stage 8
+ 187 037d CD 00 00 00       	    call cp_literal
+ 188 0381 00 00 00 00 00 A0 	    .byte 0,0,0,0,0,0xa0          ; positive2^31, real SFIX overflow
+ 189 0387 CD 00 00 00       	    call cp_store4
+ 190 038b 50 07 00          	    .d24 integer_destination
+ 191 038e D2 84 06 00       	    jp nc,failed
+ 192 0392 FE 14             	    cp 20
+ 193 0394 C2 84 06 00       	    jp nz,failed
+ 194 0398 2A 50 07 00       	    ld hl,(integer_destination)   ; ADL24 OK: inspect low three payload bytes
+ 195 039c 11 FE FF FF B7 ED 	    same 0xfffffe
+ 195      52 C2 84 06 
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C005/compact/abi.s 			page 6
+
+
+ 195      00 
+ 196 03a7 3A 53 07 00 FE FF 	    byte_at integer_destination+3,255
+ 196      C2 84 06 00 
+ 197 03b1 3A 54 07 00 FE 66 	    byte_at integer_destination+4,0x66
+ 197      C2 84 06 00 
+ 198 03bb 21 00 00 00 39 ED 	    stack_ok
+ 198      5B 1B 07 00 
+ 198      B7 ED 52 C2 
+ 198      84 06 00 
+ 199                       	
+ 200 03cc 3E 09 32 1E 07 00 	    stage 9
+ 201 03d2 CD 00 00 00       	    call cp_store1
+ 202 03d6 56 07 00          	    .d24 byte_destination
+ 203 03d9 D2 84 06 00       	    jp nc,failed
+ 204 03dd FE 14             	    cp 20
+ 205 03df C2 84 06 00       	    jp nz,failed
+ 206 03e3 3A 56 07 00 FE FF 	    byte_at byte_destination,255
+ 206      C2 84 06 00 
+ 207 03ed 3A 57 07 00 FE 88 	    byte_at byte_destination+1,0x88
+ 207      C2 84 06 00 
+ 208 03f7 21 00 00 00 39 ED 	    stack_ok
+ 208      5B 1B 07 00 
+ 208      B7 ED 52 C2 
+ 208      84 06 00 
+ 209                       	
+ 210 0408 3E 0A 32 1E 07 00 	    stage 10
+ 211 040e CD 00 00 00       	    call cp_literal
+ 212 0412 00 00 00 00 30 82 	    .byte 0,0,0,0,0x30,0x82
+ 213 0418 DD 21 56 34 12    	    ld ix,0x123456
+ 214 041d FD 21 EF CD AB    	    ld iy,0xabcdef
+ 215 0422 CD 00 00 00       	    call cp_store5
+ 216 0426 59 07 00          	    .d24 variant_destination
+ 217 0429 21 59 07 00 11 40 	    same_packet variant_destination,positive_fraction
+ 217      07 00 01 05 
+ 217      00 00 CD A9 
+ 217      06 00 
+ 218 0439 3A 58 07 00 FE 99 	    byte_at variant_destination-1,0x99
+ 218      C2 84 06 00 
+ 219 0443 3A 5E 07 00 FE AA 	    byte_at variant_destination+5,0xaa
+ 219      C2 84 06 00 
+ 220 044d DD E5             	    push ix
+ 221 044f E1                	    pop hl
+ 222 0450 11 56 34 12 B7 ED 	    same 0x123456
+ 222      52 C2 84 06 
+ 222      00 
+ 223 045b FD E5             	    push iy
+ 224 045d E1                	    pop hl
+ 225 045e 11 EF CD AB B7 ED 	    same 0xabcdef
+ 225      52 C2 84 06 
+ 225      00 
+ 226 0469 21 00 00 00 39 ED 	    stack_ok
+ 226      5B 1B 07 00 
+ 226      B7 ED 52 C2 
+ 226      84 06 00 
+ 227                       	
+ 228 047a 3E 0B 32 1E 07 00 	    stage 11
+ 229 0480 AF                	    xor a
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C005/compact/abi.s 			page 7
+
+
+ 230 0481 32 1F 07 00       	    ld (mode),a
+ 231 0485 01 CC BB AA       	    ld bc,0xaabbcc
+ 232 0489 CD 00 00 00       	    call cp_arrayprefix
+ 233 048d 5F 07 00          	    .d24 array_cell
+ 234 0490 1F 04 01          	    .byte 31,4,1
+ 235 0493 DD E5             	    push ix
+ 236 0495 E1                	    pop hl
+ 237 0496 11 5F 07 00 B7 ED 	    same array_cell
+ 237      52 C2 84 06 
+ 237      00 
+ 238 04a1 FD E5             	    push iy
+ 239 04a3 E1                	    pop hl
+ 240 04a4 11 9C 00 01 B7 ED 	    same num_pool+155
+ 240      52 C2 84 06 
+ 240      00 
+ 241 04af 3A 21 07 00 FE 01 	    byte_at observed_a,1
+ 241      C2 84 06 00 
+ 242 04b9 3A 22 07 00 FE 04 	    byte_at observed_b,4
+ 242      C2 84 06 00 
+ 243 04c3 3A 23 07 00 FE 01 	    byte_at observed_tag,1
+ 243      C2 84 06 00 
+ 244 04cd 21 00 00 00 39 ED 	    stack_ok
+ 244      5B 1B 07 00 
+ 244      B7 ED 52 C2 
+ 244      84 06 00 
+ 245                       	
+ 246 04de 3E 0C 32 1E 07 00 	    stage 12
+ 247 04e4 3E 01             	    ld a,1
+ 248 04e6 32 1F 07 00       	    ld (mode),a
+ 249 04ea CD 00 00 00       	    call cp_arrayaddr
+ 250 04ee 5F 07 00          	    .d24 array_cell
+ 251 04f1 00 05 10          	    .byte 0,5,16
+ 252 04f4 D2 84 06 00       	    jp nc,failed
+ 253 04f8 FE 0F             	    cp 15
+ 254 04fa C2 84 06 00       	    jp nz,failed
+ 255 04fe 3A 23 07 00 FE 02 	    byte_at observed_tag,2
+ 255      C2 84 06 00 
+ 256 0508 3A 21 07 00 FE 10 	    byte_at observed_a,16
+ 256      C2 84 06 00 
+ 257 0512 3A 22 07 00 FE 05 	    byte_at observed_b,5
+ 257      C2 84 06 00 
+ 258 051c FD E5             	    push iy
+ 259 051e E1                	    pop hl
+ 260 051f 11 01 00 01 B7 ED 	    same num_pool
+ 260      52 C2 84 06 
+ 260      00 
+ 261 052a 21 00 00 00 39 ED 	    stack_ok
+ 261      5B 1B 07 00 
+ 261      B7 ED 52 C2 
+ 261      84 06 00 
+ 262                       	
+ 263 053b 3E 0D 32 1E 07 00 	    stage 13
+ 264 0541 AF                	    xor a
+ 265 0542 32 1F 07 00       	    ld (mode),a
+ 266 0546 FD 21 EF CD AB    	    ld iy,0xabcdef
+ 267 054b CD 00 00 00       	    call cp_actsave
+ 268 054f 2B 07 00          	    .d24 variant_binding
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C005/compact/abi.s 			page 8
+
+
+ 269 0552 81                	    .byte 129
+ 270 0553 3A 21 07 00 FE 81 	    byte_at observed_a,129
+ 270      C2 84 06 00 
+ 271 055d 3A 23 07 00 FE 03 	    byte_at observed_tag,3
+ 271      C2 84 06 00 
+ 272 0567 DD E5             	    push ix
+ 273 0569 E1                	    pop hl
+ 274 056a 11 2B 07 00 B7 ED 	    same variant_binding
+ 274      52 C2 84 06 
+ 274      00 
+ 275 0575 FD E5             	    push iy
+ 276 0577 E1                	    pop hl
+ 277 0578 11 EF CD AB B7 ED 	    same 0xabcdef
+ 277      52 C2 84 06 
+ 277      00 
+ 278 0583 21 00 00 00 39 ED 	    stack_ok
+ 278      5B 1B 07 00 
+ 278      B7 ED 52 C2 
+ 278      84 06 00 
+ 279                       	
+ 280 0594 3E 0E 32 1E 07 00 	    stage 14
+ 281 059a CD 00 00 00       	    call cp_actbind
+ 282 059e 0F 00 1F          	    .byte 15,0,31
+ 283 05a1 3A 21 07 00 FE 0F 	    byte_at observed_a,15
+ 283      C2 84 06 00 
+ 284 05ab 3A 23 07 00 FE 04 	    byte_at observed_tag,4
+ 284      C2 84 06 00 
+ 285 05b5 FD E5             	    push iy
+ 286 05b7 E1                	    pop hl
+ 287 05b8 11 9C 00 01 B7 ED 	    same num_pool+155
+ 287      52 C2 84 06 
+ 287      00 
+ 288 05c3 21 00 00 00 39 ED 	    stack_ok
+ 288      5B 1B 07 00 
+ 288      B7 ED 52 C2 
+ 288      84 06 00 
+ 289                       	
+ 290 05d4 3E 0F 32 1E 07 00 	    stage 15
+ 291 05da CD 00 00 00       	    call cp_actbind
+ 292 05de 00 01 1F          	    .byte 0,1,31
+ 293 05e1 3A 21 07 00 FE 00 	    byte_at observed_a,0
+ 293      C2 84 06 00 
+ 294 05eb FD E5             	    push iy
+ 295 05ed E1                	    pop hl
+ 296 05ee 11 A2 1F 01 B7 ED 	    same str_pool+31*256
+ 296      52 C2 84 06 
+ 296      00 
+ 297 05f9 21 00 00 00 39 ED 	    stack_ok
+ 297      5B 1B 07 00 
+ 297      B7 ED 52 C2 
+ 297      84 06 00 
+ 298                       	
+ 299 060a 3E 10 32 1E 07 00 	    stage 16
+ 300 0610 3E 01             	    ld a,1
+ 301 0612 32 1F 07 00       	    ld (mode),a
+ 302 0616 CD 00 00 00       	    call cp_actbegin
+ 303 061a D2 84 06 00       	    jp nc,failed
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C005/compact/abi.s 			page 9
+
+
+ 304 061e B7                	    or a
+ 305 061f C2 84 06 00       	    jp nz,failed
+ 306 0623 3A 23 07 00 FE 05 	    byte_at observed_tag,5
+ 306      C2 84 06 00 
+ 307 062d 21 00 00 00 39 ED 	    stack_ok
+ 307      5B 1B 07 00 
+ 307      B7 ED 52 C2 
+ 307      84 06 00 
+ 308 063e 3E 11 32 1E 07 00 	    stage 17
+ 309 0644 AF                	    xor a
+ 310 0645 32 1F 07 00       	    ld (mode),a
+ 311 0649 CD 00 00 00       	    call cp_actbegin
+ 312 064d DA 84 06 00       	    jp c,failed
+ 313 0651 21 00 00 00 39 ED 	    stack_ok
+ 313      5B 1B 07 00 
+ 313      B7 ED 52 C2 
+ 313      84 06 00 
+ 314 0662 3A 00 00 01 FE 35 	    byte_at num_guard,0x35
+ 314      C2 84 06 00 
+ 315 066c 3A A1 00 01 FE 53 	    byte_at num_end_guard,0x53
+ 315      C2 84 06 00 
+ 316 0676 21 62 07 00       	    ld hl,success_text
+ 317 067a CD BE 06 00       	    call print_text
+ 318 067e 21 00 00 00       	    ld hl,0
+ 319 0682 18 18             	    jr exit
+ 320                       	failed:
+ 321 0684 3E 46             	    ld a,'F'
+ 322 0686 49 D7             	    rst.lis 0x10
+ 323 0688 3A 1E 07 00       	    ld a,(stage_value)
+ 324 068c C6 40             	    add a,64
+ 325 068e 49 D7             	    rst.lis 0x10
+ 326 0690 3E 0D             	    ld a,13
+ 327 0692 49 D7             	    rst.lis 0x10
+ 328 0694 3E 0A             	    ld a,10
+ 329 0696 49 D7             	    rst.lis 0x10
+ 330 0698 21 01 00 00       	    ld hl,1
+ 331                       	exit:
+ 332 069c ED 7B 1B 07 00    	    ld sp,(saved_sp)             ; ADL24 OK: restore three-byte SP
+ 333 06a1 FD E1             	    pop iy
+ 334 06a3 DD E1             	    pop ix
+ 335 06a5 D1                	    pop de
+ 336 06a6 C1                	    pop bc
+ 337 06a7 F1                	    pop af
+ 338 06a8 C9                	    ret
+ 339                       	compare_bytes:
+ 340 06a9 1A                	    ld a,(de)
+ 341 06aa BE                	    cp (hl)
+ 342 06ab C2 84 06 00       	    jp nz,failed
+ 343 06af 23                	    inc hl
+ 344 06b0 13                	    inc de
+ 345 06b1 0B                	    dec bc
+ 346 06b2 E5                	    push hl
+ 347 06b3 21 00 00 00       	    ld hl,0
+ 348 06b7 B7                	    or a
+ 349 06b8 ED 42             	    sbc hl,bc
+ 350 06ba E1                	    pop hl
+ 351 06bb 20 EC             	    jr nz,compare_bytes
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C005/compact/abi.s 			page 10
+
+
+ 352 06bd C9                	    ret
+ 353                       	print_text:
+ 354 06be 7E                	    ld a,(hl)
+ 355 06bf B7                	    or a
+ 356 06c0 C8                	    ret z
+ 357 06c1 49 D7             	    rst.lis 0x10
+ 358 06c3 23                	    inc hl
+ 359 06c4 18 F8             	    jr print_text
+ 360                       	missing_bridge:
+ 361 06c6 3E 1A             	    ld a,26
+ 362                       	error_bridge:
+ 363 06c8 32 20 07 00       	    ld (error_seen),a
+ 364 06cc 37                	    scf
+ 365 06cd C9                	    ret
+ 366                       	prefix_stub:
+ 367 06ce F5                	    push af
+ 368 06cf 3E 01             	    ld a,1
+ 369 06d1 32 23 07 00       	    ld (observed_tag),a
+ 370 06d5 F1                	    pop af
+ 371 06d6 18 08             	    jr memory_stub
+ 372                       	addr_stub:
+ 373 06d8 F5                	    push af
+ 374 06d9 3E 02             	    ld a,2
+ 375 06db 32 23 07 00       	    ld (observed_tag),a
+ 376 06df F1                	    pop af
+ 377                       	memory_stub:
+ 378 06e0 32 21 07 00       	    ld (observed_a),a
+ 379 06e4 78                	    ld a,b
+ 380 06e5 32 22 07 00       	    ld (observed_b),a
+ 381 06e9 3A 1F 07 00       	    ld a,(mode)
+ 382 06ed B7                	    or a
+ 383 06ee C8                	    ret z
+ 384 06ef 3E 0F             	    ld a,15
+ 385 06f1 37                	    scf
+ 386 06f2 C9                	    ret
+ 387                       	save_stub:
+ 388 06f3 F5                	    push af
+ 389 06f4 3E 03             	    ld a,3
+ 390 06f6 32 23 07 00       	    ld (observed_tag),a
+ 391 06fa F1                	    pop af
+ 392 06fb 18 11             	    jr activation_stub
+ 393                       	bind_stub:
+ 394 06fd F5                	    push af
+ 395 06fe 3E 04             	    ld a,4
+ 396 0700 32 23 07 00       	    ld (observed_tag),a
+ 397 0704 F1                	    pop af
+ 398 0705 18 07             	    jr activation_stub
+ 399                       	begin_stub:
+ 400 0707 3E 05             	    ld a,5
+ 401 0709 32 23 07 00       	    ld (observed_tag),a
+ 402 070d AF                	    xor a
+ 403                       	activation_stub:
+ 404 070e 32 21 07 00       	    ld (observed_a),a
+ 405 0712 3A 1F 07 00       	    ld a,(mode)
+ 406 0716 B7                	    or a
+ 407 0717 C8                	    ret z
+ 408 0718 AF                	    xor a
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C005/compact/abi.s 			page 11
+
+
+ 409 0719 37                	    scf
+ 410 071a C9                	    ret
+ 411 071b 00 00 00          	saved_sp: .d24 0
+ 412 071e 00                	stage_value: .byte 0
+ 413 071f 00                	mode: .byte 0
+ 414 0720 00                	error_seen: .byte 0
+ 415 0721 00                	observed_a: .byte 0
+ 416 0722 00                	observed_b: .byte 0
+ 417 0723 00                	observed_tag: .byte 0
+ 418 0724 01 FF             	byte_binding: .byte 1,255
+ 419 0726 01 78 56 34 92    	integer_binding: .byte 1,0x78,0x56,0x34,0x92
+ 420 072b 01 00 00 00 30 82 	variant_binding: .byte 1,0,0,0,0x30,0x82
+ 421 0731 00 01 02 03 04    	missing_binding: .byte 0,1,2,3,4
+ 422 0736 FF 00 00 00 00    	byte_value: .byte 255,0,0,0,0
+ 423 073b 78 56 34 92 00    	integer_value: .byte 0x78,0x56,0x34,0x92,0
+ 424 0740 00 00 00 30 82    	positive_fraction: .byte 0,0,0,0x30,0x82
+ 425 0745 A5 A5 A5 A5 00    	unchanged_value: .byte 0xa5,0xa5,0xa5,0xa5,0
+ 426 074a 05 00 00 00 00    	five: .byte 5,0,0,0,0
+ 427 074f 55                	.byte 0x55
+ 428 0750 CC CC CC CC       	integer_destination: .space 4,0xcc
+ 429 0754 66 77             	.byte 0x66,0x77
+ 430 0756 CC                	byte_destination: .byte 0xcc
+ 431 0757 88 99             	.byte 0x88,0x99
+ 432 0759 CC CC CC CC CC    	variant_destination: .space 5,0xcc
+ 433 075e AA                	.byte 0xaa
+ 434 075f 00 00 00          	array_cell: .d24 0
+ 435 0762 43 4F 4D 50 41 43 	success_text: .asciz "COMPACT_ABI_OK\r\n"
+ 435      54 5F 41 42 
+ 435      49 5F 4F 4B 
+ 435      0D 0A 00 
+ 436 0773 00 00 00 00 00 00 	    .org 0x10000
+ 436      00 00 00 00 
+ 436      00 00 00 00 
+ 436      00 00 00 00 
+ 436      00 00 00 00 
+ 437 10000 35                	num_guard: .byte 0x35
+ 438 10001 A5 A5 A5 A5 A5 A5 	num_pool: .space 160,0xa5
+ 438      A5 A5 A5 A5 
+ 438      A5 A5 A5 A5 
+ 438      A5 A5 A5 A5 
+ 438      A5 A5 A5 A5 
+ 439 100a1 53                	num_end_guard: .byte 0x53
+ 440 100a2 5A 5A 5A 5A 5A 5A 	str_pool: .space 8192,0x5a
+ 440      5A 5A 5A 5A 
+ 440      5A 5A 5A 5A 
+ 440      5A 5A 5A 5A 
+ 440      5A 5A 5A 5A 

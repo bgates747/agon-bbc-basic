@@ -1,0 +1,5 @@
+10 ON ERROR REPORT:PRINT:OSCLI "BYE"
+20 h%=OPENOUT("compact-packets.dat")
+30 x=2.75:FOR i%=0 TO 4:BPUT#h%,?(^x+i%):NEXT:y%=x:PRINT ;y%
+40 x=-2.75:FOR i%=0 TO 4:BPUT#h%,?(^x+i%):NEXT:y%=x:PRINT ;y%
+50 CLOSE#0:PRINT "COMPACT_REFERENCE_PACKETS_DONE":OSCLI "BYE"

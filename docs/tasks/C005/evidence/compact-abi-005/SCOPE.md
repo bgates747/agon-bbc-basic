@@ -1,0 +1,1 @@
+Twenty-one native ABI stages pass using unchanged394-byte/29-relocation module, real NUM and MEM/ACT observation stubs. Added real division-by-zero propagation/left preservation, save/bind error stack balance and numeric use with optional unused bridges zero. No frontend integration or physical result.

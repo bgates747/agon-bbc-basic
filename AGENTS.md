@@ -107,3 +107,10 @@ truthfully; an approval waiver is not a test result.
 C007's completed source search and measurement contract are indexed by
 `compiler/TESTING.md`; no new benchmark performance was measured. The Author's latest authorization waives earlier approval stops for remaining
 work. Commit authorization is not a claim of human validation.
+
+C005 compaction now has metadata-only compact/compiler.bas558c39a9: eight private
+arrays use bounded existing byte types (19968 native element bytes saved). Smoke
+54.599s retains four old images; boundary5/4-native340.239s and mixed/string
+consumers2 in86.522s and baseline39/15 in86.246s pass. compact/runtime.s is a separate394-byte/29-relocation native CALL
+adapter, with21-stage ABI and GNU-link proof, not yet integrated. Read compact/ABI.md
+and COMPACTION.md. No native compiler image exists yet.

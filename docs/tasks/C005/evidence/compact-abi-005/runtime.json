@@ -1,0 +1,57 @@
+{
+  "bytes": 394,
+  "relocations": 29,
+  "exports": {
+    "cp_literal": 28,
+    "cp_numeric": 43,
+    "cp_read1": 78,
+    "cp_read4": 84,
+    "cp_read5": 90,
+    "cp_store1": 157,
+    "cp_store4": 163,
+    "cp_store5": 204,
+    "cp_arrayprefix": 222,
+    "cp_arrayaddr": 252,
+    "cp_actsave": 282,
+    "cp_actbind": 300,
+    "cp_actbegin": 335,
+    "cp_num_base": 344,
+    "cp_str_base": 347,
+    "cp_slot_numeric": 351,
+    "cp_slot_numerror": 355,
+    "cp_slot_literal": 359,
+    "cp_slot_novar": 363,
+    "cp_slot_prefix": 367,
+    "cp_slot_addr": 371,
+    "cp_slot_memerror": 375,
+    "cp_slot_save": 379,
+    "cp_slot_bind": 383,
+    "cp_slot_begin": 387,
+    "cp_slot_acterror": 391
+  },
+  "independent_link_bases": [
+    270336,
+    294912
+  ],
+  "unresolved_symbols": 0,
+  "external_bridge_fields": {
+    "cp_num_base": 344,
+    "cp_str_base": 347,
+    "cp_slot_numeric": 351,
+    "cp_slot_numerror": 355,
+    "cp_slot_literal": 359,
+    "cp_slot_novar": 363,
+    "cp_slot_prefix": 367,
+    "cp_slot_addr": 371,
+    "cp_slot_memerror": 375,
+    "cp_slot_save": 379,
+    "cp_slot_bind": 383,
+    "cp_slot_begin": 387,
+    "cp_slot_acterror": 391
+  },
+  "hashes": {
+    "docs/tasks/C005/compact/runtime.s": "177c90e67a179a6ccf866c759cbb2517d9c2bd512c120bb1a3501efee4085023",
+    "docs/tasks/C005/build/compact-runtime/runtime_data.bas": "9e5e18b5ca85ecc77cb629ba20bd0e23021ce04eecc83eaec49b3362cc1e9870",
+    "docs/tasks/C005/build/compact-runtime/runtime-0.bin": "0ba523c366f36ad08a120df8e56bb53b4176406d9ae14b5369515f2e09b0f49a"
+  }
+}

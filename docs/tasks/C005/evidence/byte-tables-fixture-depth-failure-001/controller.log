@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/Agon/mystuff/bbc-basic-v-adl/docs/tasks/C005/compact/test_tables.py", line 28, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/Agon/mystuff/bbc-basic-v-adl/docs/tasks/C005/compact/test_tables.py", line 27, in main
+    h.main()
+    ~~~~~~^^
+  File "/Agon/mystuff/bbc-basic-v-adl/docs/tasks/C002/tools/test_output.py", line 156, in main
+    assert f"OK:p{i}.bas\n" in compiled, (i, compiled)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (2, 'Warning: unused arguments left: ["--firmware", "platform"].\nTom\'s Fake VDP Version 1.03\nunknown packet VDU 0x17, 0, 0xf8\nunknown packet VDU 0x17, 0, 0x99\nuunknown packet VDU 0x17, 0, 0x94\n\x80\nAgon Platform MOS Version 3.0.2 Arthur\n\nOK:p0.bas\nOK:p1.bas\nERR:p2.bas\np2.bas:1:40: Expression nesting exceeds 32 at 3250\nERR:p3.bas\np3.bas:257:14: Procedure limit exceeds 256 at 3250\nOK:p4.bas\nOK:p0.bas\nOUTPUT_COMPILE_DONE\n/ *')

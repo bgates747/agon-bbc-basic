@@ -1,0 +1,17 @@
+{
+  "scope": "Native fixed-operand adapter ABI; real NUM, observation stubs for MEM/ACT; no frontend integration",
+  "stages": 21,
+  "entry_points": 13,
+  "hardware_validation": false,
+  "controller_seconds": 1.068,
+  "hashes": {
+    "docs/tasks/C005/compact/runtime.s": "177c90e67a179a6ccf866c759cbb2517d9c2bd512c120bb1a3501efee4085023",
+    "docs/tasks/C005/compact/ABI.md": "30ea73c43b5d2c9d1afbeffdf7844247e4b723e6f8d77aa2a7cd0948f09d01f2",
+    "docs/tasks/C005/compact/abi.s": "3304474995f3f0077d2cd7c2310df93f49ff7944e7b3c19ea111a63fe8d47f43",
+    "docs/tasks/C005/compact/test_abi.py": "de2250db2ce4d012af7bd2ff269a7b509fd0e34391728b67bbb546cf36a88a09",
+    "docs/tasks/C005/build/compact-runtime/runtime-0.bin": "0ba523c366f36ad08a120df8e56bb53b4176406d9ae14b5369515f2e09b0f49a",
+    "docs/tasks/C005/build/compact-runtime/runtime.json": "89ee806085e9c7691d17a5db3be321e5a5d255dc1d98686a35058e9b69a412e4",
+    "compiler/build/numeric-runtime/runtime.o": "b7ec9926b363312855af25e5e8a776493bc712046a2c24677431fdbc3eef6d7b",
+    "docs/tasks/C005/build/compact-abi/probe.bin": "ed5ddd9fc1005a525f78fa17fcba78e27d9c4b191c17dcfb0dd97accf4131dd5"
+  }
+}

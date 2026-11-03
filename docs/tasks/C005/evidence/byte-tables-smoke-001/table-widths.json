@@ -1,0 +1,64 @@
+{
+  "source_sha256": "508a74f28f56aca3faf716aef021162ba24d73d9a5d01552deb9c4d12f3def4e",
+  "candidate_sha256": "558c39a9656a46c5799a209c957fdfce48a9fafbb93bc08bfe5b50fe9f53a30b",
+  "native_element_bytes_saved": 19968,
+  "fields": {
+    "par": {
+      "elements": 4096,
+      "maximum_value": 255,
+      "old_element_bytes": 4,
+      "new_element_bytes": 1,
+      "replacements": 7
+    },
+    "argkind": {
+      "elements": 512,
+      "maximum_value": 1,
+      "old_element_bytes": 4,
+      "new_element_bytes": 1,
+      "replacements": 3
+    },
+    "argindex": {
+      "elements": 512,
+      "maximum_value": 31,
+      "old_element_bytes": 4,
+      "new_element_bytes": 1,
+      "replacements": 4
+    },
+    "parcnt": {
+      "elements": 256,
+      "maximum_value": 16,
+      "old_element_bytes": 4,
+      "new_element_bytes": 1,
+      "replacements": 6
+    },
+    "pkind": {
+      "elements": 256,
+      "maximum_value": 1,
+      "old_element_bytes": 4,
+      "new_element_bytes": 1,
+      "replacements": 4
+    },
+    "vsize": {
+      "elements": 256,
+      "maximum_value": 5,
+      "old_element_bytes": 4,
+      "new_element_bytes": 1,
+      "replacements": 5
+    },
+    "vdim": {
+      "elements": 256,
+      "maximum_value": 16,
+      "old_element_bytes": 4,
+      "new_element_bytes": 1,
+      "replacements": 5
+    },
+    "retdef": {
+      "elements": 512,
+      "maximum_value": 255,
+      "old_element_bytes": 4,
+      "new_element_bytes": 1,
+      "replacements": 3
+    }
+  },
+  "scope": "Private metadata representation; public BASIC values and code generation unchanged"
+}

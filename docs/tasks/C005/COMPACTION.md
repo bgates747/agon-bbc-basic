@@ -59,3 +59,30 @@ C006 still requires a functioning native compiler and generation evidence.
 
 The task record and dated log own results and promotion. This contract records
 implementation boundaries, not a second unfinished-work list.
+
+## Private byte-table and adapter results
+
+Candidate558c39a9 changes only those eight array suffixes. Four complete old
+images remain identical in smoke54.599s. The first boundary fixture accidentally
+exceeded the existing expression-depth cap; its failed/compile-only artifacts
+are retained, without a native-pass claim. The corrected five-source cohort
+passes340.239s: four native executions, formal binding255, return owner255 /
+256 definitions, staged slot31 through shallow nested calls,257 rejection,
+repeat and GNU numeric links. Mixed numeric/byte/string PROC arguments, LOCAL,
+recursion, slices and string-FN consumers also pass two-program86.522s scope,
+with fresh actual BBC outputs and GNU numeric/string links. Full baseline follows.
+
+The separate compact/runtime.s module is394 bytes /29 internal relocations,
+with13 native entries and13 external fields. GNU links at&42000/&48000 match
+rebasing. Native ABI21 passes with real unchanged NUM and explicit MEM/ACT
+observation stubs; no frontend integration is yet claimed. ABI.md records exact
+fields, registers, SP, error balance and fixture corrections. Actual pinned BBC
+packets, not a Python numeric model, corrected an initially misencoded fractional
+test value. The runtime itself did not change during those fixture corrections.
+
+Exact byte-table source558c39a9 also passes baseline39/15 in86.246s with GNU
+golden and repeat (`byte-tables-baseline-001`). `compact/maps_harness.py` prepares
+a host-only observer that has the actual BBC compiler write its completed label
+addresses to a map file. It observes tables rather than compiling source or
+calculating addresses on the host. Only its guarded Python preparation has run;
+no map-based frontend qualification is claimed yet.

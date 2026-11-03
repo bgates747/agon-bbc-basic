@@ -1,0 +1,33 @@
+[
+  {
+    "source": "text$=\"outer\":PROCouter:PRINT text$\nvalue=1.5:whole%=-7:byte&=255:s$=\"old\":PROCtypes(2.5,9.9,257,\"new\"):PRINT ;value;\":\";whole%;\":\";byte&;\":\";s$\ncopy$=\"original\":PROCslice(copy$):PRINT copy$\nPROCrecursive(4):PRINT ;n%\nEND\nDEF PROCouter:LOCAL text$:text$=\"inner\":PROCsee:ENDPROC\nDEF PROCsee:PRINT text$:ENDPROC\nDEF PROCtypes(value,whole%,byte&,s$):PRINT ;value;\":\";whole%;\":\";byte&;\":\";s$:ENDPROC\nDEF PROCslice(s$):MID$(s$,2,2)=\"XY\":PRINT s$:ENDPROC\nDEF PROCrecursive(n%):PRINT ;n%:IF n%>0 THEN PROCrecursive(n%-1)\nENDPROC\n",
+    "reference_source": "text$=\"outer\":PROCouter:PRINT text$\nvalue=1.5:whole%=-7:byte&=255:s$=\"old\":PROCtypes(2.5,9.9,257,\"new\"):PRINT ;value;\":\";whole%;\":\";byte&;\":\";s$\ncopy$=\"original\":PROCslice(copy$):PRINT copy$\nPROCrecursive(4):PRINT ;n%\n",
+    "reference_definitions": [
+      "DEF PROCouter:LOCAL text$:text$=\"inner\":PROCsee:ENDPROC",
+      "DEF PROCsee:PRINT text$:ENDPROC",
+      "DEF PROCtypes(value,whole%,byte&,s$):PRINT ;value;\":\";whole%;\":\";byte&;\":\";s$:ENDPROC",
+      "DEF PROCslice(s$):MID$(s$,2,2)=\"XY\":PRINT s$:ENDPROC",
+      "DEF PROCrecursive(n%):PRINT ;n%:IF n%>0 THEN PROCrecursive(n%-1)",
+      "ENDPROC"
+    ],
+    "reference": true,
+    "status": 0,
+    "procedure_observations": 4,
+    "expected": "inner\nouter\n2.5:9:1:new\n1.5:-7:255:old\noXYginal\noriginal\n4\n3\n2\n1\n0\n0\n"
+  },
+  {
+    "source": "PRINT LEFT$(FNletters);\":\";LEFT$(FNletters,2);\":\";RIGHT$(FNletters,2)\nPRINT MID$(FNletters,2);\":\";MID$(FNletters,0);\":\";MID$(FNletters,2,3)\nPRINT ;LEN FNletters;\":\";ASC FNletters;\":\";VAL FNdigits;\":\";INSTR(FNletters,FNneedle)\nPRINT ;INSTR(FNletters,FNneedle,FNcount);\":\";(FNletters=\"ABCDEF\");\":\";(\"ABCDEF\"=FNletters)\nPRINT ;ASC LEFT$(FNbytes);\":\";ASC MID$(FNbytes,0,1);\":\";ASC RIGHT$(FNbytes,1)\nPRINT \"[\"+LEFT$(FNletters)+\"]\";\":\";STRING$(2,STR$ FNnumber)\nEND\nDEF FNletters=\"ABCDEF\"\nDEF FNneedle=\"CD\"\nDEF FNdigits=\"12.5\"\nDEF FNcount:scratch$=\"changed\":=2\nDEF FNbytes=CHR$(0)+CHR$(128)+CHR$(255)\nDEF FNnumber=3\n",
+    "reference_source": "PRINT LEFT$(FNletters);\":\";LEFT$(FNletters,2);\":\";RIGHT$(FNletters,2)\nPRINT MID$(FNletters,2);\":\";MID$(FNletters,0);\":\";MID$(FNletters,2,3)\nPRINT ;LEN FNletters;\":\";ASC FNletters;\":\";VAL FNdigits;\":\";INSTR(FNletters,FNneedle)\nPRINT ;INSTR(FNletters,FNneedle,FNcount);\":\";(FNletters=\"ABCDEF\");\":\";(\"ABCDEF\"=FNletters)\nPRINT ;ASC LEFT$(FNbytes);\":\";ASC MID$(FNbytes,0,1);\":\";ASC RIGHT$(FNbytes,1)\nPRINT \"[\"+LEFT$(FNletters)+\"]\";\":\";STRING$(2,STR$ FNnumber)\n",
+    "reference_definitions": [
+      "DEF FNletters=\"ABCDEF\"",
+      "DEF FNneedle=\"CD\"",
+      "DEF FNdigits=\"12.5\"",
+      "DEF FNcount:scratch$=\"changed\":=2",
+      "DEF FNbytes=CHR$(0)+CHR$(128)+CHR$(255)",
+      "DEF FNnumber=3"
+    ],
+    "reference": true,
+    "status": 0,
+    "expected": "ABCDE:AB:EF\nBCDEF:ABCDEF:BCD\n6:65:12.5:3\n3:-1:-1\n0:0:255\n[ABCDE]:33\n"
+  }
+]

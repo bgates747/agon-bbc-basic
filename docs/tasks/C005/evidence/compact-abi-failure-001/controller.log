@@ -1,0 +1,18 @@
+Traceback (most recent call last):
+  File "/Agon/mystuff/bbc-basic-v-adl/docs/tasks/C005/compact/test_abi.py", line 13, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/Agon/mystuff/bbc-basic-v-adl/docs/tasks/C005/compact/test_abi.py", line 11, in main
+    assert 'COMPACT_ABI_STATUS:0\n' in log and 'COMPACT_ABI_OK\n' in log,log
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Warning: unused arguments left: ["--firmware", "platform"].
+Tom's Fake VDP Version 1.03
+unknown packet VDU 0x17, 0, 0xf8
+unknown packet VDU 0x17, 0, 0x99
+uunknown packet VDU 0x17, 0, 0x94
+
+Agon Platform MOS Version 3.0.2 Arthur
+
+FB
+COMPACT_ABI_STATUS:1
+/ *

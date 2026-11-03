@@ -494,3 +494,26 @@ rejects at2182:67, with1972 symbols/248 bindings and old output preserved,
 1322.639s. No executable is emitted. COMPACTION.md refines private byte-table
 ranges (19968 element-byte saving) and native call-adapter boundaries, retaining
 reference arithmetic/conversion and BBC public values. Actual fit remains open.
+
+## Byte-table qualification and native call adapters
+
+Private metadata-only558c39a9 saves19968 native element bytes by using existing
+BBC byte arrays for eight bounded fields. Four whole old images remain identical
+in54.599s smoke. Boundary5 passes340.239s (four native/one rejection), including
+formal index255,256 definitions/return owner255 and staged slot31; the initial
+over-nested fixture is retained as a failed compile-only attempt. Mixed types,
+LOCAL/recursive calls and string-FN consumers pass86.522s. Full baseline follows.
+
+The isolated394-byte/29-relocation adapter module independently links and passes
+21 native stages: real NUM/SFIX, widths, max slots, guards, stack/index preservation,
+errors and optional zero bridges. MEM/ACT use observation stubs here. Initial
+fixture selector0 was AND rather than intended ADD11; a misencoded2.75 packet
+used exponent82. Actual pinned BBC gives0000003081 and000000b081, with integer
+assignments2/-2. Only the fixtures change; runtime source177c90e6 remains fixed.
+Failures, an unchanged rerun, actual reference packets and ABI17/21 are retained.
+This is not frontend integration, native fit or physical validation.
+
+Byte-table558c39a9 baseline39/15 passes86.246s, GNU golden and repeat included.
+Adapter21-stage ABI passes with the same394-byte module; a prepared host-only
+BBC label-map observer will support independent emitted-template/bridge checks
+after integration. That observer has not executed yet.
