@@ -417,3 +417,25 @@ native-test.dat contains exactly FF74657874. Both rejected inputs preserve their
 old output, and all12 compiler returns are0. Retain final controller/manifest.
 Start live-native-errors-001 as its own host command for the final39 fresh
 reference ERR/ERL/native-output/linkage checks before offline physical packaging.
+
+## Native error suite and physical fixture ready
+
+live-native-errors-001 passes all39 fresh pinned BASIC ERR/ERL programs and actual
+native outputs in612.766 controller seconds. Complete39-image runtime/entry
+checks and deterministic repeat pass. Freeze final controller/manifest; all
+emulator prerequisites now pass with unchanged6597a0df source/299a3119 image.
+
+Run prepare_olimex.py against those real four completed manifests. It passes and
+creates40 payloads/441398 bytes, including111810-byte source and324275-byte
+compiler. Preserve the exact offline bundle as olimex-fixture-001, manifest
+SHA05149bd76c5f23f8f6bf97c8db7bde3871e858a1e579a55784f05dd3a84d4787.
+Ten expected generated images total102941 bytes. OLIMEX-R01.md pins the finite
+12-source/10-program/two-self-source scope and memory/restoration/stop protocol.
+This is ready preparation, not a physical deployment or result.
+
+Extender guidance07-20-19 answers the timing/MEM/CLI enquiry: no comparable
+physical compiler timing or current stack high-water exists. Preserve the map,
+observe fresh installed MEM only after grant, separate mirrored host elapsed
+intervals from CPU/performance claims, and revise from actual first hardware
+results. No reset/flash/startup/mode changes are planned. Request a finite lease
+only after this frozen qualified fixture exists.

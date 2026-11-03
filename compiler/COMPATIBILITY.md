@@ -51,7 +51,7 @@ existing string/numeric regressions on the reauthorized Pi5 CLI.
 | EVAL | Deliberately unsupported | Compile-time rejection; absent from initial language |
 | STOP, RUN, CHAIN, OSCLI | Unsupported | STOP is not silently compiled as END |
 | Tokenised source, abbreviations, lowercase keywords | Unsupported | No silent tokenisation assumptions |
-| Self-compilation | Partial | Exact source6597a0df produces identical324275-byte G0/G1/G2/repeat images, including actual normal interpreted main. Explicit resumed lineage is retained; native regressions and physical qualification pending |
+| Self-compilation | Partial | Exact source6597a0df produces identical324275-byte G0/G1/G2/repeat images, including actual normal interpreted main. Explicit resumed lineage is retained; native baseline39, representative12 and error39 suites pass; physical qualification pending |
 
 The [C003 scalar record](../docs/tasks/C003/SCALARS.md) describes reference
 creation/storage rules, scope and qualification; the [string core record](../docs/tasks/C003/STRINGS.md) adds ownership, allocation and ABI evidence. [Slices and comparisons](../docs/tasks/C003/SLICES.md) records the typed expression extension and reference boundaries.

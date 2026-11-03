@@ -1,0 +1,118 @@
+{
+  "scope": "Offline fixture preparation; no hardware access or result",
+  "compiler_sha256": "6597a0df3f99b4f43c42bff1cdbc59f5fdf730c57837f3d4112a598fbfbe5fb8",
+  "native_compiler_sha256": "299a31190c380541a73ed9eb144a303fa37abccc4f3c3e0ad47f99f1538122c0",
+  "image_bytes": 324275,
+  "load_address": 262144,
+  "static_image_end": 586419,
+  "private_heap_limit": 687872,
+  "activation_arena_bytes": 32768,
+  "top_reserve_bytes": 256,
+  "fixture_path": "/extender/diagnostics/bbc-basic/c006-r01",
+  "result_path": "/agents/extender/results/bbc-basic/c006-r01",
+  "filename_inputs": {
+    "self-a": [
+      "/extender/diagnostics/bbc-basic/c006-r01/compiler.bas",
+      "/agents/extender/results/bbc-basic/c006-r01/self-a.bin"
+    ],
+    "self-b": [
+      "/extender/diagnostics/bbc-basic/c006-r01/compiler.bas",
+      "/agents/extender/results/bbc-basic/c006-r01/self-b.bin"
+    ],
+    "compile-0": [
+      "/extender/diagnostics/bbc-basic/c006-r01/case-0.bas",
+      "/agents/extender/results/bbc-basic/c006-r01/case-0.bin"
+    ],
+    "compile-1": [
+      "/extender/diagnostics/bbc-basic/c006-r01/case-1.bas",
+      "/agents/extender/results/bbc-basic/c006-r01/case-1.bin"
+    ],
+    "compile-2": [
+      "/extender/diagnostics/bbc-basic/c006-r01/case-2.bas",
+      "/agents/extender/results/bbc-basic/c006-r01/case-2.bin"
+    ],
+    "compile-3": [
+      "/extender/diagnostics/bbc-basic/c006-r01/case-3.bas",
+      "/agents/extender/results/bbc-basic/c006-r01/case-3.bin"
+    ],
+    "compile-4": [
+      "/extender/diagnostics/bbc-basic/c006-r01/case-4.bas",
+      "/agents/extender/results/bbc-basic/c006-r01/case-4.bin"
+    ],
+    "compile-5": [
+      "/extender/diagnostics/bbc-basic/c006-r01/case-5.bas",
+      "/agents/extender/results/bbc-basic/c006-r01/case-5.bin"
+    ],
+    "compile-6": [
+      "/extender/diagnostics/bbc-basic/c006-r01/case-6.bas",
+      "/agents/extender/results/bbc-basic/c006-r01/case-6.bin"
+    ],
+    "compile-7": [
+      "/extender/diagnostics/bbc-basic/c006-r01/case-7.bas",
+      "/agents/extender/results/bbc-basic/c006-r01/case-7.bin"
+    ],
+    "compile-8": [
+      "/extender/diagnostics/bbc-basic/c006-r01/case-8.bas",
+      "/agents/extender/results/bbc-basic/c006-r01/case-8.bin"
+    ],
+    "compile-9": [
+      "/extender/diagnostics/bbc-basic/c006-r01/case-9.bas",
+      "/agents/extender/results/bbc-basic/c006-r01/case-9.bin"
+    ],
+    "compile-10": [
+      "/extender/diagnostics/bbc-basic/c006-r01/case-10.bas",
+      "/agents/extender/results/bbc-basic/c006-r01/case-10.bin"
+    ],
+    "compile-11": [
+      "/extender/diagnostics/bbc-basic/c006-r01/case-11.bas",
+      "/agents/extender/results/bbc-basic/c006-r01/case-11.bin"
+    ]
+  },
+  "uploads": {
+    "payload/case-0.bas": "/extender/diagnostics/bbc-basic/c006-r01/case-0.bas",
+    "payload/case-1.bas": "/extender/diagnostics/bbc-basic/c006-r01/case-1.bas",
+    "payload/case-10.bas": "/extender/diagnostics/bbc-basic/c006-r01/case-10.bas",
+    "payload/case-11.bas": "/extender/diagnostics/bbc-basic/c006-r01/case-11.bas",
+    "payload/case-2.bas": "/extender/diagnostics/bbc-basic/c006-r01/case-2.bas",
+    "payload/case-3.bas": "/extender/diagnostics/bbc-basic/c006-r01/case-3.bas",
+    "payload/case-4.bas": "/extender/diagnostics/bbc-basic/c006-r01/case-4.bas",
+    "payload/case-5.bas": "/extender/diagnostics/bbc-basic/c006-r01/case-5.bas",
+    "payload/case-6.bas": "/extender/diagnostics/bbc-basic/c006-r01/case-6.bas",
+    "payload/case-7.bas": "/extender/diagnostics/bbc-basic/c006-r01/case-7.bas",
+    "payload/case-8.bas": "/extender/diagnostics/bbc-basic/c006-r01/case-8.bas",
+    "payload/case-9.bas": "/extender/diagnostics/bbc-basic/c006-r01/case-9.bas",
+    "payload/compile-0.txt": "/extender/diagnostics/bbc-basic/c006-r01/compile-0.txt",
+    "payload/compile-1.txt": "/extender/diagnostics/bbc-basic/c006-r01/compile-1.txt",
+    "payload/compile-10.txt": "/extender/diagnostics/bbc-basic/c006-r01/compile-10.txt",
+    "payload/compile-11.txt": "/extender/diagnostics/bbc-basic/c006-r01/compile-11.txt",
+    "payload/compile-2.txt": "/extender/diagnostics/bbc-basic/c006-r01/compile-2.txt",
+    "payload/compile-3.txt": "/extender/diagnostics/bbc-basic/c006-r01/compile-3.txt",
+    "payload/compile-4.txt": "/extender/diagnostics/bbc-basic/c006-r01/compile-4.txt",
+    "payload/compile-5.txt": "/extender/diagnostics/bbc-basic/c006-r01/compile-5.txt",
+    "payload/compile-6.txt": "/extender/diagnostics/bbc-basic/c006-r01/compile-6.txt",
+    "payload/compile-7.txt": "/extender/diagnostics/bbc-basic/c006-r01/compile-7.txt",
+    "payload/compile-8.txt": "/extender/diagnostics/bbc-basic/c006-r01/compile-8.txt",
+    "payload/compile-9.txt": "/extender/diagnostics/bbc-basic/c006-r01/compile-9.txt",
+    "payload/compiler.bas": "/extender/diagnostics/bbc-basic/c006-r01/compiler.bas",
+    "payload/compiler.bin": "/extender/diagnostics/bbc-basic/c006-r01/compiler.bin",
+    "payload/reject-10.dat": "/agents/extender/results/bbc-basic/c006-r01/case-10.bin",
+    "payload/reject-11.dat": "/agents/extender/results/bbc-basic/c006-r01/case-11.bin",
+    "payload/run-0.txt": "/extender/diagnostics/bbc-basic/c006-r01/run-0.txt",
+    "payload/run-1.txt": "/extender/diagnostics/bbc-basic/c006-r01/run-1.txt",
+    "payload/run-2.txt": "/extender/diagnostics/bbc-basic/c006-r01/run-2.txt",
+    "payload/run-3.txt": "/extender/diagnostics/bbc-basic/c006-r01/run-3.txt",
+    "payload/run-4.txt": "/extender/diagnostics/bbc-basic/c006-r01/run-4.txt",
+    "payload/run-5.txt": "/extender/diagnostics/bbc-basic/c006-r01/run-5.txt",
+    "payload/run-6.txt": "/extender/diagnostics/bbc-basic/c006-r01/run-6.txt",
+    "payload/run-7.txt": "/extender/diagnostics/bbc-basic/c006-r01/run-7.txt",
+    "payload/run-8.txt": "/extender/diagnostics/bbc-basic/c006-r01/run-8.txt",
+    "payload/run-9.txt": "/extender/diagnostics/bbc-basic/c006-r01/run-9.txt",
+    "payload/self-a.txt": "/extender/diagnostics/bbc-basic/c006-r01/self-a.txt",
+    "payload/self-b.txt": "/extender/diagnostics/bbc-basic/c006-r01/self-b.txt"
+  },
+  "bootstrap_evidence": "/Agon/mystuff/bbc-basic-v-adl/docs/tasks/C006/evidence/live-bootstrap-resume-001",
+  "regression_evidence": "/Agon/mystuff/bbc-basic-v-adl/docs/tasks/C006/evidence/live-regressions-001",
+  "planned_RUN_returns": 0,
+  "EXEC_RUN_line": 4,
+  "hardware_validation": false
+}

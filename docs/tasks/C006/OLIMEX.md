@@ -106,7 +106,9 @@ before those cases, assert its actual lease and verify all payload readbacks.
 The generated command files use LOAD/RUN ., mark entry/return and start the
 foreground listener only after application return. The caller observes prompts
 and markers before providing inputs or transferring files. Syntax checks pass;
-real-input packaging awaits the generation/regression prerequisites.
+real-input packaging now passes against all completed prerequisite cohorts.
+Frozen olimex-fixture-001 and [the finite run plan](OLIMEX-R01.md) identify40
+payloads/441398 bytes and the exact comparisons. No physical result follows.
 
 ## Explicit operation journal
 

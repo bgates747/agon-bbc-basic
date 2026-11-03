@@ -1,0 +1,6 @@
+CD /agents/extender/results/bbc-basic/c006-r01
+ECHO BBC_BEGIN_COMPILE_5
+LOAD /extender/diagnostics/bbc-basic/c006-r01/compiler.bin
+RUN .
+ECHO BBC_END_COMPILE_5
+EMOS sdserve --fast /

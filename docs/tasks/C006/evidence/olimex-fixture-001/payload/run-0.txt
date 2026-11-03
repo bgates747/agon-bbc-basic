@@ -1,0 +1,6 @@
+CD /agents/extender/results/bbc-basic/c006-r01
+ECHO BBC_BEGIN_NATIVE_0
+LOAD /agents/extender/results/bbc-basic/c006-r01/case-0.bin
+RUN .
+ECHO BBC_END_NATIVE_0
+EMOS sdserve --fast /

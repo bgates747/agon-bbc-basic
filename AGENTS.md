@@ -69,7 +69,7 @@ environment, ownership, assembly, emulator, hardware and coordination rules.
 
 ## Active qualification and authorization
 
-1. Only C006 remains unfinished: native compiler regressions and physical Olimex.
+1. Only C006 remains unfinished: physical Olimex qualification.
    Read C006.md, C006/BOOTSTRAP.md and C006/OLIMEX.md. Full normal-main G0,
    native G1/G2 and actual repeat now produce all four identical324275-byte
    images299a3119. Durations3951.738/1983.142/1997.471/1996.877 seconds are
@@ -80,14 +80,13 @@ environment, ownership, assembly, emulator, hardware and coordination rules.
    bytestrings match. The cohort is complete. live-native-baseline-001 passes
    all39 cases (15 full images/24 diagnostics) in245.15 controller seconds.
    live-regressions-001 passes all12 cases, including exact file bytes, in131.049s.
-   live-native-errors-001 is active on the sole CLI SD; do not launch another CLI
-   against it. Run each remaining
-   native suite separately, retaining failure evidence and avoiding a long
-   multi-stage host command. No physical compiler result exists yet.
+   live-native-errors-001 passes all39 fresh ERR/ERL/native programs, complete
+   runtime/entry links and deterministic repeat in612.766s. All native suites
+   are finished and frozen. No physical compiler result exists yet.
 2. C006 native_baseline.py compares39 actual standard sources against15 complete
    baseline images/24 diagnostics. regressions.py runs12 representative cases;
    native_errors.py runs39 fresh reference ERR/ERL programs. Prepared workflows
-   are not results; preserve exact input/runtime hashes and interrupted state.
+   are now retained results; preserve exact input/runtime hashes and interrupted state.
 3. Use `.venv/bin/python` explicitly. compiler/README.md owns commands. The
    ignored `.emulator/` is automated CLI only; launch through its generated
    `./fab-agon-emulator` wrapper from the profile directory. One active run owns
@@ -107,8 +106,9 @@ environment, ownership, assembly, emulator, hardware and coordination rules.
    malformed request was preserved/repaired; C006/OLIMEX.md owns the record.
 7. Physical custody is solely agon-dev-env/cross-agent/olimex-bench. Prepare an
    exact finite fixture, reserve, receive Extender's grant and assert its token
-   before target operations. No BBC reservation/lease exists yet; we reported
-   not-ready so other prepared work can use the bench. Use pinned new staged
+   before target operations. Physical bundle olimex-fixture-001 and finite plan
+   C006/OLIMEX-R01.md are prepared; reserve and request fresh readiness next.
+   No BBC lease exists yet. Use pinned new staged
    transfers, admitted keyboard/CLI and maintained passive serial/printer mirror
    per Extender. Preserve installed firmware/startup/wiring; no unmount/eject.
    Do not treat old hardware headers or an empty queue as current readiness.
