@@ -775,3 +775,14 @@ resolution is an idea only; illustrative@@:/@B/@F syntax is not adopted and must
 not silently reserve existing named identifiers. Label scopes, conventional
 numbered targets and LOCAL variable semantics remain separate questions. No
 implementation, tests, deployment or resource reservation is selected.
+
+The Author confirms Mandelbrot runs correctly under the pinned reference BASIC
+on Oryx and requests compiler support, an official task and logical commit/push
+groups before proceeding. Read the actual49-line source at emulator-relative
+basic-compiled/tests/12-mandelbrot/mandelbrot.bas; SHA1eb897c8. MODE8 is the first
+reported rejection. Inspection also identifies GCOL0,C%, PLOT69,K%,J% and numeric
+GET followed by MODE1, alongside already supported numeric/array/DATA/control
+constructs. Promote C010 as current task with unchanged-source and differential
+compatibility acceptance; do not substitute a rewritten numerical algorithm.
+The working tree was clean. Record a planning checkpoint before implementation;
+reference visual acceptance does not qualify a new compiled image.

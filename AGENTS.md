@@ -32,6 +32,13 @@ environment, ownership, assembly, emulator, hardware and coordination rules.
 
 ## Current qualified compiler
 
+C010 is the active implementation task: support the Author-validated unchanged
+Mandelbrot source (MODE, GCOL, PLOT and numeric GET initially missing). Read its
+brief before changing behavior. The Author requests logical commit/push groups
+and continuing implementation. C008 manual results remain pending; C009 is a
+low-priority possible feature only. Prior qualification below remains tied to
+its exact older source/image until new evidence is recorded.
+
 1. C001–C005 and C007 have completed their initial scopes. C005's language,
    streaming/resource and compact-runtime work is promoted. Live source SHA:
    `6597a0df3f99b4f43c42bff1cdbc59f5fdf730c57837f3d4112a598fbfbe5fb8`.
