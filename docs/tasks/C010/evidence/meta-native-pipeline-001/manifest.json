@@ -1,0 +1,13 @@
+{
+  "image-checks.log": "8e7ad6764ed39e5c3482b0e3a32be37ff28d0e7fbcf5145442b9f2717736cf7b",
+  "metadata_pipeline.py": "8115462daa19660092dc798af707afad38be33f1c2f5d4c5a0594328b7a59260",
+  "native-baseline.log": "dbb26aa7cc93b5e10f444a1cc7950692246573847a1c64d202f15e755fcca0da",
+  "native-mandelbrot.log": "8aa2348d63500fe621e766b785184272af29088d467b8c6b5e737dd0ec972e03",
+  "native-representative.log": "bfc545a7e131f70f0f6f318153861468da3d811bce3200104938d6903c0d2c88",
+  "native-self.log": "92cfc1627ef6ae203066872124dba13e5c3241f8ec2352cbbd0882ce012129f3",
+  "native-wire-basic.log": "186586c4c4004839597459daac291ccea2c2623dca293abd24bd31bc86afac09",
+  "native-wire-bounded.log": "a65dc5c551af1d1e5b0164c38590a8fa8ffe678aa56b3c45d36f124c2b95d073",
+  "native-wire-errors.log": "3fccdcd64c5f10062b8a6c26afe593cbda3f9a8c1ca3cc97c116153a1657d5c9",
+  "native-wire-interactions.log": "5448d7e8bc83f0dbcf0dd6576268f6afcfd504104c1b36f5e31454e4b6f901cf",
+  "results.json": "e858623c1e6afce30d78644d8840edabe0ed588086a4d7ebeee7393933a18296"
+}

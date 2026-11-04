@@ -1044,3 +1044,33 @@ identity assertion against that initial batch correctly fails. Use the exact
 corresponding b8afbfdb fixtures for this private-prefix identity claim rather
 than equating differently numbered source. No program failure is inferred.
 The36 complete images match. No additional CPU test or visual result is claimed.
+
+Actual meta-native-self-001 completes normally after1964.124 controller seconds:
+327205 bytes, every byte identical to its40e4ae06 input. Its source is exactly
+70d3c5c6. meta-native-pipeline-001 completes all nine stages in3959.870s including
+the seed wait and concurrent qualification; this is not a benchmark interval.
+The actual self-build resolves the resource prerequisite. All finite test jobs
+have completed; no emulator/hardware session is left intentionally running.
+
+live-promotion-001 verifies all26 retained cohorts, complete source/image
+identity and notice gates, then copies exact source70d3c5c6 to compiler/compiler.bas
+and actual self-output40e4ae06 to compiler/bin/compiler.bin. No qualified source
+edit occurs during promotion. New provenance separates this automated version
+from older physical299a3119; no new physical/optical/performance claim or main
+promotion occurs. Compatibility/specification/readme identify MODE, GCOL, PLOT
+and bare GET limits. The exact1038-byte Mandelbrot input is also copied to
+compiler/examples/mandelbrot.bas. Clarify the Author-agreed mandatory @ on label
+definitions/references without changing existing behavior or variable scoping.
+
+prepare_package.py builds a53-file/501472-byte portable refresh from pinned
+C008/manual-004. manual-package-001 freezes every payload byte and its manifest
+1a9e5b2c1d4300ff25ec766f63487bc0c577aeeb80b1a96378dac364dfacee9f.
+All twelve existing test directories remain unchanged; tests/12-mandelbrot adds
+exact source, bad741db native program and commands. A full53-file path/name scan
+including JSON/binaries and all local Markdown links passes. Package provenance
+explicitly separates older physical tests from this automated release. Actual
+managed delivery and human results are separate gates; no user files are selected.
+
+service-completion-001 verifies the empty bbc-basic-c010 service list and no
+owned Python controllers/CLI emulators at2026-11-04T01:33:54.419508Z
+(November3 locally). This is a read-only Pi check, with no target access.

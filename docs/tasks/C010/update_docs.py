@@ -60,6 +60,12 @@ executable and exact version/qualification are in `compiler/bin/manifest.json`.
 This version's physical/human and performance results remain unclaimed. Main
 promotion is separate.'''
     text = once(text,old,new)
+    old = '''4. Proposed named label syntax is `@name:` at a statement boundary; targets
+   are `GOTO @name` and `GOSUB @name`. For example:'''
+    new = '''4. Named label syntax is `@name:` at a statement boundary; targets
+   are `GOTO @name` and `GOSUB @name`. The `@` is required in both the
+   definition and each reference. For example:'''
+    text = once(text,old,new)
     old = '   and zero-fill forms remain unsupported. `CLS` emits VDU 12.'
     new = old+'''
 

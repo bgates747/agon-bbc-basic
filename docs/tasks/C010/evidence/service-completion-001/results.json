@@ -1,0 +1,8 @@
+{
+  "observed": "2026-11-04T01:33:54.419508+00:00",
+  "service_listing": "",
+  "service_stderr": "",
+  "owned_controllers_or_emulators": [],
+  "all_owned_jobs_closed": true,
+  "scope": "Read-only Pi process/service check; no hardware or Oryx access"
+}

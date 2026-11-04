@@ -1,12 +1,9 @@
 # Native BBC BASIC compiler — development
 
-The compiler is written in BBC BASIC and emits standalone native eZ80 ADL code.
-It compiles its own source: the reference-hosted build, two native generations
-and a repeat produce identical complete324275-byte images. Native baseline39,
-representative12 and fresh error39 regressions pass. All12 physical source
-compiles and10 generated programs pass. Two physical self-compilation generations
-produce the identical image. The qualified executable is at
-[`bin/compiler.bin`](bin/compiler.bin), with its license and provenance.
+The compiler is written in BBC BASIC and emits standalone native eZ80 ADL code. This build adds MODE, GCOL, PLOT and bare numeric GET for the unchanged Mandelbrot program. Its complete graphics stream matches the reference. The current 327205-byte native compiler reproduces itself byte for byte. Native baseline39, representative12, error39 and18 graphics/key pairs pass.
+
+The earlier C006 four-stage and physical results retain their exact older source6597a0df/image299a3119. This version awaits physical/human validation; no paired performance benchmark is claimed. The current executable and provenance are in [`bin/`](bin/README.md).
+
 It currently
 compiles literal/numeric output, labelled control flow, numeric byte VDU
 expressions, standard math functions, scalar numeric variables and a mutable
@@ -177,11 +174,14 @@ their documented scopes. The native compiler has completed its first self-source
 [Bootstrap resources](../docs/tasks/C005/RESOURCES.md) qualify256 shared routine
 definitions, bounded FN value transfer and a sorted BBC symbol index. The live
 compiler now uses three streaming passes and4096 symbols, compact native CALL
-adapters and bounded private metadata. Its324275-byte self-source image matches
-the interpreter-produced seed exactly in the first native preflight. See the
-[compaction record](../docs/tasks/C005/COMPACTION.md) and
-[generation contract](../docs/tasks/C006/BOOTSTRAP.md) for evidence and the
-remaining repeated-generation/physical boundary.
+adapters and bounded private metadata. C005/C006's earlier324275-byte image
+matches its interpreted seed and subsequent native/physical generations.
+C010 preserves those resource limits; its private bookkeeping factoring keeps
+the graphics-enabled compiler within the same memory map. Its private symbol
+prefixes are shorter; public label syntax and scope stay unchanged. See the
+[compaction record](../docs/tasks/C005/COMPACTION.md),
+[earlier generation contract](../docs/tasks/C006/BOOTSTRAP.md) and
+[current qualification](../docs/tasks/C010.md) for their exact versions.
 
 [Source error recovery](../docs/tasks/C005/ERRORS.md) supports ON ERROR,
 ON ERROR LOCAL/OFF, LOCAL ERROR's reference no-op, ERROR, REPORT and read-only
@@ -191,7 +191,7 @@ the pinned startup notice. Held Escape is checked at handler entry; general
 asynchronous Escape elsewhere remains unqualified. Exact restrictions, source-line
 quirks and the older compact failure-format boundary are in the compatibility matrix.
 
-The completed generation record is live-bootstrap-resume-001. It preserves the
+The earlier C006 generation record is live-bootstrap-resume-001. It preserves the
 successful normal-main G0/G1/G2 stages from the first attempt and records a fresh
 repeat after host interruption; all four actual images match. This is automated
 self-hosting proof. The native baseline39, representative12 and error39 suites
@@ -200,6 +200,16 @@ programs. Physical olimex-self-a-late-001 verifies the first complete self-sourc
 image, retaining its original observation timeout separately from the clean
 late return. A separately granted repeat uses that actual hardware-produced
 compiler unchanged; olimex-repeat-001 verifies the second identical full image.
-Both hardware slots are cleanly released. The unchanged second output is the
-qualified development executable at bin/compiler.bin, with its exact notice
-and provenance; the initial C006 scope is complete.
+Both hardware slots are cleanly released. That unchanged second output was
+the qualified development executable before C010. Its physical evidence remains
+bound to source6597a0df/image299a3119; the initial C006 scope is complete.
+The current executable's manifest records its fresh automated qualification
+and retains that earlier release's provenance separately.
+
+
+[Mandelbrot](examples/mandelbrot.bas) preserves the Author-validated source bytes.
+Compile it normally, then load/run its output from MOS. It draws in MODE8,
+waits for a key, restores MODE1 and returns. The [C010 audit](../docs/tasks/C010/AUDIT.md)
+documents conversions, MOS calling conventions, actual full-stream parity and
+the protocol-only CLI observer's rendering limits. The private bookkeeping
+refactor retains self-hosting fit while preserving generated program images.

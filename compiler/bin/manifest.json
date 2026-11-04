@@ -1,38 +1,66 @@
 {
-  "scope": "Qualified development executable; no main/production promotion",
+  "scope": "Development executable qualified by automated compatibility and native self-compilation",
   "target": "Agon MOS, eZ80 ADL24, load040000",
-  "image_bytes": 324275,
-  "image_sha256": "299a31190c380541a73ed9eb144a303fa37abccc4f3c3e0ad47f99f1538122c0",
+  "image_bytes": 327205,
+  "image_sha256": "40e4ae06730b6735696f5f07962efd10e6c9cfbdc44a81b65dd6e9ce1c82355a",
   "source": "compiler/compiler.bas",
-  "source_sha256": "6597a0df3f99b4f43c42bff1cdbc59f5fdf730c57837f3d4112a598fbfbe5fb8",
-  "binary_copied_unchanged_from": "docs/tasks/C006/evidence/olimex-repeat-001/output.dat",
+  "source_sha256": "70d3c5c6f4da44cf865c36c3f4edef143b9e37c662097067a5e6ceac414c300e",
+  "binary_copied_unchanged_from": "docs/tasks/C010/evidence/meta-native-self-001/compiler.dat",
   "license_sha256": "cc8e92d92cf12fb1d04ddae0b573367f14188df5fcd6c7909d36486ff53a108a",
   "emulator_generations": [
-    "g0",
-    "g1",
-    "g2",
-    "repeat"
+    "C006-native-seed-to-C010",
+    "C010-native-self"
   ],
   "native_regressions": {
     "baseline": 39,
     "representative": 12,
-    "errors": 39
+    "errors": 39,
+    "graphics_keyboard_pairs": 18
   },
   "physical_qualification": {
-    "source_compiles": 12,
-    "generated_programs": 10,
-    "self_source_generations": 2
+    "source_compiles": 0,
+    "generated_programs": 0,
+    "self_source_generations": 0
+  },
+  "prior_qualified_release": {
+    "source_sha256": "6597a0df3f99b4f43c42bff1cdbc59f5fdf730c57837f3d4112a598fbfbe5fb8",
+    "image_sha256": "299a31190c380541a73ed9eb144a303fa37abccc4f3c3e0ad47f99f1538122c0",
+    "physical_qualification": {
+      "source_compiles": 12,
+      "generated_programs": 10,
+      "self_source_generations": 2
+    },
+    "evidence": "docs/tasks/C006/evidence/native-promotion-001"
   },
   "evidence": [
-    "docs/tasks/C006/evidence/live-bootstrap-resume-001",
-    "docs/tasks/C006/evidence/live-native-baseline-001",
-    "docs/tasks/C006/evidence/live-regressions-001",
-    "docs/tasks/C006/evidence/live-native-errors-001",
-    "docs/tasks/C006/evidence/olimex-small-001",
-    "docs/tasks/C006/evidence/olimex-self-a-late-001",
-    "docs/tasks/C006/evidence/olimex-repeat-001"
+    "docs/tasks/C010/evidence/meta-hosted-pipeline-001",
+    "docs/tasks/C010/evidence/meta-wire-basic-001",
+    "docs/tasks/C010/evidence/meta-wire-bounded-001",
+    "docs/tasks/C010/evidence/meta-wire-errors-001",
+    "docs/tasks/C010/evidence/meta-wire-interactions-001",
+    "docs/tasks/C010/evidence/meta-admissions-001",
+    "docs/tasks/C010/evidence/meta-repack-001",
+    "docs/tasks/C010/evidence/meta-hosted-baseline-001",
+    "docs/tasks/C010/evidence/meta-native-build-001",
+    "docs/tasks/C010/evidence/meta-native-self-001",
+    "docs/tasks/C010/evidence/meta-symbol-layout-001",
+    "docs/tasks/C010/evidence/meta-image-checks-001",
+    "docs/tasks/C010/evidence/meta-native-baseline-001",
+    "docs/tasks/C010/evidence/meta-native-representative-001",
+    "docs/tasks/C010/evidence/meta-native-wire-basic-001",
+    "docs/tasks/C010/evidence/meta-native-wire-bounded-001",
+    "docs/tasks/C010/evidence/meta-native-wire-errors-001",
+    "docs/tasks/C010/evidence/meta-native-wire-interactions-001",
+    "docs/tasks/C010/evidence/meta-native-mandelbrot-001",
+    "docs/tasks/C010/evidence/metadata-image-identity-001",
+    "docs/tasks/C010/evidence/full-native-002",
+    "docs/tasks/C010/evidence/full-reference-001",
+    "docs/tasks/C010/evidence/full-pair-001",
+    "docs/tasks/C010/evidence/meta-native-pipeline-001",
+    "docs/tasks/C010/evidence/meta-native-errors-001",
+    "docs/tasks/C010/evidence/meta-error-controller-001"
   ],
-  "original_interruption_and_timeout_records_preserved": true,
+  "original_failure_records_preserved": true,
   "human_optical_validation": false,
   "performance_benchmark": false
 }

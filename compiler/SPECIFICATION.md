@@ -4,11 +4,14 @@ The current implementation proves the path from BBC BASIC source to a MOS
 native executable. Later stages must preserve BBC BASIC values and activation
 semantics before broadening the accepted language. This draft describes the
 promoted C001 bootstrap, C002 numeric expression/output and C003 scalar/string operations, C004 control/activations and C005 memory, I/O, DATA and source-error facilities in
-`compiler/compiler.bas`. C006 qualifies self-compilation in the emulator and
-two physical Olimex generations with complete identical images. The qualified
-development executable is `compiler/bin/compiler.bin`, copied unchanged from
-the second hardware output. These remain on the development branch; promotion
-to main is separate. No human optical or performance acceptance is claimed.
+`compiler/compiler.bas`. C006 qualified the earlier source6597a0df/image299a3119
+with four emulator images and two physical generations. C010 adds MODE, GCOL,
+PLOT and bare numeric GET for unchanged Mandelbrot, with exact reference graphics
+output. Its current native compiler derives from that qualified seed and
+reproduces its complete image in a fresh native self-build. The development
+executable and exact version/qualification are in `compiler/bin/manifest.json`.
+This version's physical/human and performance results remain unclaimed. Main
+promotion is separate.
 Task documents and experimental silos follow
 [the accepted task convention](../docs/tasks/README.md).
 
@@ -39,8 +42,9 @@ The Author accepted the corrected C002 baseline for a development checkpoint.
    is allowed. The compiler does not reorder physical lines. Zero is a compiler label here;
    the pinned Agon text loader treats a zero-numbered line as immediate mode.
    Direct interpreter comparisons therefore use positive conventional numbers.
-4. Proposed named label syntax is `@name:` at a statement boundary; targets
-   are `GOTO @name` and `GOSUB @name`. For example:
+4. Named label syntax is `@name:` at a statement boundary; targets
+   are `GOTO @name` and `GOSUB @name`. The `@` is required in both the
+   definition and each reference. For example:
 
    ```basic
    GOSUB @message
@@ -69,6 +73,18 @@ The Author accepted the corrected C002 baseline for a development checkpoint.
    the package's SFIX semantics and emits the low byte. Negative values and
    byte wrapping are supported when conversion fits a signed integer. Word
    and zero-fill forms remain unsupported. `CLS` emits VDU 12.
+
+   `MODE expression` preserves the reference SFIX/low8 command and its MOS mode
+   acknowledgement wait, including clearing the flag before expression
+   evaluation. `GCOL colour` defaults to action0; `GCOL action,colour` converts
+   both arguments in order and emits their low bytes. `PLOT x,y` defaults to
+   selector69; `PLOT selector,x,y` converts arguments in order, then emits the
+   low8 selector and two low16 coordinates, little-endian. PLOT BY and related
+   graphics/sound statements remain outside the admitted scope.
+
+   Bare numeric `GET` waits for a MOS keyboard byte and returns an unsigned
+   integer0..255; Escape raises error17 through the existing error policy.
+   GET(port), GET#, GET$ and broader asynchronous Escape are not admitted here.
 9. `END` and falling off the source exit to MOS. `RETURN` without GOSUB reports
    `No GOSUB`; nested GOSUB is limited to 255 frames. Runtime failures return
    status 1, success returns status 0. `END` unwinds all outstanding GOSUBs.
@@ -405,5 +421,8 @@ The Author accepted the corrected C002 baseline for a development checkpoint.
    images, native regressions and two physical generations. The original host
    interruption/resumed lineage and first physical observation timeout/actual
    late completion remain explicit in the retained evidence.
+   C010 extends that exact qualified native lineage with a new source/image
+   and a fresh byte-identical native self-build. It does not relabel the older
+   interpreted four-stage or physical results as tests of the new version.
 
 Unfinished implementation is tracked only in [TODO.md](../TODO.md).

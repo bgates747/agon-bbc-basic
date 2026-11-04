@@ -26,11 +26,15 @@ existing string/numeric regressions on the reauthorized Pi5 CLI.
 | REM and colon statements | Implemented | Quoted colons remain string data |
 | PRINT | Partial | Literals, string and numeric expressions; default G9/initial width 10; semicolon padding/newline rules; no comma zones, TAB/SPC, ~ or mutable @% |
 | VDU and CLS | Partial | Numeric byte expressions use SFIX and low-byte wrapping; no word/zero-fill forms |
+| MODE | Partial | Numeric expression, reference SFIX/low8, VDU22 and acknowledgement wait; inherits MOS/VDP mode support |
+| GCOL | Partial | One colour argument (action0) or action,colour; per-argument SFIX and low8 bytes |
+| PLOT | Partial | Two coordinates (selector69) or selector,x,y; per-argument SFIX, low8 selector and low16 coordinates; BY and other graphics statements unsupported |
+| Numeric GET | Partial | Bare keyboard GET waits and returns unsigned0..255; Escape17 through existing error policy; GET(port), GET#, GET$ and general asynchronous Escape remain unsupported/unqualified |
 | 32-bit integer values | Implemented | Exact four-byte payloads and signed hex bit patterns; no ADL narrowing |
 | Numeric literals | Partial | Decimal whole/fraction/uppercase E forms within 255-byte source lines; reference reader results/types/errors preserved, including quirks; lowercase e and crunched text after exponents rejected; hex up to eight uppercase digits; binary literals unsupported |
 | 40-bit floating-point values | Implemented for numeric expressions | Five-byte literals/arithmetic/promoted values; reference conversion and range behavior; five-byte scalar variants; reader errors occur when executed |
 | Arithmetic and conversion | Partial | Binary + - * / ^ DIV MOD, unary signs, package overflow/promotion and VDU SFIX |
-| Standard math functions and PI | Implemented subset | ABS ACS ASN ATN COS DEG EXP INT LN LOG NOT RAD SGN SIN SQR TAN, PI; RND and OS functions remain unsupported |
+| Standard math functions and PI | Implemented subset | ABS ACS ASN ATN COS DEG EXP INT LN LOG NOT RAD SGN SIN SQR TAN, PI; RND and other OS functions remain unsupported |
 | Numeric formatting | Partial | Fixed G9, matching the reference; @% assignment and other PRINT formats unsupported |
 | Comparison and Boolean expressions | Partial | Numeric and string = <> <= >= < >, numeric NOT/AND/EOR/OR and TRUE/FALSE in expressions, assignments, VDU/PRINT; comparisons return -1/0; no shifts |
 | Numeric variables | Implemented subset | Plain/LET assignment and reads; five-byte unsuffixed variants, four-byte %, one-byte &;256 bindings shared with arrays; runtime creation/undefined-read checks, predefined A%–Z%; global GOSUB mutation |
@@ -52,7 +56,7 @@ existing string/numeric regressions on the reauthorized Pi5 CLI.
 | EVAL | Deliberately unsupported | Compile-time rejection; absent from initial language |
 | STOP, RUN, CHAIN, OSCLI | Unsupported | STOP is not silently compiled as END |
 | Tokenised source, abbreviations, lowercase keywords | Unsupported | No silent tokenisation assumptions |
-| Self-compilation | Implemented for qualified source | Exact source6597a0df produces identical324275-byte G0/G1/G2/repeat images, including actual normal interpreted main. Explicit resumed lineage is retained; native baseline39, representative12 and error39 suites pass. Physical12 source compiles/10 generated programs and two self-source generations pass with whole-image equality. Second hardware output is promoted unchanged to compiler/bin/compiler.bin; no human optical or performance claim |
+| Self-compilation | Implemented for qualified source | Exact source70d3c5c6 produces 327205-byte image40e4ae06 from the prior qualified native seed; its fresh native self-build matches completely. Native baseline39, representative12, error39 and18 graphics/key pairs pass. Earlier hardware results describe the prior source/image; this version awaits physical/human results |
 
 The [C003 scalar record](../docs/tasks/C003/SCALARS.md) describes reference
 creation/storage rules, scope and qualification; the [string core record](../docs/tasks/C003/STRINGS.md) adds ownership, allocation and ABI evidence. [Slices and comparisons](../docs/tasks/C003/SLICES.md) records the typed expression extension and reference boundaries.

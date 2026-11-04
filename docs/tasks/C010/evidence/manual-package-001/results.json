@@ -1,0 +1,15 @@
+{
+  "completed": true,
+  "files": 53,
+  "bytes": 501472,
+  "package_manifest_sha256": "1a9e5b2c1d4300ff25ec766f63487bc0c577aeeb80b1a96378dac364dfacee9f",
+  "source_sha256": "70d3c5c6f4da44cf865c36c3f4edef143b9e37c662097067a5e6ceac414c300e",
+  "image_sha256": "40e4ae06730b6735696f5f07962efd10e6c9cfbdc44a81b65dd6e9ce1c82355a",
+  "all_payload_paths_portable": true,
+  "all_local_markdown_links_shipped": true,
+  "prior_tests_preserved": 12,
+  "added_mandelbrot": true,
+  "manual_validation": false,
+  "physical_validation": false,
+  "scope": "Complete portable package, no target execution"
+}

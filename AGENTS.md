@@ -32,72 +32,47 @@ environment, ownership, assembly, emulator, hardware and coordination rules.
 
 ## Current qualified compiler
 
-C010 is the active implementation task: support the Author-validated unchanged
-Mandelbrot source (MODE, GCOL, PLOT and numeric GET initially missing). Read its
-brief before changing behavior. The Author requests logical commit/push groups
-and continuing implementation. C008 manual results remain pending; C009 is a
-low-priority possible feature only. Prior qualification below remains tied to
-its exact older source/image until new evidence is recorded.
-
-C010's13c2a488 prototype emits the unchanged18329-byte Mandelbrot image bad741db;
-actual full reference/native CPU runs match all2959501 graphics bytes/328833
-plots. Its329054-byte native image a59160c4 passes native baseline39,
-representative12 and18 new graphics/key pairs, but actual self-source reports
-No room (native-self-001/self-fit-block-001). It is not promoted. The selected
-fit experiment is C010/candidate-fit.bas, SHA b8afbfdb51de803e7c8e670d4c00e434371e3f2d0af4ce354ce29f3580cdd875;
-it factors private bookkeeping with unchanged target images. Fresh hosted39,
-admissions/repacking and18 graphics/key pairs pass. The first fit build/waiter
-tool sessions returned143 without completion; their frozen failures are retained.
-Fresh fit-native-build-002 completes:327290 bytes, SHA
-3c761c16c420a79ed04d00e3803ab00b3af54764ea66c93bb0b9a88c78f1b348,
-2031.521 controller seconds. Full GNU image checks, native baseline39,
-representative12, all18 graphics/key pairs and fresh error39/ERR/ERL/repeat pass; all39 error images and
-ten representative images equal C006's older images. Its actual self-build also
-fails No room at19216 in716.502s; fit-native-self-001 and fit-native-pipeline-002
-retain that failure. All three fit services have completed. Neither prototype
-is eligible for promotion.
-Logs are under C010/build/controller-logs; durable-launch-001 pins all three
-scripts/arguments/limits. They are not installed/enabled for startup and collect
-on exit. Do not modify active source/controllers or duplicate the owned
-profiles. See C010/AUDIT.md.
-
-The selected current experiment is C010/candidate-meta.bas, SHA
-70d3c5c6f4da44cf865c36c3f4edef143b9e37c662097067a5e6ceac414c300e.
-metadata-source-001 freezes an exact four-prefix private-symbol substitution
-from b8afbfdb; public syntax, capacities, addresses and runtimes stay fixed.
-Fresh meta-hosted-baseline-00139/15, meta-admissions-001, all ten repackers and
-all18 meta-wire pairs pass with unchanged images/diagnostics/runtime modules.
-meta-hosted-pipeline-001 completes545.649s. Five finite transient services bbc-basic-c010-meta-ROLE-001
-(ROLE build/hosted/native/errors/layout; hosted complete) own this work. Build/self use
-c010-fit-build, hosted then native serial tests use c010-fit, errors use root
-.emulator, and the interpreted layout observer uses c010-wire. Individual
-metadata-launch-ROLE-001 receipts pin scripts/source/arguments/limits. No
-startup units are installed; do not modify active scripts/source or reuse
-these profiles. metadata_pipeline.py owns sequencing and fresh unique cohorts.
-meta-symbol-layout-001 is complete:327205 layout bytes,2128 symbols/229 routines/
-254 bindings, seven pages,9764 symbol bytes/5550 other string bytes. The prefix
-saving is4433 bytes. metadata-bounds-001 gives93259 mandatory/observed against
-98523 available, leaving5264 before omitted costs (old4087); not native fit
-proof. The layout service is complete and c010-wire is idle. Only the build
-and dependent native/error services remain active; do not duplicate their work.
-meta-native-build-001 now completes2031.510s: actual327205-byte image SHA
+C010's implementation and automated qualification are promoted. Live source
+compiler/compiler.bas is SHA
+70d3c5c6f4da44cf865c36c3f4edef143b9e37c662097067a5e6ceac414c300e:
+113293 bytes/2104 lines,187 PROC and42 FN definitions. Actual source layout uses
+2128 symbols/229 routines/254 bindings and seven target pages. Live native
+compiler/bin/compiler.bin is327205 bytes, SHA
 40e4ae06730b6735696f5f07962efd10e6c9cfbdc44a81b65dd6e9ce1c82355a.
-meta-image-checks-001 passes full GNU image/entry/adapter checks and
-meta-native-mandelbrot-001 emits unchanged bad741db. The build service is done;
-the native service now owns the actual fresh meta-native-self-001 and serial
-regressions. Error39 runs separately. Live source/bin remain old pending gates.
-The fresh native baseline39, representative12, error39 and all18 wire pairs
-now pass. All ten representative and39 error images equal C006; all36 hosted/
-native graphics/key fixture images equal b8afbfdb's exact corresponding images
-(metadata-image-identity-001). The error service is complete. Only native
-self-build meta-native-self-001 remains active, owned by
-bbc-basic-c010-meta-native-001 in c010-fit-build. Other profiles are idle.
-Live source/bin remain the
-older qualified versions below. The staged Oryx mandelbrot-c010.bin is exact
-bad741db; its visual result remains pending, and no Oryx emulator was controlled.
+
+C010 adds MODE, GCOL, PLOT and bare numeric GET for exact unchanged Mandelbrot.
+Native baseline39, representative12, error39/ERR/ERL/repeat and18 graphics/key
+pairs pass; hosted checks, all ten repackers/nine unchanged runtimes and36
+complete graphics image comparisons pass. Exact Mandelbrot source1eb897c8
+emits18329-byte bad741db; full actual reference/native CPU runs match2959501
+graphics bytes/328833 plots, final key wait, MODE1 and return. These observations
+do not render pixels or measure a paired performance benchmark.
+
+meta-native-build-001 uses the older qualified native seed299a3119 and completes
+2031.510 controller seconds. Its actual new native self-build completes1964.124s
+and matches every byte of40e4ae06 (meta-native-self-001). All nine pipeline stages
+complete in meta-native-pipeline-001. live-promotion-001 gates/copies that actual
+self-output unchanged. No new interpreted four-stage or hardware result is claimed.
+The earlier failed prototypes/interrupted controllers remain frozen, including
+both No room failures. C010/AUDIT.md owns details and private symbol namespace
+proof. Private resets/SFIX factoring and shorter symbol text retain self-fit;
+4096 symbols, all language/resource limits, runtime modules, numerical behavior,
+&A7F00 heap endpoint,32768 activation bytes and &AFF00 guard remain unchanged.
+The lower-bound storage observation leaves5264 before omitted costs; actual
+self-compilation, rather than that estimate, establishes this source's fit.
+
+All finite C010 services/jobs have completed. service-completion-001 verifies
+an empty owned service/controller/emulator list at01:33:54UTC November4
+(20:33:54EST November3). No hardware custody or Oryx emulator session was selected.
+C008 manual results remain pending, and C009 is a possible low-priority feature
+only. The53-file portable refresh (501472 bytes, manifest1a9e5b2c) is frozen in
+C010/evidence/manual-package-001; bounded managed updates are the remaining
+C010 delivery step. Preserve all user files/results and older frozen evidence.
+
+## Earlier C005/C006 basis
 
 1. C001–C005 and C007 have completed their initial scopes. C005's language,
-   streaming/resource and compact-runtime work is promoted. Live source SHA:
+   streaming/resource and compact-runtime work is promoted. Earlier qualified source SHA:
    `6597a0df3f99b4f43c42bff1cdbc59f5fdf730c57837f3d4112a598fbfbe5fb8`.
    It has2067 lines,177 PROC/42 FN definitions. Actual self-source uses2094
    symbols/219 routines/254 bindings and emits324275 bytes.
@@ -162,13 +137,13 @@ bad741db; its visual result remains pending, and no Oryx emulator was controlled
    are invalid. Private receipts remain ignored under C006/build/physical-c006-r01
    and physical-c006-r02; no target operation follows from historical records.
    Any future physical run needs a new finite scope/reservation/fresh grant.
-5. The qualified development executable is compiler/bin/compiler.bin, copied
-   unchanged from actual second hardware output by promote_native.py after full
-   evidence/source/license/release gates. compiler/bin/manifest.json and
-   C006/evidence/native-promotion-001 retain provenance; the exact root/vendor
-   notice is alongside it. MOS LOAD then RUN . starts normal filename prompts.
-   It includes its runtime; no installed interpreter or assembler is required.
-   Source and numeric/runtime behavior remain unchanged. No main merge occurs.
+5. C006 promoted the earlier299a3119 executable unchanged from its second
+   actual hardware output; native-promotion-001 retains that exact evidence.
+   C010 now promotes40e4ae06 from its actual fresh Pi native self-build. The
+   current compiler/bin/manifest.json separates the two versions and retains
+   earlier physical provenance; the exact root/vendor notice is alongside it.
+   MOS LOAD then RUN . starts normal filename prompts. Its runtime is included;
+   no installed interpreter or assembler is required. No main merge occurs.
 6. Use .venv/bin/python explicitly; compiler/README.md owns commands. Ignored
    .emulator/ is automated CLI only, launched through its generated profile-local
    ./fab-agon-emulator wrapper. Freeze owned results before subsequent work.

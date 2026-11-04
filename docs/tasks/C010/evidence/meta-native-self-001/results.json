@@ -1,0 +1,11 @@
+{
+  "scope": "Actual supplied native compiler self-compiles the exact BBC candidate",
+  "compiler_source_sha256": "70d3c5c6f4da44cf865c36c3f4edef143b9e37c662097067a5e6ceac414c300e",
+  "seed_sha256": "40e4ae06730b6735696f5f07962efd10e6c9cfbdc44a81b65dd6e9ce1c82355a",
+  "cli_sha256": "63d22f604af13317cf6532911b9206ac03e7b4f9ed257f93924a65d551646d8e",
+  "completed": true,
+  "image_sha256": "40e4ae06730b6735696f5f07962efd10e6c9cfbdc44a81b65dd6e9ce1c82355a",
+  "image_bytes": 327205,
+  "complete_image_equals_expected": true,
+  "controller_seconds": 1964.124
+}
