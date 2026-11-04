@@ -45,9 +45,21 @@ plots. Its329054-byte native image a59160c4 passes native baseline39,
 representative12 and18 new graphics/key pairs, but actual self-source reports
 No room (native-self-001/self-fit-block-001). It is not promoted. The selected
 fit experiment is C010/candidate-fit.bas, SHA b8afbfdb51de803e7c8e670d4c00e434371e3f2d0af4ce354ce29f3580cdd875;
-it factors private bookkeeping with unchanged target images. Fresh hosted39/
-admissions/repacking pass; fit-native-build-001 and fit_pipeline.py own pending
-native/self-fit qualification. See C010/AUDIT.md. Live source/bin remain the
+it factors private bookkeeping with unchanged target images. Fresh hosted39,
+admissions/repacking and18 graphics/key pairs pass. The first fit build/waiter
+tool sessions returned143 without completion; their frozen failures are retained.
+Fresh fit-native-build-002 completes:327290 bytes, SHA
+3c761c16c420a79ed04d00e3803ab00b3af54764ea66c93bb0b9a88c78f1b348,
+2031.521 controller seconds. Full GNU image checks, native baseline39,
+representative12, all18 graphics/key pairs and fresh error39/ERR/ERL/repeat pass; all39 error images and
+ten representative images equal C006's older images. Its actual self-build is
+still pending under finite service bbc-basic-c010-fit-pipeline-002, which owns
+c010-fit-build and c010-fit profiles. The build/error services have completed.
+Logs are under C010/build/controller-logs; durable-launch-001 pins all three
+scripts/arguments/limits. They are not installed/enabled for startup and collect
+on exit. Do not modify active source/controllers or duplicate the owned
+profiles. See C010/AUDIT.md.
+Live source/bin remain the
 older qualified versions below. The staged Oryx mandelbrot-c010.bin is exact
 bad741db; its visual result remains pending, and no Oryx emulator was controlled.
 

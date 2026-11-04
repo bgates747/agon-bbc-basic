@@ -89,12 +89,36 @@ promotion is separate.'''
         'The compiler is written in BBC BASIC and emits standalone native eZ80 ADL code. '
         'This build adds MODE, GCOL, PLOT and bare numeric GET for the unchanged '
         'Mandelbrot program. Its complete graphics stream matches the reference. '
-        f'The current{size}-byte native compiler reproduces itself byte for byte. '
+        f'The current {size}-byte native compiler reproduces itself byte for byte. '
         'Native baseline39, representative12, error39 and18 graphics/key pairs pass.\n\n'
         'The earlier C006 four-stage and physical results retain their exact older '
         'source6597a0df/image299a3119. This version awaits physical/human validation; '
         'no paired performance benchmark is claimed. The current executable and '
         'provenance are in [`bin/`](bin/README.md).\n\n')+marker+text.split(marker,1)[1]
+    old = '''adapters and bounded private metadata. Its324275-byte self-source image matches
+the interpreter-produced seed exactly in the first native preflight. See the
+[compaction record](../docs/tasks/C005/COMPACTION.md) and
+[generation contract](../docs/tasks/C006/BOOTSTRAP.md) for evidence and the
+remaining repeated-generation/physical boundary.'''
+    new = '''adapters and bounded private metadata. C005/C006's earlier324275-byte image
+matches its interpreted seed and subsequent native/physical generations.
+C010 preserves those resource limits; its private bookkeeping factoring keeps
+the graphics-enabled compiler within the same memory map. See the
+[compaction record](../docs/tasks/C005/COMPACTION.md),
+[earlier generation contract](../docs/tasks/C006/BOOTSTRAP.md) and
+[current qualification](../docs/tasks/C010.md) for their exact versions.'''
+    text = once(text,old,new)
+    old = '''The completed generation record is live-bootstrap-resume-001. It preserves the'''
+    text = once(text,old,'''The earlier C006 generation record is live-bootstrap-resume-001. It preserves the''')
+    old = '''Both hardware slots are cleanly released. The unchanged second output is the
+qualified development executable at bin/compiler.bin, with its exact notice
+and provenance; the initial C006 scope is complete.'''
+    new = '''Both hardware slots are cleanly released. That unchanged second output was
+the qualified development executable before C010. Its physical evidence remains
+bound to source6597a0df/image299a3119; the initial C006 scope is complete.
+The current executable's manifest records its fresh automated qualification
+and retains that earlier release's provenance separately.'''
+    text = once(text,old,new)
     text += '''
 
 [Mandelbrot](examples/mandelbrot.bas) preserves the Author-validated source bytes.

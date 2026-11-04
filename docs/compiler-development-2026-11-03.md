@@ -961,3 +961,18 @@ fresh self-image equality and the other retained evidence. Live admissions remai
 unchanged. Reference/test catalogue documentation now records the actual MODE/
 GCOL/PLOT/GET audit and full unchanged Mandelbrot parity with rendering/timing
 limits explicit. The conditional documentation updater runs only after promotion.
+
+The durable fit-native-build-002 completes normally in2031.521 controller
+seconds, producing327290 bytes, SHA
+3c761c16c420a79ed04d00e3803ab00b3af54764ea66c93bb0b9a88c78f1b348.
+This saves1764 bytes against the first graphics prototype without changing any
+runtime module or resource capacity. Complete GNU image checks pass; its native
+Mandelbrot compilation produces the same bad741db image. Native baseline39 and
+representative12 pass, with all ten representative images identical to C006.
+Fresh native error39 matches pinned reference output/ERR/ERL, deterministic
+repeat and all39 earlier complete images (fit-native-errors-001,
+fit-error-controller-002; harness622.971 controller seconds). The self-build
+remains active and unqualified; live source/image and package are unchanged.
+All18 fresh native graphics/key pairs also pass in the four
+fit-native-wire-*-001 cohorts. Verify each completed cohort's retained manifest
+before checkpointing; leave the active self/pipeline directories unstaged.

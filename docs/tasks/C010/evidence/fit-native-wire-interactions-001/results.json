@@ -1,0 +1,34 @@
+{
+  "scope": "Actual CPU UART stream parity; protocol peer, no renderer or human validation",
+  "compiler_source_sha256": "b8afbfdb51de803e7c8e670d4c00e434371e3f2d0af4ce354ce29f3580cdd875",
+  "reference_sha256": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+  "observer_sha256": "63d22f604af13317cf6532911b9206ac03e7b4f9ed257f93924a65d551646d8e",
+  "mos_sha256": "d564243283972690933a4554296ad6202ca4ef54572279533a942960846bebae",
+  "suite": "interactions",
+  "cases": [
+    {
+      "name": "mode-local-recovery",
+      "equal": true,
+      "reference_hex": "160837370d0a1601",
+      "native_hex": "160837370d0a1601",
+      "image_bytes": 20208
+    },
+    {
+      "name": "keyboard-local",
+      "equal": true,
+      "reference_hex": "433031305f574149540d0a3138313a373a6f757465720d0a",
+      "native_hex": "433031305f574149540d0a3138313a373a6f757465720d0a",
+      "image_bytes": 16913
+    },
+    {
+      "name": "mode-handler-reuse",
+      "equal": true,
+      "reference_hex": "160132303a33300d0a",
+      "native_hex": "160132303a33300d0a",
+      "image_bytes": 19705
+    }
+  ],
+  "completed": true,
+  "native_compiler_sha256": "3c761c16c420a79ed04d00e3803ab00b3af54764ea66c93bb0b9a88c78f1b348",
+  "controller_seconds": 44.465
+}

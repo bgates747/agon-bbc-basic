@@ -1,0 +1,158 @@
+[
+  {
+    "source_file": "t0.bas",
+    "image_file": "t0.dat"
+  },
+  {
+    "source_file": "t1.bas",
+    "image_file": "t1.dat"
+  },
+  {
+    "source_file": "t2.bas",
+    "image_file": "t2.dat"
+  },
+  {
+    "source_file": "t3.bas",
+    "image_file": "t3.dat"
+  },
+  {
+    "source_file": "t4.bas",
+    "image_file": "t4.dat"
+  },
+  {
+    "source_file": "t5.bas",
+    "image_file": "t5.dat"
+  },
+  {
+    "source_file": "t6.bas",
+    "image_file": "t6.dat"
+  },
+  {
+    "source_file": "t7.bas",
+    "image_file": "t7.dat"
+  },
+  {
+    "source_file": "t8.bas",
+    "image_file": "t8.dat"
+  },
+  {
+    "source_file": "t9.bas",
+    "image_file": "t9.dat"
+  },
+  {
+    "source_file": "t10.bas",
+    "image_file": "t10.dat"
+  },
+  {
+    "source_file": "t11.bas",
+    "diagnostic": "t11.bas:1:14: Undefined target @missing"
+  },
+  {
+    "source_file": "t12.bas",
+    "diagnostic": "t12.bas:1:9: Undefined target #123"
+  },
+  {
+    "source_file": "t13.bas",
+    "diagnostic": "t13.bas:2:4: Duplicate target @a"
+  },
+  {
+    "source_file": "t14.bas",
+    "diagnostic": "t14.bas:2:3: Line numbers must increase"
+  },
+  {
+    "source_file": "t15.bas",
+    "diagnostic": "t15.bas:2:3: Line numbers must increase"
+  },
+  {
+    "source_file": "t16.bas",
+    "diagnostic": "t16.bas:1:6: Number outside supported range"
+  },
+  {
+    "source_file": "t17.bas",
+    "diagnostic": "t17.bas:1:15: Hex literal exceeds eight digits"
+  },
+  {
+    "source_file": "t18.bas",
+    "diagnostic": "t18.bas:1:6: Unexpected text after statement"
+  },
+  {
+    "source_file": "t19.bas",
+    "diagnostic": "t19.bas:1:9: Unexpected text after statement"
+  },
+  {
+    "source_file": "t20.bas",
+    "diagnostic": "t20.bas:1:20: Unterminated string"
+  },
+  {
+    "source_file": "t21.bas",
+    "diagnostic": "t21.bas:1:11: EVAL is deliberately unsupported"
+  },
+  {
+    "source_file": "t22.bas",
+    "diagnostic": "t22.bas:1:5: EVAL is deliberately unsupported"
+  },
+  {
+    "source_file": "t23.bas",
+    "diagnostic": "t23.bas:1:5: Unsupported statement CALL"
+  },
+  {
+    "source_file": "t24.bas",
+    "diagnostic": "t24.bas:1:4: Unsupported statement SYS"
+  },
+  {
+    "source_file": "t25.bas",
+    "diagnostic": "t25.bas:1:5: Unsupported statement CASE"
+  },
+  {
+    "source_file": "t26.bas",
+    "diagnostic": "t26.bas:1:6: Expected an unsigned integer constant"
+  },
+  {
+    "source_file": "t27.bas",
+    "diagnostic": "t27.bas:1:8: Undefined target @A"
+  },
+  {
+    "source_file": "t28.bas",
+    "diagnostic": "t28.bas:1:10: Expected :"
+  },
+  {
+    "source_file": "t29.bas",
+    "diagnostic": "t29.bas:1:2: Expected a name"
+  },
+  {
+    "source_file": "t30.bas",
+    "diagnostic": "t30.bas:1:35: Name exceeds 32 characters"
+  },
+  {
+    "source_file": "t31.bas",
+    "diagnostic": "t31.bas:1:256: Source line exceeds 255 bytes"
+  },
+  {
+    "source_file": "t32.bas",
+    "diagnostic": "t32.bas:1:1: NUL byte in source"
+  },
+  {
+    "source_file": "t33.bas",
+    "diagnostic": "t33.bas:1:12: Unexpected text after statement"
+  },
+  {
+    "source_file": "t34.bas",
+    "diagnostic": "t34.bas:1:10: Unexpected text after statement"
+  },
+  {
+    "source_file": "t35.bas",
+    "image_file": "t35.dat"
+  },
+  {
+    "source_file": "t36.bas",
+    "image_file": "t36.dat"
+  },
+  {
+    "source_file": "t37.bas",
+    "image_file": "t37.dat"
+  },
+  {
+    "source_file": "t38.bas",
+    "image_file": "t38.dat"
+  }
+]

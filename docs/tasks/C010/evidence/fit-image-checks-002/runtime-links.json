@@ -1,0 +1,22 @@
+[
+  {
+    "program": 0,
+    "bases": {
+      "numeric": 533556,
+      "strings": 587071,
+      "memory": 588514,
+      "io": 538211,
+      "data": 539012,
+      "control": 540500,
+      "procedure": 549350,
+      "error": 550485
+    },
+    "arena": 687872,
+    "limit": 720640,
+    "saved_sp_slot": 533552,
+    "depth_slot": 533555,
+    "heap_context": 589428,
+    "data_cursor_entry_reset": true,
+    "error_and_ACT_bridges_checked": true
+  }
+]

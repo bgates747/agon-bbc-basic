@@ -1,0 +1,48 @@
+{
+  "scope": "Actual CPU UART stream parity; protocol peer, no renderer or human validation",
+  "compiler_source_sha256": "b8afbfdb51de803e7c8e670d4c00e434371e3f2d0af4ce354ce29f3580cdd875",
+  "reference_sha256": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+  "observer_sha256": "63d22f604af13317cf6532911b9206ac03e7b4f9ed257f93924a65d551646d8e",
+  "mos_sha256": "d564243283972690933a4554296ad6202ca4ef54572279533a942960846bebae",
+  "suite": "basic",
+  "cases": [
+    {
+      "name": "basic-graphics",
+      "equal": true,
+      "reference_hex": "16081200051945020003001601",
+      "native_hex": "16081200051945020003001601",
+      "image_bytes": 5622
+    },
+    {
+      "name": "graphics-conversions",
+      "equal": true,
+      "reference_hex": "16011200071201ff19450100ffff19450080008019ffffffffff1601",
+      "native_hex": "16011200071201ff19450100ffff19450080008019ffffffffff1601",
+      "image_bytes": 5863
+    },
+    {
+      "name": "argument-order",
+      "equal": true,
+      "reference_hex": "4142120102434445190304000500",
+      "native_hex": "4142120102434445190304000500",
+      "image_bytes": 16041
+    },
+    {
+      "name": "keyboard",
+      "equal": true,
+      "reference_hex": "433031305f574149540d0a38313a31330d0a",
+      "native_hex": "433031305f574149540d0a38313a31330d0a",
+      "image_bytes": 5627
+    },
+    {
+      "name": "keyboard-expression",
+      "equal": true,
+      "reference_hex": "433031305f574149540d0a3236323a31340d0a",
+      "native_hex": "433031305f574149540d0a3236323a31340d0a",
+      "image_bytes": 5603
+    }
+  ],
+  "completed": true,
+  "native_compiler_sha256": "3c761c16c420a79ed04d00e3803ab00b3af54764ea66c93bb0b9a88c78f1b348",
+  "controller_seconds": 57.277
+}

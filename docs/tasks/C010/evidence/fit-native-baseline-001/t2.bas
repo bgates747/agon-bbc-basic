@@ -1,0 +1,5 @@
+10 PRINT "numbered"
+20 GOSUB 100
+30 END
+100 PRINT "sub"
+110 RETURN

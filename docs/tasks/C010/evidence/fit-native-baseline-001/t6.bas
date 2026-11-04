@@ -1,0 +1,3 @@
+VDU 65,66,&43,13,10
+REM EVAL : rubbish
+END

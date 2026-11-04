@@ -1,0 +1,11 @@
+{
+  "compiler_source_sha256": "b8afbfdb51de803e7c8e670d4c00e434371e3f2d0af4ce354ce29f3580cdd875",
+  "native_compiler_sha256": "3c761c16c420a79ed04d00e3803ab00b3af54764ea66c93bb0b9a88c78f1b348",
+  "source_sha256": "1eb897c8ef3aecc99910e0352eba6d32064ebc4aef9e7bd32e9952b0878b43de",
+  "observer_sha256": "63d22f604af13317cf6532911b9206ac03e7b4f9ed257f93924a65d551646d8e",
+  "completed": true,
+  "exact_source_and_complete_image_match_hosted": true,
+  "image_sha256": "bad741db6adfc250c7c2f48c37687aec93e8271f77c48bd760f309548dada196",
+  "image_bytes": 18329,
+  "controller_seconds": 34.951
+}
