@@ -1,0 +1,8 @@
+{
+  "retained_harness": "docs/tasks/C006/native_baseline.py",
+  "retained_harness_sha256": "248fbe6a50e3ee5eb7bdb4b0d9fe84cb826c7de6fb0438264f46ce8a5a6f4c8e",
+  "observer_sha256": "63d22f604af13317cf6532911b9206ac03e7b4f9ed257f93924a65d551646d8e",
+  "compiler_source_sha256": "70d3c5c6f4da44cf865c36c3f4edef143b9e37c662097067a5e6ceac414c300e",
+  "identical_representative_full_images": [],
+  "scope": "Original C006 assertions with explicit C010 destination/profile selection"
+}

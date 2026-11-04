@@ -76,6 +76,8 @@ def main():
         'and return. No elapsed-time or performance acceptance is implied.\n')
     readme = (out/'readme.txt').read_text()
     replacements = [
+        ('tests/readme.txt indexes ten successful-source tests and two rejection tests.',
+         'tests/readme.txt indexes twelve small tests and the Mandelbrot program.'),
         ('In particular, general graphics/sound statements, RND, CASE, numeric INPUT,',
          'MODE, GCOL, PLOT and bare numeric GET support their documented forms.\n'
          'Other graphics/sound statements, RND, CASE, numeric INPUT,'),
@@ -116,6 +118,8 @@ def main():
         if p.is_file() and p.name != 'manifest.json'}
     package = dict(old, compiler_sha256=native['image_sha256'], source_sha256=native['source_sha256'],
         manual_validation=False, files=files)
+    package['prior_cases_source_sha256'] = package.pop('cases_source_sha256')
+    package['mandelbrot_source_sha256'] = digest(case/'mandelbrot.bas')
     (out/'manifest.json').write_text(json.dumps(package, indent=2)+'\n')
     print(json.dumps(dict(files=len(files)+1, manifest_sha256=digest(out/'manifest.json'))))
 

@@ -1,0 +1,282 @@
+{
+  "scope": "Exact fixtures and complete emitted images, not new CPU executions",
+  "prior_source_sha256": "b8afbfdb51de803e7c8e670d4c00e434371e3f2d0af4ce354ce29f3580cdd875",
+  "source_sha256": "70d3c5c6f4da44cf865c36c3f4edef143b9e37c662097067a5e6ceac414c300e",
+  "groups": [
+    {
+      "prior": "fit-wire-basic-001",
+      "current": "meta-wire-basic-001",
+      "cases": [
+        {
+          "name": "basic-graphics",
+          "source_sha256": "f2387adf8382ac51bea87adced8477762fe0aacfe0069ca635bab2c98c667728",
+          "image_sha256": "91eccf34b75ca4dd9a3df3627a4863eb8126ce968ecad58e690449611ced580e",
+          "bytes": 5622
+        },
+        {
+          "name": "graphics-conversions",
+          "source_sha256": "a1e4a4505cf232f8aa1debf214322a00b2e2ce8777b6297db3fd1b329100bdde",
+          "image_sha256": "5ebdb64c4beb02325e26857844311bbf8c2b4b14fe2bc49079394ce9bdc903e4",
+          "bytes": 5863
+        },
+        {
+          "name": "argument-order",
+          "source_sha256": "571185192753245f5dfa7bf2608808306d8234db113438b489eebe304abe8b99",
+          "image_sha256": "1a19b61e2bf272a8337f8dee088ce5a944f1eabd50528bc63576f1e73bf7c0e5",
+          "bytes": 16041
+        },
+        {
+          "name": "keyboard",
+          "source_sha256": "6b86272e404d8c509948d0de8aa1f01d2b5b7a438dc23e94f93b8d002567e256",
+          "image_sha256": "e6482a9969e6723bcf5f8a04d804691f9bdb3a955793416072ae689be44c70df",
+          "bytes": 5627
+        },
+        {
+          "name": "keyboard-expression",
+          "source_sha256": "21ae26fda1c34fe4e12ef40965f063e1a694f853db2ec4ed93fe69708038f7c9",
+          "image_sha256": "e2e56c36c5a0224be0b216e4e0097efdd3e75072c95dd68f1d61e5c07ed5ddaf",
+          "bytes": 5603
+        }
+      ],
+      "all_exact_sources_and_images_equal": true
+    },
+    {
+      "prior": "fit-wire-bounded-001",
+      "current": "meta-wire-bounded-001",
+      "cases": [
+        {
+          "name": "mandelbrot-bounded",
+          "source_sha256": "656d696bd0513d268bdcb230229730c678e95254d438ef904a5c09f0e4757253",
+          "image_sha256": "785287074f4b8de5d9b7874b26f7627dc1602c22a3d62144cbd83c1f52cbb3f8",
+          "bytes": 18399
+        }
+      ],
+      "all_exact_sources_and_images_equal": true
+    },
+    {
+      "prior": "fit-wire-errors-001",
+      "current": "meta-wire-errors-001",
+      "cases": [
+        {
+          "name": "gcol-first-overflow",
+          "source_sha256": "e206688c0b1b1c7ff8ecb57352f49af59ec89f44e3979261cacb00a0b2d0c84f",
+          "image_sha256": "c545e57f6dfaf2f155e15f639845fc299055f80ca937137edc518c22c94d562d",
+          "bytes": 20176
+        },
+        {
+          "name": "gcol-second-overflow",
+          "source_sha256": "dcef493cc2a638b60d1bf07ab2a92c9649e18d77ea2e413a631e897a8f3bcec3",
+          "image_sha256": "278b74f3312c1194a506076ca46c7d2e22e345b5f4fe2759242b7ed7379c8e93",
+          "bytes": 20176
+        },
+        {
+          "name": "plot-first-overflow",
+          "source_sha256": "89f2e66827c99a1cd7ecd58770ca1e363ece09ebae749a2d87dfc96b34c51750",
+          "image_sha256": "1037cc9dcec52947bc8a6a2c4073edcfe0e288e15d7b339e60f7e3b247fb9513",
+          "bytes": 20263
+        },
+        {
+          "name": "plot-second-overflow",
+          "source_sha256": "8842485fa3736a302ea9aa7da9d1d6810f903f95436fb26d0af942d48e33237b",
+          "image_sha256": "5597619d3cfd40ea43b2e169df0a7ece2b5728426bfebc8a1210c94a0ce187d1",
+          "bytes": 20263
+        },
+        {
+          "name": "plot-third-overflow",
+          "source_sha256": "5f4051f384ffc6136a8e61e329aa465ec74cc121cccc19e5b3be01b0a7ac2f3a",
+          "image_sha256": "4ce58de0c0cc99f46dc9dfa236201a815b55da3c2ae19a00885a37bb1cd8ed78",
+          "bytes": 20263
+        },
+        {
+          "name": "mode-overflow",
+          "source_sha256": "55ad763d09ce602055dca8a960d87158e3cdfe4fd1bfc643bba46190b7a6ce41",
+          "image_sha256": "4d21c82a4fb9411a6aa094f59b6ba7ddbfa63cf795591cceb243cb671cdff2bf",
+          "bytes": 20127
+        },
+        {
+          "name": "mode-expression-error",
+          "source_sha256": "dc5a786257ee3ec01588aae61d7841ab07d772e77c69dc0201cbfc7f2906eb8e",
+          "image_sha256": "daf0ad46497634f38b30a18a69b7456264a16cb1b70b5abc059ed979efe334eb",
+          "bytes": 20149
+        },
+        {
+          "name": "gcol-expression-error",
+          "source_sha256": "11b2474da575f6446a89c347599bad65ad40178c45a7bdec699a4818883556a1",
+          "image_sha256": "f094fb65106616663ff5820f49de141260dd22ad146a4cf42e5d6acdde7c4240",
+          "bytes": 20193
+        },
+        {
+          "name": "keyboard-escape",
+          "source_sha256": "eb1b2714b172721bbca4a8bf04f85011bfa6b04d5b13444043436d2432be7999",
+          "image_sha256": "64175a8776efcf8a1c317222306724f51ce1c8ee32168fff8a8bdc1658866843",
+          "bytes": 19766
+        }
+      ],
+      "all_exact_sources_and_images_equal": true
+    },
+    {
+      "prior": "fit-wire-interactions-001",
+      "current": "meta-wire-interactions-001",
+      "cases": [
+        {
+          "name": "mode-local-recovery",
+          "source_sha256": "e61587547a165ef270d767cca396593f923075d9ae43ffe7957cb3a836953399",
+          "image_sha256": "0f101887f66d3650d3d620625e86d707b4988626db43576ade80474d94ccd8e8",
+          "bytes": 20208
+        },
+        {
+          "name": "keyboard-local",
+          "source_sha256": "8da6a4d61d37194e16e150a7ee77422ce176a118b4a01835e899133574e65922",
+          "image_sha256": "e0bffcbc87ce2de3f1cc621f15576751f4a2067d477fdb462e7609c1844d6f85",
+          "bytes": 16913
+        },
+        {
+          "name": "mode-handler-reuse",
+          "source_sha256": "cd3ec2f6986b41b440cce4c0f1e9765cc125f13d5f452a8163291a360f7fbc32",
+          "image_sha256": "1a21f9c9b204c1f45c7e655e467228a1c44b725c1cd6e1325c007a7864b15018",
+          "bytes": 19705
+        }
+      ],
+      "all_exact_sources_and_images_equal": true
+    },
+    {
+      "prior": "fit-native-wire-basic-001",
+      "current": "meta-native-wire-basic-001",
+      "cases": [
+        {
+          "name": "basic-graphics",
+          "source_sha256": "f2387adf8382ac51bea87adced8477762fe0aacfe0069ca635bab2c98c667728",
+          "image_sha256": "91eccf34b75ca4dd9a3df3627a4863eb8126ce968ecad58e690449611ced580e",
+          "bytes": 5622
+        },
+        {
+          "name": "graphics-conversions",
+          "source_sha256": "a1e4a4505cf232f8aa1debf214322a00b2e2ce8777b6297db3fd1b329100bdde",
+          "image_sha256": "5ebdb64c4beb02325e26857844311bbf8c2b4b14fe2bc49079394ce9bdc903e4",
+          "bytes": 5863
+        },
+        {
+          "name": "argument-order",
+          "source_sha256": "571185192753245f5dfa7bf2608808306d8234db113438b489eebe304abe8b99",
+          "image_sha256": "1a19b61e2bf272a8337f8dee088ce5a944f1eabd50528bc63576f1e73bf7c0e5",
+          "bytes": 16041
+        },
+        {
+          "name": "keyboard",
+          "source_sha256": "6b86272e404d8c509948d0de8aa1f01d2b5b7a438dc23e94f93b8d002567e256",
+          "image_sha256": "e6482a9969e6723bcf5f8a04d804691f9bdb3a955793416072ae689be44c70df",
+          "bytes": 5627
+        },
+        {
+          "name": "keyboard-expression",
+          "source_sha256": "21ae26fda1c34fe4e12ef40965f063e1a694f853db2ec4ed93fe69708038f7c9",
+          "image_sha256": "e2e56c36c5a0224be0b216e4e0097efdd3e75072c95dd68f1d61e5c07ed5ddaf",
+          "bytes": 5603
+        }
+      ],
+      "all_exact_sources_and_images_equal": true
+    },
+    {
+      "prior": "fit-native-wire-bounded-001",
+      "current": "meta-native-wire-bounded-001",
+      "cases": [
+        {
+          "name": "mandelbrot-bounded",
+          "source_sha256": "656d696bd0513d268bdcb230229730c678e95254d438ef904a5c09f0e4757253",
+          "image_sha256": "785287074f4b8de5d9b7874b26f7627dc1602c22a3d62144cbd83c1f52cbb3f8",
+          "bytes": 18399
+        }
+      ],
+      "all_exact_sources_and_images_equal": true
+    },
+    {
+      "prior": "fit-native-wire-errors-001",
+      "current": "meta-native-wire-errors-001",
+      "cases": [
+        {
+          "name": "gcol-first-overflow",
+          "source_sha256": "e206688c0b1b1c7ff8ecb57352f49af59ec89f44e3979261cacb00a0b2d0c84f",
+          "image_sha256": "c545e57f6dfaf2f155e15f639845fc299055f80ca937137edc518c22c94d562d",
+          "bytes": 20176
+        },
+        {
+          "name": "gcol-second-overflow",
+          "source_sha256": "dcef493cc2a638b60d1bf07ab2a92c9649e18d77ea2e413a631e897a8f3bcec3",
+          "image_sha256": "278b74f3312c1194a506076ca46c7d2e22e345b5f4fe2759242b7ed7379c8e93",
+          "bytes": 20176
+        },
+        {
+          "name": "plot-first-overflow",
+          "source_sha256": "89f2e66827c99a1cd7ecd58770ca1e363ece09ebae749a2d87dfc96b34c51750",
+          "image_sha256": "1037cc9dcec52947bc8a6a2c4073edcfe0e288e15d7b339e60f7e3b247fb9513",
+          "bytes": 20263
+        },
+        {
+          "name": "plot-second-overflow",
+          "source_sha256": "8842485fa3736a302ea9aa7da9d1d6810f903f95436fb26d0af942d48e33237b",
+          "image_sha256": "5597619d3cfd40ea43b2e169df0a7ece2b5728426bfebc8a1210c94a0ce187d1",
+          "bytes": 20263
+        },
+        {
+          "name": "plot-third-overflow",
+          "source_sha256": "5f4051f384ffc6136a8e61e329aa465ec74cc121cccc19e5b3be01b0a7ac2f3a",
+          "image_sha256": "4ce58de0c0cc99f46dc9dfa236201a815b55da3c2ae19a00885a37bb1cd8ed78",
+          "bytes": 20263
+        },
+        {
+          "name": "mode-overflow",
+          "source_sha256": "55ad763d09ce602055dca8a960d87158e3cdfe4fd1bfc643bba46190b7a6ce41",
+          "image_sha256": "4d21c82a4fb9411a6aa094f59b6ba7ddbfa63cf795591cceb243cb671cdff2bf",
+          "bytes": 20127
+        },
+        {
+          "name": "mode-expression-error",
+          "source_sha256": "dc5a786257ee3ec01588aae61d7841ab07d772e77c69dc0201cbfc7f2906eb8e",
+          "image_sha256": "daf0ad46497634f38b30a18a69b7456264a16cb1b70b5abc059ed979efe334eb",
+          "bytes": 20149
+        },
+        {
+          "name": "gcol-expression-error",
+          "source_sha256": "11b2474da575f6446a89c347599bad65ad40178c45a7bdec699a4818883556a1",
+          "image_sha256": "f094fb65106616663ff5820f49de141260dd22ad146a4cf42e5d6acdde7c4240",
+          "bytes": 20193
+        },
+        {
+          "name": "keyboard-escape",
+          "source_sha256": "eb1b2714b172721bbca4a8bf04f85011bfa6b04d5b13444043436d2432be7999",
+          "image_sha256": "64175a8776efcf8a1c317222306724f51ce1c8ee32168fff8a8bdc1658866843",
+          "bytes": 19766
+        }
+      ],
+      "all_exact_sources_and_images_equal": true
+    },
+    {
+      "prior": "fit-native-wire-interactions-001",
+      "current": "meta-native-wire-interactions-001",
+      "cases": [
+        {
+          "name": "mode-local-recovery",
+          "source_sha256": "e61587547a165ef270d767cca396593f923075d9ae43ffe7957cb3a836953399",
+          "image_sha256": "0f101887f66d3650d3d620625e86d707b4988626db43576ade80474d94ccd8e8",
+          "bytes": 20208
+        },
+        {
+          "name": "keyboard-local",
+          "source_sha256": "8da6a4d61d37194e16e150a7ee77422ce176a118b4a01835e899133574e65922",
+          "image_sha256": "e0bffcbc87ce2de3f1cc621f15576751f4a2067d477fdb462e7609c1844d6f85",
+          "bytes": 16913
+        },
+        {
+          "name": "mode-handler-reuse",
+          "source_sha256": "cd3ec2f6986b41b440cce4c0f1e9765cc125f13d5f452a8163291a360f7fbc32",
+          "image_sha256": "1a21f9c9b204c1f45c7e655e467228a1c44b725c1cd6e1325c007a7864b15018",
+          "bytes": 19705
+        }
+      ],
+      "all_exact_sources_and_images_equal": true
+    }
+  ],
+  "completed": true,
+  "initial_fixture_note": "Initial13c2 basic fixtures used60/70 terminators; later fixtures use900/910. Identity uses the exact corresponding b8afbfdb fixtures.",
+  "image_comparisons": 36
+}

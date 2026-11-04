@@ -1029,3 +1029,18 @@ meta-image-checks-001. Its normal-prompt Mandelbrot compilation again produces
 the exact bad741db full image (meta-native-mandelbrot-001). Native/self and
 error39 services start their actual fresh jobs; live source/image remain old
 until all gates, including complete actual self-image equality, succeed.
+
+Fresh meta-native-baseline-00139 cases, meta-native-representative-00112 cases,
+meta-native-errors-00139 cases and all18 meta-native-wire pairs pass. The39
+error suite checks pinned reference output/ERR/ERL, repeat and GNU links in
+623.679 controller seconds; every whole error image and all ten representative
+images equal C006. meta-error-controller-001 completes and closes its root
+profile. The native self-source remains the sole active CPU job.
+
+metadata-image-identity-001 verifies all36 hosted/native graphics/key images
+and their exact fixtures against corresponding b8afbfdb cohorts. Initial13c2
+basic fixtures ended at60/70; later fixtures use900/910, so an attempted source
+identity assertion against that initial batch correctly fails. Use the exact
+corresponding b8afbfdb fixtures for this private-prefix identity claim rather
+than equating differently numbered source. No program failure is inferred.
+The36 complete images match. No additional CPU test or visual result is claimed.

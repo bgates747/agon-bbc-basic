@@ -1,0 +1,3 @@
+10 PRINT "NREG_REFERENCE_BEGIN"
+100 DIM a%(1,2),s$(1):a%(1,2)=2147483647:s$(1)="array"
+110 PRINT ;a%(1,2);":";s$(1):OSCLI "BYE"

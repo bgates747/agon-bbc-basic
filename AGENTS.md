@@ -86,6 +86,12 @@ meta-image-checks-001 passes full GNU image/entry/adapter checks and
 meta-native-mandelbrot-001 emits unchanged bad741db. The build service is done;
 the native service now owns the actual fresh meta-native-self-001 and serial
 regressions. Error39 runs separately. Live source/bin remain old pending gates.
+The fresh native baseline39, representative12, error39 and all18 wire pairs
+now pass. All ten representative and39 error images equal C006; all36 hosted/
+native graphics/key fixture images equal b8afbfdb's exact corresponding images
+(metadata-image-identity-001). The error service is complete. Only native
+self-build meta-native-self-001 remains active, owned by
+bbc-basic-c010-meta-native-001 in c010-fit-build. Other profiles are idle.
 Live source/bin remain the
 older qualified versions below. The staged Oryx mandelbrot-c010.bin is exact
 bad741db; its visual result remains pending, and no Oryx emulator was controlled.

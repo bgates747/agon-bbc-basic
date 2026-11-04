@@ -1,0 +1,134 @@
+Warning: unused arguments left: ["--firmware", "platform"].
+Tom's Fake VDP Version 1.03
+unknown packet VDU 0x17, 0, 0xf8
+unknown packet VDU 0x17, 0, 0x99
+uunknown packet VDU 0x17, 0, 0x94
+
+Agon Platform MOS Version 3.0.2 Arthur
+
+Source file: w0.bas
+Output file: w0.bin
+Wrote w0.bin
+C010_CC_STATUS:0
+C010_CC_DONE
+/ *COMPILED:0
+
+Warning: unused arguments left: ["--firmware", "platform"].
+Tom's Fake VDP Version 1.03
+unknown packet VDU 0x17, 0, 0xf8
+unknown packet VDU 0x17, 0, 0x99
+uunknown packet VDU 0x17, 0, 0x94
+
+Agon Platform MOS Version 3.0.2 Arthur
+
+Source file: w1.bas
+Output file: w1.bin
+Wrote w1.bin
+C010_CC_STATUS:0
+C010_CC_DONE
+/ *COMPILED:1
+
+Warning: unused arguments left: ["--firmware", "platform"].
+Tom's Fake VDP Version 1.03
+unknown packet VDU 0x17, 0, 0xf8
+unknown packet VDU 0x17, 0, 0x99
+uunknown packet VDU 0x17, 0, 0x94
+
+Agon Platform MOS Version 3.0.2 Arthur
+
+Source file: w2.bas
+Output file: w2.bin
+Wrote w2.bin
+C010_CC_STATUS:0
+C010_CC_DONE
+/ *COMPILED:2
+
+Warning: unused arguments left: ["--firmware", "platform"].
+Tom's Fake VDP Version 1.03
+unknown packet VDU 0x17, 0, 0xf8
+unknown packet VDU 0x17, 0, 0x99
+uunknown packet VDU 0x17, 0, 0x94
+
+Agon Platform MOS Version 3.0.2 Arthur
+
+Source file: w3.bas
+Output file: w3.bin
+Wrote w3.bin
+C010_CC_STATUS:0
+C010_CC_DONE
+/ *COMPILED:3
+
+Warning: unused arguments left: ["--firmware", "platform"].
+Tom's Fake VDP Version 1.03
+unknown packet VDU 0x17, 0, 0xf8
+unknown packet VDU 0x17, 0, 0x99
+uunknown packet VDU 0x17, 0, 0x94
+
+Agon Platform MOS Version 3.0.2 Arthur
+
+Source file: w4.bas
+Output file: w4.bin
+Wrote w4.bin
+C010_CC_STATUS:0
+C010_CC_DONE
+/ *COMPILED:4
+
+Warning: unused arguments left: ["--firmware", "platform"].
+Tom's Fake VDP Version 1.03
+unknown packet VDU 0x17, 0, 0xf8
+unknown packet VDU 0x17, 0, 0x99
+uunknown packet VDU 0x17, 0, 0x94
+
+Agon Platform MOS Version 3.0.2 Arthur
+
+Source file: w5.bas
+Output file: w5.bin
+Wrote w5.bin
+C010_CC_STATUS:0
+C010_CC_DONE
+/ *COMPILED:5
+
+Warning: unused arguments left: ["--firmware", "platform"].
+Tom's Fake VDP Version 1.03
+unknown packet VDU 0x17, 0, 0xf8
+unknown packet VDU 0x17, 0, 0x99
+uunknown packet VDU 0x17, 0, 0x94
+
+Agon Platform MOS Version 3.0.2 Arthur
+
+Source file: w6.bas
+Output file: w6.bin
+Wrote w6.bin
+C010_CC_STATUS:0
+C010_CC_DONE
+/ *COMPILED:6
+
+Warning: unused arguments left: ["--firmware", "platform"].
+Tom's Fake VDP Version 1.03
+unknown packet VDU 0x17, 0, 0xf8
+unknown packet VDU 0x17, 0, 0x99
+uunknown packet VDU 0x17, 0, 0x94
+
+Agon Platform MOS Version 3.0.2 Arthur
+
+Source file: w7.bas
+Output file: w7.bin
+Wrote w7.bin
+C010_CC_STATUS:0
+C010_CC_DONE
+/ *COMPILED:7
+
+Warning: unused arguments left: ["--firmware", "platform"].
+Tom's Fake VDP Version 1.03
+unknown packet VDU 0x17, 0, 0xf8
+unknown packet VDU 0x17, 0, 0x99
+uunknown packet VDU 0x17, 0, 0x94
+
+Agon Platform MOS Version 3.0.2 Arthur
+
+Source file: w8.bas
+Output file: w8.bin
+Wrote w8.bin
+C010_CC_STATUS:0
+C010_CC_DONE
+/ *COMPILED:8

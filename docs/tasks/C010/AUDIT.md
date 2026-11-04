@@ -185,3 +185,11 @@ recorded evidence and an explicit live promotion identify exact versions.
    The measured layout leaves98523 heap bytes, residual5264 before headers,
    allocator effects and other peak costs, compared with4087 for the older
    qualified source. This is a lower bound, not native self-fit proof.
+6. Actual meta-native-build-001 produces the327205-byte40e4ae06 image; independent
+   GNU checks and native unchanged-Mandelbrot compilation pass. Fresh native
+   baseline39, representative12, error39 and18 wire pairs pass. All ten
+   representative and39 error images equal C006. metadata-image-identity-001
+   also proves36 exact hosted/native graphics/key images equal their b8afbfdb
+   counterparts, using identical later900/910 fixtures. The initial basic
+   fixtures'60/70 numbering is explicitly separate. Actual full self-image
+   equality remains the final promotion gate.

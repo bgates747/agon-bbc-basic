@@ -109,6 +109,11 @@ def main():
     assert native_mandel['image_sha256'] == admission['image_sha256']
     assert native_mandel['exact_source_and_complete_image_match_hosted']
     inputs.append('meta-native-mandelbrot-001')
+    identity = retained('metadata-image-identity-001')
+    assert identity['completed'] and identity['source_sha256'] == SOURCE
+    assert identity['image_comparisons'] == 36
+    assert all(group['all_exact_sources_and_images_equal'] for group in identity['groups'])
+    inputs.append('metadata-image-identity-001')
     full_native = retained('full-native-002')
     full_reference = retained('full-reference-001')
     assert full_native['completed'] and full_reference['completed']
@@ -139,14 +144,15 @@ def main():
     error_controller = retained('meta-error-controller-001')
     assert error_controller['completed'] and error_controller['failure'] is None
     inputs += ['meta-native-errors-001', 'meta-error-controller-001']
+    license_file = ROOT/'compiler/bin/LICENSE.txt'
+    assert license_file.read_bytes() == (ROOT/'license.txt').read_bytes()
+    assert old_manifest['physical_qualification']['self_source_generations'] == 2
     evidence = TASK/'evidence'/args.name
     evidence.mkdir(parents=True, exist_ok=False)
     shutil.copyfile(__file__, evidence/'promote.py')
     shutil.copyfile(ROOT/'compiler/bin/manifest.json', evidence/'prior-native-manifest.json')
     shutil.copyfile(TASK/'candidate-meta.bas', ROOT/'compiler/compiler.bas')
     shutil.copyfile(image, ROOT/'compiler/bin/compiler.bin')
-    license_file = ROOT/'compiler/bin/LICENSE.txt'
-    assert license_file.read_bytes() == (ROOT/'license.txt').read_bytes()
     metadata = dict(scope='Development executable qualified by automated compatibility and native self-compilation',
         target='Agon MOS, eZ80 ADL24, load040000', image_bytes=image.stat().st_size,
         image_sha256=image_hash, source='compiler/compiler.bas', source_sha256=SOURCE,
