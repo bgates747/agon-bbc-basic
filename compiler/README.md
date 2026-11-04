@@ -36,9 +36,10 @@ This executable contains its runtime; BASIC serves as the source-bootstrap host.
 
 The portable programming/manual-test package contains the compiler, source,
 nano editor, starter, licenses and `readme.txt`; individual tests live under
-`tests/`. The current53-file package is delivered to the Author's existing Oryx
-emulator SD. The Console8 card refresh awaits its being mounted again; its
-last known package contains the older compiler. See [C008](../docs/tasks/C008.md)
+`tests/`. The current53-file package is delivered to the Console8 card and the
+Author's default Oryx Flexe SD. Existing user programs are preserved; on the
+emulator the pristine starter is also supplied as `hello-package.bas` alongside
+the user's edited `hello.bas`. See [C008](../docs/tasks/C008.md)
 for selected coordinates, guarded delivery and version-specific manual results.
 Manual acceptance remains pending.
 
@@ -215,3 +216,6 @@ waits for a key, restores MODE1 and returns. The [C010 audit](../docs/tasks/C010
 documents conversions, MOS calling conventions, actual full-stream parity and
 the protocol-only CLI observer's rendering limits. The private bookkeeping
 refactor retains self-hosting fit while preserving generated program images.
+
+The default emulator SD also carries the qualified compiler at
+`/bin/compiler.bin`, with `compiler-license.txt` alongside it.

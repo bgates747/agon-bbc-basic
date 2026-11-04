@@ -68,8 +68,9 @@ C008 manual results remain pending, and C009 is a possible low-priority feature
 only. The53-file portable refresh (501472 bytes, manifest1a9e5b2c) is frozen in
 C010/evidence/manual-package-001 and delivered to the existing Oryx emulator SD
 by emulator-update-001 with sync and no process control. C010 is complete.
-card-update-001 stops before writes because AGONC8 is not mounted; C008 retains
-that refresh and manual results. Preserve user files and older frozen evidence.
+The returned Console8 card is now updated/synced by card-update-002 and remains
+mounted. Failed001 stays immutable. C008 retains only manual results. Preserve
+user files and older frozen evidence; both destinations have the current package.
 
 ## Earlier C005/C006 basis
 
@@ -189,10 +190,10 @@ by receipt of this notice; retained custody still requires an explicit new grant
 
 C008's selected Oryx card path remains
 `/run/media/smith/AGONC8/mystuff/basic-compiled/`, Agon path
-`/mystuff/basic-compiled/`. Keep that root stable. The last known managed card
-release has50 files: earlier299a3119 compiler/6597a0df source, MIT nano editor,
-notices, starter, compatibility/runbook and12 manual test directories.
-Its initial deployment completed14:46:22EST November3,
+`/mystuff/basic-compiled/`. Keep that root stable. Current managed card release
+has53 files,40e4ae06 compiler/70d3c5c6 source and13 supplied test directories.
+The earlier50-file299a3119/6597a0df package included the same MIT nano editor,
+notices and twelve earlier tests. Its initial deployment completed14:46:22EST November3,
 with sync and the card left mounted; receipt C008/evidence/manual-deployment-001.
 No user result is implied. Do not delete or overwrite later user programs/results.
 deploy_sd.py refuses a nonempty target: future updates need explicit preservation.
@@ -219,18 +220,29 @@ with only eight checked replacements and exact existing Mandelbrot additions
 preserved. No emulator was launched/controlled. Rendering/manual acceptance
 remains pending. The provided Mandelbrot native image is18329-byte bad741db.
 
-card-update-001 fails at its first directory guard before any writes. Read-only
-findmnt/ls confirms AGONC8 and the selected root are absent; only /boot/efi is
-listed as vfat. Do not create a shadow mountpoint or choose another volume.
-C008 retains the pending refresh until the Author's card is mounted again.
-Use C010/update_package.py with previous C008/build/manual-004, current package
-above, target card and a fresh receipt name such as card-update-002. It checks
-the old7fe79c81 manifest and selected file hashes before any writes, preserves
-user files/results, syncs and leaves the card mounted. Keep failed001 immutable.
-No human results, hardware custody or emulator reservation follow from delivery.
+Earlier card-update-001 failed before writes while the card was absent; keep
+that receipt immutable. After the Author reports its return, card-update-002
+completes20:45:52EST November3 with ten guarded managed writes and sync. The
+card remains mounted. Its manifest is now1a9e5b2c; do not replay the old7fe79c81
+transition. Future updates require the current baseline and fresh receipt names,
+preserving all user programs/results. No firmware/startup or target run occurs.
+
+The canonical default-flexe guide and fresh PATH launcher read confirm the
+default profile is /home/smith/Agon/flexe-emulator. C008/default-emulator-package-001
+stops at an edited hello.bas; survey002 checks all53 supplied names, confirming
+the other52 match exactly and syncing. The user's hello.bas (6241fbdb) remains
+unchanged. C008/default-starter-preserved-001 supplies the exact packaged starter
+53fb3b33 as hello-package.bas using exclusive creation and sync. It is an extra
+file outside the unchanged package manifest. No emulator is launched/controlled,
+and no human result, hardware custody or reservation follows from deployment.
 
 Shared /tmp tmpfs filled during G2 handoff; only our inactive Cargo build cache
 was moved to C006/build/relocated-cli-cache-001, preserving the active CLI at its
 original /tmp path and exact hash. Evidence cli-cache-relocation-001; Extender
 has since safely relocated its historical trees; /tmp has3.7GiB free.
 Do not touch other owners' files.
+
+Default emulator SD `/bin/compiler.bin` is also current327205-byte40e4ae06,
+with exact notice `compiler-license.txt`; C008/evidence/default-bin-001 records
+replacement of the known299a3119 executable and sync at20:53:40EST November3.
+No emulator process was selected or controlled.

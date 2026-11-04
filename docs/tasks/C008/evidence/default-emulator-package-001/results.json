@@ -1,0 +1,10 @@
+{
+  "started": "2026-11-04T01:47:04.818224+00:00",
+  "finished": "2026-11-04T01:47:05.249924+00:00",
+  "returncode": 1,
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 13, in <module>\n    assert hashlib.sha256(path.read_bytes()).hexdigest() == expected,name\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: hello.bas\n",
+  "package_manifest_sha256": "1a9e5b2c1d4300ff25ec766f63487bc0c577aeeb80b1a96378dac364dfacee9f",
+  "manual_validation": false,
+  "scope": "Fresh default-profile and supplied-file verification; no emulator execution"
+}

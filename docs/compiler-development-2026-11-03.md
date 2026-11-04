@@ -1097,3 +1097,19 @@ retains the offline card refresh and manual results, and C009 remains only a
 low-priority unapproved possible feature. Main remains separate. No paired
 performance benchmark, new physical run or compiled graphical acceptance is
 claimed. All finite Pi work is closed and failure records remain immutable.
+
+### Returned card and default emulator delivery
+
+At the Author's request, card-update-002 refreshed the mounted Console8 card
+with the qualified53-file portable package, synced and left it mounted
+(20:45:52EST). The previous failed card-update-001 remains unchanged.
+Default emulator survey default-emulator-package-002 confirms52 supplied files
+match; the Author's edited hello.bas is preserved. The original starter is
+supplied separately as hello-package.bas (default-starter-preserved-001).
+The initial strict survey failure is retained as default-emulator-package-001.
+
+The Author additionally requested the compiler in the default emulator SD /bin.
+C008/default-bin-001 replaces the known324275-byte299a3119 executable with the
+qualified327205-byte40e4ae06 executable and its exact license notice, with sync
+at20:53:40EST. No emulator process control, hardware execution, new compiler
+qualification or manual acceptance is claimed. C008 awaits the Author's results.

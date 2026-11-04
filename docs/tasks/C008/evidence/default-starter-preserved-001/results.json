@@ -1,0 +1,8 @@
+{
+  "started": "2026-11-04T01:48:47.681159+00:00",
+  "finished": "2026-11-04T01:48:47.982905+00:00",
+  "returncode": 0,
+  "stdout": "{\"supplied_starter\": \"hello-package.bas\", \"source_sha256\": \"53fb3b335a5eeca2f037c1464697fdf4010ac9b3f1eebbe2b213710c0a4a92a3\", \"written\": true, \"synced\": true, \"preserved_user_hello_sha256\": \"6241fbdb4ab80f7c04efb922554582d80ecfbb8ff35d1d65de60373dfb00ddef\", \"no_user_file_overwrite\": true, \"no_emulator_launch\": true}\n",
+  "stderr": "",
+  "manual_validation": false
+}

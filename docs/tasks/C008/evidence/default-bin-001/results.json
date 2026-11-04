@@ -1,0 +1,7 @@
+{
+  "started": "2026-11-04T01:53:40.494829+00:00",
+  "finished": "2026-11-04T01:53:40.786593+00:00",
+  "returncode": 0,
+  "stdout": "{\"previous_sha256\": \"299a31190c380541a73ed9eb144a303fa37abccc4f3c3e0ad47f99f1538122c0\", \"previous_bytes\": 324275, \"installed\": {\"compiler.bin\": {\"bytes\": 327205, \"sha256\": \"40e4ae06730b6735696f5f07962efd10e6c9cfbdc44a81b65dd6e9ce1c82355a\"}, \"compiler-license.txt\": {\"bytes\": 891, \"sha256\": \"cc8e92d92cf12fb1d04ddae0b573367f14188df5fcd6c7909d36486ff53a108a\"}}, \"synced\": true, \"no_emulator_control\": true}\n",
+  "stderr": ""
+}

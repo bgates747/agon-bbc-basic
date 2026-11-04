@@ -1,0 +1,10 @@
+{
+  "started": "2026-11-04T01:47:51.605624+00:00",
+  "finished": "2026-11-04T01:47:51.939713+00:00",
+  "returncode": 0,
+  "stdout": "{\"all_supplied_files_match\": false, \"mismatches\": [{\"file\": \"hello.bas\", \"expected\": \"53fb3b335a5eeca2f037c1464697fdf4010ac9b3f1eebbe2b213710c0a4a92a3\", \"actual\": \"6241fbdb4ab80f7c04efb922554582d80ecfbb8ff35d1d65de60373dfb00ddef\"}], \"matching_files\": 52, \"files\": 53, \"synced\": true, \"package_manifest_sha256\": \"1a9e5b2c1d4300ff25ec766f63487bc0c577aeeb80b1a96378dac364dfacee9f\", \"no_files_rewritten\": true, \"user_files_preserved\": true, \"no_emulator_launch\": true, \"launcher_sha256\": \"1c9c4ec8d6491837fc4219afac16b7b48488e88616927e032b9a69c0caddd589\"}\n",
+  "stderr": "",
+  "package_manifest_sha256": "1a9e5b2c1d4300ff25ec766f63487bc0c577aeeb80b1a96378dac364dfacee9f",
+  "manual_validation": false,
+  "scope": "Fresh default-profile and supplied-file verification; no emulator execution"
+}
