@@ -74,6 +74,12 @@ c010-fit-build, hosted then native serial tests use c010-fit, errors use root
 metadata-launch-ROLE-001 receipts pin scripts/source/arguments/limits. No
 startup units are installed; do not modify active scripts/source or reuse
 these profiles. metadata_pipeline.py owns sequencing and fresh unique cohorts.
+meta-symbol-layout-001 is complete:327205 layout bytes,2128 symbols/229 routines/
+254 bindings, seven pages,9764 symbol bytes/5550 other string bytes. The prefix
+saving is4433 bytes. metadata-bounds-001 gives93259 mandatory/observed against
+98523 available, leaving5264 before omitted costs (old4087); not native fit
+proof. The layout service is complete and c010-wire is idle. Only the build
+and dependent native/error services remain active; do not duplicate their work.
 Live source/bin remain the
 older qualified versions below. The staged Oryx mandelbrot-c010.bin is exact
 bad741db; its visual result remains pending, and no Oryx emulator was controlled.

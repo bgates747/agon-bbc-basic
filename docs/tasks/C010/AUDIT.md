@@ -174,3 +174,14 @@ recorded evidence and an explicit live promotion identify exact versions.
    self-build remain mandatory gates. An interpreted layout observer counts
    actual storage separately; its host-only instrumentation is not a native
    compiler build or self-fit claim.
+4. meta-symbol-layout-001 completes the actual interpreted layout in1339.496
+   controller seconds:327205 output bytes counted,2128 symbols,229 routines,
+   254 bindings and seven referenced-target pages. Owned symbol contents total
+   9764 bytes; the four prefix substitutions save4433 bytes there. Other observed
+   metadata strings total5550 bytes. No output is opened; the sentinel survives.
+5. metadata-bounds-001 verifies identical explicit DIM declarations and unchanged
+   runtime/relocation catalogs against C005's pinned inventory. Its77945 fixed
+   bytes plus observed string contents give93259 mandatory/observed bytes.
+   The measured layout leaves98523 heap bytes, residual5264 before headers,
+   allocator effects and other peak costs, compared with4087 for the older
+   qualified source. This is a lower bound, not native self-fit proof.

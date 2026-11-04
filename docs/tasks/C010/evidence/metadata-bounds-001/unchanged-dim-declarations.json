@@ -1,0 +1,19 @@
+[
+  "1010 DIM sname$(4095),saddr% 12287,sort% 8191,lrefs%(63)",
+  "1021 DIM pname$(255),pline%(255),parcnt&(255),par&(255,15),argkind&(31,15),argindex&(31,15),pkind&(255),pret%(255),return$(511),retdef&(511),retline%(511),retcol%(511)",
+  "1024 DIM vname$(255),vsize&(255),vstatic%(255),vtype%(255),vdim&(255),kwords$(4)",
+  "1025 DIM sunsafe%(15)",
+  "1029 DIM ifid$(31),bid$(31),belse%(31),lkind%(31),lname$(31),lvar%(31)",
+  "4030 DIM nimage% nsize%-1,nreloc%(nrelocs%-1)",
+  "7030 DIM simage% ssize%-1,sreloc%(srelocs%)",
+  "11030 DIM timage% tframes%-1,treloc%(trelocs%-1)",
+  "13030 DIM aimage% asize%-1,areloc%(arelocs%-1)",
+  "16406 DIM mimage% msize%-1,mreloc%(mrelocs%-1)",
+  "17506 DIM iimage% isize%-1,ireloc%(irelocs%-1)",
+  "18006 DIM dimage% dsize%-1,dreloc%(drelocs%),dpacket% 4",
+  "19004 DIM eentry%(23):RESTORE 63000:READ esize%,erelocs%:FOR i%=0 TO 23:READ eentry%(i%):NEXT",
+  "19006 DIM eimage% esize%-1,ereloc%(erelocs%-1)",
+  "19514 RESTORE 64000:READ xsize%,xrelocs%:DIM xentry%(25)",
+  "19518 DIM ximage% xsize%-1,xreloc%(xrelocs%-1)",
+  "19604 DIM p% 255:FOR j%=0 TO 255:p%?j%=0:NEXT:lrefs%(i%)=p%"
+]

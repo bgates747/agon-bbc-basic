@@ -1009,3 +1009,14 @@ and24 diagnostics/preserved outputs identical), full unchanged Mandelbrot plus
 runtime modules, and18 fresh reference/native graphics/key pairs. All manifests
 are verified before retaining this checkpoint. The native build and interpreted
 layout observation remain active; no self-fit or live promotion is claimed.
+
+meta-symbol-layout-001 completes1339.496 controller seconds. Actual BBC layout
+counts327205 output bytes,2128 symbols/229 routines/254 bindings and seven
+target pages. Symbol contents occupy9764 bytes, saving4433 versus the equivalent
+long-prefix names; other metadata strings occupy5550. The output sentinel is
+unchanged because this observer performs only layout. metadata-bounds-001
+verifies identical explicit DIM declarations and the unchanged runtime catalogs
+against C005's77945-byte fixed lower bound. Mandatory/observed total93259 against
+98523 available leaves5264 before omitted peak/header/allocator costs, versus
+4087 for the older qualified source. Actual native self-build remains required.
+The old-native build is writing its output normally; no promotion occurs yet.

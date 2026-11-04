@@ -1,0 +1,19 @@
+{
+  "source_sha256": "70d3c5c6f4da44cf865c36c3f4edef143b9e37c662097067a5e6ceac414c300e",
+  "image_layout_bytes": 327205,
+  "explicit_allocation_lower_bound": 77945,
+  "observed_symbol_contents": 9764,
+  "observed_other_metadata_contents": 5550,
+  "mandatory_observed_lower_bound": 93259,
+  "available_heap_from_layout": 98523,
+  "residual_before_omitted_costs": 5264,
+  "prefix_symbol_content_savings": 4433,
+  "prior_residual_before_omitted_costs": 4087,
+  "omitted": [
+    "array headers",
+    "allocator effects",
+    "other allocations and peak temporaries"
+  ],
+  "native_fit_proven": false,
+  "scope": "Pinned storage analysis; not a native execution or self-build result"
+}
