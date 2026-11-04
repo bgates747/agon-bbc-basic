@@ -1020,3 +1020,12 @@ against C005's77945-byte fixed lower bound. Mandatory/observed total93259 agains
 98523 available leaves5264 before omitted peak/header/allocator costs, versus
 4087 for the older qualified source. Actual native self-build remains required.
 The old-native build is writing its output normally; no promotion occurs yet.
+
+meta-native-build-001 completes normally in2031.510 controller seconds:
+327205 bytes, SHA40e4ae06730b6735696f5f07962efd10e6c9cfbdc44a81b65dd6e9ce1c82355a.
+It matches the independently observed layout byte count. Complete GNU runtime,
+entry, heap/arena/guard and compact PIC/bridge checks pass in
+meta-image-checks-001. Its normal-prompt Mandelbrot compilation again produces
+the exact bad741db full image (meta-native-mandelbrot-001). Native/self and
+error39 services start their actual fresh jobs; live source/image remain old
+until all gates, including complete actual self-image equality, succeed.

@@ -80,6 +80,12 @@ saving is4433 bytes. metadata-bounds-001 gives93259 mandatory/observed against
 98523 available, leaving5264 before omitted costs (old4087); not native fit
 proof. The layout service is complete and c010-wire is idle. Only the build
 and dependent native/error services remain active; do not duplicate their work.
+meta-native-build-001 now completes2031.510s: actual327205-byte image SHA
+40e4ae06730b6735696f5f07962efd10e6c9cfbdc44a81b65dd6e9ce1c82355a.
+meta-image-checks-001 passes full GNU image/entry/adapter checks and
+meta-native-mandelbrot-001 emits unchanged bad741db. The build service is done;
+the native service now owns the actual fresh meta-native-self-001 and serial
+regressions. Error39 runs separately. Live source/bin remain old pending gates.
 Live source/bin remain the
 older qualified versions below. The staged Oryx mandelbrot-c010.bin is exact
 bad741db; its visual result remains pending, and no Oryx emulator was controlled.
