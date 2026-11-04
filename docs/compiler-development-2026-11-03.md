@@ -1113,3 +1113,19 @@ C008/default-bin-001 replaces the known324275-byte299a3119 executable with the
 qualified327205-byte40e4ae06 executable and its exact license notice, with sync
 at20:53:40EST. No emulator process control, hardware execution, new compiler
 qualification or manual acceptance is claimed. C008 awaits the Author's results.
+
+### Author Console8 Mandelbrot result and benchmark plan
+
+The Author reports Mandelbrot compiles on the Console8 and runs. Compiled
+execution appears faster in less computationally intense regions; comparison
+in intense regions is inconclusive. C008/evidence/author-mandelbrot-001 retains
+the report and its limits. This is actual human-reported functional evidence
+for that program, not an exact-image readback, whole-suite acceptance or timing.
+
+C011 records the requested proposed broad benchmark fixture: matched control
+and numeric-density experiments, compatibility coverage ledger, RAM/application
+and I/O separation, verified timer/harness selection and optional cycle attribution
+only if available. TIME is not currently admitted; long equal batches can resolve
+throughput differences even with a coarse clock. Implementation has not started;
+TODO owns the new task. No target access, code behavior change or measured
+performance claim follows from this documentation.

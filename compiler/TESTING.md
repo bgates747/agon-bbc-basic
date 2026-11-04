@@ -38,3 +38,10 @@ tasks. Compiler feature work remains in the single [TODO](../TODO.md). Later
 adoption should preserve upstream originals, identify every adaptation and
 retain correctness results before timing. Curating a source does not enable
 its language features or claim human emulator/hardware validation.
+
+The Author reports successful Console8 compilation and execution of Mandelbrot,
+with a qualitative gain in less computationally intense regions and inconclusive
+comparison in intense regions. [The retained report](../docs/tasks/C008/evidence/author-mandelbrot-001/report.md)
+is human functional evidence, not a measured speedup.
+[C011](../docs/tasks/C011.md) proposes broad matched kernels, arithmetic-density
+sweeps, service-separated applications and a verified timing harness.

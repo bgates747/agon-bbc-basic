@@ -9,7 +9,9 @@ and partial admissions are explicit in `compiler/COMPATIBILITY.md`.
 1. [ ] [C008](docs/tasks/C008.md) — Manual hardware qualification awaits the
    Author's results. The current portable53-file package and13 cases are staged
    on the Console8 card and Oryx's default Flexe SD, preserving user programs.
-   No human result is implied.
+   Mandelbrot compiles and runs per the Author; remaining cases await results.
 2. [ ] [C009](docs/tasks/C009.md) — Low priority, possible feature: consider
    anonymous labels with nearest forward/backward references. Syntax and
    implementation are not approved.
+3. [ ] [C011](docs/tasks/C011.md) — Implement and qualify the proposed broad
+   benchmark fixture, separating control/lookup costs, numeric work and services.

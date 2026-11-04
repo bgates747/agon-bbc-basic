@@ -246,3 +246,9 @@ Default emulator SD `/bin/compiler.bin` is also current327205-byte40e4ae06,
 with exact notice `compiler-license.txt`; C008/evidence/default-bin-001 records
 replacement of the known299a3119 executable and sync at20:53:40EST November3.
 No emulator process was selected or controlled.
+
+The Author now reports Mandelbrot compiles and runs on Console8, with a visible
+qualitative gain in less computationally intense regions and inconclusive
+comparison in intense regions. C008/evidence/author-mandelbrot-001 retains the
+report; other manual cases remain open. No paired speedup is measured. C011 is
+the proposed broad benchmark/timing fixture task, not an implemented suite.
