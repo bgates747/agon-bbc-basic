@@ -20,6 +20,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--native', type=Path, required=True)
     parser.add_argument('--name', required=True)
+    parser.add_argument('--source', type=Path, default=TASK/'candidate-fit.bas')
     args = parser.parse_args()
     assert args.name.replace('-', '').isalnum()
     evidence = TASK/'evidence'/args.name
@@ -32,7 +33,7 @@ def main():
     spec = importlib.util.spec_from_file_location('keyboard', ROOT/'docs/tasks/C005/io/interactive.py')
     keyboard = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(keyboard)
-    report = dict(compiler_source_sha256=digest(TASK/'candidate-fit.bas'),
+    report = dict(compiler_source_sha256=digest(args.source),
         native_compiler_sha256=digest(args.native), source_sha256=digest(source),
         observer_sha256=digest(PROFILE/'fab-agon-emulator.bin'), completed=False)
     start = time.monotonic()

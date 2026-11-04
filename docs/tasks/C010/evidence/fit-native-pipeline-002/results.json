@@ -1,0 +1,27 @@
+{
+  "completed": false,
+  "attempted": [
+    "image-checks",
+    "native-mandelbrot",
+    "native-self",
+    "native-baseline",
+    "native-representative",
+    "native-wire-basic",
+    "native-wire-bounded",
+    "native-wire-errors",
+    "native-wire-interactions"
+  ],
+  "completed_stages": [
+    "image-checks",
+    "native-mandelbrot",
+    "native-baseline",
+    "native-representative",
+    "native-wire-basic",
+    "native-wire-bounded",
+    "native-wire-errors",
+    "native-wire-interactions"
+  ],
+  "failure": "AssertionError(('native-self', 1))",
+  "image_sha256": "3c761c16c420a79ed04d00e3803ab00b3af54764ea66c93bb0b9a88c78f1b348",
+  "controller_seconds": 2785.024
+}

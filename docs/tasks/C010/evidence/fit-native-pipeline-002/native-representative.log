@@ -1,0 +1,34 @@
+Retained harness SHA256 cbf8bcfd2c80a3392cc7c5bc8e5f723b2d4899ec31568ce237a817eca5920bbe
+Native compiler regression 0 passed
+Native compiler regression 1 passed
+Native compiler regression 2 passed
+Native compiler regression 3 passed
+Native compiler regression 4 passed
+Native compiler regression 5 passed
+Native compiler regression 6 passed
+Native compiler regression 7 passed
+Native compiler regression 8 passed
+Native compiler regression 9 passed
+Native compiler regression 10 passed
+Native compiler regression 11 passed
+{
+  "native_compiler_sha256": "3c761c16c420a79ed04d00e3803ab00b3af54764ea66c93bb0b9a88c78f1b348",
+  "completed_cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+  ],
+  "hardware_validation": false,
+  "file_io_bytes_verified": true,
+  "all_cases_passed": true,
+  "controller_seconds": 127.296
+}

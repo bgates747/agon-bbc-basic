@@ -1,0 +1,16 @@
+{
+  "started": "2026-11-04T00:27:15.933423+00:00",
+  "role": "layout",
+  "unit": "bbc-basic-c010-meta-layout-001",
+  "source_sha256": "70d3c5c6f4da44cf865c36c3f4edef143b9e37c662097067a5e6ceac414c300e",
+  "script": "docs/tasks/C010/observe_metadata.py",
+  "script_sha256": "cbfc826d8fccf98b160847f47171a31e2aed791f9af335f3a1ce6d6f8201e6e6",
+  "arguments": [],
+  "runtime_max_seconds": 5700,
+  "log": "docs/tasks/C010/build/controller-logs/bbc-basic-c010-meta-layout-001.log",
+  "returncode": 0,
+  "stdout": "",
+  "stderr": "Running as unit: bbc-basic-c010-meta-layout-001.service; invocation ID: 91392b6d232a46b9acb7be8a335095ee\n",
+  "startup_unit_installed": false,
+  "launch_is_not_qualification": true
+}

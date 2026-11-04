@@ -17,6 +17,7 @@ def digest(path):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--name', required=True)
+    parser.add_argument('--source', type=Path, default=TASK/'candidate-fit.bas')
     args = parser.parse_args()
     assert args.name.replace('-', '').isalnum()
     evidence = TASK/'evidence'/args.name
@@ -27,7 +28,7 @@ def main():
         assert digest(old/name) == expected
     cases = json.loads((old/'cases.json').read_text())
     report = json.loads((ROOT/'compiler/build/test-results.json').read_text())
-    assert report['compiler_sha256'] == digest(TASK/'candidate-fit.bas')
+    assert report['compiler_sha256'] == digest(args.source)
     assert (report['cases'], report['native_executions']) == (39, 15)
     assert report['assembler_oracle'] and report['deterministic_repeat']
     console = (PROFILE/'compile.log').read_text()
@@ -46,7 +47,7 @@ def main():
             assert image.read_bytes() == (old/case['image_file']).read_bytes()
             shutil.copyfile(image, evidence/case['image_file'])
     for source, name in [
-        (TASK/'candidate-fit.bas', 'compiler.bas'),
+        (args.source, 'compiler.bas'),
         (ROOT/'compiler/tools/test_compiler.py', 'test_compiler.py'),
         (ROOT/'compiler/build/test-results.json', 'test-results.json'),
         (ROOT/'compiler/build/golden.bin', 'golden.dat'),

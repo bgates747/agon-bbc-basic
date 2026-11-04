@@ -20,6 +20,7 @@ def main():
     import argparse
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--name', required=True)
+    parser.add_argument('--source', type=Path, default=TASK/'candidate-fit.bas')
     args = parser.parse_args()
     assert args.name.replace('-', '').isalnum()
     evidence = TASK/'evidence'/args.name
@@ -41,7 +42,7 @@ def main():
         (SD/f'admission-{i}.bas').write_bytes(data)
         (evidence/f'reject-{i}.bas').write_bytes(data)
         (SD/f'admission-{i}.bin').write_bytes(sentinel)
-    definitions = (TASK/'candidate-fit.bas').read_text().split('1000 DEF', 1)[1]
+    definitions = args.source.read_text().split('1000 DEF', 1)[1]
     driver = ['10 PROCinit:RESTORE 300', '20 test%=0', '30 READ src$,dst$',
         '40 ON ERROR PRINT "REJECT:";test%:REPORT:PRINT:CLOSE#0:GOTO 70',
         '50 PROCcompile(src$,dst$)', '60 PRINT "SUCCESS:";test%',
@@ -50,7 +51,7 @@ def main():
     driver += [f'{300+i*10} DATA "admission-{i}.bas","admission-{i}.bin"'
         for i in range(len(unsupported)+1)]
     (SD/'admissions-driver.bas').write_text('\n'.join(driver)+'\n1000 DEF'+definitions)
-    report = dict(compiler_source_sha256=digest(TASK/'candidate-fit.bas'),
+    report = dict(compiler_source_sha256=digest(args.source),
         observer_sha256=digest(PROFILE/'fab-agon-emulator.bin'),
         source_sha256=digest(source), completed=False, rejected=[])
     start = time.monotonic()

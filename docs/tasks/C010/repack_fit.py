@@ -17,6 +17,7 @@ def digest(path):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--name', required=True)
+    parser.add_argument('--source', type=Path, default=TASK/'candidate-fit.bas')
     args = parser.parse_args()
     assert args.name.replace('-', '').isalnum()
     evidence = TASK/'evidence'/args.name
@@ -31,7 +32,7 @@ def main():
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(ROOT/name, target)
     source = stage/'compiler/compiler.bas'
-    shutil.copyfile(TASK/'candidate-fit.bas', source)
+    shutil.copyfile(args.source, source)
     expected = digest(source)
     report = dict(candidate_sha256=expected, completed=[], modules={}, all_identical=False)
     packages = ['report_keywords', 'numeric_runtime', 'strings_runtime', 'control_runtime',

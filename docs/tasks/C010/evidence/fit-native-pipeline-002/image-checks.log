@@ -1,0 +1,36 @@
+Complete error-enabled runtime/entry checks: 1
+{
+  "image_sha256": "3c761c16c420a79ed04d00e3803ab00b3af54764ea66c93bb0b9a88c78f1b348",
+  "image_bytes": 327290,
+  "complete_standard_runtimes_and_entry_checked": true,
+  "compact_base": 586677,
+  "compact_bytes": 394,
+  "compact_PIC_matches_GNU": true,
+  "external_fields": {
+    "cp_num_base": 538016,
+    "cp_str_base": 587746,
+    "cp_slot_numeric": 534200,
+    "cp_slot_numerror": 538041,
+    "cp_slot_literal": 533556,
+    "cp_slot_novar": 539217,
+    "cp_slot_prefix": 588870,
+    "cp_slot_addr": 588856,
+    "cp_slot_memerror": 589248,
+    "cp_slot_save": 549370,
+    "cp_slot_bind": 549618,
+    "cp_slot_begin": 549360,
+    "cp_slot_acterror": 550133
+  },
+  "independently_anchored_export_fields": [
+    "cp_slot_numeric",
+    "cp_slot_literal",
+    "cp_slot_prefix",
+    "cp_slot_addr",
+    "cp_slot_save",
+    "cp_slot_bind",
+    "cp_slot_begin"
+  ],
+  "other_checks": "two zeroed-pool ranges, four compiled-error-wrapper ranges, STR adjacency",
+  "native_execution_performed": false,
+  "scope": "Machine-image qualification; native behavioral/generation tests remain separate"
+}

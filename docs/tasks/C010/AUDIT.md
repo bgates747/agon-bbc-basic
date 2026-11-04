@@ -154,3 +154,23 @@ recorded evidence and an explicit live promotion identify exact versions.
    equalities. `fit-repack-001` preserves its exact source under all ten packers
    and verifies unchanged nine runtime templates. Its native build and new
    self-fit/behavioral qualification remain separate gates.
+
+## Private symbol storage refinement
+
+1. The327290-byte b8afbfdb compiler also fails actual native self-source with
+   No room at19216 (fit-native-self-001,716.502 controller seconds). Its fresh
+   baseline39, representative12, error39 and18 graphics/key pairs still pass.
+   The failed fit-native-pipeline-002 retains all eight successful other stages.
+2. metadata-source-001 freezes70d3c5c6, derived from b8afbfdb by replacing four
+   exact quoted compiler-private prefixes: $if becomes $, $var becomes $V,
+   $bind becomes $B, and $proc becomes $P. Definitions and references change
+   together. FNsymbol compares complete strings; no code decodes these names.
+   Numeric flow IDs start with a digit after $, while the new capital prefixes,
+   existing lower-case runtime names and public @/# targets are disjoint.
+   Scoped public labels keep their existing $p prefix and public syntax.
+3. This saves owned symbol text rather than changing addresses, instructions,
+   numeric storage, runtime modules, table capacities or the memory boundary.
+   Exact program images, fresh runtime comparisons and a complete native
+   self-build remain mandatory gates. An interpreted layout observer counts
+   actual storage separately; its host-only instrumentation is not a native
+   compiler build or self-fit claim.

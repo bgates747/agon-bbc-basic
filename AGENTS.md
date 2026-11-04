@@ -52,13 +52,27 @@ Fresh fit-native-build-002 completes:327290 bytes, SHA
 3c761c16c420a79ed04d00e3803ab00b3af54764ea66c93bb0b9a88c78f1b348,
 2031.521 controller seconds. Full GNU image checks, native baseline39,
 representative12, all18 graphics/key pairs and fresh error39/ERR/ERL/repeat pass; all39 error images and
-ten representative images equal C006's older images. Its actual self-build is
-still pending under finite service bbc-basic-c010-fit-pipeline-002, which owns
-c010-fit-build and c010-fit profiles. The build/error services have completed.
+ten representative images equal C006's older images. Its actual self-build also
+fails No room at19216 in716.502s; fit-native-self-001 and fit-native-pipeline-002
+retain that failure. All three fit services have completed. Neither prototype
+is eligible for promotion.
 Logs are under C010/build/controller-logs; durable-launch-001 pins all three
 scripts/arguments/limits. They are not installed/enabled for startup and collect
 on exit. Do not modify active source/controllers or duplicate the owned
 profiles. See C010/AUDIT.md.
+
+The selected current experiment is C010/candidate-meta.bas, SHA
+70d3c5c6f4da44cf865c36c3f4edef143b9e37c662097067a5e6ceac414c300e.
+metadata-source-001 freezes an exact four-prefix private-symbol substitution
+from b8afbfdb; public syntax, capacities, addresses and runtimes stay fixed.
+Fresh meta-hosted-baseline-00139/15 and meta-admissions-001 pass with unchanged
+images/diagnostics. Five finite transient services bbc-basic-c010-meta-ROLE-001
+(ROLE build/hosted/native/errors/layout) own pending work. Build/self use
+c010-fit-build, hosted then native serial tests use c010-fit, errors use root
+.emulator, and the interpreted layout observer uses c010-wire. Individual
+metadata-launch-ROLE-001 receipts pin scripts/source/arguments/limits. No
+startup units are installed; do not modify active scripts/source or reuse
+these profiles. metadata_pipeline.py owns sequencing and fresh unique cohorts.
 Live source/bin remain the
 older qualified versions below. The staged Oryx mandelbrot-c010.bin is exact
 bad741db; its visual result remains pending, and no Oryx emulator was controlled.

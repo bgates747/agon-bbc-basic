@@ -1,0 +1,9 @@
+{
+  "scope": "Actual supplied native compiler self-compiles the exact BBC candidate",
+  "compiler_source_sha256": "b8afbfdb51de803e7c8e670d4c00e434371e3f2d0af4ce354ce29f3580cdd875",
+  "seed_sha256": "3c761c16c420a79ed04d00e3803ab00b3af54764ea66c93bb0b9a88c78f1b348",
+  "cli_sha256": "63d22f604af13317cf6532911b9206ac03e7b4f9ed257f93924a65d551646d8e",
+  "completed": false,
+  "failure": "AssertionError('Unexpected \\'\\\\nNo room at line\\' after input; see /Agon/mystuff/bbc-basic-v-adl/.emulator/c010-fit-build/c010-bootstrap.log: Warning: unused arguments left: [\"--firmware\", \"platform\"].\\nTom\\'s Fake VDP Version 1.03\\nunknown packet VDU 0x17, 0, 0xf8\\nunknown packet VDU 0x17, 0, 0x99\\nuunknown packet VDU 0x17, 0, 0x94\\n\\x80\\nAgon Platform MOS Version 3.0.2 Arthur\\n\\nSource file: c010-self-source.bas\\nOutput file: c010-newcompiler.bin\\n\\nNo room at line 19216\\n\\nError executing autoexec.txt at line 2\\n\\nError accessing SD card\\n/ *')",
+  "controller_seconds": 716.502
+}

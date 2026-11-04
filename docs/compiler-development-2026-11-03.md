@@ -976,3 +976,28 @@ remains active and unqualified; live source/image and package are unchanged.
 All18 fresh native graphics/key pairs also pass in the four
 fit-native-wire-*-001 cohorts. Verify each completed cohort's retained manifest
 before checkpointing; leave the active self/pipeline directories unstaged.
+
+Actual fit-native-self-001 also reports No room at19216 after716.502s, now
+detected promptly by the controller. No output is opened and the CLI closes.
+fit-native-pipeline-002 is failed with its eight other successful stages
+preserved. No live promotion occurs. All old fit services have completed.
+
+metadata-source-001 records a narrower storage refinement from exact b8afbfdb:
+private prefixes $if/$var/$bind/$proc become $/$V/$B/$P. All replacements are
+exact quoted strings, consistently at definitions and references. Symbol names
+are compared as complete strings, never decoded by their prefixes. Decimal
+flow names, capital variable/binding/routine names, lower-case runtime exports
+and public @/# targets occupy distinct namespaces; scoped targets retain $p.
+The address/sort algorithms, emitted instruction/data sequences, all capacity
+limits and runtime templates are unchanged. Current source is70d3c5c6, retained
+separately as candidate-meta.bas; the earlier candidate-fit.bas is not edited.
+
+Fresh finite metadata services are launched under distinct names and receipts.
+The previous qualified native compiler builds the exact new source. A separate
+hosted job repeats baseline39, full-source/admissions, all ten repackers and18
+wire pairs. Dependent native/self and error39 jobs wait for completed manifests;
+profiles remain separate. A one-pass interpreted layout observer uses the idle
+c010-wire profile to count actual symbol/other string bytes and prefix savings,
+with host-only PRINTs and exact unchanged target source. It neither writes an
+image nor claims native fit. metadata-launch-*-001 records finite limits and
+script hashes; no startup configuration or hardware/Oryx operation is involved.

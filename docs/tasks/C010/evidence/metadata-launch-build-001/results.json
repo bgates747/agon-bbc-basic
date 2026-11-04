@@ -1,0 +1,23 @@
+{
+  "started": "2026-11-04T00:23:57.962827+00:00",
+  "role": "build",
+  "unit": "bbc-basic-c010-meta-build-001",
+  "source_sha256": "70d3c5c6f4da44cf865c36c3f4edef143b9e37c662097067a5e6ceac414c300e",
+  "script": "docs/tasks/C010/bootstrap_fit_self.py",
+  "script_sha256": "eadeeebd90c195f0e638b5fa9ed73d72cbf6a0c73db099e943ce95fbfe737a52",
+  "arguments": [
+    "--source",
+    "/Agon/mystuff/bbc-basic-v-adl/docs/tasks/C010/candidate-meta.bas",
+    "--name",
+    "meta-native-build-001",
+    "--timeout",
+    "7200"
+  ],
+  "runtime_max_seconds": 7500,
+  "log": "docs/tasks/C010/build/controller-logs/bbc-basic-c010-meta-build-001.log",
+  "returncode": 0,
+  "stdout": "",
+  "stderr": "Running as unit: bbc-basic-c010-meta-build-001.service; invocation ID: 5b4261327cc840efb2552ba9b0fd5183\n",
+  "startup_unit_installed": false,
+  "launch_is_not_qualification": true
+}

@@ -23,7 +23,7 @@ def main():
     source_hash = digest(ROOT/'compiler/compiler.bas')
     image_hash = digest(ROOT/'compiler/bin/compiler.bin')
     assert source_hash == manifest['source_sha256'] == promotion['promoted_source_sha256']
-    assert source_hash == 'b8afbfdb51de803e7c8e670d4c00e434371e3f2d0af4ce354ce29f3580cdd875'
+    assert source_hash == '70d3c5c6f4da44cf865c36c3f4edef143b9e37c662097067a5e6ceac414c300e'
     assert image_hash == manifest['image_sha256'] == promotion['promoted_image_sha256']
     size = manifest['image_bytes']
     changes = {}
@@ -103,7 +103,8 @@ remaining repeated-generation/physical boundary.'''
     new = '''adapters and bounded private metadata. C005/C006's earlier324275-byte image
 matches its interpreted seed and subsequent native/physical generations.
 C010 preserves those resource limits; its private bookkeeping factoring keeps
-the graphics-enabled compiler within the same memory map. See the
+the graphics-enabled compiler within the same memory map. Its private symbol
+prefixes are shorter; public label syntax and scope stay unchanged. See the
 [compaction record](../docs/tasks/C005/COMPACTION.md),
 [earlier generation contract](../docs/tasks/C006/BOOTSTRAP.md) and
 [current qualification](../docs/tasks/C010.md) for their exact versions.'''

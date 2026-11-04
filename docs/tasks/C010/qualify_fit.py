@@ -89,6 +89,7 @@ def main():
     parser.add_argument('--name', required=True)
     parser.add_argument('--suite', choices=['basic', 'bounded', 'errors', 'interactions'], default='basic')
     parser.add_argument('--native', type=Path, help='compile probes with this actual native compiler')
+    parser.add_argument('--source', type=Path, default=TASK/'candidate-fit.bas')
     args = parser.parse_args()
     assert args.name.replace('-', '').isalnum()
     evidence = TASK / 'evidence' / args.name
@@ -97,7 +98,7 @@ def main():
     keyboard = load('keyboard', ROOT / 'docs/tasks/C005/io/interactive.py')
     selected = cases(args.suite)
     report = dict(scope='Actual CPU UART stream parity; protocol peer, no renderer or human validation',
-                  compiler_source_sha256=digest(TASK/'candidate-fit.bas'),
+                  compiler_source_sha256=digest(args.source),
                   reference_sha256=digest(SD/'bin/basic.bin'),
                   observer_sha256=digest(PROFILE/'fab-agon-emulator.bin'),
                   mos_sha256=digest(PROFILE/'mos_platform.bin'), suite=args.suite, cases=[], completed=False)
@@ -105,7 +106,7 @@ def main():
     start = time.monotonic()
     try:
         # BBC BASIC performs every parse, conversion and byte of native emission.
-        definitions = (TASK/'candidate-fit.bas').read_text().split('1000 DEF', 1)[1]
+        definitions = args.source.read_text().split('1000 DEF', 1)[1]
         driver = ['10 PROCinit', '20 ON ERROR REPORT:PRINT:OSCLI "BYE"']
         for i, case in enumerate(selected):
             (SD/f'w{i}.bas').write_text(source(case))

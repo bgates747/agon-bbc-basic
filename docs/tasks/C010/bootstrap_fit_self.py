@@ -17,12 +17,13 @@ parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--name', default='native-build-001')
 parser.add_argument('--seed', type=Path)
 parser.add_argument('--expected', type=Path)
+parser.add_argument('--source', type=Path, default=TASK/'candidate-fit.bas')
 parser.add_argument('--timeout', type=float, default=3600)
 args = parser.parse_args()
 assert args.name.replace('-', '').isalnum()
 evidence = TASK / 'evidence' / args.name
 evidence.mkdir(parents=True, exist_ok=False)
-source = TASK / 'candidate-fit.bas'
+source = args.source.resolve(strict=True)
 image = args.seed or ROOT / 'compiler/bin/compiler.bin'
 sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
 if args.seed is None:

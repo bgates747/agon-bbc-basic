@@ -16,6 +16,8 @@ def main():
     parser.add_argument('--suite', choices=['baseline', 'representative'], required=True)
     parser.add_argument('--native', type=Path, required=True)
     parser.add_argument('--name', required=True)
+    parser.add_argument('--source', type=Path, default=TASK/'candidate-fit.bas')
+    parser.add_argument('--reference', type=Path, default=TASK/'evidence/fit-hosted-baseline-002')
     args = parser.parse_args()
     assert args.name.replace('-', '').isalnum()
     script = ROOT/'docs/tasks/C006'/('native_baseline.py' if args.suite == 'baseline' else 'regressions.py')
@@ -29,7 +31,7 @@ def main():
     cli = TASK/'build/observer-target/release/agon-cli-emulator'
     sys.argv = [str(script), '--native', str(args.native), '--cli', str(cli), '--name', args.name]
     if args.suite == 'baseline':
-        sys.argv += ['--reference', str(TASK/'evidence/fit-hosted-baseline-002')]
+        sys.argv += ['--reference', str(args.reference)]
     print('Retained harness SHA256', hashlib.sha256(script.read_bytes()).hexdigest(), flush=True)
     same_images = []
     try:
@@ -47,7 +49,7 @@ def main():
             metadata = dict(retained_harness=str(script.relative_to(ROOT)),
                 retained_harness_sha256=hashlib.sha256(script.read_bytes()).hexdigest(),
                 observer_sha256=hashlib.sha256(cli.read_bytes()).hexdigest(),
-                compiler_source_sha256=hashlib.sha256((TASK/'candidate-fit.bas').read_bytes()).hexdigest(),
+                compiler_source_sha256=hashlib.sha256(args.source.read_bytes()).hexdigest(),
                 identical_representative_full_images=same_images,
                 scope='Original C006 assertions with explicit C010 destination/profile selection')
             (evidence/'execution.json').write_text(json.dumps(metadata, indent=2)+'\n')
