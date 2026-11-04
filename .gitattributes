@@ -2,3 +2,6 @@
 /compiler/bin/compiler.bin binary
 /docs/tasks/C006/evidence/**/*.bin binary
 /docs/tasks/C010/evidence/**/*.bin binary
+
+# Frozen assembler listings retain the tool's exact spacing.
+/docs/tasks/C011/evidence/**/clock.lst -whitespace

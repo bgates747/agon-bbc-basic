@@ -1169,3 +1169,8 @@ c011-console8-002.tar at22:48:05EST with sync, archive91b7c235. Earlier records
 remain unchanged. Source limits, target/RESTORE labels and synthetic log rejection
 checks are retained; portable file scans and manifest/evidence hashes pass.
 No source/image change to the live compiler or target runtime result is implied.
+
+Checkpoint0a2a5d3 retains the first fixture and delivery receipts. Raw assembler
+listings include the tool's trailing spaces; a narrowly scoped whitespace
+attribute preserves those frozen bytes while keeping source/document checks
+active. No frozen evidence or payload bytes are rewritten for formatting.
