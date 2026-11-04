@@ -1,11 +1,12 @@
 # Graphics statements and keyboard input
 
-The candidate adds the four missing constructs used by the unchanged Mandelbrot
+The compiler adds the four missing constructs used by the unchanged Mandelbrot
 program: MODE, GCOL, PLOT and bare numeric GET. It emits native calls and VDU
 bytes, using the already qualified BBC numeric conversion routines. It does not
 copy interpreter statement dispatch, invent a numerical representation, or
-change the Mandelbrot calculation. Qualification remains experimental until
-recorded evidence and an explicit live promotion identify exact versions.
+change the Mandelbrot calculation. Completed qualification and live promotion
+below identify exact versions; rendered/manual and physical acceptance remain
+separate. Earlier failed and experimental versions retain their own evidence.
 
 ## Reference behavior and implementation
 

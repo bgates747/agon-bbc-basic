@@ -1,0 +1,22 @@
+{
+  "after/compatibility.md": "b78bac007a2675af26d0664edb481ea90ad9c602779db5321cad6f99bce55932",
+  "after/compiler-provenance.json": "cc748b09e8a19717b69bb3c9c577ba767c6fc5d48b532e72691995a8560a185a",
+  "after/compiler.bas": "70d3c5c6f4da44cf865c36c3f4edef143b9e37c662097067a5e6ceac414c300e",
+  "after/compiler.bin": "40e4ae06730b6735696f5f07962efd10e6c9cfbdc44a81b65dd6e9ce1c82355a",
+  "after/manifest.json": "1a9e5b2c1d4300ff25ec766f63487bc0c577aeeb80b1a96378dac364dfacee9f",
+  "after/readme.txt": "5be8e6e823f37f661aae8c65e99e163cc00e89f9b9bf8e09b3fd75ec894706b6",
+  "after/tests/12-mandelbrot/mandelbrot-c010.bin": "bad741db6adfc250c7c2f48c37687aec93e8271f77c48bd760f309548dada196",
+  "after/tests/12-mandelbrot/mandelbrot.bas": "1eb897c8ef3aecc99910e0352eba6d32064ebc4aef9e7bd32e9952b0878b43de",
+  "after/tests/12-mandelbrot/native-readme.txt": "d8b503d7792446662ee6aec380105027069dc047a0971733391c80e25093de71",
+  "after/tests/readme.txt": "d33413c3a929ddb270d909282999003e712a9f5f979fc652d028db54dae1fe24",
+  "before/compatibility.md": "bcb16ca42bfd681154e5f3d36bb38de5d31044fae2fc14701ee4506f4aca317c",
+  "before/compiler-provenance.json": "260f53811e7f6a539ab97616dd9a003aa4b260c045152eeaa7b6148a22d72f5f",
+  "before/compiler.bas": "6597a0df3f99b4f43c42bff1cdbc59f5fdf730c57837f3d4112a598fbfbe5fb8",
+  "before/compiler.bin": "299a31190c380541a73ed9eb144a303fa37abccc4f3c3e0ad47f99f1538122c0",
+  "before/manifest.json": "7fe79c811878fc9e151d1689a8a5156e631e394dd66c75396e626868ed591b26",
+  "before/readme.txt": "aa5a6e4f3219d0f217485ccdbf1c096a57c15777527fcc0e98968827a47324bb",
+  "before/tests/readme.txt": "ad1d447ccbd6f90398a8d0f850795f3d034a138becef15b4a7a56385fa777134",
+  "plan.json": "284e29a5285a6cb8fa48c7c531ca5cdba576426eba78923f63d5e11f7c9dea71",
+  "results.json": "c315138142ba6ca093527b1523f324368a905fdb35222507853180ed18685cbe",
+  "update_package.py": "f127bd20d50a384979fe4457adf2d54657651a2bca515290959bf975c298c306"
+}

@@ -66,8 +66,10 @@ an empty owned service/controller/emulator list at01:33:54UTC November4
 (20:33:54EST November3). No hardware custody or Oryx emulator session was selected.
 C008 manual results remain pending, and C009 is a possible low-priority feature
 only. The53-file portable refresh (501472 bytes, manifest1a9e5b2c) is frozen in
-C010/evidence/manual-package-001; bounded managed updates are the remaining
-C010 delivery step. Preserve all user files/results and older frozen evidence.
+C010/evidence/manual-package-001 and delivered to the existing Oryx emulator SD
+by emulator-update-001 with sync and no process control. C010 is complete.
+card-update-001 stops before writes because AGONC8 is not mounted; C008 retains
+that refresh and manual results. Preserve user files and older frozen evidence.
 
 ## Earlier C005/C006 basis
 
@@ -185,11 +187,12 @@ by receipt of this notice; retained custody still requires an explicit new grant
 
 ## Manual Console8 package
 
-C008 is staged at the Author-selected Oryx path
+C008's selected Oryx card path remains
 `/run/media/smith/AGONC8/mystuff/basic-compiled/`, Agon path
-`/mystuff/basic-compiled/`. Keep that root stable. Its50 files include the exact
-compiler/source, MIT nano editor, notices, starter, compatibility/runbook and12
-manual test subdirectories. Actual deployment completed14:46:22EST November3,
+`/mystuff/basic-compiled/`. Keep that root stable. The last known managed card
+release has50 files: earlier299a3119 compiler/6597a0df source, MIT nano editor,
+notices, starter, compatibility/runbook and12 manual test directories.
+Its initial deployment completed14:46:22EST November3,
 with sync and the card left mounted; receipt C008/evidence/manual-deployment-001.
 No user result is implied. Do not delete or overwrite later user programs/results.
 deploy_sd.py refuses a nonempty target: future updates need explicit preservation.
@@ -205,6 +208,26 @@ including JSON metadata and test instructions. Use package-relative paths and
 links to files actually shipped. C008's portable manual-004 package and
 portable-package-001 receipt supersede the original development-specific payload;
 development provenance and deployment coordinates remain repository-only.
+
+C010's current53-file/501472-byte portable package is frozen in
+C010/evidence/manual-package-001/payload and prepared in C010/build/manual-001,
+manifest1a9e5b2c1d4300ff25ec766f63487bc0c577aeeb80b1a96378dac364dfacee9f.
+It includes current40e4ae06 compiler/70d3c5c6 source and13 tests; all twelve
+earlier test directories are unchanged. It is delivered to Oryx's existing
+/home/smith/Agon/flexe-emulator/sdcard/basic-compiled by emulator-update-001,
+with only eight checked replacements and exact existing Mandelbrot additions
+preserved. No emulator was launched/controlled. Rendering/manual acceptance
+remains pending. The provided Mandelbrot native image is18329-byte bad741db.
+
+card-update-001 fails at its first directory guard before any writes. Read-only
+findmnt/ls confirms AGONC8 and the selected root are absent; only /boot/efi is
+listed as vfat. Do not create a shadow mountpoint or choose another volume.
+C008 retains the pending refresh until the Author's card is mounted again.
+Use C010/update_package.py with previous C008/build/manual-004, current package
+above, target card and a fresh receipt name such as card-update-002. It checks
+the old7fe79c81 manifest and selected file hashes before any writes, preserves
+user files/results, syncs and leaves the card mounted. Keep failed001 immutable.
+No human results, hardware custody or emulator reservation follow from delivery.
 
 Shared /tmp tmpfs filled during G2 handoff; only our inactive Cargo build cache
 was moved to C006/build/relocated-cli-cache-001, preserving the active CLI at its

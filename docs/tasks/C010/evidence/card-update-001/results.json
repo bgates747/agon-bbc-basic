@@ -1,0 +1,13 @@
+{
+  "scope": "Bounded managed-file update; no program/emulator/hardware execution",
+  "target": "card",
+  "destination": "/run/media/smith/AGONC8/mystuff/basic-compiled",
+  "started": "2026-11-04T01:35:01.398248+00:00",
+  "finished": "2026-11-04T01:35:01.680369+00:00",
+  "returncode": 1,
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 6, in <module>\n    assert root.is_dir() and root.resolve() == root\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+  "package_manifest_sha256": "1a9e5b2c1d4300ff25ec766f63487bc0c577aeeb80b1a96378dac364dfacee9f",
+  "manual_validation": false,
+  "user_files_not_selected": true
+}

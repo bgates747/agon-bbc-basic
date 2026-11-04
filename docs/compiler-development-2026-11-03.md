@@ -1074,3 +1074,26 @@ managed delivery and human results are separate gates; no user files are selecte
 service-completion-001 verifies the empty bbc-basic-c010 service list and no
 owned Python controllers/CLI emulators at2026-11-04T01:33:54.419508Z
 (November3 locally). This is a read-only Pi check, with no target access.
+
+C010's qualified source/bin/docs and full portable payload are committed and
+pushed as27e32e8. Actual card-update-001 then stops at the initial root-directory
+guard, before any writes: the selected Console8 package root is unavailable.
+Read-only SSH findmnt lists only /boot/efi as vfat and ls confirms that AGONC8
+and its package directory do not exist. No card mount, alternate target or
+shadow directory is created. Retain the failed receipt; its refresh remains
+under C008 pending the Author's card availability.
+
+Actual emulator-update-001 completes at2026-11-04T01:35:52.382441Z, November3
+locally: eight selected managed replacements including the manifest, successful
+sync, and exact1a9e5b2c manifest. Existing Mandelbrot source and bad741db native
+image already match and are preserved. No user programs/results, emulator
+process, firmware/startup or hardware is touched. The existing emulator package
+now contains the current qualified compiler and13 supplied test directories.
+No redundant payload readback follows the successful transfer.
+
+C010 is complete for implementation/automated qualification, exact live
+promotion and portable emulator delivery. Remove it from TODO; C008 explicitly
+retains the offline card refresh and manual results, and C009 remains only a
+low-priority unapproved possible feature. Main remains separate. No paired
+performance benchmark, new physical run or compiled graphical acceptance is
+claimed. All finite Pi work is closed and failure records remain immutable.
