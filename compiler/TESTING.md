@@ -43,5 +43,8 @@ The Author reports successful Console8 compilation and execution of Mandelbrot,
 with a qualitative gain in less computationally intense regions and inconclusive
 comparison in intense regions. [The retained report](../docs/tasks/C008/evidence/author-mandelbrot-001/report.md)
 is human functional evidence, not a measured speedup.
-[C011](../docs/tasks/C011.md) proposes broad matched kernels, arithmetic-density
-sweeps, service-separated applications and a verified timing harness.
+[C011](../docs/tasks/C011.md) now supplies an experimental42-case fixture,
+matched arithmetic-density/call-frequency cases and a MOS clock-pointer helper.
+Static checks pass; Console8 compilation, runtime correctness and timings await
+the Author. No emulator execution is part of this tranche. Broader sweeps and
+actual clock validation remain open.

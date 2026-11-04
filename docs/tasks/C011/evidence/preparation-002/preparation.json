@@ -1,0 +1,7 @@
+{
+  "scope": "Static checks/preparation only; no target execution",
+  "supersedes": "preparation-001",
+  "change": "Correct dispatch-test count in coverage:40 tests for42 cases; BASIC source and helper unchanged",
+  "package_manifest_sha256": "b0b44d96cfe7874196edb22c529f7f56e8cc2d04b68e28ae9f2e6c9b66e559ba",
+  "no_emulator": true
+}

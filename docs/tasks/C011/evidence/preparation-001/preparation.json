@@ -1,0 +1,11 @@
+{
+  "scope": "static preparation only; no BASIC compilation/execution; no emulator or hardware run",
+  "source_lines": 433,
+  "case_count": 42,
+  "helper_bytes": 297,
+  "helper_adl_audit": "Only wide memory store is ld (pointer),ix; pointer allocates exactly3 bytes. APIs use rst.lil; stack pushes/pops IX/IY balanced. Relative branches checked from signed raw displacement; objdump displays some negative JR targets incorrectly.",
+  "host_check_initial_failure": "Synthetic-test clone used JSON on tuple-keyed dictionary; failed before any target operation. Fixed to a shallow copied sample dictionary; subsequent contract checks pass.",
+  "package_sha256": "de73d41dc24ef3d0f2799cbd1d4c3348707a8568cb514ef2cca48a09bae060bf",
+  "static_checks_passed": true,
+  "device_testing_pending": true
+}

@@ -251,4 +251,19 @@ The Author now reports Mandelbrot compiles and runs on Console8, with a visible
 qualitative gain in less computationally intense regions and inconclusive
 comparison in intense regions. C008/evidence/author-mandelbrot-001 retains the
 report; other manual cases remain open. No paired speedup is measured. C011 is
-the proposed broad benchmark/timing fixture task, not an implemented suite.
+the broad benchmark/timing task. Its first42-case source and297-byte clock
+helper are prepared with static checks only; no target compilation or timing
+is claimed. C011/preparation-002 pins console8-004, manifestb0b44d96. Its archive
+is staged on Oryx as /home/smith/Agon/mystuff/c011-console8-002.tar; card-stage-001
+stops before writes because AGONC8 is absent. Retry only after the card returns,
+with fresh card-stage-002. The Author will run Console8; no emulator runs or
+virtual SD changes are permitted for this tranche.
+
+
+Pi5 manager's November3 notice establishes the canonical heavy-work checkout
+at agon-dev-env/cross-agent/pi5-workloads/README.md. Substantial Pi builds/tests
+and native emulator runs need a finite reservation and explicit token/generation
+grant, asserted before launch and released after teardown. Light preparation
+remains compatible; no checkout was requested for C011 source preparation,
+297-byte helper assembly or small synthetic/static checks. Time authority does
+not override the Author's explicit no-emulator instruction or hardware custody.

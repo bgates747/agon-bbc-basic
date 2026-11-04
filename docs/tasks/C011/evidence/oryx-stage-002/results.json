@@ -1,0 +1,11 @@
+{
+  "started": "2026-11-04T03:48:05.013816+00:00",
+  "finished": "2026-11-04T03:48:05.440629+00:00",
+  "target": "stage",
+  "returncode": 0,
+  "stdout": "{\"staged\": \"/home/smith/Agon/mystuff/c011-console8-002.tar\", \"archive_sha256\": \"91b7c235022d8fed6103872ee520042a1de869f04e77539c3cca64daf112dea4\", \"synced\": true, \"card_written\": false, \"no_emulator\": true}\n",
+  "stderr": "",
+  "manifest_sha256": "b0b44d96cfe7874196edb22c529f7f56e8cc2d04b68e28ae9f2e6c9b66e559ba",
+  "archive_sha256": "91b7c235022d8fed6103872ee520042a1de869f04e77539c3cca64daf112dea4",
+  "no_target_execution": true
+}

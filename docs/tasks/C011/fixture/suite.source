@@ -1,0 +1,433 @@
+REM C011 broad paired benchmark v1 - same source under both engines
+REM Experimental: no target execution claimed. See readme.txt.
+ON ERROR PRINT "FAILED ERR=";ERR;" ERL=";ERL:REPORT:CLOSE #0:END
+DIM ba&(63),ia%(63),va(7,7),sa$(7),hist%(32)
+DIM bases%(42),names$(42)
+DIM raw% 63
+hex$="0123456789ABCDEF"
+FOR case%=1 TO 42:READ names$(case%),bases%(case%):NEXT
+fh%=OPENIN("clock.dat")
+IF fh%=0 PRINT "Run clock.bin from this directory first":END
+magic$="":FOR j%=1 TO 4:magic$=magic$+CHR$(BGET#fh%):NEXT
+IF magic$<>"C011" CLOSE #fh%:PRINT "Wrong clock.dat":END
+clock%=BGET#fh%:clock%=clock%+256*BGET#fh%:clock%=clock%+65536*BGET#fh%
+IF NOT EOF#fh% CLOSE #fh%:PRINT "Wrong clock.dat size":END
+CLOSE #fh%
+IF clock%<256 PRINT "Invalid clock pointer":END
+PRINT "C011 v1. Run clock.bin again after reboot or MOS change."
+PRINT "First run: cases 1..42, scale 1, repetitions 1. No speed claim yet."
+INPUT LINE "Result filename (fresh, e.g. ref001.csv): " out$
+fh%=OPENIN(out$)
+IF fh%<>0 CLOSE #fh%:PRINT "Preserve existing result; choose fresh name":END
+INPUT LINE "Engine tag (ref or native): " engine$
+IF engine$<>"ref" AND engine$<>"native" PRINT "Use ref or native":END
+INPUT LINE "First case (1..42): " in$:first%=VAL(in$)
+INPUT LINE "Last case (first..42): " in$:last%=VAL(in$)
+INPUT LINE "Scale (1..1000; SAME for both engines): " in$:scale%=VAL(in$)
+INPUT LINE "Measured repetitions (1 pilot, 5 or more measured): " in$:reps%=VAL(in$)
+IF first%<1 OR last%>42 OR first%>last% PRINT "Invalid case range":END
+IF scale%<1 OR scale%>1000 OR reps%<1 OR reps%>20 PRINT "Invalid scale/repetitions":END
+log%=OPENOUT(out$)
+IF log%=0 PRINT "Cannot create result":END
+line$="C011,1,"+engine$+","+STR$(first%)+","+STR$(last%)+","+STR$(scale%)+","+STR$(reps%)
+BPUT #log%,line$
+REM Bounded clock-advancement check; observed units, not millisecond claims.
+before=FNtick:gran%=2147483647:edges%=0:polls%=0
+REPEAT
+now=FNtick:polls%=polls%+1
+IF now<>before THEN
+jump=FNdelta(before,now)
+IF jump<gran% gran%=jump
+edges%=edges%+1:before=now
+ENDIF
+UNTIL edges%=8 OR polls%=20000
+IF edges%<8 PRINT "Clock did not advance enough; discard run":CLOSE #log%:END
+PRINT "Observed minimum clock increment (centiseconds): ";gran%
+line$="CLOCK,"+STR$(clock%)+","+STR$(gran%)+","+STR$(polls%)
+BPUT #log%,line$
+FOR case%=first% TO last%
+work%=bases%(case%)*scale%
+PRINT "Case ";case%;" ";names$(case%);" n=";work%
+REM sample zero is a warmup, logged but excluded from measured statistics.
+FOR sample%=0 TO reps%
+PROCsetup(case%)
+tick0=FNtick
+PROCrun(case%,work%)
+tick1=FNtick
+elapsed=FNdelta(tick0,tick1)
+PROCcollect(case%,work%)
+state$=STR$(acc%)+":"+FNmemory(^z,5)+":"+FNhstring(s$)
+line$="S,"+STR$(case%)+","+STR$(sample%)+","+STR$(work%)+","+STR$~tick0+","+STR$~tick1+","+STR$~elapsed+","+state$
+BPUT #log%,line$
+PRINT "  sample ";sample%;" cs=";elapsed;" state=";state$
+IF elapsed<1000 PRINT "  SHORT: increase SAME scale in a fresh pair for precise timing"
+NEXT
+NEXT
+BPUT #log%,"DONE"
+CLOSE #log%
+PRINT "Finished. Preserve both logs; compare states before using timings."
+END
+DEF FNtick
+LOCAL aa%,bb%,tries%
+tries%=0
+REPEAT
+aa%=!clock% AND &7FFFFFFF:bb%=!clock% AND &7FFFFFFF:tries%=tries%+1
+UNTIL aa%=bb% OR tries%=100
+IF aa%<>bb% ERROR 100,"Clock read unstable"
+=bb%
+DEF FNdelta(aa,bb)
+LOCAL dd
+dd=bb-aa:IF dd<0 dd=dd+2147483648
+=dd
+DEF FNmemory(ptr%,len%)
+LOCAL t$,jj%,v%
+t$=""
+FOR jj%=0 TO len%-1
+v%=ptr%?jj%:t$=t$+MID$(hex$,v% DIV 16+1,1)+MID$(hex$,v% MOD 16+1,1)
+NEXT
+=t$
+DEF FNhstring(text$)
+LOCAL t$,jj%,v%
+t$=""
+FOR jj%=1 TO LEN(text$)
+v%=ASC MID$(text$,jj%,1):t$=t$+MID$(hex$,v% DIV 16+1,1)+MID$(hex$,v% MOD 16+1,1)
+NEXT
+=t$
+DEF PROCsetup(kk%)
+acc%=0:z=0:s$="":x%=7:y%=3:x=0.5:y=0.25:factor=1.000001:flag%=0
+saved%=77:held$="outer":one=12.5:two%=91:word$="abcdefghijklmnop":record$="12,ALPHA,34,BETA"
+FOR ii%=0 TO 63:ba&(ii%)=ii%:ia%(ii%)=63-ii%:raw%?ii%=ii%:NEXT
+FOR ii%=0 TO 7
+sa$(ii%)=CHR$(65+ii%):FOR jj%=0 TO 7:va(ii%,jj%)=ii%*8+jj%:NEXT
+NEXT
+FOR ii%=0 TO 32:hist%(ii%)=0:NEXT
+IF kk%=35 THEN
+io%=OPENIN("input.dat")
+IF io%=0 ERROR 101,"Missing input.dat"
+ENDIF
+IF kk%=36 THEN
+io%=OPENOUT("scratch.dat")
+IF io%=0 ERROR 101,"Cannot create scratch.dat"
+ENDIF
+IF kk%=38 MODE 8
+ENDPROC
+DEF PROCrun(kk%,nn%)
+IF kk%=1 PROCempty(nn%)
+IF kk%=2 PROCinteger(nn%)
+IF kk%=3 PROCvariant(nn%)
+IF kk%=4 PROCbyte(nn%)
+IF kk%=5 PROCbranch(nn%)
+IF kk%=6 PROCwhile(nn%)
+IF kk%=7 PROCrepeat(nn%)
+IF kk%=8 PROCgosub(nn%)
+IF kk%=9 PROCcalls(nn%)
+IF kk%=10 PROClocals(nn%)
+IF kk%=11 PROCfnnum(nn%)
+IF kk%=12 PROCfnstr(nn%)
+IF kk%=13 PROCrecurse(nn%)
+IF kk%=14 PROCfloat1(nn%)
+IF kk%=15 PROCfloat4(nn%)
+IF kk%=16 PROCfloat16(nn%)
+IF kk%=17 PROCmuldiv(nn%)
+IF kk%=18 PROCbits(nn%)
+IF kk%=19 PROCtrig(nn%)
+IF kk%=20 PROClogpow(nn%)
+IF kk%=21 PROCconvert(nn%)
+IF kk%=22 PROCbytearray(nn%)
+IF kk%=23 PROCintarray(nn%)
+IF kk%=24 PROCmulti(nn%)
+IF kk%=25 PROCraw(nn%)
+IF kk%=26 PROCdata(nn%)
+IF kk%=27 PROCcopy(nn%)
+IF kk%=28 PROCslice(nn%)
+IF kk%=29 PROCsearch(nn%)
+IF kk%=30 PROCparse(nn%)
+IF kk%=31 PROCsort(nn%)
+IF kk%>=32 AND kk%<=34 PROCmandel(nn%,kk%-32)
+IF kk%=35 PROCread(nn%)
+IF kk%=36 PROCwrite(nn%)
+IF kk%=37 PROCformat(nn%)
+IF kk%=38 PROCgraphics(nn%)
+IF kk%=39 PROCint4(nn%)
+IF kk%=40 PROCint16(nn%)
+IF kk%=41 PROCfinecalls(nn%)
+IF kk%=42 PROCcoarsecalls(nn%)
+ENDPROC
+DEF PROCcollect(kk%,nn%)
+IF kk%=35 CLOSE #io%
+IF kk%=36 THEN
+CLOSE #io%:io%=OPENIN("scratch.dat")
+IF io%=0 ERROR 101,"Missing scratch.dat"
+acc%=0
+FOR ii%=1 TO nn%
+IF EOF#io% ERROR 101,"Short scratch.dat"
+bb%=BGET#io%:IF bb%<>(ii% AND 255) ERROR 101,"Wrong scratch byte"
+acc%=(acc%+bb%) AND &7FFFFFFF
+NEXT
+IF NOT EOF#io% ERROR 101,"Long scratch.dat"
+CLOSE #io%
+ENDIF
+IF kk%=38 MODE 1
+IF kk%=1 acc%=ii%
+IF kk%=3 z=x
+IF kk%=4 acc%=byte&
+IF kk%=14 OR kk%=15 OR kk%=16 OR kk%=19 OR kk%=20 z=x
+IF kk%=22 THEN
+acc%=0:FOR ii%=0 TO 63:acc%=acc%+ba&(ii%):NEXT
+ENDIF
+IF kk%=23 THEN
+acc%=0:FOR ii%=0 TO 63:acc%=acc%+ia%(ii%):NEXT
+ENDIF
+IF kk%=24 THEN
+acc%=0:FOR ii%=0 TO 7
+FOR jj%=0 TO 7:acc%=acc%+va(ii%,jj%):NEXT
+NEXT
+s$=sa$(nn% AND 7)
+ENDIF
+IF kk%=25 THEN
+acc%=0:FOR ii%=0 TO 63:acc%=acc%+raw%?ii%:NEXT
+ENDIF
+IF kk%=31 THEN
+acc%=0:FOR ii%=0 TO 63
+IF ii%>0 IF ia%(ii%)<ia%(ii%-1) ERROR 101,"Sort order"
+acc%=acc%+ia%(ii%)
+NEXT
+IF acc%<>2016 ERROR 101,"Sort sum"
+ENDIF
+IF kk%>=32 AND kk%<=34 THEN
+s$="":FOR ii%=0 TO 32:s$=s$+CHR$(hist%(ii%)):NEXT
+ENDIF
+IF kk%=2 OR kk%=6 OR kk%=7 OR kk%=8 OR kk%=9 OR kk%=10 OR kk%=11 THEN
+IF acc%<>nn% ERROR 101,"Counter check"
+ENDIF
+IF kk%=10 THEN
+IF saved%<>77 OR held$<>"outer" OR one<>12.5 OR two%<>91 ERROR 101,"LOCAL restoration"
+ENDIF
+IF kk%=13 IF acc%<>nn%*8 ERROR 101,"Recursion check"
+IF kk%=39 OR kk%=40 OR kk%=41 OR kk%=42 THEN
+IF acc%<>7 ERROR 101,"Integer identity"
+ENDIF
+ENDPROC
+DEF PROCempty(nn%)
+FOR ii%=1 TO nn%:NEXT
+ENDPROC
+DEF PROCinteger(nn%)
+FOR ii%=1 TO nn%:acc%=acc%+1:NEXT
+ENDPROC
+DEF PROCvariant(nn%)
+FOR ii%=1 TO nn%:x=x+y:NEXT
+ENDPROC
+DEF PROCbyte(nn%)
+byte&=0:FOR ii%=1 TO nn%:byte&=byte&+1:NEXT
+ENDPROC
+DEF PROCbranch(nn%)
+FOR ii%=1 TO nn%
+IF (ii% AND 3)=0 THEN
+acc%=acc%+3
+ELSE
+IF ii% MOD 2=0 acc%=acc%+2 ELSE acc%=acc%-1
+ENDIF
+NEXT
+ENDPROC
+DEF PROCwhile(nn%)
+ii%=0:WHILE ii%<nn%:ii%=ii%+1:acc%=acc%+1:ENDWHILE
+ENDPROC
+DEF PROCrepeat(nn%)
+ii%=0:REPEAT:ii%=ii%+1:acc%=acc%+1:UNTIL ii%=nn%
+ENDPROC
+DEF PROCgosub(nn%)
+FOR ii%=1 TO nn%:GOSUB {gosub}:NEXT
+GOTO {gosub_end}
+REM LABEL gosub
+acc%=acc%+1:RETURN
+REM LABEL gosub_end
+ENDPROC
+DEF PROCleaf
+acc%=acc%+1
+ENDPROC
+DEF PROCcalls(nn%)
+FOR ii%=1 TO nn%:PROCleaf:NEXT
+ENDPROC
+DEF PROCbound(v%)
+LOCAL saved%,held$,"one",two%
+saved%=v%:held$="local":one=1:two%=2:acc%=acc%+1
+ENDPROC
+DEF PROClocals(nn%)
+FOR ii%=1 TO nn%:PROCbound(ii%):NEXT
+ENDPROC
+DEF FNplus(v%)=v%+1
+DEF PROCfnnum(nn%)
+FOR ii%=1 TO nn%:acc%=FNplus(acc%):NEXT
+ENDPROC
+DEF FNword$(v$)=v$+"!"
+DEF PROCfnstr(nn%)
+FOR ii%=1 TO nn%:s$=FNword$(word$):NEXT
+ENDPROC
+DEF PROCdepth(v%)
+LOCAL held%
+held%=v%:IF v%>0 PROCdepth(v%-1)
+acc%=acc%+1
+ENDPROC
+DEF PROCrecurse(nn%)
+FOR ii%=1 TO nn%:PROCdepth(7):NEXT
+ENDPROC
+DEF PROCfloat1(nn%)
+FOR ii%=1 TO nn%:x=x*factor:NEXT
+ENDPROC
+DEF PROCfloat4(nn%)
+FOR ii%=1 TO nn%:x=x*factor*factor*factor*factor:NEXT
+ENDPROC
+DEF PROCfloat16(nn%)
+FOR ii%=1 TO nn%
+x=x*factor*factor*factor*factor
+x=x*factor*factor*factor*factor
+x=x*factor*factor*factor*factor
+x=x*factor*factor*factor*factor
+NEXT
+ENDPROC
+DEF PROCmuldiv(nn%)
+FOR ii%=1 TO nn%:x%=(x%*13+5) MOD 997:acc%=x% DIV y%:NEXT
+ENDPROC
+DEF PROCbits(nn%)
+FOR ii%=1 TO nn%
+x%=(x% EOR ii%) AND 65535:acc%=(NOT x%) OR (ii% AND 7)
+NEXT
+ENDPROC
+DEF PROCtrig(nn%)
+FOR ii%=1 TO nn%
+x=SIN(y)+COS(y)+TAN(y)+ASN(y)+ACS(y)+ATN(y)
+NEXT
+ENDPROC
+DEF PROClogpow(nn%)
+FOR ii%=1 TO nn%
+x=SQR(y)+EXP(y)+LN(y)+LOG(y)+y^y
+x=x+ABS(-y)+SGN(y)+INT(y)+DEG(y)+RAD(y)+PI
+NEXT
+ENDPROC
+DEF PROCconvert(nn%)
+FOR ii%=1 TO nn%:s$=STR$(VAL("123.25tail"))+STR$~x%:acc%=ASC CHR$(ii% AND 255):NEXT
+ENDPROC
+DEF PROCbytearray(nn%)
+FOR ii%=1 TO nn%:jj%=ii% AND 63:ba&(jj%)=ba&(jj%)+1:NEXT
+ENDPROC
+DEF PROCintarray(nn%)
+FOR ii%=1 TO nn%:jj%=ii% AND 63:ia%(jj%)=ia%(jj%)+1:NEXT
+ENDPROC
+DEF PROCmulti(nn%)
+FOR ii%=1 TO nn%
+jj%=ii% AND 7:va(jj%,jj%)=va(jj%,jj%)+1:sa$(jj%)=CHR$(65+jj%)+"x"
+NEXT
+ENDPROC
+DEF PROCraw(nn%)
+FOR ii%=1 TO nn%
+jj%=ii% AND 15:raw%!(jj%*4)=raw%!(jj%*4) EOR &01010101
+NEXT
+ENDPROC
+DEF PROCdata(nn%)
+FOR ii%=1 TO nn%:RESTORE {data}:READ aa%,"bb",cc$:acc%=aa%+bb:s$=cc$:NEXT
+ENDPROC
+DEF PROCcopy(nn%)
+FOR ii%=1 TO nn%:s$=word$:s$=s$:s$=s$+"xy"+CHR$(0):NEXT
+ENDPROC
+DEF PROCslice(nn%)
+FOR ii%=1 TO nn%
+s$=word$:LEFT$(s$,2)="XY":RIGHT$(s$,2)="ZZ":MID$(s$,4,3)="123"
+s$=LEFT$(s$,6)+MID$(s$,7,4)+RIGHT$(s$,4)
+IF s$<>"XYc123ghijmnZZ" ERROR 101,"Slice check"
+NEXT
+ENDPROC
+DEF PROCsearch(nn%)
+FOR ii%=1 TO nn%
+s$=STRING$(3,"ab")+word$:acc%=INSTR(s$,"def",3)+LEN(s$)
+IF s$<word$ flag%=TRUE ELSE flag%=FALSE
+NEXT
+ENDPROC
+DEF PROCparse(nn%)
+FOR ii%=1 TO nn%
+aa%=INSTR(record$,","):bb%=INSTR(record$,",",aa%+1):cc%=INSTR(record$,",",bb%+1)
+acc%=VAL(LEFT$(record$,aa%-1))+VAL(MID$(record$,bb%+1,cc%-bb%-1))
+s$=MID$(record$,aa%+1,bb%-aa%-1)+RIGHT$(record$,LEN(record$)-cc%)
+NEXT
+ENDPROC
+DEF PROCsort(nn%)
+FOR rr%=1 TO nn%
+FOR ii%=0 TO 63:ia%(ii%)=(ii%*37+13) MOD 64:NEXT
+FOR ii%=1 TO 63
+key%=ia%(ii%):jj%=ii%-1:move%=TRUE
+WHILE jj%>=0 AND move%
+IF ia%(jj%)>key% THEN
+ia%(jj%+1)=ia%(jj%):jj%=jj%-1
+ELSE
+move%=FALSE
+ENDIF
+ENDWHILE
+ia%(jj%+1)=key%
+NEXT
+NEXT
+ENDPROC
+DEF PROCmandel(nn%,region%)
+LOCAL cr,"ci","zr","zi",zr2,zi2,"nextz",it%,pixel%
+FOR rr%=1 TO nn%
+FOR pixel%=0 TO 15
+cr=-2+region%*0.75+(pixel% AND 3)*0.01:ci=0.1+(pixel% DIV 4)*0.01
+zr=0:zi=0:zr2=0:zi2=0:it%=0
+REPEAT
+nextz=zr2-zi2+cr:zi=2*zr*zi+ci:zr=nextz
+zr2=zr*zr:zi2=zi*zi:it%=it%+1
+UNTIL it%=32 OR zr2+zi2>=4
+acc%=acc%+it%
+REM Keep histogram small enough for exact binary-string encoding after timing.
+IF rr%=1 hist%(it%)=hist%(it%)+1
+NEXT
+NEXT
+ENDPROC
+DEF PROCread(nn%)
+FOR ii%=1 TO nn%
+IF EOF#io% ERROR 101,"input.dat too short"
+acc%=(acc%+BGET#io%) AND &7FFFFFFF
+NEXT
+ENDPROC
+DEF PROCwrite(nn%)
+FOR ii%=1 TO nn%:BPUT #io%,ii% AND 255:NEXT
+ENDPROC
+DEF PROCformat(nn%)
+FOR ii%=1 TO nn%:PRINT ;y;":";x%;":";word$:NEXT
+ENDPROC
+DEF PROCgraphics(nn%)
+FOR ii%=1 TO nn%:GCOL 0,ii% AND 15:PLOT 69,ii% MOD 320,ii% MOD 240:NEXT
+ENDPROC
+DEF PROCint4(nn%)
+acc%=7:FOR ii%=1 TO nn%:acc%=((acc%+y%)-y%+y%)-y%:NEXT
+ENDPROC
+DEF PROCint16(nn%)
+acc%=7:FOR ii%=1 TO nn%
+acc%=((acc%+y%)-y%+y%)-y%
+acc%=((acc%+y%)-y%+y%)-y%
+acc%=((acc%+y%)-y%+y%)-y%
+acc%=((acc%+y%)-y%+y%)-y%
+NEXT
+ENDPROC
+DEF FNadd(v%,w%)=v%+w%
+DEF FNgroup(v%,w%)=((v%+w%)-w%+w%)-w%
+DEF PROCfinecalls(nn%)
+acc%=7:FOR ii%=1 TO nn%
+acc%=FNadd(acc%,y%):acc%=FNadd(acc%,-y%)
+acc%=FNadd(acc%,y%):acc%=FNadd(acc%,-y%)
+NEXT
+ENDPROC
+DEF PROCcoarsecalls(nn%)
+acc%=7:FOR ii%=1 TO nn%:acc%=FNgroup(acc%,y%):NEXT
+ENDPROC
+DATA "loop",10000,"int-increment",10000,"variant-add",10000,"byte-wrap",10000
+DATA "branch-mixed",10000,"while",10000,"repeat",10000,"gosub",10000
+DATA "proc-leaf",10000,"proc-local",1000,"fn-number",10000,"fn-string",1000
+DATA "recursion",100,"float-one",1000,"float-four",1000,"float-sixteen",1000
+DATA "mul-div-mod",1000,"boolean",1000,"trigonometry",100,"log-power",100
+DATA "conversions",100,"byte-array",10000,"int-array",10000,"multi-array",1000
+DATA "raw-indirection",10000,"data-restore",1000,"string-copy",1000,"string-slices",1000
+DATA "search-repeat",1000,"record-parser",1000,"sort",1,"mandel-region-a",1
+DATA "mandel-region-b",1,"mandel-region-c",1,"file-read",4096,"file-write",4096
+DATA "print-format",10,"graphics-enqueue",100,"int-four",10000,"int-sixteen",10000
+DATA "fine-calls",1000,"coarse-calls",1000
+REM LABEL data
+DATA 17,2.5,"datum"

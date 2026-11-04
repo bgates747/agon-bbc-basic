@@ -1,0 +1,11 @@
+{
+  "started": "2026-11-04T03:44:00.171781+00:00",
+  "finished": "2026-11-04T03:44:00.519434+00:00",
+  "target": "card",
+  "returncode": 1,
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 25, in <module>\n    assert root.is_dir() and root.resolve()==root,'Selected Console8 card root is absent; no writes'\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Selected Console8 card root is absent; no writes\n",
+  "manifest_sha256": "de73d41dc24ef3d0f2799cbd1d4c3348707a8568cb514ef2cca48a09bae060bf",
+  "archive_sha256": "10b2acae346189270eefc82d1487641f0e3e906e2931d6fb29b4822500d282f4",
+  "no_target_execution": true
+}

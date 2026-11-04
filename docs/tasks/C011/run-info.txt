@@ -1,0 +1,29 @@
+C011 target run notes - fill for each paired series
+
+Date/time:
+Target model: Console8
+CPU clock:
+MOS version:
+VDP firmware/version:
+Initial display mode/settings:
+SD card / filesystem:
+Other connected peripherals/activity:
+Suite manifest identifier:
+Compiler: qualified 40e4ae06 (see manifest.json for full hash)
+Reference: included reference.bin (see manifest.json for full hash)
+Generated suite.bin retained for maintainer SHA256:
+Generated checks.bin retained for maintainer SHA256:
+Clock helper run after latest reboot/MOS change:
+Observed CLOCK minimum increment:
+Clock observations / any stalls or discontinuities:
+Supplementary reference PASS:
+Supplementary native PASS:
+Manual PRINT output check:
+Manual graphics output check:
+Log filenames, run order and chosen counts/scale:
+Any errors / reset / interrupted samples:
+
+A manifest identifies supplied files; it does not certify the actual MOS/VDP
+firmware, a successful hardware run, or a performance result. Preserve this
+filled file, all raw logs and the generated binaries. Do not edit the BASIC
+source for just one engine of a paired comparison.

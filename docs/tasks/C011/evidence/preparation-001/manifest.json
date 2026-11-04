@@ -1,0 +1,50 @@
+{
+  "schema": "C011-fixture-v1",
+  "status": "prepared; no target execution",
+  "compiler_sha256": "40e4ae06730b6735696f5f07962efd10e6c9cfbdc44a81b65dd6e9ce1c82355a",
+  "reference_sha256": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d",
+  "native_suite_provided": false,
+  "timer": "MOS sysvar_time, read only; observed granularity required",
+  "files": {
+    "LICENSE.txt": {
+      "bytes": 891,
+      "sha256": "cc8e92d92cf12fb1d04ddae0b573367f14188df5fcd6c7909d36486ff53a108a"
+    },
+    "analyse.py": {
+      "bytes": 4756,
+      "sha256": "09bb42c5a5efd8a09428944e1e0c0ee991c5769eb0e717a46a159b32aa9b0094"
+    },
+    "checks.bas": {
+      "bytes": 1588,
+      "sha256": "6f8ff63c83e42f1cfd6f82809f635a2a2394fe4fd0cbed75c48ee4d9ec150e7f"
+    },
+    "clock.bin": {
+      "bytes": 297,
+      "sha256": "2f6e556449c06f05e3448dba22ba998167fa9dbb02e641a649fe054845209569"
+    },
+    "coverage.md": {
+      "bytes": 5019,
+      "sha256": "3a12ae5ac4c86f3cf84beceea6cc5d78c801fd0cd8bd2c5485ad5ba65598c36d"
+    },
+    "input.dat": {
+      "bytes": 4096000,
+      "sha256": "8e44ff94b68fcb096a8d5cdb8f1cc78a9c475845f11a8d676f39c9537ed231e0"
+    },
+    "readme.txt": {
+      "bytes": 6343,
+      "sha256": "7279271230bbe96bfe5933c887eae6e140c4fd77199bdee8b403aae1cd19c71f"
+    },
+    "reference.bin": {
+      "bytes": 25499,
+      "sha256": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d"
+    },
+    "run-info.txt": {
+      "bytes": 1109,
+      "sha256": "70bee50a755baeaa8af3d14a2846d84fec93061c0f12efc64a4919ccb1bcfe21"
+    },
+    "suite.bas": {
+      "bytes": 14472,
+      "sha256": "2cb67aacafa1b216017f58d067b667af712bb9f533ee38791ea3b4577bfea842"
+    }
+  }
+}

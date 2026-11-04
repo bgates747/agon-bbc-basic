@@ -1,0 +1,79 @@
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C011/clock.s 			page 1
+
+
+   1                       	; C011 clock pointer export. New fixture helper, repository zlib license.
+   2                       	; MOS executable at &40000. Does not read/change firmware or the clock.
+   3                       	    .assume adl=1
+   4                       	    .text
+   5                       	    .global start
+   6 0000 C3 45 00 00       	    jp start
+   7 0004 00 00 00 00 00 00 	    .balign 64
+   7      00 00 00 00 
+   7      00 00 00 00 
+   7      00 00 00 00 
+   7      00 00 00 00 
+   8 0040 4D 4F 53          	    .ascii "MOS"
+   9 0043 00 01             	    .byte 0,1
+  10                       	start:
+  11 0045 DD E5             	    push ix
+  12 0047 FD E5             	    push iy
+  13 0049 3E 08             	    ld a,8
+  14 004b 5B CF             	    rst.lil 8
+  15                       	    ; ADL24 OK: pointer is exactly three bytes, after four magic bytes.
+  16 004d DD 22 26 01 00    	    ld (pointer),ix
+  17 0052 21 9E 00 00       	    ld hl,filename
+  18 0056 0E 0A             	    ld c,10
+  19 0058 3E 0A             	    ld a,0x0a
+  20 005a 5B CF             	    rst.lil 8
+  21 005c B7                	    or a
+  22 005d 28 26             	    jr z,failed
+  23 005f 4F                	    ld c,a
+  24 0060 21 22 01 00       	    ld hl,record
+  25 0064 11 07 00 00       	    ld de,7
+  26                       	write_loop:
+  27 0068 46                	    ld b,(hl)
+  28 0069 3E 0D             	    ld a,0x0d
+  29 006b 5B CF             	    rst.lil 8
+  30 006d 23                	    inc hl
+  31 006e 1B                	    dec de
+  32 006f 7A                	    ld a,d
+  33 0070 B3                	    or e
+  34 0071 20 F5             	    jr nz,write_loop
+  35 0073 3E 0B             	    ld a,0x0b
+  36 0075 5B CF             	    rst.lil 8
+  37 0077 21 A8 00 00       	    ld hl,message
+  38 007b CD 96 00 00       	    call puts
+  39 007f 21 00 00 00       	    ld hl,0
+  40 0083 18 0C             	    jr done
+  41                       	failed:
+  42 0085 21 E4 00 00       	    ld hl,failure
+  43 0089 CD 96 00 00       	    call puts
+  44 008d 21 01 00 00       	    ld hl,1
+  45                       	done:
+  46 0091 FD E1             	    pop iy
+  47 0093 DD E1             	    pop ix
+  48 0095 C9                	    ret
+  49                       	puts:
+  50 0096 7E                	    ld a,(hl)
+  51 0097 B7                	    or a
+  52 0098 C8                	    ret z
+  53 0099 5B D7             	    rst.lil 0x10
+GAS LISTING /Agon/mystuff/bbc-basic-v-adl/docs/tasks/C011/clock.s 			page 2
+
+
+  54 009b 23                	    inc hl
+  55 009c 18 F8             	    jr puts
+  56 009e 63 6C 6F 63 6B 2E 	filename: .asciz "clock.dat"
+  56      64 61 74 00 
+  57 00a8 43 30 31 31 20 63 	message: .asciz "C011 clock.dat written; run the clock check in suite.bas.\r\n"
+  57      6C 6F 63 6B 
+  57      2E 64 61 74 
+  57      20 77 72 69 
+  57      74 74 65 6E 
+  58 00e4 43 30 31 31 20 63 	failure: .asciz "C011 cannot create clock.dat; check current directory/card.\r\n"
+  58      61 6E 6E 6F 
+  58      74 20 63 72 
+  58      65 61 74 65 
+  58      20 63 6C 6F 
+  59 0122 43 30 31 31       	record: .ascii "C011"
+  60 0126 00 00 00          	pointer: .space 3

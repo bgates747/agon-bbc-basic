@@ -13,5 +13,6 @@ and partial admissions are explicit in `compiler/COMPATIBILITY.md`.
 2. [ ] [C009](docs/tasks/C009.md) — Low priority, possible feature: consider
    anonymous labels with nearest forward/backward references. Syntax and
    implementation are not approved.
-3. [ ] [C011](docs/tasks/C011.md) — Implement and qualify the proposed broad
-   benchmark fixture, separating control/lookup costs, numeric work and services.
+3. [ ] [C011](docs/tasks/C011.md) — Stage and qualify the prepared42-case Console8
+   benchmark fixture; card is absent. Author runs hardware; no emulators.
+   Paired measurements and broader sweeps remain pending.

@@ -1129,3 +1129,43 @@ only if available. TIME is not currently admitted; long equal batches can resolv
 throughput differences even with a coarse clock. Implementation has not started;
 TODO owns the new task. No target access, code behavior change or measured
 performance claim follows from this documentation.
+
+### C011 first Console8 fixture, no emulator execution
+
+At the Author's request, all prior dirt was committed/pushed ase77f370 before
+starting C011. The Author explicitly selects direct Console8 execution and
+prohibits emulator runs. No emulator process/profile/virtual SD was accessed.
+
+The first fixture provides42 cases in433 numbered lines,54 PROC/FN definitions
+and maximum118-byte source lines, plus supplementary correctness/error/input
+checks. Matched float multiplication density, integer operation density and
+fine/grouped function calls accompany branches, loops, LOCAL/recursion, strings,
+arrays/raw memory, DATA, RAM parsing/sorting, fixed Mandelbrot regions and
+file/output/graphics cases. Full coverage/dispositions are in C011/COVERAGE.md;
+name/target-distance sweeps and cycle attribution are not yet implemented.
+
+A297-byte MOS helper exports the sysvars pointer without changing the clock.
+Existing BASIC indirection reads its centisecond counter with double sampling;
+startup records observed steps, not a claim of millisecond resolution or actual
+clock qualification. Tiny assembly/link and light static/synthetic contract
+checks pass. The first host test hit a tuple-keyed JSON clone error, corrected
+before any target operation. No BASIC source has been compiled/executed in this
+tranche, and no new performance or compatibility pass is claimed. No substantial
+Pi workload/check-out was started; future heavy work follows Pi5 manager's queue.
+
+C011/preparation-001 freezes console8-003, manifestde73d41d, source, helper and
+reference bytes, assembly listing and portable docs. oryx-stage-001 stages
+c011-console8-001.tar under Oryx's mystuff at22:44:00EST with sync. The guarded
+card-stage-001 transfer stops before writes because the selected Console8 root
+is absent. Card delivery, first Author-run pilot and actual measurements stay
+in C011/TODO. No mountpoint substitute, firmware, hardware custody or startup
+change is selected. Existing user programs/results and prior frozen evidence
+remain unchanged. Live compiler/runtime/interpreter source is unchanged.
+
+C011/preparation-002 supersedes001 for delivery with identical BASIC/helper
+bytes and a corrected coverage statement:40 dispatch tests serve42 cases.
+Selected console8-004 manifest isb0b44d96. oryx-stage-002 stages the final
+c011-console8-002.tar at22:48:05EST with sync, archive91b7c235. Earlier records
+remain unchanged. Source limits, target/RESTORE labels and synthetic log rejection
+checks are retained; portable file scans and manifest/evidence hashes pass.
+No source/image change to the live compiler or target runtime result is implied.
