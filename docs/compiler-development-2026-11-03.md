@@ -1174,3 +1174,14 @@ Checkpoint0a2a5d3 retains the first fixture and delivery receipts. Raw assembler
 listings include the tool's trailing spaces; a narrowly scoped whitespace
 attribute preserves those frozen bytes while keeping source/document checks
 active. No frozen evidence or payload bytes are rewritten for formatting.
+
+### C011 Console8 card delivery
+
+The Author returns the C8 card and authorizes fixture deployment. card-stage-002
+initially stops before writes at the absent-root guard. Fresh read-only volume
+inspection then shows /dev/sda1, AGONC8 vfat at the exact selected mount, and the
+established compiler package. card-stage-003 succeeds at23:02:14EST November3:
+eleven files under /mystuff/basic-compiled/benchmarks/, manifestb0b44d96, sync
+and card left mounted. User programs/results and old failed receipts remain
+unchanged. No emulator, firmware, startup or target execution is selected. The
+Author-run compilation/checks/pilot and measured comparisons remain pending.

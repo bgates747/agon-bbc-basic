@@ -255,8 +255,11 @@ the broad benchmark/timing task. Its first42-case source and297-byte clock
 helper are prepared with static checks only; no target compilation or timing
 is claimed. C011/preparation-002 pins console8-004, manifestb0b44d96. Its archive
 is staged on Oryx as /home/smith/Agon/mystuff/c011-console8-002.tar; card-stage-001
-stops before writes because AGONC8 is absent. Retry only after the card returns,
-with fresh card-stage-002. The Author will run Console8; no emulator runs or
+records the earlier absent-card failure. The Author returned the card;
+card-stage-002 initially saw it absent, then fresh mounted-volume checks and
+card-stage-003 deployed all eleven files to /mystuff/basic-compiled/benchmarks/
+at23:02:14EST November3, synced and left the card mounted. Existing user files
+are preserved. C011 awaits the Author-run pilot; earlier failures remain frozen. The Author will run Console8; no emulator runs or
 virtual SD changes are permitted for this tranche.
 
 

@@ -13,6 +13,6 @@ and partial admissions are explicit in `compiler/COMPATIBILITY.md`.
 2. [ ] [C009](docs/tasks/C009.md) — Low priority, possible feature: consider
    anonymous labels with nearest forward/backward references. Syntax and
    implementation are not approved.
-3. [ ] [C011](docs/tasks/C011.md) — Stage and qualify the prepared42-case Console8
-   benchmark fixture; card is absent. Author runs hardware; no emulators.
+3. [ ] [C011](docs/tasks/C011.md) — Qualify the prepared42-case Console8 benchmark
+   fixture, now deployed on the card. Author runs hardware; no emulators.
    Paired measurements and broader sweeps remain pending.
