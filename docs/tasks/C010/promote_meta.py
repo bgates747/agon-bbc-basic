@@ -80,6 +80,12 @@ def main():
     assert self_build['image_sha256'] == image_hash
     assert image.read_bytes() == (TASK/'evidence/meta-native-build-001/compiler.dat').read_bytes()
     inputs += ['meta-native-build-001', 'meta-native-self-001']
+    layout = retained('meta-symbol-layout-001')
+    assert layout['completed'] and layout['old_output_preserved']
+    assert layout['source_sha256'] == SOURCE and layout['image_bytes'] == image.stat().st_size
+    assert 0 < layout['symbols'] <= 4096 and layout['bindings'] <= 256 and layout['routines'] <= 256
+    assert layout['prefix_bytes_saved'] > 0
+    inputs.append('meta-symbol-layout-001')
     checked = retained('meta-image-checks-001', 'compiler-image-checks.json')
     assert checked['image_sha256'] == image_hash and checked['complete_standard_runtimes_and_entry_checked']
     assert checked['compact_PIC_matches_GNU']

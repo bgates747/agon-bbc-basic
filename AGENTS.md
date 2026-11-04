@@ -65,9 +65,10 @@ The selected current experiment is C010/candidate-meta.bas, SHA
 70d3c5c6f4da44cf865c36c3f4edef143b9e37c662097067a5e6ceac414c300e.
 metadata-source-001 freezes an exact four-prefix private-symbol substitution
 from b8afbfdb; public syntax, capacities, addresses and runtimes stay fixed.
-Fresh meta-hosted-baseline-00139/15 and meta-admissions-001 pass with unchanged
-images/diagnostics. Five finite transient services bbc-basic-c010-meta-ROLE-001
-(ROLE build/hosted/native/errors/layout) own pending work. Build/self use
+Fresh meta-hosted-baseline-00139/15, meta-admissions-001, all ten repackers and
+all18 meta-wire pairs pass with unchanged images/diagnostics/runtime modules.
+meta-hosted-pipeline-001 completes545.649s. Five finite transient services bbc-basic-c010-meta-ROLE-001
+(ROLE build/hosted/native/errors/layout; hosted complete) own this work. Build/self use
 c010-fit-build, hosted then native serial tests use c010-fit, errors use root
 .emulator, and the interpreted layout observer uses c010-wire. Individual
 metadata-launch-ROLE-001 receipts pin scripts/source/arguments/limits. No

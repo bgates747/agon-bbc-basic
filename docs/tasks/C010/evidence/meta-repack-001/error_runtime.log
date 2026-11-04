@@ -1,0 +1,41 @@
+{
+  "bytes": 2530,
+  "relocations": 128,
+  "exports": {
+    "err_init": 0,
+    "err_install": 107,
+    "err_raise": 340,
+    "err_inline": 338,
+    "err_report": 789,
+    "err_line": 94,
+    "err_code": 1009,
+    "err_current": 1010,
+    "err_lastline": 1014,
+    "err_message": 1018,
+    "err_state": 985,
+    "err_ctlpush_slot": 946,
+    "err_strload_slot": 950,
+    "err_strstore_slot": 954,
+    "err_exit_slot": 958,
+    "err_cfg_ctltop": 961,
+    "err_cfg_acttop": 964,
+    "err_cfg_frames": 967,
+    "err_cfg_base": 970,
+    "err_cfg_limit": 973,
+    "err_cfg_rootsp": 976,
+    "err_cfg_depth": 979,
+    "err_cfg_heap": 982,
+    "err_trap": 2481
+  },
+  "independent_link_bases": [
+    270336,
+    294912
+  ],
+  "unresolved_symbols": 0,
+  "hashes": {
+    "compiler/runtime/errors.s": "654c2ed07a579c216d0729632bfb4bfc8cbe46bd3cdba4dc67d058c85dc7fbb1",
+    "compiler/runtime/report_keywords.inc": "8ea8e1b007cc348654b399ad74a3c4b963d8619efa31a720ee12b4cbb30efc92",
+    "compiler/build/error-runtime/runtime_data.bas": "ee9306470722ea9692013ccf02ecdc65e8c9613b893e07a99b7900b3db54df94",
+    "compiler/build/error-runtime/runtime-0.bin": "c9d04b2e032a773f9b45007377d73c59d71781ead01fa1cac947483b5bbb9aab"
+  }
+}

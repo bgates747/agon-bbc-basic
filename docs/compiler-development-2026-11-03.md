@@ -1001,3 +1001,11 @@ c010-wire profile to count actual symbol/other string bytes and prefix savings,
 with host-only PRINTs and exact unchanged target source. It neither writes an
 image nor claims native fit. metadata-launch-*-001 records finite limits and
 script hashes; no startup configuration or hardware/Oryx operation is involved.
+
+meta-hosted-pipeline-001 completes all eight stages in545.649 controller
+seconds: fresh baseline39/15 (45.166s, GNU golden/repeat,15 earlier whole images
+and24 diagnostics/preserved outputs identical), full unchanged Mandelbrot plus
+12 output-preserving rejections, ten exact source repackers/nine unchanged
+runtime modules, and18 fresh reference/native graphics/key pairs. All manifests
+are verified before retaining this checkpoint. The native build and interpreted
+layout observation remain active; no self-fit or live promotion is claimed.

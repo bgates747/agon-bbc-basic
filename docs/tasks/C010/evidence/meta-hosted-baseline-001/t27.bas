@@ -1,0 +1,2 @@
+GOTO @A
+@a:END

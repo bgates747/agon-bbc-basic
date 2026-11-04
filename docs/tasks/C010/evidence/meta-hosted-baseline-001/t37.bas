@@ -1,0 +1,2 @@
+0 GOTO 00010
+10 PRINT "zero":END
