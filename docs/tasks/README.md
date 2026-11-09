@@ -54,6 +54,7 @@ retrospectively to the compiler work already performed.
 | C009 | [Possible anonymous labels — low-priority candidate](C009.md) |
 | C010 | [Compile the reference Mandelbrot program](C010.md) |
 | C011 | [Separate language overhead from numeric and service costs](C011.md) |
+| C012 | [Pinned firmware compatibility audit](C012.md) |
 
 Open work is listed only in [TODO.md](../../TODO.md). Broad unstarted briefs
 must be refined before implementation; their existence does not mean work has
