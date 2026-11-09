@@ -15,6 +15,5 @@ and partial admissions are explicit in `compiler/COMPATIBILITY.md`.
    implementation are not approved.
 3. [ ] [C011](docs/tasks/C011.md) — Qualify the prepared42-case Console8 benchmark
    fixture, now deployed on the card. Author runs hardware; no emulators.
-   Paired measurements and broader sweeps remain pending.
-4. [ ] [C012](docs/tasks/C012.md) — Audit current compiler/manual/benchmark
-   candidates against pinned VDPlet0.1.2-alpha and Eirene MOS rc3 defaults.
+   Paired measurements and broader sweeps remain pending. Both C008/C011
+   qualification must record the new firmware defaults; see C012 audit.

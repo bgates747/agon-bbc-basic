@@ -1,0 +1,12 @@
+{
+  "3.1.0_uart0_rc_3.zip.sha256": "08798c311f18f7fc2ec48d4af643fd875b3c6608aa4268009f10062721c7bd24",
+  "SHA256SUMS": "6469f6d6717ede6acb68d9b7ce519db07a1d5a08a0ef7c765739dfe86658aa9d",
+  "audit.py": "08b14826639d68cdfd9d43237d02721b092fd2293352a381114d5577c8f36589",
+  "firmware-source.json": "b09188a08398c95b7dbc74b49801bd1dbca8cbdddca2371153127c449f502cee",
+  "mos-release.json": "77c53b5ea7f6bcf8c73b24f149556813c1c4791223cc333e8779fddbda7cf40d",
+  "olimex-standard-snapshot.json": "d703a77f28f4f956c4bb10c3f21cabf308cdfda7d49ec4dca05c3a0f2ae5fdbe",
+  "release-manifest.json": "63360b4151287875ed3b675140c1fc0d9fdc4bd6160894636e7266efc3281ef2",
+  "results.json": "c22a75cf3ce76b88e3bfb872eff593cbbab742f96896b6023ba1c3f2c47b5390",
+  "vdp-release.json": "8d6c64c2f5c66574bcf36c533aa3dc49ab497a0c2d94334bb39a263a1de1bbfb",
+  "verification.json": "d2c3fe4db80d77c3baa7058e94ef24be6b540bbd7adb03a1588a38075b98daf6"
+}

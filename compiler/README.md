@@ -20,6 +20,10 @@ a development checkpoint. C003 numeric bindings and the mutable string core
 and required scalar/string operations are qualified and promoted. Numeric IF with
 inline THEN/ELSE and multiline IF/ELSE/ENDIF is also promoted under C004. Promotion to `main` awaits accepted testing.
 
+For new tests and deployments, use the [pinned firmware defaults](FIRMWARE.md).
+Compatibility is audited by inspection; actual new-pair qualification remains
+separate from older evidence.
+
 ## Running on Agon
 
 From `compiler/` on the Agon SD card, load `compiler.bas` into the

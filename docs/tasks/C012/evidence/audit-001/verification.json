@@ -1,0 +1,156 @@
+{
+  "status": "PASS",
+  "task": "VDPL-041-REL-001",
+  "version": "0.1.2-alpha",
+  "artifacts": {
+    "firmware.bin": {
+      "path": "/Agon/mystuff/agon-vdplet/build/vdpl041/release-012/firmware-src/.pio/build/esp32dev/firmware.bin",
+      "bytes": 1100304,
+      "sha256": "b004570b607b45bbd6e87a3c704b65b23d3221981db3aac6cf2578aa22d766e3"
+    },
+    "firmware.elf": {
+      "path": "/Agon/mystuff/agon-vdplet/build/vdpl041/release-012/firmware-src/.pio/build/esp32dev/firmware.elf",
+      "bytes": 25050804,
+      "sha256": "3b471a388764e5d8da6d10cc78f46361b8aef1f884ea0f24d86369a366460a7d"
+    },
+    "firmware.map": {
+      "path": "/Agon/mystuff/agon-vdplet/build/vdpl041/release-012/firmware-src/.pio/build/esp32dev/firmware.map",
+      "bytes": 17967186,
+      "sha256": "db7136c01432ebda022464cc00415517711a7bb33190c7de95c5bf696001806c"
+    },
+    "bootloader.bin": {
+      "path": "/Agon/mystuff/agon-vdplet/build/vdpl041/release-012/firmware-src/.pio/build/esp32dev/bootloader.bin",
+      "bytes": 18992,
+      "sha256": "f2dfacdea6ae72d0aeeb7c30e525c4c6fc768a041849feac694cbb2ee2224448"
+    },
+    "partitions.bin": {
+      "path": "/Agon/mystuff/agon-vdplet/build/vdpl041/release-012/firmware-src/.pio/build/esp32dev/partitions.bin",
+      "bytes": 3072,
+      "sha256": "148b959cbff1c38aa8e1d5c0ba9d612c54997b945e56a63f41223eef650653a1"
+    }
+  },
+  "provider_receipt": {
+    "enabled": true,
+    "repair": "idf4.4.6-rx-full-lock-v1",
+    "original_sha256": "0a90ac006b6a0cadaac4c47ab035a54c782fb6171fda82e9dd059a3d84c4b0be",
+    "fixed_sha256": "6fe284dbb987890ec80d337d6863a5f7113c2986b080f37269b9bba49be8e38c",
+    "patch_sha256": "12a13b0604b1e6d8c56625e9696057b25bf521b42814d1e69e754d64775c6380",
+    "files": {
+      "video/vdplet_uart_rx_driver.c": "6fe284dbb987890ec80d337d6863a5f7113c2986b080f37269b9bba49be8e38c",
+      "vdplet_uart_rx.py": "4fd4fb6620424b7e624ab47ac9ff5e9fecbde811a6a8de50731b5c3caa3dde67",
+      "uart-rx-LICENSE": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "uart-rx-PROVENANCE.md": "8e79174056a7c353b2493e7d579f3d32009f6d20c65a2de7ea59a7796339919d",
+      "uart-rx-full-lock.patch": "12a13b0604b1e6d8c56625e9696057b25bf521b42814d1e69e754d64775c6380"
+    },
+    "framework_version": "3.20014.231204",
+    "idf_version": "4.4.6",
+    "framework_package_sha256": "fa3262cd10e9536428203d2da0ac48e0227862e5cfc0901e13704bc06dbd7f5e",
+    "sdk_driver_archive_sha256": "a42bc503cee30c7d90662711dc7e3d140e3a848a06dcfe3aa69132f5403dcbf7",
+    "idf_version_header_sha256": "87b8bf9cc971b7c500f8b7c0f1a433e5a43f80a8374a0296274b0512318ca4fa",
+    "sdkconfig_sha256": "2e1c835225c7b113fe3ddf91132a768c875bf7f20afdb7abb730f3d44b1bf580",
+    "provider": "src/vdplet_uart_rx_driver.c.o",
+    "sdk_uart_object_excluded": true,
+    "elf_sha256": "3b471a388764e5d8da6d10cc78f46361b8aef1f884ea0f24d86369a366460a7d",
+    "map_sha256": "db7136c01432ebda022464cc00415517711a7bb33190c7de95c5bf696001806c"
+  },
+  "source_receipt_sha256": "b09188a08398c95b7dbc74b49801bd1dbca8cbdddca2371153127c449f502cee",
+  "source_freeze_sha256": "626ea5f1afe3f24a19b5d5a0a6723b0f9f533cd22fda79e5d36d51de5579240a",
+  "export_closure_sha256": "3aa32a73b5e273bf74a540e14bfe9c028a6c41d3123803db6df28dba2d10afb2",
+  "export_closure_files": 5189,
+  "source_changes_vs_prior": [
+    "video/vdplet_version.h"
+  ],
+  "executable_object_sections_identical": {
+    "video.ino.cpp.o": 1586,
+    "vdplet_uart_rx_driver.c.o": 130
+  },
+  "allocated_file_section_sizes_identical_vs_prior": true,
+  "changed_loaded_bytes_vs_prior": {
+    ".flash.rodata": 1
+  },
+  "bin_delta_vs_prior": 0,
+  "program_delta_vs_stock_control": 584,
+  "padded_bin_delta_vs_stock_control": 592,
+  "static_dram_delta": 0,
+  "iram_delta": 0,
+  "host_suite": "Prior PASS reused: only version header changed; no implementation changes.",
+  "image_validation_passed": true,
+  "no_target_execution": true,
+  "no_commit_push_release_by_coder": true,
+  "previous_5699_source_dependency_closure_rechecked": true,
+  "maintained_root_matches_frozen_source": true,
+  "compile": {
+    "status": "PASS",
+    "commands": [
+      {
+        "name": "firmware-build",
+        "argv": [
+          "/Agon/mystuff/agon-vdplet/build/vdpl041/release-012/source/.venv/bin/python",
+          "/Agon/mystuff/agon-vdplet/build/vdpl041/release-012/source/tools/build_firmware.py",
+          "--output",
+          "/Agon/mystuff/agon-vdplet/build/vdpl041/release-012",
+          "--repository",
+          "/Agon/mystuff/agon-vdplet/build/firmware/upstream.git",
+          "--features",
+          "pixels",
+          "--borrow-rows",
+          "--read-bytes",
+          "--text-profile",
+          "text96",
+          "--jobs",
+          "1"
+        ],
+        "returncode": 0,
+        "reason": null,
+        "seconds": 112.0784917009878,
+        "peak_milliC": 54550,
+        "min_available_KiB": 1580144
+      }
+    ],
+    "seconds": 112.0791200149688
+  },
+  "fifo_release": {
+    "owner": "vdplet-coder",
+    "task": "VDPL-041-REL-001",
+    "purpose": "one fresh 0.1.2-alpha production-feature repaired native build; no host rerun or target/device",
+    "plan": "/Agon/mystuff/agon-vdplet/docs/tasks/VDPL-041/PRERELEASE-PLAN.md",
+    "notify_thread": "01a1be32-34ea-7c50-a526-af4432e8e554",
+    "notify_host": "remote-ssh-discovered:raspberrypi",
+    "workload": "build",
+    "resources": "one serial compiler,80C/512MiB guards,pinned retained dependencies",
+    "duration": "expected2minutes,firmware1200s,whole1800s",
+    "cleanup": "join owned compiler children retain logs release FIFO notify next",
+    "request": "5346e285cf79",
+    "requested": "2026-11-09T03:33:23.595375+00:00",
+    "policy": {
+      "revision": "author-2026-11-05-oryx-compiler-fallback",
+      "instructions": "/Agon/mystuff/agon-dev-env/cross-agent/pi5-workloads/README.md",
+      "builds": "Automatically granted FIFO, one compile job at a time; no manager approval or 10% CPU gate.",
+      "baseload": "Robocode/Tank Royale server, including active matches, needs no reservation or routine start/end/informational notification to Pi5 manager and does not occupy or block the shared slot or compilation. Separate substantial workloads and physical bench/test permissions remain unchanged; paused work is not resumed.",
+      "routing": "Reserve Oryx for emulator runs and Pi5 for compiler work. When the required build is not possible on Pi5, compiler work may use the existing Oryx self-service FIFO without another routing approval; record the concrete architecture/toolchain limitation, not merely queue congestion. Extender schedules live-serial hardware qualification/benchmark/debug bench access; Console8/manual or semi-automated runs remain at Author discretion.",
+      "heavy": "Pi emulator exceptions need specific new Author approval; CFD/solvers and other heavy Pi work retain explicit Author authorization, manager admission, and start/end chat notices to pi5-manager. Native services are separately classified.",
+      "build_cleanup": "After owned children stop, release using --work-stopped --cleanup-complete; no manager handback or host-wide quiet test.",
+      "authorization_limit": "A supplied record documents authorization; this same-account helper cannot authenticate human authorship."
+    },
+    "author_authorization": null,
+    "manager_start_end_notice_required": false,
+    "lease": "655d4cd7fca845e5a937b27f795dadbb",
+    "generation": 706,
+    "granted": "2026-11-09T03:33:23.595375+00:00",
+    "boot_id": "b6519306-0d9f-48e3-98c4-c28ab10b75de",
+    "phase": "consumer",
+    "admission": "automatic-serial-build",
+    "entry_observation": null,
+    "released": "2026-11-09T03:35:33.774691+00:00",
+    "release_observation": {
+      "observer": "vdplet-coder",
+      "lease": "655d4cd7fca845e5a937b27f795dadbb",
+      "owned_work_stopped": true,
+      "cleanup_complete": true,
+      "disposition": "Owner confirms all owned build children stopped and cleanup complete; no global quiet claim"
+    },
+    "next_request": null,
+    "automatic_build_grant": null
+  },
+  "scope": "REL-001 only; no implementation changes, host rerun, target/emulator/device, commit/push/tag/prerelease action by coder."
+}

@@ -22,7 +22,7 @@ environment, ownership, assembly, emulator, hardware and coordination rules.
    the superseded exact-decimal experiment does not authorize divergence.
 4. Before changing behavior, read compiler/README.md, SPECIFICATION.md,
    COMPATIBILITY.md, REFERENCE.md and the latest dated development log,
-   currently `docs/compiler-development-2026-11-03.md`.
+   currently `docs/compiler-development-2026-11-08.md`.
 5. TODO.md is the only unfinished-work list. Immutable IDs map to
    docs/tasks/ID.md; experiments/scripts live under docs/tasks/ID/. Read
    docs/tasks/README.md and retrospective C000/C001. Task briefs own scope and
@@ -270,3 +270,21 @@ grant, asserted before launch and released after teardown. Light preparation
 remains compatible; no checkout was requested for C011 source preparation,
 297-byte helper assembly or small synthetic/static checks. Time authority does
 not override the Author's explicit no-emulator instruction or hardware custody.
+
+
+## November8 pinned firmware audit
+
+C012 brief frozen/pushed9255326; inspection audit complete in C012/REPORT.md and
+C012/evidence/audit-001. VDPlet0.1.2-alpha official firmware is1100304 bytes,
+SHA256b004570b607b45bbd6e87a3c704b65b23d3221981db3aac6cf2578aa22d766e3,
+verified against release SHA256SUMS. All Alexe/Olimex/Console8 VDP tests/deployments
+use it. Alexe/Console8 use release Eirene3.1.0_uart0_rc_3 ZIP mos-rc3.bin,
+100879 bytes, d7a51147f3381cd68d56f3fbe4605434a897dfae1b049269afeba09ec2b7eb50.
+Olimex uses Extender's current approved integrated EMOS; reconsult its selector,
+not bare RC3. Required exceptions must be justified in scheduling requests.
+No mandatory CBAS exception found by source/API inspection; no new runtime pass,
+installed-state proof or flashing occurred. C008/C011 retain actual qualification.
+Old text-only CLI tooling does not qualify the new firmware pair. Compiler
+FIRMWARE.md owns policy; current C011 readme template is updated, but frozen
+console8-004 and delivered card files remain unchanged. Existing no-emulator
+restriction, test/component gates and hardware permissions persist.

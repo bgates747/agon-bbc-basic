@@ -1,0 +1,81 @@
+{
+  "task_freeze": "92553266d37dc1881d28b9d3f746d327a3290786",
+  "firmware_verified": {
+    "vdp_bytes": 1100304,
+    "vdp_sha256": "b004570b607b45bbd6e87a3c704b65b23d3221981db3aac6cf2578aa22d766e3",
+    "mos_bytes": 100879,
+    "mos_sha256": "d7a51147f3381cd68d56f3fbe4605434a897dfae1b049269afeba09ec2b7eb50",
+    "mos_zip_sha256": "9c8a9a28b0f597e6a9294d806491ffca3902c16cf1876b092ae8944f65368061",
+    "downloaded_vdp_checksum_entries": {
+      "firmware-source.json": "b09188a08398c95b7dbc74b49801bd1dbca8cbdddca2371153127c449f502cee",
+      "release-manifest.json": "63360b4151287875ed3b675140c1fc0d9fdc4bd6160894636e7266efc3281ef2",
+      "vdp-vdplet-0.1.2-alpha.bin": "b004570b607b45bbd6e87a3c704b65b23d3221981db3aac6cf2578aa22d766e3",
+      "verification.json": "d2c3fe4db80d77c3baa7058e94ef24be6b540bbd7adb03a1588a38075b98daf6"
+    }
+  },
+  "candidates": {
+    "compiler-source": {
+      "bytes": 113293,
+      "sha256": "70d3c5c6f4da44cf865c36c3f4edef143b9e37c662097067a5e6ceac414c300e"
+    },
+    "compiler-native": {
+      "bytes": 327205,
+      "sha256": "40e4ae06730b6735696f5f07962efd10e6c9cfbdc44a81b65dd6e9ce1c82355a"
+    },
+    "reference-interpreter": {
+      "bytes": 25499,
+      "sha256": "a1ae6d381d9861abbc5d87550c683827499d5a8cbe1de49fd9dfa3687382653d"
+    },
+    "nano-editor": {
+      "bytes": 6560,
+      "sha256": "051fcacb92fc129c46ee235626cbef5631b5e74062dd8d5a40a03a326a6c9189"
+    },
+    "mandelbrot-source": {
+      "bytes": 1038,
+      "sha256": "1eb897c8ef3aecc99910e0352eba6d32064ebc4aef9e7bd32e9952b0878b43de"
+    },
+    "mandelbrot-native": {
+      "bytes": 18329,
+      "sha256": "bad741db6adfc250c7c2f48c37687aec93e8271f77c48bd760f309548dada196"
+    },
+    "manual-package-manifest": {
+      "bytes": 5874,
+      "sha256": "1a9e5b2c1d4300ff25ec766f63487bc0c577aeeb80b1a96378dac364dfacee9f"
+    },
+    "benchmark-package-manifest": {
+      "bytes": 1698,
+      "sha256": "b0b44d96cfe7874196edb22c529f7f56e8cc2d04b68e28ae9f2e6c9b66e559ba"
+    },
+    "benchmark-suite": {
+      "bytes": 14472,
+      "sha256": "2cb67aacafa1b216017f58d067b667af712bb9f533ee38791ea3b4577bfea842"
+    },
+    "benchmark-checks": {
+      "bytes": 1588,
+      "sha256": "6f8ff63c83e42f1cfd6f82809f635a2a2394fe4fd0cbed75c48ee4d9ec150e7f"
+    },
+    "clock-helper": {
+      "bytes": 297,
+      "sha256": "2f6e556449c06f05e3448dba22ba998167fa9dbb02e641a649fe054845209569"
+    }
+  },
+  "manual_payload_files_checked": 52,
+  "benchmark_payload_files_checked": 10,
+  "inspected_source_hashes": {
+    "rc3/src/mos_api.asm": "8dabfb7b0ef8dfa619429d84d6cbd9a0cf85f74453dda20c24d753de18c8ccbf",
+    "rc3/src/mos_api.inc": "8b62c9a4af0b5747eb7218237b96750d763f3d1f03684d6a663b921234a2d2b3",
+    "rc3/src/globals.asm": "5e215ba25386318dcd7795bfeb27e6cf9fa974ae21d4c7bfb097d9f6ca9b1bf7",
+    "rc3/src/interrupts.asm": "06d4b4a3c6cefadfbe6bcadfdfd30114acbce2c4d9dfd0a12d81ab1365daf655",
+    "rc3/src/vdp_protocol.asm": "bb83bca19df4d0edefc48368875e133b3109ddfe480a52637942d9e9c081df92",
+    "rc3/src/mos_file.c": "6339d3ada02522e707c7dcc03fcbce0c2fc01aea47d8c973e83ba1b8372d6eda",
+    "rc3/src/mos.c": "16bb90bfdbf4f64f1f40a00ac2b7e649a0120bdbedd767ef82aac6b8a7c110d8",
+    "vdplet-release/vdu.h": "24923b53a83d77ebf729795d7ecb7343e6f2fed0e9d748d48fc83c8b75e805cb",
+    "vdplet-release/vdu_sys.h": "35fff838a0942826fd8b63a69bbde9bae17a0d428e6a9289dd03607b225817ef",
+    "vdplet-release/vdu_stream_processor.h": "35f7d0d29f22462a9ccd7fad605aec5aa42fb7aadbe6c124e88ee54b29c8acc7",
+    "vdplet-release/agon_screen.h": "648dbc7d0ba9d98a3115a4ba307ff7585c6c5e28189c1e8961eff7a3c3d60343"
+  },
+  "no_target_execution": true,
+  "no_emulator": true,
+  "no_flash": true,
+  "disposition": "No mandatory firmware exception identified by source/API inspection; runtime qualification on defaults remains pending"
+}

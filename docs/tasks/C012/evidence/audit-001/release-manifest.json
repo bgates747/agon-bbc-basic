@@ -1,0 +1,78 @@
+{
+  "version": "0.1.2-alpha",
+  "tag": "v0.1.2-alpha",
+  "source_commit": "b6c7c58331bf4cbbd54dbc4a1301c124e5963622",
+  "repository": "https://github.com/bgates747/agon-vdplet",
+  "features": {
+    "pixels": true,
+    "text_profile": "text96",
+    "borrow_rows": true,
+    "read_bytes": true,
+    "uart_rx_repair": true,
+    "async_worker": false,
+    "counted_return": false,
+    "pcm_sink": false
+  },
+  "original_artifacts": {
+    "firmware.bin": {
+      "path": "/Agon/mystuff/agon-vdplet/build/vdpl041/release-012/firmware-src/.pio/build/esp32dev/firmware.bin",
+      "bytes": 1100304,
+      "sha256": "b004570b607b45bbd6e87a3c704b65b23d3221981db3aac6cf2578aa22d766e3"
+    },
+    "firmware.elf": {
+      "path": "/Agon/mystuff/agon-vdplet/build/vdpl041/release-012/firmware-src/.pio/build/esp32dev/firmware.elf",
+      "bytes": 25050804,
+      "sha256": "3b471a388764e5d8da6d10cc78f46361b8aef1f884ea0f24d86369a366460a7d"
+    },
+    "firmware.map": {
+      "path": "/Agon/mystuff/agon-vdplet/build/vdpl041/release-012/firmware-src/.pio/build/esp32dev/firmware.map",
+      "bytes": 17967186,
+      "sha256": "db7136c01432ebda022464cc00415517711a7bb33190c7de95c5bf696001806c"
+    },
+    "bootloader.bin": {
+      "path": "/Agon/mystuff/agon-vdplet/build/vdpl041/release-012/firmware-src/.pio/build/esp32dev/bootloader.bin",
+      "bytes": 18992,
+      "sha256": "f2dfacdea6ae72d0aeeb7c30e525c4c6fc768a041849feac694cbb2ee2224448"
+    },
+    "partitions.bin": {
+      "path": "/Agon/mystuff/agon-vdplet/build/vdpl041/release-012/firmware-src/.pio/build/esp32dev/partitions.bin",
+      "bytes": 3072,
+      "sha256": "148b959cbff1c38aa8e1d5c0ba9d612c54997b945e56a63f41223eef650653a1"
+    }
+  },
+  "validation": "49 focused checks; maintained sanitizer host suite; native provider/disassembly/image validation; no target execution",
+  "release_assets": {
+    "firmware-source.json": {
+      "bytes": 5691,
+      "sha256": "b09188a08398c95b7dbc74b49801bd1dbca8cbdddca2371153127c449f502cee"
+    },
+    "verification.json": {
+      "bytes": 8183,
+      "sha256": "d2c3fe4db80d77c3baa7058e94ef24be6b540bbd7adb03a1588a38075b98daf6"
+    },
+    "vdp-vdplet-0.1.2-alpha.elf.gz": {
+      "bytes": 8536971,
+      "sha256": "1c1cec524439b9785f2a380ff2d859996b66ba9ea5e0ef0fd0f6674d67de4d19"
+    },
+    "source-freeze.json": {
+      "bytes": 4520,
+      "sha256": "626ea5f1afe3f24a19b5d5a0a6723b0f9f533cd22fda79e5d36d51de5579240a"
+    },
+    "vdp-vdplet-0.1.2-alpha.bin": {
+      "bytes": 1100304,
+      "sha256": "b004570b607b45bbd6e87a3c704b65b23d3221981db3aac6cf2578aa22d766e3"
+    },
+    "compile-results.json": {
+      "bytes": 805,
+      "sha256": "b9cf5da24aac6e99b1d8a44d1bdcecd1ebf84f2cb2e15183d176fd5308d77bf5"
+    },
+    "firmware-uart-provider.json": {
+      "bytes": 1529,
+      "sha256": "12958ed750ffc50407d3e79468260910809712072b28737e1bba06fe42d9943c"
+    },
+    "vdp-vdplet-0.1.2-alpha.map.gz": {
+      "bytes": 845536,
+      "sha256": "b4bb57e353dd452e085986ca890828391bf988855f93237d4e3a3fe094d3b376"
+    }
+  }
+}

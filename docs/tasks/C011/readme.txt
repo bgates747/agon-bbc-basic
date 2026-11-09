@@ -3,7 +3,13 @@ C011 paired BASIC benchmark fixture, version 1
 This is an experimental Console8 fixture. No emulator has been run and the
 fixture has not yet been compiled or executed on a target. Begin with the
 pilot and supplementary checks. A compiler rejection or wrong state is a
-failure to investigate, never a timing sample. No firmware change is needed.
+failure to investigate, never a timing sample. Use the current selected
+VDPlet v0.1.2-alpha and Eirene MOS 3.1.0_uart0_rc_3 on Console8. Verify the
+VDP release SHA256SUMS; mos-rc3.bin from the release ZIP must be 100879 bytes,
+SHA256 d7a51147f3381cd68d56f3fbe4605434a897dfae1b049269afeba09ec2b7eb50.
+Matching verified firmware can be reused; do not reflash solely for a repeat.
+This fixture does not install firmware. Regenerate clock.dat after changes.
+Record clock/display behavior before interpreting ticks as elapsed seconds.
 
 All commands below are relative to the programming package root. Compiler.bin
 in that root must be the supplied qualified compiler. Use the included
