@@ -136,10 +136,10 @@ user files and older frozen evidence; both destinations have the current package
    cursor/mirror, preserve complete startup/listener bytes and close readers;
    fresh neutral/offline/idle/ownerlessUSB checks pass. Verified firmware
    provenance is retained without claiming fresh flash reads.
-4. No hardware custody, owned workload or observer remains. All old lease tokens
-   are invalid. Private receipts remain ignored under C006/build/physical-c006-r01
+4. No hardware custody, owned workload or observer remains. Private historical
+   receipts remain ignored under C006/build/physical-c006-r01
    and physical-c006-r02; no target operation follows from historical records.
-   Any future physical run needs a new finite scope/reservation/fresh grant.
+   The sole authority for bench procedures is the Extender guide linked below.
 5. C006 promoted the earlier299a3119 executable unchanged from its second
    actual hardware output; native-promotion-001 retains that exact evidence.
    C010 now promotes40e4ae06 from its actual fresh Pi native self-build. The
@@ -160,18 +160,8 @@ user files and older frozen evidence; both destinations have the current package
 8. C007's completed source search and measurement contract are compiler/TESTING.md.
    No paired performance benchmark or speedup has been measured. Feature limits
    remain explicit in the compatibility matrix despite self-hosting completion.
-9. Use the [Olimex bench procedure](../agon-extender/docs/operations/olimex-bench/README.md) for current physical checkout. Extender supports
+9. Use the [Olimex bench procedure](../agon-extender/docs/operations/olimex-bench/README.md) as the sole authoritative reference for all bench procedures. Extender supports
    technical questions about transfer and CLI. Our mailbox is bbc-basic.
-
-Extender's14:55:28 adoption notice reports canonical /emos/sdserve.bin updated
-to24753 bytes, SHA2560566e17f18747c2e625d2450ce5324a2b1097bce323a5e4d70fad6dcb41cdff2
-(sdserve-v0.3.0-b2026-11-03-08-07-19Z, Extender8aa3245d). The22968-byte04e7
-listener remains historical C006 evidence/rollback, not a current selection.
-Before any future finite plan/grant, read Extender's current
-docs/mainboard-sd-tools.json and mainboard-sd.md; do not infer current listener
-identity from historical FAST-TRANSFER-PIN.json. Major2/client ABI is reported
-unchanged. No existing cohort, helper pin, card package or hardware is changed
-by receipt of this notice; retained custody still requires an explicit new grant.
 
 ## Manual Console8 package
 
@@ -264,11 +254,10 @@ not override the Author's explicit no-emulator instruction or hardware custody.
 C012 brief frozen/pushed9255326; inspection audit complete in C012/REPORT.md and
 C012/evidence/audit-001. VDPlet0.1.2-alpha official firmware is1100304 bytes,
 SHA256b004570b607b45bbd6e87a3c704b65b23d3221981db3aac6cf2578aa22d766e3,
-verified against release SHA256SUMS. All Alexe/Olimex/Console8 VDP tests/deployments
-use it. Alexe/Console8 use release Eirene3.1.0_uart0_rc_3 ZIP mos-rc3.bin,
+verified against release SHA256SUMS. That is the historical C012 audit selection, not current Olimex bench policy. Alexe/Console8 use release Eirene3.1.0_uart0_rc_3 ZIP mos-rc3.bin,
 100879 bytes, d7a51147f3381cd68d56f3fbe4605434a897dfae1b049269afeba09ec2b7eb50.
-Olimex uses Extender's current approved integrated EMOS; reconsult its selector,
-not bare RC3. Required exceptions must be justified in scheduling requests.
+For Olimex firmware selection and all bench procedures, use only the
+Extender bench guide linked above; no local bench default is selected here.
 No mandatory CBAS exception found by source/API inspection; no new runtime pass,
 installed-state proof or flashing occurred. C008/C011 retain actual qualification.
 Old text-only CLI tooling does not qualify the new firmware pair. Compiler

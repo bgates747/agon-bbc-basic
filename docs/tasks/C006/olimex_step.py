@@ -1,8 +1,7 @@
-"""Journal one explicit Olimex operation through maintained Extender tools.
+"""Historical C006 implementation retained with its test evidence.
 
-Requires an existing physical lease and a qualified offline bundle. It neither
-reserves the bench nor dispatches successors/retries, resets or flashes.
-Machine addresses, serial identity, lease and operation receipts stay local.
+Bench procedures are defined solely by
+/Agon/mystuff/agon-extender/docs/operations/olimex-bench/README.md.
 """
 from pathlib import Path
 import argparse

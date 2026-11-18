@@ -1,8 +1,7 @@
-"""Release only a completed C006 repeat after observed cleanup and fresh checks.
+"""Historical C006 implementation retained with its test evidence.
 
-Requires the actual passed native stage, preservation readbacks, restored CLI,
-mirror-off receipt and closed capture receipts. It never stops unknown work,
-types commands, resets, retries or fabricates an old observation timestamp.
+Bench procedures are defined solely by
+/Agon/mystuff/agon-extender/docs/operations/olimex-bench/README.md.
 """
 from pathlib import Path
 import argparse

@@ -1,0 +1,86 @@
+[
+  {
+    "manifest": "docs/tasks/C006/evidence/olimex-deployment-001/manifest.json",
+    "entry": "deploy_olimex.py",
+    "original_sha256": "7e58f06f901486fc186f9e296054bf151b0feded41a5f1c14f1c35cfd1bd8e68",
+    "actual_sha256": "ceafe4b8ab62ae8bad856e43aac7e1b8a70279eac518b6dc620ea76070458819",
+    "disposition": "Historical manifest intentionally not rewritten; documentation removed/edited under C013"
+  },
+  {
+    "manifest": "docs/tasks/C006/evidence/olimex-repeat-001/manifest.json",
+    "entry": "release_olimex_repeat.py",
+    "original_sha256": "3c283026c709b8303cfc4fd10f70581a86c86f5a68727249d4ef430bdb2497be",
+    "actual_sha256": "f711033305594970b1a9dd6032d4be2fdf95c59479c7d89cafe73db564a1776d",
+    "disposition": "Historical manifest intentionally not rewritten; documentation removed/edited under C013"
+  },
+  {
+    "manifest": "docs/tasks/C006/evidence/olimex-repeat-deployment-001/manifest.json",
+    "entry": "deploy_olimex.py",
+    "original_sha256": "a5b187db1aa4320a209081767b2dc47e3f02ccb468a200598d1244c0040d89b7",
+    "actual_sha256": "d39e515e8f2b3d18f6497cd07a86e67f830301db3cb22ff810f2fbbec98d8003",
+    "disposition": "Historical manifest intentionally not rewritten; documentation removed/edited under C013"
+  },
+  {
+    "manifest": "docs/tasks/C006/evidence/olimex-self-a-late-001/manifest.json",
+    "entry": "collect_preserved_components.py",
+    "original_sha256": "2586af4d5a5dd6ede89c505b88b813da14341230b500742ea9f2b5a96fe1f417",
+    "actual_sha256": "9dd76c51b6526b40a1b4a8578e9390f5d4faed4840b09dc1daf69ba404f80743",
+    "disposition": "Historical manifest intentionally not rewritten; documentation removed/edited under C013"
+  },
+  {
+    "manifest": "docs/tasks/C006/evidence/olimex-small-001/manifest.json",
+    "entry": "run_olimex_small.py",
+    "original_sha256": "4e30663437ad960a9e39e4d712c673c60843d73168e56e8217772005bf1f39b5",
+    "actual_sha256": "06b24202f4064d0bdd21f9466cda28d3e13fc6b17fcc511e85e24af9d906eade",
+    "disposition": "Historical manifest intentionally not rewritten; documentation removed/edited under C013"
+  },
+  {
+    "manifest": "docs/tasks/C006/evidence/olimex-step-host-001/manifest.json",
+    "entry": "olimex_step.py",
+    "original_sha256": "4d27f30c3f2bf2baff224e70ceeea7b3a5b18328ce10c47fe0e74860997fdc43",
+    "actual_sha256": "2582e4f799fc40257acf7a5094a28d15f271e2b683bd75b5d71b0eab8ef762f3",
+    "disposition": "Historical manifest intentionally not rewritten; documentation removed/edited under C013"
+  },
+  {
+    "manifest": "docs/tasks/C006/evidence/olimex-step-host-002/manifest.json",
+    "entry": "olimex_step.py",
+    "original_sha256": "4d27f30c3f2bf2baff224e70ceeea7b3a5b18328ce10c47fe0e74860997fdc43",
+    "actual_sha256": "2582e4f799fc40257acf7a5094a28d15f271e2b683bd75b5d71b0eab8ef762f3",
+    "disposition": "Historical manifest intentionally not rewritten; documentation removed/edited under C013"
+  },
+  {
+    "manifest": "docs/tasks/C006/evidence/olimex-step-host-003/manifest.json",
+    "entry": "olimex_step.py",
+    "original_sha256": "7086a8bc7b66f5af54dfe1d06fa42350396bb29c0fbd026cbb40e00e51266872",
+    "actual_sha256": "ced4a1d63e55d6750228a2bedf038369978fece3cd588a117b66fd356966ff27",
+    "disposition": "Historical manifest intentionally not rewritten; documentation removed/edited under C013"
+  },
+  {
+    "manifest": "docs/tasks/C006/evidence/olimex-step-host-004/manifest.json",
+    "entry": "olimex_step.py",
+    "original_sha256": "409c5bae257fcb4e79643dc66d657fd23d06a42e48b1346a4aa8eaa551694d77",
+    "actual_sha256": "4713ebdf51ff2e8ed0cd957576ea8716dcae13631fe45b642fc7b8ad112157ba",
+    "disposition": "Historical manifest intentionally not rewritten; documentation removed/edited under C013"
+  },
+  {
+    "manifest": "docs/tasks/C006/evidence/olimex-step-host-005/manifest.json",
+    "entry": "olimex_step.py",
+    "original_sha256": "409c5bae257fcb4e79643dc66d657fd23d06a42e48b1346a4aa8eaa551694d77",
+    "actual_sha256": "4713ebdf51ff2e8ed0cd957576ea8716dcae13631fe45b642fc7b8ad112157ba",
+    "disposition": "Historical manifest intentionally not rewritten; documentation removed/edited under C013"
+  },
+  {
+    "manifest": "docs/tasks/C012/evidence/audit-001/evidence-manifest.json",
+    "entry": "olimex-standard-snapshot.json",
+    "original_sha256": "d703a77f28f4f956c4bb10c3f21cabf308cdfda7d49ec4dca05c3a0f2ae5fdbe",
+    "actual_sha256": null,
+    "disposition": "Historical manifest intentionally not rewritten; documentation removed/edited under C013"
+  },
+  {
+    "manifest": "docs/tasks/C012/evidence/audit-001/evidence-manifest.json",
+    "entry": "verification.json",
+    "original_sha256": "d2c3fe4db80d77c3baa7058e94ef24be6b540bbd7adb03a1588a38075b98daf6",
+    "actual_sha256": "ad672a286b235619511cccd29decdaeb09f721875ee475f5798587f7b434dc28",
+    "disposition": "Historical manifest intentionally not rewritten; documentation removed/edited under C013"
+  }
+]

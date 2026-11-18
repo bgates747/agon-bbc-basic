@@ -1,8 +1,7 @@
-"""Read only the two preserved startup/listener files during known-return cleanup.
+"""Historical C006 implementation retained with its test evidence.
 
-Use maintained pinned clients, a fresh journal per operation and an immediate
-current-lease assertion. A failure stops without retry or another target action.
-This neither invokes an application nor writes any remote file.
+Bench procedures are defined solely by
+/Agon/mystuff/agon-extender/docs/operations/olimex-bench/README.md.
 """
 from pathlib import Path
 import argparse

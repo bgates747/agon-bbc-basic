@@ -1,0 +1,10 @@
+[
+  {
+    "path": "docs/tasks/C012/build/releases/verification.json",
+    "action": "delete",
+    "before_sha256": "d2c3fe4db80d77c3baa7058e94ef24be6b540bbd7adb03a1588a38075b98daf6",
+    "after_sha256": null,
+    "reason": "Downloaded verification-document copy embeds the removed obsolete bench routing rule; no binary removed",
+    "integrity": "Its retained original SHA256SUMS entry is now intentionally unavailable locally; not a new release verification"
+  }
+]

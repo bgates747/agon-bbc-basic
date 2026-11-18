@@ -1,8 +1,7 @@
-"""Finish only the remaining prepared C006 small stages, stopping on failure.
+"""Historical C006 implementation retained with its test evidence.
 
-The two manually completed case0 stages and compile-1 must already be retained.
-Each child independently checks the lease, actual prompts/CLI, full outputs and
-listener return. No retry, self-compilation or cleanup is dispatched here.
+Bench procedures are defined solely by
+/Agon/mystuff/agon-extender/docs/operations/olimex-bench/README.md.
 """
 from pathlib import Path
 import argparse

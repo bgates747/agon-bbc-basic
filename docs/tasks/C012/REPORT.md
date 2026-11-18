@@ -22,12 +22,12 @@ the old text-only automated harness is not evidence for these new defaults.
    d7a51147f3381cd68d56f3fbe4605434a897dfae1b049269afeba09ec2b7eb50.
    Source97311c437093e416342a6c836cf9914f2ced027d; source inspection uses the
    matching release ZIP, not the current working checkout.
-3. Olimex selector snapshot is retained from Extender's current standard.
+3. The audit observed Extender's then-selected Olimex image.
    At audit time it selects integrated EMOS Eirene r04,131072 bytes,
    a25f1612f4aaa542c5488cf3266d968ad3d1d61e9df3b5ce2c680650f5d7a2ca.
    This is a scheduler-owned desired selection, not proof of installed hardware
-   bytes and not a substitute for Alexe/Console8's bare RC3. Reconsult the live
-   selector when reserving: future owner defaults may advance.
+   bytes. All current bench procedures/defaults are defined solely by the
+   [Extender bench guide](../../../../agon-extender/docs/operations/olimex-bench/README.md).
 
 ## Current candidates
 
@@ -99,5 +99,4 @@ binds the Author's pins and records unresolved runtime gates in C008/C011.
 Frozen historical packages/evidence are unchanged; their old runbooks are not
 proof of installed firmware and the old claim that no firmware change is needed
 is conditional on already matching today's defaults. No card, emulator profile,
-startup file or component-owner source is modified. Hardware and test permissions
-remain separate; no reservation or new run starts solely from this audit.
+startup file or component-owner source is modified. No reservation or new run occurred in this audit.

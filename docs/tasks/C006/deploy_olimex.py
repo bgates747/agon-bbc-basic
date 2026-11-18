@@ -1,8 +1,7 @@
-"""Sequentially upload and independently retrieve the frozen C006 payloads.
+"""Historical C006 implementation retained with its test evidence.
 
-Each explicit step uses olimex_step.py's current-lease check and maintained
-Extender tools. An error stops the cohort without retry or cleanup dispatch.
-No compiler/program invocation or startup/firmware changes occur here.
+Bench procedures are defined solely by
+/Agon/mystuff/agon-extender/docs/operations/olimex-bench/README.md.
 """
 from pathlib import Path
 import argparse

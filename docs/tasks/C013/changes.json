@@ -1,0 +1,213 @@
+[
+  {
+    "path": "AGENTS.md",
+    "action": "edit",
+    "before_sha256": "eba0aa26d7937b08f2390d45f64c9d5e5946619822c72c56cc190247b1a57901",
+    "after_sha256": "3fe2e6e4f35f2abadea8a180a036074cd1b9fed5618fc942b6e04935737dad3d",
+    "reason": "Remove local bench instructions; retain historical/application facts and sole canonical reference"
+  },
+  {
+    "path": "compiler/FIRMWARE.md",
+    "action": "edit",
+    "before_sha256": "9667778b671494830bad669ef1ebcf66a3f058adf42e3984a4e471a54c13c1c3",
+    "after_sha256": "d9e04521db07561178cf33b59e5d7a2b4f9aa1fa08598a7400144553fc362e0f",
+    "reason": "Remove local bench instructions; retain historical/application facts and sole canonical reference"
+  },
+  {
+    "path": "docs/compiler-development-2026-11-03.md",
+    "action": "edit",
+    "before_sha256": "c32677912a12cd745ac5ec3224bc7d1d00d902884275d0e972a22fc3ef28a676",
+    "after_sha256": "f0c93c7b9348b752edd6148a86aff781ea624df3f83f3549df7bbaf7f636e4b4",
+    "reason": "Remove local bench instructions; retain historical/application facts and sole canonical reference"
+  },
+  {
+    "path": "docs/tasks/C006.md",
+    "action": "edit",
+    "before_sha256": "ddd74ceef81676add363ecf98976f5e88a0d3302777ca33d0652d7ab295ba942",
+    "after_sha256": "184f1a984a386f0d8af7255ed43d85a76205309cf516ab2758c21d750246f4a2",
+    "reason": "Remove local bench instructions; retain historical/application facts and sole canonical reference"
+  },
+  {
+    "path": "docs/tasks/C006/OLIMEX-R01.md",
+    "action": "edit",
+    "before_sha256": "4b2e801879fcce8b16bfb248807be1c872c5873eee69a3b909af68d7461935a8",
+    "after_sha256": "08698ee89bf6053dffeb40c7be7963964b8abb1803a9e84efa3e9dd1ff7265a5",
+    "reason": "Remove local bench instructions; retain historical/application facts and sole canonical reference"
+  },
+  {
+    "path": "docs/tasks/C006/OLIMEX-R02.md",
+    "action": "edit",
+    "before_sha256": "33a32319588f2b45f028bea0efb787b585425686333d98e607e8a70cb778e835",
+    "after_sha256": "2310fe18b0f40a59593891f1bbc8ce11c0f225b70059e4d662b381d64a8c47a5",
+    "reason": "Remove local bench instructions; retain historical/application facts and sole canonical reference"
+  },
+  {
+    "path": "docs/tasks/C006/OLIMEX.md",
+    "action": "edit",
+    "before_sha256": "bee650bc9a5d30779f293ac1091194a8239f5eb6836ebe08f6a6634d42ffaacd",
+    "after_sha256": "70f941eace4367e23c4c5f75d143c849c7c631e96d82eae7177c049f73699b0f",
+    "reason": "Remove local bench instructions; retain historical/application facts and sole canonical reference"
+  },
+  {
+    "path": "docs/tasks/C006/collect_preserved_components.py",
+    "action": "edit",
+    "before_sha256": "2586af4d5a5dd6ede89c505b88b813da14341230b500742ea9f2b5a96fe1f417",
+    "after_sha256": "9dd76c51b6526b40a1b4a8578e9390f5d4faed4840b09dc1daf69ba404f80743",
+    "execution_ast_unchanged": true,
+    "reason": "Replace obsolete module-level procedural documentation; execution code unchanged"
+  },
+  {
+    "path": "docs/tasks/C006/deploy_olimex.py",
+    "action": "edit",
+    "before_sha256": "a5b187db1aa4320a209081767b2dc47e3f02ccb468a200598d1244c0040d89b7",
+    "after_sha256": "d39e515e8f2b3d18f6497cd07a86e67f830301db3cb22ff810f2fbbec98d8003",
+    "execution_ast_unchanged": true,
+    "reason": "Replace obsolete module-level procedural documentation; execution code unchanged"
+  },
+  {
+    "path": "docs/tasks/C006/evidence/olimex-deployment-001/deploy_olimex.py",
+    "action": "edit",
+    "before_sha256": "7e58f06f901486fc186f9e296054bf151b0feded41a5f1c14f1c35cfd1bd8e68",
+    "after_sha256": "ceafe4b8ab62ae8bad856e43aac7e1b8a70279eac518b6dc620ea76070458819",
+    "execution_ast_unchanged": true,
+    "reason": "Replace obsolete module-level procedural documentation; execution code unchanged"
+  },
+  {
+    "path": "docs/tasks/C006/evidence/olimex-repeat-001/release_olimex_repeat.py",
+    "action": "edit",
+    "before_sha256": "3c283026c709b8303cfc4fd10f70581a86c86f5a68727249d4ef430bdb2497be",
+    "after_sha256": "f711033305594970b1a9dd6032d4be2fdf95c59479c7d89cafe73db564a1776d",
+    "execution_ast_unchanged": true,
+    "reason": "Replace obsolete module-level procedural documentation; execution code unchanged"
+  },
+  {
+    "path": "docs/tasks/C006/evidence/olimex-repeat-deployment-001/deploy_olimex.py",
+    "action": "edit",
+    "before_sha256": "a5b187db1aa4320a209081767b2dc47e3f02ccb468a200598d1244c0040d89b7",
+    "after_sha256": "d39e515e8f2b3d18f6497cd07a86e67f830301db3cb22ff810f2fbbec98d8003",
+    "execution_ast_unchanged": true,
+    "reason": "Replace obsolete module-level procedural documentation; execution code unchanged"
+  },
+  {
+    "path": "docs/tasks/C006/evidence/olimex-self-a-late-001/collect_preserved_components.py",
+    "action": "edit",
+    "before_sha256": "2586af4d5a5dd6ede89c505b88b813da14341230b500742ea9f2b5a96fe1f417",
+    "after_sha256": "9dd76c51b6526b40a1b4a8578e9390f5d4faed4840b09dc1daf69ba404f80743",
+    "execution_ast_unchanged": true,
+    "reason": "Replace obsolete module-level procedural documentation; execution code unchanged"
+  },
+  {
+    "path": "docs/tasks/C006/evidence/olimex-small-001/run_olimex_small.py",
+    "action": "edit",
+    "before_sha256": "4e30663437ad960a9e39e4d712c673c60843d73168e56e8217772005bf1f39b5",
+    "after_sha256": "06b24202f4064d0bdd21f9466cda28d3e13fc6b17fcc511e85e24af9d906eade",
+    "execution_ast_unchanged": true,
+    "reason": "Replace obsolete module-level procedural documentation; execution code unchanged"
+  },
+  {
+    "path": "docs/tasks/C006/evidence/olimex-step-host-001/olimex_step.py",
+    "action": "edit",
+    "before_sha256": "4d27f30c3f2bf2baff224e70ceeea7b3a5b18328ce10c47fe0e74860997fdc43",
+    "after_sha256": "2582e4f799fc40257acf7a5094a28d15f271e2b683bd75b5d71b0eab8ef762f3",
+    "execution_ast_unchanged": true,
+    "reason": "Replace obsolete module-level procedural documentation; execution code unchanged"
+  },
+  {
+    "path": "docs/tasks/C006/evidence/olimex-step-host-002/olimex_step.py",
+    "action": "edit",
+    "before_sha256": "4d27f30c3f2bf2baff224e70ceeea7b3a5b18328ce10c47fe0e74860997fdc43",
+    "after_sha256": "2582e4f799fc40257acf7a5094a28d15f271e2b683bd75b5d71b0eab8ef762f3",
+    "execution_ast_unchanged": true,
+    "reason": "Replace obsolete module-level procedural documentation; execution code unchanged"
+  },
+  {
+    "path": "docs/tasks/C006/evidence/olimex-step-host-003/olimex_step.py",
+    "action": "edit",
+    "before_sha256": "7086a8bc7b66f5af54dfe1d06fa42350396bb29c0fbd026cbb40e00e51266872",
+    "after_sha256": "ced4a1d63e55d6750228a2bedf038369978fece3cd588a117b66fd356966ff27",
+    "execution_ast_unchanged": true,
+    "reason": "Replace obsolete module-level procedural documentation; execution code unchanged"
+  },
+  {
+    "path": "docs/tasks/C006/evidence/olimex-step-host-004/olimex_step.py",
+    "action": "edit",
+    "before_sha256": "409c5bae257fcb4e79643dc66d657fd23d06a42e48b1346a4aa8eaa551694d77",
+    "after_sha256": "4713ebdf51ff2e8ed0cd957576ea8716dcae13631fe45b642fc7b8ad112157ba",
+    "execution_ast_unchanged": true,
+    "reason": "Replace obsolete module-level procedural documentation; execution code unchanged"
+  },
+  {
+    "path": "docs/tasks/C006/evidence/olimex-step-host-005/olimex_step.py",
+    "action": "edit",
+    "before_sha256": "409c5bae257fcb4e79643dc66d657fd23d06a42e48b1346a4aa8eaa551694d77",
+    "after_sha256": "4713ebdf51ff2e8ed0cd957576ea8716dcae13631fe45b642fc7b8ad112157ba",
+    "execution_ast_unchanged": true,
+    "reason": "Replace obsolete module-level procedural documentation; execution code unchanged"
+  },
+  {
+    "path": "docs/tasks/C006/olimex_step.py",
+    "action": "edit",
+    "before_sha256": "409c5bae257fcb4e79643dc66d657fd23d06a42e48b1346a4aa8eaa551694d77",
+    "after_sha256": "4713ebdf51ff2e8ed0cd957576ea8716dcae13631fe45b642fc7b8ad112157ba",
+    "execution_ast_unchanged": true,
+    "reason": "Replace obsolete module-level procedural documentation; execution code unchanged"
+  },
+  {
+    "path": "docs/tasks/C006/release_olimex_repeat.py",
+    "action": "edit",
+    "before_sha256": "3c283026c709b8303cfc4fd10f70581a86c86f5a68727249d4ef430bdb2497be",
+    "after_sha256": "f711033305594970b1a9dd6032d4be2fdf95c59479c7d89cafe73db564a1776d",
+    "execution_ast_unchanged": true,
+    "reason": "Replace obsolete module-level procedural documentation; execution code unchanged"
+  },
+  {
+    "path": "docs/tasks/C006/run_olimex_small.py",
+    "action": "edit",
+    "before_sha256": "4e30663437ad960a9e39e4d712c673c60843d73168e56e8217772005bf1f39b5",
+    "after_sha256": "06b24202f4064d0bdd21f9466cda28d3e13fc6b17fcc511e85e24af9d906eade",
+    "execution_ast_unchanged": true,
+    "reason": "Replace obsolete module-level procedural documentation; execution code unchanged"
+  },
+  {
+    "path": "docs/tasks/C010.md",
+    "action": "edit",
+    "before_sha256": "d0f3b2ef789ff9483b3f8d783d7b5348246a6a6d2cd378677daca184d15b36b4",
+    "after_sha256": "13df85298bcd98f03e16e310c6717b0067045fb310365b88faca75dfffa44450",
+    "reason": "Remove local bench instructions; retain historical/application facts and sole canonical reference"
+  },
+  {
+    "path": "docs/tasks/C011.md",
+    "action": "edit",
+    "before_sha256": "5c82759a1c5a64e395f61113fed2ee37839380545080f877302786be112754e7",
+    "after_sha256": "37dd6971fdc774603f2e8bfb9e84eb49f089d172bac8cb890c8b3a395118a0dc",
+    "reason": "Remove local bench instructions; retain historical/application facts and sole canonical reference"
+  },
+  {
+    "path": "docs/tasks/C012.md",
+    "action": "edit",
+    "before_sha256": "6753999c8a8bda2ceca50a11a3bd1c6d1f8835d80ca0daab5aeb016c0c5c0ab0",
+    "after_sha256": "c5c0ffc4b2df28cf6b64e30e3d27e3eef1c946677db325d56283eaaa1c89dd2b",
+    "reason": "Remove local bench instructions; retain historical/application facts and sole canonical reference"
+  },
+  {
+    "path": "docs/tasks/C012/REPORT.md",
+    "action": "edit",
+    "before_sha256": "c42c6049177cd121da8b9b4eec8de7b72cf23635c7b20330bad97daf84e7832a",
+    "after_sha256": "523b0e4e6a190a8d69027edec987e99964b79b9962fe9c7dc5f72de4488ce108",
+    "reason": "Remove local bench instructions; retain historical/application facts and sole canonical reference"
+  },
+  {
+    "path": "docs/tasks/C012/evidence/audit-001/olimex-standard-snapshot.json",
+    "action": "delete",
+    "before_sha256": "d703a77f28f4f956c4bb10c3f21cabf308cdfda7d49ec4dca05c3a0f2ae5fdbe",
+    "after_sha256": null,
+    "reason": "Remove competing copied bench policy"
+  },
+  {
+    "path": "docs/tasks/C012/evidence/audit-001/verification.json",
+    "action": "edit",
+    "before_sha256": "d2c3fe4db80d77c3baa7058e94ef24be6b540bbd7adb03a1588a38075b98daf6",
+    "after_sha256": "ad672a286b235619511cccd29decdaeb09f721875ee475f5798587f7b434dc28",
+    "reason": "Remove embedded obsolete bench routing instruction"
+  }
+]

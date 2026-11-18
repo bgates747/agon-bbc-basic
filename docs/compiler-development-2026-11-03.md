@@ -151,30 +151,8 @@ packed-native-preflight-001 through normal native filename prompts; no native
 self-compilation result is yet claimed. This does not replace the default full
 generation chain.
 
-The Author directs consultation with Extender for Olimex time, file transfers
-and remote CLI access. Send the request to Extender2026-10-13Sol and record
-canonical mailbox2026-11-03_02-31-54_bbc-basic_bbc-olimex-access-request-one.
-Read the shared physical-bench lease protocol and staged-transfer decision.
-No lease, target access, reset, flash, deployment or physical result yet exists.
-
-The initial direct-written mailbox used generic YAML rather than the helper's
-JSON-valued metadata/routing format and blocked its global parser. Extender
-owns the repair: preserve exact original in quarantine, republish unchanged
-request body through agentcoms.py as
-2026-11-03_02-34-30_bbc-basic_bbc-olimex-access-request-one, verify parser restored.
-Use the maintained helper for all future mail. A separate proposed shared-index
-append was rejected by automatic review (published Markdown restriction); leave
-that index unchanged. Local physical plan C006/OLIMEX.md records the bounded
-scope, preserved components, lease, transfer, remote command and evidence rules.
-
-Extender sends canonical guidance2026-11-03_02-36-44_linux-extender_bbc-olimex-access-guidance-one.
-Acknowledge and reply using maintained helper as02-37-29_bbc-basic_bbc-access-guidance-received-two,
-with immediate chat alert. Confirm remote MOS keyboard/CLI, pinned P4-staged
-file transport and joined-control passive Legacy printer-mirror capture.
-Use Extender-owned diagnostic/results paths; retain all installed components,
-startup, wiring and display mode. Finish emulator qualification and prepare an
-exact finite fixture before reserving. Empty logical registry is not readiness;
-no target operation or lease occurs. Current native preflight remains active.
+Historical Olimex coordination was recorded in the November3 mailbox.
+Current bench procedures are linked at the end of this document.
 
 Prepare C006/prepare_olimex.py as an offline byte-copy/batch packaging tool.
 It requires the completed normal-main four-image chain plus all12 native
@@ -235,7 +213,7 @@ checks pass; the new guard awaits the full-chain run.
 C006/OLIMEX.md now records exact compiler image/heap/arena/user guard boundaries
 and the additional MOS-provided ADL stack. Read-only EMOS exec24/defines/startup
 inspection is distinct from installed firmware evidence; retain an actual MEM
-report after future checkout before running compiler fixtures. No hardware
+report with the historical physical evidence. No hardware
 access, reset, flash, mode change or memory-policy change occurs here.
 
 packed-capacity-001 passes3 programs/two native executions/one rejection in
@@ -275,16 +253,8 @@ only successful full four-image equality proceeds to live-native-baseline-001,
 live-regressions-001 and live-native-errors-001. None of those later results is
 claimed yet. No second CLI may use this SD while the pipeline is active.
 
-During G0, prepare C006/olimex_step.py for one explicit physical operation at a
-time through maintained Extender tools. It verifies fixture payloads and owner
-before each operation, journals requested actions before submission, uses new
-staged files and fresh major2 metadata/EXIT, and delegates passive capture to
-the maintained joined-control opener. Relative paths are normalized before
-changing child cwd. Local machine/lease details remain in ignored records.
-No reservation or live board operation occurs. Host-only mocked qualification
-progresses4 checks001,5 checks002,6 checks003; final tests include no target
-submission after failed lease/wrong protocol, path boundaries and separate
-owner assertions. These do not qualify hardware or the P4 protocol.
+Historical operation-helper host checks completed with mocked subprocesses.
+They did not qualify physical hardware.
 
 Tighten offline Olimex packaging to require all four qualification records:
 normal-main bootstrap, native baseline39/15+24, representative12 and fresh
@@ -299,22 +269,9 @@ actual native self-source preflight. The live compatibility matrix owns current
 features. No benchmark adaptation, new source search or timing measurement is
 performed; no speedup is inferred from controller durations.
 
-Extender source review04-24-44 confirms maintained client argument ordering but
-corrects EXIT acknowledgement versus actual handback. Implement separate ACK
-record plus bounded owner-checked online=false AND pending=false observation;
-uncertainty stops without another EXIT/session. Host004 passes8 mocked checks;
-005 strengthens offline-but-pending and per-poll ownership assertions, also8.
-Document exact retained journals for status/resume; capture ready is port-open,
-not Legacy sentinel proof, and retrieved SHA still needs expected-byte equality.
-
-Further review04-31-02 verifies installed/current MOS EXEC aborts on nonzero RUN.
-All planned physical program cases expect0; packaging now verifies actual retained
-compiler-status0 logs, including rejected source, and rejects any planned nonzero
-application status. RUN is line4 in each finite batch. Unexpected aborted EXEC
-requires its exact fresh file/line error and actual CLI; no assumed end marker,
-listener restart or RUN/SAVE replay. Reply04-33-38_bbc-basic_bbc-exit-exec-boundaries-received-four
-acknowledges both corrections through maintained mail plus immediate chat. G0
-continues; no physical reservation/access or new approval gate is introduced.
+Historical host004/005 each passed eight mocked helper checks.
+The retained MOS EXEC source audit found that nonzero RUN aborts a batch;
+these findings do not define a current bench procedure.
 
 Prepare exact physical upload mapping, including rejection sentinels placed at
 old-output destinations rather than ordinary source locations. Extend the still
@@ -418,216 +375,30 @@ old output, and all12 compiler returns are0. Retain final controller/manifest.
 Start live-native-errors-001 as its own host command for the final39 fresh
 reference ERR/ERL/native-output/linkage checks before offline physical packaging.
 
-## Native error suite and physical fixture ready
+## Historical C006 physical qualification
 
-live-native-errors-001 passes all39 fresh pinned BASIC ERR/ERL programs and actual
-native outputs in612.766 controller seconds. Complete39-image runtime/entry
-checks and deterministic repeat pass. Freeze final controller/manifest; all
-emulator prerequisites now pass with unchanged6597a0df source/299a3119 image.
+Native error qualification passed39 cases in612.766 controller seconds.
+The original fixture contained40 payloads/441398 bytes, source6597a0df and
+compiler299a3119; its manifest was05149bd76c5f23f8f6bf97c8db7bde3871e858a1e579a55784f05dd3a84d4787.
+Actual40 upload/readback comparisons passed in242.466s. All12 compiler
+invocations and10 generated programs passed, with ten equal complete images,
+two preserved42-byte sentinels and native-test.dat FF74657874.
 
-Run prepare_olimex.py against those real four completed manifests. It passes and
-creates40 payloads/441398 bytes, including111810-byte source and324275-byte
-compiler. Preserve the exact offline bundle as olimex-fixture-001, manifest
-SHA05149bd76c5f23f8f6bf97c8db7bde3871e858a1e579a55784f05dd3a84d4787.
-Ten expected generated images total102941 bytes. OLIMEX-R01.md pins the finite
-12-source/10-program/two-self-source scope and memory/restoration/stop protocol.
-This is ready preparation, not a physical deployment or result.
+The first physical self-source exceeded its5400s observation bound. The
+observer recorded TimeoutError with no compiler status or hang diagnosis.
+olimex-self-a-bound-001 retains that failure; olimex-self-a-late-001 separately
+retains the original invocation's later successful output. All324275 bytes
+matched299a3119. The final capture interval was5951.332 host seconds and its
+GET took251.948s, neither a CPU benchmark. No invocation was repeated.
+Generation7 was released2026-11-03T14:48:42.976464Z.
 
-Extender guidance07-20-19 answers the timing/MEM/CLI enquiry: no comparable
-physical compiler timing or current stack high-water exists. Preserve the map,
-observe fresh installed MEM only after grant, separate mirrored host elapsed
-intervals from CPU/performance claims, and revise from actual first hardware
-results. No reset/flash/startup/mode changes are planned. Request a finite lease
-only after this frozen qualified fixture exists.
-
-Canonical reservation ee0ad664f72a is submitted for c006-r01. Durable mailbox
-07-29-35_bbc-basic_bbc-c006-r01-reservation-ready and immediate steering deliver
-the exact scope/manifest/plan to Extender. No lease or target access is inferred.
-Correct the plan's sentinel-size transcription to42 bytes, matching actual
-frozen payloads; no payload or manifest changes.
-
-Extender07-31-52 explicit grant assigns generation7, after fresh canonical
-listener/staged startup+utility reads/EXIT and neutral idle resources. Save the
-immutable grant/config locally, assert current token for every operation, and
-independently verify input/listener/worker. Maintained joined-control capture,
-VDU2 and fresh BBC_C006_ENTRY_R01 sentinel prove actual Legacy CLI. Fresh MEM:
-USER:LO040000..0BBFFF, MOSdata0BC000..0BD05C, heap0BD05D..0BF7FF,
-stack24 at0BF800..0BFFFF/2048B, compatible with the compiler's below0B0000
-allocations. This does not measure stack high-water. Preserve actual incoming
-directory/mode and components. Explicitly start canonical major2 listener,
-create only fresh BBC roots, begin sequential40-file upload/readback verification
-through deploy_olimex.py and maintained one-operation helper. No workload yet.
-
-All40 independent readbacks pass in242.466 deployment seconds. Fresh listener
-EXIT/offline returns actual CLI (with the documented SD service stopped line).
-One overly strict host string assertion omitted that known line; actual raw
-console positively shows the current CLI. Preserve it and use the complete
-observed framing in subsequent guards; no target failure or replay occurred.
-Invoke compile0 exactly once through normal source/output prompts; retrieve its
-251-byte output and compare every byte equal. Invoke run0 exactly once; actual
-native compiler text and normal batch/listener return match. Freeze entry/MEM,
-all40 readbacks and these two partial results in olimex-deployment-001.
-
-The one-stage observer is checked against both retained actual case0 windows,
-then compile1 passes with its complete6447-byte output equal. Its exact known
-mode records are removed only for text comparison, while raw capture is retained.
-The bounded small coordinator starts remaining compile2..11/run1..9, requiring
-each child's actual passed result before proceeding. No self-source or retry/
-cleanup is included. Physical qualification is not yet complete.
-
-All remaining19 small stages finish506.254 coordinator seconds: total physical
-12 source compiles/10 actual native programs pass. Exact ten image comparisons,
-two42-byte prior-output sentinels, visible output and native-test.dat FF74657874
-match. Freeze complete raw small capture/per-stage windows, outputs, observation
-times and report in olimex-small-001. No optical or performance pass follows.
-Exit the final listener, observe actual CLI, disable VDU2 and close its owned
-reader normally. Open fresh maintained7200s self-a capture, enable/qualify it
-with new BBC_C006_SELF_A_CAPTURE_R01 sentinel and observed CLI, then start the
-canonical listener for the one-stage driver. Invoke self-a exactly once through
-its observed normal prompts. It is active; self-b is not invoked yet.
-
-Refresh BOOTSTRAP.md and public README/matrix references that still described
-the now-completed native suites as merely prepared. Keep physical small-suite
-success distinct from the still-active first self-source pass. No compiler,
-runtime, frozen fixture or device input changes accompany this documentation.
-
-At approximately one hour after self-a's final filename emission, no completion
-or diagnostic is observed; raw console remains1070 bytes. Preserve an immutable
-actual-prompt-only snapshot olimex-self-a-prompts-001, explicitly withholding
-completion and liveness claims. Source main prints no intermediate progress.
-The5400s observer remains active and no target operations are sent alongside it.
-Durable08-55-23_bbc-basic_bbc-c006-small-pass-self-a-observation-one and steering
-give Extender the completed small-suite results and this scheduling status;
-no repair, retry, parallel access or new grant is requested. Self-b is unstarted.
-
-## First physical self-source observation bound expired
-
-At epoch1793715922.4746075 the5400s completion observer raises TimeoutError and
-its host process exits1. Raw capture remains1070 bytes, ending at the exact
-output-filename echo, without Wrote, BBC_END_SELF_A, diagnostic or actual CLI.
-This is an observation failure/unknown foreground, not compiler status1, a hang
-diagnosis or an Extender defect. No target dispatch followed filename submission.
-Freeze unchanged original stage report/source/window and full capture snapshot
-in olimex-self-a-bound-001; no incomplete stage is counted as successful.
-
-Retain generation7 custody and existing maintained passive capture (7200s total,
-approximately28 minutes remaining at09:26EST). No retry/reset/self-b or further
-target queries/keys/transfer occur. Durable09-26-09_bbc-basic_bbc-c006-self-a-observation-bound-one
-and immediate steering request Extender's admitted reconciliation/continued
-bounded observation guidance, explicitly without parallel target access or new
-workload. Any actual later completion will receive separate evidence rather
-than rewriting the original timeout. All completed native/small hardware results
-remain qualified; C006 self-source/clean handback are unfinished.
-
-Extender09-27-55 reconciles the passive remainder: keep only the already-admitted
-reader to its original7200s limit. Exact correlated late BBC_END_SELF_A without
-error/reset permits only original-result listener/status/get/whole-byte checks
-and normal cleanup/release; no self-b. If the reader expires without completion,
-let it close and report, retaining custody with no reopen/keys/query/reset or
-inferred CLI. No new hardware operation is selected. Acknowledge receipt only.
-
-Offline frozen-source inspection SELF-SOURCE-WORK.md and self-source-work-001
-find signature1/compiler3/DATA3 complete traversals (782670 byte visits), per-byte
-EOF/BGET/string construction, logical prefix-length sums and packed symbol-index
-insertion shifts.2094 symbols yield a pessimistic4382742 byte-assignment bound,
-not measured actual moves. Binary symbol search and full219-routine/254-binding
-scans are distinguished. No retained executed instruction/cycle counts were
-found in complete self-source reports/controller streams. These facts cannot
-prove physical progress, predict completion or diagnose a hang. Return them to
-Extender through bbc-c006-offline-self-source-work-one and immediate steering.
-Live source, runtime, fixture and bench state remain unchanged.
-
-## Actual late physical self-source matches; clean release
-
-The original reader captures exact late Wrote/BBC_END_SELF_A/canonical listener
-sequence with no intervening error/reset. Strict normalized body comparison
-checks both prompt/filename echoes and all completion/listener lines. Under
-Extender's admitted known-return path, fresh status proves major2 listener online,
-worker idle and neutral input. Retrieve only the original result into a new
-path; a permitted progress observation shows304128/324275 bytes, no errors.
-GET completes251.948 host seconds; all324275 bytes equal SHA299a3119. Preserve
-olimex-self-a-late-001 with the old TimeoutError report unchanged alongside
-new late-observation/result and complete raw capture. No EXEC/RUN/SAVE repeats.
-Last capture append before retrieval is5951.332s after final filename emission;
-this is host/serial/listener observation, not CPU time or a performance benchmark.
-
-Fresh pinned complete-file GETs prove startup108B9e97/listener22968B04e7 unchanged.
-Fresh EXIT/offline returns actual CLI; restore exact incoming FSIM directory,
-observe native0 prompt after text/visible/flashingcursor controls, VDU3 mirroroff
-and close the owned reader normally. Fresh neutral input/worker0/offline-no-pending,
-P4mode0 and ownerless bothUSB pass. Retain per-field unchanged verified firmware
-provenance, not fresh flash-read claims. Canonical generation7 clean release is
-14:48:42.976464Z, next_request=null; complete Extender handback09-50-32 delivered
-through mailbox and steering. No lease or target action remains. No self-b,
-reset, firmware/startup/mode/wiring change or optical pass occurred. Prepare
-the outstanding physical repeat separately using the actual first observation;
-retain original finite scope/timeout and late-success lineage truthfully.
-
-## Prepare separately bounded physical repeat
-
-After checkpoint2384df9, prepare_olimex_repeat.py verifies both prior complete
-manifests, actual hardware output/seed equality and actual clean release. It
-copies the hardware-produced compiler unchanged, the exact source and one
-176-byte MOS batch into olimex-repeat-fixture-001:3 payloads436261 bytes,
-manifestb5d0761fc88e512f32d14217a8ee2de997e05e412edafc3c8236bd2101128e24.
-OLIMEX-R02.md defines one outstanding hardware generation only,6600s completion
-observation from the actual first5951.332s captured interval, fresh7200s reader
-after deployment, exact comparisons and unchanged preservation/stop boundaries.
-This is offline copying/hashing, not compilation or an execution result.
-
-The deployment experiment now accepts explicit expected file counts3 or40,
-default40 preserving the original scope. The one-stage observer accepts the
-actual incoming directory for its pre-EXEC CLI guard and an explicit self-timeout
-5400/6600 (default5400), preserving its old invocation. Syntax checks and actual
-manifest/byte/command-file preparation pass; no extra emulator/hardware experiment
-is run. New reservation/fresh Extender grant are still required.
-
-Canonical new reservation9339623b747d is submitted14:57:47.823211Z, after actual
-release. Durable bbc-c006-r02-ready-reservation-one and immediate steering provide
-the exact frozen input provenance, scope and timing/stop/cleanup plan to Extender.
-No new lease or target operation is inferred from preparation/reservation.
-
-Extender09-59-45 explicitly grants generation8 for the single outstanding repeat,
-after fresh canonical readiness/preservation checks, then stops all target access.
-Save the new grant/config locally; old generation7 token remains invalid. Actual
-new neutral/offline/worker0 checks, joined-control setup capture, VDU2/sentinel,
-CLI and fresh MEM pass with identical user/stack map. Start only canonical
-major2 listener, sequential fresh directory metadata and three-file deployment/
-independent readbacks. No repeat invocation is claimed before they pass.
-
-All3 complete readbacks pass137.291 host seconds and are frozen with actual
-fresh CLI/MEM/setup capture as olimex-repeat-deployment-001. Fresh setup EXIT
-returns actual original-directory CLI; VDU3/owned reader close normally. Open
-fresh7200s execution capture, VDU2 and BBC_C006_SELF_B_CAPTURE_R02 sentinel prove
-the new channel/CLI, then start canonical listener for the stage driver's
-explicit entry/EXIT. Invoke self-b.txt once with --self-timeout6600 and actual
-incoming-directory guard. Both real prompts are observed; final filename return
-is epoch1793718539.6227434. Repeat is active, with no completion inferred.
-
-release_olimex_repeat.py records the previously executed R01 cleanup/release
-procedure as a guarded repeat helper: require actual passed stage/full image,
-preservation readbacks, restored CLI/text/cursor/mirror receipts and both closed
-readers before fresh neutral/offline/idle/display/ownerlessUSB checks and central
-release. Syntax checks pass; it has not yet run and may execute only after the
-repeat's known complete success and explicit cleanup.
-
-Review the existing exact root/vendor notice and provenance for eventual native
-artifact distribution; both retain the zlib-style notice, original authorship
-and marked adaptations. Prepare promote_native.py as a copy-only guarded step
-for C006's live build/run workflow. It requires all completed manifests/native
-suites, actual four-generation equality, both physical images and clean release
-before copying the actual repeat to compiler/bin/compiler.bin with unchanged
-notice and provenance metadata. Syntax checks only; no live native artifact is
-created while repeat remains pending. Main is outside this development promotion.
-Correct two stale REFERENCE.md statements that still treated completed C003/C004
-LOCAL/runtime work as unfinished; no source/runtime behavior changes.
-
-At approximately one hour, the repeat's original capture still contains1047
-bytes through the final filename echo, without a diagnostic or completion.
-Freeze actual-prompt-only olimex-self-b-prompts-001 with no completion/liveness
-claim. Durable11-08-53_bbc-basic_bbc-c006-r02-observation-status-one and steering
-give Extender scheduling status only; existing6600s observer/7200s reader remain
-active, no parallel access/extra workload or acknowledgement requested.
+Offline SELF-SOURCE-WORK.md retained782670 source-byte visits and a pessimistic
+4382742 byte-assignment bound, not measured executed moves or instruction counts.
+The second workload used the actual first hardware output unchanged, the same
+source and a176-byte batch:3 payloads/436261 bytes, manifestb5d0761fc88e512f32d14217a8ee2de997e05e412edafc3c8236bd2101128e24.
+Its3 readbacks passed in137.291s. The6600s observer retained the first-run timing
+basis. These are historical workload/evidence details; all former local custody,
+operation, recovery and restoration directions have been removed.
 
 ## Physical repeat succeeds; C006 completes and native executable is promoted
 
@@ -643,17 +414,10 @@ The original first-run timeout/late result and emulator interruption/resumed
 lineage remain unchanged and explicit. These intervals include host/serial/
 listener timing and are not CPU times or paired performance benchmarks.
 
-Fresh complete startup108B9e97/listener22968B04e7 readbacks remain exact. EXIT
-returns actual CLI; restore the exact incoming directory, observe native0 and
-returned text/visible/flashing-cursor controls, VDU3 mirroroff and both capture
-closures. The actual release_olimex_repeat.py run checks completed stage/full
-image, preservation, CLI/input/display/reader receipts and fresh neutral/offline/
-idle/ownerlessUSB state. Central generation8 clean release is
-2026-11-03T16:54:23.807673Z, next_request=null. Immediate durable handback
-2026-11-03_11-55-11_bbc-basic_bbc-c006-r02-clean-release-one and steering inform
-Extender. No BBC custody, workload, transfer or observer remains. Firmware
-identities retain verified provenance, without claiming fresh flash reads;
-no firmware/startup/mode/wiring change, optical pass or SD unmount/eject occurs.
+Complete startup108B9e97/listener22968B04e7 readbacks matched. The original
+incoming directory/display state was restored and owned readers were closed.
+Generation8 was released2026-11-03T16:54:23.807673Z; no owned work remained.
+These observations are historical results, not current check-in instructions.
 
 Run promote_native.py against the completed repeat after all prerequisite
 manifest/source/license/release gates. It copies that actual second hardware
@@ -718,14 +482,6 @@ deployment helper deliberately refuses this now-nonempty directory. Future
 updates must preserve user programs/results. C008 is staged and remains on TODO
 pending the Author's actual manual results; main and compiler/runtime sources
 remain unchanged. No emulator/bench reservation or new CPU-heavy work is selected.
-
-Extender's14:49:11 retained-bench policy notice is read after staging: it records
-generation9/BENCH-013 custody retained until the Author and Extender select another
-project's slot. Existing FIFO requests remain possible, but finishing a subtask
-does not automatically release the bench or grant access. Record the restriction
-in the handoff; do not create a second queue or request/access hardware. Console8
-manual qualification remains separately under the Author's coordination. No
-acknowledgement-only reply is sent and no test or implementation change follows.
 
 The Author corrects Markdown file naming. Audit the deployed .txt documents:
 only compatibility.txt contains Markdown headings/tables/links. Correct the
@@ -1185,3 +941,7 @@ eleven files under /mystuff/basic-compiled/benchmarks/, manifestb0b44d96, sync
 and card left mounted. User programs/results and old failed receipts remain
 unchanged. No emulator, firmware, startup or target execution is selected. The
 Author-run compilation/checks/pilot and measured comparisons remain pending.
+
+
+Current Olimex bench procedures are defined solely by the
+[Extender bench guide](../../agon-extender/docs/operations/olimex-bench/README.md).

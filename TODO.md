@@ -17,5 +17,3 @@ and partial admissions are explicit in `compiler/COMPATIBILITY.md`.
    fixture, now deployed on the card. Author runs hardware; no emulators.
    Paired measurements and broader sweeps remain pending. Both C008/C011
    qualification must record the new firmware defaults; see C012 audit.
-4. [ ] [C013](docs/tasks/C013.md) — Remove competing Olimex bench procedures;
-   delegate solely to Extender's maintained bench guide.
