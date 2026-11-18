@@ -160,21 +160,8 @@ user files and older frozen evidence; both destinations have the current package
 8. C007's completed source search and measurement contract are compiler/TESTING.md.
    No paired performance benchmark or speedup has been measured. Feature limits
    remain explicit in the compatibility matrix despite self-hosting completion.
-9. The Author authorizes consultation with Extender for Olimex scheduling,
-   transfer and CLI. Our mailbox is bbc-basic. Use Extender's maintained
-   scripts/agentcoms.py and structured JSON stdin; never handwrite mailbox files.
-   Canonical physical custody is agon-dev-env/cross-agent/olimex-bench. Both clean
-   handbacks were delivered through durable mail and immediate steering; latest
-   is2026-11-03_11-55-11_bbc-basic_bbc-c006-r02-clean-release-one.
-
-Extender's2026-11-03_14-49-11 retained-bench notice records a later generation9
-checkout for BENCH-013. Extender retains custody until the Author and Extender
-select another project's slot; completion of an Extender subtask is not automatic
-release. Future requests still use the canonical FIFO and finite ready plan,
-followed by an explicit grant before any target access. Re-read current central
-instructions and the notice before requesting hardware; do not infer availability
-from an empty queue or an old completed run. Console8 remains separately
-coordinated by the Author. This project has no new reservation or bench operation.
+9. Use the [Olimex bench procedure](../agon-extender/docs/operations/olimex-bench/README.md) for current physical checkout. Extender supports
+   technical questions about transfer and CLI. Our mailbox is bbc-basic.
 
 Extender's14:55:28 adoption notice reports canonical /emos/sdserve.bin updated
 to24753 bytes, SHA2560566e17f18747c2e625d2450ce5324a2b1097bce323a5e4d70fad6dcb41cdff2
